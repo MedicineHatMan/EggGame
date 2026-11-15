@@ -14,6 +14,8 @@
 #include "core/VecMath.h"
 #include "object/TObjSnowman.h"
 #include "core/TMainTask.h"
+
+const char* gTObjPurpleBlizzardName = "TObjPurpleBlizzard";
 struct NJS_TEXLIST;
 struct Fx;
 
@@ -52,7 +54,7 @@ TObjPurpleBlizzard::TObjPurpleBlizzard(TObject* parent, int kind)
     : TObject(parent)
 {
 	mKind = kind;
-	_00   = gTObjPurpleBlizzardName;
+	_00   = (u32)gTObjPurpleBlizzardName;
 	mSize = 0x2C;
 
 	switch (kind) {

@@ -108,6 +108,10 @@ extern "C" int crystalGroundAt(const Vec3f* pos, f32* groundY, ObjShadow* shadow
 #include "egg/EggCreature.h"
 #include "enemy/EnemyFx.h"
 #include "animal/RacerMover.h"
+
+const char* sOrangeTamaName = "TEneYellowBossTama_Orange";
+const char* sBlueTamaName   = "TEneYellowBossTama_Blue";
+const char* sShockWaveName  = "TEneYellowBossTama_ShockWave";
 struct CharaColli;
 
 typedef char TEneYellowBossTama_Orange_size_check[(sizeof(TEneYellowBossTama_Orange) == 0x110) ? 1 : -1];
@@ -118,7 +122,7 @@ TEneYellowBossTama_Orange::TEneYellowBossTama_Orange(TObject* parent, const Vec3
 {
 	EnemySight* sight;
 
-	_00   = sOrangeTamaName[0];
+	_00   = (u32)sOrangeTamaName;
 	mSize = 0x110;
 	setObjId(this, 0xFFFF);
 	mModel      = modelTEneYellowBoss(3);
@@ -341,7 +345,7 @@ TEneYellowBossTama_Blue::TEneYellowBossTama_Blue(TObject* parent, const Vec3f* p
 {
 	EnemySight* sight;
 
-	_00   = sBlueTamaName[0];
+	_00   = (u32)sBlueTamaName;
 	mSize = 0x100;
 	setObjId(this, 0xFFFF);
 	mModel        = modelTEneYellowBoss(3);
@@ -552,7 +556,7 @@ typedef char TEneYellowBossTama_ShockWave_size_check[(sizeof(TEneYellowBossTama_
 TEneYellowBossTama_ShockWave::TEneYellowBossTama_ShockWave(TObject* parent, const Vec3f* pos)
     : TObjAction(parent)
 {
-	_00   = sShockWaveName[0];
+	_00   = (u32)sShockWaveName;
 	mSize = 0x48;
 	setObjId(this, 0xFFFF);
 	mPos    = *pos;

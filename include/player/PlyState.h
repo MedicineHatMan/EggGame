@@ -1542,9 +1542,9 @@ extern const char* gTPlyStateStandName;
 extern const char* gTPlyStateTransformName;
 extern const char* gTPlyStateVictoryName;
 extern const char* gTPlyStateWalkName;
-extern const u16 sBounceJumpVoices[3];
+extern u16 sBounceJumpVoices[3];
 extern u16 sRollThrowVoices[2];
-extern const u16 sRollDashVoices[2];
+extern u16 sRollDashVoices[2];
 }
 
 // The Spin and Roll states' message handlers

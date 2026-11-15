@@ -2,6 +2,9 @@
 #include "ui/AeObjControl.h"
 #include "stage/TGameDino.h"
 
+const char* gTGameDinoName = "TGameDino";
+const char* gTGameStateDinoName = "TGameStateDino";
+
 // 0x800CDA78
 extern "C" void* createGameDino(TObject* parent)
 {

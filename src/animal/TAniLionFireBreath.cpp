@@ -7,6 +7,8 @@
 #include "core/MathUtil.h"
 #include "engine/GroundQuery.h"
 #include "animal/TAniLionFireBreath.h"
+
+const char* gTAniLionFireBreathName = "TAniLionFireBreath";
 struct CharaColli;
 
 // 0x801D1040

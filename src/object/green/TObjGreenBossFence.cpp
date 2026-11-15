@@ -1,4 +1,6 @@
 #include "stage/SetManager.h"
+
+const char* gTObjGreenBossFenceName = "TObjGreenBossFence";
 struct DrawTask;
 #include "enemy/TEneAm02.h"
 #include "engine/DrawTask.h"
@@ -23,7 +25,7 @@ extern "C" TObject* createTObjGreenBossFence(TObject* parent, SetDesc* desc)
 TObjGreenBossFence::TObjGreenBossFence(TObject* parent, SetDesc* desc)
     : TSetObj(parent, desc)
 {
-	_00       = gTObjGreenBossFenceName;
+	_00       = (u32)gTObjGreenBossFenceName;
 	mSize     = 0xD4;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	mLight.reset();

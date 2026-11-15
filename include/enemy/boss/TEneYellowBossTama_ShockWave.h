@@ -24,7 +24,7 @@ public:
 };
 
 extern "C" {
-extern u32 sShockWaveName[2];
+extern const char* sShockWaveName;
 }
 
 #endif

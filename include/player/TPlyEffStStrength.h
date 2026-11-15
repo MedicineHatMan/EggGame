@@ -30,7 +30,7 @@ TPlyEffStStrength* createTPlyEffStStrength(TObject*);
 }
 
 extern "C" {
-extern u32 gTPlyEffStStrengthName;
+extern const char* gTPlyEffStStrengthName;
 }
 
 #endif

@@ -1,4 +1,6 @@
 #include "object/ObjAction.h"
+
+const char* gGoldenEggModeNames[2] = { "NORMAL", "PRISON" }; // for debugPrint
 struct DrawTask;
 #include "io/Resource.h"
 #include "egg/ObjEgg.h"

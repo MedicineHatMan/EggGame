@@ -41,6 +41,10 @@ void TObjTitleHelios::initFromDesc(SetDesc* desc)
 
 const char* gTObjTitleHeliosName = "TObjTitleHelios";
 
+const MotionEntry sTitleHeliosMotions[1] = {
+	{ 0, 3, -1, 0, 0.0f, 300.0f, 0.2f, 0.0f, 0 },
+};
+
 // 0x801AD964
 TObjTitleHelios::TObjTitleHelios(TObject* parent)
     : TSetActor(parent)

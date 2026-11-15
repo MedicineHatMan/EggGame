@@ -10,6 +10,8 @@
 #include "core/VecMath.h"
 #include "object/green/TObjGreenHoverLeaf.h"
 #include "core/TMainTask.h"
+
+const char* gTObjGreenHoverLeafName = "TObjGreenHoverLeaf";
 struct Fx;
 
 typedef char TObjGreenHoverLeaf_size_check[(sizeof(TObjGreenHoverLeaf) == 0x58) ? 1 : -1];
@@ -25,7 +27,7 @@ extern "C" int createTObjGreenHoverLeaf(s8* arg)
 TObjGreenHoverLeaf::TObjGreenHoverLeaf(TObject* parent, int)
     : TObject(parent)
 {
-	_00   = gTObjGreenHoverLeafName;
+	_00   = (u32)gTObjGreenHoverLeafName;
 	mSize = 0x58;
 	mtxIdentity(mMatrix);
 	mFx = fxSpawnFollow(1, 8, 1, mMatrix);

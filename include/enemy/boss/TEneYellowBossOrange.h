@@ -63,7 +63,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTEneYellowBossOrangeName;
+extern const char* gTEneYellowBossOrangeName;
 }
 
 #endif

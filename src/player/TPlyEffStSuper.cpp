@@ -3,6 +3,8 @@
 #include "animal/AniMount.h"
 #include "engine/FxSystem.h"
 #include "core/MathUtil.h"
+
+const char* gTPlyEffStSuperName = "TPlyEffStSuper";
 struct Fx;
 
 typedef char TPlyEffStSuper_size_check[(sizeof(TPlyEffStSuper) == 0x5C) ? 1 : -1];
@@ -18,7 +20,7 @@ TPlyEffStSuper::TPlyEffStSuper(TObject* parent)
     : TPlyEffSt(parent, 0xD)
 {
 	mEffect = 0;
-	_00     = gTPlyEffStSuperName;
+	_00     = (u32)gTPlyEffStSuperName;
 	mSize   = 0x5C;
 }
 

@@ -802,3 +802,34 @@ s32 EXIGetID(s32 chan, u32 dev, u32* id) {
 
     return 1;
 }
+
+// Nothing calls this, so the linker strips it and only its strings are left in .data
+char* EXIGetTypeString(u32 type)
+{
+	switch (type) {
+	case EXI_MEMORY_CARD_59:
+		return "Memory Card 59";
+	case EXI_MEMORY_CARD_123:
+		return "Memory Card 123";
+	case EXI_MEMORY_CARD_251:
+		return "Memory Card 251";
+	case EXI_MEMORY_CARD_507:
+		return "Memory Card 507";
+	case EXI_MEMORY_CARD_1019:
+		return "Memory Card 1019";
+	case EXI_MEMORY_CARD_2043:
+		return "Memory Card 2043";
+	case EXI_USB_ADAPTER:
+		return "USB Adapter";
+	case EXI_NPDP_GDEV:
+		return "Net Card";
+	case EXI_ETHER_VIEWER:
+		return "Artist Ether";
+	case EXI_ETHER:
+		return "Broadband Adapter";
+	case EXI_STREAM_HANGER:
+		return "Stream Hanger";
+	case EXI_IS_VIEWER:
+		return "IS-DOL-VIEWER";
+	}
+}

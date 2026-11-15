@@ -38,7 +38,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTObjGreenBossWaterfallName;
+extern const char* gTObjGreenBossWaterfallName;
 }
 
 #endif

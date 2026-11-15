@@ -4,6 +4,10 @@
 #include "stage/StageTime.h"
 #include "stage/TGameStateRescue.h"
 
+const char* gTGameRescueName = "TGameRescue";
+const char* gTGameStateRescueName = "TGameStateRescue";
+const char* gTGameStateRescueEraseName = "TGameStateRescueErase";
+
 // 0x8010E960
 extern "C" void* createGameRescue(TObject* parent)
 {

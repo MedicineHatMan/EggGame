@@ -1017,6 +1017,9 @@ void TEneYellowBoss::onActionPhase(int action, int phase)
 	}
 }
 
+extern "C" const f32 sYellowAppearBursts[4] = { 274.0f, 523.0f, 567.0f, 10000.0f }; // the frames of the burst effects
+extern "C" const f32 sYellowDeathBursts[5]  = { 45.0f, 74.0f, 111.0f, 243.0f, 10000.0f };
+
 // 0x8014AB5C
 void TEneYellowBoss::actAppear(int phase)
 {

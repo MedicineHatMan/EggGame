@@ -45,8 +45,8 @@ public:
 
 #include "stage/Stage.h"
 extern "C" {
-extern Vec3f sRedFenceTop[3];
-extern Vec3f sRedFenceBottom[3];
+extern const Vec3f sRedFenceTop[3];
+extern const Vec3f sRedFenceBottom[3];
 extern const char* gTObjRedFenceName;
 }
 

@@ -1,4 +1,6 @@
 #include "engine/WaterSurface.h"
+
+const char* gTObjGreenBossWaterfallName = "TObjGreenBossWaterfall";
 struct DrawTask;
 #include "engine/DrawTask.h"
 #include "object/ObjAction.h"
@@ -21,7 +23,7 @@ extern "C" TObject* createTObjGreenBossWaterfall(TObject* parent, SetDesc* desc)
 TObjGreenBossWaterfall::TObjGreenBossWaterfall(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00      = gTObjGreenBossWaterfallName;
+	_00      = (u32)gTObjGreenBossWaterfallName;
 	mSize    = 0x100;
 	mModel   = getGreenObjModels()[0];
 	mTexList = getGreenObjTextures()[0];

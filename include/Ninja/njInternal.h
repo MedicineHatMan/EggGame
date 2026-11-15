@@ -64,7 +64,7 @@ extern u32 gjTexHeapSize;
 extern GjTexMem* gjTexSlots;
 extern s32 gjVertsAreFloat;
 extern f32 njProjection[10];
-extern f32 njProjection2[10];
+extern f32 njProjection2[12];
 extern void* njSinTable;
 
 #endif

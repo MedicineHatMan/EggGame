@@ -30,7 +30,7 @@ TPlyEffStInvincible* createTPlyEffStInvincible(TObject*);
 }
 
 extern "C" {
-extern u32 gTPlyEffStInvincibleName;
+extern const char* gTPlyEffStInvincibleName;
 }
 
 #endif

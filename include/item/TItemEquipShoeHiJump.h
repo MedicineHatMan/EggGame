@@ -25,7 +25,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTItemEquipShoeHiJumpName;
+extern const char* gTItemEquipShoeHiJumpName;
 }
 
 #endif

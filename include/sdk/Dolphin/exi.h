@@ -22,6 +22,8 @@ extern "C" {
 #define EXI_MEMORY_CARD_123 0x00000008
 #define EXI_MEMORY_CARD_251 0x00000010
 #define EXI_MEMORY_CARD_507 0x00000020
+#define EXI_MEMORY_CARD_1019 0x00000040
+#define EXI_MEMORY_CARD_2043 0x00000080
 #define EXI_USB_ADAPTER     0x01010000
 #define EXI_NPDP_GDEV       0x01020000
 #define EXI_MODEM           0x02020000
@@ -30,6 +32,8 @@ extern "C" {
 #define EXI_AD16            0x04120000
 #define EXI_RS232C          0x04040404
 #define EXI_STREAM_HANGER   0x04130000
+#define EXI_ETHER_VIEWER    0x04220001
+#define EXI_IS_VIEWER       0x05070000
 
 // Useful macros
 #define EXI_0CR(tstart, dma, rw, tlen) ((((u32)(tstart)) << 0) | (((u32)(dma)) << 1) | (((u32)(rw)) << 2) | (((u32)(tlen)) << 4))

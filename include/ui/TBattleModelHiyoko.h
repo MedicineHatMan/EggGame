@@ -85,7 +85,7 @@ TBattleModelHiyokoProp* createTBattleModelHiyokoProp(TObject*, const Vec3f*, con
 extern "C" {
 extern const char* gTBattleModelHiyokoName;
 extern f32 sBattleHiyokoMtx[12];
-extern const MotionEntry sBattleModelHiyokoMotions[];
+extern MotionEntry sBattleModelHiyokoMotions[];
 }
 
 #endif

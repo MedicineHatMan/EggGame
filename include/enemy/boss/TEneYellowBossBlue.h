@@ -71,7 +71,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTEneYellowBossBlueName;
+extern const char* gTEneYellowBossBlueName;
 }
 
 #endif

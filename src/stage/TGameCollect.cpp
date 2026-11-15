@@ -2,6 +2,9 @@
 #include "ui/AeObjControl.h"
 #include "stage/TGameCollect.h"
 
+const char* gTGameCollectName = "TGameCollect";
+const char* gTGameStateCollectName = "TGameStateCollect";
+
 // 0x80113AA0
 extern "C" void* createGameCollect(TObject* parent)
 {

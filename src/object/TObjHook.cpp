@@ -18,6 +18,8 @@
 #include "stage/SetSlot.h"
 #include "object/TObjHook.h"
 #include "Ninja/ninja.h"
+
+const char* gTObjHookName = "TObjHook";
 struct SetLink;
 struct NJS_QUATERNION;
 
@@ -52,7 +54,7 @@ void TObjHook::debugPrint(void*)
 TObjHook::TObjHook(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00    = (u32)gTObjHookName;
+	_00    = (u32)(void*)gTObjHookName;
 	mSize  = 0xF4;
 	mDraw  = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
 	mShape = colliCreate(1, 1);

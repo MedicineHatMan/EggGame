@@ -82,7 +82,7 @@ engine/MotionPlayer.cpp:
 
 core/Pad.cpp:
 	.text       start:0x8001248C end:0x80012C6C
-	.rodata     start:0x80240630 end:0x80240640
+	.rodata     start:0x802405F8 end:0x80240640
 	.data       start:0x802523D0 end:0x802523E0
 	.sdata2     start:0x802C6448 end:0x802C6478
 
@@ -93,7 +93,7 @@ object/TObjPlayer.cpp:
 	.data       start:0x802523E0 end:0x802524F8
 	.bss        start:0x80279990 end:0x80279A18
 	.sdata      start:0x802C3938 end:0x802C3940
-	.sbss       start:0x802C4BE0 end:0x802C4BE4
+	.sbss       start:0x802C4BE0 end:0x802C4BF0
 
 engine/RigidBody.cpp:
 	.text       start:0x80013848 end:0x80013B68
@@ -104,10 +104,10 @@ object/TObject.cpp:
 	.text       start:0x80013B68 end:0x80014AA4
 	.ctors      start:0x80240178 end:0x8024017C
 	.rodata     start:0x80240748 end:0x80240780
-	.data       start:0x80252558 end:0x80252598
+	.data       start:0x80252520 end:0x80252598
 	.bss        start:0x80279A18 end:0x80279A24
 	.sdata      start:0x802C3940 end:0x802C3988
-	.sbss       start:0x802C4BF0 end:0x802C4C40
+	.sbss       start:0x802C4BF0 end:0x802C4C58
 	.sdata2     start:0x802C6488 end:0x802C6500
 
 mode/TModeTitle.cpp:
@@ -349,13 +349,15 @@ sound/TSoundEffect.cpp:
 
 sound/TMusicADX.cpp:
 	.text       start:0x80031B30 end:0x80031F14
+	.rodata     start:0x80241740 end:0x80241750
 	.data       start:0x80254EA0 end:0x80254EC0
+	.sdata      start:0x802C3C70 end:0x802C3C78
 	.sdata2     start:0x802C6C50 end:0x802C6C68
 
 core/TPeriVibrate.cpp:
 	.text       start:0x80031F14 end:0x80032174
 	.rodata     start:0x80241750 end:0x80241760
-	.data       start:0x80255040 end:0x80255060
+	.data       start:0x80254EC0 end:0x80255060
 	.sdata      start:0x802C3C78 end:0x802C3C80
 
 io/ResManager.cpp:
@@ -605,8 +607,8 @@ enemy/EnemyGroup.cpp:
 
 enemy/boss/TEneBoss02.cpp:
 	.text       start:0x800593B0 end:0x8005DF9C
-	.rodata     start:0x802422D0 end:0x80242434
-	.data       start:0x80256380 end:0x80256480
+	.rodata     start:0x802422D0 end:0x80242440
+	.data       start:0x80256150 end:0x80256480
 	.sdata      start:0x802C3D48 end:0x802C3D50
 	.sbss       start:0x802C4EE8 end:0x802C4F08
 	.sdata2     start:0x802C73A8 end:0x802C7498
@@ -799,7 +801,9 @@ object/map/TObjMapDoor01.cpp:
 
 object/TObjHook.cpp:
 	.text       start:0x80072468 end:0x80072A18
+	.rodata     start:0x80242E08 end:0x80242E18
 	.data       start:0x802571D8 end:0x80257250
+	.sdata      start:0x802C3DE0 end:0x802C3DE8
 	.sdata2     start:0x802C7920 end:0x802C7938
 
 enemy/EnemyAnim.cpp:
@@ -899,7 +903,7 @@ object/red/TObjRedFireTrap.cpp:
 
 engine/TFootPrinter.cpp:
 	.text       start:0x80085FCC end:0x800864C4
-	.rodata     start:0x80243560 end:0x80243570
+	.rodata     start:0x80243500 end:0x80243570
 	.data       start:0x80257DC0 end:0x80257DE0
 	.sdata      start:0x802C3E28 end:0x802C3E30
 	.sdata2     start:0x802C7DA0 end:0x802C7DC0
@@ -1110,8 +1114,9 @@ player/PlyInput.cpp:
 
 player/PlyState.cpp:
 	.text       start:0x800ADBC4 end:0x800BC6EC
+	.rodata     start:0x80244470 end:0x80244940
 	.data       start:0x80258E20 end:0x80259B58
-	.sdata      start:0x802C3FF8 end:0x802C4000
+	.sdata      start:0x802C3EE8 end:0x802C4000
 	.sdata2     start:0x802C8618 end:0x802C86A0
 
 object/blue/TObjBlueWaterfall.cpp:
@@ -1145,9 +1150,9 @@ object/TObjGoldenEgg.cpp:
 	.text       start:0x800BEF78 end:0x800C1A88
 	.rodata     start:0x80244DF0 end:0x80244E68
 	.data       start:0x80259CD0 end:0x80259DD8
-	.sdata      start:0x802C4020 end:0x802C4030
+	.sdata      start:0x802C4018 end:0x802C4030
 	.sbss       start:0x802C51D8 end:0x802C51F0
-	.sdata2     start:0x802C8790 end:0x802C8800
+	.sdata2     start:0x802C8780 end:0x802C8800
 
 egg/EggRoll.cpp:
 	.text       start:0x800C1A88 end:0x800C2C6C
@@ -1225,22 +1230,28 @@ object/TObjEggFeed.cpp:
 
 stage/TGameFreePlay.cpp:
 	.text       start:0x800CD7F0 end:0x800CDA78
+	.rodata     start:0x802454C0 end:0x802454E8
 	.data       start:0x8025A3F8 end:0x8025A450
+	.sdata      start:0x802C4078 end:0x802C4080
 
 stage/TGameDino.cpp:
 	.text       start:0x800CDA78 end:0x800CDE48
+	.rodata     start:0x802454E8 end:0x80245508
 	.data       start:0x8025A450 end:0x8025A4A8
+	.sdata      start:0x802C4080 end:0x802C4088
 
 stage/TGameGoldenEgg.cpp:
 	.text       start:0x800CDE48 end:0x800CE3AC
+	.rodata     start:0x80245508 end:0x80245548
 	.data       start:0x8025A4A8 end:0x8025A528
+	.sdata      start:0x802C4088 end:0x802C4098
 
 object/red/TObjRedFenceCtrl.cpp:
 	.text       start:0x800CE3AC end:0x800CEFC4
 
 object/red/TObjRedFence.cpp:
 	.text       start:0x800CEFC4 end:0x800CF420
-	.rodata     start:0x80245568 end:0x80245578
+	.rodata     start:0x80245568 end:0x802455C0
 	.data       start:0x8025A598 end:0x8025A608
 	.sdata      start:0x802C40A0 end:0x802C40A8
 	.sdata2     start:0x802C8BA0 end:0x802C8BA8
@@ -1375,7 +1386,7 @@ ui/TAeObjMsgWindow.cpp:
 	.rodata     start:0x80246148 end:0x802461F8
 	.data       start:0x8025B7A0 end:0x8025B7F0
 	.sdata      start:0x802C4120 end:0x802C4128
-	.sdata2     start:0x802C9098 end:0x802C909C
+	.sdata2     start:0x802C9090 end:0x802C909C
 
 object/blue/TObjBlueFlag.cpp:
 	.text       start:0x800EB13C end:0x800EC660
@@ -1467,7 +1478,9 @@ object/TObjSnowman.cpp:
 
 object/purple/TObjPurpleBlizzard.cpp:
 	.text       start:0x800FBF8C end:0x800FC408
+	.rodata     start:0x80246AE8 end:0x80246B00
 	.data       start:0x8025CA30 end:0x8025CA50
+	.sdata      start:0x802C4178 end:0x802C4180
 	.sdata2     start:0x802C9530 end:0x802C9550
 
 stage/TStagePurple.cpp:
@@ -1616,7 +1629,7 @@ object/purple/TObjPurplePropeller.cpp:
 object/mission/TMsnObjChicken.cpp:
 	.text       start:0x8010CC3C end:0x8010D8B4
 	.rodata     start:0x80247E60 end:0x80247EB0
-	.data       start:0x8025D568 end:0x8025D5E0
+	.data       start:0x8025D4C8 end:0x8025D5E0
 	.sdata      start:0x802C4228 end:0x802C4230
 	.sbss       start:0x802C5520 end:0x802C5538
 	.sdata2     start:0x802C99B0 end:0x802C9A00
@@ -1630,7 +1643,9 @@ stage/TGameMiniGame.cpp:
 
 stage/TGameRescue.cpp:
 	.text       start:0x8010E960 end:0x8010EFE4
+	.rodata     start:0x80247EE0 end:0x80247F18
 	.data       start:0x8025D678 end:0x8025D6F8
+	.sdata      start:0x802C4238 end:0x802C4248
 	.sdata2     start:0x802C9A00 end:0x802C9A08
 
 stage/StageTime.cpp:
@@ -1653,7 +1668,9 @@ ui/TSimpleText.cpp:
 
 stage/TGameStateClear.cpp:
 	.text       start:0x80110D10 end:0x80111BB8
+	.rodata     start:0x80247FD0 end:0x80248060
 	.data       start:0x8025D738 end:0x8025D858
+	.sdata      start:0x802C4258 end:0x802C4278
 	.sdata2     start:0x802C9A68 end:0x802C9A70
 
 ui/TFade.cpp:
@@ -1680,15 +1697,21 @@ ui/TAeObjGameOver.cpp:
 
 stage/TGameCollect.cpp:
 	.text       start:0x80113AA0 end:0x80113E48
+	.rodata     start:0x80248158 end:0x80248180
 	.data       start:0x8025D978 end:0x8025D9D0
+	.sdata      start:0x802C4298 end:0x802C42A0
 
 stage/TGameBoss.cpp:
 	.text       start:0x80113E48 end:0x80114184
+	.rodata     start:0x80248180 end:0x802481A0
 	.data       start:0x8025D9D0 end:0x8025DA28
+	.sdata      start:0x802C42A0 end:0x802C42A8
 
 stage/TGameSnowman.cpp:
 	.text       start:0x80114184 end:0x801144C0
+	.rodata     start:0x802481A0 end:0x802481C8
 	.data       start:0x8025DA28 end:0x8025DA80
+	.sdata      start:0x802C42A8 end:0x802C42B0
 
 stage/TGameGoal.cpp:
 	.text       start:0x801144C0 end:0x80114608
@@ -1729,7 +1752,7 @@ core/Vibration.cpp:
 
 object/orange/TObjOrangePanelDeOpen.cpp:
 	.text       start:0x8011F780 end:0x80120610
-	.rodata     start:0x80248498 end:0x80248600
+	.rodata     start:0x80248498 end:0x80248660
 	.data       start:0x8025E070 end:0x8025E0F8
 	.sdata      start:0x802C42D0 end:0x802C42D8
 	.sdata2     start:0x802C9D60 end:0x802C9DD0
@@ -1793,7 +1816,7 @@ ui/TAeObjPause.cpp:
 	.bss        start:0x80282808 end:0x80282838
 	.sdata      start:0x802C4300 end:0x802C4310
 	.sbss       start:0x802C55D8 end:0x802C55F0
-	.sdata2     start:0x802C9F30 end:0x802C9F80
+	.sdata2     start:0x802C9F28 end:0x802C9F80
 
 object/purple/TObjPurpleIceTrap.cpp:
 	.text       start:0x80125D94 end:0x80126B98
@@ -1954,15 +1977,21 @@ object/TObjEggRing.cpp:
 
 stage/TGameBattery.cpp:
 	.text       start:0x8013B320 end:0x8013B6F0
+	.rodata     start:0x80249770 end:0x80249798
 	.data       start:0x8025FA40 end:0x8025FA98
+	.sdata      start:0x802C4410 end:0x802C4418
 
 stage/TGameFireworks.cpp:
 	.text       start:0x8013B6F0 end:0x8013BA94
+	.rodata     start:0x80249798 end:0x802497C0
 	.data       start:0x8025FA98 end:0x8025FAF0
+	.sdata      start:0x802C4418 end:0x802C4420
 
 stage/TGameGear.cpp:
 	.text       start:0x8013BA94 end:0x8013BE9C
+	.rodata     start:0x802497C0 end:0x802497E0
 	.data       start:0x8025FAF0 end:0x8025FB48
+	.sdata      start:0x802C4420 end:0x802C4428
 
 animal/TAniIceRock.cpp:
 	.text       start:0x8013BE9C end:0x8013C86C
@@ -2058,7 +2087,7 @@ object/TObjFractalCloud.cpp:
 
 enemy/boss/TEneYellowBoss.cpp:
 	.text       start:0x80148E70 end:0x8014C904
-	.rodata     start:0x80249AB8 end:0x80249B8C
+	.rodata     start:0x80249AB8 end:0x80249BB0
 	.data       start:0x802603B8 end:0x80260788
 	.sdata      start:0x802C4490 end:0x802C4498
 	.sdata2     start:0x802CA870 end:0x802CA958
@@ -2070,7 +2099,9 @@ enemy/boss/TEneYellowBossAi.cpp:
 
 enemy/boss/TEneYellowBossPurple.cpp:
 	.text       start:0x8014E4B8 end:0x8014F238
+	.rodata     start:0x80249BB0 end:0x80249BC8
 	.data       start:0x80260800 end:0x802608E8
+	.sdata      start:0x802C4498 end:0x802C44A0
 	.sdata2     start:0x802CA990 end:0x802CA9D8
 
 enemy/boss/TEneYellowBossCrystal.cpp:
@@ -2080,12 +2111,16 @@ enemy/boss/TEneYellowBossCrystal.cpp:
 
 enemy/boss/TEneYellowBossOrange.cpp:
 	.text       start:0x8014FC18 end:0x80150818
+	.rodata     start:0x80249BC8 end:0x80249BE0
 	.data       start:0x80260960 end:0x802609F8
+	.sdata      start:0x802C44A0 end:0x802C44A8
 	.sdata2     start:0x802CAA08 end:0x802CAA60
 
 enemy/boss/TEneYellowBossTama.cpp:
 	.text       start:0x80150818 end:0x80151CBC
+	.rodata     start:0x80249BE0 end:0x80249C38
 	.data       start:0x802609F8 end:0x80260B40
+	.sdata      start:0x802C44A8 end:0x802C44B8
 	.sdata2     start:0x802CAA60 end:0x802CAAE8
 
 mode/TModeMovie.cpp:
@@ -2097,7 +2132,9 @@ mode/TModeMovie.cpp:
 
 enemy/boss/TEneYellowBossBlue.cpp:
 	.text       start:0x801520F4 end:0x80152BE0
+	.rodata     start:0x80249D20 end:0x80249D38
 	.data       start:0x80260B90 end:0x80260C40
+	.sdata      start:0x802C44B8 end:0x802C44C0
 	.sdata2     start:0x802CAB00 end:0x802CAB58
 
 ui/TAeObjGo.cpp:
@@ -2194,7 +2231,9 @@ object/last/TObjLastEggLight.cpp:
 
 stage/TGameWipeOut.cpp:
 	.text       start:0x8015F220 end:0x8015F608
+	.rodata     start:0x8024A290 end:0x8024A2B8
 	.data       start:0x80261460 end:0x802614B8
+	.sdata      start:0x802C4518 end:0x802C4520
 
 enemy/boss/TEneGreenBoss.cpp:
 	.text       start:0x8015F608 end:0x801632C0
@@ -2284,7 +2323,9 @@ object/yellow/TObjYellowFogTrapCtrl.cpp:
 
 object/green/TObjGreenHoverLeaf.cpp:
 	.text       start:0x8016FB8C end:0x8016FE50
+	.rodata     start:0x8024A660 end:0x8024A678
 	.data       start:0x80261FE8 end:0x80262008
+	.sdata      start:0x802C4568 end:0x802C4570
 	.sdata2     start:0x802CB238 end:0x802CB258
 
 ui/MainMenu.cpp:
@@ -2364,7 +2405,7 @@ ui/TAeObjMainMenu.cpp:
 	.rodata     start:0x8024AD30 end:0x8024ADF0
 	.data       start:0x80262410 end:0x80262438
 	.sdata      start:0x802C45A0 end:0x802C45A8
-	.sdata2     start:0x802CB4F8 end:0x802CB518
+	.sdata2     start:0x802CB4E0 end:0x802CB518
 
 object/green/TObjGreenGrassGroup.cpp:
 	.text       start:0x8017F184 end:0x8017FD60
@@ -2386,8 +2427,8 @@ engine/GrassBlade.cpp:
 stage/GameFlow.cpp:
 	.text       start:0x80181970 end:0x801837E8
 	.rodata     start:0x8024AE48 end:0x8024B0D8
-	.data       start:0x80262608 end:0x802626C0
-	.sdata2     start:0x802CB770 end:0x802CB780
+	.data       start:0x80262528 end:0x802626C0
+	.sdata2     start:0x802CB5B0 end:0x802CB780
 
 engine/TLightEffect.cpp:
 	.text       start:0x801837E8 end:0x80184850
@@ -2451,7 +2492,9 @@ engine/FxHolder.cpp:
 
 player/TPlyItem.cpp:
 	.text       start:0x80189768 end:0x80189908
+	.rodata     start:0x8024B860 end:0x8024B870
 	.data       start:0x80262C00 end:0x80262C20
+	.sdata      start:0x802C45E8 end:0x802C45F0
 
 object/yellow/TObjYellowTornadoScene.cpp:
 	.text       start:0x80189908 end:0x80189CD0
@@ -2530,7 +2573,9 @@ object/green/GreenObjBank.cpp:
 
 object/green/TObjGreenBossFence.cpp:
 	.text       start:0x80190294 end:0x80190500
+	.rodata     start:0x8024BB80 end:0x8024BB98
 	.data       start:0x80263060 end:0x802630E0
+	.sdata      start:0x802C4648 end:0x802C4650
 	.sdata2     start:0x802CBAE8 end:0x802CBAF8
 
 object/last/TObjLastCrowLemuresCtrl.cpp:
@@ -2555,7 +2600,9 @@ object/yellow/TObjYellowGateSet.cpp:
 
 object/green/TObjGreenBossWaterfall.cpp:
 	.text       start:0x80192C9C end:0x80192F80
+	.rodata     start:0x8024BF30 end:0x8024BF48
 	.data       start:0x802632E8 end:0x80263360
+	.sdata      start:0x802C4668 end:0x802C4670
 	.sdata2     start:0x802CBBA0 end:0x802CBBA8
 
 object/green/TObjGreenBossLake.cpp:
@@ -2595,13 +2642,15 @@ object/mission/TMsnObjCoin.cpp:
 
 object/green/TObjGreenSpore.cpp:
 	.text       start:0x801985D0 end:0x80198754
+	.rodata     start:0x8024C1A8 end:0x8024C1B8
 	.data       start:0x80263550 end:0x80263570
+	.sdata      start:0x802C4690 end:0x802C4698
 	.sdata2     start:0x802CBCA8 end:0x802CBCB0
 
 ui/TBattleModelHiyoko.cpp:
 	.text       start:0x80198754 end:0x80198F08
 	.rodata     start:0x8024C1B8 end:0x8024C1E8
-	.data       start:0x802635E0 end:0x80263620
+	.data       start:0x80263570 end:0x80263620
 	.sdata      start:0x802C4698 end:0x802C46A0
 	.sbss       start:0x802C59B8 end:0x802C59C8
 	.sdata2     start:0x802CBCB0 end:0x802CBCC0
@@ -2653,7 +2702,9 @@ ui/TextTexture.cpp:
 
 stage/TGameStateBattle.cpp:
 	.text       start:0x8019E658 end:0x8019EF84
+	.rodata     start:0x8024C368 end:0x8024C37C
 	.data       start:0x802643E0 end:0x80264488
+	.sdata      start:0x802C46C0 end:0x802C46C4
 
 stage/BattleStateSlot.cpp:
 	.text       start:0x8019EF84 end:0x8019F07C
@@ -2672,7 +2723,7 @@ core/TCustomGameContext.cpp:
 io/CardManager.cpp:
 	.text       start:0x8019F80C end:0x801A0EFC
 	.rodata     start:0x8024C400 end:0x8024C440
-	.data       start:0x802664D8 end:0x802665B0
+	.data       start:0x802644D8 end:0x802665B0
 	.sdata      start:0x802C46E0 end:0x802C46E8
 	.sbss       start:0x802C5A00 end:0x802C5A08
 	.sdata2     start:0x802CBE30 end:0x802CBE38
@@ -2778,7 +2829,9 @@ stage/TGameSuddenDeath.cpp:
 
 stage/TGameBossAfter.cpp:
 	.text       start:0x801AC01C end:0x801AC34C
+	.rodata     start:0x8024C8C0 end:0x8024C8E8
 	.data       start:0x80266F78 end:0x80266FD0
+	.sdata      start:0x802C4738 end:0x802C4740
 	.sdata2     start:0x802CC008 end:0x802CC010
 
 io/BinFileEx.cpp:
@@ -2821,7 +2874,7 @@ object/TObjTitleFlowers.cpp:
 
 object/TObjTitleHelios.cpp:
 	.text       start:0x801AD8F8 end:0x801ADEC0
-	.rodata     start:0x8024CA30 end:0x8024CA40
+	.rodata     start:0x8024CA30 end:0x8024CA60
 	.data       start:0x802671C8 end:0x80267240
 	.sdata      start:0x802C4760 end:0x802C4768
 	.sdata2     start:0x802CC058 end:0x802CC098
@@ -2847,7 +2900,7 @@ object/TObjTitlePAEffect.cpp:
 ui/TBattleModelPlayer.cpp:
 	.text       start:0x801AE634 end:0x801AEB60
 	.rodata     start:0x8024CAB8 end:0x8024CAE8
-	.data       start:0x802674A0 end:0x802674C0
+	.data       start:0x80267350 end:0x802674C0
 	.sdata      start:0x802C4778 end:0x802C4780
 	.sbss       start:0x802C5A78 end:0x802C5A80
 	.sdata2     start:0x802CC0C8 end:0x802CC0D8
@@ -2874,11 +2927,15 @@ item/TItemEquipment.cpp:
 
 item/TItemEquipComb.cpp:
 	.text       start:0x801AF5F0 end:0x801AF7FC
+	.rodata     start:0x8024CBC0 end:0x8024CBD0
 	.data       start:0x802675B0 end:0x80267638
+	.sdata      start:0x802C4788 end:0x802C4790
 
 item/TItemEquipWing.cpp:
 	.text       start:0x801AF7FC end:0x801AFAAC
+	.rodata     start:0x8024CBD0 end:0x8024CBE0
 	.data       start:0x80267638 end:0x802676C0
+	.sdata      start:0x802C4790 end:0x802C4798
 
 item/TItemOnce.cpp:
 	.text       start:0x801AFAAC end:0x801AFE08
@@ -2888,7 +2945,9 @@ item/TItemOnce.cpp:
 
 stage/TGameLastBoss.cpp:
 	.text       start:0x801AFE08 end:0x801B0108
+	.rodata     start:0x8024CBF0 end:0x8024CC18
 	.data       start:0x80267740 end:0x80267798
+	.sdata      start:0x802C47A0 end:0x802C47A8
 
 animal/AniModelManager.cpp:
 	.text       start:0x801B0108 end:0x801B0C1C
@@ -2897,12 +2956,15 @@ animal/AniModelManager.cpp:
 
 object/TObjTitleLake.cpp:
 	.text       start:0x801B0C1C end:0x801B0EE0
-	.rodata     start:0x8024CE98 end:0x8024CEA8
+	.rodata     start:0x8024CE88 end:0x8024CEA8
 	.data       start:0x80267860 end:0x802678D8
+	.sdata      start:0x802C47A8 end:0x802C47B0
 
 object/TObjTitleBigFall.cpp:
 	.text       start:0x801B0EE0 end:0x801B11A0
+	.rodata     start:0x8024CEA8 end:0x8024CEC0
 	.data       start:0x802678D8 end:0x80267950
+	.sdata      start:0x802C47B0 end:0x802C47B8
 	.sdata2     start:0x802CC0F8 end:0x802CC100
 
 animal/TAnimalRacer.cpp:
@@ -3000,26 +3062,40 @@ object/TObjClosedEgg.cpp:
 	.sbss       start:0x802C5B10 end:0x802C5B20
 	.sdata2     start:0x802CC298 end:0x802CC2D0
 
+mode/GalleryEggTable.cpp:
+	.rodata     start:0x8024D330 end:0x8024D8D0
+	.data       start:0x80267E18 end:0x802683D0
+
 player/TPlyEffStSleep.cpp:
 	.text       start:0x801BBB14 end:0x801BBCE8
+	.rodata     start:0x8024D8D0 end:0x8024D8E0
 	.data       start:0x802683D0 end:0x802683F8
+	.sdata      start:0x802C4808 end:0x802C4810
 
 player/TPlyEffStInvincible.cpp:
 	.text       start:0x801BBCE8 end:0x801BBF18
+	.rodata     start:0x8024D8E0 end:0x8024D8F8
 	.data       start:0x80268420 end:0x80268448
+	.sdata      start:0x802C4810 end:0x802C4818
 
 player/TPlyEffStStrength.cpp:
 	.text       start:0x801BBF18 end:0x801BC168
+	.rodata     start:0x8024D8F8 end:0x8024D910
 	.data       start:0x80268448 end:0x80268470
+	.sdata      start:0x802C4818 end:0x802C4820
 
 player/TPlyEffStBlind.cpp:
 	.text       start:0x801BC168 end:0x801BC4F4
+	.rodata     start:0x8024D910 end:0x8024D920
 	.data       start:0x80268470 end:0x80268498
+	.sdata      start:0x802C4820 end:0x802C4828
 	.sdata2     start:0x802CC2D0 end:0x802CC2D8
 
 player/TPlyEffStDrain.cpp:
 	.text       start:0x801BC4F4 end:0x801BC880
+	.rodata     start:0x8024D920 end:0x8024D930
 	.data       start:0x80268498 end:0x802684C0
+	.sdata      start:0x802C4828 end:0x802C4830
 	.sdata2     start:0x802CC2D8 end:0x802CC2E0
 
 animal/TAniTigerHawk.cpp:
@@ -3041,7 +3117,9 @@ item/TItemImm.cpp:
 
 ui/TBlindCtrl.cpp:
 	.text       start:0x801BDFC4 end:0x801BE1C0
+	.rodata     start:0x8024DAF0 end:0x8024DB00
 	.data       start:0x80268770 end:0x80268790
+	.sdata      start:0x802C4840 end:0x802C4848
 	.sdata2     start:0x802CC398 end:0x802CC3A0
 
 egg/TEggContentsIntro.cpp:
@@ -3085,7 +3163,9 @@ animal/AniBody.cpp:
 
 player/TPlyEffStSuper.cpp:
 	.text       start:0x801C1EC4 end:0x801C2114
+	.rodata     start:0x8024DD40 end:0x8024DD50
 	.data       start:0x802688E8 end:0x80268910
+	.sdata      start:0x802C4858 end:0x802C4860
 
 animal/TAniLionKangaroo.cpp:
 	.text       start:0x801C2114 end:0x801C3A90
@@ -3101,7 +3181,7 @@ animal/TAniHorseshoeCrabShark.cpp:
 	.rodata     start:0x8024DF18 end:0x8024E080
 	.data       start:0x802689F8 end:0x80268AE0
 	.sdata      start:0x802C4868 end:0x802C4870
-	.sdata2     start:0x802CC478 end:0x802CC4C8
+	.sdata2     start:0x802CC470 end:0x802CC4C8
 
 animal/TAniMount.cpp:
 	.text       start:0x801C5674 end:0x801C5C9C
@@ -3215,7 +3295,9 @@ item/ItemGlow.cpp:
 
 object/TObjWholeAttack.cpp:
 	.text       start:0x801CE0A0 end:0x801CE2B0
+	.rodata     start:0x8024E370 end:0x8024E380
 	.data       start:0x8026A7E0 end:0x8026A850
+	.sdata      start:0x802C48A0 end:0x802C48A8
 	.sdata2     start:0x802CC740 end:0x802CC748
 
 stage/TGameBattleHatch.cpp:
@@ -3247,7 +3329,9 @@ engine/TLastLightEffect.cpp:
 
 player/TPlyDemoLastCtrl.cpp:
 	.text       start:0x801CFBBC end:0x801CFF0C
+	.rodata     start:0x8024E430 end:0x8024E448
 	.data       start:0x8026A978 end:0x8026A9D8
+	.sdata      start:0x802C48C8 end:0x802C48D0
 	.sdata2     start:0x802CC770 end:0x802CC778
 
 egg/EggAura.cpp:
@@ -3277,16 +3361,22 @@ animal/TAniBirth.cpp:
 animal/TAniLionFireBreath.cpp:
 	.text       start:0x801D1040 end:0x801D12C0
 	.ctors      start:0x8024026C end:0x80240270
+	.rodata     start:0x8024E498 end:0x8024E4B0
 	.data       start:0x8026AA68 end:0x8026AA88
+	.sdata      start:0x802C48E8 end:0x802C48F0
 	.sdata2     start:0x802CC7A0 end:0x802CC7B0
 
 item/TItemEquipShoeHiJump.cpp:
 	.text       start:0x801D12C0 end:0x801D1464
+	.rodata     start:0x8024E4B0 end:0x8024E4C8
 	.data       start:0x8026AA88 end:0x8026AB10
+	.sdata      start:0x802C48F0 end:0x802C48F8
 
 item/TItemEquipShoeSpeed.cpp:
 	.text       start:0x801D1464 end:0x801D1628
+	.rodata     start:0x8024E4C8 end:0x8024E4E0
 	.data       start:0x8026AB10 end:0x8026AB98
+	.sdata      start:0x802C48F8 end:0x802C4900
 
 sound/MobileDust.cpp:
 	.text       start:0x801D1628 end:0x801D195C
@@ -3544,6 +3634,13 @@ Dolphin/ax/AXVPB.c:
 	.sbss       start:0x802C6030 end:0x802C6040
 	.sdata2     start:0x802CC848 end:0x802CC850
 
+Dolphin/ax/AXComp.c:
+	.data       start:0x8026CEC0 end:0x8026E900
+
+Dolphin/ax/DSPCode.c:
+	.data       start:0x8026E900 end:0x802707C0
+	.sdata      start:0x802C49C8 end:0x802C49D0
+
 Dolphin/ax/AXProf.c:
 	.text       start:0x801E87F4 end:0x801E883C
 	.sbss       start:0x802C6040 end:0x802C6050
@@ -3573,6 +3670,9 @@ Dolphin/card/CARDUnlock.c:
 	.text       start:0x801EA578 end:0x801EB7D8
 	.data       start:0x802709E0 end:0x80270B40
 	.sdata      start:0x802C49E0 end:0x802C49E8
+
+Dolphin/card/CARDNet.c:
+	.sdata      start:0x802C49E8 end:0x802C49F0
 
 Dolphin/card/CARDRdwr.c:
 	.text       start:0x801EB7D8 end:0x801EBA58
@@ -3706,6 +3806,7 @@ Dolphin/TRK_MINNOW_DOLPHIN/serpoll.c:
 	.text       start:0x801F95A4 end:0x801F985C
 	.rodata     start:0x8024E578 end:0x8024E708
 	.bss        start:0x802A37D8 end:0x802A37F0
+	.sbss       start:0x802C60D8 end:0x802C60E0
 
 Dolphin/TRK_MINNOW_DOLPHIN/usr_put.c:
 	.text       start:0x801F985C end:0x801F98E8
@@ -3850,6 +3951,9 @@ Dolphin/MSL_C/MSL_Common/alloc.c:
 	.bss        start:0x802A4BE8 end:0x802A4C20
 	.sbss       start:0x802C6108 end:0x802C6110
 
+Dolphin/MSL_C/MSL_Common/errno.c:
+	.sbss       start:0x802C6110 end:0x802C6118
+
 Dolphin/MSL_C/MSL_Common/ansi_files.c:
 	.text       start:0x801FF9D8 end:0x801FFAF0
 	.data       start:0x80271988 end:0x80271AC8
@@ -3870,6 +3974,10 @@ Dolphin/MSL_C/PPC_EABI/critical_regions.gamecube.c:
 Dolphin/MSL_C/MSL_Common/ctype.c:
 	.text       start:0x802031D0 end:0x802031F4
 	.data       start:0x80271C30 end:0x80271F30
+
+Dolphin/MSL_C/MSL_Common/locale.c:
+	.rodata     start:0x8024EEE0 end:0x8024EEE8
+	.data       start:0x80271F30 end:0x80271F68
 
 Dolphin/MSL_C/MSL_Common/direct_io.c:
 	.text       start:0x802031F4 end:0x8020357C
@@ -3906,6 +4014,9 @@ Dolphin/MSL_C/MSL_Common/qsort.c:
 Dolphin/MSL_C/MSL_Common/rand.c:
 	.text       start:0x802065A0 end:0x802065C0
 	.sdata      start:0x802C4A58 end:0x802C4A60
+
+Dolphin/MSL_C/MSL_Common/float.c:
+	.sdata      start:0x802C4A60 end:0x802C4A88
 
 Dolphin/MSL_C/MSL_Common/scanf.c:
 	.text       start:0x802065C0 end:0x80207608
@@ -4038,6 +4149,7 @@ Ninja/njCamera.c:
 
 Ninja/njPerspective.c:
 	.text       start:0x8020CD80 end:0x8020CF0C
+	.bss        start:0x802A4F20 end:0x802A4F78
 	.sdata2     start:0x802CCF38 end:0x802CCF68
 
 Ninja/njMotion.c:
@@ -4056,8 +4168,17 @@ Ninja/njMotionObj.c:
 	.bss        start:0x802A4F78 end:0x802A5008
 	.sdata2     start:0x802CCFA8 end:0x802CCFB8
 
+Ninja/gjDrawCalls.c:
+	.bss        start:0x802A5008 end:0x802A5018
+	.sdata      start:0x802C4A88 end:0x802C4A90
+
 Ninja/njPrint.c:
 	.text       start:0x8020E7D8 end:0x8020F4E0
+	.data       start:0x80272338 end:0x80274368
+	.bss        start:0x802A5018 end:0x802A5038
+	.sdata      start:0x802C4A90 end:0x802C4A98
+	.sbss       start:0x802C6140 end:0x802C61E8
+	.sdata2     start:0x802CCFB8 end:0x802CCFF0
 
 Ninja/njMath.c:
 	.text       start:0x8020F4E0 end:0x8020F888
@@ -4084,7 +4205,7 @@ Ninja/njMath5.c:
 
 Ninja/njTexture.c:
 	.text       start:0x802105F4 end:0x80211B04
-	.sbss       start:0x802C61E8 end:0x802C61F4
+	.sbss       start:0x802C61E8 end:0x802C61F8
 
 Ninja/gjDrawList.c:
 	.text       start:0x80211B04 end:0x80211CF4
@@ -4106,11 +4227,15 @@ Ninja/gjActor.c:
 
 Ninja/gjSystem.c:
 	.text       start:0x80214980 end:0x80215540
-	.rodata     start:0x8024F288 end:0x8024F2B8
+	.rodata     start:0x8024F288 end:0x8024F2D8
 	.data       start:0x802744E0 end:0x80274500
-	.bss        start:0x802A5320 end:0x802A5950
+	.bss        start:0x802A5320 end:0x802A5B60
 	.sdata      start:0x802C4AB8 end:0x802C4AC0
+	.sbss       start:0x802C61F8 end:0x802C6220
 	.sdata2     start:0x802CD050 end:0x802CD088
+
+Ninja/gjAlphaRef.c:
+	.sdata      start:0x802C4AC0 end:0x802C4AC8
 
 Ninja/njTexLoad.c:
 	.text       start:0x80215540 end:0x80215B4C
@@ -4126,6 +4251,7 @@ Ninja/syLib.c:
 
 Ninja/njMisc.c:
 	.text       start:0x80215E70 end:0x80216428
+	.sbss       start:0x802C6228 end:0x802C6230
 	.sdata2     start:0x802CD088 end:0x802CD0A0
 
 Ninja/syTimer.c:
@@ -4451,12 +4577,12 @@ Dolphin/si/SIBios.c:
 
 Dolphin/si/SISamplingRate.c:
 	.text       start:0x8023C5E4 end:0x8023C700
-	.data       start:0x80278D38 end:0x80278E14
+	.data       start:0x80278D38 end:0x80278FA8
 	.sbss       start:0x802C62A8 end:0x802C62B0
 
 Dolphin/exi/EXIBios.c:
 	.text       start:0x8023C700 end:0x8023E2C0
-	.data       start:0x80278FA8 end:0x802792CC
+	.data       start:0x80278FA8 end:0x80279390
 	.bss        start:0x802C3340 end:0x802C3400
 	.sdata      start:0x802C4B20 end:0x802C4B24
 	.sbss       start:0x802C62B0 end:0x802C62B8

@@ -31,6 +31,29 @@
 #include "engine/TParticle.h"
 #include "animal/RacerMover.h"
 
+MotionEntry sBoss02Motions[20] = {
+	{ 0, 18, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 },
+	{ 1, 0, -1, 0, 0.0f, 29.0f, 0.2f, 0.0f, 0 },
+	{ 1, 1, -1, 0, 0.0f, 14.0f, 0.3f, 0.0f, 0 },
+	{ 0, 2, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
+	{ 0, 17, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 },
+	{ 1, 9, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ 0, 7, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },
+	{ 1, 8, -1, 0, 0.0f, 4.0f, 0.2f, 0.0f, 0 },
+	{ 1, 6, -1, 0, 0.0f, 14.0f, 0.3f, 0.0f, 0 },
+	{ 1, 12, -1, 0, 0.0f, 14.0f, 0.3f, 0.0f, 0 },
+	{ 0, 13, -1, 0, 0.0f, 20.0f, 1.0f, 0.0f, 0 },
+	{ 1, 14, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ 1, 11, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ 0, 15, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 },
+	{ 1, 16, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ 1, 3, -1, 0, 0.0f, 19.0f, 0.35f, 0.0f, 0 },
+	{ 0, 19, -1, 0, 0.0f, 30.0f, 0.2f, 0.0f, 0 },
+	{ 1, 4, -1, 0, 0.0f, 19.0f, 0.35f, 0.0f, 0 },
+	{ 1, 5, -1, 0, 0.0f, 239.0f, 1.0f, 0.0f, 0 },
+	{ 1, 10, -1, 0, 0.0f, 539.0f, 1.0f, 0.0f, 0 },
+};
+
 extern "C" int motionKeyOnce(f32 time, MotionEntry* entry, f32* frame)
 {
 	*frame = time * entry->mRate + entry->mStart;
@@ -1067,7 +1090,7 @@ static int countTail(NJS_OBJECT* obj, int* index, int* out, int max)
 // Poses the body then bends each link of the tail from the one before
 void TEneBoss02::poseTail()
 {
-	int nodes[3];
+	int nodes[3] = { 0x41, 0x42, -1 };
 	Vec3f pts[2];
 	f32 mtx[12];
 	Vec3f prev;
@@ -1081,9 +1104,6 @@ void TEneBoss02::poseTail()
 	int angle;
 	int i;
 
-	nodes[0] = sBoss02TailNodes[0];
-	nodes[1] = sBoss02TailNodes[1];
-	nodes[2] = sBoss02TailNodes[2];
 	gjPushUnitMatrix();
 	sNode     = 0;
 	sPick     = 0;

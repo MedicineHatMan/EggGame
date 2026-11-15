@@ -28,7 +28,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTObjWholeAttackName;
+extern const char* gTObjWholeAttackName;
 }
 
 #endif

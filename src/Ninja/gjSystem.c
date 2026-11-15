@@ -17,6 +17,12 @@ typedef struct NjSinCos {
 	f32 cos;
 } NjSinCos;
 
+GXLightObj gjLightObjs[5]; // the padding after it is njTexLoad.c's 32 byte alignment
+f32 njProjection2[12];
+f32 njProjection[10];
+f32 _nj_constant_material_[4];
+f32 gjIdentityMatrix[12]; // the first matrix on the stack
+NJS_TEXERRSTAT gTexErrStat;
 NJS_CONTEXT gjContexts[6] __attribute__((aligned(8))); // 0x802A5860 8 bytes past the end of gjRenderModeCopy's 0x3C
 GXRenderModeObj gjRenderModeCopy;
 GXTlutRegion gjTlutRegions[0x50];
@@ -48,7 +54,15 @@ extern void* gjFrameDrawing;   // the frame being drawn
 extern void* gjFrameB;         // frame B
 extern void* gjFrameA;         // frame A
 extern s32 lbl_802C6140;
-extern f32 gjOneOver65535;
+u32 gjLightsOn;
+f32 gjLight0Dist; // how far away light 0 is
+s32 _nj_control_3d_flag_;
+s32 lbl_802C620C;
+s32 lbl_802C6208;
+f32 gjOneOver65535;
+f32* _gj_matrix_;
+f32* gjMatrixStack;
+f32* gjMatrixStackEnd;
 u8 gjScreenBlanked = 1; // the screen is still blanked
 
 void gjSysSetRenderMode(GXRenderModeObj* rmode, s32 unused);
@@ -99,6 +113,8 @@ void njColorBlendingMode(s32 target, s32 mode)
 		_nj_current_ctx_->blend = (_nj_current_ctx_->blend & 0xE3FFFFFF) | (factors[mode] << 26);
 	}
 }
+
+const s32 gjBlendFactorTable[8] = { 0, 1, 2, 3, 4, 5, 6, 7 }; // context blend factors to GX ones
 
 // 0x80214AE0
 void gjGXSetBlendMode(s32 enable)

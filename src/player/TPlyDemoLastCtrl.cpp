@@ -1,5 +1,7 @@
 #include "player/TPlyDemoLastCtrl.h"
 
+const char* gTPlyDemoLastCtrlName = "TPlyDemoLastCtrl";
+
 #include "player/Player.h"
 #include "player/TPlyDemoLastLose.h"
 #include "player/TPlyDemoLastSuper.h"
@@ -14,7 +16,7 @@ typedef char TPlyDemoLastCtrl_size_check[(sizeof(TPlyDemoLastCtrl) == 0x30) ? 1 
 TPlyDemoLastCtrl::TPlyDemoLastCtrl(TObject* parent)
     : TObject(parent)
 {
-	_00   = gTPlyDemoLastCtrlName;
+	_00   = (u32)gTPlyDemoLastCtrlName;
 	mSize = 0x30;
 	mStep = &TPlyDemoLastCtrl::stepLose;
 }

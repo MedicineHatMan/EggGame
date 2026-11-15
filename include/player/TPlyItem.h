@@ -24,7 +24,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTPlyItemName;
+extern const char* gTPlyItemName;
 }
 
 #endif

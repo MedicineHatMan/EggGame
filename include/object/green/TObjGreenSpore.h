@@ -24,7 +24,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTObjGreenSporeName;
+extern const char* gTObjGreenSporeName;
 }
 
 #endif

@@ -30,7 +30,7 @@ TPlyEffStSuper* createTPlyEffStSuper(TObject*);
 }
 
 extern "C" {
-extern u32 gTPlyEffStSuperName;
+extern const char* gTPlyEffStSuperName;
 }
 
 #endif

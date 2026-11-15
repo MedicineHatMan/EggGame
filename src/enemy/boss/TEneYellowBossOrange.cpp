@@ -19,6 +19,8 @@
 #include "Ninja/ninja.h"
 #include "core/MathUtil.h"
 #include "enemy/boss/TEneYellowBossOrange.h"
+
+const char* gTEneYellowBossOrangeName = "TEneYellowBossOrange";
 struct Vec3f;
 struct CharaColli;
 struct GjActor;
@@ -37,7 +39,7 @@ TEneYellowBossOrange::TEneYellowBossOrange(TObject* parent, const Vec3f* pos)
 {
 	int i;
 
-	_00         = gTEneYellowBossOrangeName;
+	_00         = (u32)gTEneYellowBossOrangeName;
 	mSize       = 0x2B4;
 	mShape      = 0;
 	mModel      = modelTEneYellowBoss(4);

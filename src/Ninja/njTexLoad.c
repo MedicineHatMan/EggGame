@@ -5,7 +5,7 @@
 typedef s32 (*GjTexLoader)(NJS_TEXLIST* list, s32 num);
 
 extern GjTexLoader gjTexLoaders[4];
-u8 gjTexHeaderBuf[0x20];
+u8 gjTexHeaderBuf[0x20] __attribute__((aligned(32)));
 char gjTexExtension[] = ".GVR"; // the file extension in .sdata
 
 s32 njLoadTextureNum(NJS_TEXLIST* list, s32 num);

@@ -6,6 +6,8 @@
 #include "engine/Colli.h"
 #include "object/TObjWholeAttack.h"
 #include "core/TMainTask.h"
+
+const char* gTObjWholeAttackName = "TObjWholeAttack";
 struct CharaColli;
 
 typedef char TObjWholeAttack_size_check[(sizeof(TObjWholeAttack) == 0x44) ? 1 : -1];
@@ -22,7 +24,7 @@ TObjWholeAttack::TObjWholeAttack(TObject* parent, const Vec3f* pos)
     , mPos(*pos)
 {
 	mTimer = 10;
-	_00    = gTObjWholeAttackName;
+	_00    = (u32)gTObjWholeAttackName;
 	mSize  = 0x44;
 	setObjId(this, 0xFFFF);
 

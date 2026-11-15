@@ -2,6 +2,9 @@
 #include "ui/AeObjControl.h"
 #include "stage/TGameBattery.h"
 
+const char* gTGameBatteryName = "TGameBattery";
+const char* gTGameStateBatteryName = "TGameStateBattery";
+
 // 0x8013B320
 extern "C" void* createGameBattery(TObject* parent)
 {

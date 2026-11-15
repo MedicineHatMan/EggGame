@@ -3,6 +3,9 @@
 #include "sound/SoundCtrl.h"
 #include "object/TObjPlayer.h"
 #include "stage/TGameBossAfter.h"
+
+const char* gTGameBossAfterName = "TGameBossAfter";
+const char* gTGameStateBossAfterName = "TGameStateBossAfter";
 struct TChrPlayer;
 struct TObjPlayer;
 

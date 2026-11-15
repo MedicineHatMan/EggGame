@@ -25,6 +25,8 @@
 #include "enemy/boss/TEneYellowBossBlue.h"
 #include "core/TMainTask.h"
 #include "ui/TAeObject.h"
+
+const char* gTEneYellowBossBlueName = "TEneYellowBossBlue";
 struct NJS_TEXLIST;
 struct Vec3f;
 struct CharaColli;
@@ -45,7 +47,7 @@ TEneYellowBossBlue::TEneYellowBossBlue(TObject* parent, const Vec3f* pos)
 {
 	int i;
 
-	_00         = gTEneYellowBossBlueName;
+	_00         = (u32)gTEneYellowBossBlueName;
 	mSize       = 0x254;
 	mShape      = 0;
 	mModel      = modelTEneYellowBoss(1);

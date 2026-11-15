@@ -374,10 +374,22 @@ void TObjOrangePanelDeOpen::vfn_10()
 	}
 }
 
+// The four corners of a tile, white
+struct TileQuadData {
+	f32 x, y, z, u, v;
+	u32 mColor;
+};
+extern "C" const TileQuadData sPanelTileQuad[4] = {
+	{ -25.0f, 0.0f, 25.0f, 0.0f, 0.0f, 0xFFFFFFFF },
+	{ -25.0f, 0.0f, -25.0f, 0.0f, 1.0f, 0xFFFFFFFF },
+	{ 25.0f, 0.0f, 25.0f, 1.0f, 0.0f, 0xFFFFFFFF },
+	{ 25.0f, 0.0f, -25.0f, 1.0f, 1.0f, 0xFFFFFFFF },
+};
+
 // 0x801203D0
 static void buildTileQuad(TileQuad* quad, const f32* pos)
 {
-	*(TileQuad*)quad = *(TileQuad*)sPanelTileQuad;
+	*(TileQuad*)quad = *(TileQuad*)&sPanelTileQuad;
 	addTilePos(&quad->mV[0].x, pos);
 	addTilePos(&quad->mV[1].x, pos);
 	addTilePos(&quad->mV[2].x, pos);

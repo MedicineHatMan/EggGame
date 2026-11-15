@@ -5,6 +5,8 @@
 #include "sound/TMusicADX.h"
 #include "sound/AudioLib.h"
 
+const char* gTMusicADXName = "TMusicADX";
+
 typedef char TMusicADX_size_check[(sizeof(TMusicADX) == 0x54) ? 1 : -1];
 
 // 0x80031B30

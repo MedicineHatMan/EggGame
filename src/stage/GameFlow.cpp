@@ -22,6 +22,16 @@
 #include "core/Mem.h"
 #include "enemy/boss/TEneYellowBossGreen.h"
 
+const char* gStageNames[7][8] = { // the stage folders by world and stage
+	{ "blue1", "blue2", "blue3", "blue4", "blue5", "blue6", "blue7", "blue8" },
+	{ "red1", "red2", "red3", "red4", "red5", "red6", "red7", "red8" },
+	{ "purple1", "purple2", "purple3", "purple4", "purple5", "purple6", "purple7", "purple8" },
+	{ "orange1", "orange2", "orange3", "orange4", "orange5", "orange6", "orange7", "orange8" },
+	{ "yellow1", "yellow2", "yellow3", "yellow4", "yellow5", "yellow6", "yellow7", "yellow8" },
+	{ "green1", "green2", "green3", "green4", "green5", "green6", "green7", "green8" },
+	{ "last", "last2", "last3", "last4", "last5", "last6", "last7", "last8" },
+};
+
 #include "mode/TModeBattleMenu.h"
 #include "mode/TModeMemCheck.h"
 

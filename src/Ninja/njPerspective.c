@@ -1,6 +1,8 @@
 #include "Ninja/ninja.h"
 #include "Ninja/njInternal.h"
 
+GjProjection gProjection;
+
 void gjSetPerspective(s32 ang, f32 aspect, f32 n, f32 f)
 {
 	ang *= 0.75f;

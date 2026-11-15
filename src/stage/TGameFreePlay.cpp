@@ -2,6 +2,9 @@
 #include "stage/GameState.h"
 #include "stage/TGameFreePlay.h"
 
+const char* gTGameFreePlayName = "TGameFreePlay";
+const char* gTGameStateFreePlayName = "TGameStateFreePlay";
+
 // 0x800CD7F0
 extern "C" void* createGameFreePlay(TObject* parent)
 {

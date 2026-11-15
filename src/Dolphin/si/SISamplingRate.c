@@ -71,3 +71,35 @@ void SIRefreshSamplingRate(void)
 {
 	SISetSamplingRate(SamplingRate);
 }
+
+#define LATENCY 8
+
+// Checks the sampling rate tables. Nothing calls it, so the linker strips it and only its strings are
+// left in .data; its name is unknown
+void __SICheckSamplingRate(void)
+{
+	u32 msec;
+	u32 line;
+	u32 count;
+
+	for (msec = 0; msec <= 11; msec++) {
+		line  = XYNTSC[msec].mTvShort;
+		count = XYNTSC[msec].mTvByte;
+		OSReport("%2d[msec]: count %3d, line %3d, last %3d, diff0 %2d.%03d, diff1 %2d.%03d\n", msec, count, line,
+		         263 - line * (count - 1), 636 * line / 10000, 636 * line / 10 % 1000, 636 * (263 - line * (count - 1)) / 10000,
+		         636 * (263 - line * (count - 1)) / 10 % 1000);
+		ASSERTLINE(0, line * (count - 1) + LATENCY < 263);
+		ASSERTLINE(0, 636 * line < msec * 10000);
+		ASSERTLINE(0, 636 * (263 - line * (count - 1)) < msec * 10000);
+	}
+	for (msec = 0; msec <= 11; msec++) {
+		line  = XYPAL[msec].mTvShort;
+		count = XYPAL[msec].mTvByte;
+		OSReport("%2d[msec]: count %3d, line %3d, last %3d, diff0 %2d.%03d, diff1 %2d.%03d\n", msec, count, line,
+		         313 - line * (count - 1), 640 * line / 10000, 640 * line / 10 % 1000, 640 * (313 - line * (count - 1)) / 10000,
+		         640 * (313 - line * (count - 1)) / 10 % 1000);
+		ASSERTLINE(0, line * (count - 1) + LATENCY < 313);
+		ASSERTLINE(0, 640 * line < msec * 10000);
+		ASSERTLINE(0, 640 * (313 - line * (count - 1)) < msec * 10000);
+	}
+}

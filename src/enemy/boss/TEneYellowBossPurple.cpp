@@ -21,6 +21,8 @@
 #include "Ninja/ninja.h"
 #include "enemy/EnemyHit.h"
 #include "enemy/boss/TEneYellowBossPurple.h"
+
+const char* gTEneYellowBossPurpleName = "TEneYellowBossPurple";
 struct Vec3f;
 struct GjActor;
 
@@ -43,7 +45,7 @@ TEneYellowBossPurple::TEneYellowBossPurple(TObject* parent, const Vec3f* pos)
 {
 	int i;
 
-	_00         = gTEneYellowBossPurpleName;
+	_00         = (u32)gTEneYellowBossPurpleName;
 	mSize       = 0x264;
 	mShape      = 0;
 	mModel      = modelTEneYellowBoss(6);

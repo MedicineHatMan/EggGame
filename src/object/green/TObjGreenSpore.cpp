@@ -7,6 +7,8 @@
 #include "core/VecMath.h"
 #include "object/green/TObjGreenSpore.h"
 #include "core/TMainTask.h"
+
+const char* gTObjGreenSporeName = "TObjGreenSpore";
 struct Fx;
 
 typedef char TObjGreenSpore_size_check[(sizeof(TObjGreenSpore) == 0x58) ? 1 : -1];
@@ -22,7 +24,7 @@ extern "C" int createTObjGreenSpore(s8* arg)
 TObjGreenSpore::TObjGreenSpore(TObject* parent, int)
     : TObject(parent)
 {
-	_00   = gTObjGreenSporeName;
+	_00   = (u32)gTObjGreenSporeName;
 	mSize = 0x58;
 	mtxIdentity(mMatrix);
 	mFx = fxSpawnFollow(1, 8, 0, mMatrix);

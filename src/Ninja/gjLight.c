@@ -1,7 +1,7 @@
 #include "Ninja/ninja.h"
 #include "Ninja/njInternal.h"
 
-extern GXLightObj gjLightObjs[8];
+extern GXLightObj gjLightObjs[5];
 extern f32 gjLight0Dist; // how far away light 0 is
 
 u32 gjLightMasks[5] = {

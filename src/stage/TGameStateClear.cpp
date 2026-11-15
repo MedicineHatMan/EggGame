@@ -6,6 +6,15 @@
 #include "stage/TEventCtrl.h"
 #include "stage/TGameStateClear.h"
 
+const char* gTGameStateClearName = "TGameStateClear";
+const char* gTGameStateWarpName = "TGameStateWarp";
+const char* gTGameStateDeadName = "TGameStateDead";
+const char* gTGameStateFailedName = "TGameStateFailed";
+const char* gTGameStateGameOverName = "TGameStateGameOver";
+const char* gTGameStateMissName = "TGameStateMiss";
+const char* gTGameStateSucceedName = "TGameStateSucceed";
+const char* gTGameStateWaitClearName = "TGameStateWaitClear";
+
 typedef char TGameStateClear_size_check[(sizeof(TGameStateClear) == 0x18) ? 1 : -1];
 typedef char TGameStateWarp_size_check[(sizeof(TGameStateWarp) == 0x18) ? 1 : -1];
 typedef char TGameStateDead_size_check[(sizeof(TGameStateDead) == 0x18) ? 1 : -1];

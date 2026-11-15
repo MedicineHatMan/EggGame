@@ -32,6 +32,7 @@ s32 gjTexHeapBusy(void);
 #define GVR_GBIX 0x58494247
 #define GVR_GVRT 0x54525647
 
+GjTexMem* gjTexSlots;
 s32 gjTexSlotCount; // number of slots
 GjTexHeader* gjTexHeaders;
 s32 gjTexHeaderCount; // number of headers

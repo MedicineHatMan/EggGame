@@ -14,12 +14,12 @@ typedef struct NJS_QUAD_TEXTURE_EX {
 // Not defined here the DOL keeps the .bss pair ahead of njTexLoad.c's and the .sbss ones on both sides of syLib.c's so
 // data-only files own them
 extern f32 gjIdentityMatrix[12]; // the first matrix on the stack
-extern GXLightObj gjLightObjs[8];
+extern GXLightObj gjLightObjs[5];
 extern s32 lbl_802C6208;
 extern s32 lbl_802C620C;
 extern f32 gjLight0Dist;   // how far away light 0 is
-extern u32 gjQuadSpecular; // specular for quads
-extern u32 gjQuadColor;    // colour for quads
+u32 gjQuadColor;    // colour for quads
+u32 gjQuadSpecular; // specular for quads
 void njMiscGXTexCoord2f32(f32 u, f32 v);
 void njMiscGXColor1u32(u32 col);
 void njMiscGXPosition3f32(f32 x, f32 y, f32 z);

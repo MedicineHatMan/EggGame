@@ -37,7 +37,7 @@ TPlyEffStDrain* createTPlyEffStDrain(TObject*);
 }
 
 extern "C" {
-extern u32 gTPlyEffStDrainName;
+extern const char* gTPlyEffStDrainName;
 }
 
 #endif

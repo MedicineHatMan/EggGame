@@ -9,6 +9,13 @@ struct DrawTask;
 #include "Ninja/ninja.h"
 #include "core/MathUtil.h"
 
+MotionEntry sBattleModelHiyokoMotions[4] = {
+	{ 0, 0, -1, 0, 0.0f, 49.0f, 0.25f, 0.0f, 0 },
+	{ 0, 1, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 },
+	{ 2, 2, -1, 3, 0.0f, 24.0f, 0.25f, 0.0f, 0 },
+	{ 0, 3, -1, 0, 0.0f, 39.0f, 0.5f, 0.0f, 0 },
+};
+
 const char* gTBattleModelHiyokoName = "TBattleModelHiyoko";
 struct NJS_TEXLIST;
 struct GjActor;

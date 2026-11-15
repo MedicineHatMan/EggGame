@@ -20,7 +20,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTPlyEffStSleepName;
+extern const char* gTPlyEffStSleepName;
 }
 
 #endif

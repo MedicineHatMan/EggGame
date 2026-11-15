@@ -37,7 +37,7 @@ TPlyEffStBlind* createTPlyEffStBlind(TObject*);
 }
 
 extern "C" {
-extern u32 gTPlyEffStBlindName;
+extern const char* gTPlyEffStBlindName;
 }
 
 #endif

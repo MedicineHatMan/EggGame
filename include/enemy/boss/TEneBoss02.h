@@ -500,7 +500,6 @@ TObject* createTEneBoss02(TObject*, SetDesc*);
 extern "C" {
 extern ResBank sBoss02Bank;
 extern const int sBoss02BodyNodes[];
-extern const int sBoss02TailNodes[];
 extern FxBankFile sBlueBossFx;
 extern NJS_OBJECT** sBoss02Models;
 extern NJS_TEXLIST** sBoss02Textures;

@@ -1,6 +1,9 @@
 #include "stage/TGame.h"
 #include "stage/TGameSnowman.h"
 
+const char* gTGameSnowmanName = "TGameSnowman";
+const char* gTGameStateSnowmanName = "TGameStateSnowman";
+
 // 0x80114184
 extern "C" void* createGameSnowman(TObject* parent)
 {

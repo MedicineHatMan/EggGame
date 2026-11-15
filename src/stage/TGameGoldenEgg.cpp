@@ -5,6 +5,10 @@
 #include "stage/TEventCtrl.h"
 #include "egg/TGoldenEggBreak.h"
 
+const char* gTGameGoldenEggName = "TGameGoldenEgg";
+const char* gTGameStateGoldenEggName = "TGameStateGoldenEgg";
+const char* gTGameStateGoldenEggLostName = "TGameStateGoldenEggLost";
+
 // 0x800CDE48
 extern "C" void* createGameGoldenEgg(TObject* parent)
 {

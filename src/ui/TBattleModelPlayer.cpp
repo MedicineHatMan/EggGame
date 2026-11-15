@@ -10,6 +10,21 @@ struct DrawTask;
 #include "Ninja/ninja.h"
 #include "core/MathUtil.h"
 
+MotionEntry sBattleModelPlayerMotions[12] = {
+	{ 0, 0, -1, 0, 0.0f, 174.0f, 1.0f, 0.0f, 0 },
+	{ 0, 4, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
+	{ 1, 8, -1, 0, 0.0f, 141.0f, 1.0f, 0.0f, 0 },
+	{ 0, 1, -1, 0, 0.0f, 88.0f, 0.5f, 0.0f, 0 },
+	{ 0, 5, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
+	{ 1, 9, -1, 0, 0.0f, 141.0f, 1.0f, 0.0f, 0 },
+	{ 0, 2, -1, 0, 0.0f, 88.0f, 0.5f, 0.0f, 0 },
+	{ 0, 6, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
+	{ 1, 10, -1, 0, 0.0f, 141.0f, 1.0f, 0.0f, 0 },
+	{ 0, 3, -1, 0, 0.0f, 88.0f, 0.5f, 0.0f, 0 },
+	{ 0, 7, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
+	{ 1, 11, -1, 0, 0.0f, 141.0f, 1.0f, 0.0f, 0 },
+};
+
 const char* gTBattleModelPlayerName = "TBattleModelPlayer";
 struct NJS_TEXLIST;
 struct GjActor;

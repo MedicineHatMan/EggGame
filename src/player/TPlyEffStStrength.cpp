@@ -3,6 +3,8 @@
 #include "animal/AniMount.h"
 #include "engine/FxSystem.h"
 #include "core/MathUtil.h"
+
+const char* gTPlyEffStStrengthName = "TPlyEffStStrength";
 struct Fx;
 
 typedef char TPlyEffStStrength_size_check[(sizeof(TPlyEffStStrength) == 0x5C) ? 1 : -1];
@@ -18,7 +20,7 @@ TPlyEffStStrength::TPlyEffStStrength(TObject* parent)
     : TPlyEffSt(parent, 0xC)
 {
 	mEffect = 0;
-	_00     = gTPlyEffStStrengthName;
+	_00     = (u32)gTPlyEffStStrengthName;
 	mSize   = 0x5C;
 }
 

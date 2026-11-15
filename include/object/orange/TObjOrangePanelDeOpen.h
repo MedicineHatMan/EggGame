@@ -88,7 +88,6 @@ TObject* createTObjOrangePanelDeOpen(TObject*, SetDesc*);
 
 extern "C" {
 extern const char* sPanelAnswerNames[];
-extern const f32 sPanelTileQuad[];
 }
 
 #endif

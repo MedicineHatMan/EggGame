@@ -1,6 +1,9 @@
 #include "stage/TGame.h"
 #include "stage/TGameBoss.h"
 
+const char* gTGameBossName = "TGameBoss";
+const char* gTGameStateBossName = "TGameStateBoss";
+
 // 0x80113E48
 extern "C" void* createGameBoss(TObject* parent)
 {

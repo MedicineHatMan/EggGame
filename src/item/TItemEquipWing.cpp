@@ -6,6 +6,8 @@
 #include "animal/AniMount.h"
 #include "engine/ActorMotion.h"
 
+const char* gTItemEquipWingName = "TItemEquipWing";
+
 typedef char TItemEquipWing_size_check[(sizeof(TItemEquipWing) == 0x10C) ? 1 : -1];
 
 struct WingCtx {
@@ -20,7 +22,7 @@ TItemEquipWing::TItemEquipWing(TObject* parent, const ItemSpec* spec)
     : TItemEquipment(parent, spec)
     , mGlow()
 {
-	_00   = gTItemEquipWingName;
+	_00   = (u32)gTItemEquipWingName;
 	mSize = 0x10C;
 	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 }

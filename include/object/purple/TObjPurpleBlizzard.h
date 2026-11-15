@@ -50,7 +50,7 @@ int scriptBlizzard(int*);
 }
 
 extern "C" {
-extern u32 gTObjPurpleBlizzardName;
+extern const char* gTObjPurpleBlizzardName;
 }
 
 extern "C" {

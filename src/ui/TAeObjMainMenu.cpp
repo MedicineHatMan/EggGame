@@ -3,6 +3,10 @@
 #include "ui/AeArc.h"
 #include "ui/AeUtil.h"
 #include "core/TMainTask.h"
+
+const u32 gSoundRowSlots[2] = { 0xB7, 0xB8 };
+const u32 gSoundRowLit[2]   = { 0x53, 0x5C };
+const u32 gSoundRowDim[2]   = { 0x50, 0x58 };
 struct NJS_TEXLIST;
 
 // TAeObjMainMenu class at 0x8017E294 Vtable 0x80262410

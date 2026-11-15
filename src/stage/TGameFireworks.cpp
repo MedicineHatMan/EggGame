@@ -1,6 +1,9 @@
 #include "stage/TGame.h"
 #include "stage/TGameFireworks.h"
 
+const char* gTGameFireworksName = "TGameFireworks";
+const char* gTGameStateFireworksName = "TGameStateFireworks";
+
 // 0x8013B6F0
 extern "C" void* createGameFireworks(TObject* parent)
 {

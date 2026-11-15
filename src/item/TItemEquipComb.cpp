@@ -3,13 +3,15 @@
 #include "egg/EggCreature.h"
 #include "core/MathUtil.h"
 
+const char* gTItemEquipCombName = "TItemEquipComb";
+
 typedef char TItemEquipComb_size_check[(sizeof(TItemEquipComb) == 0x78) ? 1 : -1];
 
 // 0x801AF5F0
 TItemEquipComb::TItemEquipComb(TObject* parent, const ItemSpec* spec)
     : TItemEquipment(parent, spec)
 {
-	_00   = gTItemEquipCombName;
+	_00   = (u32)gTItemEquipCombName;
 	mSize = 0x78;
 }
 

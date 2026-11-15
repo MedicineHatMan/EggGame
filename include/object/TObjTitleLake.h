@@ -40,7 +40,7 @@ TObject* createTObjTitleLake(TObject*, SetDesc*);
 }
 
 extern "C" {
-extern u32 gTObjTitleLakeName;
+extern const char* gTObjTitleLakeName;
 }
 
 #endif

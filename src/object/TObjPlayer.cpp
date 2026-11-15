@@ -43,6 +43,9 @@ int sPlayerStartAngle[4];     // 0x802799E0
 static RestartList sRestarts; // 0x802799FC
 static void* sParams[4];      // 0x80279A08
 FlagWord gPlayerFlags;        // 0x802C4BE0
+BinFile* sPlayerParamFile;
+void* sPlayerParamsTail;
+void** sPlayerTexLists2;
 
 // 0x80012C6C
 RestartList::RestartList()

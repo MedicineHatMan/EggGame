@@ -2,6 +2,9 @@
 #include "ui/AeObjControl.h"
 #include "stage/TGameGear.h"
 
+const char* gTGameGearName = "TGameGear";
+const char* gTGameStateGearName = "TGameStateGear";
+
 // 0x8013BA94
 extern "C" void* createGameGear(TObject* parent)
 {

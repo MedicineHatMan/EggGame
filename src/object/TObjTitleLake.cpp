@@ -3,6 +3,8 @@
 #include "egg/EggCreature.h"
 #include "ui/TitleObjArc.h"
 #include "Ninja/ninja.h"
+
+const char* gTObjTitleLakeName = "TObjTitleLake";
 struct NJS_TEXLIST;
 
 typedef char TObjTitleLake_size_check[(sizeof(TObjTitleLake) == 0x100) ? 1 : -1];
@@ -17,7 +19,7 @@ extern "C" TObject* createTObjTitleLake(TObject* parent, SetDesc* desc)
 TObjTitleLake::TObjTitleLake(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00                 = gTObjTitleLakeName;
+	_00                 = (u32)gTObjTitleLakeName;
 	mSize               = 0x100;
 	NJS_OBJECT** models = getTitleObjModels();
 	mModel              = models[8];

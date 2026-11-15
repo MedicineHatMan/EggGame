@@ -26,7 +26,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTItemEquipWingName;
+extern const char* gTItemEquipWingName;
 }
 
 #endif

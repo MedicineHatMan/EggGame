@@ -4,6 +4,8 @@
 #include "sound/SoundCtrl.h"
 #include "stage/TGameStateBattle.h"
 
+const char* gTGameStateBattleName = "TGameStateBattle";
+
 typedef char TGameStateBattle_size_check[(sizeof(TGameStateBattle) == 0x14) ? 1 : -1];
 typedef char TGameStateBattleStart_size_check[(sizeof(TGameStateBattleStart) == 0x1C) ? 1 : -1];
 typedef char TGameStateBattleEnd_size_check[(sizeof(TGameStateBattleEnd) == 0x18) ? 1 : -1];

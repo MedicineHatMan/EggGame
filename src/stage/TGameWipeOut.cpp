@@ -2,6 +2,9 @@
 #include "ui/AeObjControl.h"
 #include "stage/TGameWipeOut.h"
 
+const char* gTGameWipeOutName = "TGameWipeOut";
+const char* gTGameStateWipeOutName = "TGameStateWipeOut";
+
 // 0x8015F220
 extern "C" void* createGameWipeOut(TObject* parent)
 {

@@ -5,6 +5,8 @@
 #include "engine/FxSystem.h"
 #include "core/MathUtil.h"
 
+const char* gTItemEquipShoeHiJumpName = "TItemEquipShoeHiJump";
+
 typedef char TItemEquipShoeHiJump_size_check[(sizeof(TItemEquipShoeHiJump) == 0x60) ? 1 : -1];
 
 // 0x801D12C0
@@ -12,7 +14,7 @@ TItemEquipShoeHiJump::TItemEquipShoeHiJump(TObject* parent, const ItemSpec* spec
     : TItemEquipment(parent, spec)
     , mFx(0)
 {
-	_00   = gTItemEquipShoeHiJumpName;
+	_00   = (u32)gTItemEquipShoeHiJumpName;
 	mSize = 0x60;
 }
 

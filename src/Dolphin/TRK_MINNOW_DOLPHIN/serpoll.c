@@ -1,7 +1,7 @@
 #include "PowerPC_EABI_Support/MetroTRK/trk.h"
 
 static TRKFramingState gTRKFramingState;
-extern void* gTRKInputPendingPtr;
+void* gTRKInputPendingPtr = NULL;
 
 /**
  * @note Address: 0x800BC244

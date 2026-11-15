@@ -27,6 +27,8 @@ const char* gTL_04BName      = "TL_04B";
 const char* gTL_05BName      = "TL_05B";
 const char* gTL_06BName      = "TL_06B";
 
+char sObjDumpSpaces[] = "                                                      "; // indents objPrintTree's lines
+
 // 0x80013B68
 TObject::TObject(TObject* parent)
 {
@@ -306,6 +308,12 @@ TObject* gTL_03On;
 TObject* gTL_04On;
 TObject* gTL_05On;
 TObject* gTL_06On;
+int sObjAliveCount;
+int sObjWalkDepth;
+u32 sMainTaskProcMask;
+u32 sMainTaskProcMaskPrev;
+u32 sMainTaskDrawMask;
+u32 sMainTaskDrawMaskPrev;
 }
 
 // 0x800142D4

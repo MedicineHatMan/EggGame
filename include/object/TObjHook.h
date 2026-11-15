@@ -45,7 +45,7 @@ public:
 };
 
 extern "C" {
-extern void* gTObjHookName;
+extern const char* gTObjHookName;
 }
 
 #endif

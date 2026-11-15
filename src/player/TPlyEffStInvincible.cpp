@@ -3,6 +3,8 @@
 #include "animal/AniMount.h"
 #include "engine/FxSystem.h"
 #include "core/MathUtil.h"
+
+const char* gTPlyEffStInvincibleName = "TPlyEffStInvincible";
 struct Fx;
 
 typedef char TPlyEffStInvincible_size_check[(sizeof(TPlyEffStInvincible) == 0x5C) ? 1 : -1];
@@ -24,7 +26,7 @@ TPlyEffStInvincible::TPlyEffStInvincible(TObject* parent)
     : TPlyEffSt(parent, 3)
 {
 	mEffect = 0;
-	_00     = gTPlyEffStInvincibleName;
+	_00     = (u32)gTPlyEffStInvincibleName;
 	mSize   = 0x5C;
 }
 

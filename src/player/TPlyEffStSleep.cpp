@@ -2,6 +2,8 @@
 #include "egg/EggCreature.h"
 #include "engine/TParticle.h"
 
+const char* gTPlyEffStSleepName = "TPlyEffStSleep";
+
 struct SleepPart {
 	u8 _00[0x58];
 	f32* mFollow; // _58
@@ -20,7 +22,7 @@ static inline void copyJointMtx(TChrPlayer* player, int joint, f32* dst)
 TPlyEffStSleep::TPlyEffStSleep(TObject* parent)
     : TPlyEffSt(parent, 5)
 {
-	_00   = gTPlyEffStSleepName;
+	_00   = (u32)gTPlyEffStSleepName;
 	mSize = 0x58;
 }
 

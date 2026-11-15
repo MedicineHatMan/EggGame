@@ -40,7 +40,7 @@ TObject* createTObjTitleBigFall(TObject*, SetDesc*);
 }
 
 extern "C" {
-extern u32 gTObjTitleBigFallName;
+extern const char* gTObjTitleBigFallName;
 }
 
 #endif

@@ -6,6 +6,8 @@
 #include "sound/SoundCtrl.h"
 #include "ui/AeUtil.h"
 #include "core/TMainTask.h"
+
+const u32 gMsgYesNoSlots[2] = { 0x23, 0x22 }; // the yes and no rows
 struct NJS_TEXLIST;
 
 // TAeObjMsgWindow class at 0x800E9EA4 Vtable 0x8025B7C8

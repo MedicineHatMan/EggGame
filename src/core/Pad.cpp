@@ -6,6 +6,8 @@
 #include "Dolphin/pad.h"
 #include "stl/math.h"
 #include "core/Mem.h"
+
+const PadState sPadNoState = { 0x0, 0xFFFFFFFF, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0, 0, 0, 0, 0, 0.0f, 0, 0.0f, -1, -1 };
 struct VibTable;
 
 typedef char PadState_size_check[(sizeof(PadState) == 0x38) ? 1 : -1];

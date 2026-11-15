@@ -5,13 +5,15 @@
 #include "animal/AniMount.h"
 #include "engine/ActorMotion.h"
 
+const char* gTPlyItemName = "TPlyItem";
+
 typedef char TPlyItem_size_check[(sizeof(TPlyItem) == 0xA0) ? 1 : -1];
 
 // 0x80189768
 TPlyItem::TPlyItem(TObject* parent, int kind, f32* mtx)
     : TObject(parent)
 {
-	_00   = gTPlyItemName;
+	_00   = (u32)gTPlyItemName;
 	mSize = 0xA0;
 	mMtx  = mtx;
 	itemHolderAttach(kind, &mHolder);

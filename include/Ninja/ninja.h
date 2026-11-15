@@ -224,6 +224,9 @@ typedef struct NJS_TEXERRSTAT {
 	s32 err;   // _08
 	s32 _0C;   // _0C
 	s32 _10;   // _10
+	s32 _14;   // _14
+	s32 _18;   // _18
+	s32 _1C;   // _1C
 } NJS_TEXERRSTAT;
 
 // What a GVR file's GVRT chunk starts with

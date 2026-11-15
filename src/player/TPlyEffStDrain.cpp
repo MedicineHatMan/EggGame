@@ -6,6 +6,8 @@
 #include "engine/FxSystem.h"
 #include "core/MathUtil.h"
 #include "engine/ActorMotion.h"
+
+const char* gTPlyEffStDrainName = "TPlyEffStDrain";
 struct Fx;
 
 typedef char TPlyEffStDrain_size_check[(sizeof(TPlyEffStDrain) == 0x108) ? 1 : -1];
@@ -24,7 +26,7 @@ TPlyEffStDrain::TPlyEffStDrain(TObject* parent)
     , mHolder()
     , mGlow()
 {
-	_00   = gTPlyEffStDrainName;
+	_00   = (u32)gTPlyEffStDrainName;
 	mSize = 0x108;
 	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	itemHolderAttach(3, &mHolder);

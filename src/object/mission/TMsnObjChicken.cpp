@@ -29,6 +29,16 @@ struct DrawTask;
 #include "io/Resource.h"
 #include "object/ObjArchive.h"
 #include "ui/AeArc.h"
+
+MotionEntry sMsnChickenMotions[4] = {
+	{ 0, 0, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 },
+	{ 1, 1, -1, 0, 0.0f, 56.0f, 0.5f, 0.0f, 0 },
+	{ 1, 2, -1, 0, 0.0f, 39.0f, 0.5f, 0.0f, 0 },
+	{ 0, 3, -1, 0, 0.0f, 30.0f, 0.7f, 0.0f, 0 },
+};
+ColliShape sMsnChickenShape[1] = {
+	{ 0.0f, 15.0f, 0.0f, 0x0, 0, 0x0, 30.0f, 15.0f, 0.0f, 0x0, 0x2, 0x0 },
+};
 struct CharaColli;
 struct SetLink;
 struct ColliShape;

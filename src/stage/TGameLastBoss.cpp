@@ -3,6 +3,9 @@
 #include "ui/TFade.h"
 #include "stage/TGameLastBoss.h"
 
+const char* gTGameLastBossName = "TGameLastBoss";
+const char* gTGameStateLastBossName = "TGameStateLastBoss";
+
 // 0x801AFE08
 extern "C" void* createGameLastBoss(TObject* parent)
 {

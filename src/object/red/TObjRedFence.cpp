@@ -94,6 +94,9 @@ void TObjRedFence::stopFx()
 	}
 }
 
+const Vec3f sRedFenceTop[3]    = { { -78.0f, 75.0f, -5.0f }, { 0.0f, 75.0f, -5.0f }, { 78.0f, 75.0f, -5.0f } };
+const Vec3f sRedFenceBottom[3] = { { -78.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 78.0f, 0.0f, 0.0f } };
+
 // 0x800CF360
 void TObjRedFence::pointOn(Vec3f* out, u16 i)
 {

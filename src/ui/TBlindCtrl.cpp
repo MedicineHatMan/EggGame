@@ -1,6 +1,8 @@
 #include "enemy/boss/EneBoss.h"
 #include "engine/TFogCtrl.h"
 
+const char* gTBlindCtrlName = "TBlindCtrl";
+
 #include "ui/TBlindCtrl.h"
 #include "core/TMainTask.h"
 

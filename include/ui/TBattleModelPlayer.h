@@ -62,7 +62,7 @@ void loadBattleModelPlayer();
 
 extern "C" {
 extern const char* gTBattleModelPlayerName;
-extern const MotionEntry sBattleModelPlayerMotions[];
+extern MotionEntry sBattleModelPlayerMotions[];
 }
 
 #endif

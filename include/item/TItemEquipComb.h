@@ -21,7 +21,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTItemEquipCombName;
+extern const char* gTItemEquipCombName;
 }
 
 #endif

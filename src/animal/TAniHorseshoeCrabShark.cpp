@@ -17,6 +17,8 @@
 #include "stage/TStageScore.h"
 #include "animal/TAniHorseshoeCrabShark.h"
 #include "enemy/Enemy.h"
+
+const AniNode sHorseshoeCrabSharkModelNodes[2] = { { 0, 0x30 }, { 2, 0x28 } };
 struct Vec3f;
 struct Fx;
 struct DrawTask;

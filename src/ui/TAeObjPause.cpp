@@ -1,4 +1,6 @@
 #include "ui/TAeObjPause.h"
+
+const u32 gPauseBanks[2] = { 0x13, 0xFFFFFFFF };
 struct DrawTask;
 #include "ui/TextVec.h"
 #include "engine/DrawTask.h"

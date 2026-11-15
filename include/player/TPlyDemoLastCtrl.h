@@ -31,7 +31,7 @@ public:
 };
 
 extern "C" {
-extern u32 gTPlyDemoLastCtrlName;
+extern const char* gTPlyDemoLastCtrlName;
 }
 
 #endif

@@ -6,6 +6,8 @@
 #include "engine/FxSystem.h"
 #include "core/MathUtil.h"
 #include "engine/ActorMotion.h"
+
+const char* gTPlyEffStBlindName = "TPlyEffStBlind";
 struct Fx;
 
 typedef char TPlyEffStBlind_size_check[(sizeof(TPlyEffStBlind) == 0x108) ? 1 : -1];
@@ -24,7 +26,7 @@ TPlyEffStBlind::TPlyEffStBlind(TObject* parent)
     , mHolder()
     , mGlow()
 {
-	_00   = gTPlyEffStBlindName;
+	_00   = (u32)gTPlyEffStBlindName;
 	mSize = 0x108;
 	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	itemHolderAttach(4, &mHolder);

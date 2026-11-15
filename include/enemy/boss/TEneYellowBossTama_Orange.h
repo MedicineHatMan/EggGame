@@ -55,7 +55,7 @@ public:
 };
 
 extern "C" {
-extern u32 sOrangeTamaName[2];
+extern const char* sOrangeTamaName;
 }
 
 #endif

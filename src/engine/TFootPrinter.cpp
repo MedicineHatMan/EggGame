@@ -12,6 +12,13 @@ struct DrawTask;
 #include "Ninja/ninja.h"
 #include "core/TMainTask.h"
 
+const FootCorner sFootCorners[4] = {
+	{ -2.0f, 0.4f, 2.0f, 0.0f, 0.0f, 0x0 },
+	{ -2.0f, 0.4f, -2.0f, 0.0f, 1.0f, 0x0 },
+	{ 2.0f, 0.4f, 2.0f, 1.0f, 0.0f, 0x0 },
+	{ 2.0f, 0.4f, -2.0f, 1.0f, 1.0f, 0x0 },
+};
+
 typedef char FootPrint_size_check[(sizeof(FootPrint) == 0x38) ? 1 : -1];
 
 typedef char TFootPrinter_size_check[(sizeof(TFootPrinter) == 0x382C) ? 1 : -1];
