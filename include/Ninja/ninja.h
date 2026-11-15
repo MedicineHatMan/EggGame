@@ -51,14 +51,14 @@ typedef struct GXViewport {
 } GXViewport;
 
 typedef struct GjTexInfo {
-	s32 format;   // _00
-	u32 _04;      // _04
-	u32 _08;      // _08
-	s32 width;    // _0C
-	s32 height;   // _10
-	u32 _14;      // _14
-	u32 flags;    // _18 0x80000000 mipmapped 0x8000 palette
-	void* image;  // _1C
+	s32 format;  // _00
+	u32 _04;     // _04
+	u32 _08;     // _08
+	s32 width;   // _0C
+	s32 height;  // _10
+	u32 _14;     // _14
+	u32 flags;   // _18 0x80000000 mipmapped 0x8000 palette
+	void* image; // _1C
 } GjTexInfo;
 
 typedef struct GjTexHeader {
@@ -85,22 +85,22 @@ typedef struct GjTexMem {
 struct GjModel;
 
 typedef struct NJS_OBJECT {
-	u32 evalflags;           // _00
-	struct GjModel* model;   // _04
-	f32 pos[3];              // _08
-	s32 ang[3];              // _14
-	f32 scl[3];              // _20
+	u32 evalflags;              // _00
+	struct GjModel* model;      // _04
+	f32 pos[3];                 // _08
+	s32 ang[3];                 // _14
+	f32 scl[3];                 // _20
 	struct NJS_OBJECT* child;   // _2C
 	struct NJS_OBJECT* sibling; // _30
-	f32 quatRe;              // _34 only with evalflags 0x400
+	f32 quatRe;                 // _34 only with evalflags 0x400
 } NJS_OBJECT;
 
 /** A Ninja motion the per-node keys how many frames and which kinds of key each node has */
 typedef struct NJS_MOTION {
-	void* mdata;  // _00
-	u32 nbFrame;  // _04
-	u16 type;     // _08
-	u16 inp_fn;   // _0A the node's lists and 0xC0 for how it reads them
+	void* mdata; // _00
+	u32 nbFrame; // _04
+	u16 type;    // _08
+	u16 inp_fn;  // _0A the node's lists and 0xC0 for how it reads them
 } NJS_MOTION;
 
 typedef struct GjActor {
@@ -114,17 +114,17 @@ typedef struct GjActor {
 typedef struct GjMesh {
 	void* params; // _00
 	s32 nbParam;  // _04
-	void* list; // _08 the display list
-	u32 size;   // _0C
+	void* list;   // _08 the display list
+	u32 size;     // _0C
 } GjMesh;
 
 typedef struct GjModel {
-	void* verts;   // _00
-	void* vtxList; // _04 see gjCalcActor
-	GjMesh* opaque; // _08
-	GjMesh* trans;  // _0C
-	u16 nbOpaque;  // _10
-	u16 nbTrans;   // _12
+	void* verts;       // _00
+	void* vtxList;     // _04 see gjCalcActor
+	GjMesh* opaque;    // _08
+	GjMesh* trans;     // _0C
+	u16 nbOpaque;      // _10
+	u16 nbTrans;       // _12
 	NJS_POINT3 center; // _14 of the bounding sphere
 	f32 r;             // _20 the bounding radius
 } GjModel;
@@ -134,24 +134,24 @@ typedef void (*GjKeyFn)(void* keys, u32 n, f32 frame, void* out);
 
 // The running motion gjMotionSelectState picks which one of these
 typedef struct GjMotionState {
-	u8* base;     // _00
-	s32 size;     // _04
-	s32 total;    // _08
-	void** list0; // _0C
-	u32* list1;   // _10
-	f32 frame;    // _14
-	u32 nbFrame;  // _18
-	s32 index;    // _1C
-	u32 type;     // _20
-	GjKeyFn readVec;  // _24
-	GjKeyFn readAng;  // _28
-	GjKeyFn _2C;      // _2C
-	GjKeyFn readAngS; // _30
-	s32 (*getPos)(f32* out);  // _34
-	s32 (*getAng)(s32* out);  // _38
-	s32 (*getScl)(f32* out);  // _3C
+	u8* base;                            // _00
+	s32 size;                            // _04
+	s32 total;                           // _08
+	void** list0;                        // _0C
+	u32* list1;                          // _10
+	f32 frame;                           // _14
+	u32 nbFrame;                         // _18
+	s32 index;                           // _1C
+	u32 type;                            // _20
+	GjKeyFn readVec;                     // _24
+	GjKeyFn readAng;                     // _28
+	GjKeyFn _2C;                         // _2C
+	GjKeyFn readAngS;                    // _30
+	s32 (*getPos)(f32* out);             // _34
+	s32 (*getAng)(s32* out);             // _38
+	s32 (*getScl)(f32* out);             // _3C
 	s32 (*getQuat)(NJS_QUATERNION* out); // _40
-	s32 (*getAngS)(s16* out); // _44
+	s32 (*getAngS)(s16* out);            // _44
 } GjMotionState;
 
 typedef struct GjDrawCalls {
@@ -161,16 +161,16 @@ typedef struct GjDrawCalls {
 
 // One of six sets of render state
 typedef struct NJS_CONTEXT {
-	u32 _00;      // _00
-	u32 mode;     // _04 0xE0000000 z compare 0x18000000 culling 0x04000000 z write off
-	GjTexInfo* tex; // _08
-	u32 blend;    // _0C 0xE0000000 source 0x1C000000 destination 0x18000 clamp
-	u32 _10;      // _10
-	s32 _14;      // _14
-	s32 _18;      // _18 the texture palette
-	u32 _1C;      // _1C
+	u32 _00;              // _00
+	u32 mode;             // _04 0xE0000000 z compare 0x18000000 culling 0x04000000 z write off
+	GjTexInfo* tex;       // _08
+	u32 blend;            // _0C 0xE0000000 source 0x1C000000 destination 0x18000 clamp
+	u32 _10;              // _10
+	s32 _14;              // _14
+	s32 _18;              // _18 the texture palette
+	u32 _1C;              // _1C
 	NJS_TEXLIST* texlist; // _20
-	u32 _24;      // _24
+	u32 _24;              // _24
 } NJS_CONTEXT;
 
 // The current perspective see gjSetPerspective
@@ -234,13 +234,13 @@ typedef struct GjTexDesc {
 } GjTexDesc;
 
 // 2 pi / 65536 The DOL's constant is a float pi taken to double 0x3F1921FB00000000
-#define NJ_PI 3.141592f
+#define NJ_PI         3.141592f
 #define NJ_ANG_TO_RAD (NJ_PI / 32768.0)
 
 // ---- Globals
-extern f32* _gj_matrix_;    // the current matrix inside the stack below
-extern f32* gjMatrixStackEnd;   // the last matrix of the stack
-extern f32* gjMatrixStack;   // the first matrix of the stack
+extern f32* _gj_matrix_;      // the current matrix inside the stack below
+extern f32* gjMatrixStackEnd; // the last matrix of the stack
+extern f32* gjMatrixStack;    // the first matrix of the stack
 extern NJS_CONTEXT* _nj_current_ctx_;
 extern GXRenderModeObj* _gj_rmode_;
 extern GjProjection gProjection;
@@ -497,7 +497,7 @@ void gjSetFogRange(f32, f32);
 void gjSetLightColor(int, f32, f32, f32);
 void gjSetLightSwitch(s32, s32);
 void gjSetLightVector(int, f32, f32, f32);
-void gjSetMotionCallback(void(*f)(NJS_OBJECT*));
+void gjSetMotionCallback(void (*f)(NJS_OBJECT*));
 void gjSetNumPostChans(int);
 void gjSetPaletteData(int, u16, int, void*);
 void gjSetPerspective(s32, f32, f32, f32);

@@ -48,40 +48,40 @@ public:
 	void* operator new(unsigned long size) { return objHeapAlloc(gObjHeap, size); }
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual Vec3f* getPos();                                       // _20 0x8015E9B0
-	virtual int getKind();                                         // _2C 0x8015E9A8
+	virtual Vec3f* getPos();                                              // _20 0x8015E9B0
+	virtual int getKind();                                                // _2C 0x8015E9A8
 	virtual int onHit(const TObjAction* other, int arg, int* result) = 0; // _58
-	virtual void setAim(const Vec3f* pos, int rotY);                // _6C 0x8015DA1C
+	virtual void setAim(const Vec3f* pos, int rotY);                      // _6C 0x8015DA1C
 
-	void orient(int rotY, const f32* mtx);      // 0x8015D608 points the feather up the boss's node
-	void updateColli();                         // 0x8015D774
-	void updateShadow();                        // 0x8015D7AC
-	void trackNodes();                          // 0x8015D810
-	void calcPoints();                          // 0x8015D860
-	void emitTrail();                           // 0x8015D8C0
-	void stopTrail();                           // 0x8015D96C
-	void applyMatrix();                         // 0x8015D9D4
-	void approachAim();                         // 0x8015DA3C
-	void turnToAim();                           // 0x8015DAB8
+	void orient(int rotY, const f32* mtx);                                         // 0x8015D608 points the feather up the boss's node
+	void updateColli();                                                            // 0x8015D774
+	void updateShadow();                                                           // 0x8015D7AC
+	void trackNodes();                                                             // 0x8015D810
+	void calcPoints();                                                             // 0x8015D860
+	void emitTrail();                                                              // 0x8015D8C0
+	void stopTrail();                                                              // 0x8015D96C
+	void applyMatrix();                                                            // 0x8015D9D4
+	void approachAim();                                                            // 0x8015DA3C
+	void turnToAim();                                                              // 0x8015DAB8
 	f32 steer(f32 ahead, f32 behind, f32 side, f32 maxSpeed, const Vec3f* target); // 0x8015DB1C
-	static void dirToRot(const Vec3f* dir, SetRot* rot); // 0x8015DD4C
+	static void dirToRot(const Vec3f* dir, SetRot* rot);                           // 0x8015DD4C
 
-	SetTransform mXform; // _30
+	SetTransform mXform;  // _30
 	MotionPlayer mMotion; // _74
-	EnemyAnim mClip;  // _B0
-	CharaColli* mShape;     // _BC
+	EnemyAnim mClip;      // _B0
+	CharaColli* mShape;   // _BC
 	DrawTask* mDraw;      // _C0
-	void* mAnim;      // _C4
-	ObjShadow mShadow; // _C8
-	Vec3f mAim;       // _100 where it hovers
-	int mAimRotY;     // _10C
-	int mTrailKind;   // _110 the particle the trail drops
-	int mTrailPhase;  // _114 which half of the points drops this frame
-	int mGlowKind;    // _118
-	HitVec mPoint[8]; // _11C
-	TObject* mPart[4]; // _17C
-	FxHolder mGlow;   // _18C
-	SeHolder mRing;   // _1C0
+	void* mAnim;          // _C4
+	ObjShadow mShadow;    // _C8
+	Vec3f mAim;           // _100 where it hovers
+	int mAimRotY;         // _10C
+	int mTrailKind;       // _110 the particle the trail drops
+	int mTrailPhase;      // _114 which half of the points drops this frame
+	int mGlowKind;        // _118
+	HitVec mPoint[8];     // _11C
+	TObject* mPart[4];    // _17C
+	FxHolder mGlow;       // _18C
+	SeHolder mRing;       // _1C0
 };
 
 /**
@@ -95,25 +95,25 @@ public:
 	TEneLastBossFeather_Dark(TObject* parent, const Vec3f* pos, int rotY, const f32* mtx); // 0x8015DE0C
 	virtual ~TEneLastBossFeather_Dark();                                                   // 0x8015DEF4
 
-	virtual void draw();   // _0C 0x8015E00C
-	virtual void vfn_10(); // _10 0x8015E180
-	virtual void render(); // _1C 0x8015E1E0
+	virtual void draw();                                              // _0C 0x8015E00C
+	virtual void vfn_10();                                            // _10 0x8015E180
+	virtual void render();                                            // _1C 0x8015E1E0
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58 0x8015DF50
 
 	void launch(const Vec3f* dir, const Vec3f* target, f32 radius); // 0x8015DF58
 
-	int mState;      // _1F4 0 hovering 1 thrown
+	int mState; // _1F4 0 hovering 1 thrown
 	int _1F8;
-	Vec3f mTarget;   // _1FC
-	f32 mMapRadius;  // _208
+	Vec3f mTarget;  // _1FC
+	f32 mMapRadius; // _208
 };
 
 enum FeatherHomeState {
-	HOME_HOVER   = 0, // on the boss's wing following setAim
-	HOME_CHASE   = 1, // thrown homes on the nearest player until its time runs out or it touches something
-	HOME_BURST   = 2, // a short pause after it bursts
-	HOME_GROW    = 3, // the blast grows to a radius of 35
-	HOME_FADE    = 4, // the blast is gone the effect plays out
+	HOME_HOVER = 0, // on the boss's wing following setAim
+	HOME_CHASE = 1, // thrown homes on the nearest player until its time runs out or it touches something
+	HOME_BURST = 2, // a short pause after it bursts
+	HOME_GROW  = 3, // the blast grows to a radius of 35
+	HOME_FADE  = 4, // the blast is gone the effect plays out
 };
 
 /**
@@ -127,9 +127,9 @@ public:
 	TEneLastBossFeather_Home(TObject* parent, const Vec3f* pos, int rotY, const f32* mtx); // 0x8015E228
 	virtual ~TEneLastBossFeather_Home();                                                   // 0x8015E328
 
-	virtual void draw();     // _0C 0x8015E5F4
-	virtual void vfn_10();   // _10 0x8015E8D8
-	virtual void render();   // _1C 0x8015E954
+	virtual void draw();                                              // _0C 0x8015E5F4
+	virtual void vfn_10();                                            // _10 0x8015E8D8
+	virtual void render();                                            // _1C 0x8015E954
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58 0x8015E420
 
 	void launch(const Vec3f* dir); // 0x8015E3A8

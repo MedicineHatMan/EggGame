@@ -32,16 +32,16 @@ enum BattleModeEvent {
 struct BattleEntry {
 	BattleEntry(); // 0x8002EB14
 
-	int mActive;   // _00 the slot has a fighter
-	int mHuman;    // _04 zero for a computer player
-	int mWins;     // _08 rounds won kept by TGameFlow across battles
-	int mChara;    // _0C the fighter
-	u8 mPlace;     // _10 from the round's BattlePlayer
-	int mPoints;   // _14
-	int mLost;     // _18
-	int _1C;       // _1C
-	Vec3f mPos;    // _20 the spawn point
-	int mAngle;    // _2C the spawn angle in 0x10000ths of a turn
+	int mActive; // _00 the slot has a fighter
+	int mHuman;  // _04 zero for a computer player
+	int mWins;   // _08 rounds won kept by TGameFlow across battles
+	int mChara;  // _0C the fighter
+	u8 mPlace;   // _10 from the round's BattlePlayer
+	int mPoints; // _14
+	int mLost;   // _18
+	int _1C;     // _1C
+	Vec3f mPos;  // _20 the spawn point
+	int mAngle;  // _2C the spawn angle in 0x10000ths of a turn
 };
 
 /**

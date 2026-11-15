@@ -7,7 +7,7 @@ ADXPD_OBJ adxpd_obj[ADXPD_MAX_OBJ];
 int adxpd_init_fg;
 
 /* The high-pass cutoff and the sampling rate the coefficients start from */
-#define ADXPD_DEF_COF 500
+#define ADXPD_DEF_COF   500
 #define ADXPD_DEF_SFREQ 44100
 
 // 0x80226678
@@ -33,7 +33,7 @@ ADXPD ADXPD_Create(void)
 	xpd = &adxpd_obj[i];
 	memset(xpd, 0, sizeof(ADXPD_OBJ));
 	xpd->used = 1;
-	xpd->idx = i;
+	xpd->idx  = i;
 	xpd->mode = 0;
 	xpd->stat = ADXPD_STAT_STOP;
 	ADX_GetCoefficient(ADXPD_DEF_COF, ADXPD_DEF_SFREQ, &xpd->k0, &xpd->k1);
@@ -100,8 +100,8 @@ int ADXPD_GetStat(ADXPD xpd)
 int ADXPD_EntryMono(ADXPD xpd, unsigned char* src, int nblk, short* dst)
 {
 	if (xpd->stat == ADXPD_STAT_STOP) {
-		xpd->ch = ADXPD_CH_MONO;
-		xpd->src = src;
+		xpd->ch   = ADXPD_CH_MONO;
+		xpd->src  = src;
 		xpd->nblk = nblk;
 		xpd->dstl = dst;
 		xpd->dstr = 0;
@@ -114,8 +114,8 @@ int ADXPD_EntryMono(ADXPD xpd, unsigned char* src, int nblk, short* dst)
 int ADXPD_EntrySte(ADXPD xpd, unsigned char* src, int nblk, short* dstl, short* dstr)
 {
 	if (xpd->stat == ADXPD_STAT_STOP) {
-		xpd->ch = ADXPD_CH_STEREO;
-		xpd->src = src;
+		xpd->ch   = ADXPD_CH_STEREO;
+		xpd->src  = src;
 		xpd->nblk = nblk;
 		xpd->dstl = dstl;
 		xpd->dstr = dstr;
@@ -129,7 +129,7 @@ void ADXPD_Start(ADXPD xpd)
 {
 	if (xpd->stat == ADXPD_STAT_STOP) {
 		xpd->num_blk = 0;
-		xpd->stat = ADXPD_STAT_START;
+		xpd->stat    = ADXPD_STAT_START;
 	}
 }
 
@@ -164,11 +164,10 @@ void ADXPD_ExecHndl(ADXPD xpd)
 		return;
 	}
 	if (xpd->ch == ADXPD_CH_MONO) {
-		xpd->num_blk = ADX_DecodeMono4(xpd->src, xpd->nblk, xpd->dstl, xpd->dly[0], xpd->k0, xpd->k1, &xpd->key, xpd->mul,
-		                               xpd->add);
+		xpd->num_blk = ADX_DecodeMono4(xpd->src, xpd->nblk, xpd->dstl, xpd->dly[0], xpd->k0, xpd->k1, &xpd->key, xpd->mul, xpd->add);
 	} else {
-		xpd->num_blk = ADX_DecodeSte4(xpd->src, xpd->nblk, xpd->dstl, xpd->dly[0], xpd->dstr, xpd->dly[1], xpd->k0,
-		                              xpd->k1, &xpd->key, xpd->mul, xpd->add);
+		xpd->num_blk = ADX_DecodeSte4(xpd->src, xpd->nblk, xpd->dstl, xpd->dly[0], xpd->dstr, xpd->dly[1], xpd->k0, xpd->k1, &xpd->key,
+		                              xpd->mul, xpd->add);
 		if (xpd->num_blk % 2 == 1) {
 			adxpd_init_fg = 1;
 		}

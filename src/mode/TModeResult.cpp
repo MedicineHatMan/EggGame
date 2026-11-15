@@ -588,23 +588,23 @@ static void stateNotice(TModeResult* mode, int phase)
 }
 
 // A card message that stays until the card changes
-#define CARD_MESSAGE(name, id)                                                                                    \
-	static void name(TModeResult* mode, int phase)                                                                \
-	{                                                                                                             \
-		switch (phase) {                                                                                          \
-		case RESULT_ENTER:                                                                                        \
-			mode->openMessage(getStageSelectWarning(id));                                                         \
-			break;                                                                                                \
-		case RESULT_UPDATE:                                                                                       \
-			if (mode->checkCard() == 0 && mode->runBox() != 0) {                                                  \
-				mode->setState(0xF);                                                                              \
-			}                                                                                                     \
-			break;                                                                                                \
-		case RESULT_DRAW:                                                                                         \
-			break;                                                                                                \
-		case RESULT_EXIT:                                                                                         \
-			break;                                                                                                \
-		}                                                                                                         \
+#define CARD_MESSAGE(name, id)                                   \
+	static void name(TModeResult* mode, int phase)               \
+	{                                                            \
+		switch (phase) {                                         \
+		case RESULT_ENTER:                                       \
+			mode->openMessage(getStageSelectWarning(id));        \
+			break;                                               \
+		case RESULT_UPDATE:                                      \
+			if (mode->checkCard() == 0 && mode->runBox() != 0) { \
+				mode->setState(0xF);                             \
+			}                                                    \
+			break;                                               \
+		case RESULT_DRAW:                                        \
+			break;                                               \
+		case RESULT_EXIT:                                        \
+			break;                                               \
+		}                                                        \
 	}
 
 // 0x801B8E5C
@@ -636,25 +636,25 @@ static void stateCard4(TModeResult* mode, int phase)
 CARD_MESSAGE(stateCard5, 0x12)
 
 // A card message for a card that is in
-#define CARD_WAIT(name, id, next)                                                                                 \
-	static void name(TModeResult* mode, int phase)                                                                \
-	{                                                                                                             \
-		switch (phase) {                                                                                          \
-		case RESULT_ENTER:                                                                                        \
-			mode->openMessage(getStageSelectWarning(id));                                                         \
-			break;                                                                                                \
-		case RESULT_UPDATE:                                                                                       \
-			if (mode->mCard != mode->mPrevCard) {                                                                 \
-				mode->checkCard();                                                                                \
-			} else if (mode->runBox() != 0) {                                                                     \
-				mode->setState(next);                                                                             \
-			}                                                                                                     \
-			break;                                                                                                \
-		case RESULT_DRAW:                                                                                         \
-			break;                                                                                                \
-		case RESULT_EXIT:                                                                                         \
-			break;                                                                                                \
-		}                                                                                                         \
+#define CARD_WAIT(name, id, next)                         \
+	static void name(TModeResult* mode, int phase)        \
+	{                                                     \
+		switch (phase) {                                  \
+		case RESULT_ENTER:                                \
+			mode->openMessage(getStageSelectWarning(id)); \
+			break;                                        \
+		case RESULT_UPDATE:                               \
+			if (mode->mCard != mode->mPrevCard) {         \
+				mode->checkCard();                        \
+			} else if (mode->runBox() != 0) {             \
+				mode->setState(next);                     \
+			}                                             \
+			break;                                        \
+		case RESULT_DRAW:                                 \
+			break;                                        \
+		case RESULT_EXIT:                                 \
+			break;                                        \
+		}                                                 \
 	}
 
 // 0x801B9074
@@ -851,28 +851,28 @@ static void stateAskSkip(TModeResult* mode, int phase)
 }
 
 // A card operation start it show its message and wait for the card to report it done
-#define CARD_WORK(name, id, start, busy, done, next)                                                              \
-	static void name(TModeResult* mode, int phase)                                                                \
-	{                                                                                                             \
-		switch (phase) {                                                                                          \
-		case RESULT_ENTER:                                                                                        \
-			mode->openTimed(getStageSelectWarning(id));                                                           \
-			start();                                                                                              \
-			break;                                                                                                \
-		case RESULT_UPDATE:                                                                                       \
-			if (mode->mCard == done) {                                                                            \
-				if (mode->runBox() != 0) {                                                                        \
-					mode->setState(next);                                                                         \
-				}                                                                                                 \
-			} else if (mode->mCard != busy) {                                                                     \
-				mode->checkCard();                                                                                \
-			}                                                                                                     \
-			break;                                                                                                \
-		case RESULT_DRAW:                                                                                         \
-			break;                                                                                                \
-		case RESULT_EXIT:                                                                                         \
-			break;                                                                                                \
-		}                                                                                                         \
+#define CARD_WORK(name, id, start, busy, done, next)    \
+	static void name(TModeResult* mode, int phase)      \
+	{                                                   \
+		switch (phase) {                                \
+		case RESULT_ENTER:                              \
+			mode->openTimed(getStageSelectWarning(id)); \
+			start();                                    \
+			break;                                      \
+		case RESULT_UPDATE:                             \
+			if (mode->mCard == done) {                  \
+				if (mode->runBox() != 0) {              \
+					mode->setState(next);               \
+				}                                       \
+			} else if (mode->mCard != busy) {           \
+				mode->checkCard();                      \
+			}                                           \
+			break;                                      \
+		case RESULT_DRAW:                               \
+			break;                                      \
+		case RESULT_EXIT:                               \
+			break;                                      \
+		}                                               \
 	}
 
 // 0x801B9714
@@ -999,23 +999,23 @@ static void stateSaved(TModeResult* mode, int phase)
 }
 
 // A card error that goes back to the page that showed it once read
-#define CARD_ERROR(name, id)                                                                                      \
-	static void name(TModeResult* mode, int phase)                                                                \
-	{                                                                                                             \
-		switch (phase) {                                                                                          \
-		case RESULT_ENTER:                                                                                        \
-			mode->openMessage(getStageSelectWarning(id));                                                         \
-			break;                                                                                                \
-		case RESULT_UPDATE:                                                                                       \
-			if (mode->checkCard() == 0 && mode->runBox() != 0) {                                                  \
-				mode->setState(mode->mBackState);                                                                 \
-			}                                                                                                     \
-			break;                                                                                                \
-		case RESULT_DRAW:                                                                                         \
-			break;                                                                                                \
-		case RESULT_EXIT:                                                                                         \
-			break;                                                                                                \
-		}                                                                                                         \
+#define CARD_ERROR(name, id)                                     \
+	static void name(TModeResult* mode, int phase)               \
+	{                                                            \
+		switch (phase) {                                         \
+		case RESULT_ENTER:                                       \
+			mode->openMessage(getStageSelectWarning(id));        \
+			break;                                               \
+		case RESULT_UPDATE:                                      \
+			if (mode->checkCard() == 0 && mode->runBox() != 0) { \
+				mode->setState(mode->mBackState);                \
+			}                                                    \
+			break;                                               \
+		case RESULT_DRAW:                                        \
+			break;                                               \
+		case RESULT_EXIT:                                        \
+			break;                                               \
+		}                                                        \
 	}
 
 // 0x801B9BC8

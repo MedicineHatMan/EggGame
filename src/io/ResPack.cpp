@@ -63,8 +63,8 @@ int ResPack::load(TFile* file)
 		if (file->read(mBuffer, mChunk) > 0) {
 			ARQRequest request;
 			sDmaDone = 0;
-			ARQPostRequest(&request, 0, ARQ_TYPE_MRAM_TO_ARAM, ARQ_PRIORITY_HIGH, (u32)mBuffer, mAram + mDone,
-			               (mChunk + 0x1F) & ~0x1F, dmaDone);
+			ARQPostRequest(&request, 0, ARQ_TYPE_MRAM_TO_ARAM, ARQ_PRIORITY_HIGH, (u32)mBuffer, mAram + mDone, (mChunk + 0x1F) & ~0x1F,
+			               dmaDone);
 			while (sDmaDone == 0) { }
 			mDone += mChunk;
 			if (mDone == mDataSize) {

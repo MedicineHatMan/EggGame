@@ -38,10 +38,10 @@ ObjClassName gTObjEggCannonName = { "TObjEggCannon", 0 };
 
 /** Message 0x16 to an egg get in this cannon */
 struct CannonEnterMsg {
-	u16 mType;    // _00
+	u16 mType; // _00
 	u8 _02[2];
-	u16 mCannon;  // _04 the cannon's id
-	u16 _06;      // _06
+	u16 mCannon; // _04 the cannon's id
+	u16 _06;     // _06
 	u8 _08[8];
 };
 
@@ -70,18 +70,18 @@ extern "C" void initTObjEggCannon()
 	int angle = 0;
 	int i     = 0;
 	for (; i < 64; i += 2) {
-		f32 s = njSin(angle);
-		f32 c = njCos(angle);
+		f32 s          = njSin(angle);
+		f32 c          = njCos(angle);
 		ScopeVertex* v = &sScopeShade[i];
-		int grey    = (u8)(int)(32.0f * s + 32.5f);
-		v[0].x      = 400.0f * c + 320.0f;
-		v[0].y      = 400.0f * s + 240.0f;
-		v[0].z      = 0.5f;
-		v[0].mColor = 0xFF000000;
-		v[1].x      = 200.0f * c + 320.0f;
-		v[1].y      = 200.0f * s + 240.0f;
-		v[1].z      = 0.5f;
-		v[1].mColor = 0xFF000000 | (grey << 16) | (grey << 8) | grey;
+		int grey       = (u8)(int)(32.0f * s + 32.5f);
+		v[0].x         = 400.0f * c + 320.0f;
+		v[0].y         = 400.0f * s + 240.0f;
+		v[0].z         = 0.5f;
+		v[0].mColor    = 0xFF000000;
+		v[1].x         = 200.0f * c + 320.0f;
+		v[1].y         = 200.0f * s + 240.0f;
+		v[1].z         = 0.5f;
+		v[1].mColor    = 0xFF000000 | (grey << 16) | (grey << 8) | grey;
 		angle += 0x800;
 	}
 	sScopeShade[i].x          = 720.0f;
@@ -95,7 +95,9 @@ extern "C" void initTObjEggCannon()
 }
 
 // 0x800D3D04
-extern "C" void termTObjEggCannon() { }
+extern "C" void termTObjEggCannon()
+{
+}
 
 // 0x800D3D08
 extern "C" TObject* createTObjEggCannon(TObject* parent, SetDesc* desc)
@@ -107,20 +109,20 @@ extern "C" TObject* createTObjEggCannon(TObject* parent, SetDesc* desc)
 void TObjEggCannon::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
-	mPower     = (f32)desc->getInt(0);
-	mFixTime   = desc->getInt(1);
-	mLightPos  = mPos;
+	mPower    = (f32)desc->getInt(0);
+	mFixTime  = desc->getInt(1);
+	mLightPos = mPos;
 	mLightPos.y += 20.0f;
 	mLightPos.z += -10.0f;
-	mPitchMin  = (int)(182.04445f * desc->getFloat(0));
-	mYawMin    = (int)(182.04445f * desc->getFloat(2));
-	mRollMin   = 0;
-	mPitchMax  = (int)(182.04445f * desc->getFloat(1));
-	mYawMax    = (int)(182.04445f * desc->getFloat(3));
-	mRollMax   = 0;
-	mPitch     = mPitchMin;
-	mYaw       = (mYawMin + mYawMax) / 2;
-	mRoll      = 0;
+	mPitchMin = (int)(182.04445f * desc->getFloat(0));
+	mYawMin   = (int)(182.04445f * desc->getFloat(2));
+	mRollMin  = 0;
+	mPitchMax = (int)(182.04445f * desc->getFloat(1));
+	mYawMax   = (int)(182.04445f * desc->getFloat(3));
+	mRollMax  = 0;
+	mPitch    = mPitchMin;
+	mYaw      = (mYawMin + mYawMax) / 2;
+	mRoll     = 0;
 }
 
 // 0x800D3F0C
@@ -403,7 +405,7 @@ BOOL TObjEggCannon::fire()
 		return FALSE;
 	}
 	CannonShotMsg msg;
-	msg.mType   = 0x23;
+	msg.mType = 0x23;
 	msg.mVel.set(0.0f, 0.0f, -mPower);
 	f32 mtx[12];
 	mtxSetRotY(mtx, mYaw + mRot.y);

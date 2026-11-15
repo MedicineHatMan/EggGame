@@ -45,19 +45,19 @@ class TEneOrangeBossMirror : public TObjAction {
 public:
 	enum {
 		// mMode
-		MODE_UP     = 0,
-		MODE_LOWER  = 1, // sinking
-		MODE_RAISE  = 2, // rising
-		MODE_DOWN   = 3,
+		MODE_UP    = 0,
+		MODE_LOWER = 1, // sinking
+		MODE_RAISE = 2, // rising
+		MODE_DOWN  = 3,
 		// mBreak
 		BREAK_WHOLE   = 0,
 		BREAK_CRACK   = 1, // shaking about to break
 		BREAK_BROKEN  = 2,
 		BREAK_RESTORE = 3, // fading back in
 		// mMirrorFlags
-		MIRROR_FLAG1   = 0x1,  // a hit only rings it does not break
-		MIRROR_RESTORE = 0x2,  // grow back now
-		MIRROR_BUSY    = 0x4,  // cracking broken or restoring
+		MIRROR_FLAG1   = 0x1, // a hit only rings it does not break
+		MIRROR_RESTORE = 0x2, // grow back now
+		MIRROR_BUSY    = 0x4, // cracking broken or restoring
 		MIRROR_DOWN    = 0x8,
 		MIRROR_WATCH   = 0x10, // watching for the player
 		MIRROR_HIT     = 0x20, // the player touched it while watched
@@ -69,51 +69,51 @@ public:
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();                                  // _0C 0x8011DDD4 the per-frame work
-	virtual void vfn_10();                                // _10 0x8011E328 hides it when out of sight
-	virtual void render();                                // _1C 0x8011EAA0
-	virtual Vec3f* getPos();                              // _20 0x8011EC04
-	virtual int getKind();                                // _2C 0x8011EC0C
+	virtual void draw();                                              // _0C 0x8011DDD4 the per-frame work
+	virtual void vfn_10();                                            // _10 0x8011E328 hides it when out of sight
+	virtual void render();                                            // _1C 0x8011EAA0
+	virtual Vec3f* getPos();                                          // _20 0x8011EC04
+	virtual int getKind();                                            // _2C 0x8011EC0C
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58 0x8011D9B4
 
-	void reset();               // 0x8011DA1C down and whole
-	void clearHit();            // 0x8011DB0C
-	u32 wasHit();               // 0x8011DB1C
-	u16 hitBy();                // 0x8011DB28
-	void watch();               // 0x8011DB30
-	void unwatch();             // 0x8011DB64
-	int isWhole();              // 0x8011DB98
-	void setFlag1();            // 0x8011DBA8
-	void clearFlag1();          // 0x8011DBB8
-	void restore();             // 0x8011DBC8
-	void setGrid(int grid);     // 0x8011DBD8
+	void reset();                    // 0x8011DA1C down and whole
+	void clearHit();                 // 0x8011DB0C
+	u32 wasHit();                    // 0x8011DB1C
+	u16 hitBy();                     // 0x8011DB28
+	void watch();                    // 0x8011DB30
+	void unwatch();                  // 0x8011DB64
+	int isWhole();                   // 0x8011DB98
+	void setFlag1();                 // 0x8011DBA8
+	void clearFlag1();               // 0x8011DBB8
+	void restore();                  // 0x8011DBC8
+	void setGrid(int grid);          // 0x8011DBD8
 	void rippleAt(const Vec3f* pos); // 0x8011DBE0
-	void raise();               // 0x8011DC58
-	void lower();               // 0x8011DC64
-	int isMode(int mode);       // 0x8011DC70
-	int isStarting();           // 0x8011DC84 the move it is making has just begun
-	void meshOn();              // 0x8011DCE8
-	void meshRefresh();         // 0x8011DD0C
-	void forceBreak();          // 0x8011DD30
-	void turn(int angle);       // 0x8011DD40
-	void dust();                // 0x8011DD74
-	void updateMode();          // 0x8011DEF0
-	void updateBreak();         // 0x8011E050
+	void raise();                    // 0x8011DC58
+	void lower();                    // 0x8011DC64
+	int isMode(int mode);            // 0x8011DC70
+	int isStarting();                // 0x8011DC84 the move it is making has just begun
+	void meshOn();                   // 0x8011DCE8
+	void meshRefresh();              // 0x8011DD0C
+	void forceBreak();               // 0x8011DD30
+	void turn(int angle);            // 0x8011DD40
+	void dust();                     // 0x8011DD74
+	void updateMode();               // 0x8011DEF0
+	void updateBreak();              // 0x8011E050
 
-	Vec3f mPos;           // _30 y goes from -60 down to 50 up
+	Vec3f mPos; // _30 y goes from -60 down to 50 up
 	u8 _3C[4];
-	int mAngle;           // _40
+	int mAngle; // _40
 	u8 _44[4];
-	MirrorPane mPane;     // _48
-	void* mOwner;         // _204 0 in the ring 1 in the middle
-	int mMode;            // _208
-	int mPrevMode;        // _20C
-	int mBreak;           // _210
-	u32 mMirrorFlags;     // _214
-	u16 mHitBy;           // _218
+	MirrorPane mPane; // _48
+	void* mOwner;     // _204 0 in the ring 1 in the middle
+	int mMode;        // _208
+	int mPrevMode;    // _20C
+	int mBreak;       // _210
+	u32 mMirrorFlags; // _214
+	u16 mHitBy;       // _218
 	u8 _21A[2];
 	EnemyLight mLight;    // _21C
-	DrawTask* mDraw;          // _25C
+	DrawTask* mDraw;      // _25C
 	TObject* mFx;         // _260 the dust while it moves
 	FxHolder mGlow;       // _264
 	SeHolder mRing;       // _298
@@ -134,8 +134,8 @@ NJS_TEXNAME sMirrorScreenName;        // 0x80282718
 NJS_TEXLIST sMirrorScreenList;        // 0x802C5580
 TEneOrangeBossMirror** sMirrorRing;   // 0x802C5588 MIRROR_RING_COUNT of them
 TEneOrangeBossMirror** sMirrorCenter; // 0x802C558C one
-NJS_OBJECT** sOrangeBossMapModels;           // 0x802C5590
-NJS_TEXLIST** sOrangeBossMapTextures;         // 0x802C5594
+NJS_OBJECT** sOrangeBossMapModels;    // 0x802C5590
+NJS_TEXLIST** sOrangeBossMapTextures; // 0x802C5594
 }
 
 // The radians-to-angle factor 0x10000 / 2pi
@@ -149,8 +149,8 @@ extern "C" void initOrangeBossMap()
 
 	resBankLoad(&sOrangeBossMapBank, "ar_ene_orange_boss_map.arc");
 	resBankAddTextures(&sOrangeBossMapBank, 0, "ene_orange_boss_map.gvm");
-	sOrangeBossMapModels   = resBankGetModels(&sOrangeBossMapBank);
-	sOrangeBossMapTextures = resBankGetTextures(&sOrangeBossMapBank);
+	sOrangeBossMapModels        = resBankGetModels(&sOrangeBossMapBank);
+	sOrangeBossMapTextures      = resBankGetTextures(&sOrangeBossMapBank);
 	sMirrorScreenList.textures  = &sMirrorScreenName;
 	sMirrorScreenList.nbTexture = 1;
 	njSetTextureInfo(&info, 0, 4, 320, 240);
@@ -263,9 +263,9 @@ extern "C" void mirrorsCreate()
 		pos.z *= 220.0f;
 		sMirrorRing[i] = createMirrorRing(gTL_04, &pos, angle + 0x8000);
 	}
-	pos.x = 0.0f;
-	pos.y = 50.0f;
-	pos.z = 0.0f;
+	pos.x            = 0.0f;
+	pos.y            = 50.0f;
+	pos.z            = 0.0f;
 	sMirrorCenter[0] = createMirrorCenter(gTL_04, &pos, 0);
 	orangeFloorStart();
 }
@@ -304,7 +304,7 @@ extern "C" void mirrorForget(TEneOrangeBossMirror* mirror)
 extern "C" int mirrorSlotOf(const Vec3f* dir)
 {
 	int angle = (int)(RAD_TO_ANGLE * (f32)atan2(dir->x, dir->z));
-	angle = (angle + 0x1000) & 0xFFFF;
+	angle     = (angle + 0x1000) & 0xFFFF;
 	return angle / 0x2000;
 }
 
@@ -717,7 +717,7 @@ static void makeTri(f32 nx, f32 nz, MeshTri* tri, Vec3f* verts, int a, int b, in
 	tri->mNormal.x = nx;
 	tri->mNormal.y = 0.0f;
 	tri->mNormal.z = nz;
-	sum = verts[a];
+	sum            = verts[a];
 	vb.set(verts[b].x, verts[b].y, verts[b].z);
 	njAddVector(&sum, &vb);
 	vc.set(verts[c].x, verts[c].y, verts[c].z);
@@ -843,11 +843,11 @@ void MirrorPane::placeCollider(const Vec3f* pos, int angle)
 	f32 c;
 	ColliShape* shape;
 
-	at   = *pos;
+	at = *pos;
 	at.y += 50.0f;
 	njSinCos(angle, &s, &c);
-	at.x = s * mDepth + at.x;
-	at.z = c * mDepth + at.z;
+	at.x  = s * mDepth + at.x;
+	at.z  = c * mDepth + at.z;
 	shape = colliGetShape(mCollider, 0);
 	colliShapeSetPos(shape, &at);
 	colliShapeSetBoxRot(shape, angle);
@@ -950,7 +950,7 @@ TEneOrangeBossMirror::TEneOrangeBossMirror(TObject* parent, void* owner, const V
 	_00   = (u32)gTEneOrangeBossMirrorName;
 	mSize = 0x2E8;
 	setObjId(this, 0xFFFF);
-	mPos  = *pos;
+	mPos   = *pos;
 	mAngle = arg;
 	mPane.init(mObjId, &mPos, arg);
 	mOwner = owner;
@@ -1386,7 +1386,7 @@ extern "C" void mirrorGlassQuad(const Vec3f* pos, int angle, u8 alpha, const Vec
 	GXSetNumTexGens(1);
 	GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX3X4, GX_TG_POS, GX_TEXMTX0, GX_FALSE, GX_PTIDENTITY);
 	GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT0, 4);
-	color = alpha | 0xFFFFFF00;
+	color      = alpha | 0xFFFFFF00;
 	f32 left   = -50.0f;
 	f32 top    = 100.0f;
 	f32 bottom = 0.0f;
@@ -1445,7 +1445,7 @@ extern "C" void mirrorGlassGrid(const Vec3f* pos, int angle, u8 alpha, int grid)
 	for (i = 0; i < grid; i++) {
 		y0 = y - step;
 		t0 = y - off;
-		x      = -50.0f;
+		x  = -50.0f;
 		for (j = 0; j < grid; j++) {
 			x1 = x + step;
 			u1 = x + off;
@@ -1478,7 +1478,7 @@ extern "C" void mirrorGlassGrid(const Vec3f* pos, int angle, u8 alpha, int grid)
 			MIRROR_FIFO_F32 = y;
 			MIRROR_FIFO_F32 = zero;
 			MIRROR_FIFO_U32 = color;
-			x = x + step;
+			x               = x + step;
 		}
 		y = y + step;
 	}

@@ -45,7 +45,9 @@ void AniReachHit::detach()
 }
 
 // 0x801CCE4C
-void AniReachHit::hit(AniLife* life) { }
+void AniReachHit::hit(AniLife* life)
+{
+}
 
 // 0x801CCE50
 void AniReachHit::update(AniBody* body)

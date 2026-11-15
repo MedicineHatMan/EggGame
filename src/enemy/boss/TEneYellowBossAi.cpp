@@ -380,18 +380,42 @@ void YellowBossAi::forgetParent(YellowBossAi* parent)
 void YellowBossAi::onPhase(int state, int phase)
 {
 	switch (state) {
-	case 0: stateIntro(phase); break;
-	case 1: stateSummon(phase); break;
-	case 2: stateOpen(phase); break;
-	case 3: stateRecover(phase); break;
-	case 4: stateSplit(phase); break;
-	case 5: stateCopyAppear(phase); break;
-	case 6: stateCopyGone(phase); break;
-	case 7: stateBarrage(phase); break;
-	case 8: stateDash(phase); break;
-	case 9: stateCopyWait(phase); break;
-	case 10: stateTaunt(phase); break;
-	case 11: stateDying(phase); break;
+	case 0:
+		stateIntro(phase);
+		break;
+	case 1:
+		stateSummon(phase);
+		break;
+	case 2:
+		stateOpen(phase);
+		break;
+	case 3:
+		stateRecover(phase);
+		break;
+	case 4:
+		stateSplit(phase);
+		break;
+	case 5:
+		stateCopyAppear(phase);
+		break;
+	case 6:
+		stateCopyGone(phase);
+		break;
+	case 7:
+		stateBarrage(phase);
+		break;
+	case 8:
+		stateDash(phase);
+		break;
+	case 9:
+		stateCopyWait(phase);
+		break;
+	case 10:
+		stateTaunt(phase);
+		break;
+	case 11:
+		stateDying(phase);
+		break;
 	}
 }
 

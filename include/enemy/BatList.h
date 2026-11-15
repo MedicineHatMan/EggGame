@@ -42,9 +42,9 @@ struct Am01BatBrain : public Am01LeapBrain {
 
 	void phaseDrop(int phase);
 
-	Vec3f mCenter;  // _54 where the bat was
-	int mAngle;     // _60 around mCenter
-	BatList mLink;  // _64
+	Vec3f mCenter; // _54 where the bat was
+	int mAngle;    // _60 around mCenter
+	BatList mLink; // _64
 };
 
 #endif

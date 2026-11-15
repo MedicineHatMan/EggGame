@@ -55,14 +55,14 @@ const char* gTEneBoss03_MagmaPowName = "TEneBoss03_MagmaPow";
 TEneBoss03_MagmaPow::TEneBoss03_MagmaPow(TObject* parent, const Vec3f* pos, f32 speed, f32 maxRadius, f32 push)
     : TObject(parent)
 {
-	_00    = (u32)gTEneBoss03_MagmaPowName;
-	mSize  = 0x40;
-	mPos   = *pos;
-	mPrev  = 0.0f;
-	mRadius = 0.0f;
-	mSpeed  = speed;
+	_00        = (u32)gTEneBoss03_MagmaPowName;
+	mSize      = 0x40;
+	mPos       = *pos;
+	mPrev      = 0.0f;
+	mRadius    = 0.0f;
+	mSpeed     = speed;
 	mMaxRadius = maxRadius;
-	mPush = push;
+	mPush      = push;
 }
 
 // 0x800865F0
@@ -85,36 +85,36 @@ void TEneBoss03_MagmaPow::draw()
 // 0x800866C4
 MagmaGrid::MagmaGrid(int cols, int rows, const Vec3f* pos, f32 width, f32 depth)
 {
-	mFlags = 0;
-	mDepth = depth;
-	mWidth = width;
-	mRows  = rows;
-	mCols  = cols;
-	mPos   = *pos;
+	mFlags    = 0;
+	mDepth    = depth;
+	mWidth    = width;
+	mRows     = rows;
+	mCols     = cols;
+	mPos      = *pos;
 	int count = mRows * mCols;
-	mVerts   = new HitVec[count];
-	mNormals = new HitVec[count];
-	mSpeeds  = new f32[count];
-	mCells   = new u32[count];
-	mScrollA = 0;
-	mScrollB = 0;
+	mVerts    = new HitVec[count];
+	mNormals  = new HitVec[count];
+	mSpeeds   = new f32[count];
+	mCells    = new u32[count];
+	mScrollA  = 0;
+	mScrollB  = 0;
 	for (int i = 0; i < count; i++) {
 		HitVec* normal = &mNormals[i];
-		normal->x = 0.0f;
-		normal->y = 1.0f;
-		normal->z = 0.0f;
-		mSpeeds[i] = 0.0f;
+		normal->x      = 0.0f;
+		normal->y      = 1.0f;
+		normal->z      = 0.0f;
+		mSpeeds[i]     = 0.0f;
 	}
-	int lastCol = mCols - 1;
-	int lastRow = mRows - 1;
-	mCells[0] = 0x140;
-	mCells[lastCol] = 0xC0;
-	mCells[lastRow * mCols] = 0x120;
+	int lastCol                       = mCols - 1;
+	int lastRow                       = mRows - 1;
+	mCells[0]                         = 0x140;
+	mCells[lastCol]                   = 0xC0;
+	mCells[lastRow * mCols]           = 0x120;
 	mCells[lastCol + lastRow * mCols] = 0xA0;
-	int top    = 1;
-	int bottom = lastRow * mCols + 1;
+	int top                           = 1;
+	int bottom                        = lastRow * mCols + 1;
 	for (int i = 1; i < mCols - 1; i++) {
-		mCells[top] = 0x1C0;
+		mCells[top]    = 0x1C0;
 		mCells[bottom] = 0x1A0;
 		top++;
 		bottom++;
@@ -190,9 +190,9 @@ static inline int clampCount(int value, int limit)
 // 0x80086AE0
 void MagmaGrid::push(const Vec3f* pos, f32 inner, f32 outer, f32 amount)
 {
-	f32 z = pos->z - (mPos.z - 0.5f * mDepth);
+	f32 z     = pos->z - (mPos.z - 0.5f * mDepth);
 	f32 zHigh = z + outer;
-	f32 x = pos->x - (mPos.x - 0.5f * mWidth);
+	f32 x     = pos->x - (mPos.x - 0.5f * mWidth);
 	f32 xHigh = x + outer;
 	if (zHigh < 0.0f || xHigh < 0.0f) {
 		return;
@@ -202,42 +202,42 @@ void MagmaGrid::push(const Vec3f* pos, f32 inner, f32 outer, f32 amount)
 	if (zLow > mDepth || xLow > mWidth) {
 		return;
 	}
-	f32 toRow = (f32)(mRows - 1) / mDepth;
-	f32 toCol = (f32)(mCols - 1) / mWidth;
+	f32 toRow   = (f32)(mRows - 1) / mDepth;
+	f32 toCol   = (f32)(mCols - 1) / mWidth;
 	int rowFrom = (int)ceil(zLow * toRow);
 	int rowTo   = (int)ceil(zHigh * toRow);
 	int colFrom = (int)ceil(xLow * toCol);
 	int colTo   = (int)ceil(xHigh * toCol);
 	// The square inside the circle which the ring cannot reach unless inner is small
-	f32 side = 0.5f * (inner * 1.4142135f);
+	f32 side      = 0.5f * (inner * 1.4142135f);
 	int inRowFrom = (int)ceil((z - side) * toRow);
 	int inRowTo   = (int)ceil((z + side) * toRow);
 	int inColFrom = (int)ceil((x - side) * toCol);
 	int inColTo   = (int)ceil((x + side) * toCol);
-	f32 inner2 = inner * inner;
-	f32 cx = pos->z - mPos.z;
-	f32 cz = pos->x - mPos.x;
-	f32 outer2 = outer * outer;
-	rowFrom   = clampCount(rowFrom, mRows);
-	rowTo     = clampCount(rowTo, mRows);
-	colFrom   = clampCount(colFrom, mCols);
-	colTo     = clampCount(colTo, mCols);
-	inColFrom = clampCount(inColFrom, mCols);
-	inColTo   = clampCount(inColTo, mCols);
-	inRowFrom = clampCount(inRowFrom, mRows);
-	inRowTo   = clampCount(inRowTo, mRows);
-#define MAGMA_BAND(rowA, rowB, colA, colB)                                  \
-	for (int r = rowA; r < rowB; r++) {                                     \
-		for (int c = colA; c < colB; c++) {                                 \
-			int i = r * mCols + c;                                          \
-			f32 dx = mVerts[i].x - cz;                                      \
-			f32 dz = mVerts[i].z - cx;                                      \
-			f32 d2 = dx * dx + dz * dz;                                     \
-			if (d2 >= inner2 && d2 < outer2) {                              \
-				markMoving(i);                                              \
-				mSpeeds[i] += amount;                                       \
-			}                                                               \
-		}                                                                   \
+	f32 inner2    = inner * inner;
+	f32 cx        = pos->z - mPos.z;
+	f32 cz        = pos->x - mPos.x;
+	f32 outer2    = outer * outer;
+	rowFrom       = clampCount(rowFrom, mRows);
+	rowTo         = clampCount(rowTo, mRows);
+	colFrom       = clampCount(colFrom, mCols);
+	colTo         = clampCount(colTo, mCols);
+	inColFrom     = clampCount(inColFrom, mCols);
+	inColTo       = clampCount(inColTo, mCols);
+	inRowFrom     = clampCount(inRowFrom, mRows);
+	inRowTo       = clampCount(inRowTo, mRows);
+#define MAGMA_BAND(rowA, rowB, colA, colB)     \
+	for (int r = rowA; r < rowB; r++) {        \
+		for (int c = colA; c < colB; c++) {    \
+			int i  = r * mCols + c;            \
+			f32 dx = mVerts[i].x - cz;         \
+			f32 dz = mVerts[i].z - cx;         \
+			f32 d2 = dx * dx + dz * dz;        \
+			if (d2 >= inner2 && d2 < outer2) { \
+				markMoving(i);                 \
+				mSpeeds[i] += amount;          \
+			}                                  \
+		}                                      \
 	}
 	MAGMA_BAND(rowFrom, inRowFrom, colFrom, colTo);
 	MAGMA_BAND(inRowFrom, inRowTo, colFrom, inColFrom);
@@ -257,8 +257,8 @@ void MagmaGrid::flush()
 // 0x80087144
 void MagmaGrid::markMoving(int index)
 {
-	u32 cell = mCells[index] | 1;
-	int cols = mCols;
+	u32 cell      = mCells[index] | 1;
+	int cols      = mCols;
 	mCells[index] = cell;
 	if ((cell & 0x20) != 0) {
 		mCells[index - cols] |= 4;
@@ -277,8 +277,8 @@ void MagmaGrid::markMoving(int index)
 // 0x800871D8
 void MagmaGrid::markMoving2(int index)
 {
-	u32 cell = mCells[index] | 1;
-	int cols = mCols;
+	u32 cell      = mCells[index] | 1;
+	int cols      = mCols;
 	mCells[index] = cell;
 	if ((cell & 0x20) != 0) {
 		mCells[index - cols] |= 4;
@@ -305,7 +305,7 @@ int MagmaGrid::update()
 		if ((mCells[i] & 1) != 0) {
 			f32 height;
 			f32 speed = mSpeeds[i];
-			height = mVerts[i].y;
+			height    = mVerts[i].y;
 			speed += -0.001f * height;
 			speed *= 0.995f;
 			height += speed;
@@ -314,8 +314,8 @@ int MagmaGrid::update()
 				speed  = 0.0f;
 				height = 0.0f;
 			}
-			moved = 1;
-			mSpeeds[i] = speed;
+			moved       = 1;
+			mSpeeds[i]  = speed;
 			mVerts[i].y = height;
 		}
 	}
@@ -333,7 +333,7 @@ int MagmaGrid::update()
 			f32 ny;
 			f32 nz;
 			nx = 0.0f;
-			y = mVerts[i].y;
+			y  = mVerts[i].y;
 			ny = 0.3f;
 			nz = 0.0f;
 			if ((cell & 2) != 0) {
@@ -375,14 +375,14 @@ void MagmaGrid::cull()
 	f32 y;
 	f32 z0;
 	int behind = 0;
-	x0    = mPos.x;
-	halfW = mWidth * 0.5f;
-	halfD = 0.5f * mDepth;
-	xHigh = x0 + halfW;
-	z0    = mPos.z;
-	y     = mPos.y;
+	x0         = mPos.x;
+	halfW      = mWidth * 0.5f;
+	halfD      = 0.5f * mDepth;
+	xHigh      = x0 + halfW;
+	z0         = mPos.z;
+	y          = mPos.y;
 	Vec3f at;
-	z = z0 + halfD;
+	z    = z0 + halfD;
 	at.y = y;
 	at.x = xHigh;
 	at.z = z;
@@ -400,7 +400,7 @@ void MagmaGrid::cull()
 	}
 	at.x = xHigh;
 	at.y = y;
-	z = z0 - halfD;
+	z    = z0 - halfD;
 	at.z = z;
 	njCalcPointEx(&at, &at);
 	if (at.z >= 0.0f) {
@@ -514,8 +514,8 @@ void MagmaGrid::draw()
 	volatile u16* fifo;
 	int bottom;
 	int top;
-	fifo = (volatile u16*)0xCC008000;
-	top = 0;
+	fifo   = (volatile u16*)0xCC008000;
+	top    = 0;
 	bottom = (s16)mCols;
 	for (int r = 0; r < mRows - 1; r++) {
 		GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT0, (u16)(mCols * 2));
@@ -555,9 +555,9 @@ TEneBoss03_Magma::TEneBoss03_Magma(TObject* parent)
 		mGrids[i] = 0;
 	}
 	Vec3f at;
-	at.x = 0.0f;
-	at.y = 180.0f;
-	at.z = 0.0f;
+	at.x      = 0.0f;
+	at.y      = 180.0f;
+	at.z      = 0.0f;
 	mGrids[0] = new MagmaGrid(0x1A, 0x1A, &at, 1000.0f, 1000.0f);
 	mGrids[0]->setWarp();
 	at.z = 0.0f;
@@ -565,42 +565,42 @@ TEneBoss03_Magma::TEneBoss03_Magma(TObject* parent)
 	at.y = 180.0f;
 	at.z -= 750.0f;
 	mGrids[1] = new MagmaGrid(0x1A, 6, &at, 1000.0f, 500.0f);
-	at.z = 0.0f;
-	at.x = 0.0f;
-	at.y = 180.0f;
+	at.z      = 0.0f;
+	at.x      = 0.0f;
+	at.y      = 180.0f;
 	at.z += 750.0f;
 	mGrids[2] = new MagmaGrid(0x1A, 6, &at, 1000.0f, 500.0f);
-	at.x = 0.0f;
-	at.y = 180.0f;
-	at.z = 0.0f;
+	at.x      = 0.0f;
+	at.y      = 180.0f;
+	at.z      = 0.0f;
 	at.x -= 750.0f;
 	mGrids[3] = new MagmaGrid(6, 0x1A, &at, 500.0f, 1000.0f);
-	at.x = 0.0f;
-	at.y = 180.0f;
-	at.z = 0.0f;
+	at.x      = 0.0f;
+	at.y      = 180.0f;
+	at.z      = 0.0f;
 	at.x += 750.0f;
 	mGrids[4] = new MagmaGrid(6, 0x1A, &at, 500.0f, 1000.0f);
-	at.x = 0.0f;
-	at.z = 0.0f;
-	at.y = 180.0f;
+	at.x      = 0.0f;
+	at.z      = 0.0f;
+	at.y      = 180.0f;
 	at.x += 750.0f;
 	at.z += 750.0f;
 	mGrids[5] = new MagmaGrid(6, 6, &at, 500.0f, 500.0f);
-	at.x = 0.0f;
-	at.z = 0.0f;
-	at.y = 180.0f;
+	at.x      = 0.0f;
+	at.z      = 0.0f;
+	at.y      = 180.0f;
 	at.x -= 750.0f;
 	at.z += 750.0f;
 	mGrids[6] = new MagmaGrid(6, 6, &at, 500.0f, 500.0f);
-	at.x = 0.0f;
-	at.z = 0.0f;
-	at.y = 180.0f;
+	at.x      = 0.0f;
+	at.z      = 0.0f;
+	at.y      = 180.0f;
 	at.x += 750.0f;
 	at.z -= 750.0f;
 	mGrids[7] = new MagmaGrid(6, 6, &at, 500.0f, 500.0f);
-	at.x = 0.0f;
-	at.z = 0.0f;
-	at.y = 180.0f;
+	at.x      = 0.0f;
+	at.z      = 0.0f;
+	at.y      = 180.0f;
 	at.x -= 750.0f;
 	at.z -= 750.0f;
 	mGrids[8] = new MagmaGrid(6, 6, &at, 500.0f, 500.0f);

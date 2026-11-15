@@ -40,13 +40,13 @@ public:
 	void showTitles();
 	void hideTitles();
 
-	s8 mState;               // _0C 0 asking 1 waiting for the answer to close 2 trying progressive 3 done
-	u16 mTimer;              // _0E
-	TSimpleText* mTitle;     // _10
-	TSimpleText* mSubtitle;  // _14
-	TSimpleText* mText;      // _18
-	int mPrompt;             // _1C 1 a yes/no question 2 a message
-	int mChoice;             // _20 0 yes 1 no
+	s8 mState;                // _0C 0 asking 1 waiting for the answer to close 2 trying progressive 3 done
+	u16 mTimer;               // _0E
+	TSimpleText* mTitle;      // _10
+	TSimpleText* mSubtitle;   // _14
+	TSimpleText* mText;       // _18
+	int mPrompt;              // _1C 1 a yes/no question 2 a message
+	int mChoice;              // _20 0 yes 1 no
 	TAeObjMsgWindow* mWindow; // _24
 };
 

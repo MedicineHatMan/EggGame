@@ -22,26 +22,26 @@ public:
 	};
 
 	TEnemyAppear(TObject* parent, Vec3f pos, int dropIn); // 0x8001BA6C
-	virtual ~TEnemyAppear();                               // 0x8001BBB8
+	virtual ~TEnemyAppear();                              // 0x8001BBB8
 
-	int isLanded();          // 0x8001BC20
-	void getPos(Vec3f* out); // 0x8001BC44
+	int isLanded();                // 0x8001BC20
+	void getPos(Vec3f* out);       // 0x8001BC44
 	void launch(const Vec3f* vel); // 0x8001BC60 flies along vel instead of dropping straight down
 
 	virtual void draw();   // _0C 0x8001BD18 the update
 	virtual void vfn_10(); // _10 0x8001BF64 shown only while falling or landing
 	virtual void render(); // _1C 0x8001BF98
 
-	s16 mTimer;      // _20
-	s16 _22;         // _22
-	Vec3f mPos;      // _24
-	f32 mVelY;       // _30
-	f32 mSpeed;      // _34 along mDir
-	Vec3f mDir;      // _38 flat
-	f32 mScale;      // _44
+	s16 mTimer;          // _20
+	s16 _22;             // _22
+	Vec3f mPos;          // _24
+	f32 mVelY;           // _30
+	f32 mSpeed;          // _34 along mDir
+	Vec3f mDir;          // _38 flat
+	f32 mScale;          // _44
 	DrawTask* mDrawTask; // _48 from addDrawTask
-	u32 mMoveFlags;  // _4C bit 0 = moves along mDir
-	int mState;      // _50
+	u32 mMoveFlags;      // _4C bit 0 = moves along mDir
+	int mState;          // _50
 };
 
 /**
@@ -52,7 +52,7 @@ public:
 class TEnemyDropSpawner : public TObject {
 public:
 	TEnemyDropSpawner(TObject* parent, const Vec3f* pos, int count, int big); // 0x8001CC98
-	virtual ~TEnemyDropSpawner();                                       // 0x8001CD48
+	virtual ~TEnemyDropSpawner();                                             // 0x8001CD48
 
 	virtual void draw(); // _0C 0x8001CDA4
 
@@ -72,12 +72,12 @@ int hatchDone(f32* t);                             // 0x8001C38C
 void hatchStep(f32* t);                            // 0x8001C3A8
 void hatchPose(f32* t, GjActor* pose, f32 height); // 0x8001C3BC
 
-void setGqrS16();                                                 // 0x8001C000 GQR6 = s16 with 8 fraction bits
-void poseEggShape(GjActor* pose, f32 t, f32 height);              // 0x8001C010
-void poseEggBlend(GjActor* pose, f32 t, f32 height, f32 split);   // 0x8001C174
-void poseHatch(GjActor* pose, f32 t, f32 height);                 // 0x8001C324
+void setGqrS16();                                               // 0x8001C000 GQR6 = s16 with 8 fraction bits
+void poseEggShape(GjActor* pose, f32 t, f32 height);            // 0x8001C010
+void poseEggBlend(GjActor* pose, f32 t, f32 height, f32 split); // 0x8001C174
+void poseHatch(GjActor* pose, f32 t, f32 height);               // 0x8001C324
 
-void spawnDropRun(Vec3f* pos, int count);           // 0x8001CC1C
+void spawnDropRun(Vec3f* pos, int count);            // 0x8001CC1C
 void spawnDropRunEx(Vec3f* pos, int count, int big); // 0x8001CC40
 }
 

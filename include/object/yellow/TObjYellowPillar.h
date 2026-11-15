@@ -49,21 +49,21 @@ public:
 	void stateFall();
 	void stateLanded();
 
-	NJS_OBJECT* mModelData;  // _64
-	NJS_TEXLIST* mTexList;    // _68
-	MeshData* mColliData;  // _6C
-	DrawTask* mDrawTask;   // _70
-	ObjModel mModel;   // _74
-	ObjDrawState mState;  // _94
-	f32 mMatrix[12];   // _B8
-	CharaColli* mTerritory;  // _E8 the cylinder that starts the fall
-	MeshObject* mColli;      // _EC
-	f32 mTerritoryRad; // _F0
-	int mPower;        // _F4
-	Vec3f mCenter;     // _F8
-	f32 mRadius;       // _104
-	EnemyLight mLight; // _108
-	int mAct;          // _148 0 = wait 1 = fall 2 = landed
+	NJS_OBJECT* mModelData; // _64
+	NJS_TEXLIST* mTexList;  // _68
+	MeshData* mColliData;   // _6C
+	DrawTask* mDrawTask;    // _70
+	ObjModel mModel;        // _74
+	ObjDrawState mState;    // _94
+	f32 mMatrix[12];        // _B8
+	CharaColli* mTerritory; // _E8 the cylinder that starts the fall
+	MeshObject* mColli;     // _EC
+	f32 mTerritoryRad;      // _F0
+	int mPower;             // _F4
+	Vec3f mCenter;          // _F8
+	f32 mRadius;            // _104
+	EnemyLight mLight;      // _108
+	int mAct;               // _148 0 = wait 1 = fall 2 = landed
 };
 
 extern "C" {

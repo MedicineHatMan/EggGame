@@ -36,11 +36,11 @@ struct WaterObject {
 // Colours for the TEV callback which has no way to read them from the water
 f32 gGreenPondSceneSetRange = 3000.0f; // 0x802C45C0
 
-const f32 sWaterFarDist = gGreenPondSceneSetRange;          // 0x802C5920
-f32 sWaterKeepDist = gGreenPondSceneSetRange + 50.0f; // 0x802C5924
-static int sBlendMode;   // 0x802C5928
-static u8 sColor[4];     // 0x802C592C
-static u8 sAddColor[4];  // 0x802C5930
+const f32 sWaterFarDist = gGreenPondSceneSetRange;         // 0x802C5920
+f32 sWaterKeepDist      = gGreenPondSceneSetRange + 50.0f; // 0x802C5924
+static int sBlendMode;                                     // 0x802C5928
+static u8 sColor[4];                                       // 0x802C592C
+static u8 sAddColor[4];                                    // 0x802C5930
 
 static const int sPondModels[3]   = { 3, 4, 5 }; // 0x8024B23C
 static const int sPondTextures[3] = { 3, 4, 5 }; // 0x8024B248
@@ -48,12 +48,12 @@ static const int sPondTextures[3] = { 3, 4, 5 }; // 0x8024B248
 // 0x80184A34
 WaterSurface::WaterSurface()
 {
-	mModel   = 0;
-	mTexList = 0;
-	mCentre.x = 0.0f;
-	mCentre.y = 0.0f;
-	mCentre.z = 0.0f;
-	mRadius   = 0.0f;
+	mModel     = 0;
+	mTexList   = 0;
+	mCentre.x  = 0.0f;
+	mCentre.y  = 0.0f;
+	mCentre.z  = 0.0f;
+	mRadius    = 0.0f;
 	mScroll[0] = 0.0f;
 	mScroll[1] = 0.0f;
 	mScroll[2] = 0.0f;
@@ -191,7 +191,7 @@ void WaterSurface::beginDraw()
 
 	_nj_control_3d_flag_ |= 0x80000;
 	info[4] = (u32)waterTexGen0;
-	gjChangeDrawObjIF((void*const*)info, (u32)0x40);
+	gjChangeDrawObjIF((void* const*)info, (u32)0x40);
 	gjSetNumPostChans(0);
 	gjSetPostChanCallback(0);
 	gjSetNumPostTevStages((mFakeBump != 0 ? 1 : 0) + 1);
@@ -209,7 +209,7 @@ void WaterSurface::endDraw()
 	GXSetTevDirect(GX_TEVSTAGE0);
 	GXSetTevDirect(GX_TEVSTAGE1);
 	info[4] = 0;
-	gjChangeDrawObjIF((void*const*)info, (u32)0x40);
+	gjChangeDrawObjIF((void* const*)info, (u32)0x40);
 	gjSetNumPostChans(0);
 	gjSetNumPostTexGens(0);
 	gjSetNumPostTevStages(0);
@@ -298,7 +298,7 @@ extern "C" void waterTexGen1()
 extern "C" void waterTevStage(int stageIn)
 {
 	u8 stage = stageIn;
-	int next  = stage + 1;
+	int next = stage + 1;
 
 	GXSetTevKColorSel(next, GX_TEV_KCSEL_K1_R);
 	GXSetTevKColor(GX_KCOLOR0, *(GXColor*)sColor);

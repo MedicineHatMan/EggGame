@@ -46,10 +46,10 @@ public:
 
 	void setPos(const Vec3f* pos);
 
-	Vec3f mPos;      // _20
+	Vec3f mPos;          // _20
 	DrawTask* mDrawTask; // _2C
-	TObject* mFx;    // _30
-	TObject* mFx2;   // _34
+	TObject* mFx;        // _30
+	TObject* mFx2;       // _34
 };
 
 #endif

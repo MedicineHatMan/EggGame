@@ -194,8 +194,8 @@ void ObjModel::calcMotion()
 			MotionBlend* link = mMotion->getBlend();
 			gjMotionLinkActor(mActor, link, time);
 		} else {
-			int cur      = mMotion->mCurrent;
-			f32 frame    = mMotion->mFrame;
+			int cur            = mMotion->mCurrent;
+			f32 frame          = mMotion->mFrame;
 			NJS_MOTION* motion = mMotion->getMotion(cur);
 			gjMotionActor(frame, mActor, motion);
 		}
@@ -212,8 +212,8 @@ void ObjModel::calcMotion()
 			njStartMotionLink((const NJS_MOTION_LINK*)link, time);
 			objModelLinkNodes(mModel, mNodes, 0);
 		} else {
-			int cur      = mMotion->mCurrent;
-			f32 frame    = mMotion->mFrame;
+			int cur            = mMotion->mCurrent;
+			f32 frame          = mMotion->mFrame;
 			NJS_MOTION* motion = mMotion->getMotion(cur);
 			njStartMotionObj(motion, frame);
 			objModelNodes(mModel, mNodes, 0);
@@ -250,8 +250,8 @@ void ObjModel::draw()
 			MotionBlend* link = mMotion->getBlend();
 			gjDrawMotionLink(mModel, link, time);
 		} else {
-			int cur      = mMotion->mCurrent;
-			f32 frame    = mMotion->mFrame;
+			int cur            = mMotion->mCurrent;
+			f32 frame          = mMotion->mFrame;
 			NJS_MOTION* motion = mMotion->getMotion(cur);
 			gjDrawMotion(mModel, motion, frame);
 		}

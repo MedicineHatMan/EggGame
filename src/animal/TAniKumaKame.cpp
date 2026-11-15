@@ -20,26 +20,28 @@ f32 sKumaKameRate3 = 0.4f;
 f32 sKumaKameRate4 = 0.32f;
 
 MotionEntry gKumaMotions[] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 15.0f, sKumaKameRate0, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, sKumaKameRate1, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, sKumaKameRate2, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 30.0f, sKumaKameRate3, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 20.0f, sKumaKameRate4, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, sKumaKameRate2, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 30.0f, sKumaKameRate1, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 15.0f, sKumaKameRate0, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, sKumaKameRate1, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, sKumaKameRate2, 0.0f, 0 }, { MOTION_ONCE, 3, -1, 0, 0.0f, 30.0f, sKumaKameRate3, 0.0f, 0 },
+	{ MOTION_ONCE, 4, -1, 0, 0.0f, 20.0f, sKumaKameRate4, 0.0f, 0 }, { MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, sKumaKameRate2, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 30.0f, sKumaKameRate1, 0.0f, 0 },
 };
 ColliShape sKumaKameFirstShape[] = {
 	{ { 0.0f, 5.0f, 0.0f }, 0x0, 0, 0x0, 5.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
 extern const f32 sKumaHopHeights[] = {
-	50.0f, 50.0f, 100.0f,
+	50.0f,
+	50.0f,
+	100.0f,
 }; // the height of each hop
 extern const int sKumaHopWaits[] = {
-	0, 0, 15,
+	0,
+	0,
+	15,
 }; // the frames to wait after each hop
 extern const int sKumaHopEffects[] = {
-	4, 2, 6,
+	4,
+	2,
+	6,
 }; // the effect for each landing
 }
 
@@ -94,26 +96,26 @@ void TAniKumaKame::onPhase(int phase)
 	if (phase == 0) {
 		setMotionSpeed(1.0f);
 		playMotion(3, 1, 0.075f);
-		mTimer = 0;
-		mAniFlags   = 0;
-		mStep  = 0x14;
+		mTimer    = 0;
+		mAniFlags = 0;
+		mStep     = 0x14;
 		makeAttackShape(1, 1);
 		mDistance = 0.0f;
 
-		u32 id  = findEggAhead(getPos(), getRotY(), mHolderId, 0x2000, 200.0f);
+		u32 id = findEggAhead(getPos(), getRotY(), mHolderId, 0x2000, 200.0f);
 		if ((u16)id != 0xFFFF) {
 			TObjAction* target = findObjById(id);
-			mDir = subtracted(target->getPos(), getPos());
-			f32 length = njUnitVector(&mDir);
+			mDir               = subtracted(target->getPos(), getPos());
+			f32 length         = njUnitVector(&mDir);
 			if (length < 1e-6f) {
 				mDir = gVecZero;
 			}
 			mDistance = length;
 		}
-		mRot[1] = vecAngleXZ(&mDir);
-		mAniFlags     = 0;
-		mHops    = 0;
-		mSubMode = 5;
+		mRot[1]   = vecAngleXZ(&mDir);
+		mAniFlags = 0;
+		mHops     = 0;
+		mSubMode  = 5;
 	} else if (phase == 2) {
 		switch (mStep) {
 		case 0x13:
@@ -153,9 +155,9 @@ void TAniKumaKame::runWait()
 		}
 		mPlayer.play(3);
 		mAniFlags &= ~0x1000;
-		mVel.x = 0.0f;
-		mVel.y = 0.0f;
-		mVel.z = 0.0f;
+		mVel.x                         = 0.0f;
+		mVel.y                         = 0.0f;
+		mVel.z                         = 0.0f;
 		colliGetShapes(mColli)->mSizeX = mParams->mValues[5];
 		sePlay3D(0x1BB, &mPos);
 		mStep = 0x14;
@@ -199,9 +201,9 @@ void TAniKumaKame::runRise()
 	Vec3f to = sum;
 	mAniFlags &= ~4;
 	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&from, (const Vec3f*)&to, (unsigned long)0x200) != 0) {
-		hit = *(EggProbe*)&hits.mHits[0];
-		f32 dist   = *(f32*)hit._3C;
-		f32 size   = (mShape)->mSizeX;
+		hit      = *(EggProbe*)&hits.mHits[0];
+		f32 dist = *(f32*)hit._3C;
+		f32 size = (mShape)->mSizeX;
 		if (dist < size) {
 			Vec3f push;
 			gjScaleVector(size - dist, &push, &hit.mNormal);
@@ -260,8 +262,8 @@ void TAniKumaKame::runFall()
 	from.y += 10.0f;
 	mAniFlags &= ~4;
 	if (meshColliProbe((EggHit*)&hits, (const Vec3f*)&from, (unsigned long)1) != 0) {
-		hit = *(EggProbe*)&hits.mHits[0];
-		f32 drop   = hit.mPos.y - mPos.y;
+		hit      = *(EggProbe*)&hits.mHits[0];
+		f32 drop = hit.mPos.y - mPos.y;
 		if (drop >= mVel.y) {
 			mVel.y = drop;
 			mAniFlags &= ~1;

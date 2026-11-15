@@ -45,7 +45,11 @@ typedef char TLightEffect_size_check[(sizeof(TLightEffect) == 0x10C) ? 1 : -1];
 
 // 0x801837E8
 TLightEffect::TLightEffect(TObject* parent, void* motion, int effect, const f32* matrix, const u32* color)
-    : TObject(parent), mEffect(0), mMotion(motion), mEffectId(effect), mFrame(0)
+    : TObject(parent)
+    , mEffect(0)
+    , mMotion(motion)
+    , mEffectId(effect)
+    , mFrame(0)
 {
 	_00   = (u32)gTLightEffectName;
 	mSize = 0x10C;
@@ -53,12 +57,12 @@ TLightEffect::TLightEffect(TObject* parent, void* motion, int effect, const f32*
 	mtxCopy(mMatrix, matrix);
 	Vec3f pos;
 	mtxGetPos(matrix, &pos);
-	mLight.mFlags  = 2;
-	mLight.mKa[0]  = 1.0f;
-	mLight.mKa[1]  = 0.0f;
-	mLight.mKa[2]  = 0.0f;
-	mLight.mColor  = *color;
-	mLight.mPos    = pos;
+	mLight.mFlags = 2;
+	mLight.mKa[0] = 1.0f;
+	mLight.mKa[1] = 0.0f;
+	mLight.mKa[2] = 0.0f;
+	mLight.mColor = *color;
+	mLight.mPos   = pos;
 }
 
 // 0x801838C0
@@ -100,9 +104,9 @@ extern "C" void lightEffectLoadArc()
 {
 	loadArc("egg_suit.arc", &gEggSuitArc);
 	if (gEggSuitArc != 0) {
-		gEggSuitModels = (NJS_OBJECT**)findArcExport(gEggSuitArc, "models");
+		gEggSuitModels   = (NJS_OBJECT**)findArcExport(gEggSuitArc, "models");
 		gEggSuitTexlists = (NJS_TEXLIST**)findArcExport(gEggSuitArc, "texlists");
-		void** textures = (void**)findArcExport(gEggSuitArc, "textures");
+		void** textures  = (void**)findArcExport(gEggSuitArc, "textures");
 		bindGvmTextures((u8*)*textures, gEggSuitTexlists[0]);
 		bindGvmTextures((u8*)*textures, gEggSuitTexlists[1]);
 		bindGvmTextures((u8*)*textures, gEggSuitTexlists[2]);
@@ -120,9 +124,9 @@ static u32 sLightBlue   = ColorValue(0x0000FFFF).mValue;
 static u32 sLightYellow = ColorValue(0xFFFF00FF).mValue;
 
 extern "C" {
-TArc* gEggSuitArc;          // egg_suit.arc loaded by lightEffectLoadArc
-NJS_OBJECT** gEggSuitModels;        // its "models"
-NJS_TEXLIST** gEggSuitTexlists;      // its "texlists" the ball unused the environment map
+TArc* gEggSuitArc;              // egg_suit.arc loaded by lightEffectLoadArc
+NJS_OBJECT** gEggSuitModels;    // its "models"
+NJS_TEXLIST** gEggSuitTexlists; // its "texlists" the ball unused the environment map
 }
 
 /** What the player's vfn_BC takes */
@@ -164,11 +168,12 @@ extern "C" TObject* createTObjEggSuit(TObject* parent, SetDesc* desc)
 
 // 0x80183BF8
 TObjEggSuit::TObjEggSuit(TObject* parent, const SetDesc* desc)
-    : TObjAction(parent), mMode(4)
+    : TObjAction(parent)
+    , mMode(4)
 {
 	f32 mtx[12];
 
-	mText  = 0;
+	mText = 0;
 	_00   = (u32)sClassName;
 	mSize = 0xD4;
 	setObjId(this, desc->mObjId);
@@ -475,8 +480,8 @@ void TObjEggSuit::render()
 	gjSetNumPostTexGens(0);
 	gjSetNumPostTevStages(0);
 	u32 flags;
-	flags = _nj_control_3d_flag_;
-	funcs[7]  = 0;
+	flags    = _nj_control_3d_flag_;
+	funcs[7] = 0;
 	flags &= ~0x80000;
 	_nj_control_3d_flag_ = flags;
 	gjChangeDrawObjIF(funcs, 0x10);

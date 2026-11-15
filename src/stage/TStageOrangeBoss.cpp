@@ -25,7 +25,7 @@ extern "C" TStage* createOrangeBossStage()
 TStageOrangeBoss::TStageOrangeBoss()
 {
 	sOrangeStage = this;
-	mFlags = 0;
+	mFlags       = 0;
 }
 
 // 0x8011EC94

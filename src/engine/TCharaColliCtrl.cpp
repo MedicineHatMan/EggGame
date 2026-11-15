@@ -17,7 +17,10 @@ TCharaColliCtrl::TCharaColliCtrl(TObject* parent)
 }
 
 // 0x8000A9F0
-TCharaColliCtrl::~TCharaColliCtrl() { charaColliClear(); }
+TCharaColliCtrl::~TCharaColliCtrl()
+{
+	charaColliClear();
+}
 
 // 0x8000AA54
 extern "C" void charaColliClear()
@@ -26,7 +29,7 @@ extern "C" void charaColliClear()
 	while (node != 0) {
 		colliClear(node);
 		CharaColli* cur = node;
-		node = node->mNext;
+		node            = node->mNext;
 		colliLink(cur, gColliFree);
 	}
 }

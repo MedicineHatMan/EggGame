@@ -35,8 +35,8 @@ void __AXAuxInit(void)
 	__AXAuxDspWritePositionDPL2 = 0;
 	__AXAuxDspReadPositionDPL2  = 1;
 	__AXAuxCpuReadWritePosition = 2;
-	pA = (long*)&__AXBufferAuxA;
-	pB = (long*)&__AXBufferAuxB;
+	pA                          = (long*)&__AXBufferAuxA;
+	pB                          = (long*)&__AXBufferAuxB;
 	for (i = 0; i < 0x1E0; i++) {
 		*(pA) = 0;
 		pA += 1;

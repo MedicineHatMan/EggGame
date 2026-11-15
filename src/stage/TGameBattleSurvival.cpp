@@ -10,7 +10,7 @@ struct SurvivalRank {
 };
 
 const char* gTGameBattleSurvivalName = "TGameBattleSurvival";
-const char* gTGameStateSurvivalName = "TGameStateSurvival";
+const char* gTGameStateSurvivalName  = "TGameStateSurvival";
 
 // 0x8019F07C
 TGameBattleSurvival::TGameBattleSurvival(TObject* parent)
@@ -113,14 +113,14 @@ extern "C" void survivalRankSort(SurvivalRank* ranks, int count)
 	int i;
 	for (i = 0; i < count; i++) {
 		for (j = 0; j < count - 1; j++) {
-			cur = &ranks[j];
+			cur   = &ranks[j];
 			order = cur->mOrder;
 			if (order > cur[1].mOrder) {
-				player = cur->mPlayer;
-				cur->mPlayer = cur[1].mPlayer;
-				cur->mOrder = cur[1].mOrder;
+				player         = cur->mPlayer;
+				cur->mPlayer   = cur[1].mPlayer;
+				cur->mOrder    = cur[1].mOrder;
 				cur[1].mPlayer = player;
-				cur[1].mOrder = order;
+				cur[1].mOrder  = order;
 			}
 		}
 	}
@@ -197,10 +197,10 @@ int TGameStateSurvival::onPlayerOut(TGameContextBattle* context, BattleMsg* msg)
 	}
 
 	LivesMsg lives;
-	lives.mType   = 0xB1;
-	lives._04     = msg->mPlayer;
-	lives.mLives  = entry[0];
-	lives.mSlot   = context->mPlayers[index]._00;
+	lives.mType  = 0xB1;
+	lives._04    = msg->mPlayer;
+	lives.mLives = entry[0];
+	lives.mSlot  = context->mPlayers[index]._00;
 	aeSendMessage(&lives);
 
 	battlePlayerOut(context, msg->mPlayer, msg->mOther, entry[0] != 0);
@@ -239,4 +239,6 @@ int TGameStateSurvival::onMessage(TGameContextBattle* context, ObjMsg* msg)
 
 // 0x8019F764
 // The class is in TGame.h and its other code is in TGameBattleSurvival.cpp
-TGameBattleSurvival::~TGameBattleSurvival() { }
+TGameBattleSurvival::~TGameBattleSurvival()
+{
+}

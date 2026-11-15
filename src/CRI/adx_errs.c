@@ -10,7 +10,7 @@ void ADXERR_Init(void)
 {
 	memset(adxerr_msg, 0, sizeof(adxerr_msg));
 	adxerr_func = 0;
-	adxerr_obj = 0;
+	adxerr_obj  = 0;
 }
 
 // 0x8021FD5C
@@ -18,7 +18,7 @@ void ADXERR_Finish(void)
 {
 	memset(adxerr_msg, 0, sizeof(adxerr_msg));
 	adxerr_func = 0;
-	adxerr_obj = 0;
+	adxerr_obj  = 0;
 }
 
 // 0x8021FCF8

@@ -12,16 +12,16 @@ void gcaxSndHeapReset(void)
 	BOOL level;
 
 	level = OSDisableInterrupts();
-	top = gcax_work->heap_top;
-	endp = &end;
+	top   = gcax_work->heap_top;
+	endp  = &end;
 	(void)endp;
-	end = (GCAX_MEMBLK*)((u8*)gcax_work->heap_top + gcax_work->heap_size - sizeof(GCAX_MEMBLK));
+	end        = (GCAX_MEMBLK*)((u8*)gcax_work->heap_top + gcax_work->heap_size - sizeof(GCAX_MEMBLK));
 	top->magic = GCAX_BLK_FREE;
-	top->pad = 0;
-	top->next = end;
+	top->pad   = 0;
+	top->next  = end;
 	end->magic = GCAX_BLK_BUSY;
-	end->pad = 0;
-	end->next = 0;
+	end->pad   = 0;
+	end->next  = 0;
 	OSRestoreInterrupts(level);
 }
 
@@ -30,7 +30,7 @@ void gcaxSndHeapInit(void* base, u32 size)
 {
 	BOOL level;
 
-	level = OSDisableInterrupts();
+	level               = OSDisableInterrupts();
 	gcax_work->heap_top = (GCAX_MEMBLK*)(((u32)base + 0x1F) & ~0x1F);
 	size -= (0x20 - ((u32)base & 0x1F)) & 0x1F;
 	size &= ~3;
@@ -49,9 +49,9 @@ void* gcaxSndMalloc(u32 size)
 	BOOL level;
 	GCAX_MEMBLK* next;
 
-	blk = gcax_work->heap_top;
+	blk   = gcax_work->heap_top;
 	level = OSDisableInterrupts();
-	len = (size + 0x1F) & ~0x1F;
+	len   = (size + 0x1F) & ~0x1F;
 	while (blk->next != 0) {
 		if (blk->magic == GCAX_BLK_FREE) {
 			room = (u32)blk->next - (u32)blk - sizeof(GCAX_MEMBLK);
@@ -70,13 +70,12 @@ found:
 		rest = (GCAX_MEMBLK*)((u8*)blk + len);
 		rest++;
 		rest->magic = GCAX_BLK_FREE;
-		rest->pad = 0;
-		rest->next = next;
-		blk->next = rest;
+		rest->pad   = 0;
+		rest->next  = next;
+		blk->next   = rest;
 	}
 	blk->magic = GCAX_BLK_BUSY;
-	if (gcax_work->debug & 1) {
-	}
+	if (gcax_work->debug & 1) { }
 	OSRestoreInterrupts(level);
 	return blk + 1;
 }
@@ -90,7 +89,7 @@ GCAX_MEMBLK* gcaxSndHeapPrev(GCAX_MEMBLK* blk)
 	GCAX_MEMBLK* last;
 	GCAX_MEMBLK* next;
 
-	cur = gcax_work->heap_top;
+	cur  = gcax_work->heap_top;
 	last = prev = 0;
 	(void)last;
 	while (cur->next != 0) {
@@ -111,8 +110,8 @@ void gcaxSndFree(void* p)
 	GCAX_MEMBLK* prev;
 	BOOL level;
 
-	level = OSDisableInterrupts();
-	blk = (GCAX_MEMBLK*)p - 1;
+	level      = OSDisableInterrupts();
+	blk        = (GCAX_MEMBLK*)p - 1;
 	blk->magic = GCAX_BLK_FREE;
 	if (blk->next != 0) {
 		prev = blk->next;
@@ -135,7 +134,7 @@ u32 gcaxSndHeapRest(void)
 	BOOL level;
 	u32 rest;
 
-	rest = 0;
+	rest  = 0;
 	level = OSDisableInterrupts();
 	if (gcax_work != 0 && gcax_work->heap_top != 0) {
 		for (blk = gcax_work->heap_top; blk->next != 0; blk = blk->next) {
@@ -159,8 +158,7 @@ void gcaxArqCallback(u32 req)
 		}
 	}
 	OSReport("AX SDLIB: Panic: arq not found at %s:%s\n", "gcaxSndMemory.c", 174);
-	for (;;) {
-	}
+	for (;;) { }
 found:
 	gcax_work->arq_busy[i] = 0;
 	if (gcax_work->arq_cb[i] != 0) {
@@ -180,12 +178,11 @@ int gcaxArqPost(u32 src, u32 dst, u32 len, GCAX_CALLBACK cb, void* arg)
 		}
 	}
 	OSReport("AX SDLIB: Panic: no more at %s:%s\n", "gcaxSndMemory.c", 194);
-	for (;;) {
-	}
+	for (;;) { }
 found:
 	gcax_work->arq_busy[i] = 1;
-	gcax_work->arq_cb[i] = cb;
-	gcax_work->arq_arg[i] = arg;
+	gcax_work->arq_cb[i]   = cb;
+	gcax_work->arq_arg[i]  = arg;
 	ARQPostRequest(&gcax_work->arq[i], gcax_work->arq_owner, 0, 1, src, dst, len, gcaxArqCallback);
 	return i;
 }
@@ -196,10 +193,9 @@ void gcaxArqPostWait(u32 src, u32 dst, u32 len, GCAX_CALLBACK cb, void* arg)
 	int i;
 	u8* busy;
 
-	i = gcaxArqPost(src, dst, len, cb, arg);
+	i    = gcaxArqPost(src, dst, len, cb, arg);
 	busy = &gcax_work->arq_busy[i];
-	while (*busy != 0) {
-	}
+	while (*busy != 0) { }
 }
 
 // 0x80230CF4
@@ -208,11 +204,10 @@ int gcaxArqPostEx(u32 src, u32 dst, u32 len, GCAX_CALLBACK cb, void* arg, int no
 	int i;
 	u8* busy;
 
-	i = gcaxArqPost(src, dst, len, cb, arg);
+	i    = gcaxArqPost(src, dst, len, cb, arg);
 	busy = &gcax_work->arq_busy[i];
 	if (nowait == 0) {
-		while (*busy != 0) {
-		}
+		while (*busy != 0) { }
 	}
 	return i;
 }

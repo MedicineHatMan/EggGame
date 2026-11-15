@@ -63,9 +63,9 @@ public:
 	virtual void update();
 
 	BinFile* mFiles[5]; // _0C
-	s8 mState;               // _20 0 = picking 1 = sending 2 = failed 3 = sent
-	s8 mCursor;              // _21
-	s16 mTimer;              // _22
+	s8 mState;          // _20 0 = picking 1 = sending 2 = failed 3 = sent
+	s8 mCursor;         // _21
+	s16 mTimer;         // _22
 };
 
 #endif

@@ -18,7 +18,9 @@ TGameGoal::TGameGoal(TObject* parent)
 }
 
 // 0x80114558
-TGameGoal::~TGameGoal() { }
+TGameGoal::~TGameGoal()
+{
+}
 
 // 0x801145B4
 void TGameGoal::startState()

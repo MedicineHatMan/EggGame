@@ -52,9 +52,9 @@ void TObjHook::debugPrint(void*)
 TObjHook::TObjHook(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00   = (u32)gTObjHookName;
-	mSize = 0xF4;
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
+	_00    = (u32)gTObjHookName;
+	mSize  = 0xF4;
+	mDraw  = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
 	mShape = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks(mShape, 4, 255, 254, 254);
@@ -73,9 +73,9 @@ TObjHook::~TObjHook()
 // 0x80072658
 void TObjHook::vfn_74()
 {
-	_E8     = 0.0f;
-	_F0     = 0;
-	mHooked = 0;
+	_E8           = 0.0f;
+	_F0           = 0;
+	mHooked       = 0;
 	mPlace.mFlags = 7;
 	mPlace.mPos.x = mPos.x;
 	mPlace.mPos.y = mPos.y;

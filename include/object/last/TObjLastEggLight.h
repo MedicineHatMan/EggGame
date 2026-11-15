@@ -29,9 +29,9 @@ public:
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
 	ScrollModel mSurface; // _90
-	NJS_OBJECT* mModel;           // _B0
+	NJS_OBJECT* mModel;   // _B0
 	f32 mRadius;          // _B4
-	DrawTask* mDraw;          // _B8
+	DrawTask* mDraw;      // _B8
 	int mSpin;            // _BC added to the yaw each frame
 	SeHolder mTone;       // _C0 the sound
 };

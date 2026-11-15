@@ -15,11 +15,11 @@
 struct FxEmitter;
 struct FxShape;
 
-#define FX_PIPE (*(volatile f32*)0xCC008000)
-#define FX_PIPE8 (*(volatile u8*)0xCC008000)
-#define FX_ANGLE 10430.38043493439
-#define FX_PI 3.141592653589793
-#define FX_TWO_PI 6.283185307179586
+#define FX_PIPE    (*(volatile f32*)0xCC008000)
+#define FX_PIPE8   (*(volatile u8*)0xCC008000)
+#define FX_ANGLE   10430.38043493439
+#define FX_PI      3.141592653589793
+#define FX_TWO_PI  6.283185307179586
 #define FX_HALF_PI 1.5707963267948966
 
 static inline f32 fxRandom()
@@ -31,9 +31,9 @@ static inline f32 fxSqrt(f32 x)
 {
 	if (x > 0.0f) {
 		double g = __frsqrte(x);
-		g = 0.5 * g * (3.0 - g * g * x);
-		g = 0.5 * g * (3.0 - g * g * x);
-		g = 0.5 * g * (3.0 - g * g * x);
+		g        = 0.5 * g * (3.0 - g * g * x);
+		g        = 0.5 * g * (3.0 - g * g * x);
+		g        = 0.5 * g * (3.0 - g * g * x);
 		return (f32)(x * g);
 	}
 	return x;
@@ -55,9 +55,9 @@ void fxSpawnInWorld(FxEmitter* fx, FxEmitter* self, FxSpawnFn spawn)
 		return;
 	}
 	f32 dir[3];
-	dir[0] = self->mDir[0];
-	dir[1] = self->mDir[1];
-	dir[2] = self->mDir[2];
+	dir[0]    = self->mDir[0];
+	dir[1]    = self->mDir[1];
+	dir[2]    = self->mDir[2];
 	f32 speed = njUnitVector((Vec3f*)dir);
 	f32 m[3][4];
 	if (fx->mFollow != NULL) {
@@ -98,8 +98,8 @@ void fxSpawnInWorld(FxEmitter* fx, FxEmitter* self, FxSpawnFn spawn)
 	if (self->_A4 < 0.0f) {
 		if (self->mKind == 0 || self->mKind == 3 || self->mKind == 4) {
 			f32 low = self->mShapeB;
-			step  = (self->mShapeA - low) / (f32)(int)left;
-			angle = step * fxRandom() + low;
+			step    = (self->mShapeA - low) / (f32)(int)left;
+			angle   = step * fxRandom() + low;
 		} else {
 			step  = FX_TWO_PI / (f32)(int)left;
 			angle = 2.0 * (FX_PI * fxRandom());
@@ -131,8 +131,8 @@ void fxSpawnInWorld(FxEmitter* fx, FxEmitter* self, FxSpawnFn spawn)
 					lift = (FX_HALF_PI - atan2(self->mShapeC, radius)) - self->_A4;
 				} else {
 					f32 low = self->mShapeB;
-					angle = (self->mShapeA - low) * fxRandom() + low;
-					lift  = self->_A4 + (FX_HALF_PI - atan2(self->mShapeC, radius));
+					angle   = (self->mShapeA - low) * fxRandom() + low;
+					lift    = self->_A4 + (FX_HALF_PI - atan2(self->mShapeC, radius));
 				}
 			} else if (self->mKind == 4) {
 				if (self->_A4 < 0.0f) {
@@ -140,15 +140,15 @@ void fxSpawnInWorld(FxEmitter* fx, FxEmitter* self, FxSpawnFn spawn)
 					lift = FX_HALF_PI - self->_A4;
 				} else {
 					f32 low = self->mShapeB;
-					angle = (self->mShapeA - low) * fxRandom() + low;
-					lift  = FX_HALF_PI + self->_A4;
+					angle   = (self->mShapeA - low) * fxRandom() + low;
+					lift    = FX_HALF_PI + self->_A4;
 				}
 			} else if (self->_A4 < 0.0f) {
 				angle += step;
 				lift *= -self->_A4;
 			} else {
 				f32 low = self->mShapeB;
-				angle = (self->mShapeA - low) * fxRandom() + low;
+				angle   = (self->mShapeA - low) * fxRandom() + low;
 				lift *= self->_A4;
 			}
 			f32 turn = FX_ANGLE * angle;
@@ -174,17 +174,17 @@ void fxSpawnInWorld(FxEmitter* fx, FxEmitter* self, FxSpawnFn spawn)
 			vel[2] = c0 * speed;
 			PSMTXMultVec((const float*)m, (const NJS_VECTOR*)pos, (NJS_VECTOR*)pos);
 			PSMTXMultVecSR((const float*)m, (const NJS_VECTOR*)vel, (NJS_VECTOR*)vel);
-			spawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vel[0], vel[1], vel[2], self->mGravity, self->mDamp,
-			      self->mScale);
+			spawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vel[0], vel[1], vel[2],
+			      self->mGravity, self->mDamp, self->mScale);
 			break;
 		}
 		case 2: {
 			pos[0] = fxRandom();
 			pos[1] = fxRandom();
 			pos[2] = fxRandom();
-			f32 x = self->mShapeB;
-			f32 y = self->mShapeC;
-			f32 z = self->mShapeD;
+			f32 x  = self->mShapeB;
+			f32 y  = self->mShapeC;
+			f32 z  = self->mShapeD;
 			switch (*(s16*)&self->mShapeA) {
 			case 1:
 				pos[0] = fxSnap(pos[0]);
@@ -237,8 +237,8 @@ void fxSpawnInWorld(FxEmitter* fx, FxEmitter* self, FxSpawnFn spawn)
 			vel[1] = 0.0f;
 			vel[2] = speed;
 			PSMTXMultVecSR((const float*)m, (const NJS_VECTOR*)vel, (NJS_VECTOR*)vel);
-			spawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vel[0], vel[1], vel[2], self->mGravity, self->mDamp,
-			      self->mScale);
+			spawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vel[0], vel[1], vel[2],
+			      self->mGravity, self->mDamp, self->mScale);
 			break;
 		}
 		case 5: {
@@ -269,8 +269,8 @@ void fxSpawnInWorld(FxEmitter* fx, FxEmitter* self, FxSpawnFn spawn)
 			pos[0] = radius * pos[0] + m[0][3];
 			pos[1] = radius * pos[1] + m[1][3];
 			pos[2] = radius * pos[2] + m[2][3];
-			spawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vel[0], vel[1], vel[2], self->mGravity, self->mDamp,
-			      self->mScale);
+			spawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vel[0], vel[1], vel[2],
+			      self->mGravity, self->mDamp, self->mScale);
 			break;
 		}
 		case 6: {
@@ -282,8 +282,9 @@ void fxSpawnInWorld(FxEmitter* fx, FxEmitter* self, FxSpawnFn spawn)
 				at = 2.0 * (FX_PI * fxRandom());
 			}
 			self->mShapeA = speed;
-			angle = at;
-			spawn(self->mPartFlags | 0x200, self->mPartLife, self->mPartScript, self, 0.0f, 0.0f, 0.0f, at, radius, 0.0f, tilt0, tilt1, self->mScale);
+			angle         = at;
+			spawn(self->mPartFlags | 0x200, self->mPartLife, self->mPartScript, self, 0.0f, 0.0f, 0.0f, at, radius, 0.0f, tilt0, tilt1,
+			      self->mScale);
 			break;
 		}
 		}
@@ -319,14 +320,14 @@ void fxConePos(FxParticle* part, f32* x, f32* y, f32* z)
 	f32 height = part->mVel[2] - owner->mShapeA;
 	f32 radius = fabs(owner->_A0);
 	f32 around = part->mVel[0] - owner->mGravity;
-	radius = (height * (njSin((int)(FX_ANGLE * (f32)tilt)) / njCos((int)(FX_ANGLE * (f32)tilt))) + radius) * part->mVel[1];
+	radius     = (height * (njSin((int)(FX_ANGLE * (f32)tilt)) / njCos((int)(FX_ANGLE * (f32)tilt))) + radius) * part->mVel[1];
 	njSinCos((int)(FX_ANGLE * around), &py, &px);
 	px *= radius;
 	py *= radius;
 	const f32* m = owner->mFollow != NULL ? owner->mFollow : owner->mMatrix;
-	*x = m[3] + (px * c1 + height * s1);
-	*y = m[7] + (c1 * (height * s0) + (s1 * (-px * s0) + py * c0));
-	*z = m[11] + (c1 * (height * c0) + (s1 * (-px * c0) - py * s0));
+	*x           = m[3] + (px * c1 + height * s1);
+	*y           = m[7] + (c1 * (height * s0) + (s1 * (-px * s0) + py * c0));
+	*z           = m[11] + (c1 * (height * c0) + (s1 * (-px * c0) - py * s0));
 }
 
 // 0x800E1C24
@@ -337,7 +338,7 @@ void fxSpriteMaterial(Fx* fx, FxEmitter* self, int flags)
 	ref.mMaterial = self->mMaterial;
 	ref.mTexGroup = self->mTexGroup;
 	ref.mTexUses  = uses;
-	int i = 0;
+	int i         = 0;
 	while (i < 3) {
 		uses[i].mTex   = self->mTex[i];
 		uses[i].mFlags = flags;
@@ -363,7 +364,7 @@ void fxSpriteDraw(Fx* fx, FxEmitter* self)
 	fxSetVtxLayout(0);
 	if (gFxRenderReady != 0) {
 		gFxRenderReady = 0;
-		int* in = (int*)(state + 0x260);
+		int* in        = (int*)(state + 0x260);
 		GXSetTevColorIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
 		in = (int*)(state + 0x280);
 		GXSetTevAlphaIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
@@ -482,26 +483,26 @@ void* fxBankNullKind(FxBank*, int)
 // 0x800E2140
 static inline void fxEmitterReadDesc(FxEmitter* fx, FxEmitterDesc* desc)
 {
-	fx->mRate      = desc->mRate;
-	fx->mAccum     = 0.0f;
-	fx->mMax       = desc->mMax;
-	fx->mPartLife  = desc->mPartLife;
-	fx->mPartFlags = desc->mPartFlags;
-	fx->mTex[0]    = desc->mTex[0];
-	fx->mTex[1]    = desc->mTex[1];
-	fx->mTexGroup  = desc->mTexGroup;
-	fx->mMaterial  = desc->mMaterial;
-	fx->mDir[0] = desc->mDir[0];
-	fx->mDir[1] = desc->mDir[1];
-	fx->mDir[2] = desc->mDir[2];
-	fx->mGravity = desc->mGravity;
-	fx->mDamp    = desc->mDamp;
-	fx->mScale   = desc->mScale;
+	fx->mRate       = desc->mRate;
+	fx->mAccum      = 0.0f;
+	fx->mMax        = desc->mMax;
+	fx->mPartLife   = desc->mPartLife;
+	fx->mPartFlags  = desc->mPartFlags;
+	fx->mTex[0]     = desc->mTex[0];
+	fx->mTex[1]     = desc->mTex[1];
+	fx->mTexGroup   = desc->mTexGroup;
+	fx->mMaterial   = desc->mMaterial;
+	fx->mDir[0]     = desc->mDir[0];
+	fx->mDir[1]     = desc->mDir[1];
+	fx->mDir[2]     = desc->mDir[2];
+	fx->mGravity    = desc->mGravity;
+	fx->mDamp       = desc->mDamp;
+	fx->mScale      = desc->mScale;
 	fx->mPartScript = desc->mPartScript;
-	fx->mCount = 0;
-	fx->mKids  = NULL;
-	fx->_A0 = desc->_14;
-	fx->_A4 = desc->_18;
+	fx->mCount      = 0;
+	fx->mKids       = NULL;
+	fx->_A0         = desc->_14;
+	fx->_A4         = desc->_18;
 	fxEmitterReadShape(fx, desc);
 }
 
@@ -512,13 +513,14 @@ FxEmitter* fxStreakNew(FxBank* bank, int index)
 		return NULL;
 	}
 	FxEmitterDesc* desc = (FxEmitterDesc*)bank->mDescs[index * 2 + 1];
-	fx->mUpdate = (void (*)(Fx*))fxStreakUpdate;
-	fx->mDraw   = (void (*)(Fx*))fxStreakDraw;
-	fx->mRemove = (void (*)(Fx*))fxEmitterFree;
+	Fx* base            = fx;
+	fx->mUpdate         = (void (*)(Fx*))fxStreakUpdate;
+	fx->mDraw           = (void (*)(Fx*))fxStreakDraw;
+	fx->mRemove         = (void (*)(Fx*))fxEmitterFree;
 	fx->mFlags |= desc->mFlags;
 	fx->mKind = desc->mKind;
 	fx->mStop = desc->mLife != 0 ? desc->mLife : 0xFFFF;
-	fxEmitterReadDesc(fx, desc);
+	fxEmitterReadDesc((FxEmitter*)base, desc);
 	return fx;
 }
 
@@ -559,7 +561,7 @@ void fxStreakDraw(FxEmitter* fx)
 	fxSetVtxLayout(6);
 	if (gFxRenderReady != 1) {
 		gFxRenderReady = 1;
-		int* in = (int*)(state + 0x270);
+		int* in        = (int*)(state + 0x270);
 		GXSetTevColorIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
 		in = (int*)(state + 0x290);
 		GXSetTevAlphaIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);

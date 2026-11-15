@@ -13,7 +13,10 @@ struct NJS_QUATERNION;
 struct TChrPlayer;
 struct TObjPlayer;
 
-static void orangeRootUpdate(OrangeBrainRoot* root, TEneOrangeBoss* owner) { root->OrangeBrainRoot::update(owner); }
+static void orangeRootUpdate(OrangeBrainRoot* root, TEneOrangeBoss* owner)
+{
+	root->OrangeBrainRoot::update(owner);
+}
 
 // 0x8011A3E0
 inline void OrangeBrainRoot::update(TEneOrangeBoss* owner)
@@ -42,10 +45,15 @@ int sOrangeWaitFrames = 600;
 #define random01() (3.0517578e-5f * rand())
 
 // 0x8011A478
-OrangeBrainBase::OrangeBrainBase() { mOwner = 0; }
+OrangeBrainBase::OrangeBrainBase()
+{
+	mOwner = 0;
+}
 
 // 0x8011A4AC
-OrangeBrainBase::~OrangeBrainBase() { }
+OrangeBrainBase::~OrangeBrainBase()
+{
+}
 
 // 0x8011A508
 OrangeBrain* createOrangeBrain(TEneOrangeBoss* owner)
@@ -58,13 +66,13 @@ OrangeBrain::OrangeBrain(TEneOrangeBoss* owner)
 {
 	mSight.reset();
 	mSight.mHeightLimit = 1000.0f;
-	mSavedHealth = gOrangeBossParams->mHealth;
-	mReturnState = STATE_4;
-	mHurtWait    = 0;
-	mHurtRecover = 0;
-	mStep        = 0;
-	mTimer       = 0;
-	mPick        = 0;
+	mSavedHealth        = gOrangeBossParams->mHealth;
+	mReturnState        = STATE_4;
+	mHurtWait           = 0;
+	mHurtRecover        = 0;
+	mStep               = 0;
+	mTimer              = 0;
+	mPick               = 0;
 	start(owner);
 	orangeStageMirrorsOff();
 }
@@ -111,8 +119,7 @@ void OrangeBrain::saveHealth()
 // 0x8011A7F8
 int OrangeBrain::isHurtStep()
 {
-	if (healthDropReached(mSavedHealth, mOwner->mHealth, gOrangeBossParams->mHealthSteps,
-	                      gOrangeBossParams->mHurtDrop) != 0) {
+	if (healthDropReached(mSavedHealth, mOwner->mHealth, gOrangeBossParams->mHealthSteps, gOrangeBossParams->mHurtDrop) != 0) {
 		mOwner->clearHold();
 		return 1;
 	}
@@ -604,7 +611,7 @@ void OrangeBrain::phaseState10(int phase)
 		switch (mStep) {
 		case 0:
 			if (mirrorRingAllUp() != 0) {
-				mStep = 1;
+				mStep    = 1;
 				int pick = (int)(8.0f * random01());
 				if (pick >= 8) {
 					pick = 7;
@@ -802,10 +809,10 @@ void OrangeBrain::phaseDie(int phase)
 {
 	switch (phase) {
 	case 0:
-			mirrorRingLower();
-			mirrorCenterLower(1);
-			orangeFloorPhase0();
-			mNext = mOwner->dieAction();
+		mirrorRingLower();
+		mirrorCenterLower(1);
+		orangeFloorPhase0();
+		mNext = mOwner->dieAction();
 		break;
 	case 1:
 		break;

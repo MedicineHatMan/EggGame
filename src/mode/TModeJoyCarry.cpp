@@ -69,8 +69,8 @@ void TModeJoyCarry::update()
 		if (padGet(0)->mPressed & 0x100) {
 			u32 size;
 			BinFile* file = mFiles[mCursor];
-			size = file->mSize;
-			JoyCarry* jc = JoyCarry::get();
+			size          = file->mSize;
+			JoyCarry* jc  = JoyCarry::get();
 			if (jc->boot(file->mData, size) == 0) {
 				mState = 2;
 				mTimer = 180;

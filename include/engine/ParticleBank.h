@@ -12,9 +12,9 @@ struct Vec3f;
  * @size 0x4
  */
 struct ParticleTex {
-	u16 mMode;  // _00 Bits 0-1 blend 2-3 animation 1 = play once 2 = start on a random frame 4 a flag
-	u8 mBank;   // _02 the slot the texture is in
-	u8 mIndex;  // _03 the texture in that slot's list found from ParticleDesc::mTexId
+	u16 mMode; // _00 Bits 0-1 blend 2-3 animation 1 = play once 2 = start on a random frame 4 a flag
+	u8 mBank;  // _02 the slot the texture is in
+	u8 mIndex; // _03 the texture in that slot's list found from ParticleDesc::mTexId
 };
 
 /**
@@ -67,21 +67,21 @@ struct ParticleDesc {
  * @size 0x14
  */
 struct ParticleBank {
-	ResBank mBank;  // _00
-	int mTexCount;  // _0C
-	u32* mTexIds;   // _10
+	ResBank mBank; // _00
+	int mTexCount; // _0C
+	u32* mTexIds;  // _10
 };
 
 extern "C" {
-void loadParticles(const char* name);                     // 0x8003FC80
-void freeParticles();                                     // 0x8003FDE0
-ParticleDesc* getParticleDesc(int slot, int id);          // 0x8003FFCC
-ParticleDesc* getParticleDescs(int slot);                 // 0x80040020
-int getParticleSlotCount();                               // 0x80040044
-int getParticleDescCount(int slot);                       // 0x8004004C
+void loadParticles(const char* name);                            // 0x8003FC80
+void freeParticles();                                            // 0x8003FDE0
+ParticleDesc* getParticleDesc(int slot, int id);                 // 0x8003FFCC
+ParticleDesc* getParticleDescs(int slot);                        // 0x80040020
+int getParticleSlotCount();                                      // 0x80040044
+int getParticleDescCount(int slot);                              // 0x8004004C
 void particleRandomOffset(const ParticleDesc* desc, Vec3f* out); // 0x80040094
 void setSpriteMode(u16* mode, int blend, int anim, int flag);    // 0x80040180
-int getSpriteAnim(const u16* mode);                       // 0x80040194
+int getSpriteAnim(const u16* mode);                              // 0x80040194
 }
 
 #endif

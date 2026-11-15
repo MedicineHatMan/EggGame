@@ -25,13 +25,15 @@ struct SetLink;
 extern "C" {
 
 // 0x802C4058
-ObjClassName gTObjRedEventMagmaName = { "TObjRedEventMagma", 0 };
+ObjClassName gTObjRedEventMagmaName      = { "TObjRedEventMagma", 0 };
 extern const int sRedEventMagmaModels[3] = {
-	5, 6, 7,
+	5,
+	6,
+	7,
 };
-extern const int sRedEventMagmaData[3] = { 5, 6, 7 };
-extern const int sRedEventMagmaNodes1[3] = { 2, 3, 4 };
-extern const int sRedEventMagmaNodes2[3] = { 2, 3, 4 };
+extern const int sRedEventMagmaData[3]            = { 5, 6, 7 };
+extern const int sRedEventMagmaNodes1[3]          = { 2, 3, 4 };
+extern const int sRedEventMagmaNodes2[3]          = { 2, 3, 4 };
 extern const MotionEntry sRedEventMagmaMotions[3] = {
 	{ MOTION_ONCE, 3, -1, 0, 0.0f, 29.0f, 0.1f, 0.0f, 0 },
 	{ MOTION_ONCE, 4, -1, 0, 0.0f, 29.0f, 0.1f, 0.0f, 0 },
@@ -88,7 +90,7 @@ void loadMagmaArc()
 void releaseMagmaArc()
 {
 	releaseResource(sRedEventMagmaArc);
-	sRedEventMagmaArc = 0;
+	sRedEventMagmaArc    = 0;
 	sRedEventMagmaAssets = 0;
 }
 
@@ -102,13 +104,13 @@ extern "C" TObject* createTObjRedEventMagma(TObject* parent, SetDesc* desc)
 void TObjRedEventMagma::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
-	mTrans.mPos = mPos;
+	mTrans.mPos                  = mPos;
 	*(MagmaRotCopy*)&mTrans.mRot = *(MagmaRotCopy*)&mRot;
 	mScroll.readDesc(desc);
 	mModelId = (u16)desc->getInt(0);
 	mModelId = mModelId > 2 ? 2 : mModelId;
-	mGeo = getGeObjModels()[sRedEventMagmaModels[mModelId]];
-	mTex = getGeObjTextures()[sRedEventMagmaData[mModelId]];
+	mGeo     = getGeObjModels()[sRedEventMagmaModels[mModelId]];
+	mTex     = getGeObjTextures()[sRedEventMagmaData[mModelId]];
 	mScroll.bindModel(*(void**)((u8*)mGeo + 4), &mTrans);
 	mEventId = (u16)desc->getInt(3);
 }
@@ -126,8 +128,8 @@ void TObjRedEventMagma::debugPrint(void*)
 TObjRedEventMagma::TObjRedEventMagma(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00       = (u32)gTObjRedEventMagmaName.mName;
-	mSize     = 0x168;
+	_00   = (u32)gTObjRedEventMagmaName.mName;
+	mSize = 0x168;
 	initFromDesc(desc);
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	setup();
@@ -162,8 +164,8 @@ static inline f32 magmaSqrt(f32 x)
 
 void TObjRedEventMagma::setup()
 {
-	mFxB   = 0;
-	mFx    = 0;
+	mFxB        = 0;
+	mFx         = 0;
 	void** rows = *(void***)((u8*)sRedEventMagmaAssets + 8);
 	bindRecords(&mCount, (int*)rows[mModelId]);
 	mMotion.init(sRedEventMagmaMotions, gGeObjCommon->mSet.mMotions);
@@ -171,7 +173,7 @@ void TObjRedEventMagma::setup()
 	if (keyBitIsSet((u16)mEventId)) {
 		mMotion.update();
 		NJS_MOTION* motion = mMotion.getMotion(mMotion.mCurrent);
-		mMotion.mFrame = (f32)motion->nbFrame - 1.0f;
+		mMotion.mFrame     = (f32)motion->nbFrame - 1.0f;
 		bindShut();
 		spawnFour();
 		setAct(2);
@@ -182,7 +184,7 @@ void TObjRedEventMagma::setup()
 	}
 
 	void* model = getGeObjModels()[sRedEventMagmaNodes1[mModelId]];
-	void* tex = getGeObjTextures()[sRedEventMagmaNodes2[mModelId]];
+	void* tex   = getGeObjTextures()[sRedEventMagmaNodes2[mModelId]];
 	mModel.setModel(model);
 	mModel.mTexList = (NJS_TEXLIST*)tex;
 	mModel.mState   = (DrawState*)getDefaultDrawState();

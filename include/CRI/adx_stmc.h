@@ -5,8 +5,8 @@
 #include <CRI/sj.h>
 #include <CRI/cri_cvfs.h>
 
-#define ADXSTM_MAX 0x28
-#define ADXSTM_SCT 0x800
+#define ADXSTM_MAX    0x28
+#define ADXSTM_SCT    0x800
 #define ADXSTM_RD_ALL 0xFFFFF
 
 typedef struct _adxstm_obj {

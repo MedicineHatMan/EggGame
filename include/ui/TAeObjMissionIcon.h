@@ -22,8 +22,8 @@ struct MissionIconMsg {
  * @size 0x8
  */
 struct MissionIconRateMsg {
-	s16 mCode;  // _00
-	f32 mRate;  // _04
+	s16 mCode; // _00
+	f32 mRate; // _04
 };
 
 /**
@@ -49,7 +49,7 @@ public:
 	TAeLayer* mLayer;    // _34 the frame every other layer is bound into
 	TAeLayer* mMarks[4]; // _38 one per counted item or the parts of the gauge
 	TAeLayer* mFills[4]; // _48 what each mark shows when it is filled
-	DrawTask* mTask;         // _58
+	DrawTask* mTask;     // _58
 	u32 _5C;             // _5C
 	int mFrame;          // _60 the time left in frames
 	f32 mPulse;          // _64 0 to 1

@@ -17,9 +17,9 @@ TAniFlushFlowerBomb::TAniFlushFlowerBomb(TObject* owner, u16 ownerId, const Vec3
 	_00     = (u32)gTAniFlushFlowerBombName;
 	mSize   = 0xC0;
 	mtxSetTransV(mFxMatrix, &mPos);
-	mFx     = fxSpawnFollow(1, mFxBank, 1, mFxMatrix);
+	mFx                           = fxSpawnFollow(1, mFxBank, 1, mFxMatrix);
 	*(ColliShapeCopy*)&mShapeData = *(ColliShapeCopy*)shape;
-	mColli  = colliCreate(1, 1);
+	mColli                        = colliCreate(1, 1);
 	if (mColli != 0) {
 		colliSetOwner(mColli, (u16)ownerId);
 		colliSetMasks((CharaColli*)mColli, 0x20, 0xFF, 0xFF, 0x10);

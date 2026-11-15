@@ -41,12 +41,12 @@ struct Am07Brain {
 	{
 		mOwner = 0;
 		mState = 0;
-		mNext = -1;
+		mNext  = -1;
 	}
 
-	virtual int checkInterrupt() = 0;               // _08 1 if it changed state
+	virtual int checkInterrupt()               = 0; // _08 1 if it changed state
 	virtual void onPhase(int state, int phase) = 0; // _0C
-	virtual ~Am07Brain();                              // _10 0x800706E8 inline in TEneAm07Brain.cpp
+	virtual ~Am07Brain();                           // _10 0x800706E8 inline in TEneAm07Brain.cpp
 	virtual void update(TEneAm07* owner);           // _14 0x8006F93C
 
 	inline void changeState(int state)
@@ -144,18 +144,18 @@ public:
 	inline void* operator new(u32 size);
 	inline void operator delete(void* mem);
 
-	virtual void vfn_10();                     // _10
-	virtual void render();                     // _1C
-	virtual void readEnemyDesc(SetDesc* desc); // _38
-	virtual void vfn_3C();                     // _3C
-	virtual f32 vfn_40();                      // _40
+	virtual void vfn_10();                                              // _10
+	virtual void render();                                              // _1C
+	virtual void readEnemyDesc(SetDesc* desc);                          // _38
+	virtual void vfn_3C();                                              // _3C
+	virtual f32 vfn_40();                                               // _40
 	virtual int onHit(const TObjAction* other, int shape, int* result); // _58
-	virtual void vfn_6C();                     // _6C
-	virtual void updateBody();                 // _70
-	virtual void setPos(const Vec3f* pos);           // _74
-	virtual void syncCollider();               // _78
-	virtual void onActionPhase(int action, int phase); // _7C
-	virtual int getDamage(EnemyHit* hit);      // _A4
+	virtual void vfn_6C();                                              // _6C
+	virtual void updateBody();                                          // _70
+	virtual void setPos(const Vec3f* pos);                              // _74
+	virtual void syncCollider();                                        // _78
+	virtual void onActionPhase(int action, int phase);                  // _7C
+	virtual int getDamage(EnemyHit* hit);                               // _A4
 
 	void init(SetDesc* desc);
 
@@ -216,36 +216,36 @@ public:
 	void actSink(int phase);
 	void actFall(int phase);
 
-	Am07Brain* mBrain;      // _158
-	void* mPose;            // _15C
-	DrawTask* mDrawTask;        // _160
-	u32 mFlags2;            // _164
-	Vec3f mPush;            // _168 added to the velocity when flipped
-	int mHealthStep;        // _174
-	f32 mHover;             // _178 how far above mBody.mPos the model sits
-	f32 mTurnVel;           // _17C
-	f32 mRadius;            // _180
-	f32 mCylRadius;         // _184
-	HitVec mPoints[10];     // _188 2 the head 4 and 6 the body 5 a scale axis 7 the stinger 8 and 9 the tail
-	Vec3f mCenter;          // _200
-	Vec3f mAnchor;          // _20C where it wanders or hovers
-	Vec3f mGoal;            // _218 the player it is after
-	Vec3f mGroundPos;       // _224
-	Vec3f mGroundNormal;    // _230
-	TEnemyLifeBar* mBar;    // _23C
-	ObjShadow mShadow;      // _240
-	EnemyFx* mFx;           // _278 the dive's trail
-	EnemyLight mLight;      // _27C
-	EnemyTint mTint;        // _2BC
-	EnemyEffect mEffect;    // _2C4
-	s16 mSound;             // _314 SOUND_
-	s16 mPrevSound;         // _316
-	SeHolder mSe;           // _318
-	int mStep;              // _34C
-	int mTimer;             // _350
-	int mPhase;             // _354 the wander's heading or the hover's sway
-	int _358;               // _358
-	f32 mDist;              // _35C
+	Am07Brain* mBrain;   // _158
+	void* mPose;         // _15C
+	DrawTask* mDrawTask; // _160
+	u32 mFlags2;         // _164
+	Vec3f mPush;         // _168 added to the velocity when flipped
+	int mHealthStep;     // _174
+	f32 mHover;          // _178 how far above mBody.mPos the model sits
+	f32 mTurnVel;        // _17C
+	f32 mRadius;         // _180
+	f32 mCylRadius;      // _184
+	HitVec mPoints[10];  // _188 2 the head 4 and 6 the body 5 a scale axis 7 the stinger 8 and 9 the tail
+	Vec3f mCenter;       // _200
+	Vec3f mAnchor;       // _20C where it wanders or hovers
+	Vec3f mGoal;         // _218 the player it is after
+	Vec3f mGroundPos;    // _224
+	Vec3f mGroundNormal; // _230
+	TEnemyLifeBar* mBar; // _23C
+	ObjShadow mShadow;   // _240
+	EnemyFx* mFx;        // _278 the dive's trail
+	EnemyLight mLight;   // _27C
+	EnemyTint mTint;     // _2BC
+	EnemyEffect mEffect; // _2C4
+	s16 mSound;          // _314 SOUND_
+	s16 mPrevSound;      // _316
+	SeHolder mSe;        // _318
+	int mStep;           // _34C
+	int mTimer;          // _350
+	int mPhase;          // _354 the wander's heading or the hover's sway
+	int _358;            // _358
+	f32 mDist;           // _35C
 };
 
 extern "C" {

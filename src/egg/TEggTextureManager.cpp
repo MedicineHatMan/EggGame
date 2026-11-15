@@ -96,7 +96,9 @@ TEggTextureManager::~TEggTextureManager()
 }
 
 // 0x801BA66C
-void TEggTextureManager::draw() { }
+void TEggTextureManager::draw()
+{
+}
 
 // 0x801BA670
 int TEggTextureManager::acquire(int id)

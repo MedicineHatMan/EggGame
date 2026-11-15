@@ -7,7 +7,7 @@ int gcaxSndInitEx(void* buf, int max_voice, u32 size, u32 aram_size)
 	u32 zero;
 
 	gcaxSndAllocWork(buf, size);
-	gcax_work->size = sizeof(GCAX_WORK);
+	gcax_work->size      = sizeof(GCAX_WORK);
 	gcax_work->master_db = 0.0f;
 	gcax_work->arq_owner = 0xF;
 	gcax_work->max_voice = max_voice;
@@ -99,7 +99,7 @@ int gcaxLoaderAlloc(GCAX_LOADER** out)
 found:
 	memset(loader, 0, sizeof(GCAX_LOADER));
 	loader->used = 1;
-	*out = loader;
+	*out         = loader;
 	return GCAX_OK;
 }
 
@@ -136,10 +136,10 @@ int gcaxLoaderSet(int handle, void* data, u32 size, GCAX_CALLBACK cb, void* arg)
 		return err;
 	}
 	loader->data = data;
-	loader->arq = -1;
+	loader->arq  = -1;
 	loader->size = size;
-	loader->cb = cb;
-	loader->arg = arg;
+	loader->cb   = cb;
+	loader->arg  = arg;
 	return GCAX_OK;
 }
 
@@ -158,8 +158,7 @@ int gcaxLoaderFree(int handle)
 		return err;
 	}
 	if (loader->used != 0 && loader->arq >= 0) {
-		while (gcax_work->arq_busy[loader->arq] != 0) {
-		}
+		while (gcax_work->arq_busy[loader->arq] != 0) { }
 	}
 	loader->used = 0;
 	return GCAX_OK;
@@ -188,15 +187,15 @@ int gcaxLoaderLoad(int handle)
 	if (err != GCAX_OK) {
 		return err;
 	}
-	base = loader->data;
-	mlt = (u32*)base;
-	mltm = (u32*)(base + 0x10);
+	base  = loader->data;
+	mlt   = (u32*)base;
+	mltm  = (u32*)(base + 0x10);
 	entry = (u32*)(base + 0x20);
-	base = (u8*)loader->data + 0x20;
+	base  = (u8*)loader->data + 0x20;
 	if (mlt[0] != GCAX_MAGIC || mlt[1] != GCAX_TYPE_MLT || mltm[0] != GCAX_MAGIC || mltm[1] != GCAX_TYPE_MLTM) {
 		return GCAX_ERR_DATA;
 	}
-	n = mltm[3] >> 4;
+	n   = mltm[3] >> 4;
 	err = GCAX_OK;
 	while (n-- > 0) {
 		if (entry[1] == 0xFFFFFFFF) {
@@ -204,7 +203,7 @@ int gcaxLoaderLoad(int handle)
 		}
 		type = (entry[0] >> 24) & 0xF;
 		bank = (entry[1] >> 24) & 0xF;
-		ret = -1;
+		ret  = -1;
 		switch (type) {
 		case 1:
 			ret = gcaxSndLoadMpb(bank, (GCAX_CHUNK*)(base + entry[2]), loader->cb, loader->arg, gcax_work->load_nowait);

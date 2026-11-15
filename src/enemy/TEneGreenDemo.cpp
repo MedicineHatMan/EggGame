@@ -34,10 +34,10 @@ MotionEntry sGreenDemoMotionTable[] = {
 
 typedef char TEneGreenDemo_size_check[(sizeof(TEneGreenDemo) == 0x138) ? 1 : -1];
 
-static ResBank sGreenDemoBank;     // 0x802868B8
+static ResBank sGreenDemoBank;           // 0x802868B8
 static NJS_OBJECT** sGreenDemoModels;    // 0x802C5AE8
-static NJS_TEXLIST** sGreenDemoTexLists;  // 0x802C5AEC
-static NJS_MOTION** sGreenDemoMotions;    // 0x802C5AF0
+static NJS_TEXLIST** sGreenDemoTexLists; // 0x802C5AEC
+static NJS_MOTION** sGreenDemoMotions;   // 0x802C5AF0
 
 // 0x801B6864
 // The enemy init list clears the bank
@@ -94,16 +94,16 @@ TEneGreenDemo::TEneGreenDemo(TObject* parent)
 	motionCtrlSetPlayer(&mAnim, &mPlayer);
 	motionCtrlInit(&mAnim, sGreenDemoMotionTable, sGreenDemoMotions);
 	motionCtrlPlay(&mAnim, 0);
-	mPose = actorCreate(*sGreenDemoModels);
+	mPose     = actorCreate(*sGreenDemoModels);
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	shadowSetGround(&mShadow, &mPos, 0);
 	mShadow._30 = 20.0f;
 	mShadow._34 = 20.0f;
 	shadowEnable(&mShadow);
-	mScreen = 0;
+	mScreen      = 0;
 	mSavedParent = 0;
-	mState = 0;
-	mFx    = 0;
+	mState       = 0;
+	mFx          = 0;
 	fxHolderStop(&mVoice);
 }
 
@@ -138,7 +138,7 @@ void TEneGreenDemo::draw()
 	case 0:
 		if (eventStartByObj(this) != 0) {
 			void* first = *resBankGetObjects(&sGreenDemoBank);
-			mScreen = createCamPath(0, 3, first, *resBankGetMotion(&sGreenDemoBank, 1), 0, 1.0f, 1.0f);
+			mScreen     = createCamPath(0, 3, first, *resBankGetMotion(&sGreenDemoBank, 1), 0, 1.0f, 1.0f);
 			sePlayFor(0x2BC, 0);
 			mState = 1;
 			pose();

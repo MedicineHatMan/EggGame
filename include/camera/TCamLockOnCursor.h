@@ -58,29 +58,29 @@ public:
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	void init();                                             // 0x8002FC6C
-	void setOwner(u16 id);                                   // 0x8002FCE4
-	BOOL hasMarks();                                         // 0x8002FCF8
-	void lock();                                             // 0x8002FD0C onto the nearest mark
-	void unlock();                                           // 0x8002FD8C
-	void nextMark();                                         // 0x8002FDC8
-	void enable();                                           // 0x8002FE34
-	void disable();                                          // 0x8002FE44
-	void setRange(f32 far, int angle, f32 near, f32 keep);   // 0x8002FEA4
-	void setHeight(f32 height);                              // 0x8002FEB8
-	void useNormalRange();                                   // 0x8002FEC0
-	void useAltRange();                                      // 0x8002FF08 the same numbers
-	void useUnlimitedRange();                                // 0x8002FF50
-	u16 getLockId();                                         // 0x8002FF98
-	void getCurrent(LockOnMark* out);                        // 0x8002FFA0
-	BOOL canTarget(TObjAction* obj);                         // 0x8002FFCC
+	void init();                                                         // 0x8002FC6C
+	void setOwner(u16 id);                                               // 0x8002FCE4
+	BOOL hasMarks();                                                     // 0x8002FCF8
+	void lock();                                                         // 0x8002FD0C onto the nearest mark
+	void unlock();                                                       // 0x8002FD8C
+	void nextMark();                                                     // 0x8002FDC8
+	void enable();                                                       // 0x8002FE34
+	void disable();                                                      // 0x8002FE44
+	void setRange(f32 far, int angle, f32 near, f32 keep);               // 0x8002FEA4
+	void setHeight(f32 height);                                          // 0x8002FEB8
+	void useNormalRange();                                               // 0x8002FEC0
+	void useAltRange();                                                  // 0x8002FF08 the same numbers
+	void useUnlimitedRange();                                            // 0x8002FF50
+	u16 getLockId();                                                     // 0x8002FF98
+	void getCurrent(LockOnMark* out);                                    // 0x8002FFA0
+	BOOL canTarget(TObjAction* obj);                                     // 0x8002FFCC
 	BOOL inRange(f32 dotMin, const Vec3f* fwd, Vec3f* dir, f32* outLen); // 0x80030014
-	void scan(const Vec3f* from, int rotY);                  // 0x800300FC
-	BOOL project(f32 maxY, const Vec3f* pos, Vec3f* out);    // 0x800305B0
-	int markKind(u16 id);                                    // 0x80030668 a player's id else 4
-	void drawPlayerMark(const Vec3f* at, int kind, BOOL locked); // 0x80030680
-	void drawOtherMark(const Vec3f* at, int kind, BOOL locked);  // 0x800307B0
-	void drawMark(const Vec3f* at, u16 id, BOOL locked);     // 0x8003086C
+	void scan(const Vec3f* from, int rotY);                              // 0x800300FC
+	BOOL project(f32 maxY, const Vec3f* pos, Vec3f* out);                // 0x800305B0
+	int markKind(u16 id);                                                // 0x80030668 a player's id else 4
+	void drawPlayerMark(const Vec3f* at, int kind, BOOL locked);         // 0x80030680
+	void drawOtherMark(const Vec3f* at, int kind, BOOL locked);          // 0x800307B0
+	void drawMark(const Vec3f* at, u16 id, BOOL locked);                 // 0x8003086C
 
 	DrawTask* mDraw;              // _20
 	void* mTex;                   // _24

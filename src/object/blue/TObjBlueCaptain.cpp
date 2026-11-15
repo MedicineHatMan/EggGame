@@ -27,7 +27,7 @@
 extern "C" {
 
 // 0x802C4008
-ObjClassName gTObjBlueCaptainName = { "TObjBlueCaptain", 0 };
+ObjClassName gTObjBlueCaptainName                = { "TObjBlueCaptain", 0 };
 extern const MotionEntry sBlueCaptainMotions0[4] = {
 	{ MOTION_ONCE, 6, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 	{ MOTION_ONCE, 6, -1, 0, 0.0f, 50.0f, 0.4f, 0.0f, 0 },
@@ -60,9 +60,9 @@ extern "C" TObject* createTObjBlueCaptain(TObject* parent, SetDesc* desc)
 TObjBlueCaptain::TObjBlueCaptain(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00    = (u32)gTObjBlueCaptainName.mName;
-	mSize  = 0x1BC;
-	mDraw  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	_00   = (u32)gTObjBlueCaptainName.mName;
+	mSize = 0x1BC;
+	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	initFromDesc(desc);
 	vfn_74();
 }
@@ -93,7 +93,7 @@ void TObjBlueCaptain::debugPrint(void*)
 // 0x800BD434
 void TObjBlueCaptain::vfn_74()
 {
-	mEventCam = 0;
+	mEventCam      = 0;
 	void** motions = gGeObjCommon->mSet.mMotions;
 	mMotion0.init(sBlueCaptainMotions0, motions);
 	mMotion1.init(sBlueCaptainMotions1, motions);

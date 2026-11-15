@@ -140,8 +140,7 @@ static void KillThreads(void)
 		next = thread->linkActive.next;
 		switch (thread->state) {
 		case 1:
-		case 4:
-		{
+		case 4: {
 			OSCancelThread(thread);
 			break;
 		}

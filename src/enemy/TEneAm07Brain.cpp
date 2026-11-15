@@ -34,7 +34,7 @@ struct ObjShadow;
 void Am07Brain::update(TEneAm07* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}
@@ -52,7 +52,9 @@ Am07BrainBase::Am07BrainBase()
 }
 
 // 0x8006FA08
-Am07BrainBase::~Am07BrainBase() { }
+Am07BrainBase::~Am07BrainBase()
+{
+}
 
 // 0x8006FA64
 Am07BeeBrain* Am07BeeBrain::create(TEneAm07* owner)
@@ -67,9 +69,9 @@ Am07BeeBrain::Am07BeeBrain(TEneAm07* owner)
 	mSight.mHeightLimit = 500.0f;
 	mMemory.reset();
 	mTimer = 0;
-	mWait = 0;
+	mWait  = 0;
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	mState = STATE_APPEAR;
 	onPhase(mState, 0);
 	if (mNext != -1) {
@@ -78,7 +80,9 @@ Am07BeeBrain::Am07BeeBrain(TEneAm07* owner)
 }
 
 // 0x8006FB6C
-Am07BeeBrain::~Am07BeeBrain() { }
+Am07BeeBrain::~Am07BeeBrain()
+{
+}
 
 // 0x8006FBD4
 // Slot _08 A flip hit while stinging only makes it flinch
@@ -230,7 +234,7 @@ void Am07BeeBrain::phaseWander(int phase)
 	case 0:
 		pickWanderSpot();
 		mTimer = wanderTime();
-		mNext = TEneAm07::ACT_WANDER;
+		mNext  = TEneAm07::ACT_WANDER;
 		break;
 	case 2:
 		if (look() != 0) {
@@ -329,8 +333,8 @@ void Am07BeeBrain::phaseStuck(int phase)
 	switch (phase) {
 	case 0:
 		mTimer = 0;
-		mWait = sAm07Param[0];
-		mNext = TEneAm07::ACT_STUCK;
+		mWait  = sAm07Param[0];
+		mNext  = TEneAm07::ACT_STUCK;
 		break;
 	case 2:
 		if (mOwner->isPullDone() != 0) {
@@ -349,7 +353,7 @@ void Am07BeeBrain::phaseStuck(int phase)
 			mWait--;
 			if (mWait <= 0) {
 				mTimer = 1;
-				mNext = TEneAm07::ACT_PULL;
+				mNext  = TEneAm07::ACT_PULL;
 			}
 			break;
 		case 1:
@@ -387,7 +391,7 @@ void Am07BeeBrain::phaseDie(int phase)
 {
 	switch (phase) {
 	case 0:
-			mNext = mOwner->deathAction();
+		mNext = mOwner->deathAction();
 		break;
 	case 1:
 		break;
@@ -395,4 +399,3 @@ void Am07BeeBrain::phaseDie(int phase)
 		break;
 	}
 }
-

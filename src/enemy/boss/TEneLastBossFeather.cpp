@@ -58,13 +58,13 @@ TEneLastBossFeather::TEneLastBossFeather(TObject* parent)
 	mShadow._30 = 9.0f;
 	mShadow._34 = 9.0f;
 	shadowEnable(&mShadow);
-	mAim.x = 0.0f;
-	mAim.y = 0.0f;
-	mAim.z = 0.0f;
-	mAimRotY = 0;
-	mTrailKind = 0x45;
+	mAim.x      = 0.0f;
+	mAim.y      = 0.0f;
+	mAim.z      = 0.0f;
+	mAimRotY    = 0;
+	mTrailKind  = 0x45;
 	mTrailPhase = 0;
-	mGlowKind = 0xF;
+	mGlowKind   = 0xF;
 	for (i = 0; i < 8; i++) {
 		mPoint[i].x = 0.0f;
 		mPoint[i].y = 0.0f;
@@ -131,14 +131,17 @@ void TEneLastBossFeather::orient(int rotY, const f32* mtx)
 	mtxSetRotX(m, -pitch);
 	mtxRotateY(m, m, -yaw);
 	mtxMultVecSR(m, &side, &side);
-	f32 roll = (f32)atan2(side.y, side.x);
+	f32 roll      = (f32)atan2(side.y, side.x);
 	mXform.mRot.x = pitch;
 	mXform.mRot.y = yaw;
 	mXform.mRot.z = (int)(10430.38043493439 * roll);
 }
 
 // 0x8015D774
-void TEneLastBossFeather::updateColli() { colliShapeSetPos(colliGetShapes(mShape), &mXform.mPos); }
+void TEneLastBossFeather::updateColli()
+{
+	colliShapeSetPos(colliGetShapes(mShape), &mXform.mPos);
+}
 
 // 0x8015D7AC
 // The shadow falls on the arena floor
@@ -275,12 +278,12 @@ f32 TEneLastBossFeather::steer(f32 ahead, f32 behind, f32 side, f32 maxSpeed, co
 	along.z = to.z;
 	gjScaleVector(dot, &along, &along);
 	Vec3f perp = featherSub(&mXform.mVel, &along);
-	across.x = perp.x;
-	across.y = perp.y;
-	across.z = perp.z;
-	along.x  = to.x;
-	along.y  = to.y;
-	along.z  = to.z;
+	across.x   = perp.x;
+	across.y   = perp.y;
+	across.z   = perp.z;
+	along.x    = to.x;
+	along.y    = to.y;
+	along.z    = to.z;
 	if (dot >= 0.0f) {
 		gjScaleVector(dot + ahead, &along, &along);
 	} else {
@@ -309,14 +312,14 @@ void TEneLastBossFeather::dirToRot(const Vec3f* dir, SetRot* rot)
 	f32 yaw;
 	f32 pitch;
 
-	yaw      = atan2(d.x, d.z);
+	yaw   = atan2(d.x, d.z);
 	f32 x = d.x;
 	f32 z = d.z;
 	x *= x;
 	z *= z;
 	z += x;
-	f32 r = (f32)__frsqrte(z);
-	pitch    = atan2(__fres(r), -d.y);
+	f32 r  = (f32)__frsqrte(z);
+	pitch  = atan2(__fres(r), -d.y);
 	rot->x = -(int)(10430.38043493439 * pitch);
 	rot->y = (int)(10430.38043493439 * yaw);
 }
@@ -348,25 +351,30 @@ TEneLastBossFeather_Dark::TEneLastBossFeather_Dark(TObject* parent, const Vec3f*
 	mSize       = 0x20C;
 	mXform.mPos = *pos;
 	orient(rotY, mtx);
-	mState      = 0;
-	_1F8        = 0;
-	mAim        = mXform.mPos;
-	mAimRotY    = mXform.mRot.y;
-	mTrailKind  = 0x45;
-	mGlowKind   = 0xF;
-	mTarget.x   = 0.0f;
-	mTarget.y   = 20.0f;
-	mTarget.z   = 0.0f;
-	mMapRadius  = 50.0f;
+	mState     = 0;
+	_1F8       = 0;
+	mAim       = mXform.mPos;
+	mAimRotY   = mXform.mRot.y;
+	mTrailKind = 0x45;
+	mGlowKind  = 0xF;
+	mTarget.x  = 0.0f;
+	mTarget.y  = 20.0f;
+	mTarget.z  = 0.0f;
+	mMapRadius = 50.0f;
 	updateColli();
 	updateShadow();
 }
 
 // 0x8015DEF4
-TEneLastBossFeather_Dark::~TEneLastBossFeather_Dark() {}
+TEneLastBossFeather_Dark::~TEneLastBossFeather_Dark()
+{
+}
 
 // 0x8015DF50
-int TEneLastBossFeather_Dark::onHit(const TObjAction*, int, int*) { return 0; }
+int TEneLastBossFeather_Dark::onHit(const TObjAction*, int, int*)
+{
+	return 0;
+}
 
 // 0x8015DF58
 // Throws the feather along dir
@@ -380,10 +388,10 @@ void TEneLastBossFeather_Dark::launch(const Vec3f* dir, const Vec3f* target, f32
 	mXform.mVel.z = dir->z;
 	gjScaleVector(5.0f, &mXform.mVel, &mXform.mVel);
 	mXform.mVel.y += 2.0f;
-	mTarget.x     = target->x;
-	mTarget.y     = target->y;
-	mTarget.z     = target->z;
-	mMapRadius    = radius;
+	mTarget.x  = target->x;
+	mTarget.y  = target->y;
+	mTarget.z  = target->z;
+	mMapRadius = radius;
 }
 
 // 0x8015E00C
@@ -483,10 +491,10 @@ TEneLastBossFeather_Home::TEneLastBossFeather_Home(TObject* parent, const Vec3f*
 	sight   = &mSight;
 	sight->reset();
 	mSight.mHeightLimit = 1000.0f;
-	mAim        = mXform.mPos;
-	mAimRotY    = mXform.mRot.y;
-	mTrailKind  = 0x46;
-	mGlowKind   = 0xE;
+	mAim                = mXform.mPos;
+	mAimRotY            = mXform.mRot.y;
+	mTrailKind          = 0x46;
+	mGlowKind           = 0xE;
 	updateColli();
 	updateShadow();
 }
@@ -686,10 +694,16 @@ void TEneLastBossFeather_Home::render()
 }
 
 // 0x8015E9A8
-int TEneLastBossFeather::getKind() { return 2; }
+int TEneLastBossFeather::getKind()
+{
+	return 2;
+}
 
 // 0x8015E9B0
-Vec3f* TEneLastBossFeather::getPos() { return &mXform.mPos; }
+Vec3f* TEneLastBossFeather::getPos()
+{
+	return &mXform.mPos;
+}
 
 // 0x8015E9B8
 extern "C" void createLastBossMagic(TObject* parent, const Vec3f* pos, f32 radius)

@@ -51,20 +51,20 @@ const char* gTEneDeathCrowName = "TEneDeathCrow";
 TEneDeathCrow::TEneDeathCrow(TObject* parent, const Vec3f* pos, int quiet)
     : TObject(parent)
 {
-	_00   = (u32)gTEneDeathCrowName;
-	mSize = 0x48;
-	mPos.x = pos->x;
-	mPos.y = pos->y;
-	mPos.z = pos->z;
-	mRotY = (int)(65536.0f * (3.0517578125e-05f * (f32)rand()));
+	_00       = (u32)gTEneDeathCrowName;
+	mSize     = 0x48;
+	mPos.x    = pos->x;
+	mPos.y    = pos->y;
+	mPos.z    = pos->z;
+	mRotY     = (int)(65536.0f * (3.0517578125e-05f * (f32)rand()));
 	f32 speed = 0.7f * (3.0517578125e-05f * (f32)rand()) + 0.1f;
 	njSinCos(mRotY, &mVel.x, &mVel.z);
 	mVel.x *= speed;
 	mVel.y = 0.0f;
 	mVel.z *= speed;
-	mFrame = 0.0f;
+	mFrame    = 0.0f;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mLife = 0x78;
+	mLife     = 0x78;
 	if (quiet == 0) {
 		seStartAt(0x67, &mPos);
 	}
@@ -126,8 +126,8 @@ extern "C" void* createDeathCrowGen(TObject* parent, const Vec3f* pos)
 extern "C" void spawnDeathCrowsOnParts(NJS_OBJECT* model, f32 base, f32 high, f32 low)
 {
 	f32 bottom;
-	f32 top    = high + base;
-	bottom = low + base;
+	f32 top = high + base;
+	bottom  = low + base;
 	Vec3f at;
 	Vec3f origin;
 	origin.x = model->pos[0];
@@ -150,8 +150,8 @@ const char* gTEneDeathCrowGenName = "TEneDeathCrowGen";
 TEneDeathCrowGen::TEneDeathCrowGen(TObject* parent, const Vec3f* pos)
     : TObject(parent)
 {
-	_00   = (u32)gTEneDeathCrowGenName;
-	mSize = 0x30;
+	_00    = (u32)gTEneDeathCrowGenName;
+	mSize  = 0x30;
 	mPos.x = pos->x;
 	mPos.y = pos->y;
 	mPos.z = pos->z;
@@ -189,9 +189,9 @@ void TEneDeathCrowGen::draw()
 // 0x800E89C8
 BossSuit::BossSuit()
 {
-	mAlpha     = 0;
+	mAlpha = 0;
 	_20 = mSinkTo = mSinkFrom = mSinkRate = mSinkStart = mHeight = mFadeRate = mFadeStart = 0.0f;
-	mFxKind = 1;
+	mFxKind                                                                               = 1;
 	for (int i = 0; i < 2; i++) {
 		mFx[i]   = 0;
 		mFxId[i] = 0;
@@ -221,7 +221,7 @@ extern "C" int bossSuitFade(f32 time, BossSuit* suit)
 	} else if (t >= 1.0f) {
 		suit->mAlpha = 0;
 	} else {
-		t = 1.0f - t;
+		t            = 1.0f - t;
 		suit->mAlpha = (u8)(int)(255.0f * t);
 	}
 	return suit->mAlpha != 0xFF;
@@ -301,7 +301,7 @@ extern "C" int bossSuitUpdate(f32 time, BossSuit* suit, const Vec3f* pos, void* 
 {
 	int fade = bossSuitFade(time, suit);
 	int sink = bossSuitSink(time, suit, pos, model);
-	u8 on   = 0;
+	u8 on    = 0;
 	if (fade != 0 || sink != 0) {
 		on = 1;
 	}
@@ -313,7 +313,7 @@ extern "C" int bossSuitUpdateNoFx(f32 time, BossSuit* suit)
 {
 	int fade = bossSuitFade(time, suit);
 	int sink = bossSuitSink(time, suit, 0, 0);
-	u8 on   = 0;
+	u8 on    = 0;
 	if (fade != 0 || sink != 0) {
 		on = 1;
 	}

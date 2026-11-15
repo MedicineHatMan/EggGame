@@ -37,10 +37,10 @@ public:
 
 	static void drawTask(TWhiteFadeInOut* fade);
 
-	u16 mFrames;    // _20
-	DrawTask* mTask;    // _24
-	f32 mAlpha;     // _28
-	f32 mTarget;    // _2C
+	u16 mFrames;     // _20
+	DrawTask* mTask; // _24
+	f32 mAlpha;      // _28
+	f32 mTarget;     // _2C
 };
 
 /**
@@ -57,10 +57,10 @@ public:
 
 	static void drawTask(TBlackFadeInOut* fade);
 
-	u16 mFrames;    // _20
-	DrawTask* mTask;    // _24
-	f32 mAlpha;     // _28
-	f32 mTarget;    // _2C
+	u16 mFrames;     // _20
+	DrawTask* mTask; // _24
+	f32 mAlpha;      // _28
+	f32 mTarget;     // _2C
 };
 
 /**
@@ -77,10 +77,10 @@ public:
 
 	static void drawTask(TAlphaFade* fade);
 
-	DrawTask* mTask;   // _20
-	int mClearing; // _24
-	u8 _28[4];     // _28
-	f32 mAlpha;    // _2C
+	DrawTask* mTask; // _20
+	int mClearing;   // _24
+	u8 _28[4];       // _28
+	f32 mAlpha;      // _2C
 };
 
 extern "C" {

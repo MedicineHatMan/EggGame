@@ -12,21 +12,21 @@ struct ObjMsg;
 
 // What the stage's set data gives aniRaceSetup
 struct AniRaceDesc {
-	u16 mRailId;   // _00
+	u16 mRailId; // _00
 	u8 _02[2];
-	f32 mSpeed;    // _04
-	u16 mCourse;   // _08
-	u16 mLaps;     // _0A
-	u16 mRank;     // _0C
+	f32 mSpeed;  // _04
+	u16 mCourse; // _08
+	u16 mLaps;   // _0A
+	u16 mRank;   // _0C
 	u8 _0E[2];
-	f32 mScale;    // _10
-	Vec3f mStart;  // _14
+	f32 mScale;   // _10
+	Vec3f mStart; // _14
 };
 
 typedef char TAniRacePath_size_check[(sizeof(TAniRacePath) == 0x5C) ? 1 : -1];
 
 static TAniRacePath* sPath;  // 0x802C58B8
-static TAnimalRacer* sRacer;         // 0x802C58BC
+static TAnimalRacer* sRacer; // 0x802C58BC
 static u16 sRailId;          // 0x802C58C0
 static f32 sSpeed;           // 0x802C58C4
 static f32 sScale;           // 0x802C58C8
@@ -50,7 +50,7 @@ extern "C" TAniRacePath* aniRaceMakePath()
 	return new TAniRacePath(gTL_05);
 }
 
-int sAniRaceGlobal = -1; // 0x802C4580
+int sAniRaceGlobal            = -1; // 0x802C4580
 const char* gTAniRacePathName = "TAniRacePath";
 
 // 0x8017AAD8
@@ -160,12 +160,12 @@ void TAniRacePath::finish()
 // 0x8017ADCC
 extern "C" int aniRaceSetup(AniRaceDesc* desc)
 {
-	sRailId      = desc->mRailId;
-	sSpeed       = desc->mSpeed;
-	sCourse      = desc->mCourse;
-	sRank        = desc->mRank;
-	sLaps        = desc->mLaps;
-	sScale       = desc->mScale;
+	sRailId        = desc->mRailId;
+	sSpeed         = desc->mSpeed;
+	sCourse        = desc->mCourse;
+	sRank          = desc->mRank;
+	sLaps          = desc->mLaps;
+	sScale         = desc->mScale;
 	sRacePathStart = desc->mStart;
 	return 1;
 }
@@ -191,16 +191,16 @@ extern "C" int aniRaceStart()
 // 0x8017AE94
 extern "C" void aniRaceInit()
 {
-	sPath           = 0;
-	sRacer          = 0;
-	sAniRaceGlobal    = -1;
-	sRacePathStart.x  = 0.0f;
-	sRacePathStart.y  = 0.0f;
-	sRacePathStart.z  = 0.0f;
-	sRailId         = 0xFFFF;
-	sSpeed          = 2.0f;
-	sScale          = 1.0f;
-	sCourse         = 0;
+	sPath            = 0;
+	sRacer           = 0;
+	sAniRaceGlobal   = -1;
+	sRacePathStart.x = 0.0f;
+	sRacePathStart.y = 0.0f;
+	sRacePathStart.z = 0.0f;
+	sRailId          = 0xFFFF;
+	sSpeed           = 2.0f;
+	sScale           = 1.0f;
+	sCourse          = 0;
 	aniRaceNop0();
 	racerInit();
 }
@@ -210,16 +210,16 @@ extern "C" void aniRaceEnd()
 {
 	racerExit();
 	aniRaceNop1();
-	sPath           = 0;
-	sRacer          = 0;
-	sAniRaceGlobal    = -1;
-	sRacePathStart.x  = 0.0f;
-	sRacePathStart.y  = 0.0f;
-	sRacePathStart.z  = 0.0f;
-	sRailId         = 0xFFFF;
-	sSpeed          = 2.0f;
-	sScale          = 1.0f;
-	sCourse         = 0;
+	sPath            = 0;
+	sRacer           = 0;
+	sAniRaceGlobal   = -1;
+	sRacePathStart.x = 0.0f;
+	sRacePathStart.y = 0.0f;
+	sRacePathStart.z = 0.0f;
+	sRailId          = 0xFFFF;
+	sSpeed           = 2.0f;
+	sScale           = 1.0f;
+	sCourse          = 0;
 }
 
 // 0x8017AF74
@@ -349,10 +349,10 @@ extern "C" void aniRacePlaceFirst()
 extern "C" void aniRacePlaceSecond()
 {
 	if (sPath != 0) {
-		sPath->mPlace = 2;
+		sPath->mPlace      = 2;
 		TAniRacePath* path = sPath;
-		path->mClock  = 0;
-		path->mTiming = 1;
+		path->mClock       = 0;
+		path->mTiming      = 1;
 	}
 }
 

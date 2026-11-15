@@ -109,10 +109,10 @@ s32 gjTexLoadMem(NJS_TEXLIST* list, s32 num)
 		data = gvrFindImage(&desc, &index, *(u8**)list->textures[num].filename);
 		if (data == NULL) {
 			NJS_TEXINFO* info = list->textures[num].filename;
-			desc.width = info->info.width;
-			desc.height = info->info.height;
-			desc.format = info->info.format;
-			data = info->texaddr;
+			desc.width        = info->info.width;
+			desc.height       = info->info.height;
+			desc.format       = info->info.format;
+			data              = info->texaddr;
 		}
 	}
 	if (gbix != 0xFFFFFFFF) {
@@ -126,8 +126,7 @@ s32 gjTexLoadMem(NJS_TEXLIST* list, s32 num)
 		gjTexReleaseSlot(slot);
 		return -1;
 	}
-	while (gjTexHeapReady() != 1) {
-	}
+	while (gjTexHeapReady() != 1) { }
 	return 1;
 }
 
@@ -148,11 +147,11 @@ s32 gjTexLoadInfo(NJS_TEXLIST* list, s32 num)
 	if (ret != 0) {
 		return ret;
 	}
-	info = list->textures[num].filename;
-	desc.width = info->info.width;
+	info        = list->textures[num].filename;
+	desc.width  = info->info.width;
 	desc.height = info->info.height;
 	desc.format = info->info.format;
-	index = (u32)list->textures[num].texaddr;
+	index       = (u32)list->textures[num].texaddr;
 	if (gbix != 0xFFFFFFFF) {
 		index = gbix;
 	}

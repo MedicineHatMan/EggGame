@@ -73,11 +73,11 @@ const char* gTObjYellowDoubleFogName = "TObjYellowDoubleFog";
 TObjYellowDoubleFog::TObjYellowDoubleFog(TObject* parent)
     : TObject(parent)
 {
-	_00        = (u32)gTObjYellowDoubleFogName;
-	mSize      = 0x30;
-	mState     = 0;
+	_00         = (u32)gTObjYellowDoubleFogName;
+	mSize       = 0x30;
+	mState      = 0;
 	mBoardTimer = 0;
-	mTriggers  = 0;
+	mTriggers   = 0;
 	mStormTimer = 0;
 }
 
@@ -159,13 +159,13 @@ void TObjYellowDoubleFog::draw()
 	if (mTriggers > 0) {
 		mStormTimer--;
 		if (mStormTimer <= 0) {
-			mStormTimer = 90;
+			mStormTimer        = 90;
 			TObjAction* player = (TObjAction*)findObjById(0);
 			if (player != 0) {
 				Vec3f start;
 				Vec3f dir;
 				Vec3f pos;
-				pos = *player->getPos();
+				pos   = *player->getPos();
 				pos.y = 693.0f;
 
 				int angle = 65536.0f * (3.0517578e-05f * rand());
@@ -178,7 +178,7 @@ void TObjYellowDoubleFog::draw()
 				angle = 65536.0f * randUnit();
 				njSinCos(angle, &sn, &cs);
 
-				start = pos;
+				start     = pos;
 				f32 reach = 100.0f * randUnit();
 				start.x += reach * sn;
 				start.z += reach * cs;

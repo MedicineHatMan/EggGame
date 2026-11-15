@@ -41,7 +41,7 @@ public:
 	SetRot mRot;         // _4C
 	HitVec mCorners[4];  // _58
 	SetLinkMember mLink; // _88
-	DrawTask* mDrawTask;     // _94
+	DrawTask* mDrawTask; // _94
 	u8 _98[0xC];         // _98
 };
 

@@ -20,16 +20,16 @@ public:
 
 	virtual int getKind(); // 0x80191948
 
-	void place(const Vec3f* pos); // 0x801917C0
-	void setRadius(f32 radius);   // 0x80191880
-	void getCenter(Vec3f* pos) const;   // 0x801918B4
-	f32 getRadius() const;              // 0x801918FC
-	void drawShape();             // 0x80191924
+	void place(const Vec3f* pos);     // 0x801917C0
+	void setRadius(f32 radius);       // 0x80191880
+	void getCenter(Vec3f* pos) const; // 0x801918B4
+	f32 getRadius() const;            // 0x801918FC
+	void drawShape();                 // 0x80191924
 
-	TSetActor* mOwner; // _30
-	CharaColli* mShape;      // _34
-	void* mFx;         // _38
-	f32 mMtx[12];      // _3C
+	TSetActor* mOwner;  // _30
+	CharaColli* mShape; // _34
+	void* mFx;          // _38
+	f32 mMtx[12];       // _3C
 };
 
 #endif

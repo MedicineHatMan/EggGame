@@ -2,20 +2,20 @@
 
 #define SHN_UNDEF 0
 
-#define R_PPC_NONE           0
-#define R_PPC_ADDR32         1
-#define R_PPC_ADDR24         2
-#define R_PPC_ADDR16         3
-#define R_PPC_ADDR16_LO      4
-#define R_PPC_ADDR16_HI      5
-#define R_PPC_ADDR16_HA      6
-#define R_PPC_ADDR14         7
-#define R_PPC_ADDR14_BRTAKEN 8
+#define R_PPC_NONE            0
+#define R_PPC_ADDR32          1
+#define R_PPC_ADDR24          2
+#define R_PPC_ADDR16          3
+#define R_PPC_ADDR16_LO       4
+#define R_PPC_ADDR16_HI       5
+#define R_PPC_ADDR16_HA       6
+#define R_PPC_ADDR14          7
+#define R_PPC_ADDR14_BRTAKEN  8
 #define R_PPC_ADDR14_BRNTAKEN 9
-#define R_PPC_REL24          10
-#define R_PPC_REL14          11
-#define R_PPC_REL14_BRTAKEN  12
-#define R_PPC_REL14_BRNTAKEN 13
+#define R_PPC_REL24           10
+#define R_PPC_REL14           11
+#define R_PPC_REL14_BRTAKEN   12
+#define R_PPC_REL14_BRNTAKEN  13
 
 #define OS_MODULE_VERSION 3
 
@@ -25,37 +25,37 @@
 OSModuleQueue __OSModuleInfoList : OS_MODULE_LIST_ADDR;
 const void* __OSStringTable : OS_STRING_TABLE_ADDR;
 
-#define ENQUEUE_INFO(queue, info, link)     \
-	do {                                    \
-		OSModuleInfo* __prev;               \
-                                            \
-		__prev = (queue)->tail;             \
-		if (__prev == NULL)                 \
-			(queue)->head = (info);         \
-		else                                \
-			__prev->link.next = (info);     \
-		(info)->link.prev = __prev;         \
-		(info)->link.next = NULL;           \
-		(queue)->tail = (info);             \
+#define ENQUEUE_INFO(queue, info, link) \
+	do {                                \
+		OSModuleInfo* __prev;           \
+                                        \
+		__prev = (queue)->tail;         \
+		if (__prev == NULL)             \
+			(queue)->head = (info);     \
+		else                            \
+			__prev->link.next = (info); \
+		(info)->link.prev = __prev;     \
+		(info)->link.next = NULL;       \
+		(queue)->tail     = (info);     \
 	} while (0)
 
-#define DEQUEUE_INFO(info, queue, link)     \
-	do {                                    \
-		OSModuleInfo* __next;               \
-		OSModuleInfo* __prev;               \
-                                            \
-		__next = (info)->link.next;         \
-		__prev = (info)->link.prev;         \
-                                            \
-		if (__next == NULL)                 \
-			(queue)->tail = __prev;         \
-		else                                \
-			__next->link.prev = __prev;     \
-                                            \
-		if (__prev == NULL)                 \
-			(queue)->head = __next;         \
-		else                                \
-			__prev->link.next = __next;     \
+#define DEQUEUE_INFO(info, queue, link) \
+	do {                                \
+		OSModuleInfo* __next;           \
+		OSModuleInfo* __prev;           \
+                                        \
+		__next = (info)->link.next;     \
+		__prev = (info)->link.prev;     \
+                                        \
+		if (__next == NULL)             \
+			(queue)->tail = __prev;     \
+		else                            \
+			__next->link.prev = __prev; \
+                                        \
+		if (__prev == NULL)             \
+			(queue)->head = __next;     \
+		else                            \
+			__prev->link.next = __next; \
 	} while (0)
 
 #pragma dont_inline on
@@ -63,13 +63,17 @@ const void* __OSStringTable : OS_STRING_TABLE_ADDR;
  * @note Address: 0x801D60A8
  * @note Size: 0x4
  */
-void OSNotifyLink(OSModuleInfo* module) { }
+void OSNotifyLink(OSModuleInfo* module)
+{
+}
 
 /**
  * @note Address: 0x801D60AC
  * @note Size: 0x4
  */
-void OSNotifyUnlink(OSModuleInfo* module) { }
+void OSNotifyUnlink(OSModuleInfo* module)
+{
+}
 #pragma dont_inline reset
 
 /**
@@ -260,7 +264,10 @@ static BOOL Link(OSModuleInfo* newModule, void* bss, BOOL fixed)
  * @note Address: 0x801D664C
  * @note Size: 0x24
  */
-BOOL OSLink(OSModuleInfo* newModule, void* bss) { return Link(newModule, bss, FALSE); }
+BOOL OSLink(OSModuleInfo* newModule, void* bss)
+{
+	return Link(newModule, bss, FALSE);
+}
 
 /**
  * @note Address: 0x801D6670

@@ -64,11 +64,11 @@ public:
 	EggCollide mRail; // _20
 	u8 mPlace;        // _3C 1 or 2
 	u8 _3D[3];
-	int mTiming;      // _40
-	int mClock;       // _44 in sixteenths while mTiming is set
-	int mState;       // _48
-	Vec3f mPos;       // _4C
-	f32 mSpeed;       // _58
+	int mTiming; // _40
+	int mClock;  // _44 in sixteenths while mTiming is set
+	int mState;  // _48
+	Vec3f mPos;  // _4C
+	f32 mSpeed;  // _58
 };
 
 extern "C" {

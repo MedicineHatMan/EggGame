@@ -76,10 +76,14 @@ TModeBattle::TModeBattle()
 }
 
 // 0x8002EB14
-BattleEntry::BattleEntry() { }
+BattleEntry::BattleEntry()
+{
+}
 
 // 0x8002EB18
-TModeBattle::~TModeBattle() { }
+TModeBattle::~TModeBattle()
+{
+}
 
 // 0x8002EB40
 void TModeBattle::setChara(int slot, int chara)
@@ -100,7 +104,7 @@ void TModeBattle::loadFiles()
 	name[0] = 'k';
 	name[1] = '_';
 	dst     = name + 2;
-	src = mName;
+	src     = mName;
 	while (*src != '\0') {
 		*dst++ = *src++;
 	}
@@ -117,10 +121,10 @@ void TModeBattle::loadFiles()
 int TModeBattle::init()
 {
 	setConstPalette((ConstPalette*)sConstPalette1);
-	StageDef* def        = findStageDef(mName);
+	StageDef* def = findStageDef(mName);
 	int players;
-	TStageBattle* stage  = (TStageBattle*)createBattleStage();
-	mStage               = stage;
+	TStageBattle* stage = (TStageBattle*)createBattleStage();
+	mStage              = stage;
 	mStage->load(mName);
 	mStage->loadAssets();
 
@@ -155,7 +159,7 @@ int TModeBattle::init()
 	gBattleGroups[3] = 4;
 	setDrawTaskDepthRange(1000.0f, -1000.0f);
 	setRangeCheck(0);
-	gEggFeedFlag = 1;
+	gEggFeedFlag     = 1;
 	gEggAssetsLoaded = 0;
 	createItemManage();
 	gItemBattle = 1;
@@ -219,7 +223,7 @@ void TModeBattle::update()
 		gjDoneRender();
 		int count = VIGetRetraceCount();
 		if (count > gjLastRetrace) {
-			mSkipDraw    = 1;
+			mSkipDraw     = 1;
 			gjLastRetrace = count;
 		} else {
 			mSkipDraw = 0;
@@ -283,7 +287,7 @@ void TModeBattle::startRound(int sudden)
 				battleStageSetHuman(i, 0);
 			} else {
 				battleStageSetHuman(i, 1);
-				TObjPlayer* player = (TObjPlayer*)playerCreateBattleInt(gTL_03, (u16)i, mEntries[i].mChara);
+				TObjPlayer* player    = (TObjPlayer*)playerCreateBattleInt(gTL_03, (u16)i, mEntries[i].mChara);
 				*((u8*)player + 0x24) = i;
 				if (sudden != 0) {
 					player->vfn_70(10);
@@ -307,7 +311,7 @@ void TModeBattle::startRound(int sudden)
 		((TGameBattleSurvival*)mGame)->setLives(mLives);
 	} else if (mRule == 1) {
 		aeBattleRuleTime();
-		mGame = (TGameContextBattle*)createGameBattleTime();
+		mGame                               = (TGameContextBattle*)createGameBattleTime();
 		((TGameBattleTime*)mGame)->mSetting = mTime;
 	} else if (mRule == 2) {
 		aeBattleRuleHatch();

@@ -17,9 +17,9 @@ struct Vec3f;
 struct ContactHit {
 	ContactHit(); // 0x8000B320 empty
 
-	Vec3f mPos;   // _00
-	f32 mDist;    // _0C
-	u16 mTri;     // _10
+	Vec3f mPos; // _00
+	f32 mDist;  // _0C
+	u16 mTri;   // _10
 	u16 _12;
 	MeshColli* mMesh; // _14
 };
@@ -32,7 +32,7 @@ struct ContactSet {
 };
 
 /** One slot of what a probe returns */
-struct GroundResult { // size 0x4C
+struct GroundResult {  // size 0x4C
 	Vec3f mCorners[3]; // _00
 	Vec3f mPos;        // _24
 	Vec3f mNormal;     // _30
@@ -55,7 +55,6 @@ struct MeshGatherPair : public MeshGather {
 };
 
 extern "C" {
-
 }
 
 MeshColli* gWorldMesh;
@@ -92,10 +91,10 @@ void contactCopyResults(void* result, ContactSet* set)
 			continue;
 		}
 		GroundResult* out = &((GroundResult*)result)[i];
-		ContactHit* hit = &set->mHits[i];
-		MeshColli* mesh = hit->mMesh;
-		Vec3f* verts = mesh->mVerts;
-		MeshTri* tri = &mesh->mTris[hit->mTri];
+		ContactHit* hit   = &set->mHits[i];
+		MeshColli* mesh   = hit->mMesh;
+		Vec3f* verts      = mesh->mVerts;
+		MeshTri* tri      = &mesh->mTris[hit->mTri];
 		if (mesh->mFlags & 1) {
 			Vec3f v;
 			for (int k = 0; k < 3; k++) {
@@ -103,16 +102,16 @@ void contactCopyResults(void* result, ContactSet* set)
 				mtxMultVec(mesh->mMatrix, &v, &out->mCorners[k]);
 			}
 			out->mPos = hit->mPos;
-			v.x = tri->mNormal.x;
-			v.y = tri->mNormal.y;
-			v.z = tri->mNormal.z;
+			v.x       = tri->mNormal.x;
+			v.y       = tri->mNormal.y;
+			v.z       = tri->mNormal.z;
 			mtxMultVecSR(mesh->mMatrix, &v, &out->mNormal);
 		} else {
 			out->mCorners[0] = verts[tri->mVerts[0]];
 			out->mCorners[1] = verts[tri->mVerts[1]];
 			out->mCorners[2] = verts[tri->mVerts[2]];
-			out->mPos    = hit->mPos;
-			out->mNormal = tri->mNormal;
+			out->mPos        = hit->mPos;
+			out->mNormal     = tri->mNormal;
 		}
 		out->mMask = tri->mMask;
 		out->mDist = hit->mDist;
@@ -153,8 +152,8 @@ int meshListQueryDown(const MeshList* list, const Vec3f* pos, u32 mask, MeshHitF
 	int count;
 	MeshEntry* data;
 
-	data  = list->mData;
-	count = list->mCount;
+	data      = list->mData;
+	count     = list->mCount;
 	int total = 0;
 	for (int i = 0; i < count; i++) {
 		total += data[i].mMesh->queryDown(&data[i], pos, mask, fn, arg);
@@ -188,8 +187,8 @@ int meshListQueryLine(const MeshList* list, const Vec3f* from, const Vec3f* to, 
 	int count;
 	MeshEntry* data;
 
-	data  = list->mData;
-	count = list->mCount;
+	data      = list->mData;
+	count     = list->mCount;
 	int total = 0;
 	for (int i = 0; i < count; i++) {
 		total += data[i].mMesh->queryLine(&data[i], from, to, mask, fn, arg);
@@ -220,8 +219,8 @@ int meshListProbeDown(EggHit* out, const MeshList* list, const Vec3f* pos, u32 m
 	int total = 0;
 	ContactSet set;
 	set.mNearest = gFarRayDist + 1.0f;
-	set.mFound = FlagWord(0);
-	set.mMask = mask;
+	set.mFound   = FlagWord(0);
+	set.mMask    = mask;
 	for (int i = 0; i < list->mCount; i++) {
 		total += list->mData[i].mMesh->queryDown(&list->mData[i], pos, mask, contactTakeHit, &set);
 	}
@@ -251,8 +250,8 @@ u32 meshListProbeLine(EggHit* out, const MeshList* list, const Vec3f* from, cons
 	int total = 0;
 	ContactSet set;
 	set.mNearest = gFarRayDist + 1.0f;
-	set.mFound = FlagWord(0);
-	set.mMask = mask;
+	set.mFound   = FlagWord(0);
+	set.mMask    = mask;
 	for (int i = 0; i < list->mCount; i++) {
 		total += list->mData[i].mMesh->queryLine(&list->mData[i], from, to, mask, contactTakeHit, &set);
 	}
@@ -277,8 +276,8 @@ int meshListQuerySphere(const MeshList* list, const MeshSphere* sphere, void* a,
 	int count;
 	MeshEntry* data;
 
-	data  = list->mData;
-	count = list->mCount;
+	data      = list->mData;
+	count     = list->mCount;
 	int total = 0;
 	for (int i = 0; i < count; i++) {
 		total += data[i].mMesh->querySphere(&data[i], sphere, mask, a, b);
@@ -299,8 +298,8 @@ extern "C" u32 meshListQuerySphereEx(const MeshList* list, const MeshSphere* sph
 	int count;
 	MeshEntry* data;
 
-	data  = list->mData;
-	count = list->mCount;
+	data      = list->mData;
+	count     = list->mCount;
 	int total = 0;
 	for (int i = 0; i < count; i++) {
 		total += data[i].mMesh->querySphereEx(&data[i], sphere, mask, a, b, c, d);
@@ -528,7 +527,7 @@ void groundInit()
 {
 	queryPoolInit();
 	portalWorkInit();
-	gWorldMesh = new WorldMesh;
+	gWorldMesh     = new WorldMesh;
 	MeshPool* pool = new MeshPool;
 	if (pool != NULL) {
 		pool = meshPoolInit(pool, 200);
@@ -609,7 +608,7 @@ void meshTriEdge(MeshColli* mesh, u16 tri, u16 edge, Vec3f* a, Vec3f* b)
 // 0x8000C05C
 void meshListWalk(MeshList* list, void* a, void* b)
 {
-	int i = 0;
+	int i    = 0;
 	int more = 1;
 	while (i < list->mCount && more != 0) {
 		list->mData[i].mMesh->walk(&list->mData[i], a, b, &more);

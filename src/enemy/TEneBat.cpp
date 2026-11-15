@@ -32,19 +32,16 @@ extern "C" {
 // The looping sound in mSound start with an id move it stop it
 
 MotionEntry sBatMotions[] = {
-	{ MOTION_LOOP, 9, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_LOOP, 5, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 7, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 39.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_CHAIN, 0, -1, 6, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 9, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 }, { MOTION_LOOP, 5, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 }, { MOTION_LOOP, 7, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 },
+	{ MOTION_ONCE, 8, -1, 0, 0.0f, 39.0f, 0.4f, 0.0f, 0 }, { MOTION_CHAIN, 0, -1, 6, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 }, { MOTION_ONCE, 2, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 3, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 }, { MOTION_ONCE, 4, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
 };
 extern const int sBatBones[] = {
-	12, 60, -1,
+	12,
+	60,
+	-1,
 }; // the bones mParts follow
 }
 
@@ -54,7 +51,7 @@ extern const EnemyFrameKey sBatFrameKey2[] = { { 14.0f, 0 }, { -1.0f, 5 } };
 extern const EnemyFrameKey sBatFrameKey3[] = { { 9.0f, 5 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sBatFrameKey4[] = { { 9.0f, 5 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sBatFrameKey5[] = { { 2.0f, 4 }, { 18.0f, 3 }, { -1.0f, 4 } };
-const EnemyFrameKey* sBatFrameKeys[6] = { sBatFrameKey0, sBatFrameKey1, sBatFrameKey2, sBatFrameKey3, sBatFrameKey4, sBatFrameKey5 };
+const EnemyFrameKey* sBatFrameKeys[6]      = { sBatFrameKey0, sBatFrameKey1, sBatFrameKey2, sBatFrameKey3, sBatFrameKey4, sBatFrameKey5 };
 
 extern "C" {
 extern const ColliShape sBatShape[] = {
@@ -87,8 +84,8 @@ extern "C" void initTEneBat()
 {
 	resBankLoad(&sBatBank, "ar_ene_bat.arc");
 	resBankAddTextures(&sBatBank, 0, "ene_bat.gvm");
-	sBatModels = resBankGetModels(&sBatBank);
-	sBatMotion = resBankGetMotion(&sBatBank, 0);
+	sBatModels   = resBankGetModels(&sBatBank);
+	sBatMotion   = resBankGetMotion(&sBatBank, 0);
 	sBatTextures = resBankGetTextures(&sBatBank);
 }
 
@@ -97,9 +94,9 @@ extern "C" void shutdownTEneBat()
 {
 	resBankRemoveTextures(&sBatBank, 0);
 	resBankRelease(&sBatBank);
-	sBatModels = 0;
+	sBatModels   = 0;
 	sBatTextures = 0;
-	sBatMotion = 0;
+	sBatMotion   = 0;
 }
 
 // 0x800D6B60
@@ -112,7 +109,7 @@ extern "C" TObject* createTEneBat(TObject* parent, SetDesc* desc)
 TEneBat::TEneBat(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0x2FC;
 	init(desc);
 }
@@ -123,7 +120,7 @@ void TEneBat::init(SetDesc* desc)
 	motionCtrlInit(&mAnim, sBatMotions, sBatMotion);
 	motionCtrlPlay(&mAnim, 0);
 	mBody.mRot.x = 0;
-	mCollider = colliCreate(2, 1);
+	mCollider    = colliCreate(2, 1);
 	colliCopyShapes(mCollider, (const ColliShape*)sBatShape);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 0x14, 0, 0x10);
@@ -134,12 +131,12 @@ void TEneBat::init(SetDesc* desc)
 	}
 	mBrain = 0;
 	readEnemyDesc(desc);
-	mPose = allocPose(*(void**)sBatModels);
-	mModel = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mFlags2 = 0;
-	mKnock.x = 0.0f;
-	mKnock.y = 0.0f;
-	mKnock.z = 0.0f;
+	mPose     = allocPose(*(void**)sBatModels);
+	mModel    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mFlags2   = 0;
+	mKnock.x  = 0.0f;
+	mKnock.y  = 0.0f;
+	mKnock.z  = 0.0f;
 	mFrameKey = 0;
 	for (int i = 0; i < 2; i++) {
 		mParts[i].x = 0.0f;
@@ -149,9 +146,9 @@ void TEneBat::init(SetDesc* desc)
 	mTarget.x = 0.0f;
 	mTarget.y = 0.0f;
 	mTarget.z = 0.0f;
-	mAim.x = 0.0f;
-	mAim.y = 0.0f;
-	mAim.z = 0.0f;
+	mAim.x    = 0.0f;
+	mAim.y    = 0.0f;
+	mAim.z    = 0.0f;
 	shadowSetGround(&mShadow, &mBody.mPos, 0);
 	mShadow._30 = 18.0f;
 	mShadow._34 = 18.0f;
@@ -165,11 +162,11 @@ void TEneBat::init(SetDesc* desc)
 	mLight.setFadeDist(-15.0f);
 	mTint.reset();
 	enemyEffectSetLarge(15.0f, &mEffect, &mBody.mPos);
-	mStep = 0;
-	mTimer = 0;
-	mAngle = 0;
+	mStep   = 0;
+	mTimer  = 0;
+	mAngle  = 0;
 	mHeight = 0.0f;
-	mRise = 1.0f;
+	mRise   = 1.0f;
 	createBrain();
 }
 
@@ -194,10 +191,10 @@ TEneBat::~TEneBat()
 // 0x800D6FC4
 void TEneBat::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -214,8 +211,8 @@ f32 TEneBat::vfn_40()
 void TEneBat::syncCollider()
 {
 	Vec3f* part = (Vec3f*)colliGetShapes(mCollider);
-	part[4] = mParts[0];
-	part[0] = mParts[1];
+	part[4]     = mParts[0];
+	part[0]     = mParts[1];
 	colliRefreshBounds(mCollider);
 	colliBoundsOn(mCollider);
 }
@@ -226,7 +223,7 @@ void TEneBat::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
 	int health = desc->getInt(0);
-	mHealth = health <= 0 ? 200 : health;
+	mHealth    = health <= 0 ? 200 : health;
 }
 
 // 0x800D70DC
@@ -234,16 +231,16 @@ void TEneBat::readEnemyDesc(SetDesc* desc)
 int TEneBat::onHit(const TObjAction* other, int shape, int* result)
 {
 	HitInfo* info = (HitInfo*)result;
-	int hit = 0;
+	int hit       = 0;
 	if ((mFlags2 & BAT_ARMED) != 0) {
 		if (isPlayerOrKind4(other) != 0) {
 			info->mDamage = 20;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			mFlags2 |= BAT_ARMED;
 		} else if (isEggObj(other) != 0) {
 			info->mDamage = 1;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			info->mFlags.setBit(0xD);
 		}
@@ -260,7 +257,7 @@ void TEneBat::setTarget(const Vec3f* target)
 // 0x800D71A0
 void TEneBat::setAim(const Vec3f* pos, int angle)
 {
-	mAim = *pos;
+	mAim      = *pos;
 	mAimAngle = angle;
 }
 
@@ -473,13 +470,13 @@ int TEneBat::move(Vec3f* vel)
 	Vec3f dir;
 	getFlatPush(&dir);
 	njAddVector(&dir, vel);
-	dir.y = 0.0f;
+	dir.y   = 0.0f;
 	f32 len = njUnitVector(&dir);
 	if (len < gUnitVectorMin) {
 		dir = gVecZero;
 	}
-	f32 dist = len;
-	int hit = probeWall(9.0f, &mBody.mPos, &dir, &dist, 0, 0);
+	f32 dist     = len;
+	int hit      = probeWall(9.0f, &mBody.mPos, &dir, &dist, 0, 0);
 	mBody.mPos.x = dir.x * dist + mBody.mPos.x;
 	mBody.mPos.z = dir.z * dist + mBody.mPos.z;
 	return hit;
@@ -525,7 +522,7 @@ u8 TEneBat::followGround(f32 up, f32 down, Vec3f* pos, f32* vy)
 		base += *vy;
 		f32 gap = hit.y - base;
 		if (gap > 0.0f) {
-			rise = gap + *vy;
+			rise   = gap + *vy;
 			ground = 1;
 		} else if (gap > -2.5f) {
 			mFlags2 |= BAT_LOW;
@@ -538,14 +535,14 @@ u8 TEneBat::followGround(f32 up, f32 down, Vec3f* pos, f32* vy)
 	if (ceiling != 0) {
 		if (ground != 0) {
 			pos->y = 0.5f * (lift + rise) + pos->y;
-			*vy = 0.0f;
+			*vy    = 0.0f;
 		} else {
 			pos->y = pos->y + lift;
-			*vy = 0.0f;
+			*vy    = 0.0f;
 		}
 	} else if (ground != 0) {
 		pos->y = pos->y + rise;
-		*vy = 0.0f;
+		*vy    = 0.0f;
 	} else {
 		pos->y = pos->y + *vy;
 	}
@@ -712,8 +709,8 @@ void TEneBat::actFly(int phase)
 		if (diff <= 0x600) {
 			mStep = 1;
 		}
-		dir = to;
-		dir.y = 0.0f;
+		dir      = to;
+		dir.y    = 0.0f;
 		f32 dist = njUnitVector(&dir);
 		if (dist < gUnitVectorMin) {
 			dir = gVecZero;
@@ -726,7 +723,7 @@ void TEneBat::actFly(int phase)
 		}
 		gjScaleVector(speed, &dir, &dir);
 		move(&dir);
-		int close = dist < 1.0f;
+		int close    = dist < 1.0f;
 		mBody.mVel.x = dir.x;
 		mBody.mVel.z = dir.z;
 		int level;
@@ -762,10 +759,10 @@ void TEneBat::actRise(int phase)
 		motionCtrlPlayBlend(0.1f, &mAnim, 2);
 		clearFrameKey();
 		startFlap();
-		mStep = 0;
+		mStep   = 0;
 		mHeight = 0.0f;
-		mRise = 1.8f;
-		mTimer = 0;
+		mRise   = 1.8f;
+		mTimer  = 0;
 		break;
 	case 1: {
 		motionCtrlUpdate(&mAnim);
@@ -790,10 +787,10 @@ void TEneBat::actRise(int phase)
 					dy = mRise - dy;
 				} else {
 					mRise = dy;
-					dy = 0.0f;
+					dy    = 0.0f;
 				}
 				mHeight = y;
-				dy = dy + mBody.mVel.y;
+				dy      = dy + mBody.mVel.y;
 				followGround(5.0f, 17.0f, &mBody.mPos, &dy);
 				mBody.mVel.y *= 0.8f;
 				mBody.mRot.y += 0x1900;
@@ -805,9 +802,9 @@ void TEneBat::actRise(int phase)
 			}
 			if (motionCtrlIsDone(&mAnim) != 0) {
 				mBody.mVel.y = mRise;
-				mHeight = mAim.y;
-				mRise = 0.0f;
-				mStep = 1;
+				mHeight      = mAim.y;
+				mRise        = 0.0f;
+				mStep        = 1;
 				motionCtrlPlay(&mAnim, 3);
 			}
 			if (motionCtrlPassed(14.0f, &mAnim) != 0) {
@@ -821,11 +818,11 @@ void TEneBat::actRise(int phase)
 			diff += 67.0f;
 			diff -= mBody.mPos.y;
 			f32 vy = mBody.mVel.y;
-			vy = approachSpeed(vy, diff, 0.15f, 0.2f, 0.2f, 10.0f, 0.01f);
+			vy     = approachSpeed(vy, diff, 0.15f, 0.2f, 0.2f, 10.0f, 0.01f);
 			followGround(5.0f, 17.0f, &mBody.mPos, &vy);
 			if (mStep == 1) {
 				if (vy < mBody.mVel.y) {
-					mStep = 2;
+					mStep  = 2;
 					mTimer = 0;
 					motionCtrlPlay(&mAnim, 4);
 					startFlap();
@@ -836,7 +833,7 @@ void TEneBat::actRise(int phase)
 					int diff = angleDiff(mBody.mRot.y, mAimAngle);
 					if (diff >= 0 && diff < 0x1900) {
 						mBody.mRot.y = mAimAngle;
-						mRise = 1.0f;
+						mRise        = 1.0f;
 					} else {
 						mBody.mRot.y += 0x1900;
 					}
@@ -896,8 +893,8 @@ void TEneBat::actDive(int phase)
 		mFlags2 &= ~BAT_HIT;
 		disarm();
 		fxHolderStop(&mFx);
-		mStep = 0;
-		mTimer = 480;
+		mStep   = 0;
+		mTimer  = 480;
 		mHeight = 0.0f;
 		break;
 	case 1: {
@@ -911,7 +908,7 @@ void TEneBat::actDive(int phase)
 				mStep = 1;
 				arm();
 				mBody.mVel.y = -1.7f;
-				mHeight = mAim.y;
+				mHeight      = mAim.y;
 				seStartAt(0xFC, &mBody.mPos);
 			}
 			break;
@@ -922,28 +919,27 @@ void TEneBat::actDive(int phase)
 			f32 sin;
 			f32 cos;
 			njSinCos(mBody.mRot.y, &sin, &cos);
-			f32 dx = mAim.x - mBody.mPos.x;
-			f32 dz = mAim.z - mBody.mPos.z;
+			f32 dx       = mAim.x - mBody.mPos.x;
+			f32 dz       = mAim.z - mBody.mPos.z;
 			mBody.mVel.x = 3.0f * sin;
 			mBody.mVel.z = 3.0f * cos;
-			int wall = move(&mBody.mVel);
-			f32 dy = 13.0f + mHeight - mBody.mPos.y;
+			int wall     = move(&mBody.mVel);
+			f32 dy       = 13.0f + mHeight - mBody.mPos.y;
 			if (dy > 0.0f) {
 				dy *= 0.2f;
 			}
 			mBody.mVel.y = approachSpeed(mBody.mVel.y, dy, 0.08f, 0.1f, 0.005f, 10.0f, 0.01f);
 			followGround(5.0f, 13.0f, &mBody.mPos, &mBody.mVel.y);
 			mTimer--;
-			if (wall != 0 || mTimer <= 0
-			    || ((mFlags2 & BAT_LOW) != 0 && (dx * sin + dz * cos <= 0.0f || (mFlags2 & BAT_HIT) != 0))) {
+			if (wall != 0 || mTimer <= 0 || ((mFlags2 & BAT_LOW) != 0 && (dx * sin + dz * cos <= 0.0f || (mFlags2 & BAT_HIT) != 0))) {
 				motionCtrlPlay(&mAnim, 7);
 				disarm();
-				mStep = 2;
+				mStep   = 2;
 				mHeight = 7.0f + (17.0f + mBody.mPos.y);
 				fxHolderStop(&mFx);
 			} else {
 				Vec3f trail;
-				trail = mBody.mPos;
+				trail   = mBody.mPos;
 				trail.x = 40.0f * sin + trail.x;
 				trail.z = 40.0f * cos + trail.z;
 				mFx.start(5, 10, &trail, 0, mBody.mRot.y);
@@ -1003,7 +999,7 @@ void TEneBat::actStun(int phase)
 	case 0:
 		motionCtrlPlay(&mAnim, 8);
 		mEnemyFlags |= ENEMY_FLIPPING;
-		mFrameKey = 3;
+		mFrameKey    = 3;
 		mBody.mVel.x = 0.4f * mKnock.x;
 		mBody.mVel.z = 0.4f * mKnock.z;
 		noteStun();
@@ -1035,9 +1031,9 @@ void TEneBat::actFlip(int phase)
 		mBody.mVel.z = mKnock.z;
 		mBody.mVel.y = -2.0f;
 		noteStun();
-		mStep = 0;
+		mStep   = 0;
 		mHeight = 0.0f;
-		mAngle = toAngle(mKnock.x, mKnock.z);
+		mAngle  = toAngle(mKnock.x, mKnock.z);
 		break;
 	case 1:
 		motionCtrlUpdate(&mAnim);
@@ -1057,7 +1053,7 @@ void TEneBat::actFlip(int phase)
 		case 1:
 			turnTo(mAngle, 0x280);
 			if (motionCtrlFrame(&mAnim) >= 13.0f) {
-				mStep = 2;
+				mStep   = 2;
 				mHeight = 7.0f + (4.0f + mBody.mPos.y);
 			}
 			updatePose();
@@ -1112,7 +1108,7 @@ void TEneBat::actDie(int phase)
 // 0x800D8D58
 void TEneBat::vfn_3C()
 {
-	int x = kEnemyInfoX << 16;
+	int x    = kEnemyInfoX << 16;
 	int line = kEnemyInfoLine;
 	njPrint(x | line, ":HP %4d", mHealth);
 }

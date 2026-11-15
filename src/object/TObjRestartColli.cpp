@@ -27,7 +27,7 @@ const char* gTObjRestartColliName = "TObjRestartColli";
 TObjRestartColli::TObjRestartColli(TObject* parent, const SetDesc* desc)
     : TObjAction(parent)
 {
-	_00 = (u32)gTObjRestartColliName;
+	_00   = (u32)gTObjRestartColliName;
 	mSize = 0x50;
 	setObjId(this, desc->mObjId);
 	mShape = colliCreate(1, 1);

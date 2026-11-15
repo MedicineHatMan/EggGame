@@ -95,8 +95,7 @@ int GBAResetAsync(s32 chan, u8* status, GBASyncCallback callback);
 int GBAReadAsync(s32 chan, u8* dst, u8* status, GBASyncCallback callback);
 int GBAWriteAsync(s32 chan, u8* src, u8* status, GBASyncCallback callback);
 s32 GBAGetProcessStatus(s32 chan, u8* percent);
-s32 GBAJoyBootAsync(s32 chan, s32 paletteColor, s32 paletteSpeed, u8* program, s32 length, u8* status,
-                    GBASyncCallback callback);
+s32 GBAJoyBootAsync(s32 chan, s32 paletteColor, s32 paletteSpeed, u8* program, s32 length, u8* status, GBASyncCallback callback);
 OSTime __GBASetDelay(s32 chan, OSTime delay);
 void __GBAX01(s32 chan, s32 ret);
 void __GBAX02(s32 chan, u8* readbuf);

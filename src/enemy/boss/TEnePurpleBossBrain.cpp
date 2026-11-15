@@ -2,7 +2,10 @@
 #include "enemy/boss/TEnePurpleBoss_IceBall.h"
 #include "core/Mem.h"
 
-static void purpleRootUpdate(PurpleBrainRoot* root, TEnePurpleBoss* owner) { root->PurpleBrainRoot::update(owner); }
+static void purpleRootUpdate(PurpleBrainRoot* root, TEnePurpleBoss* owner)
+{
+	root->PurpleBrainRoot::update(owner);
+}
 
 // 0x800CB09C
 inline void PurpleBrainRoot::update(TEnePurpleBoss* owner)
@@ -19,10 +22,15 @@ inline void PurpleBrainRoot::update(TEnePurpleBoss* owner)
 }
 
 // 0x800CB134
-PurpleBrainBase::PurpleBrainBase() { mOwner = 0; }
+PurpleBrainBase::PurpleBrainBase()
+{
+	mOwner = 0;
+}
 
 // 0x800CB168
-PurpleBrainBase::~PurpleBrainBase() { }
+PurpleBrainBase::~PurpleBrainBase()
+{
+}
 
 // 0x800CB1C4
 PurpleBrain* createPurpleBrain(TEnePurpleBoss* owner)
@@ -41,7 +49,9 @@ PurpleBrain::PurpleBrain(TEnePurpleBoss* owner)
 }
 
 // 0x800CB2B8
-PurpleBrain::~PurpleBrain() { }
+PurpleBrain::~PurpleBrain()
+{
+}
 
 // 0x800CB320
 // Slot _08
@@ -347,7 +357,7 @@ void PurpleBrain::phaseDie(int phase)
 {
 	switch (phase) {
 	case 0:
-			mNext = mOwner->dieAction();
+		mNext = mOwner->dieAction();
 		break;
 	case 1:
 		break;

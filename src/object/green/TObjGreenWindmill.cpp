@@ -34,8 +34,8 @@ struct WindmillContact {
 
 f32 gGreenWindmillSetRange = 3000.0f; // 0x802C45C8
 
-static const f32 sDrawDist = gGreenWindmillSetRange;          // 0x802C5938
-static f32 sKeepDist = gGreenWindmillSetRange + 50.0f;  // 0x802C593C
+static const f32 sDrawDist = gGreenWindmillSetRange;         // 0x802C5938
+static f32 sKeepDist       = gGreenWindmillSetRange + 50.0f; // 0x802C593C
 
 typedef char TObjGreenWindmill_size_check[(sizeof(TObjGreenWindmill) == 0x154) ? 1 : -1];
 
@@ -104,12 +104,12 @@ void TObjGreenWindmill::initFromDesc(SetDesc* desc)
 	meshColliSetMatrix(mColli, (const f32*)mFanMatrix);
 
 	f32 reach = 10.0f + mRadius;
-	high.x = reach;
-	high.y = reach;
-	high.z = reach;
-	low.x  = -reach;
-	low.y  = -reach;
-	low.z  = -reach;
+	high.x    = reach;
+	high.y    = reach;
+	high.z    = reach;
+	low.x     = -reach;
+	low.y     = -reach;
+	low.z     = -reach;
 	vecAdd(&high, &high, &mCentre);
 	vecAdd(&low, &low, &mCentre);
 	boxAroundLine(box, &high, &low);

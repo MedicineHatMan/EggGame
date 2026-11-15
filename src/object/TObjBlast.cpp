@@ -43,11 +43,11 @@ void TObjBlast::build()
 
 	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
 	colliShapeInit(&shape);
-	shape.mType = 0;
+	shape.mType  = 0;
 	shape.mSizeX = mRadius;
 	shape.mFlags |= 8;
-	mShape       = 0;
-	mShape       = colliCreate(1, 1);
+	mShape = 0;
+	mShape = colliCreate(1, 1);
 	colliCopyShapes(mShape, &shape);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks(mShape, 0x80, 0, 0xFF, 0);

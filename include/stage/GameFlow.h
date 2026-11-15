@@ -7,13 +7,13 @@
 enum GameScene {
 	SCENE_LICENSE      = 0,
 	SCENE_TITLE        = 1,
-	SCENE_PROGRESSIVE  = 2,  // the progressive scan question TModeTvConfig::create
-	SCENE_ATTRACT      = 3,  // the title's demo movie alternating between two
+	SCENE_PROGRESSIVE  = 2, // the progressive scan question TModeTvConfig::create
+	SCENE_ATTRACT      = 3, // the title's demo movie alternating between two
 	SCENE_MAIN_MENU    = 4,
 	SCENE_STORY_STAGE  = 5,
 	SCENE_BOSS_STAGE   = 6,
-	SCENE_BOSS_AGAIN   = 7,  // a boss stage replayed from the stage menu
-	SCENE_TEST_STAGE   = 8,  // a stage picked from the debug stage list
+	SCENE_BOSS_AGAIN   = 7, // a boss stage replayed from the stage menu
+	SCENE_TEST_STAGE   = 8, // a stage picked from the debug stage list
 	SCENE_BATTLE_STAGE = 9,
 	SCENE_SAVE         = 10, // TModeResult writes the key bits back to the save
 	SCENE_MOVIE        = 11, // mMovie then mAfterMovie

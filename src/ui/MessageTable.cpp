@@ -15,10 +15,10 @@ void setMessageTable(MessageFile* file)
 		sMessageCount = 0;
 		return;
 	}
-	u32 size = file->mTableSize;
-	void** msgs = (void**)file->mOffsets;
-	text = file->mTextOffset + (u32)file;
-	sMessages = msgs;
+	u32 size      = file->mTableSize;
+	void** msgs   = (void**)file->mOffsets;
+	text          = file->mTextOffset + (u32)file;
+	sMessages     = msgs;
 	sMessageCount = size >> 2;
 	for (i = 0; i < sMessageCount; i++) {
 		((char**)sMessages)[i] += text + 8;

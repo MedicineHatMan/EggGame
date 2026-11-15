@@ -22,7 +22,8 @@ const char* gTEggShockWaveName = "TEggShockWave";
 
 // 0x80029410
 TEggShockWave::TEggShockWave(f32 radius, TObject* parent, u16 source, void* tag)
-    : TObjAction(parent), mSource(source)
+    : TObjAction(parent)
+    , mSource(source)
 {
 	ColliShape* shape;
 
@@ -39,9 +40,9 @@ TEggShockWave::TEggShockWave(f32 radius, TObject* parent, u16 source, void* tag)
 	colliShapeSetCylinder(colliGetShape((CharaColli*)mShape, 0));
 	colliGetShape((CharaColli*)mShape, 0)->mSizeX = mRadius;
 	colliGetShape((CharaColli*)mShape, 0)->mSizeY = mRadius;
-	shape         = colliGetShape((CharaColli*)mShape, 0);
+	shape                                         = colliGetShape((CharaColli*)mShape, 0);
 	shape->mFlags |= 8;
-	shape         = colliGetShape((CharaColli*)mShape, 0);
+	shape = colliGetShape((CharaColli*)mShape, 0);
 	shape->mFlags |= 0x10;
 }
 
@@ -69,7 +70,7 @@ int TEggShockWave::onHit(const TObjAction* other, int, int* result)
 	if (mSource == other->mObjId || (u16)(s16)other->mObjId == mHolderId) {
 		return 0;
 	}
-	hit = (HitInfo*)result;
+	hit          = (HitInfo*)result;
 	hit->mDamage = mPower;
 	hit->mFlags.setBit(1);
 	hit->mFlags.orWith(mHitFlags);

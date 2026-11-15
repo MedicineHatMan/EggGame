@@ -62,24 +62,24 @@ public:
 	void statePlay();
 	void stateDone();
 
-	NJS_OBJECT* mModelData;    // _64 MODEL_PANEL_FLOOR
-	void* mTexFloor;     // _68 TLS_MODEL_PANEL_FLOOR
-	void* mTexTiles;     // _6C TLS_MODEL_PANEL
-	MeshData* mColliData;    // _70 COL_MODEL_PANEL_FLOOR
-	DrawTask* mDrawTask; // _74
-	ObjModel mModel;     // _78
-	f32 mMatrix[12];     // _98
-	MeshColli* mMesh;         // _C8
-	u16 mSwitch;         // _CC set int 0
-	u8 mAnswer;          // _CE set int 1 clamped to 0..3
+	NJS_OBJECT* mModelData; // _64 MODEL_PANEL_FLOOR
+	void* mTexFloor;        // _68 TLS_MODEL_PANEL_FLOOR
+	void* mTexTiles;        // _6C TLS_MODEL_PANEL
+	MeshData* mColliData;   // _70 COL_MODEL_PANEL_FLOOR
+	DrawTask* mDrawTask;    // _74
+	ObjModel mModel;        // _78
+	f32 mMatrix[12];        // _98
+	MeshColli* mMesh;       // _C8
+	u16 mSwitch;            // _CC set int 0
+	u8 mAnswer;             // _CE set int 1 clamped to 0..3
 	u8 _CF;
-	Vec3f mCenter;       // _D0
-	f32 mRadius;         // _DC
-	PanelTile mTiles[25]; // _E0
-	CharaColli* mTileColli;    // _270 25 boxes
-	EnemyLight mLight;   // _274
+	Vec3f mCenter;          // _D0
+	f32 mRadius;            // _DC
+	PanelTile mTiles[25];   // _E0
+	CharaColli* mTileColli; // _270 25 boxes
+	EnemyLight mLight;      // _274
 	ObjDrawState mState;    // _2B4
-	int mAct;            // _2D8 0 playing 1 open
+	int mAct;               // _2D8 0 playing 1 open
 };
 
 extern "C" {

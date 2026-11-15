@@ -29,7 +29,6 @@ struct TObjEggFeed;
 extern "C" {
 
 // The bowling egg still in the original bytes
-
 }
 
 /** What the lane sends the player */
@@ -80,10 +79,10 @@ static inline Vec3f above(const Vec3f& pos, f32 height)
 static inline f32 gameSqrtf(f32 x)
 {
 	if (x > 0.0f) {
-		f64 guess = __frsqrte((f64)x);
-		guess     = 0.5 * guess * (3.0 - guess * guess * x);
-		guess     = 0.5 * guess * (3.0 - guess * guess * x);
-		guess     = 0.5 * guess * (3.0 - guess * guess * x);
+		f64 guess      = __frsqrte((f64)x);
+		guess          = 0.5 * guess * (3.0 - guess * guess * x);
+		guess          = 0.5 * guess * (3.0 - guess * guess * x);
+		guess          = 0.5 * guess * (3.0 - guess * guess * x);
 		volatile f32 y = (f32)(x * guess);
 		return y;
 	}
@@ -251,8 +250,8 @@ void TObjGameBowling::phaseWait()
 		msg.mArg  = 1;
 		msg.mArg2 = 0;
 		if (mPlayer->sendToHandle((ObjMsg*)&msg) != 0) {
-			rot = mRot.y;
-			mAim    = mPlayer->getRotY() - rot;
+			rot    = mRot.y;
+			mAim   = mPlayer->getRotY() - rot;
 			mPhase = 1;
 		}
 	}
@@ -456,7 +455,9 @@ void TObjGameBowling::setupPins()
 }
 
 // 0x800A0568
-void TObjGameBowling::releaseEgg(TObjAction*) { }
+void TObjGameBowling::releaseEgg(TObjAction*)
+{
+}
 
 // 0x800A056C
 int TObjGameBowling::vfn_50()
@@ -688,16 +689,16 @@ void TBowlPin::checkHit()
 		vecSub(&dir, &mPos[1], egg->getPos());
 		vecNormalize(&dir, &dir);
 		const Vec3f& ref1 = scaled(dir, njInnerProduct(&dir, &push));
-		push = ref1;
-		Vec3f step = scaled(push, 1.0f / 60.0f);
-		Vec3f back = negated(step);
-		mVel[2]    = scaled(back, 3.0f);
-		mVel[2].y  = 0.0f;
+		push              = ref1;
+		Vec3f step        = scaled(push, 1.0f / 60.0f);
+		Vec3f back        = negated(step);
+		mVel[2]           = scaled(back, 3.0f);
+		mVel[2].y         = 0.0f;
 		const Vec3f& ref3 = scaled(step, 5.0f);
-		mVel[0] = ref3;
-		mVel[0].y  = 0.0f;
-		mVel[2].y  = 1.0f;
-		mVel[0].y  = 6.0f;
+		mVel[0]           = ref3;
+		mVel[0].y         = 0.0f;
+		mVel[2].y         = 1.0f;
+		mVel[0].y         = 6.0f;
 		mHits++;
 		mState = 1;
 	}
@@ -737,7 +738,9 @@ void TBowlPin::fall()
 }
 
 // 0x800A10CC
-void TBowlPin::rest() { }
+void TBowlPin::rest()
+{
+}
 
 // 0x800A10D0
 // Each end falls and bounces off the floor 20 below where it would be

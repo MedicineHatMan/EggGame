@@ -18,7 +18,9 @@ TGameDino::TGameDino(TObject* parent)
 }
 
 // 0x800CDB18
-TGameDino::~TGameDino() { }
+TGameDino::~TGameDino()
+{
+}
 
 // 0x800CDB74
 void TGameDino::startState()

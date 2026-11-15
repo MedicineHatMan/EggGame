@@ -47,7 +47,6 @@ struct TSimpleText;
 extern "C" {
 
 // obj_ms_prisoner.arc and what it holds shared by every prisoner
-
 }
 
 enum PrisonerState {
@@ -84,7 +83,7 @@ enum PrisonerProgress {
 
 /** The event message that puts the rescuer somewhere near */
 struct PrisonerPlaceMsg {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
 	Vec3f mPos; // _04
 	int mRotY;  // _10
@@ -92,7 +91,7 @@ struct PrisonerPlaceMsg {
 
 /** The talk message names the text to show */
 struct PrisonerTalkMsg {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
 	s16 mMsgId; // _04
 };
@@ -143,9 +142,9 @@ typedef char TObjMissionPrisoner_size_check[(sizeof(TObjMissionPrisoner) == 0x26
 extern "C" void initMissionPrisoner()
 {
 	sMissionPrisonerArc = 0;
-	sPrisonerModels = 0;
+	sPrisonerModels     = 0;
 	sPrisonerMotionData = 0;
-	sPrisonerTexLists = 0;
+	sPrisonerTexLists   = 0;
 }
 
 // 0x8010A514
@@ -156,9 +155,9 @@ extern "C" void termMissionPrisoner()
 		releaseResource(sMissionPrisonerArc);
 		sMissionPrisonerArc = 0;
 	}
-	sPrisonerModels = 0;
+	sPrisonerModels     = 0;
 	sPrisonerMotionData = 0;
-	sPrisonerTexLists = 0;
+	sPrisonerTexLists   = 0;
 }
 
 // 0x8010A568
@@ -168,10 +167,10 @@ static void loadMissionPrisoner(int kind)
 	playerLoadSoundBank(kind, 9);
 	loadArc("obj_ms_prisoner.arc", &sMissionPrisonerArc);
 	if (sMissionPrisonerArc != 0) {
-		sPrisonerModels = (NJS_OBJECT**)findArcExport(sMissionPrisonerArc, "prs_models");
+		sPrisonerModels     = (NJS_OBJECT**)findArcExport(sMissionPrisonerArc, "prs_models");
 		sPrisonerMotionData = (NJS_MOTION**)findArcExport(sMissionPrisonerArc, "prs_motions");
-		sPrisonerTexLists = (NJS_TEXLIST**)findArcExport(sMissionPrisonerArc, "prs_texlists");
-		void** textures = (void**)findArcExport(sMissionPrisonerArc, "prs_textures");
+		sPrisonerTexLists   = (NJS_TEXLIST**)findArcExport(sMissionPrisonerArc, "prs_texlists");
+		void** textures     = (void**)findArcExport(sMissionPrisonerArc, "prs_textures");
 		if (textures != 0) {
 			bindGvmTextures((u8*)textures[0], sPrisonerTexLists[0]);
 		}
@@ -202,8 +201,8 @@ const char* gTObjMissionPrisonerName = "TObjMissionPrisoner";
 TObjMissionPrisoner::TObjMissionPrisoner(TObject* parent, const SetDesc* desc)
     : TObjAction(parent)
 {
-	_00   = (u32)gTObjMissionPrisonerName;
-	mSize = 0x264;
+	_00       = (u32)gTObjMissionPrisonerName;
+	mSize     = 0x264;
 	mModels   = 0;
 	mTexLists = 0;
 	mKind     = 0;
@@ -291,7 +290,7 @@ void TObjMissionPrisoner::loadModels()
 		pose();
 		if (mModels != 0) {
 			void* mem = objHeapAlloc(gObjHeap, sizeof(TPlyComb));
-			mActor = new (mem) TPlyComb(this);
+			mActor    = new (mem) TPlyComb(this);
 			mActor->build(mModels[1]);
 			mActor->mTexture = mTexLists[0];
 			mActor->setRoot(mBodyMatrix);
@@ -317,8 +316,8 @@ void TObjMissionPrisoner::pose()
 	pose.mNode = 0;
 	njPushMatrixEx();
 	njUnitMatrix(0);
-	int cur = mMotion.mCurrent;
-	f32 frame = mMotion.mFrame;
+	int cur            = mMotion.mCurrent;
+	f32 frame          = mMotion.mFrame;
 	NJS_MOTION* motion = mMotion.getMotion(cur);
 	calcActorMotion(mBody, motion, (NodeCallback)catchPoseNode, frame, (void*)&pose);
 	mtxCopy(mFaceMatrix, pose.mFace);
@@ -623,9 +622,9 @@ void TObjMissionPrisoner::stateTalk(int phase)
 	if (phase == PRISONER_ENTER) {
 		mWindow = (int*)createSimpleTextPlain(getMessage(mMsgId));
 		Vec3f pos;
-		pos.x = mPos.x;
-		pos.y = mPos.y + 5.0f;
-		pos.z = mPos.z;
+		pos.x   = mPos.x;
+		pos.y   = mPos.y + 5.0f;
+		pos.z   = mPos.z;
 		mCamera = createTCamConversation(0, 2, &pos, -0xAAA, 0x1555);
 		mMotion.play(2);
 	} else if (phase == PRISONER_EXIT) {
@@ -731,7 +730,7 @@ int TObjMissionPrisoner::onMeet(ObjMsg* msg)
 		return 0;
 	}
 	Vec3f target;
-	target = *findObjById(((ObjIdMsg*)msg)->mId)->getPos();
+	target      = *findObjById(((ObjIdMsg*)msg)->mId)->getPos();
 	mTargetRotY = angleToXZ(&mPos, &target);
 	mRescuer.setId(((ObjIdMsg*)msg)->mId);
 	return eventScriptRequest(mEventId, (u16)mObjId);

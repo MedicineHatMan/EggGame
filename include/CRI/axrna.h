@@ -4,14 +4,13 @@
 #include <CRI/cri_types.h>
 #include "Dolphin/ar.h"
 
-extern void ARQPostRequest(ARQRequest* task, u32 owner, u32 type, u32 priority, u32 source, u32 dest, u32 length,
-                           void (*callback)(u32));
+extern void ARQPostRequest(ARQRequest* task, u32 owner, u32 type, u32 priority, u32 source, u32 dest, u32 length, void (*callback)(u32));
 extern u32 ARAlloc(u32 length);
 extern u32 ARFree(u32* length);
 
-#define AXRNARES_MAX 32
+#define AXRNARES_MAX  32
 #define AXRNARES_SIZE 0x40000
-#define AXRNARES_BUF 0x2000
+#define AXRNARES_BUF  0x2000
 
 /* One ARAM buffer The address and length are in samples */
 typedef struct {

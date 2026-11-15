@@ -224,8 +224,8 @@ void TObjArrowPoint::launchFrom(TObjAction* from)
 	Vec3f flat   = start;
 	flat.y       = 0.0f;
 	target.y     = 0.0f;
-	Vec3f dir = vecDiff(&target, &flat);
-	f32 dist  = njUnitVector(&dir);
+	Vec3f dir    = vecDiff(&target, &flat);
+	f32 dist     = njUnitVector(&dir);
 	if (dist < gUnitVectorMin) {
 		dir = gVecZero;
 	}
@@ -261,9 +261,9 @@ void TObjArrowPoint::aimAtSkull()
 		return;
 	}
 	Vec3f t = vecDiff(skull->getPos(), &mPos);
-	neg.y = t.y;
-	neg.x = t.x;
-	neg.z = t.z;
+	neg.y   = t.y;
+	neg.x   = t.x;
+	neg.z   = t.z;
 	neg.y *= 2.0f;
 	gjScaleVector(-1.0f, &neg, &neg);
 }

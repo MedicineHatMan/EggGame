@@ -14,7 +14,10 @@
 struct ColliShape;
 struct CharaColli;
 struct ColliContact;
-static inline f32 rippleSqrt(f32 x) { return __fres((f32)__frsqrte(x)); }
+static inline f32 rippleSqrt(f32 x)
+{
+	return __fres((f32)__frsqrte(x));
+}
 
 extern "C" {
 extern const ColliShape sBoss02_PoolPowShape[] = {
@@ -37,10 +40,10 @@ public:
 	virtual void draw();
 	virtual int getKind(); // _2C 0x8007A028
 
-	int mCount;      // _30
-	u16 mIds[10];    // _34
-	HitVec mLast[10]; // _48
-	int _C0[10];     // _C0
+	int mCount;         // _30
+	u16 mIds[10];       // _34
+	HitVec mLast[10];   // _48
+	int _C0[10];        // _C0
 	CharaColli* mColli; // _E8
 };
 
@@ -76,14 +79,14 @@ const char* gTEneBoss02_PoolPowName = "TEneBoss02_PoolPow";
 TEneBoss02_PoolPow::TEneBoss02_PoolPow(TObject* parent, const Vec3f* pos, f32 speed, f32 maxRadius, f32 height)
     : TObject(parent)
 {
-	_00   = (u32)gTEneBoss02_PoolPowName;
-	mSize = 0x40;
-	mPos  = *pos;
-	mPrev = 0.0f;
-	mRadius = 0.0f;
-	mSpeed  = speed;
+	_00        = (u32)gTEneBoss02_PoolPowName;
+	mSize      = 0x40;
+	mPos       = *pos;
+	mPrev      = 0.0f;
+	mRadius    = 0.0f;
+	mSpeed     = speed;
 	mMaxRadius = maxRadius;
-	mHeight = height;
+	mHeight    = height;
 }
 
 // 0x80078DCC
@@ -116,8 +119,8 @@ BossPoolWatcher::BossPoolWatcher(TObject* parent)
 	setObjId(this, 0xFFFF);
 	mCount = 0;
 	for (int i = 0; i < 10; i++) {
-		mIds[i] = 0xFFFF;
-		_C0[i]  = 0;
+		mIds[i]    = 0xFFFF;
+		_C0[i]     = 0;
 		mLast[i].x = 0.0f;
 		mLast[i].y = 0.0f;
 		mLast[i].z = 0.0f;
@@ -143,11 +146,11 @@ void BossPoolWatcher::draw()
 {
 	HitVec now[10];
 	u16 ids[10];
-	int count = 0;
+	int count         = 0;
 	ColliContact* hit = mColli->mContacts;
 	while (hit != 0) {
 		if ((colliContactShape(hit)->mFlags & 0x10) == 0) {
-			u16 id = colliContactOwner(hit);
+			u16 id    = colliContactOwner(hit);
 			int fresh = 1;
 			for (int i = 0; i < count; i++) {
 				if (id == ids[i]) {
@@ -159,25 +162,25 @@ void BossPoolWatcher::draw()
 				TObjAction* obj = findObjById(id);
 				if (obj != 0) {
 					Vec3f pos;
-					pos = *obj->getPos();
+					pos       = *obj->getPos();
 					int isNew = 1;
-					int pow = 1;
+					int pow   = 1;
 					for (int i = 0; i < mCount; i++) {
 						if (mIds[i] == id) {
-							isNew = 0;
+							isNew      = 0;
 							ids[count] = id;
-							f32 dx = mLast[i].x - pos.x;
-							f32 dz = mLast[i].z - pos.z;
+							f32 dx     = mLast[i].x - pos.x;
+							f32 dz     = mLast[i].z - pos.z;
 							if (dx * dx + dz * dz > 64.0f) {
 								now[count].x = pos.x;
 								now[count].y = pos.y;
 								now[count].z = pos.z;
-								pow = 1;
+								pow          = 1;
 							} else {
 								now[count].x = mLast[i].x;
 								now[count].y = mLast[i].y;
 								now[count].z = mLast[i].z;
-								pow = 0;
+								pow          = 0;
 							}
 							break;
 						}
@@ -187,7 +190,7 @@ void BossPoolWatcher::draw()
 						now[count].y = pos.y;
 						ids[count]   = id;
 						now[count].z = pos.z;
-						pow = 1;
+						pow          = 1;
 					}
 					if (pow != 0) {
 						createPoolPow(&pos, 4.0f, 25.0f, 5.0f);
@@ -202,7 +205,7 @@ void BossPoolWatcher::draw()
 		hit = (ColliContact*)(*(void**)hit);
 	}
 	for (int i = 0; i < count; i++) {
-		mIds[i] = ids[i];
+		mIds[i]    = ids[i];
 		mLast[i].x = now[i].x;
 		mLast[i].y = now[i].y;
 		mLast[i].z = now[i].z;
@@ -265,9 +268,9 @@ extern "C" void bossRippleInit()
 	f32 s;
 	HitVec* dir = sRippleGrid = new HitVec[100];
 	for (int i = 0; i < 10; i++) {
-		u  = 0.22222222f * i - 1.0f;
+		u        = 0.22222222f * i - 1.0f;
 		f64 absu = __fabs(u);
-		au = absu;
+		au       = absu;
 		for (int j = 0; j < 10; j++) {
 			v  = 0.22222222f * j - 1.0f;
 			av = __fabs(v);
@@ -276,7 +279,7 @@ extern "C" void bossRippleInit()
 			} else {
 				r = au / av;
 			}
-			s  = (f32)__frsqrte(r * r + 1.0f);
+			s      = (f32)__frsqrte(r * r + 1.0f);
 			dir->x = u * s;
 			dir->y = 0.0f;
 			dir->z = v * s;
@@ -310,18 +313,20 @@ extern "C" BossRipple* newBossRipple()
 BossRippleBase::BossRippleBase()
 {
 	mRadius = mPos.z = mPos.y = mPos.x = 0.0f;
-	mFlags = 0;
+	mFlags                             = 0;
 }
 
 // 0x800796E4
-BossRippleBase::~BossRippleBase() { }
+BossRippleBase::~BossRippleBase()
+{
+}
 
 // 0x8007972C
 // A little above the point a random bit higher still so that surfaces don't fight
 extern "C" void bossRippleSetPos(BossRippleBase* surface, const Vec3f* pos)
 {
 	surface->mPos = *pos;
-	f32 r = 2.0f * (3.0517578125e-05f * (f32)rand() - 0.5f);
+	f32 r         = 2.0f * (3.0517578125e-05f * (f32)rand() - 0.5f);
 	surface->mPos.y += 0.01f * r + 0.1f;
 	surface->mFlags |= 1;
 }
@@ -353,7 +358,9 @@ BossRipple::BossRipple()
 }
 
 // 0x800798D8
-BossRipple::~BossRipple() { }
+BossRipple::~BossRipple()
+{
+}
 
 // 0x80079930
 // Pushes the points in the ring between inner and outer away from pos
@@ -369,7 +376,7 @@ void BossRipple::ripple(f32 inner, f32 outer, f32 strength, const Vec3f* pos)
 	f32 inner2 = inner * inner;
 	f32 outer2 = outer * outer;
 	f32 push   = strength * 0.1f;
-	f32 two = 2.0f;
+	f32 two    = 2.0f;
 	f32 half   = 0.5f * (inner * rippleSqrt(two));
 	for (int i = 0; i < 100; i++) {
 		f32 rx = mRest[i][0];
@@ -390,7 +397,7 @@ void BossRipple::ripple(f32 inner, f32 outer, f32 strength, const Vec3f* pos)
 			continue;
 		}
 		mMoving[i] = 1;
-		f32 k = push * (f32)__frsqrte(d2);
+		f32 k      = push * (f32)__frsqrte(d2);
 		ox *= k;
 		oz *= k;
 		mVel[i][0] += ox;
@@ -421,8 +428,8 @@ int BossRipple::place()
 	int i;
 	for (i = 0; i < 100; i++) {
 		njCalcPointEx(&sRippleGrid[i], &p);
-		f32 ox = mVerts[i].x - mRest[i][0];
-		f32 oz = mVerts[i].z - mRest[i][1];
+		f32 ox      = mVerts[i].x - mRest[i][0];
+		f32 oz      = mVerts[i].z - mRest[i][1];
 		mRest[i][0] = p.x;
 		mRest[i][1] = p.z;
 		mVerts[i].x = p.x + ox;
@@ -452,9 +459,9 @@ int BossRipple::relax()
 			if (dz * dz + dx * dx < 0.010000001f && (f32)square(mVel[i][0]) + square(mVel[i][1]) < 0.0025000002f) {
 				mVerts[i].x = mRest[i][0];
 				mVerts[i].z = mRest[i][1];
-				mVel[i][0] = 0.0f;
-				mVel[i][1] = 0.0f;
-				mMoving[i] = 0;
+				mVel[i][0]  = 0.0f;
+				mVel[i][1]  = 0.0f;
+				mMoving[i]  = 0;
 			} else {
 				moved = 1;
 				dx *= -0.05f;
@@ -475,7 +482,7 @@ int BossRipple::relax()
 void BossRipple::update()
 {
 	int placed = place();
-	u8 dirty = relax() != 0 || placed != 0;
+	u8 dirty   = relax() != 0 || placed != 0;
 	if (dirty) {
 		flush();
 	}
@@ -507,7 +514,7 @@ void BossRipple::draw(f32 alpha)
 	GXLoadTexMtxImm(mtx, GX_TEXMTX0, GX_MTX2x4);
 	GXClearVtxDesc();
 	GXSetVtxDesc(GX_VA_POS, GX_INDEX16);  // position 16-bit index
-	GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT); // colour direct
+	GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);  // colour direct
 	GXSetVtxDesc(GX_VA_TEX0, GX_INDEX16); // texture 0 16-bit index
 	GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);
 	GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0);
@@ -529,7 +536,7 @@ void BossRipple::draw(f32 alpha)
 	s16 top    = 0;
 	s16 bottom = 10;
 	int row    = 0;
-	color = (__cvt_fp2unsigned(255.0f * alpha) & 0xFF) | 0xFFFFFF00;
+	color      = (__cvt_fp2unsigned(255.0f * alpha) & 0xFF) | 0xFFFFFF00;
 	for (; row < 9; row++) {
 		GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT0, 20);
 		for (int col = 0; col < 10; col++) {
@@ -572,7 +579,9 @@ extern "C" TStage* createBlueBossStage()
 }
 
 // 0x8007A068
-TStageBlueBoss::TStageBlueBoss() { }
+TStageBlueBoss::TStageBlueBoss()
+{
+}
 
 // 0x8007A0A4
 void TStageBlueBoss::loadAssets()
@@ -594,4 +603,6 @@ void TStageBlueBoss::vfn_14()
 }
 
 // 0x8007A108
-TStageBlueBoss::~TStageBlueBoss() { }
+TStageBlueBoss::~TStageBlueBoss()
+{
+}

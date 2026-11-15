@@ -11,7 +11,7 @@ struct SuddenRank {
 	int mOrder;  // _04
 };
 
-const char* gTGameSuddenDeathName = "TGameSuddenDeath";
+const char* gTGameSuddenDeathName      = "TGameSuddenDeath";
 const char* gTGameStateSuddenDeathName = "TGameStateSuddenDeath";
 
 // 0x801AB9B4
@@ -76,14 +76,14 @@ extern "C" void suddenRankSort(SuddenRank* ranks, int count)
 	int i;
 	for (i = 0; i < count; i++) {
 		for (j = 0; j < count - 1; j++) {
-			cur = &ranks[j];
+			cur   = &ranks[j];
 			order = cur->mOrder;
 			if (order > cur[1].mOrder) {
-				player = cur->mPlayer;
-				cur->mPlayer = cur[1].mPlayer;
-				cur->mOrder = cur[1].mOrder;
+				player         = cur->mPlayer;
+				cur->mPlayer   = cur[1].mPlayer;
+				cur->mOrder    = cur[1].mOrder;
 				cur[1].mPlayer = player;
-				cur[1].mOrder = order;
+				cur[1].mOrder  = order;
 			}
 		}
 	}

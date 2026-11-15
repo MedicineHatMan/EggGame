@@ -32,8 +32,8 @@ public:
 
 extern TModeMovie* gModeMovie; // the one that is running or NULL
 
-void movieModeCheckDisc();         // 0x80151CF4
-const char* movieName(int movie);  // 0x80151EE0 the .sfd for a MovieId clamped
-void movieModeDrawFrame();         // 0x80151FF4
+void movieModeCheckDisc();        // 0x80151CF4
+const char* movieName(int movie); // 0x80151EE0 the .sfd for a MovieId clamped
+void movieModeDrawFrame();        // 0x80151FF4
 
 #endif

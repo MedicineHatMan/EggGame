@@ -339,13 +339,12 @@ void TEneGroupWave::draw()
 struct SetLink;
 
 extern "C" {
-extern const char sGroupWatcherName[] = "TEneGroupWatcher";
-extern const char sGroupComboName[] = "TEneGroupCombo";
-const char* gTEneGroupCollisionName = "TEneGroupCollision";
+extern const char sGroupWatcherName[]               = "TEneGroupWatcher";
+extern const char sGroupComboName[]                 = "TEneGroupCombo";
+const char* gTEneGroupCollisionName                 = "TEneGroupCollision";
 extern const ColliShape sEneGroupCollisionShapes[1] = {
 	{ { 0.0f, 20.0f, 0.0f }, 0x0, 0, 0x0, 20.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
-
 }
 
 // 0x800583CC
@@ -358,7 +357,7 @@ extern "C" TObject* createTEneGroupCollision(TObject* parent, SetDesc* desc)
 TEneGroupCollision::TEneGroupCollision(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)gTEneGroupCollisionName;
+	_00   = (u32)gTEneGroupCollisionName;
 	mSize = 0x168;
 	init(desc);
 	mEnemyFlags |= ENEMY_KILLED;
@@ -393,12 +392,12 @@ void TEneGroupCollision::syncCollider()
 {
 	ColliShape* shape = colliGetShape(mCollider, 0);
 	ColliShape place;
-	place._0C = 0;
+	place._0C    = 0;
 	place.mPos.x = 0.0f;
 	place.mPos.y = 0.0f;
 	place.mPos.z = 0.0f;
-	place.mRotY = 0;
-	place._14 = 0;
+	place.mRotY  = 0;
+	place._14    = 0;
 	switch (shape->mType) {
 	case SHAPE_SPHERE:
 		colliPlaceShapes(mCollider, &mBody.mPos, &place);
@@ -422,25 +421,25 @@ void TEneGroupCollision::syncCollider()
 void TEneGroupCollision::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
-	mGroup = desc->getInt(0);
-	mCount = desc->getInt(1);
-	mRestart = desc->getInt(3);
+	mGroup      = desc->getInt(0);
+	mCount      = desc->getInt(1);
+	mRestart    = desc->getInt(3);
 	int restart = mRestart;
 	if (restart < 0) {
 		restart = 0;
 	} else if (restart > 2) {
 		restart = 2;
 	}
-	mRestart = restart;
+	mRestart          = restart;
 	ColliShape* shape = colliGetShape(mCollider, 0);
-	int type = desc->getInt(2);
-	type = type < 0 ? 0 : (type > 2 ? 2 : type);
-	f32 a = desc->getFloat(0);
-	a = a < 10.0f ? 10.0f : a;
-	f32 b = desc->getFloat(1);
-	b = b < 10.0f ? 10.0f : b;
-	f32 c = desc->getFloat(2);
-	c = c < 10.0f ? 10.0f : c;
+	int type          = desc->getInt(2);
+	type              = type < 0 ? 0 : (type > 2 ? 2 : type);
+	f32 a             = desc->getFloat(0);
+	a                 = a < 10.0f ? 10.0f : a;
+	f32 b             = desc->getFloat(1);
+	b                 = b < 10.0f ? 10.0f : b;
+	f32 c             = desc->getFloat(2);
+	c                 = c < 10.0f ? 10.0f : c;
 	switch (type) {
 	case 0:
 		shape->mType = SHAPE_SPHERE;
@@ -489,12 +488,14 @@ void TEneGroupCollision::updateBody()
 }
 
 // 0x800589BC
-void TEneGroupCollision::vfn_6C() { }
+void TEneGroupCollision::vfn_6C()
+{
+}
 
 // 0x800589C0
 void TEneGroupCollision::vfn_3C()
 {
-	int x = kEnemyInfoX << 16;
+	int x    = kEnemyInfoX << 16;
 	int line = kEnemyInfoLine;
 	njPrintC(x | line, ":GROUP");
 	njPrintC(x | (line + 1), ":SWITCH ID");
@@ -533,7 +534,11 @@ int TEneGroupCollision::canAct()
 }
 
 // 0x80058B2C
-void TEneGroupCollision::vfn_B0() { }
+void TEneGroupCollision::vfn_B0()
+{
+}
 
 // 0x80058B30
-void TEneGroupCollision::onActionPhase(int, int) { }
+void TEneGroupCollision::onActionPhase(int, int)
+{
+}

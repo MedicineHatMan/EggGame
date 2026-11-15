@@ -28,10 +28,10 @@ public:
 
 	void freeEffects(); // name is ours
 
-	u8 mKind;   // _20
-	u8 _21[3];  // _21
-	Fx* mFx;  // _24 particle effect Its matrix is at +0x2C
-	Fx* mFx2; // _28 second effect null for kind 2
+	u8 mKind;  // _20
+	u8 _21[3]; // _21
+	Fx* mFx;   // _24 particle effect Its matrix is at +0x2C
+	Fx* mFx2;  // _28 second effect null for kind 2
 };
 
 class TStage;

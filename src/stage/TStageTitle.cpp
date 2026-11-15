@@ -11,16 +11,26 @@ extern "C" TStage* createTitleStage()
 }
 
 // 0x801AE29C
-TStageTitle::TStageTitle() { }
+TStageTitle::TStageTitle()
+{
+}
 
 // 0x801AE2D8
-void TStageTitle::loadAssets() { }
+void TStageTitle::loadAssets()
+{
+}
 
 // 0x801AE2DC
-void TStageTitle::freeAssets() { }
+void TStageTitle::freeAssets()
+{
+}
 
 // 0x801AE2E0
-void TStageTitle::vfn_14() { }
+void TStageTitle::vfn_14()
+{
+}
 
 // 0x801AE2E4
-TStageTitle::~TStageTitle() { }
+TStageTitle::~TStageTitle()
+{
+}

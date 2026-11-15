@@ -50,13 +50,13 @@ public:
 	virtual int getKind();
 	virtual int onHit(const TObjAction* other, int arg, int* result);
 
-	Vec3f mPos;         // _30
-	int mTime;          // _3C
-	f32 mRadius;        // _40
-	f32 mAlpha;         // _44
+	Vec3f mPos;           // _30
+	int mTime;            // _3C
+	f32 mRadius;          // _40
+	f32 mAlpha;           // _44
 	BossRipple* mSurface; // _48
-	DrawTask* mDrawTask;    // _4C
-	int mState;         // _50 0 growing 1 waiting 2 fading
+	DrawTask* mDrawTask;  // _4C
+	int mState;           // _50 0 growing 1 waiting 2 fading
 };
 
 /**
@@ -78,13 +78,13 @@ public:
 
 	void close();
 
-	Vec3f mPos;         // _30
-	int _3C;            // _3C
-	f32 mRadius;        // _40
+	Vec3f mPos;           // _30
+	int _3C;              // _3C
+	f32 mRadius;          // _40
 	BossRipple* mSurface; // _44
-	DrawTask* mDrawTask;    // _48
-	int mSlot;          // _4C
-	int mState;         // _50 0 growing 1 open 2 closing
+	DrawTask* mDrawTask;  // _48
+	int mSlot;            // _4C
+	int mState;           // _50 0 growing 1 open 2 closing
 };
 
 extern "C" {

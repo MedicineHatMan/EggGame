@@ -36,8 +36,7 @@ static u32 F72(u32 crc, u32 src, vu8* keyp)
 
 static u32 F95(u32 src, vu8* keyp)
 {
-	src = (src * ((keyp[3] << keyp[0x16]) | ((keyp[1] | (keyp[4] << keyp[0x11])) | (keyp[4] << keyp[0x18]))))
-	    - (keyp[7] - keyp[6]);
+	src = (src * ((keyp[3] << keyp[0x16]) | ((keyp[1] | (keyp[4] << keyp[0x11])) | (keyp[4] << keyp[0x18])))) - (keyp[7] - keyp[6]);
 	return src;
 }
 
@@ -55,8 +54,7 @@ static void F104(s32 chan, int ret)
 	}
 }
 
-s32 GBAJoyBootAsync(s32 chan, s32 paletteColor, s32 paletteSpeed, u8* programp, s32 length, u8* status,
-                    GBASyncCallback callback)
+s32 GBAJoyBootAsync(s32 chan, s32 paletteColor, s32 paletteSpeed, u8* programp, s32 length, u8* status, GBASyncCallback callback)
 {
 	int ret;
 	GBABootInfo* bootInfo = &__GBA[chan].bootInfo;
@@ -164,8 +162,8 @@ void __GBAX01(s32 chan, s32 ret)
 	if (ret == GBA_READY) {
 		bootInfo->keyA = gba->param->keyA;
 		bootInfo->keyB = gba->param->keyB;
-		if (bootInfo->readbuf[3] == 0 || bootInfo->readbuf[2] == 0 || (bootInfo->keyA & (D54[5] << 9)) == 0
-		    || bootInfo->readbuf[1] == 0 || (bootInfo->keyA >> 15) == 0 || bootInfo->readbuf[0] == 0) {
+		if (bootInfo->readbuf[3] == 0 || bootInfo->readbuf[2] == 0 || (bootInfo->keyA & (D54[5] << 9)) == 0 || bootInfo->readbuf[1] == 0
+		    || (bootInfo->keyA >> 15) == 0 || bootInfo->readbuf[0] == 0) {
 			ret = GBA_JOYBOOT_UNKNOWN_STATE;
 		} else {
 			bootInfo->i = (int)~D54[36] & bootInfo->length + D54[36];
@@ -267,12 +265,10 @@ static void F33(s32 chan, int ret)
 
 			if (bootInfo->i < D54[33]) {
 				bootInfo->dummyWord[3 - (1 - bootInfo->i)] = writeWord;
-				bootInfo->dummyWord[5 - bootInfo->i]
-				    = bootInfo->dummyWord[(2 - (1 - bootInfo->i))] * bootInfo->dummyWord[4 - bootInfo->i];
+				bootInfo->dummyWord[5 - bootInfo->i] = bootInfo->dummyWord[(2 - (1 - bootInfo->i))] * bootInfo->dummyWord[4 - bootInfo->i];
 				bootInfo->dummyWord[5 - (1 - bootInfo->i)]
 				    = bootInfo->dummyWord[((1 - bootInfo->i))] * bootInfo->dummyWord[1 - (1 - bootInfo->i)];
-				bootInfo->dummyWord[7 - bootInfo->i]
-				    = bootInfo->dummyWord[(-(1 - bootInfo->i))] * bootInfo->dummyWord[4 - bootInfo->i];
+				bootInfo->dummyWord[7 - bootInfo->i] = bootInfo->dummyWord[(-(1 - bootInfo->i))] * bootInfo->dummyWord[4 - bootInfo->i];
 			}
 
 			ret = GBAWriteAsync(chan, bootInfo->writebuf, bootInfo->status, F33);
@@ -354,10 +350,8 @@ static void F39(s32 chan, int ret)
 	GBABootInfo* bootInfo = &__GBA[chan].bootInfo;
 
 	if (ret == GBA_READY) {
-		if ((((bootInfo->readbuf[3] ^ (bootInfo->initialCode >> 24))
-		      | (bootInfo->readbuf[2] ^ (bootInfo->initialCode >> 16))
-		      | (bootInfo->readbuf[1] ^ (bootInfo->initialCode >> 8))
-		      | (bootInfo->readbuf[0] ^ (bootInfo->initialCode >> 0)))
+		if ((((bootInfo->readbuf[3] ^ (bootInfo->initialCode >> 24)) | (bootInfo->readbuf[2] ^ (bootInfo->initialCode >> 16))
+		      | (bootInfo->readbuf[1] ^ (bootInfo->initialCode >> 8)) | (bootInfo->readbuf[0] ^ (bootInfo->initialCode >> 0)))
 		     << 24)
 		    != 0) {
 			ret = GBA_JOYBOOT_UNKNOWN_STATE;

@@ -32,9 +32,9 @@ int eggAnyTouch(void*, EggContact*, EggContact*);
 struct EggContact {
 	EggContact* mNext; // _00
 	u8 _04[8];
-	Vec3f mPos;        // _0C
-	int mShape;        // _18
-	Vec3f mNormal;     // _1C
+	Vec3f mPos;    // _0C
+	int mShape;    // _18
+	Vec3f mNormal; // _1C
 };
 
 struct EggColl {

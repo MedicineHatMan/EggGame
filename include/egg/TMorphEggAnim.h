@@ -55,10 +55,10 @@ public:
 	u8 mDone;            // _00 bit 0 = the script hit 0x7F
 	u8 mLoops;           // _01
 	u16 mWait;           // _02
-	u8* mBase;     // _04
-	u8* mPc;       // _08
-	u8* mLoopAt;   // _0C
-	u8* mMark;     // _10
+	u8* mBase;           // _04
+	u8* mPc;             // _08
+	u8* mLoopAt;         // _0C
+	u8* mMark;           // _10
 	u32 mActive;         // _14 one bit per slot still running
 	MorphKey* mSlot[16]; // _18
 };
@@ -77,11 +77,11 @@ public:
 
 	virtual void draw(); // _0C
 
-	f32 mScale;         // _20
-	Vec3f mPos;         // _24
-	MorphScript mScript; // _30
-	MorphKey mKey;      // _88
-	ObjDrawState mState; // _A4 its tint mTev2 is the key value in every channel
+	f32 mScale;                // _20
+	Vec3f mPos;                // _24
+	MorphScript mScript;       // _30
+	MorphKey mKey;             // _88
+	ObjDrawState mState;       // _A4 its tint mTev2 is the key value in every channel
 	TParticleGenerator* mPart; // _C8 particleGenEmptyDefault
 };
 

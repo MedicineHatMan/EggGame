@@ -63,7 +63,7 @@ public:
 
 	void init();
 
-	int mEnabled;    // _00
+	int mEnabled;     // _00
 	int mRangeAdjust; // _04
 
 	// _08 = vtable
@@ -89,18 +89,18 @@ public:
 	void useMain();
 	void useOther();
 
-	FogRun mFrom;   // _0C
-	FogRun mTo;     // _28
-	int mBlending;  // _44
-	int mNext;      // _48
-	f32 mRate;      // _4C
-	int mPriority;  // _50
-	int mOrder;     // _54
-	f32 mBlend;     // _58
-	f32 mStep;      // _5C
-	int mMain;      // _60
-	int mOther;     // _64
-	int mCurrent;   // _68
+	FogRun mFrom;  // _0C
+	FogRun mTo;    // _28
+	int mBlending; // _44
+	int mNext;     // _48
+	f32 mRate;     // _4C
+	int mPriority; // _50
+	int mOrder;    // _54
+	f32 mBlend;    // _58
+	f32 mStep;     // _5C
+	int mMain;     // _60
+	int mOther;    // _64
+	int mCurrent;  // _68
 };
 
 /**
@@ -139,11 +139,11 @@ public:
 	void setMain(int id);
 	void setOther(int id);
 
-	DrawTask* mTask;           // _20
-	FogBlend mBlends[4];   // _24
-	FogMix mMixes[4];      // _1D4
-	int mMode;             // _2F4 0 main 1 mixing 2 other
-	u16 mRangeTable[10];   // _2F8
+	DrawTask* mTask;     // _20
+	FogBlend mBlends[4]; // _24
+	FogMix mMixes[4];    // _1D4
+	int mMode;           // _2F4 0 main 1 mixing 2 other
+	u16 mRangeTable[10]; // _2F8
 };
 
 /**

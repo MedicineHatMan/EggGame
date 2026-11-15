@@ -28,9 +28,9 @@ extern "C" void loadBalloonArc()
 {
 	loadArc("balloon.arc", &sBalloonArc);
 	if (sBalloonArc != 0) {
-		gBalloonModels       = (NJS_OBJECT**)findArcExport(sBalloonArc, "models");
-		gBalloonTexLists       = (NJS_TEXLIST**)findArcExport(sBalloonArc, "texlists");
-		void** textures    = (void**)findArcExport(sBalloonArc, "textures");
+		gBalloonModels   = (NJS_OBJECT**)findArcExport(sBalloonArc, "models");
+		gBalloonTexLists = (NJS_TEXLIST**)findArcExport(sBalloonArc, "texlists");
+		void** textures  = (void**)findArcExport(sBalloonArc, "textures");
 		for (int i = 0; i < 8; i++) {
 			bindGvmTextures((u8*)textures[0], gBalloonTexLists[i]);
 		}
@@ -48,9 +48,9 @@ extern "C" void releaseBalloonArc()
 		}
 	}
 	releaseResource(sBalloonArc);
-	sBalloonArc = 0;
-	gBalloonModels = 0;
-	gBalloonTexLists = 0;
+	sBalloonArc       = 0;
+	gBalloonModels    = 0;
+	gBalloonTexLists  = 0;
 	gBalloonPosExport = 0;
 }
 
@@ -80,7 +80,7 @@ TObjOrangeBalloon::TObjOrangeBalloon(TObject* parent)
 	if (gBalloonPosExport == 0) {
 		mGrid = 0;
 	} else {
-		mGrid     = (u8*)memAlloc(*(u32*)((u8*)gBalloonPosExport + 4));
+		mGrid = (u8*)memAlloc(*(u32*)((u8*)gBalloonPosExport + 4));
 		syMemSet(mGrid, 0, *(u32*)((u8*)gBalloonPosExport + 4));
 	}
 	mTimer = 1;
@@ -144,8 +144,7 @@ void TObjOrangeBalloon::draw()
 	while (puff != 0) {
 		next = puff->mNext;
 		puff->mY += 0.8333334f;
-		if (puff->mX < box[0] || puff->mY < box[1] || puff->mZ < box[2] || puff->mX > box[3] || puff->mY > box[4]
-		    || puff->mZ > box[5]) {
+		if (puff->mX < box[0] || puff->mY < box[1] || puff->mZ < box[2] || puff->mX > box[3] || puff->mY > box[4] || puff->mZ > box[5]) {
 			if (prev != 0) {
 				prev->mNext = next;
 			} else {
@@ -177,8 +176,8 @@ void TObjOrangeBalloon::bindTex(int kind)
 void TObjOrangeBalloon::bindShape(int lod)
 {
 	void** models = (void**)gBalloonModels;
-	u8* model      = (u8*)models[lod];
-	int* node = *(int**)(model + 4);
+	u8* model     = (u8*)models[lod];
+	int* node     = *(int**)(model + 4);
 	if (sBalloonLastLod != lod) {
 		u32 bits = *(u32*)(*(int*)node[2] + 0x14);
 		GXClearVtxDesc();
@@ -214,7 +213,7 @@ void TObjOrangeBalloon::render()
 	GXSetBlendMode(0, 0, 0, 0);
 
 	u8* light = (u8*)getSceneRecord();
-	int chan   = *(int*)(light + 0xC);
+	int chan  = *(int*)(light + 0xC);
 	GXSetNumChans(1);
 	GXSetChanMatColor(4, *(GXColor*)&sOrangeBalloonClearColor);
 	GXSetChanCtrl(0, 1, 0, 0, *(int*)(chan + 0xC), 2, 1);
@@ -223,7 +222,7 @@ void TObjOrangeBalloon::render()
 	gjSetZBufferMode(1);
 	GXSetCullMode(2);
 
-	sBalloonLastLod = -1;
+	sBalloonLastLod  = -1;
 	sBalloonLastKind = -1;
 
 	u32 batch[10][2];
@@ -286,9 +285,9 @@ void TObjOrangeBalloon::spawn(u16 cell)
 	if (puff == 0) {
 		return;
 	}
-	mFree             = puff->mNext;
-	puff->mKind       = (u8)(int)(8.0f * (3.0517578e-05f * (f32)rand()));
-	puff->mCell       = cell;
+	mFree       = puff->mNext;
+	puff->mKind = (u8)(int)(8.0f * (3.0517578e-05f * (f32)rand()));
+	puff->mCell = cell;
 
 	puff->mX = 100.0f * (2.0f * (3.0517578e-05f * (f32)rand() - gBalloonRandOffset)) + (*(Vec3f**)gBalloonPosExport)[cell].x;
 	puff->mY = 10.0f * (2.0f * (3.0517578e-05f * (f32)rand() - gBalloonRandOffset)) + (*(Vec3f**)gBalloonPosExport)[cell].y;

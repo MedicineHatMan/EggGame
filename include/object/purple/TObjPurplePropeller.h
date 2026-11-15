@@ -37,23 +37,23 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	void* mGeo;          // _64 MODEL_PROPELLER
-	void* mTex;          // _68 TLS_MODEL_PROPELLER
-	DrawTask* mDrawTask; // _6C
-	ObjModel mModel;     // _70
-	f32 mMatrix[12];     // _90 placed scaled then pitched
-	f32 mSpin[12];       // _C0 mMatrix yawed by mAngle
-	f32 mScale;          // _F0 1 plus set float 0
-	int mAngle;          // _F4
-	int mRotSpeed;       // _F8 set int 0
-	TParticleGenerator* mSnow0;  // _FC particle 0xF5
-	TParticleGenerator* mSnow1;  // _100 particle 0xF6
-	u16 mFrom;           // _104 set int 2
-	u16 mTo;             // _106 set int 3
-	SoundHandle mSound;  // _108
-	Vec3f mCentre;       // _134
-	f32 mRadius;         // _140
-	int mAct;            // _144 0 spinning 1 stopping the snow 2 stopped
+	void* mGeo;                 // _64 MODEL_PROPELLER
+	void* mTex;                 // _68 TLS_MODEL_PROPELLER
+	DrawTask* mDrawTask;        // _6C
+	ObjModel mModel;            // _70
+	f32 mMatrix[12];            // _90 placed scaled then pitched
+	f32 mSpin[12];              // _C0 mMatrix yawed by mAngle
+	f32 mScale;                 // _F0 1 plus set float 0
+	int mAngle;                 // _F4
+	int mRotSpeed;              // _F8 set int 0
+	TParticleGenerator* mSnow0; // _FC particle 0xF5
+	TParticleGenerator* mSnow1; // _100 particle 0xF6
+	u16 mFrom;                  // _104 set int 2
+	u16 mTo;                    // _106 set int 3
+	SoundHandle mSound;         // _108
+	Vec3f mCentre;              // _134
+	f32 mRadius;                // _140
+	int mAct;                   // _144 0 spinning 1 stopping the snow 2 stopped
 };
 
 extern "C" {

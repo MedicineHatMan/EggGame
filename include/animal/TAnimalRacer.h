@@ -32,15 +32,15 @@ extern "C" void objHeapFree(void*, void*);
 // One row of the course table at gAnimalParams
 struct RacerInfo {
 	u8 _00[4];
-	int mKind;       // _04 copied into mStep and minus 3 is the mover's kind
-	f32 mRate;       // _08
+	int mKind; // _04 copied into mStep and minus 3 is the mover's kind
+	f32 mRate; // _08
 	u8 _0C[4];
-	f32 mCap;        // _10
-	f32 mBlend;      // _14
+	f32 mCap;   // _10
+	f32 mBlend; // _14
 	u8 _18[8];
-	void* mJump;     // _20
-	int mClipCount;  // _24
-	void** mClips;   // _28
+	void* mJump;    // _20
+	int mClipCount; // _24
+	void** mClips;  // _28
 };
 
 // A frame window on mClips
@@ -71,13 +71,13 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();              // _0C
-	virtual void vfn_10();            // _10
-	virtual void render();            // _1C
-	virtual Vec3f* getPos();          // _20
-	virtual int getRotY();            // _28
-	virtual int getKind();            // _2C
-	virtual int sendToHandle(ObjMsg* msg); // _4C
+	virtual void draw();                                              // _0C
+	virtual void vfn_10();                                            // _10
+	virtual void render();                                            // _1C
+	virtual Vec3f* getPos();                                          // _20
+	virtual int getRotY();                                            // _28
+	virtual int getKind();                                            // _2C
+	virtual int sendToHandle(ObjMsg* msg);                            // _4C
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58
 
 	void setup();
@@ -109,35 +109,35 @@ public:
 	int answerRange(void* msg);
 	int answerAim(void* msg);
 
-	s16 mMode;          // _30 -1 none -2 while switching
-	s16 mPrevMode;      // _32
-	s16 mStep;          // _34
-	s16 mMotion;        // _36
-	u32 _38;            // _38
-	RacerMover mMover;  // _3C
-	Vec3f mStart;       // _9C
-	Vec3f mSaved;       // _A8
-	Vec3f mPos;         // _B4
-	Vec3f mVel;         // _C0
-	s32 mRotX;          // _CC
-	s32 mRotY;          // _D0
-	s32 mRotZ;          // _D4
-	f32 mMtx[12];       // _D8
-	RacerScale mScale;  // _108
-	Vec3f mNudge;       // _114
-	AniAsset mAsset;    // _120
-	void* mCourse;      // _138
-	RacerInfo* mInfo;   // _13C
-	GjActor* mBuf;         // _140
-	void* mModel;       // _144
-	MotionEntry* mTable; // _148
+	s16 mMode;            // _30 -1 none -2 while switching
+	s16 mPrevMode;        // _32
+	s16 mStep;            // _34
+	s16 mMotion;          // _36
+	u32 _38;              // _38
+	RacerMover mMover;    // _3C
+	Vec3f mStart;         // _9C
+	Vec3f mSaved;         // _A8
+	Vec3f mPos;           // _B4
+	Vec3f mVel;           // _C0
+	s32 mRotX;            // _CC
+	s32 mRotY;            // _D0
+	s32 mRotZ;            // _D4
+	f32 mMtx[12];         // _D8
+	RacerScale mScale;    // _108
+	Vec3f mNudge;         // _114
+	AniAsset mAsset;      // _120
+	void* mCourse;        // _138
+	RacerInfo* mInfo;     // _13C
+	GjActor* mBuf;        // _140
+	void* mModel;         // _144
+	MotionEntry* mTable;  // _148
 	MotionPlayer mPlayer; // _14C
-	f32 mRate;          // _188
-	CharaColli* mFx;          // _18C
-	RacerShape mShape;  // _190
-	ObjRef mRef;        // _1C0
-	RacerClip* mClips;  // _1CC
-	s8 mClipCount;      // _1D0
+	f32 mRate;            // _188
+	CharaColli* mFx;      // _18C
+	RacerShape mShape;    // _190
+	ObjRef mRef;          // _1C0
+	RacerClip* mClips;    // _1CC
+	s8 mClipCount;        // _1D0
 	u8 _1D1[3];
 	void* mJump;        // _1D4
 	s32 mAim;           // _1D8
@@ -146,7 +146,7 @@ public:
 	ObjShadow mShadow;  // _1E4
 	DrawTask* mTask;    // _21C
 	EnemyLight mLight;  // _220
-	ObjDrawState mDraw;    // _260
+	ObjDrawState mDraw; // _260
 	u32 mFlags;         // _284 1 and 2 are jump frames 4 landed 0x20 holds the rate 0x40 at the goal
 };
 
@@ -169,8 +169,8 @@ struct RacerPack {
 	void** mHead;   // _00
 	void* mMotions; // _04
 	u8 _08[0xC];
-	void** mModel;  // _14 the first word is the texture list
-	u8* mGvm;       // _18
+	void** mModel; // _14 the first word is the texture list
+	u8* mGvm;      // _18
 };
 
 extern "C" {

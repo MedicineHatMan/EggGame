@@ -25,16 +25,26 @@ extern "C" TStage* createPurpleStage()
 }
 
 // 0x800FC440
-TStagePurple::TStagePurple() { }
+TStagePurple::TStagePurple()
+{
+}
 
 // 0x800FC47C
-void TStagePurple::loadAssets() { }
+void TStagePurple::loadAssets()
+{
+}
 
 // 0x800FC480
-void TStagePurple::freeAssets() { }
+void TStagePurple::freeAssets()
+{
+}
 
 // 0x800FC484
-void TStagePurple::vfn_14() { }
+void TStagePurple::vfn_14()
+{
+}
 
 // 0x800FC488
-TStagePurple::~TStagePurple() { }
+TStagePurple::~TStagePurple()
+{
+}

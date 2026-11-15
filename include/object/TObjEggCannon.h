@@ -70,32 +70,32 @@ public:
 	void updateMatrix();
 	void drawScope();
 
-	DrawTask* mDraw;           // _64
-	ObjDrawState mDrawState;   // _68
-	ObjModel mModel;           // _8C
-	f32 mMtx[12];              // _AC
-	MotionPlayer mMotion;      // _DC
-	int mPitch;                // _118
-	int mYaw;                  // _11C
-	int mRoll;                 // _120
-	int mPitchMin;             // _124
-	int mYawMin;               // _128
-	int mRollMin;              // _12C
-	int mPitchMax;             // _130
-	int mYawMax;               // _134
-	int mRollMax;              // _138
-	Vec3f mLightPos;           // _13C
-	f32 mPower;                // _148
-	u16 mEggId;                // _14C 0xFFFF = none
-	TObjAction* mEgg;          // _150
-	TCamFix* mCamera;          // _154
-	int mFixTime;              // _158
-	ObjShadow mShadow;         // _15C
-	SoundHandle mSnd;          // _194
-	s16 mTimer;                // _1C0
-	EnemyLight mLight;         // _1C4
-	u32 mFlags2;               // _204 Flag
-	int mState;                // _208 State
+	DrawTask* mDraw;         // _64
+	ObjDrawState mDrawState; // _68
+	ObjModel mModel;         // _8C
+	f32 mMtx[12];            // _AC
+	MotionPlayer mMotion;    // _DC
+	int mPitch;              // _118
+	int mYaw;                // _11C
+	int mRoll;               // _120
+	int mPitchMin;           // _124
+	int mYawMin;             // _128
+	int mRollMin;            // _12C
+	int mPitchMax;           // _130
+	int mYawMax;             // _134
+	int mRollMax;            // _138
+	Vec3f mLightPos;         // _13C
+	f32 mPower;              // _148
+	u16 mEggId;              // _14C 0xFFFF = none
+	TObjAction* mEgg;        // _150
+	TCamFix* mCamera;        // _154
+	int mFixTime;            // _158
+	ObjShadow mShadow;       // _15C
+	SoundHandle mSnd;        // _194
+	s16 mTimer;              // _1C0
+	EnemyLight mLight;       // _1C4
+	u32 mFlags2;             // _204 Flag
+	int mState;              // _208 State
 };
 
 #endif

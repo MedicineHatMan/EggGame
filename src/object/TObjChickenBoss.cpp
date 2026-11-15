@@ -54,15 +54,15 @@ struct ChickenFadeVtx {
 
 /** Message 0x70 a player asks to talk */
 struct ChickenTalkMsg {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
-	u16 mFrom;  // _04 the player's id
+	u16 mFrom; // _04 the player's id
 };
 
 /** Message 0x8A asks how far away it can be talked to */
 struct ChickenRangeMsg {
-	u16 mType;    // _00
-	f32 mRange;   // _04
+	u16 mType;  // _00
+	f32 mRange; // _04
 };
 
 enum ChickenBossState {
@@ -86,9 +86,9 @@ enum ChickenBossFlag {
 	CHICKEN_GREET_SOUND = 8, // the greeting sound has played
 };
 
-TArc* sChickenBossArc;       // 0x802C50A8 ar_event_presbyter.arc
-NJS_MOTION** sChickenBossMotions;  // 0x802C50AC its "motions" the elder's then the golden egg's at 9
-void** sChickenBossCamPath;  // 0x802C50B0 its "event_cam" the camera object then its motion
+TArc* sChickenBossArc;            // 0x802C50A8 ar_event_presbyter.arc
+NJS_MOTION** sChickenBossMotions; // 0x802C50AC its "motions" the elder's then the golden egg's at 9
+void** sChickenBossCamPath;       // 0x802C50B0 its "event_cam" the camera object then its motion
 
 typedef char TObjChickenBoss_size_check[(sizeof(TObjChickenBoss) == 0x298) ? 1 : -1];
 
@@ -97,14 +97,10 @@ const f32 gChickenBossSetRange = 1000.0f;
 const char* gTObjChickenBossName = "TObjChickenBoss";
 
 const MotionEntry sChickenBossMotionTable[] = {
-	{ 1, 8, -1, 0, 0.0f, 399.0f, 1.0f, 0.0f, 0 },
-	{ 1, 4, -1, 0, 0.0f, 60.0f, 0.25f, 0.0f, 0 },
-	{ 0, 0, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
-	{ 1, 2, -1, 0, 0.0f, 39.0f, 0.3f, 0.0f, 0 },
-	{ 0, 3, -1, 0, 0.0f, 20.0f, 0.2f, 0.0f, 0 },
-	{ 1, 1, -1, 0, 0.0f, 60.0f, 0.2f, 0.0f, 0 },
-	{ 1, 5, -1, 0, 0.0f, 20.0f, 0.2f, 0.0f, 0 },
-	{ 0, 7, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
+	{ 1, 8, -1, 0, 0.0f, 399.0f, 1.0f, 0.0f, 0 }, { 1, 4, -1, 0, 0.0f, 60.0f, 0.25f, 0.0f, 0 },
+	{ 0, 0, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },  { 1, 2, -1, 0, 0.0f, 39.0f, 0.3f, 0.0f, 0 },
+	{ 0, 3, -1, 0, 0.0f, 20.0f, 0.2f, 0.0f, 0 },  { 1, 1, -1, 0, 0.0f, 60.0f, 0.2f, 0.0f, 0 },
+	{ 1, 5, -1, 0, 0.0f, 20.0f, 0.2f, 0.0f, 0 },  { 0, 7, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
 	{ 0, 6, -1, 0, 0.0f, 20.0f, 0.25f, 0.0f, 0 },
 };
 
@@ -356,7 +352,7 @@ int TObjChickenBoss::sendToHandle(ObjMsg* msg)
 	case 0x40:
 		return mState == CHICKEN_IDLE ? 0x40 : 0;
 	case 0x70: {
-		u16 from = ((ChickenTalkMsg*)msg)->mFrom;
+		u16 from        = ((ChickenTalkMsg*)msg)->mFrom;
 		TObjAction* obj = findObjById(from);
 		if (obj != 0) {
 			Vec3f* at  = obj->getPos();
@@ -476,21 +472,21 @@ void TObjChickenBoss::stateHatch()
 		bgmStop();
 		mFlags &= ~CHICKEN_DRAW_GOLDEN;
 		mFlags |= CHICKEN_DRAW_MODEL;
-		gen = chickenBossParticle(&gVecZero, 0x46, 0x56, 1);
+		gen          = chickenBossParticle(&gVecZero, 0x46, 0x56, 1);
 		gen->mAttach = mNodeMtx[0];
-		gen = chickenBossParticle(&gVecZero, 0x17C, 0x2B, 1);
+		gen          = chickenBossParticle(&gVecZero, 0x17C, 0x2B, 1);
 		gen->mAttach = mNodeMtx[1];
-		gen = chickenBossParticle(&gVecZero, 0x17C, 0x44, 1);
+		gen          = chickenBossParticle(&gVecZero, 0x17C, 0x44, 1);
 		gen->mAttach = mNodeMtx[1];
-		gen = chickenBossParticle(&gVecZero, 0x17E, 1, 0x14);
+		gen          = chickenBossParticle(&gVecZero, 0x17E, 1, 0x14);
 		gen->mAttach = mNodeMtx[1];
-		gen = chickenBossParticle(&gVecZero, 0x17F, 0xF0, 1);
+		gen          = chickenBossParticle(&gVecZero, 0x17F, 0xF0, 1);
 		gen->mAttach = mNodeMtx[2];
-		gen = chickenBossParticle(&gVecZero, 0x17F, 0x10E, 1);
+		gen          = chickenBossParticle(&gVecZero, 0x17F, 0x10E, 1);
 		gen->mAttach = mNodeMtx[2];
-		gen = chickenBossParticle(&gVecZero, 0x17F, 0x131, 1);
+		gen          = chickenBossParticle(&gVecZero, 0x17F, 0x131, 1);
 		gen->mAttach = mNodeMtx[2];
-		gen = chickenBossParticle(&gVecZero, 0x195, 0xBE, 0xB4);
+		gen          = chickenBossParticle(&gVecZero, 0x195, 0xBE, 0xB4);
 		gen->mAttach = mNodeMtx[1];
 		fxSpawnAt(1, 7, 0x21, mGoldenMtx);
 		setState(CHICKEN_RISE);
@@ -563,13 +559,19 @@ void TObjChickenBoss::stateIdle()
 }
 
 // 0x800895F4
-void TObjChickenBoss::state4() { }
+void TObjChickenBoss::state4()
+{
+}
 
 // 0x800895F8
-void TObjChickenBoss::state5() { }
+void TObjChickenBoss::state5()
+{
+}
 
 // 0x800895FC
-void TObjChickenBoss::state6() { }
+void TObjChickenBoss::state6()
+{
+}
 
 // 0x80089600
 void TObjChickenBoss::stateTalk()
@@ -579,8 +581,8 @@ void TObjChickenBoss::stateTalk()
 	ObjMsg resume;
 
 	if (mText != 0 && mText->mState == 3) {
-		mText->mHold = 1;
-		mText        = 0;
+		mText->mHold       = 1;
+		mText              = 0;
 		TObjAction* talker = mTalker.get();
 		if (talker != 0) {
 			done.mType = 0x30;
@@ -636,7 +638,8 @@ void TObjChickenBoss::vfn_10()
 		return;
 	}
 	ColliShape* shape = colliGetShape(mShape, 0);
-	Vec3f center;	center.set(shape->mPos.x, shape->mPos.y, shape->mPos.z);
+	Vec3f center;
+	center.set(shape->mPos.x, shape->mPos.y, shape->mPos.z);
 	if (cameraIsVisible(1000.0f, 1.5f * colliGetShape(mShape, 0)->mSizeY, &center, 0)) {
 		mDraw->mFlags &= ~1;
 	} else {
@@ -812,7 +815,9 @@ void TChickenBossDemo::draw()
 }
 
 // 0x80089EF0
-void TChickenBossDemo::vfn_10() { }
+void TChickenBossDemo::vfn_10()
+{
+}
 
 static inline u32 chickenARGB(u32 rgba)
 {

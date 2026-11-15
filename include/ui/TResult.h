@@ -67,31 +67,31 @@ public:
 	inline void runScore(int phase, int index);
 	inline void updateRank();
 
-	StageTime mTime;          // _34
+	StageTime mTime; // _34
 	u8 _3A[2];
-	StageRecord mRecord;      // _3C
-	int mShown;               // _5C the number counting up
-	int mRank;                // _60 0 to 4
-	int mCleared;             // _64 emblems won so far
-	int mNewBest;             // _68
-	u32 mFlags;               // _6C what to tell the player bit 0 an emblem 1-8 and 9-12 messages
-	TAeLayer* mBase;          // _70
-	TAeLayer* mTitle;         // _74
-	TAeLayer* mBest;          // _78
-	TAeLayer* mRankLayer;     // _7C
-	TAeLayer* mPrompt;        // _80
-	TAeLayer* mDigits[2];     // _84 the emblem count ones then tens
-	TAeLayer* mEmblem;        // _8C
-	DrawTask* mDrawTask;      // _90
-	int mState;               // _94
-	int mNextState;           // _98
-	int mWait;                // _9C
-	int mDone;                // _A0
-	TSimpleText* mTexts[13];  // _A4
-	s8 mMsgOpen;              // _D8
-	int mMsgWait;             // _DC
-	TSimpleText* mMsg;        // _E0
-	int mTensRoll;            // _E4 the emblem count's tens digit turns over too
+	StageRecord mRecord;     // _3C
+	int mShown;              // _5C the number counting up
+	int mRank;               // _60 0 to 4
+	int mCleared;            // _64 emblems won so far
+	int mNewBest;            // _68
+	u32 mFlags;              // _6C what to tell the player bit 0 an emblem 1-8 and 9-12 messages
+	TAeLayer* mBase;         // _70
+	TAeLayer* mTitle;        // _74
+	TAeLayer* mBest;         // _78
+	TAeLayer* mRankLayer;    // _7C
+	TAeLayer* mPrompt;       // _80
+	TAeLayer* mDigits[2];    // _84 the emblem count ones then tens
+	TAeLayer* mEmblem;       // _8C
+	DrawTask* mDrawTask;     // _90
+	int mState;              // _94
+	int mNextState;          // _98
+	int mWait;               // _9C
+	int mDone;               // _A0
+	TSimpleText* mTexts[13]; // _A4
+	s8 mMsgOpen;             // _D8
+	int mMsgWait;            // _DC
+	TSimpleText* mMsg;       // _E0
+	int mTensRoll;           // _E4 the emblem count's tens digit turns over too
 };
 
 void loadResultText();                  // 0x801C78F4 mes_result.bin

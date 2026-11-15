@@ -234,7 +234,7 @@ void TObjPurpleIceTrap::cool()
 		return;
 	}
 	if (++mTimer > mOffTime) {
-		mTimer       = 0;
+		mTimer        = 0;
 		mTrack.mFrame = 0.0f;
 		mTrack.mRate  = 0.5f;
 		mAct          = 0;
@@ -269,22 +269,22 @@ void TObjPurpleIceTrap::render()
 
 // One node of the balloon's octree
 struct TrapNode {
-	u16 mLeaf;      // _00
-	u16 mCount;     // _02
-	u16* mIndices;  // _04
-	u16 mChild[8];  // _08
+	u16 mLeaf;     // _00
+	u16 mCount;    // _02
+	u16* mIndices; // _04
+	u16 mChild[8]; // _08
 };
 
 struct TrapTree {
-	Vec3f* mPoints;    // _00
-	void* _04;         // _04
-	TrapNode* mNodes;  // _08
-	f32 mMinX;         // _0C
-	f32 mMinY;         // _10
-	f32 mMinZ;         // _14
-	f32 mMaxX;         // _18
-	f32 mMaxY;         // _1C
-	f32 mMaxZ;         // _20
+	Vec3f* mPoints;   // _00
+	void* _04;        // _04
+	TrapNode* mNodes; // _08
+	f32 mMinX;        // _0C
+	f32 mMinY;        // _10
+	f32 mMinZ;        // _14
+	f32 mMaxX;        // _18
+	f32 mMaxY;        // _1C
+	f32 mMaxZ;        // _20
 };
 
 struct TrapBox {
@@ -297,15 +297,15 @@ struct TrapBox {
 };
 
 // 0x801267C0
-static void walkTrapNodes(f32 minX, f32 minY, f32 minZ, f32 maxX, f32 maxY, f32 maxZ, TrapTree* tree, int index,
-                          TrapBox* box, TrapHitFn fn, void* arg)
+static void walkTrapNodes(f32 minX, f32 minY, f32 minZ, f32 maxX, f32 maxY, f32 maxZ, TrapTree* tree, int index, TrapBox* box, TrapHitFn fn,
+                          void* arg)
 {
-	f32 bMinX = box->mMinX;
-	f32 bMinY = box->mMinY;
-	f32 bMinZ = box->mMinZ;
-	f32 bMaxX = box->mMaxX;
-	f32 bMaxY = box->mMaxY;
-	f32 bMaxZ = box->mMaxZ;
+	f32 bMinX      = box->mMinX;
+	f32 bMinY      = box->mMinY;
+	f32 bMinZ      = box->mMinZ;
+	f32 bMaxX      = box->mMaxX;
+	f32 bMaxY      = box->mMaxY;
+	f32 bMaxZ      = box->mMaxZ;
 	TrapNode* node = (TrapNode*)((u8*)tree->mNodes + index * 0x18);
 	if (bMaxX < minX || bMaxY < minY || bMaxZ < minZ || bMinX > maxX || bMinY > maxY || bMinZ > maxZ) {
 		return;
@@ -320,8 +320,8 @@ static void walkTrapNodes(f32 minX, f32 minY, f32 minZ, f32 maxX, f32 maxY, f32 
 		ids = node->mIndices;
 		for (; n != 0; n--, ids++) {
 			Vec3f* point = &tree->mPoints[*ids];
-			if (point->x >= bMinX && point->y >= bMinY && point->z >= bMinZ && point->x <= bMaxX && point->y <= bMaxY &&
-			    point->z <= bMaxZ) {
+			if (point->x >= bMinX && point->y >= bMinY && point->z >= bMinZ && point->x <= bMaxX && point->y <= bMaxY
+			    && point->z <= bMaxZ) {
 				fn(*ids, arg);
 			}
 		}

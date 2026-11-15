@@ -183,20 +183,20 @@ void TAnimalRacer::setup()
 	mCourse = (void*)gAnimalCommonModel;
 	mInfo   = (RacerInfo*)gAnimalParams[gRacerKind];
 	mMotion = mStep = mPrevMode = mMode = -1;
-	_38 = 0;
-	const RacerInfo* info = mInfo;
-	kind = (s8)(info->mKind - 3);
+	_38                                 = 0;
+	const RacerInfo* info               = mInfo;
+	kind                                = (s8)(info->mKind - 3);
 	if (gRacerKind == 9) {
 		kind = 0;
 	}
-	mMover.mKind = (u8)kind;
-	mMover.mAccel  = info->mCap;
-	mMover.mTopSpeed  = 5.0f;
-	mMover.mF0C  = 0.05f;
-	mMover.mTurn = 0x400;
-	mMover.mPos  = mStart;
+	mMover.mKind     = (u8)kind;
+	mMover.mAccel    = info->mCap;
+	mMover.mTopSpeed = 5.0f;
+	mMover.mF0C      = 0.05f;
+	mMover.mTurn     = 0x400;
+	mMover.mPos      = mStart;
 	mMover.mGravity  = -0.08166667f;
-	mPos         = mStart;
+	mPos             = mStart;
 	mVel.z = mVel.y = mVel.x = 0.0f;
 	mRotZ = mRotY = mRotX = 0;
 	mtxIdentity(mMtx);
@@ -301,7 +301,7 @@ int TAnimalRacer::answerAim(void* msg)
 	TObjAction* obj = (TObjAction*)findObjById(((ObjIdMsg*)msg)->mId);
 	if (obj != 0) {
 		Vec3f* at = obj->getPos();
-		mAim = (u16)angleToXZ(&mPos, at);
+		mAim      = (u16)angleToXZ(&mPos, at);
 	} else {
 		return 0;
 	}
@@ -362,7 +362,7 @@ void TAnimalRacer::pose()
 	if (mPlayer.isBlending() != 0) {
 		gjMotionLinkActor(mBuf, (void*)mPlayer.getBlend(), mPlayer.mBlendTime);
 	} else {
-		int cur = mPlayer.mCurrent;
+		int cur   = mPlayer.mCurrent;
 		f32 frame = mPlayer.mFrame;
 		gjMotionActor(frame, mBuf, mPlayer.getMotion(cur));
 	}
@@ -461,8 +461,7 @@ void TAnimalRacer::modeWait(int phase)
 		playMotion(1, 0.075f);
 		mFlags = 0x10000;
 		mStep  = -1;
-		colliShapeMakeCylinder((ColliShape*)&mShape, &gVecZero, (int)(5.0f * mScale.z),
-		                       5.0f * mScale.x, 5.0f * mScale.y);
+		colliShapeMakeCylinder((ColliShape*)&mShape, &gVecZero, (int)(5.0f * mScale.z), 5.0f * mScale.x, 5.0f * mScale.y);
 		mShape.mFlags |= 0x200;
 		if (mFx != 0) {
 			colliCopyShapes(mFx, (const ColliShape*)&mShape);
@@ -485,8 +484,8 @@ void TAnimalRacer::modeWait(int phase)
 		case 2:
 			if (mMark != 0 && mMark->mState == 3) {
 				mMark->mHold = 1;
-				mMark = 0;
-				other = mRef.get();
+				mMark        = 0;
+				other        = mRef.get();
 				if (other != 0) {
 					msg.mType = 0x30;
 					other->sendToHandle(&msg);
@@ -534,7 +533,7 @@ void TAnimalRacer::modeRun(int phase)
 			break;
 		}
 		if ((mFlags & 0x20) == 0) {
-			along = njScalor(&mVel);
+			along          = njScalor(&mVel);
 			mPlayer.mSpeed = mRate + (1.0f - mRate) / mInfo->mBlend * along;
 		}
 	}
@@ -593,32 +592,32 @@ void TAnimalRacer::modeDash(int phase)
 			fly();
 			break;
 		case 4:
-				setSpeed(1.0f);
-				playMotion(1, 0.075f);
-				mStep = -1;
+			setSpeed(1.0f);
+			playMotion(1, 0.075f);
+			mStep = -1;
 			break;
 		case 1:
-					turned = angleApproach(mRotY, mAim, 0x400);
-					if (turned == mAim) {
-						mMark = createSimpleTextPlain(getMessage((u16)aniRaceGetRank()));
-						showSpark();
-						mStep = 2;
-					}
-					mRotY = turned;
+			turned = angleApproach(mRotY, mAim, 0x400);
+			if (turned == mAim) {
+				mMark = createSimpleTextPlain(getMessage((u16)aniRaceGetRank()));
+				showSpark();
+				mStep = 2;
+			}
+			mRotY = turned;
 			break;
 		case 2:
 			if (mMark != 0 && mMark->mState == 3) {
-					mMark->mHold = 1;
-					mMark = 0;
-					other = mRef.get();
-					if (other != 0) {
-						msg.mType = 0x30;
-						other->sendToHandle(&msg);
-					}
-					hideSpark();
-					eventEnd();
-					aniRaceFinish();
-					setMode(5);
+				mMark->mHold = 1;
+				mMark        = 0;
+				other        = mRef.get();
+				if (other != 0) {
+					msg.mType = 0x30;
+					other->sendToHandle(&msg);
+				}
+				hideSpark();
+				eventEnd();
+				aniRaceFinish();
+				setMode(5);
 			}
 			break;
 		}
@@ -658,32 +657,32 @@ void TAnimalRacer::modeGlide(int phase)
 			fly();
 			break;
 		case 4:
-				setSpeed(1.0f);
-				playMotion(1, 0.075f);
-				mStep = -1;
+			setSpeed(1.0f);
+			playMotion(1, 0.075f);
+			mStep = -1;
 			break;
 		case 1:
-					turned = angleApproach(mRotY, mAim, 0x400);
-					if (turned == mAim) {
-						mMark = createSimpleTextPlain(getMessage((u16)aniRaceGetLaps()));
-						showSpark();
-						mStep = 2;
-					}
-					mRotY = turned;
+			turned = angleApproach(mRotY, mAim, 0x400);
+			if (turned == mAim) {
+				mMark = createSimpleTextPlain(getMessage((u16)aniRaceGetLaps()));
+				showSpark();
+				mStep = 2;
+			}
+			mRotY = turned;
 			break;
 		case 2:
 			if (mMark != 0 && mMark->mState == 3) {
-					mMark->mHold = 1;
-					mMark = 0;
-					other = mRef.get();
-					if (other != 0) {
-						msg.mType = 0x30;
-						other->sendToHandle(&msg);
-					}
-					hideSpark();
-					eventEnd();
-					aniRaceFinish();
-					setMode(5);
+				mMark->mHold = 1;
+				mMark        = 0;
+				other        = mRef.get();
+				if (other != 0) {
+					msg.mType = 0x30;
+					other->sendToHandle(&msg);
+				}
+				hideSpark();
+				eventEnd();
+				aniRaceFinish();
+				setMode(5);
 			}
 			break;
 		}
@@ -742,7 +741,7 @@ void TAnimalRacer::chase()
 		mFlags |= 0x40;
 	} else {
 		Vec3f dir = racerSub(&mPos, &at);
-		dir.y = 0.0f;
+		dir.y     = 0.0f;
 		if (njUnitVector(&dir) < gUnitVectorMin) {
 			dir = gVecZero;
 		}
@@ -764,8 +763,8 @@ void TAnimalRacer::chase()
 	if ((mMover.mFlags & 0x18) != 0) {
 		aniRaceSetSpeed(10.0f);
 	}
-	mPos  = mMover.mPos;
-	mVel  = mMover.mVel;
+	mPos            = mMover.mPos;
+	mVel            = mMover.mVel;
 	*(Rot3i*)&mRotX = mMover.mRot;
 	if ((mMover.mFlags & 0x10) != 0) {
 		Vec3f launchVel;
@@ -778,8 +777,8 @@ void TAnimalRacer::chase()
 void TAnimalRacer::leap()
 {
 	Vec3f goal;
-	goal = *(Vec3f*)aniRaceGetPos();
-	Vec3f at = goal;
+	goal      = *(Vec3f*)aniRaceGetPos();
+	Vec3f at  = goal;
 	f32 speed = njScalor(&mVel);
 	if (distXZ(&at, &mPos) <= 30.0f && speed <= 0.4f) {
 		playMotion(8, 0.075f);
@@ -789,7 +788,7 @@ void TAnimalRacer::leap()
 		playMotion(9, 0.075f);
 		setSpeed(mInfo->mRate);
 		Vec3f dir = racerSub(&mPos, &at);
-		dir.y = 0.0f;
+		dir.y     = 0.0f;
 		if (njUnitVector(&dir) < gUnitVectorMin) {
 			dir = gVecZero;
 		}
@@ -799,12 +798,12 @@ void TAnimalRacer::leap()
 		f32 y = dest.y;
 		y += 15.0f;
 		mMover.mTarget.set(dest.x, y, dest.z);
-		mMover.mPos    = mPos;
-		mMover.mVel    = mVel;
-		mMover.mRot    = *(Rot3i*)&mRotX;
+		mMover.mPos = mPos;
+		mMover.mVel = mVel;
+		mMover.mRot = *(Rot3i*)&mRotX;
 		updateMover(&mMover);
-		mPos  = mMover.mPos;
-		mVel  = mMover.mVel;
+		mPos            = mMover.mPos;
+		mVel            = mMover.mVel;
 		*(Rot3i*)&mRotX = mMover.mRot;
 	}
 }
@@ -815,16 +814,16 @@ void TAnimalRacer::fly()
 	Vec3f ground;
 	Vec3f goal;
 	f32 speed;
-	goal = *(Vec3f*)aniRaceGetPos();
+	goal       = *(Vec3f*)aniRaceGetPos();
 	Vec3f want = goal;
 	Vec3f from = mPos;
-	speed = njScalor(&mVel);
+	speed      = njScalor(&mVel);
 	EggHits hits;
 	if (meshColliProbe((EggHit*)&hits, (const Vec3f*)&want, 1) != 0) {
 		ground = hits.mHits[0].mPos;
 	}
 	Vec3f dir = racerSub(&mPos, &ground);
-	dir.y = 0.0f;
+	dir.y     = 0.0f;
 	if (njUnitVector(&dir) < gUnitVectorMin) {
 		dir = gVecZero;
 	}

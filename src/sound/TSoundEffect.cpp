@@ -10,7 +10,8 @@ const char* gTSoundEffectName = "TSoundEffect";
 
 // 0x80030B60
 TSoundEffect::TSoundEffect(TObject* parent)
-    : TObject(parent), mTable(0)
+    : TObject(parent)
+    , mTable(0)
 {
 	mWaiting.mHead  = 0;
 	mWaiting.mTail  = 0;
@@ -18,10 +19,10 @@ TSoundEffect::TSoundEffect(TObject* parent)
 	mPlaying.mHead  = 0;
 	mPlaying.mTail  = 0;
 	mPlaying.mCount = 0;
-	mFrame  = 0;
-	mSerial = 0;
-	_00     = (u32)gTSoundEffectName;
-	mSize   = 0x58;
+	mFrame          = 0;
+	mSerial         = 0;
+	_00             = (u32)gTSoundEffectName;
+	mSize           = 0x58;
 	for (int i = 0; i < 2; i++) {
 		gcaxSndOpenPort(&mPorts[i]);
 		for (int channel = 0; channel < 0x10; channel++) {
@@ -34,7 +35,7 @@ TSoundEffect::TSoundEffect(TObject* parent)
 	for (int i = 0; i < 0x20; i++) {
 		node = mPool.mNodes;
 		node += i;
-		node->mVoice.mPort = i >> 4;
+		node->mVoice.mPort              = i >> 4;
 		mPool.mNodes[i].mVoice.mChannel = i & 0xF;
 	}
 }
@@ -162,7 +163,10 @@ void TSoundEffect::stopAll()
 }
 
 // 0x80031048
-int TSoundEffect::isPlaying(int serial) { return findVoice(serial) != 0; }
+int TSoundEffect::isPlaying(int serial)
+{
+	return findVoice(serial) != 0;
+}
 
 // 0x80031074
 SoundVoice* TSoundEffect::allocVoice(int priority)
@@ -232,7 +236,7 @@ void TSoundEffect::draw()
 	SoundNode* node = mPlaying.mHead;
 	while (node != 0) {
 		voice = &node->mVoice;
-		next = node->mNext;
+		next  = node->mNext;
 		if (!(voice->mFlags & 0x10)) {
 			if (voice->mFlags & 0x80) {
 				voice->mFlags &= 0x7F;
@@ -491,6 +495,6 @@ void SoundPool::init(int count)
 		mNodes[i].mNext = &mNodes[i + 1];
 	}
 	mNodes[count - 1].mNext = 0;
-	mFree  = mNodes;
-	mCount = count;
+	mFree                   = mNodes;
+	mCount                  = count;
 }

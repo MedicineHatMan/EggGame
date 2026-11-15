@@ -26,7 +26,6 @@ const f32 gLastRippleFieldSetRange = 700.0f;
 
 // 0x802C4710
 ObjClassName gTObjLastRippleFieldName = { "TObjLastRippleField", 0 };
-
 }
 
 typedef char TObjLastRippleField_size_check[(sizeof(TObjLastRippleField) == 0xB0) ? 1 : -1];
@@ -88,11 +87,11 @@ void TObjLastRippleField::initFromDesc(SetDesc* desc)
 	s32 ry = mRot.y;
 	f32 sz;
 	f32 sx = 0.5f * desc->getFloat(0);
-	sz = 0.5f * desc->getFloat(0);
+	sz     = 0.5f * desc->getFloat(0);
 	colliShapeMakeBox(colliGetShapes((CharaColli*)mShape), &mPos, ry, sz, 2.5f, sx, 1);
 	colliGetShapes((CharaColli*)mShape)->mFlags |= 0x10;
 	mReach = rippleSqrt(colliGetShapes((CharaColli*)mShape)->mSizeX * colliGetShapes((CharaColli*)mShape)->mSizeX
-	                  + colliGetShapes((CharaColli*)mShape)->mSizeZ * colliGetShapes((CharaColli*)mShape)->mSizeZ);
+	                    + colliGetShapes((CharaColli*)mShape)->mSizeZ * colliGetShapes((CharaColli*)mShape)->mSizeZ);
 }
 
 // 0x801A84F4
@@ -283,10 +282,10 @@ static inline f32 fanRoot(f32 x)
 
 static void rippleDrawFan(u32 count, u8 alpha, f32 radius)
 {
-	static f32 sRoot2 = dolsqrtf(2.0f);
+	static f32 sRoot2     = dolsqrtf(2.0f);
 	static f32 sHalfRoot2 = dolsqrtf(0.5f);
-	int angle = 0;
-	u32 step = 0x10000 / count;
+	int angle             = 0;
+	u32 step              = 0x10000 / count;
 	f32 lo;
 	f32 hi;
 	f32 reach;
@@ -295,24 +294,25 @@ static void rippleDrawFan(u32 count, u8 alpha, f32 radius)
 	reach = radius * sRoot2;
 
 	GXBegin(GX_TRIANGLEFAN, GX_VTXFMT0, count + 2);
-	zero = 0.0f;
+	hi          = sHalfRoot2;
+	zero        = 0.0f;
+	lo          = -hi;
 	GX_FIFO_F32 = zero;
 	GX_FIFO_F32 = zero;
 	GX_FIFO_F32 = zero;
 	GX_FIFO_F32 = zero;
 	GX_FIFO_F32 = zero;
-	lo = -(hi = sHalfRoot2);
 	for (i = 0; i < count; i++) {
 		f32 c;
 		f32 s;
 		f32 dist;
 
 		njSinCos(angle, &s, &c);
-		c = c < lo ? lo : (c > hi ? hi : c);
-		s = s < lo ? lo : (s > hi ? hi : s);
-		dist = c * c + s * s;
-		f32 x = c * reach;
-		f32 z = s * reach;
+		c           = c < lo ? lo : (c > hi ? hi : c);
+		s           = s < lo ? lo : (s > hi ? hi : s);
+		dist        = c * c + s * s;
+		f32 x       = c * reach;
+		f32 z       = s * reach;
 		GX_FIFO_F32 = x;
 		GX_FIFO_F32 = zero;
 		GX_FIFO_F32 = z;
@@ -323,7 +323,7 @@ static void rippleDrawFan(u32 count, u8 alpha, f32 radius)
 		GX_FIFO_F32 = dist;
 		angle += step;
 	}
-	hi = sHalfRoot2;
+	hi          = sHalfRoot2;
 	GX_FIFO_F32 = reach * hi;
 	GX_FIFO_F32 = zero;
 	GX_FIFO_F32 = zero;

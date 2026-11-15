@@ -81,8 +81,8 @@ int GrassBlade::cut(TObjAction* other)
 		Vec3f from;
 		from = *other->getPos();
 		Vec3f pos;
-		pos = mPos;
-		f32 dist   = distXZ(&pos, &from);
+		pos      = mPos;
+		f32 dist = distXZ(&pos, &from);
 		if (dist <= other->getRadiusV()) {
 			mDir = angleToXZ(&from, &pos);
 			mFlags |= BLADE_CUT;
@@ -121,8 +121,8 @@ void GrassBlade::bend(TObjAction* other)
 		Vec3f from;
 		from = *other->getPos();
 		Vec3f pos;
-		pos = mPos;
-		from.y     = pos.y;
+		pos    = mPos;
+		from.y = pos.y;
 		if (vecDistanceSq(&pos, &from) <= 400.0f) {
 			mDir        = angleToXZ(&from, &pos);
 			mTiltTarget = (int)(1792.0f * grassRandSigned()) + 0x1CFF;
@@ -343,7 +343,7 @@ void GrassBlade::stateSway(int event)
 		}
 		switch (mStep) {
 		case 0: {
-			mFrame = 0;
+			mFrame     = 0;
 			int frames = 120.0f * RANDF();
 			if (frames >= 120) {
 				frames = 119;
@@ -534,7 +534,7 @@ void GrassBlade::drawFaded(u32 alpha)
 	int i;
 
 	for (i = 0; i < 3; i++) {
-		col[i]     = mVtx[i].col;
+		col[i]      = mVtx[i].col;
 		mVtx[i].col = alpha + (col[i] & 0xFFFFFF);
 	}
 	njDrawTexture3DExSetData((const NJS_TEXTURE_VTX*)mVtx, 3);

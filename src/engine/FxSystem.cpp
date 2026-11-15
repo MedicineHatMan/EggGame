@@ -18,33 +18,11 @@ struct NJS_TEXLIST;
 
 extern "C" {
 f32 gFxCoordArray[25][2] = {
-	{ 0.0f, 0.0f },
-	{ 1.0f, 0.0f },
-	{ 0.0f, 1.0f },
-	{ 1.0f, 1.0f },
-	{ 0.5f, 0.0f },
-	{ 0.0f, 0.5f },
-	{ 0.5f, 0.5f },
-	{ 1.0f, 0.5f },
-	{ 0.5f, 1.0f },
-	{ 0.25f, 0.0f },
-	{ 0.75f, 0.0f },
-	{ 0.0f, 0.25f },
-	{ 0.25f, 0.25f },
-	{ 0.5f, 0.25f },
-	{ 0.75f, 0.25f },
-	{ 1.0f, 0.25f },
-	{ 0.25f, 0.5f },
-	{ 0.75f, 0.5f },
-	{ 0.0f, 0.75f },
-	{ 0.25f, 0.75f },
-	{ 0.5f, 0.75f },
-	{ 0.75f, 0.75f },
-	{ 1.0f, 0.75f },
-	{ 0.25f, 1.0f },
-	{ 0.75f, 1.0f },
+	{ 0.0f, 0.0f },   { 1.0f, 0.0f },  { 0.0f, 1.0f },  { 1.0f, 1.0f },  { 0.5f, 0.0f },  { 0.0f, 0.5f },   { 0.5f, 0.5f },
+	{ 1.0f, 0.5f },   { 0.5f, 1.0f },  { 0.25f, 0.0f }, { 0.75f, 0.0f }, { 0.0f, 0.25f }, { 0.25f, 0.25f }, { 0.5f, 0.25f },
+	{ 0.75f, 0.25f }, { 1.0f, 0.25f }, { 0.25f, 0.5f }, { 0.75f, 0.5f }, { 0.0f, 0.75f }, { 0.25f, 0.75f }, { 0.5f, 0.75f },
+	{ 0.75f, 0.75f }, { 1.0f, 0.75f }, { 0.25f, 1.0f }, { 0.75f, 1.0f },
 };
-
 }
 
 // 0x800DA460
@@ -139,22 +117,22 @@ void fxSystemReset()
 		gFxGroups[i].mHead  = NULL;
 		gFxGroups[i].mCount = 0;
 	}
-	gFxRigFreeList = NULL;
-	gFxShapeFreeList = NULL;
-	sFxShapePool = NULL;
-	sFxShapePoolCount = 0;
-	sFxRigPool = NULL;
-	sFxRigPoolCount = 0;
-	gFxParticleFreeList = NULL;
-	sFxParticlePool = NULL;
-	sFxParticlePoolCount = 0;
-	gFxExtraFreeList = NULL;
-	sFxExtraPool = NULL;
-	sFxExtraPoolCount = 0;
-	gFxStepTable = NULL;
-	sFxTexImage = NULL;
+	gFxRigFreeList        = NULL;
+	gFxShapeFreeList      = NULL;
+	sFxShapePool          = NULL;
+	sFxShapePoolCount     = 0;
+	sFxRigPool            = NULL;
+	sFxRigPoolCount       = 0;
+	gFxParticleFreeList   = NULL;
+	sFxParticlePool       = NULL;
+	sFxParticlePoolCount  = 0;
+	gFxExtraFreeList      = NULL;
+	sFxExtraPool          = NULL;
+	sFxExtraPoolCount     = 0;
+	gFxStepTable          = NULL;
+	sFxTexImage           = NULL;
 	gFxParticleExtraCount = 0;
-	gFxParticleCount = 0;
+	gFxParticleCount      = 0;
 }
 
 // 0x800DA758
@@ -171,9 +149,9 @@ void fxShapePoolLink(void* pool, int count)
 		s[i].mNext = &s[i + 1];
 	}
 	s[count - 1].mNext = NULL;
-	sFxShapePool = pool;
-	sFxShapePoolCount = count;
-	gFxShapeFreeList = (FxShape*)pool;
+	sFxShapePool       = pool;
+	sFxShapePoolCount  = count;
+	gFxShapeFreeList   = (FxShape*)pool;
 }
 
 // 0x800DA7B0
@@ -185,9 +163,9 @@ void fxRigPoolLink(void* pool, int count)
 		s[i].mNext = &s[i + 1];
 	}
 	s[count - 1].mNext = NULL;
-	sFxRigPool = pool;
-	sFxRigPoolCount = count;
-	gFxRigFreeList = (FxEmitter*)pool;
+	sFxRigPool         = pool;
+	sFxRigPoolCount    = count;
+	gFxRigFreeList     = (FxEmitter*)pool;
 }
 
 // 0x800DA804
@@ -198,10 +176,10 @@ void fxParticlePoolLink(void* pool, int count)
 	for (i = 0; i < count - 1; i++) {
 		s[i].mNext = &s[i + 1];
 	}
-	s[count - 1].mNext = NULL;
-	sFxParticlePool = pool;
+	s[count - 1].mNext   = NULL;
+	sFxParticlePool      = pool;
 	sFxParticlePoolCount = count;
-	gFxParticleFreeList = (FxParticle*)pool;
+	gFxParticleFreeList  = (FxParticle*)pool;
 }
 
 // 0x800DA854
@@ -213,9 +191,9 @@ void fxExtraPoolLink(void* pool, int count)
 		s[i].mNext = &s[i + 1];
 	}
 	s[count - 1].mNext = NULL;
-	sFxExtraPool = pool;
-	sFxExtraPoolCount = count;
-	gFxExtraFreeList = (FxExtra*)pool;
+	sFxExtraPool       = pool;
+	sFxExtraPoolCount  = count;
+	gFxExtraFreeList   = (FxExtra*)pool;
 }
 
 // 0x800DA8A4
@@ -240,18 +218,18 @@ Fx* fxSpawn(int groupNo, int bankNo, int id)
 		return NULL;
 	}
 	u32 kind = desc[0];
-	Fx* fx = gFxFactories[kind](bank, index);
+	Fx* fx   = gFxFactories[kind](bank, index);
 	if (fx != NULL) {
 		FxGroup* group = &gFxGroups[groupNo];
 		if (group->mHead != NULL) {
-			fx->mPrev = group->mHead->mPrev;
-			fx->mNext = NULL;
+			fx->mPrev                  = group->mHead->mPrev;
+			fx->mNext                  = NULL;
 			group->mHead->mPrev->mNext = fx;
-			group->mHead->mPrev = fx;
+			group->mHead->mPrev        = fx;
 		} else {
-			fx->mPrev = fx;
+			fx->mPrev    = fx;
 			group->mHead = fx;
-			fx->mNext = NULL;
+			fx->mNext    = NULL;
 		}
 		group->mCount++;
 		if (fx->mFlags & 2) {
@@ -262,7 +240,7 @@ Fx* fxSpawn(int groupNo, int bankNo, int id)
 		fx->mOwner  = NULL;
 		fx->mGroup  = group;
 		fx->mFollow = NULL;
-		fx->mEvent     = 0;
+		fx->mEvent  = 0;
 		if (kind == 0) {
 			fx->mUpdate(fx);
 		}
@@ -323,7 +301,7 @@ void fxRemove(Fx* fx)
 		if (fx->mPrev == fx) {
 			group->mHead = NULL;
 		} else if (group->mHead == fx) {
-			group->mHead = fx->mNext;
+			group->mHead     = fx->mNext;
 			fx->mPrev->mNext = NULL;
 			if (fx->mNext != NULL) {
 				fx->mNext->mPrev = fx->mPrev;
@@ -346,7 +324,7 @@ void fxRemove(Fx* fx)
 void fxRemoveBank(int bank)
 {
 	FxGroup* groups = gFxGroups;
-	gFxDebugFlags = 2;
+	gFxDebugFlags   = 2;
 	for (int i = 0; i < gFxGroupCount; i++) {
 		Fx* fx = groups[i].mHead;
 		while (fx != NULL) {
@@ -381,7 +359,7 @@ void fxFlagOwner(void* owner)
 void fxRemoveOwner(void* owner)
 {
 	FxGroup* groups = gFxGroups;
-	gFxDebugFlags = 1;
+	gFxDebugFlags   = 1;
 	for (int i = 0; i < gFxGroupCount; i++) {
 		Fx* fx = groups[i].mHead;
 		while (fx != NULL) {
@@ -402,9 +380,9 @@ void fxRemoveAll()
 	FxGroup* group;
 	int i;
 	FxGroup* groups = gFxGroups;
-	gFxDebugFlags = 2;
+	gFxDebugFlags   = 2;
 	for (i = 0; i < gFxGroupCount; i++) {
-		group = &groups[i];
+		group  = &groups[i];
 		Fx* fx = group->mHead;
 		while (fx != NULL) {
 			Fx* next = fx->mNext;
@@ -420,7 +398,7 @@ void fxRemoveAll()
 // 0x800DADBC
 void fxSetRigAlloc(void* (*alloc)(u32), void (*free)(void*))
 {
-	gFxRigAlloc = alloc;
+	gFxRigAlloc   = alloc;
 	gFxRigRelease = free;
 }
 
@@ -592,10 +570,10 @@ void fxSetZMode(int mode, u8 ref)
 	int m = mode & 0xFF;
 	switch (m) {
 	case 3:
-			GXSetAlphaCompare(GX_GREATER, ref, GX_AOP_AND, GX_ALWAYS, 0);
+		GXSetAlphaCompare(GX_GREATER, ref, GX_AOP_AND, GX_ALWAYS, 0);
 		break;
 	default:
-			GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_AND, GX_ALWAYS, 0);
+		GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_AND, GX_ALWAYS, 0);
 		break;
 	}
 	if ((u8)mode != gFxLastZMode.mMode) {
@@ -624,8 +602,7 @@ void fxSetZMode(int mode, u8 ref)
 // 0x800DB280
 void fxSetTevColor(const u8* color)
 {
-	if (color[0] != gFxLastColor[0] || color[1] != gFxLastColor[1] || color[2] != gFxLastColor[2]
-	    || color[3] != gFxLastColor[3]) {
+	if (color[0] != gFxLastColor[0] || color[1] != gFxLastColor[1] || color[2] != gFxLastColor[2] || color[3] != gFxLastColor[3]) {
 		gFxLastColor[0] = color[0];
 		gFxLastColor[1] = color[1];
 		gFxLastColor[2] = color[2];

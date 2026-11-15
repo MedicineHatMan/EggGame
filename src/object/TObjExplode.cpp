@@ -28,7 +28,8 @@ const char* gTObjExplodeName = "TObjExplode";
 
 // 0x8018B724
 TObjExplode::TObjExplode(TObject* parent, const Vec3f* pos, u16 id, u16 kind)
-    : TObjAction(parent), mPos(*pos)
+    : TObjAction(parent)
+    , mPos(*pos)
 {
 	f32 mtx[12];
 	ColliShape* shape;
@@ -82,10 +83,16 @@ int TObjExplode::onHit(const TObjAction*, int, int* result)
 }
 
 // 0x8018B978
-int TObjExplode::getKind() { return 3; }
+int TObjExplode::getKind()
+{
+	return 3;
+}
 
 // 0x8018B980
-Vec3f* TObjExplode::getPos() { return &mPos; }
+Vec3f* TObjExplode::getPos()
+{
+	return &mPos;
+}
 
 // 0x8018B988
 extern "C" void spawnChickenBomb(s16 owner, const Vec3f* pos)

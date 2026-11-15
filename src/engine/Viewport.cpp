@@ -8,10 +8,14 @@ f32 gViewX; // 0x802C4C68
 f32 gViewY; // 0x802C4C6C
 
 // 0x8001542C
-extern "C" void viewportInit() { }
+extern "C" void viewportInit()
+{
+}
 
 // 0x80015430
-extern "C" void viewportTerm() { }
+extern "C" void viewportTerm()
+{
+}
 
 // 0x80015434
 extern "C" void setViewport(int split)
@@ -116,6 +120,7 @@ extern "C" void getViewport(f32* x, f32* y, f32* w, f32* h)
 }
 
 // 0x80015664
+// clang-format off
 extern "C" asm f32 quatNormalize(register Quat* q)
 {
 	nofralloc
@@ -132,8 +137,10 @@ extern "C" asm f32 quatNormalize(register Quat* q)
 	psq_st f4, 0x8(q), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80015694
+// clang-format off
 extern "C" asm void quatScale(register Quat* q, register f32 scale)
 {
 	nofralloc
@@ -145,8 +152,10 @@ extern "C" asm void quatScale(register Quat* q, register f32 scale)
 	psq_st f3, 0x8(q), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x800156B0
+// clang-format off
 extern "C" asm void quatAdd(register Quat* q, register const Quat* add)
 {
 	nofralloc
@@ -160,3 +169,4 @@ extern "C" asm void quatAdd(register Quat* q, register const Quat* add)
 	psq_st f1, 0x8(q), 0, 0
 	blr
 }
+// clang-format on

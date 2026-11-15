@@ -52,9 +52,9 @@ extern "C" TObject* createTObjPurpleIceWall(TObject* parent, SetDesc* desc)
 TObjPurpleIceWall::TObjPurpleIceWall(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00       = (u32)gTObjPurpleIceWallName.mName;
-	mSize     = 0xDC;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
+	_00        = (u32)gTObjPurpleIceWallName.mName;
+	mSize      = 0xDC;
+	mDrawTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
 	mModelData = findGeObjModel("MODEL_ICE_WALL");
 	mTexList   = (NJS_TEXLIST*)findGeObjData("TLS_MODEL_ICE_WALL");
 	mColliData = (MeshData*)findGeObjData("COL_MODEL_ICE_WALL");
@@ -79,7 +79,7 @@ void TObjPurpleIceWall::initFromDesc(SetDesc* desc)
 	mtxSetTransV(mMatrix, &mPos);
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 
-	mCenter  = *(Vec3f*)&mModelData->model->center;
+	mCenter = *(Vec3f*)&mModelData->model->center;
 	mtxMultVec(mMatrix, &mCenter, &mCenter);
 	mRadius = mModelData->model->r;
 	updateShape();
@@ -151,9 +151,9 @@ void TObjPurpleIceWall::setColliBox(void* colli, const Vec3f* center, f32 radius
 	high.z = size.z;
 	Vec3f low;
 	Vec3f t = colliNeg(size);
-	low.x = t.x;
-	low.y = t.y;
-	low.z = t.z;
+	low.x   = t.x;
+	low.y   = t.y;
+	low.z   = t.z;
 
 	gjPushUnitMatrix();
 	njTranslateEx(center);
@@ -199,11 +199,11 @@ void TObjPurpleIceWall::draw()
 	}
 	switch (mAct) {
 	case 0:
-			stateWait();
-			break;
+		stateWait();
+		break;
 	case 1:
-			shatter();
-			break;
+		shatter();
+		break;
 	}
 }
 
@@ -229,13 +229,13 @@ void TObjPurpleIceWall::stateWait()
 void TObjPurpleIceWall::shatter()
 {
 	ShatterList burst;
-	burst.mModels = getGeObjModels();
-	burst.mTexture = getGeObjTextures()[0];
-	burst.mFirst = 2;
+	burst.mModels     = getGeObjModels();
+	burst.mTexture    = getGeObjTextures()[0];
+	burst.mFirst      = 2;
 	burst.mModelCount = 2;
-	burst.mCount = 10;
-	burst.mScale = 1.0f;
-	burst.mSpeed = 0.5f;
+	burst.mCount      = 10;
+	burst.mScale      = 1.0f;
+	burst.mSpeed      = 0.5f;
 
 	Vec3f at = mCenter;
 	at.y -= mRadius;

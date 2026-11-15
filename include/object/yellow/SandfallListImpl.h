@@ -23,10 +23,10 @@ void SandfallList::clear()
 	SandfallNode* node = mHead;
 	while (node != 0) {
 		SandfallNode* next = node->mNext;
-		node->mList = 0;
-		node->mNext = 0;
-		node->mPrev = 0;
-		node = next;
+		node->mList        = 0;
+		node->mNext        = 0;
+		node->mPrev        = 0;
+		node               = next;
 	}
 }
 

@@ -46,19 +46,19 @@ public:
 	void showOptions();
 	void hideOptions();
 
-	int mState;          // _0C
-	int mBackState;      // _10 the page a message returns to
-	int mNextState;      // _14 setState writes this advance applies it after the current page's update
-	int mBoxKind;        // _18 how runBox treats the box 1 yes/no 2 message 3 skippable 4 timed
-	int mChoice;         // _1C 0 yes 1 no
-	int mBoxTimer;       // _20
-	int _24;             // _24
-	int mCard;           // _28 the card state from cardGetState
-	int mPrevCard;       // _2C
-	int mFrame;          // _30
-	u32 mPressedA;       // _34 pad bit 0x100 A latched for this frame
-	TSimpleText* mOption[2]; // _38 the two answers beside the yes/no window messages 0x27 and 0x28
-	TSimpleText* mBox;       // _40
+	int mState;               // _0C
+	int mBackState;           // _10 the page a message returns to
+	int mNextState;           // _14 setState writes this advance applies it after the current page's update
+	int mBoxKind;             // _18 how runBox treats the box 1 yes/no 2 message 3 skippable 4 timed
+	int mChoice;              // _1C 0 yes 1 no
+	int mBoxTimer;            // _20
+	int _24;                  // _24
+	int mCard;                // _28 the card state from cardGetState
+	int mPrevCard;            // _2C
+	int mFrame;               // _30
+	u32 mPressedA;            // _34 pad bit 0x100 A latched for this frame
+	TSimpleText* mOption[2];  // _38 the two answers beside the yes/no window messages 0x27 and 0x28
+	TSimpleText* mBox;        // _40
 	TAeObjMsgWindow* mWindow; // _44 the yes/no window
 };
 

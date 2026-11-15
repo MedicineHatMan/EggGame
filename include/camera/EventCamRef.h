@@ -19,17 +19,17 @@ struct EventCamRef {
 	EventCamRef();  // 0x8012CF74
 	~EventCamRef(); // 0x8012CF84
 
-	int isActive();         // 0x8012CFCC
-	void set(ObjMsg* msg);  // 0x8012CFE0 takes the camera an EventCamMsg names
-	void release();         // 0x8012CFF4
+	int isActive();        // 0x8012CFCC
+	void set(ObjMsg* msg); // 0x8012CFE0 takes the camera an EventCamMsg names
+	void release();        // 0x8012CFF4
 
 	int mActive; // _00
 	int mId;     // _04
 };
 
-void eventCamInit();        // 0x8012D03C
-void eventCamExit();        // 0x8012D050
-void eventCamReset();       // 0x8012D054
-void eventCamFree(int id);  // 0x8012D074 lets the script go on once the camera it started is given back
+void eventCamInit();       // 0x8012D03C
+void eventCamExit();       // 0x8012D050
+void eventCamReset();      // 0x8012D054
+void eventCamFree(int id); // 0x8012D074 lets the script go on once the camera it started is given back
 
 #endif

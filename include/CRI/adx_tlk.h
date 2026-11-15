@@ -8,24 +8,24 @@
 #define ADXT_MAX_OBJ 16
 #define ADXT_MAX_NCH 2
 
-#define ADXT_STAT_STOP 0
+#define ADXT_STAT_STOP    0
 #define ADXT_STAT_DECINFO 1
-#define ADXT_STAT_PREP 2
+#define ADXT_STAT_PREP    2
 #define ADXT_STAT_PLAYING 3
-#define ADXT_STAT_DECEND 4
+#define ADXT_STAT_DECEND  4
 #define ADXT_STAT_PLAYEND 5
-#define ADXT_STAT_ERROR 6
+#define ADXT_STAT_ERROR   6
 
-#define ADXT_PMODE_FNAME 0
-#define ADXT_PMODE_AFS 1
-#define ADXT_PMODE_MEM 2
-#define ADXT_PMODE_SJ 3
+#define ADXT_PMODE_FNAME  0
+#define ADXT_PMODE_AFS    1
+#define ADXT_PMODE_MEM    2
+#define ADXT_PMODE_SJ     3
 #define ADXT_PMODE_SLFILE 4
 
-#define ADXT_PAN_LEFT (-15)
+#define ADXT_PAN_LEFT   (-15)
 #define ADXT_PAN_CENTER 0
-#define ADXT_PAN_RIGHT 15
-#define ADXT_PAN_AUTO (-128)
+#define ADXT_PAN_RIGHT  15
+#define ADXT_PAN_AUTO   (-128)
 
 #define ADXT_DEF_SVRFREQ 60
 
@@ -35,65 +35,65 @@
 #define ADXT_IBUF_XLEN 0x24
 
 typedef struct {
-	signed char used;               /* 00 */
-	signed char stat;               /* 01 */
-	signed char pmode;              /* 02 */
-	signed char maxnch;             /* 03 */
-	ADXSJD sjd;                     /* 04 */
-	ADXSTM stm;                     /* 08 */
-	ADXRNA rna;                     /* 0C */
-	SJ sjf;                         /* 10 */
-	SJ sji;                         /* 14 */
-	SJ sjo[ADXT_MAX_NCH];           /* 18 */
-	char* ibuf;                     /* 20 */
-	int ibuflen;                    /* 24 */
-	int ibufxlen;                   /* 28 */
-	short* obuf;                    /* 2C */
-	int obufsize;                   /* 30 */
-	int obufdist;                   /* 34 */
-	int svrfreq;                    /* 38 */
-	short maxsct;                   /* 3C */
-	short minsct;                   /* 3E */
-	short outvol;                   /* 40 */
-	short outpan[ADXT_MAX_NCH];     /* 42 */
-	short pad46;                    /* 46 */
-	int maxdecsmpl;                 /* 48 */
-	int lpcnt;                      /* 4C */
-	int lp_skiplen;                 /* 50 */
-	int trp;                        /* 54 */
-	int wpos;                       /* 58 */
-	int mofst;                      /* 5C */
-	short ercode;                   /* 60 */
-	int edecpos;                    /* 64 */
-	short edeccnt;                  /* 68 */
-	short eshrtcnt;                 /* 6A */
-	signed char lpflg;              /* 6C */
-	signed char autorcvr;           /* 6D */
-	signed char fltmode;            /* 6E */
-	signed char execflag;           /* 6F */
-	signed char pstwait_flag;       /* 70 */
-	signed char pstready_flag;      /* 71 */
-	signed char pause_flag;         /* 72 */
-	ADXAMP amp;                     /* 74 */
-	SJ ampsji[ADXT_MAX_NCH];        /* 78 */
-	SJ ampsjo[ADXT_MAX_NCH];        /* 80 */
-	int time_ofst;                  /* 88 */
-	int lesct;                      /* 8C */
-	int trpnsmpl;                   /* 90 */
-	LSC lsc;                        /* 94 */
-	signed char lnkflg;             /* 98 */
-	signed char rsv;                /* 99 */
-	short rsv2;                     /* 9A */
-	unsigned int tvofst;            /* 9C */
-	unsigned int svcnt;             /* A0 */
-	unsigned int decofst;           /* A4 */
-	signed char stm_start;          /* A8 */
-	char padA9[3];                  /* A9 */
-	char* fname_buf;                /* AC */
-	const char* fname;              /* B0 */
-	void* dir;                      /* B4 */
-	int ofst;                       /* B8 */
-	int nsct;                       /* BC */
+	signed char used;           /* 00 */
+	signed char stat;           /* 01 */
+	signed char pmode;          /* 02 */
+	signed char maxnch;         /* 03 */
+	ADXSJD sjd;                 /* 04 */
+	ADXSTM stm;                 /* 08 */
+	ADXRNA rna;                 /* 0C */
+	SJ sjf;                     /* 10 */
+	SJ sji;                     /* 14 */
+	SJ sjo[ADXT_MAX_NCH];       /* 18 */
+	char* ibuf;                 /* 20 */
+	int ibuflen;                /* 24 */
+	int ibufxlen;               /* 28 */
+	short* obuf;                /* 2C */
+	int obufsize;               /* 30 */
+	int obufdist;               /* 34 */
+	int svrfreq;                /* 38 */
+	short maxsct;               /* 3C */
+	short minsct;               /* 3E */
+	short outvol;               /* 40 */
+	short outpan[ADXT_MAX_NCH]; /* 42 */
+	short pad46;                /* 46 */
+	int maxdecsmpl;             /* 48 */
+	int lpcnt;                  /* 4C */
+	int lp_skiplen;             /* 50 */
+	int trp;                    /* 54 */
+	int wpos;                   /* 58 */
+	int mofst;                  /* 5C */
+	short ercode;               /* 60 */
+	int edecpos;                /* 64 */
+	short edeccnt;              /* 68 */
+	short eshrtcnt;             /* 6A */
+	signed char lpflg;          /* 6C */
+	signed char autorcvr;       /* 6D */
+	signed char fltmode;        /* 6E */
+	signed char execflag;       /* 6F */
+	signed char pstwait_flag;   /* 70 */
+	signed char pstready_flag;  /* 71 */
+	signed char pause_flag;     /* 72 */
+	ADXAMP amp;                 /* 74 */
+	SJ ampsji[ADXT_MAX_NCH];    /* 78 */
+	SJ ampsjo[ADXT_MAX_NCH];    /* 80 */
+	int time_ofst;              /* 88 */
+	int lesct;                  /* 8C */
+	int trpnsmpl;               /* 90 */
+	LSC lsc;                    /* 94 */
+	signed char lnkflg;         /* 98 */
+	signed char rsv;            /* 99 */
+	short rsv2;                 /* 9A */
+	unsigned int tvofst;        /* 9C */
+	unsigned int svcnt;         /* A0 */
+	unsigned int decofst;       /* A4 */
+	signed char stm_start;      /* A8 */
+	char padA9[3];              /* A9 */
+	char* fname_buf;            /* AC */
+	const char* fname;          /* B0 */
+	void* dir;                  /* B4 */
+	int ofst;                   /* B8 */
+	int nsct;                   /* BC */
 } ADX_TALK;
 
 typedef ADX_TALK* ADXT;

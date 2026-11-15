@@ -15,17 +15,17 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();          // _0C
-	virtual void render();        // _1C
+	virtual void draw();           // _0C
+	virtual void render();         // _1C
 	virtual int vfn_20(s16* code); // _20 a BossConsoleMsg
 
 	int setLife(struct BossConsoleMsg* msg); // 0x800F2A24
-	int close();                              // 0x800F2A6C
+	int close();                             // 0x800F2A6C
 
 	TAeLayer* mBar;     // _34 id 0xB7
 	TAeLayer* mBarBack; // _38 id 0xBA
 	TAeLayer* mFace;    // _3C sBossConsoleOpen bound into mBar
-	DrawTask* mTask;        // _40
+	DrawTask* mTask;    // _40
 	BOOL mClosing;      // _44
 };
 
@@ -39,9 +39,9 @@ void ringDrawTerm();
 
 /** Message 0xB9 sets the boss's life 0 to 1 */
 struct BossConsoleMsg {
-	s16 mCode;  // _00
+	s16 mCode; // _00
 	u8 _02[2];
-	f32 mLife;  // _04
+	f32 mLife; // _04
 };
 
 extern "C" {

@@ -10,15 +10,15 @@ extern const f32 gUnitVectorMin;
 // Named constants come ahead of the pooled literals so this 0.0 is separate from the one the code below uses
 // Nothing in the DOL reads it
 extern "C" const f32 mathZero = 0.0f;
-extern "C" const f32 mathOne = 1.0f;
+extern "C" const f32 mathOne  = 1.0f;
 
 static inline f32 mathSqrt(f32 x)
 {
 	if (x > 0.0f) {
-		f64 guess = __frsqrte(x);
-		guess     = 0.5 * guess * (3.0 - guess * guess * x);
-		guess     = 0.5 * guess * (3.0 - guess * guess * x);
-		guess     = 0.5 * guess * (3.0 - guess * guess * x);
+		f64 guess         = __frsqrte(x);
+		guess             = 0.5 * guess * (3.0 - guess * guess * x);
+		guess             = 0.5 * guess * (3.0 - guess * guess * x);
+		guess             = 0.5 * guess * (3.0 - guess * guess * x);
 		volatile f32 root = (f32)(x * guess);
 		return root;
 	}
@@ -33,7 +33,10 @@ extern "C" int angleToXZ(const Vec3f* from, const Vec3f* to)
 }
 
 // 0x80061790
-extern "C" int vecAngleXZ(const Vec3f* v) { return (int)(10430.38043493439 * (f32)atan2(v->x, v->z)); }
+extern "C" int vecAngleXZ(const Vec3f* v)
+{
+	return (int)(10430.38043493439 * (f32)atan2(v->x, v->z));
+}
 
 // 0x800617D0
 extern "C" f32 distXZ(const Vec3f* a, const Vec3f* b)
@@ -44,7 +47,10 @@ extern "C" f32 distXZ(const Vec3f* a, const Vec3f* b)
 }
 
 // 0x80061854
-extern "C" f32 vecLenXZ(const Vec3f* v) { return mathSqrt(v->x * v->x + v->z * v->z); }
+extern "C" f32 vecLenXZ(const Vec3f* v)
+{
+	return mathSqrt(v->x * v->x + v->z * v->z);
+}
 
 // 0x800618CC
 // A ground plane vector of a length pointing along an angle
@@ -76,10 +82,16 @@ extern "C" f32 vecNormalizeXZ(const Vec3f* v, Vec3f* out)
 }
 
 // 0x800619FC
-extern "C" f32 vecDotXZ(const Vec3f* a, const Vec3f* b) { return a->x * b->x + a->z * b->z; }
+extern "C" f32 vecDotXZ(const Vec3f* a, const Vec3f* b)
+{
+	return a->x * b->x + a->z * b->z;
+}
 
 // 0x80061A18
-extern "C" f32 vecCrossXZ(const Vec3f* a, const Vec3f* b) { return a->z * b->x - a->x * b->z; }
+extern "C" f32 vecCrossXZ(const Vec3f* a, const Vec3f* b)
+{
+	return a->z * b->x - a->x * b->z;
+}
 
 // 0x80061A34
 // out = v - 2 * dot(v, n) * n a bounce off a surface with the normal n
@@ -106,6 +118,7 @@ extern "C" void vecLerp(f32 t, const Vec3f* a, const Vec3f* b, Vec3f* out)
 
 // 0x80061B18
 // Turns a vector about the Y axis
+// clang-format off
 extern "C" asm void vecRotateY(const Vec3f* in, Vec3f* out, int angle)
 {
 	nofralloc
@@ -129,9 +142,13 @@ extern "C" asm void vecRotateY(const Vec3f* in, Vec3f* out, int angle)
 	psq_st f1, 0x8(r4), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x80061B64
-extern "C" void mtxConcat(f32* dst, const f32* a, const f32* b) { PSMTXConcat(a, b, dst); }
+extern "C" void mtxConcat(f32* dst, const f32* a, const f32* b)
+{
+	PSMTXConcat(a, b, dst);
+}
 
 // 0x80061B98
 extern "C" void mtxGetPos(const f32* m, Vec3f* out)
@@ -154,13 +171,20 @@ extern "C" void mtxToQuat(const f32* m, f32* out)
 }
 
 // 0x80061C08
-extern "C" void mtxMultVec(const f32* m, const Vec3f* in, Vec3f* out) { PSMTXMultVec(m, (const NJS_VECTOR*)in, (NJS_VECTOR*)out); }
+extern "C" void mtxMultVec(const f32* m, const Vec3f* in, Vec3f* out)
+{
+	PSMTXMultVec(m, (const NJS_VECTOR*)in, (NJS_VECTOR*)out);
+}
 
 // 0x80061C28
 // Rotate and scale only leaving out the matrix's place
-extern "C" void mtxMultVecSR(const f32* m, const Vec3f* in, Vec3f* out) { PSMTXMultVecSR(m, (const NJS_VECTOR*)in, (NJS_VECTOR*)out); }
+extern "C" void mtxMultVecSR(const f32* m, const Vec3f* in, Vec3f* out)
+{
+	PSMTXMultVecSR(m, (const NJS_VECTOR*)in, (NJS_VECTOR*)out);
+}
 
 // 0x80061C48
+// clang-format off
 extern "C" asm void mtxTranslateV(f32* dst, const f32* src, const Vec3f* v)
 {
 	nofralloc
@@ -189,8 +213,10 @@ extern "C" asm void mtxTranslateV(f32* dst, const f32* src, const Vec3f* v)
 	psq_st f5, 0x28(r3), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80061CA8
+// clang-format off
 extern "C" asm void mtxTranslate(f32* dst, const f32* src, f32 x, f32 y, f32 z)
 {
 	nofralloc
@@ -220,9 +246,11 @@ extern "C" asm void mtxTranslate(f32* dst, const f32* src, f32 x, f32 y, f32 z)
 	psq_st f5, 0x28(r3), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80061D0C
 // Takes the angle in r5 and leaves its sine in f1 and its cosine in f2
+// clang-format off
 extern "C" asm void mtxLoadSinCos()
 {
 	nofralloc
@@ -235,8 +263,10 @@ extern "C" asm void mtxLoadSinCos()
 	lfs f2, 0x4(r9)
 	blr
 }
+// clang-format on
 
 // 0x80061D2C
+// clang-format off
 extern "C" asm void mtxRotateX(f32* dst, const f32* src, int angle)
 {
 	nofralloc
@@ -272,8 +302,10 @@ extern "C" asm void mtxRotateX(f32* dst, const f32* src, int angle)
 	psq_st f5, 0x28(r3), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80061DA8
+// clang-format off
 extern "C" asm void mtxRotateY(f32* dst, const f32* src, int angle)
 {
 	nofralloc
@@ -309,8 +341,10 @@ extern "C" asm void mtxRotateY(f32* dst, const f32* src, int angle)
 	psq_st f5, 0x28(r3), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80061E24
+// clang-format off
 extern "C" asm void mtxRotateZ(f32* dst, const f32* src, int angle)
 {
 	nofralloc
@@ -340,6 +374,7 @@ extern "C" asm void mtxRotateZ(f32* dst, const f32* src, int angle)
 	psq_st f5, 0x28(r3), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80061E88
 // angles holds x y z
@@ -359,6 +394,7 @@ extern "C" void mtxConcatQuat(f32* dst, const f32* src, const f32* q)
 }
 
 // 0x80061F24
+// clang-format off
 extern "C" asm void mtxScaleV(f32* dst, const f32* src, const Vec3f* v)
 {
 	nofralloc
@@ -384,8 +420,10 @@ extern "C" asm void mtxScaleV(f32* dst, const f32* src, const Vec3f* v)
 	psq_st f5, 0x28(r3), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80061F78
+// clang-format off
 extern "C" asm void mtxScale(f32 x, f32 y, f32 z, f32* dst, const f32* src)
 {
 	nofralloc
@@ -412,27 +450,49 @@ extern "C" asm void mtxScale(f32 x, f32 y, f32 z, f32* dst, const f32* src)
 	psq_st f5, 0x28(r3), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80061FD0
-extern "C" int mtxInverse(f32* dst, const f32* src) { return PSMTXInverse(src, dst); }
+extern "C" int mtxInverse(f32* dst, const f32* src)
+{
+	return PSMTXInverse(src, dst);
+}
 
 // 0x80061FFC
-extern "C" void mtxTranspose(f32* dst, const f32* src) { PSMTXTranspose(src, dst); }
+extern "C" void mtxTranspose(f32* dst, const f32* src)
+{
+	PSMTXTranspose(src, dst);
+}
 
 // 0x80062028
-extern "C" void mtxCopy(f32* dst, const f32* src) { PSMTXCopy(src, dst); }
+extern "C" void mtxCopy(f32* dst, const f32* src)
+{
+	PSMTXCopy(src, dst);
+}
 
 // 0x80062054
-extern "C" f32 lerpF(f32 a, f32 b, f32 t) { return t * (b - a) + a; }
+extern "C" f32 lerpF(f32 a, f32 b, f32 t)
+{
+	return t * (b - a) + a;
+}
 
 // 0x80062060
-extern "C" void mtxIdentity(f32* m) { PSMTXIdentity(m); }
+extern "C" void mtxIdentity(f32* m)
+{
+	PSMTXIdentity(m);
+}
 
 // 0x80062080
-extern "C" void mtxSetTransV(f32* m, const Vec3f* v) { PSMTXTrans(m, v->x, v->y, v->z); }
+extern "C" void mtxSetTransV(f32* m, const Vec3f* v)
+{
+	PSMTXTrans(m, v->x, v->y, v->z);
+}
 
 // 0x800620AC
-extern "C" void mtxSetTrans(f32* m, f32 x, f32 y, f32 z) { PSMTXTrans(m, x, y, z); }
+extern "C" void mtxSetTrans(f32* m, f32 x, f32 y, f32 z)
+{
+	PSMTXTrans(m, x, y, z);
+}
 
 // 0x800620CC
 extern "C" void mtxSetRotX(f32* m, int angle)
@@ -463,7 +523,13 @@ extern "C" void mtxFromQuat(f32* m, const f32* q)
 }
 
 // 0x800621A8
-extern "C" void mtxSetScaleV(f32* m, const Vec3f* v) { PSMTXScale(m, v->x, v->y, v->z); }
+extern "C" void mtxSetScaleV(f32* m, const Vec3f* v)
+{
+	PSMTXScale(m, v->x, v->y, v->z);
+}
 
 // 0x800621D4
-extern "C" void mtxSetScale(f32* m, f32 x, f32 y, f32 z) { PSMTXScale(m, x, y, z); }
+extern "C" void mtxSetScale(f32* m, f32 x, f32 y, f32 z)
+{
+	PSMTXScale(m, x, y, z);
+}

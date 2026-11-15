@@ -41,9 +41,9 @@ const int gPausePadCells[4] = { 0x4F, 0x51, 0x53, 0x55 };
 const int gAeDigitCells[10] = { 0x1A, 0x1C, 0x1E, 0x20, 0x22, 0x24, 0x26, 0x28, 0x2A, 0x2C };
 
 // The three class names come before the archive name in .rodata
-const char* gTAeObjPauseName = "TAeObjPause";
+const char* gTAeObjPauseName    = "TAeObjPause";
 const char* gTAeObjPlayRestName = "TAeObjPlayRest";
-const char* gTAeObjCoinNumName = "TAeObjCoinNum";
+const char* gTAeObjCoinNumName  = "TAeObjCoinNum";
 static inline Vec3f vec3(f32 x, f32 y, f32 z)
 {
 	Vec3f v;
@@ -68,7 +68,7 @@ extern "C" void loadPause()
 	loadArc(getLangFileName("ae_pause.arc"), &sPauseArc);
 	if (sPauseArc != 0) {
 		AeArcBlock* block = aeArcBlock(sPauseArc);
-		sPauseAe = block->mAe;
+		sPauseAe          = block->mAe;
 		relocateAe(sPauseAe);
 		sPauseTexList = block->mTexList;
 		bindGvmTextures((u8*)block->mGvm, sPauseTexList);
@@ -91,7 +91,7 @@ extern "C" void freePause()
 		sPauseTexList = 0;
 		releaseResource(sPauseArc);
 		sPauseArc = 0;
-		sPauseAe = 0;
+		sPauseAe  = 0;
 	}
 }
 
@@ -114,19 +114,19 @@ static inline void mark(TObject* obj)
 	}
 }
 
-#define PAUSE_PULSE(i)                                       \
-	if (mRow[i] != 0) {                                      \
-		mRow[i]->update();                                   \
-		if (mCursor == i) {                                  \
-			mColor[1] = 0.5f * njCos(sPausePulse) + 0.5f;    \
-			mColor[1] = 240.0f * mColor[1];                  \
-			mColor[1] = mColor[1] / 255.0f;                  \
-			mColor[2] = 0.9411765f;                          \
-			mColor[3] = 0.15686275f;                         \
-		} else {                                             \
-			mColor[1] = mColor[2] = mColor[3] = 1.0f;        \
-		}                                                    \
-		mRow[i]->setColor(mColor);                           \
+#define PAUSE_PULSE(i)                                    \
+	if (mRow[i] != 0) {                                   \
+		mRow[i]->update();                                \
+		if (mCursor == i) {                               \
+			mColor[1] = 0.5f * njCos(sPausePulse) + 0.5f; \
+			mColor[1] = 240.0f * mColor[1];               \
+			mColor[1] = mColor[1] / 255.0f;               \
+			mColor[2] = 0.9411765f;                       \
+			mColor[3] = 0.15686275f;                      \
+		} else {                                          \
+			mColor[1] = mColor[2] = mColor[3] = 1.0f;     \
+		}                                                 \
+		mRow[i]->setColor(mColor);                        \
 	}
 
 // 0x80124494
@@ -138,9 +138,9 @@ TAeObjPause::TAeObjPause(TObject* parent, void* data, void* assets)
 	f32 color[3];
 	int i;
 
-	_00     = (u32)gTAeObjPauseName;
-	mSize   = 0x9C;
-	mBase  = createLayer(0x83, 0x10);
+	_00   = (u32)gTAeObjPauseName;
+	mSize = 0x9C;
+	mBase = createLayer(0x83, 0x10);
 	if (mBase != 0) {
 		mBase->mBanks = gPauseBanks;
 	}
@@ -171,16 +171,16 @@ TAeObjPause::TAeObjPause(TObject* parent, void* data, void* assets)
 		mBase->attach(0x4A, mRow[2], 0);
 		mBase->attach(0x49, mRow[3], 0);
 	}
-	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3E, 0);
-	mState   = 0;
+	mTask     = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3E, 0);
+	mState    = 0;
 	mCursor   = 0;
 	mResult   = -1;
-	mDone   = 0;
-	mColor[0]   = 1.0f;
-	mColor[1]   = 0.9411765f;
-	mColor[2]   = 0.9411765f;
-	mColor[3]   = 0.15686275f;
-	mHint   = 0;
+	mDone     = 0;
+	mColor[0] = 1.0f;
+	mColor[1] = 0.9411765f;
+	mColor[2] = 0.9411765f;
+	mColor[3] = 0.15686275f;
+	mHint     = 0;
 	for (i = 0; i < 2; i++) {
 		mText[i] = 0;
 	}
@@ -189,7 +189,7 @@ TAeObjPause::TAeObjPause(TObject* parent, void* data, void* assets)
 	for (i = 0; i < PAUSE_ROWS; i++) {
 		mDisabled[i] = 0;
 	}
-	mPad = 0;
+	mPad   = 0;
 	mCoins = 0;
 	alphaFadeDim(0x3C);
 	mText[0] = createSimpleText(this, 1, -1, &gPauseText0At, &gPauseTextBox, &gPauseTextScale, getStageSelectWarning(0x27));
@@ -205,7 +205,8 @@ TAeObjPause::TAeObjPause(TObject* parent, void* data, void* assets)
 	pos[0]   = 153.0f;
 	pos[1]   = 190.0f;
 	pos[2]   = -1.0f;
-	mHint = createSimpleText((TObject*)this, 1, -1, (const Vec3f*)pos, (const Vec3f*)scale, (const Vec3f*)color, (void*)getStageSelectWarning(0x2A));
+	mHint    = createSimpleText((TObject*)this, 1, -1, (const Vec3f*)pos, (const Vec3f*)scale, (const Vec3f*)color,
+	                            (void*)getStageSelectWarning(0x2A));
 	mark(mHint);
 }
 
@@ -216,12 +217,12 @@ TAeObjPause::~TAeObjPause()
 	for (int i = 0; i < 2; i++) {
 		if (mText[i] != 0) {
 			mText[i]->mFlags |= 1;
-			mText[i]                   = 0;
+			mText[i] = 0;
 		}
 	}
 	if (mWindow != 0) {
 		mWindow->mFlags |= 1;
-		mWindow                   = 0;
+		mWindow = 0;
 	}
 	removeDrawTask(mTask);
 }
@@ -283,11 +284,11 @@ void TAeObjPause::draw()
 // The animation each row plays for each cursor position lit on its own dim on the others
 // The backdrop's cell for each player's pad
 
-#define PAUSE_SHOW_CURSOR()                                   \
-	sePlay(0x1B);                                             \
-	mRow[0]->reset(gPauseRow0Anims[mCursor], 1);                     \
-	mRow[1]->reset(gPauseRow1Anims[mCursor], 1);                     \
-	mRow[2]->reset(gPauseRow2Anims[mCursor], 1);                     \
+#define PAUSE_SHOW_CURSOR()                      \
+	sePlay(0x1B);                                \
+	mRow[0]->reset(gPauseRow0Anims[mCursor], 1); \
+	mRow[1]->reset(gPauseRow1Anims[mCursor], 1); \
+	mRow[2]->reset(gPauseRow2Anims[mCursor], 1); \
 	mRow[3]->reset(gPauseRow3Anims[mCursor], 1);
 
 // 0x80124C90
@@ -627,8 +628,8 @@ void TAeObjPlayRest::setRest(u16 rest, u16 chara)
 void TAeObjPlayRest::show()
 {
 	if (mLayer != 0) {
-		mTimer        = 300;
-		mLayer->_A8   = 1.0f;
+		mTimer      = 300;
+		mLayer->_A8 = 1.0f;
 		mLayer->wake();
 	}
 }
@@ -704,7 +705,7 @@ void TAeObjCoinNum::render()
 void TAeObjCoinNum::setCount(u32 count)
 {
 	if (mLayer != 0) {
-		mTimer = 120;
+		mTimer    = 120;
 		u16 shown = (u16)count > 99 ? 99 : (u16)count;
 		if (mLayer != 0) {
 			mLayer->setCell(0x17, gAeDigitCells[shown / 10]);

@@ -40,16 +40,16 @@ const char* gTAeObjGameOverName = "TAeObjGameOver";
 
 extern "C" {
 // ae_game_over.arc and what it holds
-TArc* gAeGameOverArc;       // 0x802C5558
-void* gAeGameOverData;      // 0x802C555C
-NJS_TEXLIST* gAeGameOverTexList;   // 0x802C5560
+TArc* gAeGameOverArc;            // 0x802C5558
+void* gAeGameOverData;           // 0x802C555C
+NJS_TEXLIST* gAeGameOverTexList; // 0x802C5560
 }
 
 // What ae_game_over.arc holds
 struct AeGameOverArc {
-	void* mAe;      // _00
+	void* mAe;             // _00
 	NJS_TEXLIST* mTexList; // _04
-	void* mGvm;     // _08
+	void* mGvm;            // _08
 };
 
 // 0x80113800
@@ -61,7 +61,9 @@ extern "C" void initAeGameOver()
 }
 
 // 0x80113814
-extern "C" void termAeGameOver() { }
+extern "C" void termAeGameOver()
+{
+}
 
 // 0x80113818
 extern "C" int loadAeGameOver()

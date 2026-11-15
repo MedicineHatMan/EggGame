@@ -38,6 +38,7 @@ void njSetMatrix(f32* dst, f32* src)
 }
 
 // 0x8020FD80
+// clang-format off
 asm void njSubVector(NJS_VECTOR* a, const NJS_VECTOR* b)
 {
 	nofralloc
@@ -51,6 +52,7 @@ asm void njSubVector(NJS_VECTOR* a, const NJS_VECTOR* b)
 	psq_st f1, 0x8(r3), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x8020FDA4
 void njXYZAngleToQuaternion(const s32* ang, NJS_QUATERNION* q)
@@ -62,7 +64,7 @@ void njXYZAngleToQuaternion(const s32* ang, NJS_QUATERNION* q)
 	f32 sz = njSin(ang[2] >> 1);
 	f32 cz = njCos(ang[2] >> 1);
 
-	q->re = cz * (cx * cy) + sz * (sx * sy);
+	q->re    = cz * (cx * cy) + sz * (sx * sy);
 	q->im[0] = sz * (-cx * sy) + cz * (sx * cy);
 	q->im[1] = sx * (cy * sz) + cx * (sy * cz);
 	q->im[2] = sy * (-cz * sx) + cy * (sz * cx);
@@ -78,7 +80,7 @@ void njZXYAngleToQuaternion(const s32* ang, NJS_QUATERNION* q)
 	f32 sz = njSin(ang[2] >> 1);
 	f32 cz = njCos(ang[2] >> 1);
 
-	q->re = cz * (cx * cy) + sz * (sx * sy);
+	q->re    = cz * (cx * cy) + sz * (sx * sy);
 	q->im[0] = sz * (cx * sy) + cz * (sx * cy);
 	q->im[1] = sx * (-cy * sz) + cx * (sy * cz);
 	q->im[2] = sy * (-cz * sx) + cy * (sz * cx);
@@ -94,6 +96,7 @@ void njTranslate(f32* m, f32 x, f32 y, f32 z)
 }
 
 // 0x80210060
+// clang-format off
 asm void __internal_njTranslate(f32* m, f32 x, f32 y, f32 z)
 {
 	nofralloc
@@ -120,3 +123,4 @@ asm void __internal_njTranslate(f32* m, f32 x, f32 y, f32 z)
 	psq_st f13, 0x2c(r3), 1, 0
 	blr
 }
+// clang-format on

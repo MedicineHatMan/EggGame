@@ -99,9 +99,9 @@ const char* gTAniManagerName = "TAniManager";
 TAniManager::TAniManager(TObject* parent, int mode)
     : TObject(parent)
 {
-	mList = 0;
-	mMode = mode;
-	mList = new AniList;
+	mList   = 0;
+	mMode   = mode;
+	mList   = new AniList;
 	mNextId = 10;
 	for (int i = 0; i < 8; i++) {
 		mUsed[i] = 0;
@@ -114,7 +114,7 @@ TAniManager::TAniManager(TObject* parent, int mode)
 TAniManager::~TAniManager()
 {
 	delete mList;
-	mList    = 0;
+	mList       = 0;
 	gAniManager = 0;
 }
 
@@ -237,9 +237,9 @@ void AniList::clear()
 	AniListLink* link = mFirst;
 	while (link != 0) {
 		AniListLink* next = link->mNext;
-		link->mList = 0;
-		link->mNext = 0;
-		link->mPrev = 0;
-		link        = next;
+		link->mList       = 0;
+		link->mNext       = 0;
+		link->mPrev       = 0;
+		link              = next;
 	}
 }

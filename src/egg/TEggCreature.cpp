@@ -73,7 +73,9 @@ int TEggCreature::onMsg23(ObjMsg* msg)
 }
 
 // 0x80050928
-void TEggCreature::vfn_70() { }
+void TEggCreature::vfn_70()
+{
+}
 
 // 0x8005092C
 void TEggCreature::vfn_78()
@@ -88,10 +90,14 @@ int TEggCreature::vfn_74()
 }
 
 // 0x80050944
-void TEggCreature::vfn_80(const void* body) { }
+void TEggCreature::vfn_80(const void* body)
+{
+}
 
 // 0x80050948
-void TEggCreature::setPose(const Vec3f* pos, int rot) { }
+void TEggCreature::setPose(const Vec3f* pos, int rot)
+{
+}
 
 // 0x8005094C
 void TEggCreature::vfn_7C()
@@ -112,10 +118,14 @@ int TEggCreature::vfn_88()
 }
 
 // 0x8005096C
-void TEggCreature::vfn_8C(u32 flags) { }
+void TEggCreature::vfn_8C(u32 flags)
+{
+}
 
 // 0x80050970
-void TEggCreature::vfn_90(u32 flags) { }
+void TEggCreature::vfn_90(u32 flags)
+{
+}
 
 // 0x80050974
 int TEggCreature::getKind()

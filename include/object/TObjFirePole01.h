@@ -36,13 +36,13 @@ public:
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();                                        // _0C
-	virtual void vfn_10();                                      // _10 hidden while off camera
-	virtual void render();                                      // _1C
-	virtual void initFromDesc(SetDesc* desc);                   // _30
-	virtual void debugPrint(void*);                             // _34
+	virtual void draw();                                              // _0C
+	virtual void vfn_10();                                            // _10 hidden while off camera
+	virtual void render();                                            // _1C
+	virtual void initFromDesc(SetDesc* desc);                         // _30
+	virtual void debugPrint(void*);                                   // _34
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58
-	virtual void vfn_74();                                      // _74 sets it up
+	virtual void vfn_74();                                            // _74 sets it up
 
 	void startSound();  // 0x80057234
 	void checkDouse();  // 0x80057278
@@ -51,9 +51,9 @@ public:
 	void stateDoused(); // 0x800574DC
 	void placeColli();  // 0x8005764C
 
-	NJS_OBJECT* mModel;               // _64
-	void* mTexture;             // _68
-	int mFrame;                 // _6C of 12
+	NJS_OBJECT* mModel; // _64
+	void* mTexture;     // _68
+	int mFrame;         // _6C of 12
 	u8 _70[4];
 	DrawTask* mDraw;            // _74
 	TParticleGenerator* mFlame; // _78 the fire or the smoke once doused

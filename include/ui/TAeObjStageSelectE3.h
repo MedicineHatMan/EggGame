@@ -16,10 +16,10 @@ public:
 	virtual void draw();   // _0C
 	virtual void vfn_10(); // _10
 
-	TAeLayer* mLayer;  // _34 id 0x81
+	TAeLayer* mLayer;   // _34 id 0x81
 	TAeLayer* mPreview; // _38 id 0x17 the row's preview bound into mLayer
-	u32 _3C;           // _3C
-	int mStage;        // _40 the row mPreview shows
+	u32 _3C;            // _3C
+	int mStage;         // _40 the row mPreview shows
 };
 
 extern "C" {

@@ -54,11 +54,11 @@ public:
 
 	void setup(const Vec3f* pos, const Vec3f* target, f32 speed, f32 gravity);
 
-	VolFlight mFlight; // _20
-	int mState;         // _88 0 flying 1 sinking
-	f32 mTime;          // _8C
-	DrawTask* mDrawTask;    // _90
-	EnemyFx* mFx;       // _94
+	VolFlight mFlight;   // _20
+	int mState;          // _88 0 flying 1 sinking
+	f32 mTime;           // _8C
+	DrawTask* mDrawTask; // _90
+	EnemyFx* mFx;        // _94
 };
 
 typedef char TEneBoss03_VolRock_Dummy_size_check[(sizeof(TEneBoss03_VolRock_Dummy) == 0x98) ? 1 : -1];
@@ -102,17 +102,17 @@ extern "C" void volFlightInit(VolFlight* fly, const Vec3f* from, const Vec3f* to
 	fly->mBody.mPos.x = from->x;
 	fly->mBody.mPos.y = from->y;
 	fly->mBody.mPos.z = from->z;
-	fly->mSpinX = (int)(800.0f * RAND_SIGNED());
-	fly->mSpinY = (int)(1000.0f * RAND_SIGNED());
-	fly->mStart.x = from->x;
-	fly->mStart.y = from->y;
-	fly->mStart.z = from->z;
-	fly->mTarget.x = to->x;
-	fly->mTarget.y = to->y;
-	fly->mTarget.z = to->z;
+	fly->mSpinX       = (int)(800.0f * RAND_SIGNED());
+	fly->mSpinY       = (int)(1000.0f * RAND_SIGNED());
+	fly->mStart.x     = from->x;
+	fly->mStart.y     = from->y;
+	fly->mStart.z     = from->z;
+	fly->mTarget.x    = to->x;
+	fly->mTarget.y    = to->y;
+	fly->mTarget.z    = to->z;
 	Vec3f vel;
-	f32 frames = flatVelocityTo(from, to, &vel, speed);
-	f32 up     = launchSpeedFor(frames, to->y - from->y, gravity);
+	f32 frames        = flatVelocityTo(from, to, &vel, speed);
+	f32 up            = launchSpeedFor(frames, to->y - from->y, gravity);
 	fly->mBody.mVel.x = vel.x;
 	fly->mBody.mVel.y = up;
 	fly->mBody.mVel.z = vel.z;
@@ -128,7 +128,7 @@ extern "C" f32 volFlightStep(VolFlight* fly, f32 time)
 	f32 fall = 0.5f * fly->gravity();
 	fall *= time;
 	fly->mBody.mPos.y = time * fall + fly->mBody.mPos.y;
-	f32 dy = fly->mBody.mPos.y - oldY;
+	f32 dy            = fly->mBody.mPos.y - oldY;
 	fly->mBody.mRot.x += fly->mSpinX;
 	fly->mBody.mRot.y += fly->mSpinY;
 	return dy;
@@ -165,9 +165,9 @@ extern "C" void volFlightTrail(VolFlight* fly, EnemyFx** fx)
 		*fx = (EnemyFx*)particleGenByIdDefault(&at, 1, 0x47);
 	} else {
 		EnemyFx* p = *fx;
-		p->mPos.x = at.x;
-		p->mPos.y = at.y;
-		p->mPos.z = at.z;
+		p->mPos.x  = at.x;
+		p->mPos.y  = at.y;
+		p->mPos.z  = at.z;
 	}
 }
 
@@ -175,16 +175,16 @@ extern "C" void volFlightTrail(VolFlight* fly, EnemyFx** fx)
 extern "C" void volRockLoad()
 {
 	gVolRockList = 0;
-	gRockModel = (RockModel*)modelTEneBoss03Mole();
-	gRockShape = shapeTEneBoss03Mole();
+	gRockModel   = (RockModel*)modelTEneBoss03Mole();
+	gRockShape   = shapeTEneBoss03Mole();
 }
 
 // 0x8008315C
 extern "C" void volRockFree()
 {
 	gVolRockList = 0;
-	gRockModel = 0;
-	gRockShape = 0;
+	gRockModel   = 0;
+	gRockShape   = 0;
 }
 
 extern "C" void lightVolRockFuse(TEneBoss03_VolRock* rock, int time);
@@ -194,9 +194,9 @@ extern "C" void lightVolRockFuse(TEneBoss03_VolRock* rock, int time);
 extern "C" void lightVolRocksFrom(const Vec3f* pos)
 {
 	Vec3f delta;
-	delta.x = -pos->x;
-	delta.y = 0.0f;
-	delta.z = -pos->z;
+	delta.x  = -pos->x;
+	delta.y  = 0.0f;
+	delta.z  = -pos->z;
 	f32 near = vecLenXZ(&delta) - 190.0f;
 	for (TEneBoss03_VolRock* rock = gVolRockList; rock != 0; rock = rock->mNext) {
 		delta.x = rock->mFlight.mBody.mPos.x;
@@ -288,7 +288,7 @@ void TEneBoss03_VolRock::setup(const Vec3f* pos, const Vec3f* target, f32 speed,
 	if (gVolRockList == 0) {
 		gVolRockList = this;
 	} else {
-		mNext = gVolRockList->mNext;
+		mNext               = gVolRockList->mNext;
 		gVolRockList->mNext = this;
 	}
 }
@@ -329,11 +329,11 @@ int TEneBoss03_VolRock::onHit(const TObjAction* other, int arg, int* result)
 		hit->mPos.y = 0.0f;
 		hit->mPos.z = 0.0f;
 		if (isPlayerObj(other) != 0) {
-			took = 1;
+			took         = 1;
 			hit->mDamage = 0xA;
 		} else if (isEggObj(other) != 0) {
 			hit->mDamage = 1;
-			took = 1;
+			took         = 1;
 			hit->mFlags.setBit(0xD);
 		}
 	}
@@ -369,7 +369,7 @@ int TEneBoss03_VolRock::checkHits()
 				if ((colliContactShape(it)->mFlags & 0x400) != 0) {
 					VolRockMsg msg;
 					VolRockFromMsg from;
-					msg.mType = 0x74;
+					msg.mType  = 0x74;
 					from.mType = 0x2A;
 					from.mFrom = mObjId;
 					obj->sendToHandle((ObjMsg*)&from);
@@ -409,8 +409,8 @@ int TEneBoss03_VolRock::isCold()
 extern "C" void lightVolRockFuse(TEneBoss03_VolRock* rock, int time)
 {
 	if (rock->mState == 1) {
-		rock->mState = 3;
-		rock->mTimer = time;
+		rock->mState         = 3;
+		rock->mTimer         = time;
 		rock->mPiecePos[0].x = rock->mFlight.mBody.mPos.x;
 		rock->mPiecePos[0].y = rock->mFlight.mBody.mPos.y;
 		rock->mPiecePos[0].z = rock->mFlight.mBody.mPos.z;
@@ -454,9 +454,9 @@ void TEneBoss03_VolRock::placePieces()
 	gjPushUnitMatrix();
 	volFlightApply(&mFlight);
 	Vec3f centre;
-	centre.x = mFlight.mBody.mPos.x;
-	centre.y = mFlight.mBody.mPos.y;
-	centre.z = mFlight.mBody.mPos.z;
+	centre.x   = mFlight.mBody.mPos.x;
+	centre.y   = mFlight.mBody.mPos.y;
+	centre.z   = mFlight.mBody.mPos.z;
 	Vec3f* pos = (Vec3f*)mPiecePos;
 	Vec3f* vel = mPieceVel;
 	for (int i = 0; i < 14; i++) {
@@ -546,10 +546,10 @@ void TEneBoss03_VolRock::draw()
 		}
 		break;
 	case 3: {
-		f32 dx = RAND_SIGNED();
-		f32 dz = RAND_SIGNED();
-		f32 ox = 0.5f * dx;
-		f32 oz = 0.5f * dz;
+		f32 dx               = RAND_SIGNED();
+		f32 dz               = RAND_SIGNED();
+		f32 ox               = 0.5f * dx;
+		f32 oz               = 0.5f * dz;
 		mFlight.mBody.mPos.x = mPiecePos[0].x + ox;
 		mFlight.mBody.mPos.z = mPiecePos[0].z + oz;
 		break;
@@ -680,8 +680,8 @@ static inline void setRockDrawIF(void* chan, void* blend, u32 mask)
 extern "C" void beginRockHot()
 {
 	void* funcs[7];
-	NJS_TEXLIST* list = gRockShape[2];
-	sVolRockTexWord = list->textures[1].texaddr;
+	NJS_TEXLIST* list         = gRockShape[2];
+	sVolRockTexWord           = list->textures[1].texaddr;
 	list->textures[1].texaddr = list->textures[0].texaddr;
 	njSetTexture(list);
 	if (sVolRockClear != 0) {
@@ -699,7 +699,7 @@ extern "C" void endRockHot()
 {
 	setRockDrawIF(0, 0, 0x88);
 	NJS_TEXNAME* tex = gRockShape[2]->textures;
-	tex[1].texaddr = sVolRockTexWord;
+	tex[1].texaddr   = sVolRockTexWord;
 }
 
 // 0x80084544
@@ -790,13 +790,13 @@ void TEneBoss03_VolRock::drawModel()
 void TEneBoss03_VolRock::render()
 {
 	if (mLitAlpha < 0xFF) {
-		sVolRockClear = 1;
-		GXColor color = *(GXColor*)&sVolRockSeeColor;
-		color.a = mLitAlpha;
+		sVolRockClear             = 1;
+		GXColor color             = *(GXColor*)&sVolRockSeeColor;
+		color.a                   = mLitAlpha;
 		*(GXColor*)&sVolRockColor = color;
 	} else {
-		sVolRockClear = 0;
-		GXColor black = { 0, 0, 0, 0xFF };
+		sVolRockClear             = 0;
+		GXColor black             = { 0, 0, 0, 0xFF };
 		*(GXColor*)&sVolRockColor = black;
 	}
 	if (mHeat >= 1.0f) {
@@ -825,8 +825,8 @@ TEneBoss03_VolRock_Dummy::TEneBoss03_VolRock_Dummy(TObject* parent, const Vec3f*
 // 0x800849B0
 void TEneBoss03_VolRock_Dummy::setup(const Vec3f* pos, const Vec3f* target, f32 speed, f32 gravity)
 {
-	_00   = (u32)gTEneBoss03_VolRock_DummyName;
-	mSize = 0x98;
+	_00       = (u32)gTEneBoss03_VolRock_DummyName;
+	mSize     = 0x98;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	volFlightInit(&mFlight, pos, target, speed, gravity);
 	mTime  = 0.0f;
@@ -853,7 +853,7 @@ void TEneBoss03_VolRock_Dummy::draw()
 		f32 rose = volFlightStep(&mFlight, mTime);
 		if (rose < 0.0f && volFlightLanded(&mFlight) != 0) {
 			mFlight.mBody.mVel.y = rose;
-			mState = 1;
+			mState               = 1;
 		}
 		break;
 	}
@@ -915,8 +915,8 @@ extern "C" void createVolRockBurst(TObject* parent, const Vec3f* pos, int realCo
 VolRockBurst::VolRockBurst(TObject* parent, const Vec3f* pos, int realCount)
     : TObject(parent)
 {
-	mPos   = *pos;
-	mIndex = 0;
+	mPos       = *pos;
+	mIndex     = 0;
 	mAngleBase = (int)(65536.0f * randUnit()) / 0x18;
 	Vec3f delta;
 	delta.x = 0.0f;

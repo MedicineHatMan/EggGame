@@ -1127,11 +1127,11 @@ typedef enum _GXMiscToken {
 
 // Flags for setting GXData dirtyState
 typedef enum _GXDirtyFlag {
-	GX_DIRTY_SU_TEX   = (1 << 0), // 0x1
-	GX_DIRTY_BP_MASK  = (1 << 1), // 0x2
-	GX_DIRTY_GEN_MODE = (1 << 2), // 0x4
-	GX_DIRTY_VCD      = (1 << 3), // 0x8
-	GX_DIRTY_VAT      = (1 << 4), // 0x10
+	GX_DIRTY_SU_TEX      = (1 << 0),  // 0x1
+	GX_DIRTY_BP_MASK     = (1 << 1),  // 0x2
+	GX_DIRTY_GEN_MODE    = (1 << 2),  // 0x4
+	GX_DIRTY_VCD         = (1 << 3),  // 0x8
+	GX_DIRTY_VAT         = (1 << 4),  // 0x10
 	GX_DIRTY_AMB_COLOR0  = (1 << 8),  // 0x100
 	GX_DIRTY_AMB_COLOR1  = (1 << 9),  // 0x200
 	GX_DIRTY_MAT_COLOR0  = (1 << 10), // 0x400
@@ -1156,8 +1156,8 @@ typedef enum _GXDirtyFlag {
 
 	GX_AMB_MAT_MASK = GX_DIRTY_AMB_COLOR0 | GX_DIRTY_AMB_COLOR1 | GX_DIRTY_MAT_COLOR0 | GX_DIRTY_MAT_COLOR1, // 0xF00
 
-	GX_LIGHT_CHAN_MASK
-	= GX_DIRTY_CHAN_COLOR0 | GX_DIRTY_CHAN_COLOR1 | GX_DIRTY_CHAN_ALPHA0 | GX_DIRTY_CHAN_ALPHA1 | GX_DIRTY_NUM_COLORS, // 0x100F000
+	GX_LIGHT_CHAN_MASK = GX_DIRTY_CHAN_COLOR0 | GX_DIRTY_CHAN_COLOR1 | GX_DIRTY_CHAN_ALPHA0 | GX_DIRTY_CHAN_ALPHA1
+	    | GX_DIRTY_NUM_COLORS, // 0x100F000
 
 	GX_TEX_GEN_MASK = 0x2FF0000, // all GX_DIRTY_TEXs | GX_DIRTY_NUM_TEX
 } GXDirtyFlag;

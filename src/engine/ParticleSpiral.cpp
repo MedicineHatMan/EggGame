@@ -88,7 +88,10 @@ void TParticleSpiralG::draw()
 }
 
 // 0x80028518
-void TParticleSpiralG::vfn_10() { mPart.updateStretch(); }
+void TParticleSpiralG::vfn_10()
+{
+	mPart.updateStretch();
+}
 
 // 0x8002853C
 extern "C" void* particleSpiralLNew(TObject* parent, const ParticleDesc* desc, int slot, f32 scale)
@@ -124,7 +127,10 @@ void TParticleSpiralL::draw()
 }
 
 // 0x800286B4
-void TParticleSpiralL::vfn_10() { mPart.updateStretchAt(&mLocal); }
+void TParticleSpiralL::vfn_10()
+{
+	mPart.updateStretchAt(&mLocal);
+}
 
 // 0x800286E0
 // ~TParticleSpiralL and 0x8002873C ~TParticleSpiralG are inline in the classes draw is the key function so L's vtable

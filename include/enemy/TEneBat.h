@@ -41,10 +41,10 @@ struct BatBrain {
 	{
 		mOwner = 0;
 		mState = 0;
-		mNext = -1;
+		mNext  = -1;
 	}
 
-	virtual int checkInterrupt() = 0;               // _08 1 if it changed state
+	virtual int checkInterrupt()               = 0; // _08 1 if it changed state
 	virtual void onPhase(int state, int phase) = 0; // _0C
 	inline virtual ~BatBrain() { }                  // _10 0x800D9AD8
 	virtual void update(TEneBat* owner);            // _14 0x800D8EA4
@@ -131,19 +131,19 @@ public:
 	inline void* operator new(u32 size);
 	inline void operator delete(void* mem);
 
-	virtual void vfn_10();                     // _10 hides it off screen
-	virtual void render();                     // _1C
-	virtual void readEnemyDesc(SetDesc* desc); // _38
-	virtual void vfn_3C();                     // _3C prints debug text
-	virtual f32 vfn_40();                      // _40
+	virtual void vfn_10();                                              // _10 hides it off screen
+	virtual void render();                                              // _1C
+	virtual void readEnemyDesc(SetDesc* desc);                          // _38
+	virtual void vfn_3C();                                              // _3C prints debug text
+	virtual f32 vfn_40();                                               // _40
 	virtual int onHit(const TObjAction* other, int shape, int* result); // _58
-	virtual void vfn_6C();                     // _6C
-	virtual void updateBody();                 // _70
-	virtual void setPos(const Vec3f* pos);           // _74
-	virtual void syncCollider();               // _78
-	virtual void onActionPhase(int action, int phase); // _7C
-	virtual int getDamage(EnemyHit* hit);      // _A4
-	virtual int getHitKind(const void* touch, HitInfo* info); // _A8
+	virtual void vfn_6C();                                              // _6C
+	virtual void updateBody();                                          // _70
+	virtual void setPos(const Vec3f* pos);                              // _74
+	virtual void syncCollider();                                        // _78
+	virtual void onActionPhase(int action, int phase);                  // _7C
+	virtual int getDamage(EnemyHit* hit);                               // _A4
+	virtual int getHitKind(const void* touch, HitInfo* info);           // _A8
 
 	void init(SetDesc* desc);
 	void setTarget(const Vec3f* target);
@@ -187,28 +187,28 @@ public:
 	void actFlip(int phase);
 	void actDie(int phase);
 
-	BatHuntBrain* mBrain;  // _158
-	void* mPose;           // _15C
-	DrawTask* mModel;          // _160 the task
-	u32 mFlags2;           // _164
-	Vec3f mKnock;          // _168 which way a hit pushes it
-	EnemyEffect mEffect;   // _174
-	HitVec mParts[2];      // _1C4 posed from the bones
-	Vec3f mTarget;         // _1DC where to fly
-	Vec3f mAim;            // _1E8 the player to dive at
-	int mAimAngle;         // _1F4
-	TEnemyLifeBar* mBar;   // _1F8
-	ObjShadow mShadow;     // _1FC
-	EnemyLight mLight;     // _234
-	EnemyTint mTint;       // _274
-	BatList mList;         // _27C the enemies it let go
-	SoundHandle mSound;    // _288
-	FxHolder mFx;          // _2B4 the dive's trail
-	int mStep;             // _2E8
-	int mTimer;            // _2EC
-	int mAngle;            // _2F0
-	f32 mHeight;           // _2F4
-	f32 mRise;             // _2F8
+	BatHuntBrain* mBrain; // _158
+	void* mPose;          // _15C
+	DrawTask* mModel;     // _160 the task
+	u32 mFlags2;          // _164
+	Vec3f mKnock;         // _168 which way a hit pushes it
+	EnemyEffect mEffect;  // _174
+	HitVec mParts[2];     // _1C4 posed from the bones
+	Vec3f mTarget;        // _1DC where to fly
+	Vec3f mAim;           // _1E8 the player to dive at
+	int mAimAngle;        // _1F4
+	TEnemyLifeBar* mBar;  // _1F8
+	ObjShadow mShadow;    // _1FC
+	EnemyLight mLight;    // _234
+	EnemyTint mTint;      // _274
+	BatList mList;        // _27C the enemies it let go
+	SoundHandle mSound;   // _288
+	FxHolder mFx;         // _2B4 the dive's trail
+	int mStep;            // _2E8
+	int mTimer;           // _2EC
+	int mAngle;           // _2F0
+	f32 mHeight;          // _2F4
+	f32 mRise;            // _2F8
 };
 
 extern "C" {

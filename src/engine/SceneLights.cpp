@@ -48,9 +48,9 @@ extern "C" {
 // 0x8004D428
 void sceneLightsSetSunDir(SceneLights* scene, const Vec3f* dir)
 {
-	f32 y = dir->y;
+	f32 y              = dir->y;
 	scene->mSun.mDir.x = dir->x;
-	f32 z = dir->z;
+	f32 z              = dir->z;
 	scene->mSun.mDir.y = y;
 	scene->mSun.mDir.z = z;
 }

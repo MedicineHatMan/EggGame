@@ -39,12 +39,12 @@ struct FrogBrain {
 	{
 		mOwner = 0;
 		mState = 0;
-		mNext = -1;
+		mNext  = -1;
 	}
 
-	virtual int checkInterrupt() = 0;               // _08 1 if it changed state
+	virtual int checkInterrupt()               = 0; // _08 1 if it changed state
 	virtual void onPhase(int state, int phase) = 0; // _0C
-	inline virtual ~FrogBrain() { }              // _10 0x800F1854
+	inline virtual ~FrogBrain() { }                 // _10 0x800F1854
 	virtual void update(TEneFrog* owner);           // _14 0x800F0E64
 
 	inline void changeState(int state)
@@ -101,14 +101,14 @@ struct FrogHuntBrain : public FrogBrainBase {
 class TEneFrog : public TObjEnemy {
 public:
 	enum Action {
-		ACT_APPEAR     = 0,
-		ACT_IDLE       = 1,
-		ACT_HOP        = 2,
-		ACT_LICK       = 3,
-		ACT_RETRACT    = 4,
-		ACT_STUN       = 5,
-		ACT_STUN_LICK  = 6, // stunned with the tongue out
-		ACT_DIE        = 7,
+		ACT_APPEAR    = 0,
+		ACT_IDLE      = 1,
+		ACT_HOP       = 2,
+		ACT_LICK      = 3,
+		ACT_RETRACT   = 4,
+		ACT_STUN      = 5,
+		ACT_STUN_LICK = 6, // stunned with the tongue out
+		ACT_DIE       = 7,
 	};
 
 	enum {
@@ -125,18 +125,18 @@ public:
 
 	inline void operator delete(void* mem);
 
-	virtual void vfn_10();                     // _10 hides it off screen
-	virtual void render();                     // _1C
-	virtual void readEnemyDesc(SetDesc* desc); // _38
-	virtual void vfn_3C();                     // _3C prints debug text
-	virtual f32 vfn_40();                      // _40
+	virtual void vfn_10();                                              // _10 hides it off screen
+	virtual void render();                                              // _1C
+	virtual void readEnemyDesc(SetDesc* desc);                          // _38
+	virtual void vfn_3C();                                              // _3C prints debug text
+	virtual f32 vfn_40();                                               // _40
 	virtual int onHit(const TObjAction* other, int shape, int* result); // _58
-	virtual void vfn_6C();                     // _6C
-	virtual void updateBody();                 // _70
-	virtual void setPos(const Vec3f* pos);           // _74
-	virtual void syncCollider();               // _78
-	virtual void onActionPhase(int action, int phase); // _7C
-	virtual int getDamage(EnemyHit* hit);      // _A4
+	virtual void vfn_6C();                                              // _6C
+	virtual void updateBody();                                          // _70
+	virtual void setPos(const Vec3f* pos);                              // _74
+	virtual void syncCollider();                                        // _78
+	virtual void onActionPhase(int action, int phase);                  // _7C
+	virtual int getDamage(EnemyHit* hit);                               // _A4
 
 	void init(SetDesc* desc);
 	void setTarget(const Vec3f* target);
@@ -177,33 +177,33 @@ public:
 	void actStunLick(int phase);
 	void actDie(int phase);
 
-	FrogHuntBrain* mBrain;    // _158
+	FrogHuntBrain* mBrain;       // _158
 	GjActor* mPose;              // _15C
-	DrawTask* mModel;             // _160 the task
-	u32 mFlags2;              // _164
-	Vec3f mKnock;             // _168 which way a hit pushes it
-	HitVec mParts[5];         // _174 posed from the bones
-	Vec3f mTarget;            // _1B0 where to hop
-	Vec3f mAim;               // _1BC the player to lick
-	int mAimAngle;            // _1C8
-	TEnemyLifeBar* mBar;      // _1CC
-	ObjShadow mShadow;        // _1D0
-	EnemyLight mLight;        // _208
-	EnemyTint mTint;          // _248
-	EnemyEffect mEffect;      // _250
-	CharaColli* mTongueCollider;    // _2A0
-	MotionPlayer mTongueMotion; // _2A4
-	EnemyAnim mTongueAnim;    // _2E0
+	DrawTask* mModel;            // _160 the task
+	u32 mFlags2;                 // _164
+	Vec3f mKnock;                // _168 which way a hit pushes it
+	HitVec mParts[5];            // _174 posed from the bones
+	Vec3f mTarget;               // _1B0 where to hop
+	Vec3f mAim;                  // _1BC the player to lick
+	int mAimAngle;               // _1C8
+	TEnemyLifeBar* mBar;         // _1CC
+	ObjShadow mShadow;           // _1D0
+	EnemyLight mLight;           // _208
+	EnemyTint mTint;             // _248
+	EnemyEffect mEffect;         // _250
+	CharaColli* mTongueCollider; // _2A0
+	MotionPlayer mTongueMotion;  // _2A4
+	EnemyAnim mTongueAnim;       // _2E0
 	GjActor* mTonguePose;        // _2EC
-	int mTonguePitch;         // _2F0
-	int mTongueYaw;           // _2F4
-	int mTongueYawPrev;       // _2F8
-	HitVec mTongue[8];        // _2FC posed from the tongue's bones root to tip
-	TObject* mTongueFx[8];    // _35C
-	int mStep;                // _37C
-	int mSubStep;            // _380 the tongue's step in a lick the fall's in a death
-	int mHopAngle;            // _384
-	f32 mBestDist;            // _388 the closest a hop has come to mTarget
+	int mTonguePitch;            // _2F0
+	int mTongueYaw;              // _2F4
+	int mTongueYawPrev;          // _2F8
+	HitVec mTongue[8];           // _2FC posed from the tongue's bones root to tip
+	TObject* mTongueFx[8];       // _35C
+	int mStep;                   // _37C
+	int mSubStep;                // _380 the tongue's step in a lick the fall's in a death
+	int mHopAngle;               // _384
+	f32 mBestDist;               // _388 the closest a hop has come to mTarget
 };
 
 extern "C" {

@@ -26,11 +26,7 @@ class TCamera;
 class TMsnObjCage : public TSetActor {
 public:
 	// 0 waiting 1 counting down the open 2 waiting for the effect to finish
-	enum Phase {
-		PHASE_WAIT = 0,
-		PHASE_OPEN = 1,
-		PHASE_DONE = 2
-	};
+	enum Phase { PHASE_WAIT = 0, PHASE_OPEN = 1, PHASE_DONE = 2 };
 
 	TMsnObjCage(TObject* parent, SetDesc* desc);
 	virtual ~TMsnObjCage();
@@ -63,24 +59,24 @@ private:
 	void finish();
 	void setHidden(int hidden);
 
-	ObjModel mShadow;  // _64
-	ObjPlace mPlace;    // _84
-	EnemyLight mLight; // _E0
+	ObjModel mShadow;    // _64
+	ObjPlace mPlace;     // _84
+	EnemyLight mLight;   // _E0
 	ObjDrawState mSaved; // _120 copied from getDefaultDrawState
 	DrawTask* mTask;     // _144
-	MeshObject* mModel;    // _148
-	TCamera* mBeam;  // _14C
-	int mTimer;      // _150
-	EventCamRef mWatch; // _154
-	int mCamera;     // _15C 0 or 1
-	int mKeyId;      // _160
-	int mPhase;      // _164
-	f32 mScale;      // _168 1..3
+	MeshObject* mModel;  // _148
+	TCamera* mBeam;      // _14C
+	int mTimer;          // _150
+	EventCamRef mWatch;  // _154
+	int mCamera;         // _15C 0 or 1
+	int mKeyId;          // _160
+	int mPhase;          // _164
+	f32 mScale;          // _168 1..3
 	u8 _16C[0xC];
-	int mMirror;     // _178 1 draws into the mirror
-	int mCamPos;     // _17C 1 uses the set offset as the aim
-	Vec3f mAim;      // _180
-	Vec3f mMark;     // _18C where the beam starts
+	int mMirror; // _178 1 draws into the mirror
+	int mCamPos; // _17C 1 uses the set offset as the aim
+	Vec3f mAim;  // _180
+	Vec3f mMark; // _18C where the beam starts
 };
 
 extern "C" {

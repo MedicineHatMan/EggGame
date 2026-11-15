@@ -17,7 +17,9 @@ TGameSnowman::TGameSnowman(TObject* parent)
 }
 
 // 0x80114224
-TGameSnowman::~TGameSnowman() { }
+TGameSnowman::~TGameSnowman()
+{
+}
 
 // 0x80114280
 void TGameSnowman::startState()

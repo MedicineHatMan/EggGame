@@ -135,8 +135,7 @@ int TModeStageSelectE3::init()
 	mTitle->render();
 	mTitle->mFlags |= 0x10;
 	for (int i = 0; i < 4; i++) {
-		mRows[i] = createSimpleTextOnTask(1, -1, &sE3RowPos, &sE3RowBox, &sE3RowScale,
-		                                  (void*)sE3StageNames[i]);
+		mRows[i] = createSimpleTextOnTask(1, -1, &sE3RowPos, &sE3RowBox, &sE3RowScale, (void*)sE3StageNames[i]);
 		mRows[i]->mFlags |= 0x10;
 	}
 	Vec3f pos;
@@ -179,24 +178,26 @@ int TModeStageSelectE3::shutdown()
 // 0x80101004
 TModeStageSelectE3::TModeStageSelectE3()
 {
-	mState         = E3_SELECT;
-	mTimer         = 30;
-	mCursor        = 0;
-	mWorld         = 0;
-	_18            = 0;
+	mState  = E3_SELECT;
+	mTimer  = 30;
+	mCursor = 0;
+	mWorld  = 0;
+	_18     = 0;
 	mStages.clear();
-	_48            = 0;
-	mTitle         = 0;
-	mRows[3]       = 0;
-	mRows[2]       = 0;
-	mRows[1]       = 0;
-	mRows[0]       = 0;
-	mCamera        = 0;
-	mModel         = 0;
+	_48      = 0;
+	mTitle   = 0;
+	mRows[3] = 0;
+	mRows[2] = 0;
+	mRows[1] = 0;
+	mRows[0] = 0;
+	mCamera  = 0;
+	mModel   = 0;
 }
 
 // 0x801010A0
-TModeStageSelectE3::~TModeStageSelectE3() { }
+TModeStageSelectE3::~TModeStageSelectE3()
+{
+}
 
 // 0x801010FC
 void TModeStageSelectE3::update()
@@ -334,4 +335,3 @@ void TModeStageSelectE3::choose()
 		break;
 	}
 }
-

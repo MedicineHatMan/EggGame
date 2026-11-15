@@ -30,23 +30,17 @@ NJS_TEXLIST** sAm08Textures;
 NJS_MOTION** sAm08Motion;
 
 MotionEntry sAm08Motions[] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 14.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 9, -1, 0, 0.0f, 20.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_LOOP, 10, -1, 0, 0.0f, 20.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 11, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 3, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 4, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 5, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 14.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 8, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 7, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },  { MOTION_LOOP, 9, -1, 0, 0.0f, 20.0f, 0.6f, 0.0f, 0 },
+	{ MOTION_LOOP, 10, -1, 0, 0.0f, 20.0f, 0.3f, 0.0f, 0 }, { MOTION_LOOP, 11, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 },
 };
 extern const int sAm08Nodes[] = {
 	11, 15, 16, 22, 23, 53, 55, 64, -1,
 };
-const char* sClassName = "TEneAm08";
+const char* sClassName                      = "TEneAm08";
 extern const EnemyFrameKey sAm08FrameKey0[] = { { 10.0f, 0 }, { -1.0f, 5 } };
 extern const EnemyFrameKey sAm08FrameKey1[] = { { 7.0f, 5 }, { 12.0f, 0 }, { 18.0f, 3 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sAm08FrameKey2[] = { { 15.0f, 0 }, { 25.0f, 5 }, { -1.0f, 0 } };
@@ -54,7 +48,7 @@ extern const EnemyFrameKey sAm08FrameKey3[] = { { 1.0f, 0 }, { 7.0f, 3 }, { -1.0
 extern const EnemyFrameKey sAm08FrameKey4[] = { { 9.0f, 3 }, { -1.0f, 2 } };
 extern const EnemyFrameKey sAm08FrameKey5[] = { { 14.0f, 3 }, { -1.0f, 2 } };
 const EnemyFrameKey* sAm08FrameKeys[6] = { sAm08FrameKey0, sAm08FrameKey1, sAm08FrameKey2, sAm08FrameKey3, sAm08FrameKey4, sAm08FrameKey5 };
-extern const ColliShape sAm08Shapes[] = {
+extern const ColliShape sAm08Shapes[]  = {
 	{ { 0.0f, 0.0f, 0.0f }, 0x0, 0, 0x0, 13.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 	{ { 0.0f, 0.0f, 0.0f }, 0x0, 0, 0x0, 10.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 	{ { 0.0f, 0.0f, 0.0f }, 0x0, 0, 0x0, 4.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
@@ -80,18 +74,18 @@ extern "C" void initTEneAm08()
 {
 	resBankLoad(&sAm08Bank, "ar_ene_lizard.arc");
 	resBankAddTextures(&sAm08Bank, 0, "ene_lizard.gvm");
-	sAm08Models = resBankGetModels(&sAm08Bank);
+	sAm08Models   = resBankGetModels(&sAm08Bank);
 	sAm08Textures = resBankGetTextures(&sAm08Bank);
-	sAm08Motion = resBankGetMotion(&sAm08Bank, 0);
+	sAm08Motion   = resBankGetMotion(&sAm08Bank, 0);
 }
 
 extern "C" void shutdownTEneAm08()
 {
 	resBankRemoveTextures(&sAm08Bank, 0);
 	resBankRelease(&sAm08Bank);
-	sAm08Models = 0;
+	sAm08Models   = 0;
 	sAm08Textures = 0;
-	sAm08Motion = 0;
+	sAm08Motion   = 0;
 }
 
 extern "C" TObject* createTEneAm08(TObject* parent, SetDesc* desc)
@@ -102,7 +96,7 @@ extern "C" TObject* createTEneAm08(TObject* parent, SetDesc* desc)
 TEneAm08::TEneAm08(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0x318;
 	init(desc);
 }
@@ -114,7 +108,7 @@ void TEneAm08::init(SetDesc* desc)
 	motionCtrlInit(&mAnim, sAm08Motions, sAm08Motion);
 	motionCtrlPlay(&mAnim, 10);
 	mBody.mRot.x = 0;
-	mCollider = colliCreate(6, 1);
+	mCollider    = colliCreate(6, 1);
 	colliCopyShapes(mCollider, sAm08Shapes);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 0x37, 0x14, 0x10);
@@ -133,28 +127,28 @@ void TEneAm08::init(SetDesc* desc)
 	colliDisable(mBite);
 	mBrain = 0;
 	readEnemyDesc(desc);
-	mPose = allocPose(*(void**)sAm08Models);
+	mPose     = allocPose(*(void**)sAm08Models);
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mFlags2 = 0;
-	mPush.x = 0.0f;
-	mPush.y = 0.0f;
-	mPush.z = 0.0f;
+	mFlags2   = 0;
+	mPush.x   = 0.0f;
+	mPush.y   = 0.0f;
+	mPush.z   = 0.0f;
 	mFrameKey = 0;
 	for (int i = 0; i < 8; i++) {
 		mPoints[i].x = 0.0f;
 		mPoints[i].y = 0.0f;
 		mPoints[i].z = 0.0f;
 	}
-	mRadius = 0.0f;
-	mAnchor.x = 0.0f;
-	mAnchor.y = 0.0f;
-	mAnchor.z = 0.0f;
-	mGoal.x = 0.0f;
-	mGoal.y = 0.0f;
-	mGoal.z = 0.0f;
+	mRadius    = 0.0f;
+	mAnchor.x  = 0.0f;
+	mAnchor.y  = 0.0f;
+	mAnchor.z  = 0.0f;
+	mGoal.x    = 0.0f;
+	mGoal.y    = 0.0f;
+	mGoal.z    = 0.0f;
 	mGoalAngle = 0;
-	_200 = 0.0f;
-	mBiteZ = 40.0f;
+	_200       = 0.0f;
+	mBiteZ     = 40.0f;
 	shadowSetGround(&mShadow, &mBody.mPos, 0);
 	mShadow._30 = 52.0f;
 	mShadow._34 = 26.0f;
@@ -169,8 +163,8 @@ void TEneAm08::init(SetDesc* desc)
 	mTint.reset();
 	enemyEffectSetLarge(18.0f, &mEffect, &mPoints[5]);
 	mStep = 0;
-	_310 = 0;
-	_314 = 0.0f;
+	_310  = 0;
+	_314  = 0.0f;
 	createBrain();
 }
 
@@ -196,10 +190,10 @@ TEneAm08::~TEneAm08()
 // 0x800736D8
 void TEneAm08::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -225,7 +219,7 @@ void TEneAm08::lerpPoints(int a, int b, Vec3f* out)
 void TEneAm08::syncCollider()
 {
 	ColliShape* part = colliGetShapes(mCollider);
-	part[0].mPos = mPoints[0];
+	part[0].mPos     = mPoints[0];
 	lerpPoints(1, 2, &part[2].mPos);
 	lerpPoints(3, 4, &part[3].mPos);
 	part[1].mPos = mPoints[5];
@@ -241,7 +235,7 @@ void TEneAm08::syncCollider()
 	colliBoundsOn(mCollider);
 	if ((mFlags2 & AM_BITE) != 0) {
 		ColliShape bite = sAm08BiteShape;
-		bite.mPos.z = mBiteZ;
+		bite.mPos.z     = mBiteZ;
 		mBiteZ += 12.5f;
 		if (mBiteZ >= 90.0f) {
 			mBiteZ = 40.0f;
@@ -258,8 +252,8 @@ void TEneAm08::syncCollider()
 void TEneAm08::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
-	int health = desc->getInt(0);
-	mHealth = health > 0 ? health : 50;
+	int health  = desc->getInt(0);
+	mHealth     = health > 0 ? health : 50;
 	mHealthStep = divideBy5(mHealth);
 }
 
@@ -275,16 +269,16 @@ int TEneAm08::isBiting(int shape)
 // A player takes 20 an egg 1 and another enemy 20 and a push along the lunge
 int TEneAm08::onHit(const TObjAction* other, int shape, int* result)
 {
-	int hit = 0;
+	int hit       = 0;
 	HitInfo* info = (HitInfo*)result;
 	if (isBiting(shape) != 0) {
 		if (isPlayerOrKind4(other) != 0) {
 			info->mDamage = 20;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 		} else if (isEggObj(other) != 0) {
 			info->mDamage = 1;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			info->mFlags.setBit(0xD);
 		} else if (isEnemyObj(other) != 0) {
@@ -292,9 +286,9 @@ int TEneAm08::onHit(const TObjAction* other, int shape, int* result)
 			info->mFlags.clear();
 			info->mFlags.setBit(1);
 			info->mFlags.setBit(0xC);
-			hit = 1;
+			hit        = 1;
 			info->mPos = mBody.mVel;
-			info->_14 = -1;
+			info->_14  = -1;
 		}
 	}
 	return hit;
@@ -309,7 +303,7 @@ void TEneAm08::setAnchor(const Vec3f* pos)
 // 0x80073AD4
 void TEneAm08::setGoal(const Vec3f* pos, int angle)
 {
-	mGoal = *pos;
+	mGoal      = *pos;
 	mGoalAngle = angle;
 }
 
@@ -498,7 +492,7 @@ void TEneAm08::placePoints()
 	d.y = mPoints[7].y;
 	d.z = mPoints[7].z;
 	njSubVector(&d, &mBody.mPos);
-	d.y = 0.0f;
+	d.y     = 0.0f;
 	mRadius = njScalor(&d);
 }
 
@@ -837,7 +831,7 @@ void TEneAm08::actSlide(int phase)
 	case 0:
 		motionCtrlPlayBlend(0.5f, &mAnim, 1);
 		mFlags2 |= AM_BITING | AM_LUNGING | AM_GUARDING | AM_TRAIL;
-		mStep = 0;
+		mStep     = 0;
 		mFrameKey = 5;
 		break;
 	case 1: {
@@ -971,7 +965,7 @@ void TEneAm08::beginDeath(int* timer)
 	killed(1);
 	noteDie();
 	mFrameKey = 3;
-	*timer = 60;
+	*timer    = 60;
 }
 
 // 0x80074F5C

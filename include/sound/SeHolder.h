@@ -18,7 +18,7 @@ struct SeHolder {
 };
 
 /** A sound set to play once a count reaches a frame */
-struct SeCue { // size 0x4
+struct SeCue {  // size 0x4
 	u16 mFrame; // _00
 	u16 mId;    // _02 the sound
 };
@@ -28,15 +28,15 @@ void seCueClear(SeCue* cue);                  // 0x80123968
 void seCueSet(SeCue* cue, int frame, int id); // 0x80123978
 void seCueUpdate(SeCue* cue, int frame);      // 0x80123984
 
-void seHolderStop(SeHolder* holder);                            // 0x80123A30
-void seHolderPlay(SeHolder* holder, int id, const Vec3f* pos);  // 0x80123A70
+void seHolderStop(SeHolder* holder);                           // 0x80123A30
+void seHolderPlay(SeHolder* holder, int id, const Vec3f* pos); // 0x80123A70
 
-int seStart(int id);                                           // 0x80123ABC
-void seStartArg(int id, int arg);                               // 0x80123ADC
-int seStartAt(int id, const Vec3f* pos);                       // 0x80123AFC
-int seStartWith(int id, int arg);                               // 0x80123B1C
-int seStartAtWith(int id, const Vec3f* pos, int arg);          // 0x80123B58
-void seStartAtFar(int id, const void* pos);                     // 0x80123B94 carries 700
+int seStart(int id);                                                 // 0x80123ABC
+void seStartArg(int id, int arg);                                    // 0x80123ADC
+int seStartAt(int id, const Vec3f* pos);                             // 0x80123AFC
+int seStartWith(int id, int arg);                                    // 0x80123B1C
+int seStartAtWith(int id, const Vec3f* pos, int arg);                // 0x80123B58
+void seStartAtFar(int id, const void* pos);                          // 0x80123B94 carries 700
 void seStartAtRange(int id, const void* pos, int volume, f32 range); // 0x80123BBC
 
 void seEnemyDie0(const Vec3f* pos);  // 0x80123BDC sounds 0xE3 and 0xE5

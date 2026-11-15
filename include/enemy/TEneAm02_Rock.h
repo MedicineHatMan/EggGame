@@ -21,12 +21,12 @@ public:
 
 	inline void operator delete(void* mem);
 
-	virtual void draw();                                        // _0C the per-frame update
-	virtual void vfn_10();                                      // _10
-	virtual void render();                                      // _1C draws the model
-	virtual Vec3f* getPos();                                    // _20
-	virtual int getKind();                                      // _2C
-	virtual int vfn_48(TObjAction* other);                      // _48
+	virtual void draw();                                              // _0C the per-frame update
+	virtual void vfn_10();                                            // _10
+	virtual void render();                                            // _1C draws the model
+	virtual Vec3f* getPos();                                          // _20
+	virtual int getKind();                                            // _2C
+	virtual int vfn_48(TObjAction* other);                            // _48
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58
 
 	void hold(Vec3f* pos, int rotY); // 0x80041304
@@ -36,8 +36,8 @@ public:
 	int mAngle;         // _A4 the holder's facing while it's held
 	f32 mScale;         // _A8 grows from 0.1 to 1 then back down
 	ObjShadow mShadow;  // _AC
-	CharaColli* mShape;       // _E4
-	DrawTask* mTask;        // _E8
+	CharaColli* mShape; // _E4
+	DrawTask* mTask;    // _E8
 	int mState;         // _EC
 	int mTimer;         // _F0 frames in the air
 };

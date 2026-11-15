@@ -12,16 +12,11 @@ struct ColliShape;
 
 extern "C" {
 MotionEntry gRacerMotions[] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.14f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 15.0f, 0.17f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 14.0f, 0.33f, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 14.0f, 0.77f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 14.0f, 0.18f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 14.0f, 0.33f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 14.0f, 0.17f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 14.0f, 0.33f, 0.0f, 0 },
-	{ MOTION_BLEND, 6, -1, 10, 0.0f, 14.0f, 0.3f, 0.075f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.14f, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 15.0f, 0.17f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 14.0f, 0.33f, 0.0f, 0 }, { MOTION_LOOP, 3, -1, 0, 0.0f, 14.0f, 0.77f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 14.0f, 0.18f, 0.0f, 0 }, { MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 14.0f, 0.33f, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 14.0f, 0.17f, 0.0f, 0 },
+	{ MOTION_ONCE, 7, -1, 0, 0.0f, 14.0f, 0.33f, 0.0f, 0 }, { MOTION_BLEND, 6, -1, 10, 0.0f, 14.0f, 0.3f, 0.075f, 0 },
 	{ MOTION_LOOP, 4, -1, 0, 0.0f, 39.0f, 0.38f, 0.0f, 0 },
 };
 ColliShape sRabitOwlFirstShape[] = {
@@ -76,9 +71,9 @@ void TAniRabitOwl::onPhase(int phase)
 		playMotion(3, 1, 0.075f);
 		eggTypeStopAllFx(this);
 		startFollowers();
-		mWait = 0;
-		mAniFlags  = 0;
-		mStep = 0x1A;
+		mWait     = 0;
+		mAniFlags = 0;
+		mStep     = 0x1A;
 
 		u8 shape[0x30];
 		f32* values = mParams->mValues;
@@ -173,7 +168,8 @@ void TAniRabitOwl::runFly()
 	Vec3f from = mPos;
 	from.y += 10.0f;
 	Vec3f to = owlAhead(&from, &mVel);
-	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&from, (const Vec3f*)&to, (unsigned long)0x201) != 0 || touchedTarget() != 0 || mTravelled >= mParams->mValues[3]) {
+	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&from, (const Vec3f*)&to, (unsigned long)0x201) != 0 || touchedTarget() != 0
+	    || mTravelled >= mParams->mValues[3]) {
 		throwBombs();
 		mWait = 0x3C;
 		mStep = 0x1B;
@@ -244,11 +240,11 @@ void TAniRabitOwl::throwBombs()
 	}
 
 	int angle = 0;
-	int i = 0;
+	int i     = 0;
 	while (i < 8) {
 		vecRotateY(&forward, &vel, angle);
 		TAniFlushFlowerBomb* bomb = new TAniFlushFlowerBomb(this, mObjId, &mPos, mFxBank, (ColliShape*)shape);
-		mBombs[i] = bomb;
+		mBombs[i]                 = bomb;
 		if (mBombs[i] != 0) {
 			mBombs[i]->mVel    = vel;
 			mBombs[i]->mGrowth = mGrowth;

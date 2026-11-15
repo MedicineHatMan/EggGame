@@ -5,10 +5,10 @@ int gcaxNewAramBank(int bank, int size)
 {
 	int ret;
 
-	ret = -1;
+	ret  = -1;
 	size = (size + 0x1F) & ~0x1F;
 	if (bank >= 0 && bank < GCAX_BANK_MAX && gcax_work->aram_rest >= size) {
-		gcax_work->aram_bank[bank].adr = gcax_work->aram_next;
+		gcax_work->aram_bank[bank].adr  = gcax_work->aram_next;
 		gcax_work->aram_bank[bank].size = size;
 		gcax_work->aram_next += size;
 		gcax_work->aram_rest -= size;
@@ -36,9 +36,9 @@ int gcaxSndLoadMpb(int bank, GCAX_CHUNK* mpb, GCAX_CALLBACK cb, void* arg, int n
 	}
 	if (cb == (GCAX_CALLBACK)-1) {
 		nowait = 0;
-		cb = 0;
+		cb     = 0;
 	}
-	ret = gcaxArqPostEx((u32)(chunk + 1), gcax_work->aram_bank[bank].adr, chunk->size, cb, arg, nowait);
+	ret   = gcaxArqPostEx((u32)(chunk + 1), gcax_work->aram_bank[bank].adr, chunk->size, cb, arg, nowait);
 	chunk = (GCAX_CHUNK*)((u8*)chunk + chunk->size + sizeof(GCAX_CHUNK));
 	if (chunk->magic != GCAX_MAGIC || chunk->type != GCAX_TYPE_MPBP) {
 		return -3;
@@ -59,7 +59,7 @@ int gcaxSndLoadMpb(int bank, GCAX_CHUNK* mpb, GCAX_CALLBACK cb, void* arg, int n
 // 0x80230FF8
 int gcaxSndLoadMsb(int bank, GCAX_CHUNK* msb, GCAX_CALLBACK cb, void* arg, int call)
 {
-	int ret = 0;
+	int ret           = 0;
 	GCAX_CHUNK* chunk = msb;
 
 	if (chunk->magic != GCAX_MAGIC || chunk->type != GCAX_TYPE_MSB) {
@@ -67,7 +67,7 @@ int gcaxSndLoadMsb(int bank, GCAX_CHUNK* msb, GCAX_CALLBACK cb, void* arg, int c
 	}
 	if (cb == (GCAX_CALLBACK)-1) {
 		call = 0;
-		cb = 0;
+		cb   = 0;
 	}
 	if (gcax_work->msb[bank].ptr != 0) {
 		gcaxSndFree(gcax_work->msb[bank].ptr);
@@ -92,7 +92,7 @@ void gcaxSndTrace(const char* label)
 
 	if (gcax_work->trace_state != gcax_work->send_state) {
 		gcax_work->trace_state = gcax_work->send_state;
-		changed = 1;
+		changed                = 1;
 	}
 }
 
@@ -131,7 +131,7 @@ int gcaxSndSendBank(int bank, void* p, u32 size)
 			gcaxSndFree(gcax_work->mpbp[gcax_work->send_slot].ptr);
 		}
 		gcax_work->mpbp[gcax_work->send_slot].ptr = 0;
-		gcax_work->send_state = 0;
+		gcax_work->send_state                     = 0;
 		return 0;
 	}
 	if (((u32)p & 0x1F) != 0) {
@@ -149,8 +149,8 @@ int gcaxSndSendBank(int bank, void* p, u32 size)
 				cur += sizeof(GCAX_CHUNK);
 				gcax_work->send_len -= sizeof(GCAX_CHUNK);
 				gcax_work->send_bank_rest = chunk->size;
-				gcax_work->send_state = 1;
-				gcax_work->send_total = 0;
+				gcax_work->send_state     = 1;
+				gcax_work->send_total     = 0;
 			}
 			break;
 		case 1:
@@ -166,7 +166,7 @@ int gcaxSndSendBank(int bank, void* p, u32 size)
 					ret = -107;
 					break;
 				}
-				gcax_work->send_dst = gcax_work->aram_bank[gcax_work->send_slot].adr;
+				gcax_work->send_dst     = gcax_work->aram_bank[gcax_work->send_slot].adr;
 				gcax_work->send_to_aram = 1;
 			} else if (chunk->type == GCAX_TYPE_MPBP) {
 				if (gcax_work->mpbp[gcax_work->send_slot].ptr != 0) {
@@ -178,8 +178,8 @@ int gcaxSndSendBank(int bank, void* p, u32 size)
 					break;
 				}
 				gcax_work->mpbp[gcax_work->send_slot].size = chunk->size;
-				gcax_work->send_dst = (u32)gcax_work->mpbp[gcax_work->send_slot].ptr;
-				gcax_work->send_to_aram = 0;
+				gcax_work->send_dst                        = (u32)gcax_work->mpbp[gcax_work->send_slot].ptr;
+				gcax_work->send_to_aram                    = 0;
 			} else {
 				ret = -104;
 				break;
@@ -188,7 +188,7 @@ int gcaxSndSendBank(int bank, void* p, u32 size)
 			gcax_work->send_len -= sizeof(GCAX_CHUNK);
 			gcax_work->send_bank_rest -= sizeof(GCAX_CHUNK);
 			gcax_work->send_chunk_rest = chunk->size;
-			gcax_work->send_state = 2;
+			gcax_work->send_state      = 2;
 			break;
 		case 2:
 			gcax_work->send_n = gcax_work->send_len;
@@ -226,7 +226,7 @@ done:
 			gcaxSndFree(gcax_work->mpbp[gcax_work->send_slot].ptr);
 		}
 		gcax_work->mpbp[gcax_work->send_slot].ptr = 0;
-		gcax_work->send_state = 0;
+		gcax_work->send_state                     = 0;
 	}
 	gcaxSndTrace("(C)");
 	gcax_work->send_total += size;

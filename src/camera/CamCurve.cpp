@@ -31,13 +31,13 @@ extern "C" {
 void camCurveStart(CamCurve* curve, const Vec3f* at)
 {
 	CamCurveState* c = CURVE(curve);
-	c->mHeight    = 0.0f;
-	c->mLift      = c->mHeight;
-	c->mSpring[0] = 0.1f;
-	c->mSpring[1] = 0.7f;
-	c->mSpring[2] = 0.02f;
-	c->mSpring[3] = 0.05f;
-	c->mSpring[4] = 0.1f;
+	c->mHeight       = 0.0f;
+	c->mLift         = c->mHeight;
+	c->mSpring[0]    = 0.1f;
+	c->mSpring[1]    = 0.7f;
+	c->mSpring[2]    = 0.02f;
+	c->mSpring[3]    = 0.05f;
+	c->mSpring[4]    = 0.1f;
 	camCurveReset(curve, at);
 }
 
@@ -45,19 +45,19 @@ void camCurveStart(CamCurve* curve, const Vec3f* at)
 void camCurveReset(CamCurve* curve, const Vec3f* at)
 {
 	CamCurveState* c = CURVE(curve);
-	c->mFlags     = 0;
-	c->mLastDir.x = 0.0f;
-	c->mLastDir.y = 0.0f;
-	c->mLastDir.z = 0.0f;
-	c->mSteady    = 0;
-	c->mDrift.x   = 0.0f;
-	c->mDrift.y   = 0.0f;
-	c->mDrift.z   = 0.0f;
-	c->mOffset.x  = 0.0f;
-	c->mOffset.y  = 0.0f;
-	c->mOffset.z  = 0.0f;
-	c->mOffset.y  = c->mLift;
-	c->mPos       = *at;
+	c->mFlags        = 0;
+	c->mLastDir.x    = 0.0f;
+	c->mLastDir.y    = 0.0f;
+	c->mLastDir.z    = 0.0f;
+	c->mSteady       = 0;
+	c->mDrift.x      = 0.0f;
+	c->mDrift.y      = 0.0f;
+	c->mDrift.z      = 0.0f;
+	c->mOffset.x     = 0.0f;
+	c->mOffset.y     = 0.0f;
+	c->mOffset.z     = 0.0f;
+	c->mOffset.y     = c->mLift;
+	c->mPos          = *at;
 	njAddVector(&c->mPos, &c->mOffset);
 	c->mVel.x = 0.0f;
 	c->mVel.y = 0.0f;

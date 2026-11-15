@@ -1,0 +1,18 @@
+# Files clang-format must not touch: their assert macros stringify the condition (#cond),
+# so changing the spacing inside one changes a string in the DOL
+src/Dolphin/ax/AXAlloc.c
+src/Dolphin/ax/AXCL.c
+src/Dolphin/ax/AXOut.c
+src/Dolphin/ax/AXProf.c
+src/Dolphin/ax/AXVPB.c
+src/Dolphin/axfx/delay.c
+src/Dolphin/dsp/dsp_task.c
+src/Dolphin/dvd/dvdfs.c
+src/Dolphin/exi/EXIBios.c
+src/Dolphin/mix/mix.c
+src/Dolphin/mtx/mtxvec.c
+src/Dolphin/os/OSAlloc.c
+src/Dolphin/si/SIBios.c
+src/Dolphin/si/SISamplingRate.c
+src/Dolphin/mtx/vec.c
+src/Dolphin/pad/Pad.c

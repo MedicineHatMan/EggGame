@@ -168,7 +168,8 @@ void TAniBirth::runWaitOwner(int phase)
 void TAniBirth::runEggModel(int phase)
 {
 	if (phase == 0) {
-		mModel = createCamPath((s8)mOwner->mPlayer, 2, ((void**)gAnimalCommonModel[1])[0], ((void**)gAnimalCommonModel[2])[0], 0, 0.0f, 0.18f);
+		mModel
+		    = createCamPath((s8)mOwner->mPlayer, 2, ((void**)gAnimalCommonModel[1])[0], ((void**)gAnimalCommonModel[2])[0], 0, 0.0f, 0.18f);
 		mModel->attachToMtx();
 		applyBody(mBody, mModel->getMtx());
 		mtxTranslateV(mModel->getMtx(), mModel->getMtx(), &mOffset);
@@ -193,7 +194,7 @@ void TAniBirth::runAnimal(int phase)
 {
 	if (phase == 0) {
 		void** assets = (void**)findArcExport(mHolder->mEntry->mData.mArc, "AniModel");
-		mModel = createCamPath((s8)mOwner->mPlayer, 2, ((void**)assets[2])[0], ((void**)assets[3])[0], 0, 0.0f, 0.31f);
+		mModel        = createCamPath((s8)mOwner->mPlayer, 2, ((void**)assets[2])[0], ((void**)assets[3])[0], 0, 0.0f, 0.31f);
 		mModel->attachToMtx();
 		applyBody(mBody, mModel->getMtx());
 		mtxTranslateV(mModel->getMtx(), mModel->getMtx(), &mOffset);
@@ -228,7 +229,7 @@ void TAniBirth::runAnimal(int phase)
 			break;
 		}
 	} else if (phase == 3) {
-		mBody->mVel.y = mBody->mVel.y + -4.9f;
+		mBody->mVel.addY(-4.9f);
 		applyBody(mBody, mModel->getMtx());
 	}
 }
@@ -265,10 +266,5 @@ void TAniBirth::runEnd(int phase)
 	}
 }
 
-// 0x801D1024
-extern "C" void initBirthJump()
-{
-	sBirthJump.x = 0.0f;
-	sBirthJump.y = 130.0f;
-	sBirthJump.z = 0.0f;
-}
+// The __sinit at 0x801D1024 fills this
+BirthJump sBirthJump(0.0f, 130.0f, 0.0f);

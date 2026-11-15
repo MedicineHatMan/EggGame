@@ -1,7 +1,7 @@
 #include <gcax/gcax.h>
 
 #define GCAX_SEQ_PLAYING 0x2
-#define GCAX_SEQ_PAUSED 0x1
+#define GCAX_SEQ_PAUSED  0x1
 
 // 0x80236960
 int gcaxSeqReadVar(u8** pp)
@@ -50,7 +50,7 @@ void gcaxSeqUpdate(GCAX_PORT* port)
 		return;
 	}
 	seq = &port->seq;
-	p = seq->ptr;
+	p   = seq->ptr;
 	if (p == 0) {
 		return;
 	}
@@ -61,17 +61,17 @@ void gcaxSeqUpdate(GCAX_PORT* port)
 
 restart:
 	seq->beat = 60.0f / seq->tempo;
-	d = (u32)OSTicksToMicroseconds(gcax_work->seq_dt);
+	d         = (u32)OSTicksToMicroseconds(gcax_work->seq_dt);
 	d *= gcax_work->tempo_scale;
 	d *= seq->speed;
 	d *= seq->tempo;
 	d /= 60000000.0f;
 	seq->prev_tick = seq->tick;
-	seq->delta = d;
+	seq->delta     = d;
 	seq->tick += d;
 
 	do {
-		q = p;
+		q     = p;
 		delta = gcaxSeqReadVar(&q);
 		if (delta < 0) {
 			p = 0;
@@ -80,7 +80,7 @@ restart:
 		if (seq->next + delta > seq->tick) {
 			break;
 		}
-		p = q;
+		p              = q;
 		seq->prev_next = seq->next;
 		seq->next += delta;
 		if (*p & 0x80) {
@@ -112,19 +112,19 @@ restart:
 		case 0xB0:
 			if (p[0] == 0x1F) {
 				if (seq->loop_ptr == 0) {
-					seq->loop_ptr = p + 2;
+					seq->loop_ptr   = p + 2;
 					seq->loop_count = p[1];
-					seq->loop_next = seq->next;
-					seq->loop_tick = seq->prev_tick;
+					seq->loop_next  = seq->next;
+					seq->loop_tick  = seq->prev_tick;
 					seq->loop_tempo = seq->tempo;
 					p += 2;
 					break;
 				}
 				if (seq->loop_count == 0) {
 				rewind:
-					p = seq->loop_ptr;
-					seq->tick = seq->loop_tick;
-					seq->next = seq->loop_next;
+					p          = seq->loop_ptr;
+					seq->tick  = seq->loop_tick;
+					seq->next  = seq->loop_next;
 					seq->tempo = seq->loop_tempo;
 					goto restart;
 				}
@@ -154,7 +154,7 @@ restart:
 	} while (seq->next < seq->tick);
 
 done:
-	seq->ptr = p;
+	seq->ptr  = p;
 	seq->time = gcax_work->time;
 	if (p == 0) {
 		port->seq_flags &= ~GCAX_SEQ_PLAYING;

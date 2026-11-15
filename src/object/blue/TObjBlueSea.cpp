@@ -24,11 +24,11 @@ typedef char TObjBlueSea_size_check[(sizeof(TObjBlueSea) == 0x48) ? 1 : -1];
 // spacing is the distance between rows
 static void drawSeaGrid(f32 y, f32 spacing, u32 color)
 {
-	f32 cell    = spacing * 5.0f;
-	f32 countF  = (f32)ceil(14000.0f / cell);
-	int count   = (int)countF;
-	f32 half    = 0.5f * cell * countF;
-	f32 z1      = half;
+	f32 cell   = spacing * 5.0f;
+	f32 countF = (f32)ceil(14000.0f / cell);
+	int count  = (int)countF;
+	f32 half   = 0.5f * cell * countF;
+	f32 z1     = half;
 
 	GXSetCullMode(GX_CULL_BACK);
 	for (int row = 0; row < count; row++) {
@@ -79,8 +79,8 @@ extern "C" void initBlueSea()
 	resBankLoad(&sBlueSeaBank, "ar_obj_blue_sea.arc");
 	resBankAddTextures(&sBlueSeaBank, 0, "obj_blue_sea.gvm");
 	sBlueSeaTextures = resBankGetTextures(&sBlueSeaBank);
-	sBlueSeaColor = new u32;
-	*sBlueSeaColor = 0xFFFFFF80;
+	sBlueSeaColor    = new u32;
+	*sBlueSeaColor   = 0xFFFFFF80;
 }
 
 // 0x8004DC0C

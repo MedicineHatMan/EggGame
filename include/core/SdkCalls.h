@@ -14,7 +14,7 @@ void GXSetPointSize(u8, GXTexOffset);
 s32 GBAGetProcessStatus(s32 chan, u8* percent);
 BOOL PADInit();
 void AXInit();
-void AXRegisterCallback(void(*callback)());
+void AXRegisterCallback(void (*callback)());
 void MIXInit();
 void C_QUATMtx(f32*, const f32*);
 void GXSetTexCopySrc(u16 left, u16 top, u16 width, u16 height);

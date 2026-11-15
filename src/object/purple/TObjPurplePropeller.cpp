@@ -77,7 +77,7 @@ void TObjPurplePropeller::initFromDesc(SetDesc* desc)
 	mtxRotateX(mMatrix, mMatrix, mRot.x);
 	mtxRotateY(mSpin, mMatrix, mAngle);
 
-	mCentre        = ((PropNode*)mGeo)->mMesh->mCentre;
+	mCentre = ((PropNode*)mGeo)->mMesh->mCentre;
 	mtxMultVec(mSpin, &mCentre, &mCentre);
 	mRadius = ((PropNode*)mGeo)->mMesh->mRadius * mScale;
 }
@@ -104,8 +104,8 @@ void TObjPurplePropeller::vfn_74()
 	mSnow1          = 0;
 	mSnow0          = 0;
 	if (switchesSet() == 0) {
-		mSnow0 = particleGenById(this, &gVecZero, 0, 0xF5);
-		mSnow1 = particleGenById(this, &gVecZero, 0, 0xF6);
+		mSnow0       = particleGenById(this, &gVecZero, 0, 0xF5);
+		mSnow1       = particleGenById(this, &gVecZero, 0, 0xF6);
 		mSnow0->mPos = mPos;
 		mSnow1->mPos = mPos;
 		mSnow0->setRot(mRot.x, mRot.y);
@@ -209,4 +209,3 @@ void TObjPurplePropeller::render()
 	mModel.draw();
 	njPopMatrixEx();
 }
-

@@ -34,18 +34,18 @@ struct MagmaGrid {
 	void cull();
 	void draw();
 
-	u32 mFlags;   // _00 1 = warps what is behind it 2 = off screen
-	f32 mDepth;   // _04
-	f32 mWidth;   // _08
-	int mRows;    // _0C
-	int mCols;    // _10
-	Vec3f mPos;   // _14
+	u32 mFlags;       // _00 1 = warps what is behind it 2 = off screen
+	f32 mDepth;       // _04
+	f32 mWidth;       // _08
+	int mRows;        // _0C
+	int mCols;        // _10
+	Vec3f mPos;       // _14
 	HitVec* mVerts;   // _20
 	HitVec* mNormals; // _24
-	f32* mSpeeds; // _28
-	u32* mCells;  // _2C
-	int mScrollA; // _30
-	int mScrollB; // _34
+	f32* mSpeeds;     // _28
+	u32* mCells;      // _2C
+	int mScrollA;     // _30
+	int mScrollB;     // _34
 };
 
 /**
@@ -65,7 +65,7 @@ public:
 	void push(const Vec3f* pos, f32 inner, f32 outer, f32 amount);
 
 	MagmaGrid* mGrids[9]; // _20
-	DrawTask* mDrawTask;      // _44
+	DrawTask* mDrawTask;  // _44
 };
 
 extern "C" {

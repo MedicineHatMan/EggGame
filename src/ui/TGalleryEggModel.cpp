@@ -15,15 +15,15 @@ struct NJS_TEXLIST;
 // The block of gallery_egg.arc gGalleryEggs
 // +0xB8 and +0xBC are two extra textures used by eggs 0x28-0x2A and 0x2C
 struct GalleryEggAssets {
-	int mCount;     // _00 of mTex and mGvm
-	NJS_OBJECT* mModel;   // _04
-	void* mMotion;  // _08 length is a u32 at +0x04
-	void** mTex;    // _0C
-	void** mGvm;    // _10
+	int mCount;         // _00 of mTex and mGvm
+	NJS_OBJECT* mModel; // _04
+	void* mMotion;      // _08 length is a u32 at +0x04
+	void** mTex;        // _0C
+	void** mGvm;        // _10
 };
 
-TArc* gGalleryEggArc;            // 0x802C5AE0
-GalleryEggAssets* gGalleryEggs;  // 0x802C5AE4
+TArc* gGalleryEggArc;           // 0x802C5AE0
+GalleryEggAssets* gGalleryEggs; // 0x802C5AE4
 
 // 0x801B622C
 // Name is ours
@@ -90,7 +90,9 @@ void TGalleryEggModel::draw()
 }
 
 // 0x801B64D8
-void TGalleryEggModel::vfn_10() { }
+void TGalleryEggModel::vfn_10()
+{
+}
 
 // 0x801B64DC
 // Opaque post-tev stage

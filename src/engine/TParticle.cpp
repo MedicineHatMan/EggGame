@@ -85,7 +85,9 @@ TParticleEmitG::TParticleEmitG(TObject* parent, const ParticleDesc* desc, const 
 }
 
 // 0x80026550
-TParticleEmitG::~TParticleEmitG() { }
+TParticleEmitG::~TParticleEmitG()
+{
+}
 
 // 0x800265AC
 void TParticleEmitG::draw()
@@ -98,7 +100,10 @@ void TParticleEmitG::draw()
 }
 
 // 0x80026604
-void TParticleEmitG::vfn_10() { mPart.updateStretch(); }
+void TParticleEmitG::vfn_10()
+{
+	mPart.updateStretch();
+}
 
 // 0x80026628
 extern "C" void* particleEmitLNew(TObject* parent, const ParticleDesc* desc, int slot, f32 scale, int rotX, int rotY)
@@ -121,7 +126,9 @@ TParticleEmitL::TParticleEmitL(TObject* parent, const ParticleDesc* desc, int sl
 }
 
 // 0x80026758
-TParticleEmitL::~TParticleEmitL() { }
+TParticleEmitL::~TParticleEmitL()
+{
+}
 
 // 0x800267B4
 void TParticleEmitL::draw()
@@ -135,4 +142,7 @@ void TParticleEmitL::draw()
 }
 
 // 0x80026820
-void TParticleEmitL::vfn_10() { mPart.updateStretchAt(&mLocal); }
+void TParticleEmitL::vfn_10()
+{
+	mPart.updateStretchAt(&mLocal);
+}

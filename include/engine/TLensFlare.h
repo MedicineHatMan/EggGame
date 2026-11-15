@@ -24,12 +24,12 @@ public:
 	virtual void vfn_10();
 	virtual void render();
 
-	void* mTexture; // _20
+	void* mTexture;  // _20
 	DrawTask* mTask; // _24
-	Vec3f mPos;     // _28
-	u8 mAlpha;      // _34
-	f32 mFade;      // _38
-	int mVisible;   // _3C
+	Vec3f mPos;      // _28
+	u8 mAlpha;       // _34
+	f32 mFade;       // _38
+	int mVisible;    // _3C
 };
 
 extern "C" TLensFlare* lensFlareCreate(void* owner, const Vec3f* pos); // 0x800D3B18
@@ -38,10 +38,10 @@ extern "C" TLensFlare* lensFlareCreate(void* owner, const Vec3f* pos); // 0x800D
  * @size 0x10
  */
 struct FlareSprite {
-	f32 mAlong;  // _00 how far along the line
-	f32 mFar;    // _04 size at the far end
-	f32 mNear;   // _08 size at the near end
-	f32 mU;      // _0C
+	f32 mAlong; // _00 how far along the line
+	f32 mFar;   // _04 size at the far end
+	f32 mNear;  // _08 size at the near end
+	f32 mU;     // _0C
 };
 
 /**

@@ -42,10 +42,10 @@ ColliShape sHariAzarashiFirstShape[] = {
 
 typedef char TAniHariAzarashi_size_check[(sizeof(TAniHariAzarashi) == 0x3A0) ? 1 : -1];
 
-#define KILL(obj)            \
-	if ((obj) != 0) {        \
-		(obj)->mFlags |= 1;  \
-		(obj) = 0;           \
+#define KILL(obj)           \
+	if ((obj) != 0) {       \
+		(obj)->mFlags |= 1; \
+		(obj) = 0;          \
 	}
 
 inline void TAniHariAzarashi::killAll()
@@ -81,7 +81,7 @@ TAniHariAzarashi::TAniHariAzarashi(TObject* parent, int player, int kind, const 
 	mNodes = gHariMotions;
 	mShape = sHariAzarashiFirstShape;
 	initColli();
-	m270       = sHariAzarashiCallbacks;
+	m270        = sHariAzarashiCallbacks;
 	mSliders[2] = 0;
 	mSliders[1] = 0;
 	mSliders[0] = 0;
@@ -141,15 +141,15 @@ void TAniHariAzarashi::onPhase(int phase)
 		playMotion(3, 1, 0.075f);
 		eggTypeStopAllFx(this);
 		startFollowers();
-		mTimer = 0;
-		mAniFlags   = 0;
-		mStep  = 0xE;
+		mTimer    = 0;
+		mAniFlags = 0;
+		mStep     = 0xE;
 		colliDisable(mColli);
 		mSpread = 0.0f;
 		for (s16 i = 0; i < 3; i++) {
 			TAniIceSlider* slider = new TAniIceSlider(this, &mPos, &mDir, objIdOf(this), mTarget.getId());
-			mSliders[i]         = slider;
-			mSliders[i]->mRange = mParams->mValues[3];
+			mSliders[i]           = slider;
+			mSliders[i]->mRange   = mParams->mValues[3];
 		}
 		mSubMode = 5;
 	} else if (phase == 2) {
@@ -178,8 +178,8 @@ void TAniHariAzarashi::runSpread()
 	f32 a[12];
 	f32 b[12];
 	f32 c[12];
-	Vec3f at   = mSliders[0]->mPos;
-	int rotY   = mSliders[0]->mRot[1];
+	Vec3f at = mSliders[0]->mPos;
+	int rotY = mSliders[0]->mRot[1];
 	mtxIdentity(a);
 	mtxTranslateV(a, a, &at);
 	mtxRotateY(a, a, rotY);
@@ -215,7 +215,7 @@ void TAniHariAzarashi::runSpread()
 	mSliders[0]->mState = 1;
 	mSliders[1]->mState = 1;
 	mSliders[2]->mState = 1;
-	mStep = 0xF;
+	mStep               = 0xF;
 	sePlay3D(0x1B1, &mPos);
 }
 
@@ -234,7 +234,7 @@ void TAniHariAzarashi::runSlide()
 	}
 	for (int i = 0; i < 3; i++) {
 		TAniIceRock* rock = new TAniIceRock(this, &mSliders[i]->mPos, mObjId);
-		mRocks[i] = rock;
+		mRocks[i]         = rock;
 		if (mRocks[i] != 0) {
 			mRocks[i]->mScale = 3.0f;
 			mRocks[i]->mRise  = -40.0f;
@@ -323,4 +323,3 @@ extern "C" void hariBones4()
 	copyAnimalBones(2, 4, sBone);
 	sBone++;
 }
-

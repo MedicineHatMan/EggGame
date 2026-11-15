@@ -35,17 +35,17 @@ public:
 	void setPos(const Vec3f* pos); // 0x8018D3A0
 	void flash();                  // 0x8018D3BC
 
-	NJS_OBJECT* mModel;   // _20
-	void* mMotions;       // _24
-	NJS_TEXLIST* mTexList;       // _28
-	SetTransform mXform;  // _2C
-	MotionPlayer mMotion; // _70
-	EnemyAnim mClip;      // _AC
-	DrawTask* mDraw;          // _B8
-	EnemyTint mTint;      // _BC the hit flash
-	FxHolder mGlow;       // _C4
-	int mState;           // _F8 a LastExCoreState
-	int mAlpha;           // _FC 0 to 255
+	NJS_OBJECT* mModel;    // _20
+	void* mMotions;        // _24
+	NJS_TEXLIST* mTexList; // _28
+	SetTransform mXform;   // _2C
+	MotionPlayer mMotion;  // _70
+	EnemyAnim mClip;       // _AC
+	DrawTask* mDraw;       // _B8
+	EnemyTint mTint;       // _BC the hit flash
+	FxHolder mGlow;        // _C4
+	int mState;            // _F8 a LastExCoreState
+	int mAlpha;            // _FC 0 to 255
 };
 
 // Drops a TObjLastBossShot at pos

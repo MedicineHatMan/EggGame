@@ -5,10 +5,13 @@
 #include "camera/TCameraCtrl.h"
 #include "object/green/TObjGreenGrassField.h"
 #include "core/TMainTask.h"
-
+
 // Not in the DOL Calling update before its body makes the compiler generate it here at the start of the file rather
 // than deferring it to the end
-static void greenRootUpdate(GreenBrainRoot* root, TEneGreenBoss* owner) { root->GreenBrainRoot::update(owner); }
+static void greenRootUpdate(GreenBrainRoot* root, TEneGreenBoss* owner)
+{
+	root->GreenBrainRoot::update(owner);
+}
 
 // 0x801632C0
 inline void GreenBrainRoot::update(TEneGreenBoss* owner)
@@ -31,7 +34,9 @@ GreenBrainBase::GreenBrainBase()
 }
 
 // 0x8016338C
-GreenBrainBase::~GreenBrainBase() { }
+GreenBrainBase::~GreenBrainBase()
+{
+}
 
 // 0x801633E8
 GreenBrain* createGreenBrain(TEneGreenBoss* owner)
@@ -42,15 +47,15 @@ GreenBrain* createGreenBrain(TEneGreenBoss* owner)
 // 0x80163430
 GreenBrain::GreenBrain(TEneGreenBoss* owner)
 {
-	mOwner = owner;
+	mOwner       = owner;
 	mSavedHealth = gGreenBossParams->mHealth;
 	mSight.reset();
 	mSight.mHeightLimit = 1000.0f;
-	mStep   = 0;
-	mTimer  = 0;
-	mTimer2 = 0;
-	_5C     = 0;
-	_60     = 0;
+	mStep               = 0;
+	mTimer              = 0;
+	mTimer2             = 0;
+	_5C                 = 0;
+	_60                 = 0;
 	if (mOwner != 0) {
 		mNext  = -1;
 		mState = 0;
@@ -65,7 +70,9 @@ GreenBrain::GreenBrain(TEneGreenBoss* owner)
 }
 
 // 0x8016351C
-GreenBrain::~GreenBrain() { }
+GreenBrain::~GreenBrain()
+{
+}
 
 // 0x80163584
 // Slot _08
@@ -172,7 +179,7 @@ int GreenBrain::isInRange(Vec3f* pos)
 // 0x80163998
 int GreenBrain::isFacing(int angle)
 {
-	int limit = gGreenBossParams->mFacing[getStage()];
+	int limit   = gGreenBossParams->mFacing[getStage()];
 	bool facing = angle <= limit || angle >= -limit;
 	return facing;
 }

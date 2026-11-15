@@ -2,6 +2,7 @@
 #include "Ninja/njInternal.h"
 
 // 0x8020F888
+// clang-format off
 asm f32 njScalor2(const NJS_VECTOR* v)
 {
 	nofralloc
@@ -13,6 +14,7 @@ asm f32 njScalor2(const NJS_VECTOR* v)
 	fmadds f1, f2, f2, f0
 	blr
 }
+// clang-format on
 
 // 0x8020F8A4
 #pragma opt_propagation off
@@ -57,9 +59,9 @@ void njCreateQuaternion(s32 ang, f32 x, f32 y, f32 z, NJS_QUATERNION* q)
 	f32 s;
 	f32 c;
 	s32 half = ang >> 1;
-	s = njSin(half);
-	c = njCos(half);
-	q->re = c;
+	s        = njSin(half);
+	c        = njCos(half);
+	q->re    = c;
 	q->im[0] = s * x;
 	q->im[1] = s * y;
 	q->im[2] = s * z;
@@ -71,9 +73,9 @@ void njCreateQuaternionV(const NJS_VECTOR* v, s32 ang, NJS_QUATERNION* q)
 	f32 s;
 	f32 c;
 	s32 half = ang >> 1;
-	s = njSin(half);
-	c = njCos(half);
-	q->re = c;
+	s        = njSin(half);
+	c        = njCos(half);
+	q->re    = c;
 	q->im[0] = s * v->x;
 	q->im[1] = s * v->y;
 	q->im[2] = s * v->z;
@@ -91,7 +93,7 @@ void njInterpolateQuaternion(const NJS_QUATERNION* a, const NJS_QUATERNION* b, N
 	f32 bx = b->im[0];
 	f32 by = b->im[1];
 	f32 bz = b->im[2];
-	f32 u = 1.0f - t;
+	f32 u  = 1.0f - t;
 	f32 r;
 	f32 x;
 	f32 y;
@@ -109,8 +111,8 @@ void njInterpolateQuaternion(const NJS_QUATERNION* a, const NJS_QUATERNION* b, N
 		y = ay * u - by * t;
 		z = az * u - bz * t;
 	}
-	inv = 1.0f / sqrtf(z * z + (y * y + (r * r + x * x)));
-	out->re = r * inv;
+	inv        = 1.0f / sqrtf(z * z + (y * y + (r * r + x * x)));
+	out->re    = r * inv;
 	out->im[0] = x * inv;
 	out->im[1] = y * inv;
 	out->im[2] = z * inv;

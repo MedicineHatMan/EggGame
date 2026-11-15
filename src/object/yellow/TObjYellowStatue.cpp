@@ -27,9 +27,8 @@ struct TObjAction;
 
 extern "C" {
 // 0x802C44D0
-ObjClassName gTObjYellowStatueName = { "TObjYellowStatue", 0 };
+ObjClassName gTObjYellowStatueName              = { "TObjYellowStatue", 0 };
 extern const MotionEntry sYellowStatueMotions[] = { { 1, 0, -1, 0, 0.0f, 45.0f, 0.2f, 0.0f, 0 } };
-
 }
 
 class TObjYellowStatue;
@@ -48,10 +47,10 @@ extern "C" TObject* createTObjYellowStatue(TObject* parent, SetDesc* desc)
 TObjYellowStatue::TObjYellowStatue(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	mTimer = 0x30;
-	mEvent = 0;
-	_00    = (u32)gTObjYellowStatueName.mName;
-	mSize  = 0x130;
+	mTimer     = 0x30;
+	mEvent     = 0;
+	_00        = (u32)gTObjYellowStatueName.mName;
+	mSize      = 0x130;
 	mNode.mObj = this;
 	sStatues.add(&mNode);
 
@@ -133,7 +132,7 @@ void TObjYellowStatue::updateMatrix()
 		mtxRotateY(mMatrix, mMatrix, mRot.y - mAngle);
 	}
 	GjModel* model = mModelData->model;
-	mCenter  = *(Vec3f*)&model->center;
+	mCenter        = *(Vec3f*)&model->center;
 	mtxMultVec(mMatrix, &mCenter, &mCenter);
 	mRadius = mModelData->model->r;
 }

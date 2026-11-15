@@ -94,7 +94,10 @@ void memShowStats()
  */
 class TMemBlock : public TObject {
 public:
-	TMemBlock() : TObject(0) { }
+	TMemBlock()
+	    : TObject(0)
+	{
+	}
 	virtual ~TMemBlock() { }
 
 	virtual void vfn_14() { memDumpPrintf("Adr %08X Sz %06X Cl %08X", mAddr, mBytes, mOwner); }

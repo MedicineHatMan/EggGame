@@ -44,7 +44,7 @@ extern "C" TObject* createTObjWindColli(TObject* parent, SetDesc* desc)
 TObjWindColli::TObjWindColli(TObject* parent, const SetDesc* desc)
     : TObjAction(parent)
 {
-	_00 = (u32)gTObjWindColliName;
+	_00   = (u32)gTObjWindColliName;
 	mSize = 0x80;
 	setObjId(this, desc->mObjId);
 	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
@@ -179,7 +179,9 @@ void TObjWindColli::draw()
 }
 
 // 0x800F412C
-void TObjWindColli::vfn_10() { }
+void TObjWindColli::vfn_10()
+{
+}
 
 // 0x800F4130
 // Debug a red line along the wind then the shape
@@ -197,7 +199,7 @@ void TObjWindColli::render()
 		sWindLine[1].y = 0.0f;
 		sWindLine[1].z = 20.0f;
 	} else {
-		f32 len = 20.0f;
+		f32 len        = 20.0f;
 		sWindLine[1].x = dir.x * len;
 		sWindLine[1].y = dir.y * len;
 		sWindLine[1].z = dir.z * len;
@@ -232,10 +234,14 @@ TWindCtrl::TWindCtrl(TObject* parent)
 }
 
 // 0x800F42B4
-TWindCtrl::~TWindCtrl() { }
+TWindCtrl::~TWindCtrl()
+{
+}
 
 // 0x800F4310
-void TWindCtrl::draw() { }
+void TWindCtrl::draw()
+{
+}
 
 // 0x800F4314
 void TWindCtrl::getWind(Vec3f* out) const

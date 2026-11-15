@@ -18,7 +18,7 @@ extern "C" void loadAeTitle()
 	loadArc(getLangFileName("ae_egg_title.arc"), &sAeTitleArc);
 	if (sAeTitleArc != 0) {
 		AeArcBlock* block = aeArcBlock(sAeTitleArc);
-		sAeTitleAe = block->mAe;
+		sAeTitleAe        = block->mAe;
 		relocateAe(sAeTitleAe);
 		sAeTitleTexList = block->mTexList;
 		bindGvmTextures((u8*)block->mGvm, sAeTitleTexList);
@@ -35,7 +35,7 @@ extern "C" void freeAeTitle()
 		sAeTitleTexList = 0;
 		releaseResource(sAeTitleArc);
 		sAeTitleArc = 0;
-		sAeTitleAe = 0;
+		sAeTitleAe  = 0;
 	}
 }
 
@@ -65,7 +65,10 @@ TAeObjTitle::TAeObjTitle(TObject* parent, void* data, void* assets)
 }
 
 // 0x800A6038
-TAeObjTitle::~TAeObjTitle() { removeDrawTask(mTask); }
+TAeObjTitle::~TAeObjTitle()
+{
+	removeDrawTask(mTask);
+}
 
 // 0x800A60A0
 // Once the logo is in holds it and starts the press-start layer bound to it
@@ -112,7 +115,9 @@ void TAeObjTitle::draw()
 }
 
 // 0x800A61EC
-void TAeObjTitle::vfn_10() { }
+void TAeObjTitle::vfn_10()
+{
+}
 
 // 0x800A61F0
 void TAeObjTitle::render()

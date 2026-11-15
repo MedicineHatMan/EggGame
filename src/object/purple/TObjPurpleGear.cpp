@@ -17,7 +17,7 @@ extern "C" {
 
 // 0x802C41C0
 const char* gTObjPurpleGearName = "TObjPurpleGear";
-char* sPurpleGearKindNames[2] = { "SMALL", "BIG" };
+char* sPurpleGearKindNames[2]   = { "SMALL", "BIG" };
 }
 
 typedef char TObjPurpleGear_size_check[(sizeof(TObjPurpleGear) == 0x110) ? 1 : -1];
@@ -72,7 +72,7 @@ void TObjPurpleGear::initFromDesc(SetDesc* desc)
 		break;
 	}
 
-	mCenter  = *(Vec3f*)&mModelData->model->center;
+	mCenter = *(Vec3f*)&mModelData->model->center;
 	mtxMultVec(mSpin, &mCenter, &mCenter);
 	mRadius = mModelData->model->r * mScale;
 

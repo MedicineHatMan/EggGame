@@ -15,6 +15,7 @@ struct DrawTask;
 #include "engine/FrameTex.h"
 #include "engine/TParticle.h"
 #include "animal/TAniBubbleWave.h"
+#include "animal/AniModel.h"
 struct DrawStateSlot;
 struct DrawState;
 struct CharaColli;
@@ -22,14 +23,10 @@ struct CamView;
 
 extern "C" {
 extern const MotionEntry sBubbleWaveMotions[9] = {
-	{ MOTION_LOOP, 0, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 4, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ -1, 0, 0, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 0, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 0, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 }, { MOTION_LOOP, 3, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 4, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 }, { -1, 0, 0, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 0, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 },
 	{ MOTION_CHAIN, 0, 0, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 };
 extern const MotionEntry sBubbleWaveMotionB[1] = {
@@ -47,9 +44,9 @@ extern const ColliShape sBubbleWaveShape[1] = {
 
 struct WaveCamera {
 	u8 _00[0x44];
-	int mFov;     // _44
+	int mFov; // _44
 	u8 _48[4];
-	f32 mAspect;  // _4C
+	f32 mAspect; // _4C
 };
 
 const char* gTAniBubbleWaveName = "TAniBubbleWave";
@@ -57,18 +54,17 @@ const char* gTAniBubbleWaveName = "TAniBubbleWave";
 // 0x801340C4
 TAniBubbleWave::TAniBubbleWave(TEggCreatureTypeE* owner, const Vec3f* pos, u16 ownerId)
     : TObject(owner)
+    , mPos(*pos)
 {
-	mPos              = *pos;
-	_00               = (u32)gTAniBubbleWaveName;
-	mSize             = 0x13C;
-	mDrawTask         = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
-	void*** assets    = (void***)owner->mMotion;
-	mObjectA          = assets[0][3];
-	mObjectB          = assets[0][2];
-	mTexList          = (NJS_TEXLIST*)assets[5][0];
-	mPlayerB.init(sBubbleWaveMotionB, assets[1]);
+	_00       = (u32)gTAniBubbleWaveName;
+	mSize     = 0x13C;
+	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
+	mObjectA  = owner->mMotion->mObject[3];
+	mObjectB  = owner->mMotion->mObject[2];
+	mTexList  = (NJS_TEXLIST*)*owner->mMotion->mTexList;
+	mPlayerB.init(sBubbleWaveMotionB, owner->mMotion->mMotions);
 	mPlayerB.play(0);
-	mPlayerA.init(sBubbleWaveMotionA, assets[1]);
+	mPlayerA.init(sBubbleWaveMotionA, owner->mMotion->mMotions);
 	mPlayerA.play(0);
 	mDrawState          = *getDefaultDrawState();
 	mDrawState.mFlags   = 0x200;
@@ -76,14 +72,13 @@ TAniBubbleWave::TAniBubbleWave(TEggCreatureTypeE* owner, const Vec3f* pos, u16 o
 	mScale.x            = 1.5f;
 	mScale.y            = 1.0f;
 	mScale.z            = 1.5f;
-	((void (*)(f32*))mtxSetScaleV)(mMatrix);
-	const ColliShape* shape = sBubbleWaveShape;
-	mRadius    = shape->mSizeX;
-	mHeight    = shape->mSizeY;
-	mFrame     = 0.0f;
+	mtxSetScaleV(mMatrix, &mScale);
+	mRadius    = sBubbleWaveShape->mSizeX;
+	mHeight    = sBubbleWaveShape->mSizeY;
 	mFrameWait = 0;
 	mRise      = 0;
 	mTicks     = 0;
+	mFrame     = 0.0f;
 	mIsDisc    = 0;
 	mWarp      = 1.0f;
 	mDiscAngle = 0x8000;
@@ -91,8 +86,8 @@ TAniBubbleWave::TAniBubbleWave(TEggCreatureTypeE* owner, const Vec3f* pos, u16 o
 	if (mColli != 0) {
 		colliSetOwner(mColli, (u16)ownerId);
 		colliSetMasks((CharaColli*)mColli, 0x20, 0xFF, 0xFF, 0x10);
-		colliCopyShapes((CharaColli*)mColli, shape);
-		colliPlaceShapes((CharaColli*)mColli, &mPos, shape);
+		colliCopyShapes((CharaColli*)mColli, sBubbleWaveShape);
+		colliPlaceShapes((CharaColli*)mColli, &mPos, sBubbleWaveShape);
 		colliShapeSetBit8((CharaColli*)mColli, 0);
 	}
 }
@@ -111,9 +106,9 @@ void TAniBubbleWave::draw()
 		mRise += 0x280;
 		mHeight = 30.0f * njSin(mRise);
 		mRadius += 1.17647f;
-		f32 height = 10.0f;
-		height = (mHeight < height) ? height : mHeight;
-		f32 radius = mRadius;
+		f32 height                     = 10.0f;
+		height                         = (mHeight < height) ? height : mHeight;
+		f32 radius                     = mRadius;
 		colliGetShapes(mColli)->mSizeX = radius;
 		colliGetShapes(mColli)->mSizeY = height;
 	}
@@ -175,6 +170,15 @@ void TAniBubbleWave::render()
 	}
 }
 
+// A texture coordinate of the disc: the unit circle point scaled into 0..1
+static inline f32 discU(f32 x, f32 uv)
+{
+	x /= uv;
+	x = 1.0f + x;
+	x = 0.5f * x;
+	return x;
+}
+
 // 0x80134650
 void TAniBubbleWave::renderDisc()
 {
@@ -222,24 +226,26 @@ void TAniBubbleWave::renderDisc()
 	GXSetBlendMode(GX_BM_NONE, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_COPY);
 	GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_AND, GX_ALWAYS, 0xFF);
 
+	f32 half;
 	f32 y;
 	f32 midZ;
 	f32 midX;
 	f32 uv;
 	midX = mPos.x;
-	y = 0.5f + mPos.y;
+	y    = 0.5f + mPos.y;
 	midZ = mPos.z;
-	uv = 1.1f + njCos(mDiscAngle);
+	uv   = 1.1f + njCos(mDiscAngle);
 	uv *= 3.0f;
+	half = 0.5f;
 	GXBegin(GX_TRIANGLEFAN, GX_VTXFMT0, 0xE);
 	GXPosition3f32(midX, y, midZ);
-	GXTexCoord2f32(0.5f, 0.5f);
+	GXTexCoord2f32(half, half);
 	for (s16 i = 0; i < 0xD; i++) {
 		int angle = (int)(182.04445f * (f32)(i * 30));
 		f32 c     = njCos(angle);
 		f32 s     = njSin(angle);
 		GXPosition3f32(mRadius * c + mPos.x, y, mRadius * s + mPos.z);
-		GXTexCoord2f32(0.5f * (1.0f + c / uv), 0.5f * (1.0f + -s / uv));
+		GXTexCoord2f32(discU(c, uv), discU(-s, uv));
 	}
 	GXSetNumIndStages(0);
 	GXSetTevDirect(GX_TEVSTAGE0);
@@ -256,8 +262,8 @@ void TAniBubbleWave::renderWave()
 	if (mPlayerA.isBlending() != 0) {
 		gjDrawMotionLink((NJS_OBJECT*)mObjectA, (void*)mPlayerA.getBlend(), mPlayerA.mBlendTime);
 	} else {
-		int cur = mPlayerA.mCurrent;
-		f32 frame = mPlayerA.mFrame;
+		int cur            = mPlayerA.mCurrent;
+		f32 frame          = mPlayerA.mFrame;
 		NJS_MOTION* motion = mPlayerA.getMotion(cur);
 		gjDrawMotion((NJS_OBJECT*)mObjectA, motion, frame);
 	}
@@ -265,8 +271,8 @@ void TAniBubbleWave::renderWave()
 	if (mPlayerB.isBlending() != 0) {
 		gjDrawMotionLink((NJS_OBJECT*)mObjectB, (void*)mPlayerB.getBlend(), mPlayerB.mBlendTime);
 	} else {
-		int cur = mPlayerB.mCurrent;
-		f32 frame = mPlayerB.mFrame;
+		int cur            = mPlayerB.mCurrent;
+		f32 frame          = mPlayerB.mFrame;
 		NJS_MOTION* motion = mPlayerB.getMotion(cur);
 		gjDrawMotion((NJS_OBJECT*)mObjectB, motion, frame);
 	}
@@ -291,7 +297,7 @@ void TAniBubbleWave::beginScroll()
 	GXLoadTexMtxImm(m, GX_TEXMTX0, GX_MTX2x4);
 	u8 funcs[0x20];
 	*(void**)(funcs + 0x10) = (void*)scrollTexGen;
-	gjChangeDrawObjIF((void*const*)funcs, (u32)0x40);
+	gjChangeDrawObjIF((void* const*)funcs, (u32)0x40);
 }
 
 // 0x80134C24
@@ -299,7 +305,7 @@ void TAniBubbleWave::endScroll()
 {
 	u8 funcs[0x20];
 	*(void**)(funcs + 0x10) = 0;
-	gjChangeDrawObjIF((void*const*)funcs, (u32)0x40);
+	gjChangeDrawObjIF((void* const*)funcs, (u32)0x40);
 }
 
 // 0x80134C80

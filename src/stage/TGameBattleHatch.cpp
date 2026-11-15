@@ -9,7 +9,7 @@
  * @size 0x8
  */
 struct HatchLeaderMsg {
-	s16 mKind;   // _00
+	s16 mKind; // _00
 	u16 _02;
 	u16 mPlayer; // _04
 	u16 _06;
@@ -17,7 +17,7 @@ struct HatchLeaderMsg {
 
 // And who scored with up to 0x18 bytes in all
 struct HatchScoreMsg {
-	s16 mKind;   // _00
+	s16 mKind; // _00
 	u16 _02;
 	u16 mPlayer; // _04
 	u16 _06;
@@ -74,10 +74,16 @@ void TGameBattleHatch::startState()
 }
 
 // 0x801CE414
-void TGameBattleHatch::start() { SET_BATTLE_STATE(this, createGameStateHatch); }
+void TGameBattleHatch::start()
+{
+	SET_BATTLE_STATE(this, createGameStateHatch);
+}
 
 // 0x801CE468
-extern "C" int hatchRankBehind(HatchRank* a, HatchRank* b) { return a->mScore < b->mScore; }
+extern "C" int hatchRankBehind(HatchRank* a, HatchRank* b)
+{
+	return a->mScore < b->mScore;
+}
 
 // 0x801CE488
 extern "C" void hatchRankSort(HatchRank* ranks, int count)
@@ -85,9 +91,9 @@ extern "C" void hatchRankSort(HatchRank* ranks, int count)
 	for (int i = 0; i < count; i++) {
 		for (int j = 0; j < count - 1; j++) {
 			if (hatchRankBehind(&ranks[j], &ranks[j + 1])) {
-				int player    = ranks[j].mPlayer;
-				int score     = ranks[j].mScore;
-				ranks[j]      = ranks[j + 1];
+				int player           = ranks[j].mPlayer;
+				int score            = ranks[j].mScore;
+				ranks[j]             = ranks[j + 1];
 				ranks[j + 1].mPlayer = player;
 				ranks[j + 1].mScore  = score;
 			}
@@ -114,8 +120,8 @@ int TGameBattleHatch::checkEnd()
 	}
 	hatchRankSort(ranks, count);
 
-	place   = 1;
-	leaders = 1;
+	place                                           = 1;
+	leaders                                         = 1;
 	*((u8*)this + (ranks[0].mPlayer * 0x18 + 0x38)) = 1;
 	for (i = 1; i < count; i++) {
 		if (hatchRankBehind(&ranks[i], &ranks[i - 1])) {

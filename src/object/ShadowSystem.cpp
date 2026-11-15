@@ -18,7 +18,7 @@ void shadowSystemInit()
 	GXSetPixelFmt(GX_PF_RGBA6_Z24, GX_ZC_LINEAR);
 	GXSetDstAlpha(GX_ENABLE, 0x10);
 	sShadowVolume = sShadowVolumeModel;
-	sShadowFlags = 0;
+	sShadowFlags  = 0;
 	shadowListInit();
 }
 
@@ -226,7 +226,7 @@ void shadowVolumeEnd()
 // 0x800F1ED8
 void shadowListInit()
 {
-	sShadowList = NULL;
+	sShadowList      = NULL;
 	sShadowVolumesOn = 1;
 }
 

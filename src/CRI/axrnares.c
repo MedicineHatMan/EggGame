@@ -19,7 +19,7 @@ AXRNARES AXRNARES_Create(void)
 		axrna_call_errfn("E1070313:Not enough RNARES handle.\n");
 		return 0;
 	}
-	res = &axrnares_obj[i];
+	res       = &axrnares_obj[i];
 	res->used = 1;
 	return res;
 }

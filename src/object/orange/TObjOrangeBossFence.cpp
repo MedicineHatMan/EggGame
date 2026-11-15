@@ -7,8 +7,8 @@
 
 extern "C" {
 
-NJS_OBJECT** gOrangeBossObjModels;       // 0x802C5620
-NJS_TEXLIST** gOrangeBossObjTextures;     // 0x802C5624
+NJS_OBJECT** gOrangeBossObjModels;    // 0x802C5620
+NJS_TEXLIST** gOrangeBossObjTextures; // 0x802C5624
 }
 
 typedef char TObjOrangeBossFence_size_check[(sizeof(TObjOrangeBossFence) == 0xD4) ? 1 : -1];

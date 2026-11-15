@@ -44,8 +44,8 @@ s32 njCalcScreen(const NJS_POINT3* p, f32* sx, f32* sy)
 	PSMTXIdentity(m);
 	GXGetProjectionv(proj);
 	GXProject(p->x, p->y, p->z, m, proj, gjViewport, sx, sy, &sz);
-	if (sz < njProjection[1] || sz > njProjection[0] || *sx < njProjection[6] || *sx > njProjection[8]
-	    || *sy < njProjection[7] || *sy > njProjection[9]) {
+	if (sz < njProjection[1] || sz > njProjection[0] || *sx < njProjection[6] || *sx > njProjection[8] || *sy < njProjection[7]
+	    || *sy > njProjection[9]) {
 		return 0;
 	}
 	return 1;

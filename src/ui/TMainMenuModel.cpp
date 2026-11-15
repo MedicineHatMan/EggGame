@@ -18,20 +18,16 @@ struct NJS_OBJECT;
 // 0x80267BA0
 // Three motions for each of the three kinds
 extern "C" MotionEntry sMainMenuModelMotions[9] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 1.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 29.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 1.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 4, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 1.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 7, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 1.0f, 1.0f, 0.0f, 0 },  { MOTION_LOOP, 1, -1, 0, 0.0f, 29.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 }, { MOTION_ONCE, 3, -1, 0, 0.0f, 1.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 4, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 }, { MOTION_ONCE, 5, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 1.0f, 1.0f, 0.0f, 0 },  { MOTION_LOOP, 7, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
 	{ MOTION_ONCE, 8, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
 };
 
 extern "C" {
 TArc* sMainMenuModelArc; // main_menu_model.arc
-void* sMainMenuBlock; // block at arc+0x4C
+void* sMainMenuBlock;    // block at arc+0x4C
 }
 
 struct MenuBlock {
@@ -64,7 +60,7 @@ extern "C" void loadMainMenuModel()
 {
 	loadArc("main_menu_model.arc", &sMainMenuModelArc);
 	MenuBlock* block = (MenuBlock*)sMainMenuModelArc->mData;
-	sMainMenuBlock     = block;
+	sMainMenuBlock   = block;
 	bindGvmTextures((u8*)*block->mGvm, (NJS_TEXLIST*)*block->mTex);
 }
 
@@ -85,11 +81,15 @@ extern "C" TMainMenuModel* createTMainMenuModel(TObject* parent, const Vec3f* po
 
 // 0x801B7B98
 TMainMenuModel::TMainMenuModel(TObject* parent, const Vec3f* pos, const int* angle, int kind, int priority)
-    : TObject(parent), mActor(0), mKind((s8)kind), mPos(*pos), mAngle(*(const MenuModelAngle*)angle)
+    : TObject(parent)
+    , mActor(0)
+    , mKind((s8)kind)
+    , mPos(*pos)
+    , mAngle(*(const MenuModelAngle*)angle)
 {
-	_00       = (u32)gTMainMenuModelName;
-	mSize     = 0xC0;
-	mDraw     = addDrawTask(this, (void (*)(void*))drawObjectTask, priority, 0);
+	_00   = (u32)gTMainMenuModelName;
+	mSize = 0xC0;
+	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, priority, 0);
 	setup();
 }
 
@@ -107,7 +107,7 @@ TMainMenuModel::~TMainMenuModel()
 // Kinds 0 1 and 2 each own three MotionEntry rows
 void TMainMenuModel::setup()
 {
-	mAlt               = mKind + 3;
+	mAlt = mKind + 3;
 	buildMenuActor(&mActor, ((MenuBlock*)sMainMenuBlock)->mModels[mKind]);
 	buildMenuActor(&mActorB, ((MenuBlock*)sMainMenuBlock)->mModels[mAlt]);
 	if (mKind < 3) {
@@ -130,7 +130,9 @@ void TMainMenuModel::draw()
 }
 
 // 0x801B7E78
-void TMainMenuModel::vfn_10() { }
+void TMainMenuModel::vfn_10()
+{
+}
 
 // 0x801B7E7C
 void TMainMenuModel::render()
@@ -151,8 +153,8 @@ void TMainMenuModel::render()
 	} else if (mActor != 0) {
 		gjDrawActor(mActor);
 	} else {
-		int cur = mMotion.mCurrent;
-		f32 frame = mMotion.mFrame;
+		int cur            = mMotion.mCurrent;
+		f32 frame          = mMotion.mFrame;
 		NJS_MOTION* motion = mMotion.getMotion(cur);
 		gjDrawMotion((NJS_OBJECT*)((MenuBlock*)sMainMenuBlock)->mModels[mKind], motion, frame);
 	}
@@ -175,7 +177,7 @@ void TMainMenuModel::stepMotion()
 		if (mMotion.isBlending() != 0) {
 			gjMotionLinkActor(mActor, (void*)mMotion.getBlend(), mMotion.mBlendTime);
 		} else {
-			int cur = mMotion.mCurrent;
+			int cur   = mMotion.mCurrent;
 			f32 frame = mMotion.mFrame;
 			gjMotionActor(frame, mActor, mMotion.getMotion(cur));
 		}

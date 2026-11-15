@@ -26,7 +26,7 @@ public:
 	static void drawTask(TCircleFadeInOut* fade);
 
 	u16 mFrames;     // _20
-	DrawTask* mTask;     // _24
+	DrawTask* mTask; // _24
 	f32 mRadius;     // _28
 	f32 mTarget;     // _2C
 	f32 mX;          // _30
@@ -44,28 +44,46 @@ typedef char TAlphaFade_size_check[(sizeof(TAlphaFade) == 0x30) ? 1 : -1];
  * @size 0x10
  */
 struct FadeVertex {
-	f32 x;     // _00
-	f32 y;     // _04
-	f32 z;     // _08
+	f32 x;      // _00
+	f32 y;      // _04
+	f32 z;      // _08
 	u32 mColor; // _0C
 };
 
 // 0x80111BB8
-extern "C" void fadeToWhite() { new TWhiteFadeInOut(gTL_01, 1); }
+extern "C" void fadeToWhite()
+{
+	new TWhiteFadeInOut(gTL_01, 1);
+}
 
 // 0x80111BF4
-extern "C" void fadeToBlack() { new TBlackFadeInOut(gTL_01, 1); }
+extern "C" void fadeToBlack()
+{
+	new TBlackFadeInOut(gTL_01, 1);
+}
 
 // 0x80111C30
-extern "C" void fadeCircleOpen() { new TCircleFadeInOut(gTL_01, 0, 0.0f, 0.0f, 1.0f, 1.0f); }
+extern "C" void fadeCircleOpen()
+{
+	new TCircleFadeInOut(gTL_01, 0, 0.0f, 0.0f, 1.0f, 1.0f);
+}
 
 // 0x80111C7C
-extern "C" void fadeCircleClose() { new TCircleFadeInOut(gTL_01, 1, 0.0f, 0.0f, 1.0f, 1.0f); }
+extern "C" void fadeCircleClose()
+{
+	new TCircleFadeInOut(gTL_01, 1, 0.0f, 0.0f, 1.0f, 1.0f);
+}
 
 // Stripped from the DOL Its 320 and 240 the screen centre come before the int-to-float constant in the pool
-extern "C" void fadeCircleCentred(int close) { new TCircleFadeInOut(gTL_01, close, 320.0f, 240.0f, 1.0f, 1.0f); }
+extern "C" void fadeCircleCentred(int close)
+{
+	new TCircleFadeInOut(gTL_01, close, 320.0f, 240.0f, 1.0f, 1.0f);
+}
 
-static inline void* fadeModelAlloc() { return objHeapAlloc(gObjHeap, 0x3C); }
+static inline void* fadeModelAlloc()
+{
+	return objHeapAlloc(gObjHeap, 0x3C);
+}
 
 // 0x80111CC8
 extern "C" void fadeModel00()
@@ -100,7 +118,7 @@ extern "C" void alphaFadeDim(int slot)
 		moveDrawTask(sAlphaFadeObj->mTask, slot);
 	} else {
 		TAlphaFade* fade = new TAlphaFade(gTL_08, 0);
-		sAlphaFadeObj     = fade;
+		sAlphaFadeObj    = fade;
 		if (fade != 0) {
 			moveDrawTask(fade->mTask, slot);
 		}
@@ -145,7 +163,10 @@ TWhiteFadeInOut::TWhiteFadeInOut(TObject* parent, int toWhite)
 }
 
 // 0x80111F6C
-TWhiteFadeInOut::~TWhiteFadeInOut() { removeDrawTask(mTask); }
+TWhiteFadeInOut::~TWhiteFadeInOut()
+{
+	removeDrawTask(mTask);
+}
 
 // 0x80111FD4
 void TWhiteFadeInOut::draw()
@@ -171,7 +192,10 @@ static inline void fadeFillScreen(u32 color)
 }
 
 // Stripped from the DOL Its fill comes before the white drawTask which puts 640 and 480 ahead of 255 in the pool
-extern "C" void fadeFill(u32 color) { fadeFillScreen(color); }
+extern "C" void fadeFill(u32 color)
+{
+	fadeFillScreen(color);
+}
 
 // 0x80112028
 void TWhiteFadeInOut::drawTask(TWhiteFadeInOut* fade)
@@ -200,7 +224,10 @@ TBlackFadeInOut::TBlackFadeInOut(TObject* parent, int toBlack)
 }
 
 // 0x80112150
-TBlackFadeInOut::~TBlackFadeInOut() { removeDrawTask(mTask); }
+TBlackFadeInOut::~TBlackFadeInOut()
+{
+	removeDrawTask(mTask);
+}
 
 // 0x801121B8
 void TBlackFadeInOut::draw()
@@ -242,7 +269,10 @@ TCircleFadeInOut::TCircleFadeInOut(TObject* parent, int close, f32 x, f32 y, f32
 }
 
 // 0x80112390
-TCircleFadeInOut::~TCircleFadeInOut() { removeDrawTask(mTask); }
+TCircleFadeInOut::~TCircleFadeInOut()
+{
+	removeDrawTask(mTask);
+}
 
 // 0x801123F8
 void TCircleFadeInOut::draw()
@@ -267,15 +297,15 @@ void TCircleFadeInOut::drawTask(TCircleFadeInOut* fade)
 	f32 angle;
 	int turn;
 	int i;
-	f32 sx = fade->mScaleX;
-	f32 sy = fade->mScaleY;
-	width = 640.0f * sx;
+	f32 sx  = fade->mScaleX;
+	f32 sy  = fade->mScaleY;
+	width   = 640.0f * sx;
 	centerX = 320.0f * sx;
-	height = 480.0f * sy;
+	height  = 480.0f * sy;
 	centerY = 240.0f * sy;
-	angle = 0.0f;
+	angle   = 0.0f;
 	for (i = 0; i < 0x32; i++) {
-		verts[i].mColor     = 0xFF000000;
+		verts[i].mColor = 0xFF000000;
 		if (i % 2 == 1) {
 			if (angle >= 0.0f && angle < 45.0f) {
 				verts[i].x = width;
@@ -308,9 +338,9 @@ void TCircleFadeInOut::drawTask(TCircleFadeInOut* fade)
 			verts[i].z = 1.0f;
 			angle += 15.0f;
 		} else {
-			turn = (int)(182.04445f * angle);
-			verts[i].x     = fade->mRadius * njCos(turn) + centerX;
-			verts[i].y     = fade->mRadius * njSin(turn) + centerY;
+			turn       = (int)(182.04445f * angle);
+			verts[i].x = fade->mRadius * njCos(turn) + centerX;
+			verts[i].y = fade->mRadius * njSin(turn) + centerY;
 			if (verts[i].x < 0.0f) {
 				verts[i].x = 0.0f;
 			} else if (verts[i].x > width) {

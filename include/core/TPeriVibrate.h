@@ -20,8 +20,8 @@ TPeriVibrate* periVibrateCreate();
  * @size 0x24
  */
 struct VibePattern {
-	u16 mValueA;    // _00
-	u16 mValueB;    // _02
+	u16 mValueA;     // _00
+	u16 mValueB;     // _02
 	u8 mSteps[0x20]; // _04
 };
 
@@ -49,9 +49,9 @@ public:
 
 	void play(int port, int pattern);
 
-	u8 _20[0x20];              // _20
+	u8 _20[0x20];                // _20
 	VibePattern mPatterns[0x20]; // _40
-	VibePort mPorts[4];        // _4C0
+	VibePort mPorts[4];          // _4C0
 };
 
 /**

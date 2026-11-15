@@ -35,7 +35,7 @@ void TPlyEffStSuper::vfn_20()
 {
 	Vec3f pos;
 
-	pos     = *mOwner->getPos();
+	pos = *mOwner->getPos();
 	mtxSetTransV(mMtx, &pos);
 	mEffect = fxSpawnFollow(1, 0, 0x8D, mMtx);
 }

@@ -26,12 +26,12 @@ public:
 	inline TBlindCtrl(TObject* parent)
 	    : TObject(parent)
 	{
-		_00      = (u32)gTBlindCtrlName;
-		mSize    = 0x30;
-		mOn[3]   = 0;
-		mOn[2]   = 0;
-		mOn[1]   = 0;
-		mOn[0]   = 0;
+		_00    = (u32)gTBlindCtrlName;
+		mSize  = 0x30;
+		mOn[3] = 0;
+		mOn[2] = 0;
+		mOn[1] = 0;
+		mOn[0] = 0;
 	}
 	virtual ~TBlindCtrl();
 

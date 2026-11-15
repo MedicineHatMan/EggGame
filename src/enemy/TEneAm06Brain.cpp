@@ -12,17 +12,21 @@ struct TObjPlayer;
 
 // 0x80048E20
 // Empty __construct_array calls it for each spot
-Am06Spot::Am06Spot() { }
+Am06Spot::Am06Spot()
+{
+}
 
 // 0x80048DD8
-Am06Seen::Am06Seen() { }
+Am06Seen::Am06Seen()
+{
+}
 
 // 0x80048AD0
 void Am06Seen::reset()
 {
 	mCount = 0;
 	for (int i = 0; i < 4; i++) {
-		mSpot[i].mId = -1;
+		mSpot[i].mId    = -1;
 		mSpot[i].mPos.x = 0.0f;
 		mSpot[i].mPos.y = 0.0f;
 		mSpot[i].mPos.z = 0.0f;
@@ -33,8 +37,8 @@ void Am06Seen::reset()
 void Am06Seen::add(s16 id, TObjAction* obj)
 {
 	if (mCount < 4) {
-		mSpot[mCount].mId = id;
-		Vec3f* pos = obj->getPos();
+		mSpot[mCount].mId  = id;
+		Vec3f* pos         = obj->getPos();
 		mSpot[mCount].mPos = *pos;
 		mCount++;
 	}
@@ -47,7 +51,7 @@ int Am06Seen::find(s16 id, Vec3f* out)
 	for (int i = 0; i < mCount; i++) {
 		if ((u16)id == (u16)mSpot[i].mId) {
 			found = 1;
-			*out = mSpot[i].mPos;
+			*out  = mSpot[i].mPos;
 			break;
 		}
 	}
@@ -81,14 +85,16 @@ Am06BrainBase::Am06BrainBase()
 }
 
 // 0x80048C28
-Am06BrainBase::~Am06BrainBase() { }
+Am06BrainBase::~Am06BrainBase()
+{
+}
 
 // 0x800489BC
 // Slot _14 Phase 2 is the check and a hit that returned from checkInterrupt skips it
 void Am06Brain::update(TEneAm06* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}
@@ -113,14 +119,14 @@ Am06SnakeBrain::Am06SnakeBrain(TEneAm06* owner)
 	mCooldown = 0;
 	mList[0].reset();
 	mList[1].reset();
-	mSide = 0;
+	mSide   = 0;
 	mTarget = 0xFFFF;
-	mStun = 0;
-	mAgain = 0;
-	_10C = 0;
-	mOwner = owner;
-	mNext = -1;
-	mState = STATE_APPEAR;
+	mStun   = 0;
+	mAgain  = 0;
+	_10C    = 0;
+	mOwner  = owner;
+	mNext   = -1;
+	mState  = STATE_APPEAR;
 	onPhase(mState, 0);
 	if (mNext != -1) {
 		mOwner->setAction(mNext);
@@ -129,7 +135,9 @@ Am06SnakeBrain::Am06SnakeBrain(TEneAm06* owner)
 
 // 0x80048E24
 // The sights go then the base
-Am06SnakeBrain::~Am06SnakeBrain() { }
+Am06SnakeBrain::~Am06SnakeBrain()
+{
+}
 
 // 0x80048E98
 // Slot _08 A kind 3 hit changes nothing but it does skip this frame's phase 2
@@ -175,14 +183,14 @@ int Am06SnakeBrain::look()
 // height by at least half a unit
 u16 Am06SnakeBrain::pick(Am06Seen* fresh, Am06Seen* previous)
 {
-	u16 result = 0xFFFF;
+	u16 result    = 0xFFFF;
 	fresh->mCount = 0;
 	u16 ids[4];
-	int count = collectPlayerIds(ids);
+	int count  = collectPlayerIds(ids);
 	void* head = mOwner->headShape();
 	for (ColliContact* touch = ((CharaColli*)head)->mContacts; touch != 0; touch = touch->mNext) {
-		u32 raw = colliContactOwner(touch);
-		u16 id = (u16)raw;
+		u32 raw   = colliContactOwner(touch);
+		u16 id    = (u16)raw;
 		int known = 0;
 		for (int i = 0; i < count; i++) {
 			if (id == ids[i]) {
@@ -293,7 +301,7 @@ void Am06SnakeBrain::phaseGlow(int phase)
 {
 	switch (phase) {
 	case 0:
-		mNext = TEneAm06::ACT_GLOW;
+		mNext  = TEneAm06::ACT_GLOW;
 		mAgain = 0;
 		break;
 	case 2:
@@ -341,10 +349,10 @@ void Am06SnakeBrain::phaseSway(int phase)
 		} else if (nearSight() != 0) {
 			if (mSide == 0) {
 				mTarget = pick(&mList[0], &mList[1]);
-				mSide = 1;
+				mSide   = 1;
 			} else {
 				mTarget = pick(&mList[1], &mList[0]);
-				mSide = 0;
+				mSide   = 0;
 			}
 			if (mTarget != 0xFFFF) {
 				mOwner->setGrabId(mTarget);
@@ -470,7 +478,7 @@ void Am06SnakeBrain::phaseSpit(int phase)
 		}
 		mAgain = 0;
 		if (mOwner->isFlipDone() != 0) {
-			mNext = TEneAm06::ACT_SPIT;
+			mNext  = TEneAm06::ACT_SPIT;
 			mAgain = 1;
 		} else if (mOwner->wasHitKind3() != 0) {
 			mNext = TEneAm06::ACT_FLIP;
@@ -521,7 +529,7 @@ void Am06SnakeBrain::phaseDie(int phase)
 {
 	switch (phase) {
 	case 0:
-			mNext = mOwner->deathAction();
+		mNext = mOwner->deathAction();
 		break;
 	case 1:
 		break;

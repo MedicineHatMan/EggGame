@@ -61,7 +61,7 @@ extern "C" void textDrawQuad(s16 u0, s16 v0, s16 u1, s16 v1, f32 x, f32 y, f32 w
 	GX_FIFO_F32 = x;
 	GX_FIFO_F32 = y;
 	GX_FIFO_F32 = z;
-	c = sTextColor;
+	c           = sTextColor;
 	GX_FIFO_U32 = c;
 	GX_FIFO_S16 = u0;
 	GX_FIFO_S16 = v0;
@@ -89,7 +89,9 @@ extern "C" void textDrawQuad(s16 u0, s16 v0, s16 u1, s16 v1, f32 x, f32 y, f32 w
 }
 
 // 0x80069634
-extern "C" void textDrawEnd() { }
+extern "C" void textDrawEnd()
+{
+}
 
 // 0x80069638
 extern "C" GXTlutRegion* tlutRegionCallback(u32 index)
@@ -104,7 +106,7 @@ extern "C" GXTlutRegion* tlutRegionCallback(u32 index)
 
 extern "C" void tlutInit()
 {
-	sTlutRegions = new GXTlutRegion[35];
+	sTlutRegions         = new GXTlutRegion[35];
 	u32 addr             = 0xC0000;
 	GXTlutRegion* region = sTlutRegions;
 	for (int i = 0; i < 16; i++, addr += 0x200, region++) {

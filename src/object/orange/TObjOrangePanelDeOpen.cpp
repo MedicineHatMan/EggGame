@@ -36,7 +36,7 @@ static inline Vec3f colliNeg(const Vec3f& v)
 }
 
 const f32 gOrangePanelDeOpenSetRange = 1200.0f;
-const char* sPanelAnswerNames[4] = { "SPADE", "HEART", "DIAMOND", "CLOVER" };
+const char* sPanelAnswerNames[4]     = { "SPADE", "HEART", "DIAMOND", "CLOVER" };
 
 extern "C" {
 
@@ -85,13 +85,13 @@ extern "C" TObject* createTObjOrangePanelDeOpen(TObject* parent, SetDesc* desc)
 TObjOrangePanelDeOpen::TObjOrangePanelDeOpen(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00          = (u32)gTObjOrangePanelDeOpenName.mName;
-	mSize        = 0x2DC;
-	mModelData   = findGeObjModel("MODEL_PANEL_FLOOR");
-	mTexFloor    = findGeObjData("TLS_MODEL_PANEL_FLOOR");
-	mTexTiles    = findGeObjData("TLS_MODEL_PANEL");
-	mColliData   = (MeshData*)findGeObjData("COL_MODEL_PANEL_FLOOR");
-	mDrawTask    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	_00        = (u32)gTObjOrangePanelDeOpenName.mName;
+	mSize      = 0x2DC;
+	mModelData = findGeObjModel("MODEL_PANEL_FLOOR");
+	mTexFloor  = findGeObjData("TLS_MODEL_PANEL_FLOOR");
+	mTexTiles  = findGeObjData("TLS_MODEL_PANEL");
+	mColliData = (MeshData*)findGeObjData("COL_MODEL_PANEL_FLOOR");
+	mDrawTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	readTiles();
 	makeShapes();
 	initColli();
@@ -123,7 +123,7 @@ void TObjOrangePanelDeOpen::initFromDesc(SetDesc* desc)
 	mtxSetTransV(mMatrix, &mPos);
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 
-	mCenter  = *(Vec3f*)&mModelData->model->center;
+	mCenter = *(Vec3f*)&mModelData->model->center;
 	mtxMultVec(mMatrix, &mCenter, &mCenter);
 	mRadius = mModelData->model->r;
 	updateShapes();
@@ -171,8 +171,8 @@ void TObjOrangePanelDeOpen::readTiles()
 	int count = 0;
 	for (NJS_OBJECT* node = mModelData->child; node != 0; node = node->sibling) {
 		mTiles[count].mPos.set(node->pos[0], 0.5f - node->pos[1], node->pos[2]);
-		mTiles[count].mSuit     = (u8)(int)(3.0f * (3.0517578e-05f * (f32)rand()) + 0.5f);
-		mTiles[count].mPressed  = 0;
+		mTiles[count].mSuit    = (u8)(int)(3.0f * (3.0517578e-05f * (f32)rand()) + 0.5f);
+		mTiles[count].mPressed = 0;
 		count++;
 		if (count == 25) {
 			break;
@@ -239,9 +239,9 @@ void TObjOrangePanelDeOpen::setColliBox(void* colli, const Vec3f* center, f32 ra
 	high.z = size.z;
 	Vec3f low;
 	Vec3f t = colliNeg(size);
-	low.x = t.x;
-	low.y = t.y;
-	low.z = t.z;
+	low.x   = t.x;
+	low.y   = t.y;
+	low.z   = t.z;
 
 	gjPushUnitMatrix();
 	njTranslateEx(center);
@@ -298,11 +298,11 @@ void TObjOrangePanelDeOpen::draw()
 	}
 	switch (mAct) {
 	case 0:
-			statePlay();
-			break;
+		statePlay();
+		break;
 	case 1:
-			stateDone();
-			break;
+		stateDone();
+		break;
 	}
 }
 
@@ -328,7 +328,7 @@ void TObjOrangePanelDeOpen::statePlay()
 						mTiles[hit->mIndex].mSuit++;
 						mTiles[hit->mIndex].mSuit &= 3;
 						mTiles[hit->mIndex].mPressed = 1;
-						ColliShape* sh = colliGetShape(mTileColli, hit->mIndex);
+						ColliShape* sh               = colliGetShape(mTileColli, hit->mIndex);
 						Vec3f pos;
 						pos.set(sh->mPos.x, sh->mPos.y, sh->mPos.z);
 						particleOnceById(this, &pos, 0, 0xFD);

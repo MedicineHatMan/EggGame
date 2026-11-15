@@ -21,8 +21,8 @@ struct NoiseTex {
 };
 
 extern "C" {
-void noiseInit();             // 0x801477A4
-f32 noise2(f32 x, f32 y);     // 0x80147C14
+void noiseInit();         // 0x801477A4
+f32 noise2(f32 x, f32 y); // 0x80147C14
 }
 
 #endif

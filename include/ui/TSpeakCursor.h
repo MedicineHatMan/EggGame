@@ -25,16 +25,16 @@ public:
 	virtual void draw();   // _0C
 	virtual void render(); // _1C
 
-	void hide(); // 0x8010F2B0
-	void show(); // 0x8010F2C0
+	void hide();                            // 0x8010F2B0
+	void show();                            // 0x8010F2C0
 	void place(const Vec3f* pos, f32 lift); // 0x8010F2D0
 
-	Vec3f mPos;  // _20
-	f32 mLift;   // _2C added to Y when drawing
-	f32 mAnim;   // _30
-	u32 _34;     // _34
+	Vec3f mPos;      // _20
+	f32 mLift;       // _2C added to Y when drawing
+	f32 mAnim;       // _30
+	u32 _34;         // _34
 	DrawTask* mDraw; // _38
-	void* mTex;  // _3C first pointer in the "texlists" export
+	void* mTex;      // _3C first pointer in the "texlists" export
 };
 
 extern "C" {

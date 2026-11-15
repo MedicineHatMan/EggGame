@@ -80,11 +80,11 @@ void MobileWake::update()
 	if (mFx != NULL) {
 		Vec3f from;
 		Vec3f vel;
-		from        = mBody->mPos;
-		vel         = mBody->mVel;
-		hit.mFound  = 0;
-		from.y      = from.y + mBody->mRadius;
-		hit.mDist   = 2.0f * mBody->mRadius;
+		from       = mBody->mPos;
+		vel        = mBody->mVel;
+		hit.mFound = 0;
+		from.y     = from.y + mBody->mRadius;
+		hit.mDist  = 2.0f * mBody->mRadius;
 		groundQueryDown((const void*)&from, (void*)4, (void*)wakeHit, (void*)&hit);
 		if (hit.mFound == 0) {
 			fxStop(mFx);

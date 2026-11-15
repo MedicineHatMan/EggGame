@@ -17,11 +17,11 @@ struct MirrorShard {
 	void setCorners(f32 sizeX, f32 sizeY);
 	void step();
 
-	Vec3f mPos;       // _00
-	Vec3f mVel;       // _0C
-	int mRotX;        // _18
-	int mRotY;        // _1C
-	int mSpin;        // _20
+	Vec3f mPos;         // _00
+	Vec3f mVel;         // _0C
+	int mRotX;          // _18
+	int mRotY;          // _1C
+	int mSpin;          // _20
 	HitVec mCorners[3]; // _24
 };
 
@@ -39,9 +39,9 @@ public:
 	virtual void vfn_10();
 	virtual void render();
 
-	DrawTask* mDrawTask;        // _20
+	DrawTask* mDrawTask;     // _20
 	MirrorShard mShards[64]; // _24
-	int mAlpha;             // _1224
+	int mAlpha;              // _1224
 };
 
 extern "C" {

@@ -19,10 +19,10 @@ extern "C" {
 extern NJS_OBJECT** gBoss03Models; // the archive's models 0 is the dinosaur
 extern NJS_TEXLIST** gBoss03Textures;
 extern NJS_MOTION** gBoss03Motions;
-extern f32 gDinoRingRadius;        // how far from the middle the dinosaur walks
-extern int gDinoRingAngle;         // which way it faces on the ring relative to the way out
-extern Vec3f gDinoNode9Rest;       // node 9 of the dinosaur at rest in model space
-extern Vec3f gDinoHeadRest;        // its head node 8 at rest
+extern f32 gDinoRingRadius;  // how far from the middle the dinosaur walks
+extern int gDinoRingAngle;   // which way it faces on the ring relative to the way out
+extern Vec3f gDinoNode9Rest; // node 9 of the dinosaur at rest in model space
+extern Vec3f gDinoHeadRest;  // its head node 8 at rest
 
 void countNodes(NJS_OBJECT* obj, int* count);
 void fillNodeDepths(NJS_OBJECT* obj, s8* out, int* index, int* depth);

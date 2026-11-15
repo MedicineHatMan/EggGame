@@ -1,13 +1,12 @@
 #include <CRI/adx.h>
 
-#define ADXB_LE16(p) ((unsigned int)(p)[0] | ((unsigned int)(p)[1] << 8))
-#define ADXB_LE32(p) ((unsigned int)(p)[0] | ((unsigned int)(p)[1] << 8) | ((unsigned int)(p)[2] << 16) | ((unsigned int)(p)[3] << 24))
+#define ADXB_LE16(p)   ((unsigned int)(p)[0] | ((unsigned int)(p)[1] << 8))
+#define ADXB_LE32(p)   ((unsigned int)(p)[0] | ((unsigned int)(p)[1] << 8) | ((unsigned int)(p)[2] << 16) | ((unsigned int)(p)[3] << 24))
 #define ADXB_SWAP32(v) (((v) << 24) | (((v) & 0xFF00) << 8) | (((v) >> 8) & 0xFF00) | ((v) >> 24))
 #define ADXB_SWAP16(v) ((((v) >> 8) & 0xFF) | (((v) & 0xFF) << 8))
 
 // 0x8021C6F8
-static unsigned char* adxb_DecodeInfoAiff(unsigned char* hdr, int* sfreq, unsigned int* nch, unsigned int* bps,
-                                          unsigned int* nsmpl)
+static unsigned char* adxb_DecodeInfoAiff(unsigned char* hdr, int* sfreq, unsigned int* nch, unsigned int* bps, unsigned int* nsmpl)
 {
 	int comm;
 	int ssnd;
@@ -18,10 +17,10 @@ static unsigned char* adxb_DecodeInfoAiff(unsigned char* hdr, int* sfreq, unsign
 	unsigned int v;
 	int csize;
 
-	comm = 0;
-	ssnd = 0;
-	data = 0;
-	v = ADXB_LE32(hdr + 4);
+	comm  = 0;
+	ssnd  = 0;
+	data  = 0;
+	v     = ADXB_LE32(hdr + 4);
 	csize = ADXB_SWAP32(v);
 	if (ADXB_LE32(hdr) != 0x4D524F46) {
 		return 0;
@@ -29,11 +28,11 @@ static unsigned char* adxb_DecodeInfoAiff(unsigned char* hdr, int* sfreq, unsign
 	if (ADXB_LE32(hdr + 8) != 0x46464941) {
 		return 0;
 	}
-	p = hdr + 0xC;
+	p   = hdr + 0xC;
 	end = p + csize - 4;
 	while (p < end) {
-		id = ADXB_LE32(p);
-		v = ADXB_LE32(p + 4);
+		id    = ADXB_LE32(p);
+		v     = ADXB_LE32(p + 4);
 		csize = ADXB_SWAP32(v);
 		p += 8;
 		if (id == 0x4D4D4F43) {
@@ -43,13 +42,13 @@ static unsigned char* adxb_DecodeInfoAiff(unsigned char* hdr, int* sfreq, unsign
 			if (csize < 0x12) {
 				return 0;
 			}
-			comm = 1;
-			*nch = ADXB_LE16(p);
-			*nch = ADXB_SWAP16(*nch);
+			comm   = 1;
+			*nch   = ADXB_LE16(p);
+			*nch   = ADXB_SWAP16(*nch);
 			*nsmpl = ADXB_LE32(p + 2);
 			*nsmpl = ADXB_SWAP32(*nsmpl);
-			*bps = ADXB_LE16(p + 6);
-			*bps = ADXB_SWAP16(*bps);
+			*bps   = ADXB_LE16(p + 6);
+			*bps   = ADXB_SWAP16(*bps);
 			*sfreq = (unsigned short)ADXB_SWAP16(ADXB_LE16(p + 10)) >> (0x400E - (unsigned short)ADXB_SWAP16(ADXB_LE16(p + 8)));
 			p += 0x12;
 			if (ssnd) {
@@ -60,7 +59,7 @@ static unsigned char* adxb_DecodeInfoAiff(unsigned char* hdr, int* sfreq, unsign
 				continue;
 			}
 			ssnd = 1;
-			v = ADXB_LE32(p);
+			v    = ADXB_LE32(p);
 			p += 4;
 			data = p + ADXB_SWAP32(v);
 			if (comm) {
@@ -96,7 +95,7 @@ int ADXB_DecodeHeaderAiff(ADXB adxb, void* hdr, int len)
 	adxb->hdr_ok = 1;
 	if (len < 0x1000) {
 		hdlen = 0;
-		ret = -1;
+		ret   = -1;
 	} else {
 		data = adxb_DecodeInfoAiff(hdr, &sfreq, &nch, &bps, &nsmpl);
 		if (data == 0) {
@@ -106,14 +105,14 @@ int ADXB_DecodeHeaderAiff(ADXB adxb, void* hdr, int len)
 			if (hdlen <= 0) {
 				ret = -1;
 			} else {
-				ret = 0;
-				adxb->sfreq = sfreq;
-				adxb->nch = nch;
-				adxb->bps = bps;
+				ret              = 0;
+				adxb->sfreq      = sfreq;
+				adxb->nch        = nch;
+				adxb->bps        = bps;
 				adxb->total_smpl = nsmpl;
-				adxb->type = (signed char)0xFF;
-				adxb->blk_len = (adxb->nch * adxb->bps) / 8;
-				adxb->blk_smpl = 1;
+				adxb->type       = (signed char)0xFF;
+				adxb->blk_len    = (adxb->nch * adxb->bps) / 8;
+				adxb->blk_smpl   = 1;
 			}
 		}
 	}
@@ -163,7 +162,7 @@ static void adxb_ExecOneAiff16(ADXB adxb)
 		}
 		adxb->dec_nsmpl = n;
 		adxb->dec_dtlen = adxb->nch * (n * 2);
-		adxb->stat = ADXB_STAT_DECODE;
+		adxb->stat      = ADXB_STAT_DECODE;
 	}
 	if (adxb->stat == ADXB_STAT_DECODE) {
 		adxb->add_wr(adxb->add_wr_obj, adxb->dec_dtlen, adxb->dec_nsmpl);
@@ -204,7 +203,7 @@ static void adxb_ExecOneAiff8(ADXB adxb)
 		}
 		adxb->dec_nsmpl = n;
 		adxb->dec_dtlen = n * adxb->nch;
-		adxb->stat = ADXB_STAT_DECODE;
+		adxb->stat      = ADXB_STAT_DECODE;
 	}
 	if (adxb->stat == ADXB_STAT_DECODE) {
 		adxb->add_wr(adxb->add_wr_obj, adxb->dec_dtlen, adxb->dec_nsmpl);

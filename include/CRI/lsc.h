@@ -17,23 +17,23 @@ typedef struct {
 } LSC_STM;
 
 typedef struct _lsc_obj {
-	signed char used;   /* 00 */
-	signed char stat;   /* 01 */
-	signed char stm_on; /* 02 */
-	signed char lp_flg; /* 03 */
-	signed char pause;  /* 04 */
-	SJ sj;              /* 08 */
-	int unkC;           /* 0C */
-	int unk10;          /* 10 */
-	int flow_limit;     /* 14 */
-	int sj_size;        /* 18 */
-	int wpos;           /* 1C */
-	int rpos;           /* 20 */
-	int num_stm;        /* 24 */
-	ADXSTM stm;         /* 28 */
-	int rd_sct;         /* 2C */
-	int unk30;          /* 30 */
-	int unk34;          /* 34 */
+	signed char used;          /* 00 */
+	signed char stat;          /* 01 */
+	signed char stm_on;        /* 02 */
+	signed char lp_flg;        /* 03 */
+	signed char pause;         /* 04 */
+	SJ sj;                     /* 08 */
+	int unkC;                  /* 0C */
+	int unk10;                 /* 10 */
+	int flow_limit;            /* 14 */
+	int sj_size;               /* 18 */
+	int wpos;                  /* 1C */
+	int rpos;                  /* 20 */
+	int num_stm;               /* 24 */
+	ADXSTM stm;                /* 28 */
+	int rd_sct;                /* 2C */
+	int unk30;                 /* 30 */
+	int unk34;                 /* 34 */
 	LSC_STM stms[LSC_MAX_STM]; /* 38 */
 } LSC_OBJ;
 

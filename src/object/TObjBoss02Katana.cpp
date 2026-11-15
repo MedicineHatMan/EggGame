@@ -79,7 +79,7 @@ static const GXColor sKatanaKColor = { 0x64, 0x64, 0x64, 0xFF };
 // 0x800624B4
 void TObjBoss02Katana::render()
 {
-	NJS_OBJECT** models   = boss02GetFenceModels();
+	NJS_OBJECT** models    = boss02GetFenceModels();
 	NJS_TEXLIST** textures = boss02GetFenceTextures();
 	u32 info[8];
 	DrawStateSlot* slot;
@@ -92,7 +92,7 @@ void TObjBoss02Katana::render()
 	mLight.drawObject(models[1]);
 
 	ObjDrawState state;
-	slot         = getDrawStateSlot();
+	slot = getDrawStateSlot();
 	frameTexSetCur();
 	setDrawAmbient(&mLight, &state);
 	if ((state.mFlags & 0x200) != 0) {
@@ -102,12 +102,12 @@ void TObjBoss02Katana::render()
 
 	_nj_control_3d_flag_ |= 0x100000;
 	info[3] = (u32)katanaTev;
-	gjChangeDrawObjIF((void*const*)info, (u32)0x20);
+	gjChangeDrawObjIF((void* const*)info, (u32)0x20);
 	GXSetTevKColor(GX_KCOLOR0, sKatanaKColor);
 	gjDrawObject((NJS_OBJECT*)models[2]);
 	_nj_control_3d_flag_ &= ~0x100000;
 	info[3] = 0;
-	gjChangeDrawObjIF((void*const*)info, (u32)0x20);
+	gjChangeDrawObjIF((void* const*)info, (u32)0x20);
 	if ((state.mFlags & 0x200) != 0) {
 		endDrawAmbient((DrawStateSlot*)slot);
 	}

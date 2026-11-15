@@ -24,20 +24,20 @@ struct BeamSprite {
 	BeamSprite() { }
 	Vec3f* pos() { return (Vec3f*)&mX; }
 
-	u32 _00;       // _00
-	Vec3f mView;   // _04 as in Sprite
-	f32 mX;        // _10 the position separate floats so a sprite copy moves them with lfs/stfs
-	f32 mY;        // _14
-	f32 mZ;        // _18
-	f32 mScaleX;   // _1C
-	f32 mScaleY;   // _20
-	s32 _24;       // _24
-	f32 _28;       // _28
+	u32 _00;        // _00
+	Vec3f mView;    // _04 as in Sprite
+	f32 mX;         // _10 the position separate floats so a sprite copy moves them with lfs/stfs
+	f32 mY;         // _14
+	f32 mZ;         // _18
+	f32 mScaleX;    // _1C
+	f32 mScaleY;    // _20
+	s32 _24;        // _24
+	f32 _28;        // _28
 	SpriteKey mKey; // _2C see setSpriteMode
-	s16 _30;       // _30
-	s16 mFrame;    // _32
-	s16 _34;       // _34
-	s16 _36;       // _36
+	s16 _30;        // _30
+	s16 mFrame;     // _32
+	s16 _34;        // _34
+	s16 _36;        // _36
 };
 
 /**
@@ -65,17 +65,17 @@ public:
 	void addHit(u16 id);
 	int inHitList(u16 id);
 
-	HitVec* mPoints;     // _30
-	u32* mPointFlags;    // _34 1 outside the band 2 unused 4 hit
+	HitVec* mPoints;      // _30
+	u32* mPointFlags;     // _34 1 outside the band 2 unused 4 hit
 	BeamSprite* mSprites; // _38 3 per point
-	CharaColli* mColli;        // _3C
-	int mYaw;            // _40
-	Vec3f mPos;          // _44
-	f32 mGrow;           // _50
-	Vec3f mDir;          // _54 y is the rise a frame x and z a unit flat direction
-	f32 mLife;           // _60
-	u16 mHitIds[32];     // _64
-	int mHitCount;       // _A4
+	CharaColli* mColli;   // _3C
+	int mYaw;             // _40
+	Vec3f mPos;           // _44
+	f32 mGrow;            // _50
+	Vec3f mDir;           // _54 y is the rise a frame x and z a unit flat direction
+	f32 mLife;            // _60
+	u16 mHitIds[32];      // _64
+	int mHitCount;        // _A4
 };
 
 /** The arena the beam flies in */

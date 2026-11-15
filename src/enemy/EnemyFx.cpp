@@ -96,9 +96,9 @@ f32 approachSpeed(f32 speed, f32 gap, f32 gain, f32 accel, f32 brake, f32 most, 
 f32 springVelocity(f32 gain, f32 keep, Vec3f* vel, f32 accel, const Vec3f* gap, f32 brake, f32 most, f32 least)
 {
 	Vec3f dir;
-	dir.x = gap->x;
-	dir.y = gap->y;
-	dir.z = gap->z;
+	dir.x    = gap->x;
+	dir.y    = gap->y;
+	dir.z    = gap->z;
 	f32 dist = njUnitVector(&dir);
 	if (dist < gUnitVectorMin) {
 		dir = gVecZero;
@@ -123,9 +123,9 @@ void randomPointInRing(f32 inner, f32 outer, const Vec3f* center, Vec3f* out)
 	f32 s, c;
 	njSinCos((int)(65536.0f * (3.0517578125e-05f * rand())), &s, &c);
 	f32 dist = (outer - inner) * (3.0517578125e-05f * rand()) + inner;
-	out->x = s * dist + center->x;
-	out->y = center->y;
-	out->z = c * dist + center->z;
+	out->x   = s * dist + center->x;
+	out->y   = center->y;
+	out->z   = c * dist + center->z;
 }
 
 static inline Vec3f negated(const Vec3f& v)
@@ -169,8 +169,8 @@ void rollQuat(const Vec3f* vel, Quat* rot, f32 radius)
 	Vec3f down = negated(gVecUp);
 	njOuterProduct(vel, &down, &axis);
 	vecScale(1.0f / radius, &spin, &axis);
-	turn.w = 0.0f;
-	turn.v = spin;
+	turn.w    = 0.0f;
+	turn.v    = spin;
 	Quat half = quatHalfTimes(turn, rot);
 	quatAdd(rot, &half);
 	quatNormalize(rot);
@@ -402,18 +402,19 @@ void enemyFxFreeStub()
 // spawner
 
 // 0x8001BA6C
-TEnemyAppear::TEnemyAppear(TObject* parent, Vec3f pos, int dropIn) : TObject(parent)
+TEnemyAppear::TEnemyAppear(TObject* parent, Vec3f pos, int dropIn)
+    : TObject(parent)
 {
-	mTimer = 0;
-	_22 = 0;
-	mPos = pos;
-	mVelY = 0.0f;
-	mSpeed = 0.0f;
-	mDir.x = 0.0f;
-	mDir.y = 0.0f;
-	mDir.z = 0.0f;
+	mTimer     = 0;
+	_22        = 0;
+	mPos       = pos;
+	mVelY      = 0.0f;
+	mSpeed     = 0.0f;
+	mDir.x     = 0.0f;
+	mDir.y     = 0.0f;
+	mDir.z     = 0.0f;
 	mMoveFlags = 0;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mDrawTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	mFlags |= 0x10;
 	if (dropIn != 0) {
 		mPos.y += 25.0f;
@@ -450,9 +451,9 @@ void TEnemyAppear::getPos(Vec3f* out)
 // 0x8001BC60
 void TEnemyAppear::launch(const Vec3f* vel)
 {
-	mVelY = vel->y;
-	mDir = *vel;
-	mDir.y = 0.0f;
+	mVelY     = vel->y;
+	mDir      = *vel;
+	mDir.y    = 0.0f;
 	f32 speed = njUnitVector(&mDir);
 	if (speed < gUnitVectorMin) {
 		mDir = gVecZero;
@@ -474,7 +475,7 @@ void TEnemyAppear::draw()
 		mTimer++;
 		if (mTimer >= 20) {
 			mTimer = 0;
-			_22 = 0;
+			_22    = 0;
 			mState = STATE_FALL;
 			seStartAt(0xDB, &mPos);
 		}
@@ -505,7 +506,7 @@ void TEnemyAppear::draw()
 		mVelY += -0.05f;
 		f32 y = mPos.y + mVelY;
 		if (probeGround(&mPos, &hit, NULL) != 0 && y < hit.y) {
-			y = hit.y;
+			y      = hit.y;
 			landed = 1;
 		}
 		mPos.y = y;
@@ -555,6 +556,7 @@ void TEnemyAppear::render()
 }
 
 // 0x8001C000
+// clang-format off
 asm void setGqrS16()
 {
 	nofralloc
@@ -563,18 +565,19 @@ asm void setGqrS16()
 	mtspr 0x396, r3
 	blr
 }
+// clang-format on
 
 // The usual inline sqrtf three Newton steps on frsqrte
 static inline f32 sqrtfInline(f32 x)
 {
-	static const f64 _half = .5;
+	static const f64 _half  = .5;
 	static const f64 _three = 3.0;
 	volatile f32 y;
 	if (x > 0.0f) {
 		f64 guess = __frsqrte((f64)x);
-		guess = _half * guess * (_three - guess * guess * x);
-		guess = _half * guess * (_three - guess * guess * x);
-		y = (f32)(x * (_half * guess * (_three - guess * guess * x)));
+		guess     = _half * guess * (_three - guess * guess * x);
+		guess     = _half * guess * (_three - guess * guess * x);
+		y         = (f32)(x * (_half * guess * (_three - guess * guess * x)));
 		return y;
 	}
 	return x;
@@ -594,20 +597,22 @@ void poseEggShape(GjActor* pose, f32 t, f32 height)
 	int n;
 	register s16* v;
 
-	n = pose->size / 12;
-	v = (s16*)pose->verts;
-	f32 lift = 0.35714287f * height;
+	n          = pose->size / 12;
+	v          = (s16*)pose->verts;
+	f32 lift   = 0.35714287f * height;
 	f32 radius = 4.5f * ((1.0f - t) * (height / 12.599999f) + t);
 	setGqrS16();
 	for (int i = 0; i < n; i++) {
+		// clang-format off
 		asm {
 			psq_l x, 0(v), 1, 6
 			psq_l y, 2(v), 1, 6
 			psq_l z, 4(v), 1, 6
 		}
+		// clang-format on
 		y -= lift;
 		if (y >= 0.0f) {
-			scaleY = 0.5555556f;
+			scaleY  = 0.5555556f;
 			stretch = 1.7999998f;
 		} else {
 			stretch = scaleY = 1.0f;
@@ -617,17 +622,19 @@ void poseEggShape(GjActor* pose, f32 t, f32 height)
 		sum += y * y;
 		sum += z * z;
 		f32 len = sqrtfInline(sum);
-		f32 s = radius / len;
+		f32 s   = radius / len;
 		y *= s;
 		x *= s;
 		z *= s;
 		y *= stretch;
 		y += radius;
+		// clang-format off
 		asm {
 			psq_st x, 0(v), 1, 6
 			psq_st y, 2(v), 1, 6
 			psq_st z, 4(v), 1, 6
 		}
+		// clang-format on
 		v += 6;
 	}
 	DCStoreRange(pose->verts, pose->size);
@@ -652,25 +659,27 @@ void poseEggBlend(GjActor* pose, f32 t, f32 height, f32 split)
 	int n;
 	register s16* v;
 
-	k = t / split;
-	n = pose->size / 12;
-	v = (s16*)pose->verts;
-	lift = 0.35714287f * height;
-	keep = 1.0f - k;
-	size = (1.0f - split) * (height / 12.599999f) + split;
+	k      = t / split;
+	n      = pose->size / 12;
+	v      = (s16*)pose->verts;
+	lift   = 0.35714287f * height;
+	keep   = 1.0f - k;
+	size   = (1.0f - split) * (height / 12.599999f) + split;
 	center = k * (4.5f * size) + lift * keep;
 	size *= 4.5f;
 	setGqrS16();
 	target = size * k;
 	for (int i = 0; i < n; i++) {
+		// clang-format off
 		asm {
 			psq_l x, 0(v), 1, 6
 			psq_l y, 2(v), 1, 6
 			psq_l z, 4(v), 1, 6
 		}
+		// clang-format on
 		y -= lift;
 		if (y >= 0.0f) {
-			scaleY = 0.5555556f;
+			scaleY  = 0.5555556f;
 			stretch = 1.7999998f;
 		} else {
 			stretch = scaleY = 1.0f;
@@ -680,17 +689,19 @@ void poseEggBlend(GjActor* pose, f32 t, f32 height, f32 split)
 		sum += y * y;
 		sum += z * z;
 		f32 len = sqrtfInline(sum);
-		f32 s = (len * keep + target) / len;
+		f32 s   = (len * keep + target) / len;
 		y *= s;
 		x *= s;
 		z *= s;
 		y *= stretch;
 		y += center;
+		// clang-format off
 		asm {
 			psq_st x, 0(v), 1, 6
 			psq_st y, 2(v), 1, 6
 			psq_st z, 4(v), 1, 6
 		}
+		// clang-format on
 		v += 6;
 	}
 	DCStoreRange(pose->verts, pose->size);
@@ -763,7 +774,7 @@ void EnemyCrush::apply(SetRot* rot)
 // 0x8001C47C
 void EnemyCrush::clear()
 {
-	mTime = 0.0f;
+	mTime  = 0.0f;
 	mAngle = 0;
 	mState = 0;
 	mTimer = 0;
@@ -775,7 +786,7 @@ void EnemyCrush::start(Vec3f* pos, const Vec3f* hit, const Vec3f* ground)
 	enemyFxBurst50(pos);
 	mTimer = 0;
 	mState = 0;
-	mTime = 1.0f;
+	mTime  = 1.0f;
 	mAngle = (int)(10430.38043493439 * (f32)atan2(hit->x, hit->z));
 	pos->y = 0.5f + ground->y;
 }
@@ -801,7 +812,7 @@ int EnemyCrush::step(Vec3f* pos, Vec3f* vel, SetRot* rot)
 			mState = 1;
 			mTimer = 0;
 			vel->y = 2.0f;
-			mTime = 0.1f;
+			mTime  = 0.1f;
 			rot->x = 0x4000;
 			seStartAt(0xE4, pos);
 		}
@@ -811,7 +822,7 @@ int EnemyCrush::step(Vec3f* pos, Vec3f* vel, SetRot* rot)
 		mTimer++;
 		if (mTimer >= 90) {
 			mState = 2;
-			done = 1;
+			done   = 1;
 			break;
 		}
 		mTime += 0.1f;
@@ -822,7 +833,7 @@ int EnemyCrush::step(Vec3f* pos, Vec3f* vel, SetRot* rot)
 		pos->y += vel->y;
 		if (vel->y < -1.7f) {
 			mState = 2;
-			done = 1;
+			done   = 1;
 		}
 		break;
 	}
@@ -878,8 +889,8 @@ void EnemyBreak::init(Vec3f dir, Vec3f* pos, Vec3f* vel)
 		*vel = gVecZero;
 	}
 	gjScaleVector(2.0f, vel, vel);
-	mTimer = 0;
-	mSmoke = NULL;
+	mTimer  = 0;
+	mSmoke  = NULL;
 	mSparks = NULL;
 }
 
@@ -922,9 +933,9 @@ int EnemyBreak::update(Vec3f* pos, Vec3f* vel)
 	gjMulAddVector(speed, &to, pos, vel);
 	if (probeGroundLine(pos, &to, &hit, &normal) != 0) {
 		gjScaleVector(-2.0f * njInnerProduct(vel, &normal), &normal, &normal);
-		*vel = vecSum(&normal, vel);
+		*vel  = vecSum(&normal, vel);
 		speed = 2.0f;
-		*pos = hit;
+		*pos  = hit;
 		seStartAt(0xE3, pos);
 	} else {
 		*pos = to;
@@ -954,16 +965,16 @@ void EnemyTint::reset()
 // 0x8001CB08
 void EnemyTint::start()
 {
-	mLevel = 0;
-	mPhase = 0;
+	mLevel  = 0;
+	mPhase  = 0;
 	mActive = 1;
 }
 
 // 0x8001CB20
 void EnemyTint::clear()
 {
-	mLevel = 0;
-	mPhase = 0;
+	mLevel  = 0;
+	mPhase  = 0;
 	mActive = 0;
 }
 
@@ -1031,13 +1042,14 @@ void spawnDropRunEx(Vec3f* pos, int count, int big)
 }
 
 // 0x8001CC98
-TEnemyDropSpawner::TEnemyDropSpawner(TObject* parent, const Vec3f* pos, int count, int big) : TObject(parent)
+TEnemyDropSpawner::TEnemyDropSpawner(TObject* parent, const Vec3f* pos, int count, int big)
+    : TObject(parent)
 {
 	mTimer = 0;
 	mCount = count;
-	mPos = *pos;
-	mKind = (int)(7.0f * (3.0517578e-05f * rand()));
-	mBig = big;
+	mPos   = *pos;
+	mKind  = (int)(7.0f * (3.0517578e-05f * rand()));
+	mBig   = big;
 }
 
 // 0x8001CD48

@@ -41,21 +41,21 @@ struct SceneModel {
 
 /** A texture scroll. @size 0x10 */
 struct SceneScroll {
-	u32 _00;      // _00
-	f32 mSpeed;   // _04
-	f32 mPeriod;  // _08
-	f32 mTime;    // _0C
+	u32 _00;     // _00
+	f32 mSpeed;  // _04
+	f32 mPeriod; // _08
+	f32 mTime;   // _0C
 };
 
 struct SceneMeshes {
-	SceneModel** mModel;         // _00
-	SceneVector<u8> mSeen;       // _04 cleared every frame
-	SceneVector<u16> mFar;       // _10 100 or more in front
-	SceneVector<u16> mNear;      // _1C nearer
-	SceneVector<u16> mFlagged;   // _28 meshes with bit 0 set
-	SceneVector<u16> mExtra;     // _34
-	SceneScroll* mScrolls;       // _40
-	int mScrollCount;            // _44
+	SceneModel** mModel;       // _00
+	SceneVector<u8> mSeen;     // _04 cleared every frame
+	SceneVector<u16> mFar;     // _10 100 or more in front
+	SceneVector<u16> mNear;    // _1C nearer
+	SceneVector<u16> mFlagged; // _28 meshes with bit 0 set
+	SceneVector<u16> mExtra;   // _34
+	SceneScroll* mScrolls;     // _40
+	int mScrollCount;          // _44
 };
 
 extern "C" {

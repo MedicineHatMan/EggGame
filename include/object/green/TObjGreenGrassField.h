@@ -34,5 +34,5 @@ typedef char TObjGreenGrassField_size_check[(sizeof(TObjGreenGrassField) == 0x3D
 extern "C" TObjGreenGrassField* createTObjGreenGrassField(TObject* parent);
 
 struct Vec3f;
-
+
 #endif

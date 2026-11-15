@@ -21,10 +21,10 @@ public:
 	void setPos(const Vec3f* pos);
 	void end();
 
-	Vec3f mPos;      // _20
-	u32 mColor;      // _2C the low byte is alpha
-	u32 mEnding;     // _30 bit 0
-	f32 mScale;      // _34
+	Vec3f mPos;          // _20
+	u32 mColor;          // _2C the low byte is alpha
+	u32 mEnding;         // _30 bit 0
+	f32 mScale;          // _34
 	DrawTask* mDrawTask; // _38
 };
 

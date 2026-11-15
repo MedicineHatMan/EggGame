@@ -39,18 +39,20 @@ PortalWork::PortalWork()
 }
 
 // 0x8004FE6C
-PortalWork::~PortalWork() { }
+PortalWork::~PortalWork()
+{
+}
 
 // 0x8004FEA8
 void Frustum::set(int fov, f32 aspect, f32 near, f32 far)
 {
 	int half = fov / 2;
-	mTop    = njSin(half) / njCos(half) / near;
-	mRight  = aspect * (njSin(half) / njCos(half) / near);
-	mBottom = -mTop;
-	mLeft   = -mRight;
-	mNear   = near;
-	mFar    = far;
+	mTop     = njSin(half) / njCos(half) / near;
+	mRight   = aspect * (njSin(half) / njCos(half) / near);
+	mBottom  = -mTop;
+	mLeft    = -mRight;
+	mNear    = near;
+	mFar     = far;
 }
 
 // 0x8004FF88
@@ -123,6 +125,12 @@ void PortalVis::update(Frustum* view, f32* matrix, const Vec3f* camPos)
 
 // 0x80050280
 // Goes through each open portal of the cell that is in the view to the cell on its other side
+// The data's portal table
+static inline Portal* visPortals(const PortalVisData* data)
+{
+	return data->mPortals;
+}
+
 void PortalVis::flood(int cell, const PortalVisData* data, Frustum* view)
 {
 	if (mVisited.mData[cell] != 0) {
@@ -130,9 +138,10 @@ void PortalVis::flood(int cell, const PortalVisData* data, Frustum* view)
 	}
 	mVisited.mData[cell] = 1;
 
-	u8* flags        = mPortalFlags.mData;
-	Portal* portals  = data->mPortals;
-	PortalCell* here = &data->mCells[cell];
+	WorldVecIter<u8> first = mPortalFlags.begin();
+	u8* flags              = first.mPtr;
+	Portal* portals        = visPortals(data);
+	PortalCell* here       = &data->mCells[cell];
 	for (int i = 0; i < here->mPortalCount; i++) {
 		u16 index      = here->mPortals[i];
 		Portal* portal = &portals[index];
@@ -195,33 +204,31 @@ int PortalPlane::isBehind(const Vec3f* pos)
 // Whether the box around the portal in camera space misses the view
 static int portalOutside(Vec3f* verts, Frustum* view, Portal* portal)
 {
-	f32 minX, minY, minZ;
-	f32 maxX, maxY, maxZ;
+	f32 minX, minY;
+	f32 maxX, maxY;
+	f32 minZ, maxZ;
 	minX = minY = minZ = 100000.0f;
 	maxX = maxY = maxZ = -100000.0f;
-	u16* index = portal->mVerts;
+	u16* index         = portal->mVerts;
 	for (int i = 0; i < portal->mVertCount; i++) {
 		Vec3f* v = &verts[index[i]];
-		f32 x    = v->x;
-		if (x < minX) {
-			minX = x;
+		if (v->x < minX) {
+			minX = v->x;
 		}
-		f32 y = v->y;
-		if (y < minY) {
-			minY = y;
+		if (v->y < minY) {
+			minY = v->y;
 		}
-		f32 z = v->z;
-		if (z < minZ) {
-			minZ = z;
+		if (v->z < minZ) {
+			minZ = v->z;
 		}
-		if (x > maxX) {
-			maxX = x;
+		if (v->x > maxX) {
+			maxX = v->x;
 		}
-		if (y > maxY) {
-			maxY = y;
+		if (v->y > maxY) {
+			maxY = v->y;
 		}
-		if (z > maxZ) {
-			maxZ = z;
+		if (v->z > maxZ) {
+			maxZ = v->z;
 		}
 	}
 
@@ -233,7 +240,7 @@ static int portalOutside(Vec3f* verts, Frustum* view, Portal* portal)
 		return 1;
 	}
 	edge = maxZ * (view->mTop / view->mNear);
-	if (minY > edge || -edge > maxY) {
+	if (minY > edge || maxY < -edge) {
 		return 1;
 	}
 	return 0;
@@ -242,7 +249,7 @@ static int portalOutside(Vec3f* verts, Frustum* view, Portal* portal)
 // 0x800505E0
 void portalFill(WorldVecIter<u32> first, WorldVecIter<u32> last, const int& value)
 {
-	u32* to  = first.mPtr;
+	u32* to = first.mPtr;
 	while (to != last.mPtr) {
 		*to++ = value;
 	}
@@ -251,7 +258,7 @@ void portalFill(WorldVecIter<u32> first, WorldVecIter<u32> last, const int& valu
 // 0x80050604
 void portalFill(WorldVecIter<u8> first, WorldVecIter<u8> last, const int& value)
 {
-	u8* to  = first.mPtr;
+	u8* to = first.mPtr;
 	while (to != last.mPtr) {
 		*to++ = value;
 	}

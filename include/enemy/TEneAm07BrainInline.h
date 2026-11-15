@@ -3,6 +3,8 @@
 
 #include "enemy/TEneAm07.h"
 
-inline Am07Brain::~Am07Brain() { }
+inline Am07Brain::~Am07Brain()
+{
+}
 
 #endif

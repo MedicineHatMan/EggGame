@@ -39,7 +39,7 @@ TObjBlueFlagScene::TObjBlueFlagScene(TObject* parent, SetDesc* desc)
 	ClothMatrix matrix;
 	mtxSetTransV(matrix.m, &mPos);
 	mtxRotateZYX(matrix.m, matrix.m, &mRot.x);
-	mCloth = new FlagCloth(matrix, 10, 8, 100.0f, 80.0f, 0.3f, 0.99f, 0.0f);
+	mCloth   = new FlagCloth(matrix, 10, 8, 100.0f, 80.0f, 0.3f, 0.99f, 0.0f);
 	mTexList = getGeObjTextures()[15];
 	mAnchor  = -1;
 	initFromDesc(desc);
@@ -66,8 +66,8 @@ void TObjBlueFlagScene::initFromDesc(SetDesc* desc)
 		mCloth->rebuild(&matrix);
 
 		mCloth->mPinCount = 0;
-		f32 cols = mCloth->mCols;
-		f32 rows = mCloth->mRows;
+		f32 cols          = mCloth->mCols;
+		f32 rows          = mCloth->mRows;
 		switch (mAnchor) {
 		case 0:
 			mCloth->pin(0, 0);
@@ -119,7 +119,7 @@ void TObjBlueFlagScene::initFromDesc(SetDesc* desc)
 	wind.set(0.0f, 0.0f, 1.0f);
 	int yaw = (int)(182.04445f * (f32)desc->getInt(2));
 	vecRotateY(&wind, &wind, yaw);
-	mRef = 0.5f + desc->getFloat(0);
+	mRef  = 0.5f + desc->getFloat(0);
 	fluct = (s16)desc->getInt(3);
 	mCloth->setWind(&wind, fluct, desc->getFloat(1));
 	mCloth->mSpring = 0.3f + desc->getFloat(2);
@@ -194,15 +194,15 @@ void TObjBlueFlagScene::buildNormals()
 		for (u16 x = 0; x < 10; x++) {
 			u16 face = x * 2;
 			u16 i    = x + rowStart;
-			cur.x   = pts[i].mPos.x;
-			cur.y   = pts[i].mPos.y;
-			cur.z   = pts[i].mPos.z;
-			diag.x  = pts[i + cols + 1].mPos.x;
-			diag.y  = pts[i + cols + 1].mPos.y;
-			diag.z  = pts[i + cols + 1].mPos.z;
-			other.x = pts[i + cols].mPos.x;
-			other.y = pts[i + cols].mPos.y;
-			other.z = pts[i + cols].mPos.z;
+			cur.x    = pts[i].mPos.x;
+			cur.y    = pts[i].mPos.y;
+			cur.z    = pts[i].mPos.z;
+			diag.x   = pts[i + cols + 1].mPos.x;
+			diag.y   = pts[i + cols + 1].mPos.y;
+			diag.z   = pts[i + cols + 1].mPos.z;
+			other.x  = pts[i + cols].mPos.x;
+			other.y  = pts[i + cols].mPos.y;
+			other.z  = pts[i + cols].mPos.z;
 			vecSub(&toDiag, &diag, &cur);
 			vecSub(&toBelow, &other, &cur);
 			njOuterProduct(&toBelow, &toDiag, &row[face]);
@@ -250,7 +250,7 @@ void TObjBlueFlagScene::render()
 	u16 cols;
 	SpringPoint* pts;
 	u16 rows;
-	pts = mCloth->mPoints;
+	pts  = mCloth->mPoints;
 	cols = mCloth->mCols;
 	rows = mCloth->mRows;
 	lightSetSelect(0);

@@ -47,19 +47,19 @@ struct Fx;
 extern "C" {
 
 extern const MotionEntry sGoldenEggHatchMotions[] = { { 0, 1, -1, 0, 0.0f, 15.0f, 0.21f, 0.0f, 0 } };
-const char* gTObjGoldenEggName = "TObjGoldenEgg";
+const char* gTObjGoldenEggName                    = "TObjGoldenEgg";
 
 TArc* sGoldenEggArc;
 NJS_OBJECT** sGoldenEggModels;
 NJS_TEXLIST** sGoldenEggTexLists;
 NJS_OBJECT** sEggModels;  // 0x802C51E4 the plain egg's models for the hatch
-NJS_MOTION** sEggMotions;  // 0x802C51E8 the plain egg's motions
+NJS_MOTION** sEggMotions; // 0x802C51E8 the plain egg's motions
 }
 
 // What the hatch motion's walk fills in the matrix of its second node
 struct GoldenEggWalk {
-	int mCount;    // _00
-	f32 mMtx[12];  // _04
+	int mCount;   // _00
+	f32 mMtx[12]; // _04
 };
 
 typedef char TObjGoldenEgg_size_check[(sizeof(TObjGoldenEgg) == 0x314) ? 1 : -1];
@@ -72,7 +72,11 @@ extern "C" TArc* goldenEggGetArc()
 
 // 0x800BEF80
 TObjGoldenEgg::TObjGoldenEgg(TObject* parent, const SetDesc* desc)
-    : TObjAction(parent), mState(GOLDEN_EGG_NONE), mOwnerId(0xFFFF), mAuraRoll(this), mAuraSlow(this)
+    : TObjAction(parent)
+    , mState(GOLDEN_EGG_NONE)
+    , mOwnerId(0xFFFF)
+    , mAuraRoll(this)
+    , mAuraSlow(this)
 {
 	_00   = (u32)gTObjGoldenEggName;
 	mSize = 0x314;
@@ -85,13 +89,13 @@ TObjGoldenEgg::TObjGoldenEgg(TObject* parent, const SetDesc* desc)
 		colliShapeSetSphere(colliGetShape(mShape, 0));
 		colliGetShape(mShape, 0)->mFlags = 0x42C;
 	}
-	mDraw          = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mBody.mBounce  = 0.0f;
-	mRoll.mOwner   = (TObjEgg*)this;
-	mRoll.mPath    = &mCollide;
-	mRoll.mBody    = &mBody;
-	mHandle.mOwner = this;
-	mSparkle       = particleGenById(this, &gVecZero, 0, 0x181);
+	mDraw             = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mBody.mBounce     = 0.0f;
+	mRoll.mOwner      = (TObjEgg*)this;
+	mRoll.mPath       = &mCollide;
+	mRoll.mBody       = &mBody;
+	mHandle.mOwner    = this;
+	mSparkle          = particleGenById(this, &gVecZero, 0, 0x181);
 	mSparkle->mAttach = mRotMatrix;
 	mSparkle->setScale(10.0f);
 	mAuraRoll.mBody = &mBody;
@@ -152,10 +156,10 @@ extern "C" void termGoldenEgg()
 		}
 		releaseResource(sGoldenEggArc);
 	}
-	sGoldenEggArc      = 0;
-	sGoldenEggModels   = 0;
-	sEggModels         = 0;
-	sEggMotions        = 0;
+	sGoldenEggArc    = 0;
+	sGoldenEggModels = 0;
+	sEggModels       = 0;
+	sEggMotions      = 0;
 }
 
 // 0x800BF4A4
@@ -252,12 +256,12 @@ void TObjGoldenEgg::setPos(const Vec3f* pos)
 	f32 z;
 	f32 y;
 	f32 x;
-	x = pos->x;
-	y = pos->y;
-	z = pos->z;
-	mPos.x      = x;
-	mPos.y      = y;
-	mPos.z      = z;
+	x            = pos->x;
+	y            = pos->y;
+	z            = pos->z;
+	mPos.x       = x;
+	mPos.y       = y;
+	mPos.z       = z;
 	mBody.mPos.x = x;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
@@ -378,16 +382,16 @@ int TObjGoldenEgg::onHit(const TObjAction* other, int arg, int* result)
 	case GOLDEN_EGG_BOUNCE:
 	case GOLDEN_EGG_SLOW:
 		((HitInfo*)result)->_14 = (u32)mThrowTag;
-		ret = mRoll.hitWhileRolling(result, mLevel.getPower());
+		ret                     = mRoll.hitWhileRolling(result, mLevel.getPower());
 		break;
 	case GOLDEN_EGG_HELD: {
 		TMobileObject* holder = mHandle.mHolder;
-		ret = holder->takeHit((HitInfo*)result, mLevel.getPower());
+		ret                   = holder->takeHit((HitInfo*)result, mLevel.getPower());
 		break;
 	}
 	case GOLDEN_EGG_SLAM:
 		((HitInfo*)result)->_14 = (u32)mThrowTag;
-		ret = mRoll.hitWhileHeld(result, mLevel.getPower());
+		ret                     = mRoll.hitWhileHeld(result, mLevel.getPower());
 		break;
 	default:
 		return 0;
@@ -516,9 +520,9 @@ void TObjGoldenEgg::setRadius(f32 radius)
 		mHandle.mHolder->mBody.mRadius = radius;
 	}
 	colliGetShape(mShape, 0)->mSizeX = radius;
-	f32 size     = 2.0f * mBody.mRadius;
-	mShadow._30 = size;
-	mShadow._34 = size;
+	f32 size                         = 2.0f * mBody.mRadius;
+	mShadow._30                      = size;
+	mShadow._34                      = size;
 }
 
 // 0x800C0038
@@ -529,8 +533,8 @@ void TObjGoldenEgg::updateMatrix()
 	f32 base[12];
 	f32 grow[12];
 
-	pos = mBody.mPos;
-	rot = mBody.mRot;
+	pos       = mBody.mPos;
+	rot       = mBody.mRot;
 	f32 scale = mBody.mRadius / 10.0f;
 	mtxSetTransV(base, &pos);
 	mtxConcatQuat((f32*)mRotMatrix, (const f32*)base, (const f32*)&rot);
@@ -596,11 +600,11 @@ void TObjGoldenEgg::stateHeld(int phase)
 	} else if (phase == EGG_DRAW) {
 		eggPushHeld((void*)mShape, (EggContact*)mShape->mContacts, 0, mHandle.mHolder);
 		TMobileObject* holder = mHandle.mHolder;
-		pos = holder->mBody.mPos;
-		rot.mAxis = holder->mBody.mRot.mAxis;
-		f32 angle = holder->mBody.mRot.mW;
+		pos                   = holder->mBody.mPos;
+		rot.mAxis             = holder->mBody.mRot.mAxis;
+		f32 angle             = holder->mBody.mRot.mW;
 		setPos(&pos);
-		mBody.mRot.mW   = angle;
+		mBody.mRot.mW    = angle;
 		mBody.mRot.mAxis = rot.mAxis;
 		updateMatrix();
 		mRoll.checkBumps();
@@ -646,10 +650,10 @@ void TObjGoldenEgg::stateSlam(int phase)
 		} else if (checkThrown() != 0) {
 			setState(GOLDEN_EGG_THROWN);
 		} else if (mRoll.hasLanded() != 0) {
-			pos.x = mPos.x;
+			pos.x      = mPos.x;
 			f32 radius = mBody.mRadius;
-			pos.y = mPos.y - radius;
-			pos.z = mPos.z;
+			pos.y      = mPos.y - radius;
+			pos.z      = mPos.z;
 			u16 holder = mHolderId;
 			u16 obj    = mObjId;
 			eggSpawnShockWave(radius, obj, holder, &pos, mLevel.getPower(), mThrowTag);
@@ -685,7 +689,7 @@ void TObjGoldenEgg::stateHatch(int phase)
 
 	if (phase == EGG_ENTER) {
 		mEggFlags.mBits |= 8;
-		mTimer = 60;
+		mTimer      = 60;
 		mHatchModel = new MotionPlayer;
 		mHatchModel->init(sGoldenEggHatchMotions, sEggMotions);
 		mHatchModel->play(0);
@@ -708,20 +712,20 @@ void TObjGoldenEgg::stateHatch(int phase)
 	} else if (phase == EGG_DRAW) {
 		mHatchModel->update();
 		walk.mCount = 0;
-		drawPos = mBody.mPos;
+		drawPos     = mBody.mPos;
 		drawPos.y -= mBody.mRadius;
 		njPushMatrixEx();
 		njUnitMatrix(0);
 		njTranslateEx(&drawPos);
 		MotionPlayer* model = mHatchModel;
-		int motion = model->mCurrent;
-		f32 frame  = model->mFrame;
-		NJS_MOTION* mot = model->getMotion(motion);
+		int motion          = model->mCurrent;
+		f32 frame           = model->mFrame;
+		NJS_MOTION* mot     = model->getMotion(motion);
 		walkMotion(frame, sEggModels[4], mot, (NodeCallback)goldenEggHatchWalk, (void*)&walk);
 		njPopMatrixEx();
 		mtxCopy(mRotMatrix, walk.mMtx);
 		mtxTranslate((float*)mRotMatrix, (const float*)mRotMatrix, 0.0f, mBody.mRadius - 5.0f, 0.0f);
-		rot = mBody.mRot;
+		rot       = mBody.mRot;
 		f32 scale = mBody.mRadius / 5.0f;
 		mtxConcatQuat((f32*)mRotMatrix, (const f32*)mRotMatrix, (const f32*)&rot);
 		mtxScale(scale, scale, scale, mMatrix, mRotMatrix);
@@ -1040,7 +1044,7 @@ public:
 
 	virtual void draw();
 
-	u16 mTime;   // _20
+	u16 mTime;        // _20
 	TCamera* mCamera; // _24
 };
 
@@ -1065,7 +1069,7 @@ TGoldenEggBreak::TGoldenEggBreak(TObject* parent, const Vec3f* pos, const f32* r
 	mTime   = 0;
 	mTask   = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 
-	int count  = 0;
+	int count = 0;
 	NJS_OBJECT* node;
 	NJS_OBJECT* parts = sGoldenEggModels[1];
 	if (parts != 0) {
@@ -1092,10 +1096,10 @@ TGoldenEggBreak::TGoldenEggBreak(TObject* parent, const Vec3f* pos, const f32* r
 			mtxMultVecSR(matrix, (Vec3f*)node->pos, &dir);
 			vecNormalize(&dir, &dir);
 			vecScale(250.0f, &shard->mVel, &dir);
-			shard->mSpin.x = 0.0f;
-			shard->mSpin.y = 0.0f;
-			shard->mSpin.z = 0.0f;
-			shard->mRot[0] = rot[0];
+			shard->mSpin.x               = 0.0f;
+			shard->mSpin.y               = 0.0f;
+			shard->mSpin.z               = 0.0f;
+			shard->mRot[0]               = rot[0];
 			*(EggQuatIm*)&shard->mRot[1] = *(const EggQuatIm*)&rot[1];
 			shard++;
 			node = node->sibling;
@@ -1108,7 +1112,9 @@ TGoldenEggBreak::TGoldenEggBreak(TObject* parent, const Vec3f* pos, const f32* r
 }
 
 // 0x800C1464
-EggShard::EggShard() { }
+EggShard::EggShard()
+{
+}
 
 // 0x800C1468
 TGoldenEggBreak::~TGoldenEggBreak()
@@ -1138,8 +1144,8 @@ void TGoldenEggBreak::draw()
 	Vec3f gravity;
 	Vec3f step;
 
-	shard = mShards;
-	scale = 0.2f * mRadius;
+	shard     = mShards;
+	scale     = 0.2f * mRadius;
 	gravity.x = 0.0f;
 	gravity.y = -400.0f;
 	gravity.z = gravity.x;
@@ -1149,11 +1155,11 @@ void TGoldenEggBreak::draw()
 			vecScaleAdd(1.0f / 120.0f, &shard->mPos, &shard->mVel, &shard->mPos);
 			vecScale(1.0f / 120.0f, &step, &shard->mSpin);
 			EggRot made;
-			made.mW    = 0.0f;
+			made.mW         = 0.0f;
 			made.mAxis.v[0] = step.x;
 			made.mAxis.v[1] = step.y;
 			made.mAxis.v[2] = step.z;
-			EggRot half = goldenRotScale(goldenRotMul(made, (const EggRot*)shard->mRot), 0.5f);
+			EggRot half     = goldenRotScale(goldenRotMul(made, (const EggRot*)shard->mRot), 0.5f);
 			quatAdd((Quat*)shard->mRot, (const Quat*)&half);
 			quatNormalize((Quat*)shard->mRot);
 			vecScale(0.97f, &shard->mVel, &shard->mVel);
@@ -1257,7 +1263,10 @@ TGoldenEggBreakDemo::TGoldenEggBreakDemo(TObject* parent)
 }
 
 // 0x800C1994
-TGoldenEggBreakDemo::~TGoldenEggBreakDemo() { mCamera->mFlags |= 1; }
+TGoldenEggBreakDemo::~TGoldenEggBreakDemo()
+{
+	mCamera->mFlags |= 1;
+}
 
 // 0x800C1A00
 void TGoldenEggBreakDemo::draw()
@@ -1301,4 +1310,3 @@ int goldenEggTick(s16* timer)
 	}
 	return 0;
 }
-

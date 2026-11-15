@@ -136,7 +136,7 @@ void TObjMirror::drawQuad()
 
 	// Project the screen on to the quad with a field of view slightly narrower than the camera's
 	CamView* camera = (CamView*)camGetView(0);
-	f32 fovY   = 0.75f * (360.0f * ((f32)camera->mFov / 65536.0f));
+	f32 fovY        = 0.75f * (360.0f * ((f32)camera->mFov / 65536.0f));
 	f32 proj[12];
 	C_MTXLightPerspective((float*)proj, fovY, camera->mAspect, -0.5f, -0.5f, 0.5f, 0.5f);
 	f32 texMtx[12];
@@ -169,8 +169,8 @@ void TObjMirror::drawQuad()
 
 	GXBegin(GX_QUADS, GX_VTXFMT0, 4);
 	Vec3f* corners = (Vec3f*)mCorners;
-	f32 lo = 0.0f;
-	f32 hi = 1.0f;
+	f32 lo         = 0.0f;
+	f32 hi         = 1.0f;
 	GXPosition3f32(corners[0].x, corners[0].y, corners[0].z);
 	GXTexCoord2f32(lo, lo);
 	GXPosition3f32(corners[1].x, corners[1].y, corners[1].z);

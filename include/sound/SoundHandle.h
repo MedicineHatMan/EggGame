@@ -24,16 +24,16 @@ struct SoundHandle {
 	SoundHandle* mNext; // _00
 	SoundHandle* mPrev; // _04
 	SoundHandle* mSelf; // _08
-	Sound3DList* mList;   // _0C
-	u8 mNear;             // _10
-	u8 mFar;              // _11
-	u8 mFlags;            // _12 1 restart when it ends 2 paused
-	u8 mMode;             // _13
-	u8 mGroup;            // _14
-	u16 mId;              // _16
-	f32 mRange;           // _18
-	int mVoice;           // _1C
-	Vec3f mPos;           // _20
+	Sound3DList* mList; // _0C
+	u8 mNear;           // _10
+	u8 mFar;            // _11
+	u8 mFlags;          // _12 1 restart when it ends 2 paused
+	u8 mMode;           // _13
+	u8 mGroup;          // _14
+	u16 mId;            // _16
+	f32 mRange;         // _18
+	int mVoice;         // _1C
+	Vec3f mPos;         // _20
 };
 #pragma pop
 

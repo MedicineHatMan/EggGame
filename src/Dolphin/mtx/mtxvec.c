@@ -16,6 +16,7 @@ void C_MTXMultVec(const Mtx m, const Vec* src, Vec* dst) {
     dst->z = vTmp.z;
 }
 
+// clang-format off
 asm void PSMTXMultVec(const register Mtx m, const register Vec* src, register Vec* dst) {
     nofralloc
     psq_l f0, Vec.x(src), 0, 0
@@ -40,6 +41,7 @@ asm void PSMTXMultVec(const register Mtx m, const register Vec* src, register Ve
     psq_st f6, Vec.z(dst), 1, 0
     blr
 }
+// clang-format on
 
 void C_MTXMultVecArray(const Mtx m, const Vec* srcBase, Vec* dstBase, u32 count) {
     u32 i;
@@ -62,6 +64,7 @@ void C_MTXMultVecArray(const Mtx m, const Vec* srcBase, Vec* dstBase, u32 count)
     }
 }
 
+// clang-format off
 asm void PSMTXMultVecArray(const register Mtx m, const register Vec* srcBase, register Vec* dstBase, register u32 count) {
     nofralloc
     psq_l f13, 0x0(m), 0, 0
@@ -101,6 +104,7 @@ L_000003C4:
     psq_stu f13, 0x8(dstBase), 1, 0
     blr
 }
+// clang-format on
 
 void C_MTXMultVecSR(const Mtx m, const Vec* src, Vec* dst) {
     Vec vTmp;
@@ -117,6 +121,7 @@ void C_MTXMultVecSR(const Mtx m, const Vec* src, Vec* dst) {
     dst->z = vTmp.z;
 }
 
+// clang-format off
 asm void PSMTXMultVecSR(const register Mtx m, const register Vec* src, register Vec* dst) {
     nofralloc
     psq_l f0, 0x0(m), 0, 0
@@ -141,6 +146,7 @@ asm void PSMTXMultVecSR(const register Mtx m, const register Vec* src, register 
     psq_st f13, 0x8(dst), 1, 0
     blr
 }
+// clang-format on
 
 void C_MTXMultVecArraySR(const Mtx m, const Vec* srcBase, Vec* dstBase, u32 count) {
     u32 i;
@@ -163,6 +169,7 @@ void C_MTXMultVecArraySR(const Mtx m, const Vec* srcBase, Vec* dstBase, u32 coun
     }
 }
 
+// clang-format off
 asm void PSMTXMultVecArraySR(const register Mtx m, const register Vec* srcBase, register Vec* dstBase, register u32 count) {
     nofralloc
     psq_l f13, 0x0(m), 0, 0
@@ -201,3 +208,4 @@ L_000007D0:
     psq_stu f13, 0x8(dstBase), 1, 0
     blr
 }
+// clang-format on

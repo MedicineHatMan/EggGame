@@ -38,10 +38,10 @@ struct Fx;
 // 30.0f is 30 the radius until loadDarkGateAssets replaces it
 extern "C" void resetDarkGateAssets()
 {
-	sDarkGateArc = 0;
-	gDarkGateModel = 0;
+	sDarkGateArc     = 0;
+	gDarkGateModel   = 0;
 	gDarkGateTexList = 0;
-	gDarkGateRadius = 30.0f;
+	gDarkGateRadius  = 30.0f;
 }
 
 // 0x8010397C
@@ -50,8 +50,8 @@ extern "C" void releaseDarkGateAssets()
 	if (sDarkGateArc != 0) {
 		releaseTextures(gDarkGateTexList);
 		releaseResource(sDarkGateArc);
-		sDarkGateArc = 0;
-		gDarkGateModel = 0;
+		sDarkGateArc     = 0;
+		gDarkGateModel   = 0;
 		gDarkGateTexList = 0;
 	}
 }
@@ -68,9 +68,9 @@ extern "C" int prepareDarkGateAssets()
 extern "C" void loadDarkGateAssets()
 {
 	loadArc("geobj_darkgate.arc", &sDarkGateArc);
-	gDarkGateModel = (NJS_OBJECT*)findArcExport(sDarkGateArc, "model");
+	gDarkGateModel   = (NJS_OBJECT*)findArcExport(sDarkGateArc, "model");
 	gDarkGateTexList = (NJS_TEXLIST*)findArcExport(sDarkGateArc, "texlist");
-	void* texture = findArcExport(sDarkGateArc, "texture");
+	void* texture    = findArcExport(sDarkGateArc, "texture");
 	bindGvmTextures((u8*)texture, gDarkGateTexList);
 
 	gDarkGateRadius = gDarkGateModel->model->r;
@@ -78,18 +78,18 @@ extern "C" void loadDarkGateAssets()
 
 enum {
 	GATE_HIDDEN = 0, // for the camera
-	GATE_OPEN = 1,
+	GATE_OPEN   = 1,
 	GATE_APPEAR = 2,
-	GATE_DONE = 3,
+	GATE_DONE   = 3,
 };
 
 enum {
-	APPEAR_START = 0,
-	APPEAR_FADE = 1,
-	APPEAR_END = 2,
-	APPEAR_LEAVE = 3,
+	APPEAR_START   = 0,
+	APPEAR_FADE    = 1,
+	APPEAR_END     = 2,
+	APPEAR_LEAVE   = 3,
 	APPEAR_LEAVING = 4,
-	APPEAR_LEFT = 5,
+	APPEAR_LEFT    = 5,
 };
 
 // Message 0x14 go through the gate to its place
@@ -107,7 +107,7 @@ extern "C" TObject* createTMsnObjDarkGate(TObject* parent, SetDesc* desc)
 	return new TMsnObjDarkGate(parent, desc);
 }
 
-f32 gDarkGateRadius = 50.0f;
+f32 gDarkGateRadius              = 50.0f;
 const char* gTMsnObjDarkGateName = "TMsnObjDarkGate";
 
 // 0x80103AAC
@@ -121,18 +121,18 @@ TMsnObjDarkGate::TMsnObjDarkGate(TObject* parent, SetDesc* desc)
     , mMusic(-1)
     , mDelay(30)
 {
-	_00 = (u32)gTMsnObjDarkGateName;
-	mSize = 0x130;
+	_00       = (u32)gTMsnObjDarkGateName;
+	mSize     = 0x130;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
-	mShape = colliCreate(1, 1);
+	mShape    = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks((CharaColli*)mShape, 4, 255, 255, 254);
 	mDraw.setModel(gDarkGateModel);
 	mDraw.mDrawState = &mState;
-	mDraw.mTexList = gDarkGateTexList;
-	mDraw.mMatrix = mMatrix;
-	mState.mAmbient = -1;
-	mGlow = fxSpawnFollow(1, 7, 113, mMatrix);
+	mDraw.mTexList   = gDarkGateTexList;
+	mDraw.mMatrix    = mMatrix;
+	mState.mAmbient  = -1;
+	mGlow            = fxSpawnFollow(1, 7, 113, mMatrix);
 	initFromDesc(desc);
 }
 
@@ -167,21 +167,21 @@ void TMsnObjDarkGate::initFromDesc(SetDesc* desc)
 		if (mGlow != 0) {
 			fxPause(mGlow);
 		}
-		mGate = GATE_HIDDEN;
+		mGate   = GATE_HIDDEN;
 		mAppear = APPEAR_START;
 	} else {
 		mState.mFlags = 0;
 		if (mGlow != 0) {
 			fxResume(mGlow);
 		}
-		mGate = GATE_OPEN;
+		mGate   = GATE_OPEN;
 		mAppear = APPEAR_LEAVE;
 	}
 
 	mSetCam = CLAMP_RANGE(desc->getInt(2), 0, 1);
 	if (mSetCam != 0) {
-		f32 z = desc->getFloat(2);
-		f32 y = desc->getFloat(1);
+		f32 z     = desc->getFloat(2);
+		f32 y     = desc->getFloat(1);
 		mCamEye.x = desc->getFloat(0);
 		mCamEye.y = y;
 		mCamEye.z = z;
@@ -269,7 +269,7 @@ void TMsnObjDarkGate::waitUser()
 		}
 		GateEnterMsg msg;
 		msg.mType = 0x14;
-		msg.mPos = mPos;
+		msg.mPos  = mPos;
 		msg.mRotY = mRot.y;
 		if (other->sendToHandle(&msg) != 0) {
 			mUser.setId(colliContactOwnerU16(contact));
@@ -304,7 +304,9 @@ void TMsnObjDarkGate::appear()
 }
 
 // 0x80104368
-void TMsnObjDarkGate::done() { }
+void TMsnObjDarkGate::done()
+{
+}
 
 // 0x8010436C
 void TMsnObjDarkGate::appearStart()
@@ -316,7 +318,7 @@ void TMsnObjDarkGate::appearStart()
 		((TCamera*)mCamera)->setCut();
 		mOpenFx = fxSpawnFollow(1, 7, 0x6E, mMatrix);
 		sePlay(0x5E);
-		mTimer = 0;
+		mTimer  = 0;
 		mAppear = APPEAR_FADE;
 	}
 }
@@ -351,7 +353,7 @@ void TMsnObjDarkGate::appearEnd()
 		fxResume(mGlow);
 	}
 	mAppear = APPEAR_LEAVE;
-	mGate = GATE_OPEN;
+	mGate   = GATE_OPEN;
 }
 
 // 0x80104524
@@ -450,7 +452,7 @@ int TMsnObjDarkGate::sendToHandle(ObjMsg* msg)
 {
 	switch (msg->mType) {
 	case 199:
-			return takeCamera(msg);
+		return takeCamera(msg);
 		break;
 	}
 	return 0;

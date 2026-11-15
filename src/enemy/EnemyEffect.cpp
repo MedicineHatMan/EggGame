@@ -41,7 +41,9 @@ EnemyEffect::EnemyEffect()
 }
 
 // 0x800E8E70
-EnemyEffect::~EnemyEffect() { }
+EnemyEffect::~EnemyEffect()
+{
+}
 
 // 0x800E8EAC
 extern "C" void enemyEffectSet(f32 size, f32 height, EnemyEffect* effect, const Vec3f* target)
@@ -79,7 +81,7 @@ extern "C" void enemyEffectUpdate(EnemyEffect* effect)
 		break;
 	case 1: {
 		effect->mTimer++;
-		f32 scale = 0.1f * effect->mSize * effect->mTimer;
+		f32 scale               = 0.1f * effect->mSize * effect->mTimer;
 		effect->mSprite.mScaleX = scale;
 		effect->mSprite.mScaleY = scale;
 		if (effect->mTarget != 0) {

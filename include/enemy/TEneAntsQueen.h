@@ -29,11 +29,11 @@ struct AntLink {
 	AntLink();  // 0x800923E0
 	~AntLink(); // 0x80092400
 
-	void setOwner(TEneAntsQueen* owner);                  // 0x80092468
-	TEneAntsQueen* getOwner();                            // 0x80092470
-	void clearOwners();                                   // 0x80092478 from this link to the end
-	void insert(AntLink* head, int slot, void* brain);    // 0x80092494 this one goes in after head by slot
-	int count();                                          // 0x800924E0 the links after this one
+	void setOwner(TEneAntsQueen* owner);               // 0x80092468
+	TEneAntsQueen* getOwner();                         // 0x80092470
+	void clearOwners();                                // 0x80092478 from this link to the end
+	void insert(AntLink* head, int slot, void* brain); // 0x80092494 this one goes in after head by slot
+	int count();                                       // 0x800924E0 the links after this one
 
 	AntLink* mPrev;        // _00
 	AntLink* mNext;        // _04
@@ -62,10 +62,10 @@ struct AntsQueenBrain {
 	{
 		mOwner = 0;
 		mState = 0;
-		mNext = -1;
+		mNext  = -1;
 	}
 
-	virtual int checkInterrupt() = 0;               // _08 1 if it changed state
+	virtual int checkInterrupt()               = 0; // _08 1 if it changed state
 	virtual void onPhase(int state, int phase) = 0; // _0C
 	inline virtual ~AntsQueenBrain() { }            // _10 0x8009511C
 	virtual void update(TEneAntsQueen* owner);      // _14 0x80094110
@@ -153,19 +153,19 @@ public:
 	TEneAntsQueen(TObject* parent, SetDesc* desc);
 	virtual ~TEneAntsQueen();
 
-	virtual void vfn_10();                     // _10 hides it off screen
-	virtual void render();                     // _1C
-	virtual void readEnemyDesc(SetDesc* desc); // _38
-	virtual void vfn_3C();                     // _3C prints debug text
-	virtual f32 vfn_40();                      // _40
+	virtual void vfn_10();                                              // _10 hides it off screen
+	virtual void render();                                              // _1C
+	virtual void readEnemyDesc(SetDesc* desc);                          // _38
+	virtual void vfn_3C();                                              // _3C prints debug text
+	virtual f32 vfn_40();                                               // _40
 	virtual int onHit(const TObjAction* other, int shape, int* result); // _58
-	virtual void vfn_6C();                     // _6C
-	virtual void updateBody();                 // _70
-	virtual void setPos(const Vec3f* pos);           // _74
-	virtual void syncCollider();               // _78
-	virtual void onActionPhase(int action, int phase); // _7C
-	virtual int getDamage(EnemyHit* hit);      // _A4
-	virtual int getHitKind(const void* touch, HitInfo* info); // _A8
+	virtual void vfn_6C();                                              // _6C
+	virtual void updateBody();                                          // _70
+	virtual void setPos(const Vec3f* pos);                              // _74
+	virtual void syncCollider();                                        // _78
+	virtual void onActionPhase(int action, int phase);                  // _7C
+	virtual int getDamage(EnemyHit* hit);                               // _A4
+	virtual int getHitKind(const void* touch, HitInfo* info);           // _A8
 
 	void init(SetDesc* desc);
 	void setTarget(const Vec3f* target);
@@ -214,7 +214,7 @@ public:
 
 	AntsQueenHuntBrain* mBrain; // _158
 	void* mPose;                // _15C
-	DrawTask* mModelTask;           // _160
+	DrawTask* mModelTask;       // _160
 	u32 mFlags2;                // _164
 	Vec3f mKnock;               // _168 which way a hit pushes it
 	HitVec mParts[7];           // _174 posed from the bones

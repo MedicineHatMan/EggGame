@@ -14,7 +14,6 @@ struct DrawTask;
 extern "C" {
 NJS_OBJECT** gLastEggLightModels;
 NJS_TEXLIST** gLastEggLightTexLists;
-
 }
 
 ResBank gLastEggLightBank; // 0x802861D8
@@ -53,10 +52,10 @@ extern "C" TObject* createTObjLastEggLight(TObject* parent, SetDesc* desc)
 TObjLastEggLight::TObjLastEggLight(TObject* parent, SetDesc* desc)
     : TSetObj(parent, desc)
 {
-	_00     = (u32)gTObjLastEggLightName;
-	mSize   = 0xF4;
-	mDraw   = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
-	mSpin   = 0;
+	_00   = (u32)gTObjLastEggLightName;
+	mSize = 0xF4;
+	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
+	mSpin = 0;
 	mSurface.reset();
 	seHolderStop(&mTone);
 	mTone.setRange(1300.0f);
@@ -80,7 +79,7 @@ void TObjLastEggLight::initFromDesc(SetDesc* desc)
 
 	int value = desc->getInt(0);
 	int kind  = value < 0 ? 0 : (value > 1 ? 1 : value);
-	mModel = gLastEggLightModels[kind];
+	mModel    = gLastEggLightModels[kind];
 	GjModel* model;
 	if (mModel != 0 && (model = mModel->model) != 0) {
 		mRadius = 200.0f + model->r;

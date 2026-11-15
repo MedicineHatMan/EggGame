@@ -27,9 +27,8 @@ void AniDash::update(f32 dt)
 	case 0:
 		if (body->touching(5, 0, NULL, NULL) != 0) {
 			mState = 2;
-		} else if (body->touching(0, 0, NULL, NULL) != 0 || body->touching(1, 0, NULL, NULL) != 0
-		           || body->touching(3, 0, NULL, NULL) != 0 || body->touching(2, 0, NULL, NULL) != 0
-		           || body->touching(4, 0, NULL, NULL) != 0) {
+		} else if (body->touching(0, 0, NULL, NULL) != 0 || body->touching(1, 0, NULL, NULL) != 0 || body->touching(3, 0, NULL, NULL) != 0
+		           || body->touching(2, 0, NULL, NULL) != 0 || body->touching(4, 0, NULL, NULL) != 0) {
 			mState = 1;
 		}
 		break;

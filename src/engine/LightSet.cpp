@@ -18,12 +18,12 @@ struct SceneRecord;
 struct LightSlot {
 	LightSlot() { }
 
-	int mFrom;        // _00 light param indices to blend between
-	int mTo;          // _04
-	Vec3f mDir;       // _08
-	u32 mColor;       // _14
-	u32 mAmbient;     // _18
-	GXLightObj mObj;  // _1C
+	int mFrom;       // _00 light param indices to blend between
+	int mTo;         // _04
+	Vec3f mDir;      // _08
+	u32 mColor;      // _14
+	u32 mAmbient;    // _18
+	GXLightObj mObj; // _1C
 };
 
 static LightSlot* sLightSlots;
@@ -37,12 +37,12 @@ void lightSetCreate()
 	LightSlot* slot;
 	sLightSlots = new LightSlot[4];
 	for (int i = 0; i < 4; i++) {
-		slot = &sLightSlots[i];
-		slot->mFrom     = 0;
-		slot->mTo       = 0;
-		slot->mDir.x    = 0.5f;
-		slot->mDir.y    = -1.0f;
-		slot->mDir.z    = 0.0f;
+		slot         = &sLightSlots[i];
+		slot->mFrom  = 0;
+		slot->mTo    = 0;
+		slot->mDir.x = 0.5f;
+		slot->mDir.y = -1.0f;
+		slot->mDir.z = 0.0f;
 		if (njUnitVector(&slot->mDir) < gUnitVectorMin) {
 			slot->mDir = gVecZero;
 		}

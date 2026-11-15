@@ -29,14 +29,14 @@ public:
 	void build();
 	void grow();
 
-	int mAct;        // _30 0 growing 1 finished
-	int mPower;      // _34
-	u32 mFrame;      // _38
-	Vec3f mPos;      // _3C
-	f32 mRadius;     // _48
-	f32 mGrow;       // _4C
-	CharaColli* mShape;    // _50
-	DrawTask* mDraw; // _54
+	int mAct;           // _30 0 growing 1 finished
+	int mPower;         // _34
+	u32 mFrame;         // _38
+	Vec3f mPos;         // _3C
+	f32 mRadius;        // _48
+	f32 mGrow;          // _4C
+	CharaColli* mShape; // _50
+	DrawTask* mDraw;    // _54
 };
 
 extern "C" {

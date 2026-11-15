@@ -44,28 +44,28 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	NJS_OBJECT* mModelData;    // _64 geobj model 3
-	NJS_TEXLIST* mTexList;      // _68 geobj texture 3
-	void* mColliData;    // _6C
-	DrawTask* mDrawTask; // _70
-	MeshObject* mColli;        // _74
-	ObjModel mModel;     // _78
-	f32 mMatrix[12];     // _98
-	u16 mLevel;          // _C8 0 home 1 raised once 2 raised twice
-	f32 mHeight;         // _CC added to mPos.y 0 100 or 200
-	u16 _D0;             // _D0
-	u16 mSwitch1;        // _D2 set int 0
-	u16 mSwitch2;        // _D4 set int 1
-	u16 mEventId;        // _D6 set int 2
+	NJS_OBJECT* mModelData; // _64 geobj model 3
+	NJS_TEXLIST* mTexList;  // _68 geobj texture 3
+	void* mColliData;       // _6C
+	DrawTask* mDrawTask;    // _70
+	MeshObject* mColli;     // _74
+	ObjModel mModel;        // _78
+	f32 mMatrix[12];        // _98
+	u16 mLevel;             // _C8 0 home 1 raised once 2 raised twice
+	f32 mHeight;            // _CC added to mPos.y 0 100 or 200
+	u16 _D0;                // _D0
+	u16 mSwitch1;           // _D2 set int 0
+	u16 mSwitch2;           // _D4 set int 1
+	u16 mEventId;           // _D6 set int 2
 	EventCamRef mCam;       // _D8
-	int mRequest;        // _E0 the level message 0xC7 asked for
-	f32 mTarget;         // _E4 the height stateRise climbs to
-	TCamPath* mEvent;    // _E8 from eventCamArcPlay
-	u16 mTimer;          // _EC counts down from 180 before the rise
-	SoundHandle mSound;  // _F0 0x25F while the sand is moving
-	Vec3f mCenter;       // _11C
-	f32 mRadius;         // _128
-	int mAct;            // _12C 0 waiting 1 in the event 2 rising
+	int mRequest;           // _E0 the level message 0xC7 asked for
+	f32 mTarget;            // _E4 the height stateRise climbs to
+	TCamPath* mEvent;       // _E8 from eventCamArcPlay
+	u16 mTimer;             // _EC counts down from 180 before the rise
+	SoundHandle mSound;     // _F0 0x25F while the sand is moving
+	Vec3f mCenter;          // _11C
+	f32 mRadius;            // _128
+	int mAct;               // _12C 0 waiting 1 in the event 2 rising
 };
 
 extern "C" {

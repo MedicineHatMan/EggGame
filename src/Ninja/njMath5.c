@@ -31,6 +31,7 @@ void njMultiMatrix(f32* m, f32* n)
 }
 
 // 0x80210174
+// clang-format off
 asm f32 njUnitVector(NJS_VECTOR* v)
 {
 	nofralloc
@@ -49,13 +50,13 @@ asm f32 njUnitVector(NJS_VECTOR* v)
 	stfs f4, 0x8(r3)
 	fres f1, f0
 	blr
-}
+} // clang-format on
 
 // 0x802101B0
 // Fails if the stack is full
 s32 njPushMatrix(f32* m)
 {
-	f32* cur = _gj_matrix_;
+	f32* cur  = _gj_matrix_;
 	f32* next = cur + 12;
 	if (next > gjMatrixStackEnd) {
 		return 0;
@@ -66,6 +67,7 @@ s32 njPushMatrix(f32* m)
 }
 
 // 0x80210218
+// clang-format off
 asm void njCalcPointEx(const NJS_POINT3* src, NJS_POINT3* dst)
 {
 	nofralloc
@@ -94,6 +96,7 @@ asm void njCalcPointEx(const NJS_POINT3* src, NJS_POINT3* dst)
 	psq_st f10, 0x8(r4), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x80210278
 void njQuaternionEx(const NJS_QUATERNION* q)
@@ -122,6 +125,7 @@ void njQuaternionEx2(f32 w, const NJS_VECTOR* v)
 }
 
 // 0x80210324
+// clang-format off
 asm void njCalcVectorEx(const NJS_VECTOR* src, NJS_VECTOR* dst)
 {
 	nofralloc
@@ -152,7 +156,9 @@ asm void njCalcVectorEx(const NJS_VECTOR* src, NJS_VECTOR* dst)
 	psq_st f10, 0x8(r4), 1, 0
 	blr
 }
+// clang-format on
 // 0x8021038C
+// clang-format off
 asm void njRotateEx(const s32* ang, s32 order)
 {
 	nofralloc
@@ -240,7 +246,9 @@ L_802104A4:
 	psq_st f5, 0x28(r5), 1, 0
 	blr
 }
+// clang-format on
 // 0x802104C0
+// clang-format off
 asm s32 njPushMatrixEx(void)
 {
 	nofralloc
@@ -264,6 +272,7 @@ asm s32 njPushMatrixEx(void)
 	psq_stu f5, 0x8(r5), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x8021050C
 s32 njPopMatrixEx(void)
@@ -277,6 +286,7 @@ s32 njPopMatrixEx(void)
 }
 
 // 0x80210534
+// clang-format off
 asm void njScaleEx(const NJS_VECTOR* v)
 {
 	nofralloc
@@ -305,7 +315,9 @@ asm void njScaleEx(const NJS_VECTOR* v)
 	psq_st f5, 0x28(r5), 1, 0
 	blr
 }
+// clang-format on
 // 0x80210594
+// clang-format off
 asm void njTranslateEx(const NJS_VECTOR* v)
 {
 	nofralloc
@@ -334,3 +346,4 @@ asm void njTranslateEx(const NJS_VECTOR* v)
 	psq_st f13, 0x2c(r5), 1, 0
 	blr
 }
+// clang-format on

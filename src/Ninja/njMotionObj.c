@@ -9,9 +9,9 @@ void gjMotionSetListCount(s32 nbList)
 {
 	s32 size = nbList * 4;
 	u8* base;
-	gjCurMotionState->size = size;
+	gjCurMotionState->size  = size;
 	gjCurMotionState->total = size + size;
-	base = gjCurMotionState->base;
+	base                    = gjCurMotionState->base;
 	gjCurMotionState->list0 = (void**)base;
 	gjCurMotionState->list1 = (u32*)(base + gjCurMotionState->size);
 	gjCurMotionState->index = 0;
@@ -22,7 +22,7 @@ void njSetNextMotionNodeEx(void)
 {
 	u8* base = gjCurMotionState->base;
 	base += gjCurMotionState->total;
-	gjCurMotionState->base = base;
+	gjCurMotionState->base  = base;
 	gjCurMotionState->list0 = (void**)base;
 	gjCurMotionState->list1 = (u32*)(base + gjCurMotionState->size);
 	gjCurMotionState->index = 0;
@@ -35,16 +35,16 @@ void gjMotionBegin(NJS_MOTION* motion, f32 frame)
 	if (motion == NULL) {
 		motion = (NJS_MOTION*)&gjNullMotion;
 	}
-	fn = (motion->inp_fn & 0xC0) >> 6;
-	gjCurMotionState->base = motion->mdata;
+	fn                        = (motion->inp_fn & 0xC0) >> 6;
+	gjCurMotionState->base    = motion->mdata;
 	gjCurMotionState->nbFrame = motion->nbFrame;
-	gjCurMotionState->type = motion->type;
-	gjCurMotionState->frame = frame;
-	gjCurMotionState->index = 0;
+	gjCurMotionState->type    = motion->type;
+	gjCurMotionState->frame   = frame;
+	gjCurMotionState->index   = 0;
 	gjMotionSetListCount(motion->inp_fn & ~0xC0);
-	gjCurMotionState->readVec = gjVecKeyFuncs[fn];
-	gjCurMotionState->readAng = gjAngKeyFuncs[fn];
-	gjCurMotionState->_2C = gjPosKeyFuncs[0];
+	gjCurMotionState->readVec  = gjVecKeyFuncs[fn];
+	gjCurMotionState->readAng  = gjAngKeyFuncs[fn];
+	gjCurMotionState->_2C      = gjPosKeyFuncs[0];
 	gjCurMotionState->readAngS = gjAngSKeyFuncs[0];
 }
 
@@ -74,7 +74,7 @@ u32 gjKeyFind(const void* keys, u32 size, u32 hi, u32 frame)
 // The two keys around the frame and how far between them
 void gjKeyBracket(void* keys, u32 size, u32 n, f32 frame, void** outA, void** outB, f32* outT)
 {
-	u32 i = gjKeyFind(keys, size, n, frame);
+	u32 i  = gjKeyFind(keys, size, n, frame);
 	u32* a = (u32*)((u8*)keys + i * size);
 	u32* b;
 	s32 dt;
@@ -85,7 +85,7 @@ void gjKeyBracket(void* keys, u32 size, u32 n, f32 frame, void** outA, void** ou
 	}
 	*outA = a;
 	*outB = b;
-	dt = *b - *a;
+	dt    = *b - *a;
 	if (dt > 0) {
 		*outT = (frame - *a) / dt;
 	} else {
@@ -113,7 +113,7 @@ u32 gjKeyFindS(const void* keys, u32 size, u32 hi, u16 frame)
 // gjKeyBracket with a u16 frame
 void gjKeyBracketS(void* keys, u32 size, u32 n, f32 frame, void** outA, void** outB, f32* outT)
 {
-	u32 i = gjKeyFindS(keys, size, n, frame);
+	u32 i  = gjKeyFindS(keys, size, n, frame);
 	u16* a = (u16*)((u8*)keys + i * size);
 	u16* b;
 	s16 dt;
@@ -124,7 +124,7 @@ void gjKeyBracketS(void* keys, u32 size, u32 n, f32 frame, void** outA, void** o
 	}
 	*outA = a;
 	*outB = b;
-	dt = (s16)*b - (s16)*a;
+	dt    = (s16)*b - (s16)*a;
 	if (dt > 0) {
 		*outT = (frame - *a) / dt;
 	} else {
@@ -152,19 +152,19 @@ void gjMotionSetup(NJS_MOTION* motion, f32 frame)
 		gjCurMotionState->getPos = gjMotionGetVecNone;
 	}
 	if (type & 2) {
-		gjCurMotionState->getAng = gjMotionGetAng;
+		gjCurMotionState->getAng  = gjMotionGetAng;
 		gjCurMotionState->getQuat = NULL;
 		gjCurMotionState->getAngS = NULL;
 	} else if (type & 0x20) {
-		gjCurMotionState->getAng = NULL;
+		gjCurMotionState->getAng  = NULL;
 		gjCurMotionState->getQuat = NULL;
 		gjCurMotionState->getAngS = gjMotionGetAngS;
 	} else if (type & 0x2000) {
-		gjCurMotionState->getAng = NULL;
+		gjCurMotionState->getAng  = NULL;
 		gjCurMotionState->getQuat = gjMotionGetQuat;
 		gjCurMotionState->getAngS = NULL;
 	} else {
-		gjCurMotionState->getAng = gjMotionGetAngNone;
+		gjCurMotionState->getAng  = gjMotionGetAngNone;
 		gjCurMotionState->getQuat = NULL;
 		gjCurMotionState->getAngS = NULL;
 	}
@@ -203,25 +203,25 @@ void njMotionTransformEx(NJS_OBJECT* obj)
 // 0x8020E484
 // Returns the rotation order 0 XYZ 1 ZXY 2 a quaternion
 // The node's own rotation for a track the motion lacks a quaternion when the node has one else its angles
-#define gjObjAng(obj, out, quat, type)                       \
-	{                                                        \
-		u32 flags = (obj)->evalflags;                        \
-		if (flags & 0x400) {                                 \
-			(quat)->re    = (obj)->quatRe;                   \
-			(quat)->im[0] = *(f32*)&(obj)->ang[0];           \
-			(quat)->im[1] = *(f32*)&(obj)->ang[1];           \
-			(quat)->im[2] = *(f32*)&(obj)->ang[2];           \
-			type          = 2;                               \
-		} else {                                             \
-			(out)[0] = (obj)->ang[0];                        \
-			(out)[1] = (obj)->ang[1];                        \
-			(out)[2] = (obj)->ang[2];                        \
-			if (flags & 0x20) {                              \
-				type = 1;                                    \
-			} else {                                         \
-				type = 0;                                    \
-			}                                                \
-		}                                                    \
+#define gjObjAng(obj, out, quat, type)             \
+	{                                              \
+		u32 flags = (obj)->evalflags;              \
+		if (flags & 0x400) {                       \
+			(quat)->re    = (obj)->quatRe;         \
+			(quat)->im[0] = *(f32*)&(obj)->ang[0]; \
+			(quat)->im[1] = *(f32*)&(obj)->ang[1]; \
+			(quat)->im[2] = *(f32*)&(obj)->ang[2]; \
+			type          = 2;                     \
+		} else {                                   \
+			(out)[0] = (obj)->ang[0];              \
+			(out)[1] = (obj)->ang[1];              \
+			(out)[2] = (obj)->ang[2];              \
+			if (flags & 0x20) {                    \
+				type = 1;                          \
+			} else {                               \
+				type = 0;                          \
+			}                                      \
+		}                                          \
 	}
 
 s32 njGetMotionNodeData(NJS_OBJECT* obj, f32* pos, s32* ang, f32* scl, NJS_QUATERNION* quat)

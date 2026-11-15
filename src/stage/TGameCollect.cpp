@@ -12,14 +12,16 @@ extern "C" void* createGameCollect(TObject* parent)
 TGameCollect::TGameCollect(TObject* parent)
     : TGameContext(parent)
 {
-	_00   = (u32)gTGameCollectName;
-	mSize = 0x3C;
+	_00    = (u32)gTGameCollectName;
+	mSize  = 0x3C;
 	mLeft  = 8;
 	mTotal = 8;
 }
 
 // 0x80113B44
-TGameCollect::~TGameCollect() { }
+TGameCollect::~TGameCollect()
+{
+}
 
 // 0x80113BA0
 void TGameCollect::startState()
@@ -39,7 +41,10 @@ void TGameCollect::collected()
 }
 
 // 0x80113C58
-int TGameCollect::isDone() { return mLeft == 0; }
+int TGameCollect::isDone()
+{
+	return mLeft == 0;
+}
 
 #include "stage/TGame.h"
 #include "stage/TGameStateCollect.h"

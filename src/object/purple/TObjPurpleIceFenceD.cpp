@@ -75,7 +75,7 @@ void TObjPurpleIceFenceD::initFromDesc(SetDesc* desc)
 	mtxSetTransV(mMatrix, &mPos);
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 
-	mCenter  = *(Vec3f*)&mModelData->model->center;
+	mCenter = *(Vec3f*)&mModelData->model->center;
 	mtxMultVec(mMatrix, &mCenter, &mCenter);
 	mRadius = mModelData->model->r;
 	updateShape();
@@ -149,9 +149,9 @@ void TObjPurpleIceFenceD::setColliBox(void* colli, const Vec3f* center, f32 radi
 	high.z = size.z;
 	Vec3f low;
 	Vec3f t = colliNeg(size);
-	low.x = t.x;
-	low.y = t.y;
-	low.z = t.z;
+	low.x   = t.x;
+	low.y   = t.y;
+	low.z   = t.z;
 
 	gjPushUnitMatrix();
 	njTranslateEx(center);
@@ -207,11 +207,11 @@ void TObjPurpleIceFenceD::draw()
 	}
 	switch (mAct) {
 	case 0:
-			stateWait();
-			break;
+		stateWait();
+		break;
 	case 1:
-			stateDone();
-			break;
+		stateDone();
+		break;
 	}
 }
 

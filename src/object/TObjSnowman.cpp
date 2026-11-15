@@ -47,7 +47,6 @@ extern "C" {
 const char* gTObjSnowmanHeadName = "TObjSnowmanHead"; // what the object list prints
 
 // obj_snowman.arc and what it holds
-
 }
 
 enum SnowHeadState {
@@ -87,16 +86,16 @@ enum SnowmanState {
 /** The holder's side of the head */
 struct SnowHeadHandle : public EggHandleBase {
 	inline SnowHeadHandle() { }
-	virtual ~SnowHeadHandle() { }       // _08 0x800FA058
+	virtual ~SnowHeadHandle() { }              // _08 0x800FA058
 	virtual inline int onMessage(ObjMsg* msg); // _0C 0x800FBF68
 
 	u32 _10; // _10
 };
 
 struct SnowHoldMsg {
-	u16 mType;     // _00
+	u16 mType; // _00
 	u8 _02[2];
-	u16 mHolder;   // _04
+	u16 mHolder; // _04
 	u8 _06[2];
 	void* mHandle; // _08
 	Vec3f mPos;    // _0C
@@ -105,22 +104,22 @@ struct SnowHoldMsg {
 };
 
 struct SnowThrowMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mHolder; // _04
 	u8 _06[2];
-	Vec3f mVel;  // _08
+	Vec3f mVel; // _08
 };
 
 struct SnowJoinMsg {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mOther; // _04
 	u16 _06;    // _06
 };
 
 struct SnowPlaceMsg {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
 	Vec3f mPos; // _04
 	int mRotY;  // _10
@@ -181,23 +180,23 @@ public:
 	SnowFlags mHeadFlags; // _32
 	u16 mOwner;           // _34
 	u8 _36[4];
-	u16 mSnow;            // _3A up to HEAD_FULL_SIZE
-	u16 mTimer;           // _3C
-	u16 mGrowDelay;       // _3E
-	int mAttack;          // _40
-	CharaColli* mColli;         // _44
-	DrawTask* mDrawTask;      // _48
-	EggBody mBody;        // _4C
-	SetLinkMember mLink;  // _164
-	f32 mMatrix[12];      // _170
-	f32 mModelMatrix[12]; // _1A0
+	u16 mSnow;              // _3A up to HEAD_FULL_SIZE
+	u16 mTimer;             // _3C
+	u16 mGrowDelay;         // _3E
+	int mAttack;            // _40
+	CharaColli* mColli;     // _44
+	DrawTask* mDrawTask;    // _48
+	EggBody mBody;          // _4C
+	SetLinkMember mLink;    // _164
+	f32 mMatrix[12];        // _170
+	f32 mModelMatrix[12];   // _1A0
 	SnowHeadHandle mHandle; // _1D0
-	Vec3f mPos;           // _1E4
+	Vec3f mPos;             // _1E4
 	u8 _1F0[0x10];
 	// An EggRoll without the fields only TObjEgg uses the next member here starts 0x30 in
-	EggRoll mRoll;       // _200
-	ObjShadow mShadow;    // _230
-	Fx* mSparkle;       // _268
+	EggRoll mRoll;     // _200
+	ObjShadow mShadow; // _230
+	Fx* mSparkle;      // _268
 };
 
 typedef char TObjSnowmanHead_size_check[(sizeof(TObjSnowmanHead) == 0x26C) ? 1 : -1];
@@ -219,8 +218,8 @@ TObjSnowmanHead::TObjSnowmanHead(TObject* parent, const SetDesc* desc)
     , mAttack(0)
     , mSparkle(0)
 {
-	_00   = (u32)gTObjSnowmanHeadName;
-	mSize = 0x26C;
+	_00    = (u32)gTObjSnowmanHeadName;
+	mSize  = 0x26C;
 	mState = -1;
 	setObjId(this, desc->mObjId);
 
@@ -229,14 +228,14 @@ TObjSnowmanHead::TObjSnowmanHead(TObject* parent, const SetDesc* desc)
 	colliSetMasks((CharaColli*)mColli, 8, 0xF3, 0xF0, 0);
 	colliShapeSetSphere(colliGetShape((CharaColli*)mColli, 0));
 	colliGetShape((CharaColli*)mColli, 0)->mFlags = 0x42C;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
+	mDrawTask                                     = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
 
-	mBody.mBounce      = 0.0f;
+	mBody.mBounce   = 0.0f;
 	mBody.mFriction = 0.2f;
-	EggRoll* r     = roll();
-	r->mOwner      = (TObjEgg*)this;
-	r->mBody       = &mBody;
-	mHandle.mOwner = this;
+	EggRoll* r      = roll();
+	r->mOwner       = (TObjEgg*)this;
+	r->mBody        = &mBody;
+	mHandle.mOwner  = this;
 	setRadius(7.5f);
 	mLink.get()->attach((SetDesc*)desc);
 	initFromDesc((SetDesc*)desc);
@@ -461,8 +460,8 @@ void TObjSnowmanHead::setRadius(f32 radius)
 		((TMobileObject*)mHandle.mHolder)->mBody.mRadius = radius;
 	}
 	colliGetShape(mColli, 0)->mSizeX = radius;
-	mShadow._30 = 2.0f * radius;
-	mShadow._34 = 2.0f * radius;
+	mShadow._30                      = 2.0f * radius;
+	mShadow._34                      = 2.0f * radius;
 }
 
 // 0x800FA96C
@@ -529,13 +528,13 @@ int TObjSnowmanHead::isHolder(SnowThrowMsg* msg)
 int TObjSnowmanHead::attachTo(SnowHoldMsg* msg)
 {
 	if (mHandle.mHolder == 0) {
-		msg->mHandle = &mHandle;
-		msg->mPos    = mBody.mPos;
-		msg->mRot    = mBody.mRot;
-		msg->mRadius = mBody.mRadius;
+		msg->mHandle    = &mHandle;
+		msg->mPos       = mBody.mPos;
+		msg->mRot       = mBody.mRot;
+		msg->mRadius    = mBody.mRadius;
 		mHandle.mDamage = 10;
-		mOwner       = msg->mHolder;
-		mHolderId    = msg->mHolder;
+		mOwner          = msg->mHolder;
+		mHolderId       = msg->mHolder;
 		return 1;
 	}
 	return 0;
@@ -600,8 +599,8 @@ void TObjSnowmanHead::stateHeld(int phase)
 		TMobileObject* holder = (TMobileObject*)mHandle.mHolder;
 		Vec3f pos;
 		EggRot rot;
-		pos = holder->mBody.mPos;
-		rot = holder->mBody.mRot;
+		pos        = holder->mBody.mPos;
+		rot        = holder->mBody.mRot;
 		mBody.mPos = pos;
 		mBody.mRot = rot;
 		updateMatrices();
@@ -834,10 +833,10 @@ extern "C" void initSnowman()
 {
 	loadArc("obj_snowman.arc", &sSnowmanArc);
 	if (sSnowmanArc != 0) {
-		sSnowmanModels = (NJS_OBJECT**)findArcExport(sSnowmanArc, "models");
+		sSnowmanModels   = (NJS_OBJECT**)findArcExport(sSnowmanArc, "models");
 		sSnowmanTexLists = (NJS_TEXLIST**)findArcExport(sSnowmanArc, "texlists");
-		sSnowmanCameras = (void**)findArcExport(sSnowmanArc, "cameras");
-		void** textures = (void**)findArcExport(sSnowmanArc, "textures");
+		sSnowmanCameras  = (void**)findArcExport(sSnowmanArc, "cameras");
+		void** textures  = (void**)findArcExport(sSnowmanArc, "textures");
 		if (textures != 0) {
 			numberTextures(sSnowmanTexLists[0]);
 			bindGvmTextures((u8*)textures[0], sSnowmanTexLists[0]);
@@ -852,10 +851,10 @@ extern "C" void termSnowman()
 		releaseTextures(sSnowmanTexLists[0]);
 	}
 	releaseResource(sSnowmanArc);
-	sSnowmanModels = 0;
+	sSnowmanModels   = 0;
 	sSnowmanTexLists = 0;
-	sSnowmanCameras = 0;
-	sSnowmanArc = 0;
+	sSnowmanCameras  = 0;
+	sSnowmanArc      = 0;
 }
 
 const char* gTObjSnowmanName = "TObjSnowman";
@@ -864,8 +863,8 @@ const char* gTObjSnowmanName = "TObjSnowman";
 TObjSnowman::TObjSnowman(TObject* parent, const SetDesc* desc)
     : TObjAction(parent)
 {
-	_00   = (u32)gTObjSnowmanName;
-	mSize = 0x64;
+	_00     = (u32)gTObjSnowmanName;
+	mSize   = 0x64;
 	mState  = -1;
 	mHolder = 0xFFFF;
 	setObjId(this, desc->mObjId);
@@ -879,7 +878,7 @@ TObjSnowman::TObjSnowman(TObject* parent, const SetDesc* desc)
 	colliShapeSetSphere(colliGetShape((CharaColli*)mColli, 1));
 	colliGetShape((CharaColli*)mColli, 1)->mFlags = 0x10;
 	colliGetShape((CharaColli*)mColli, 1)->mSizeX = 10.0f;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
+	mDrawTask                                     = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
 
 	mLink.get()->attach((SetDesc*)desc);
 	initFromDesc((SetDesc*)desc);
@@ -1150,7 +1149,10 @@ SnowFlags::SnowFlags()
 }
 
 // Not in the DOL the linker stripped it
-static int snowHandleMessage(SnowHeadHandle* handle, ObjMsg* msg) { return handle->SnowHeadHandle::onMessage(msg); }
+static int snowHandleMessage(SnowHeadHandle* handle, ObjMsg* msg)
+{
+	return handle->SnowHeadHandle::onMessage(msg);
+}
 
 // 0x800FBF68
 int SnowHeadHandle::onMessage(ObjMsg* msg)

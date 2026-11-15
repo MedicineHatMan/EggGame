@@ -17,10 +17,14 @@ typedef char TObjTitleRainbow_size_check[(sizeof(TObjTitleRainbow) == 0x8C) ? 1 
 
 // 0x801B42F4
 // The set init pair both empty
-extern "C" void initTObjTitleRainbow() { }
+extern "C" void initTObjTitleRainbow()
+{
+}
 
 // 0x801B42F8
-extern "C" void termTObjTitleRainbow() { }
+extern "C" void termTObjTitleRainbow()
+{
+}
 
 // 0x801B42FC
 extern "C" TObject* createTObjTitleRainbow(TObject* parent, SetDesc* desc)
@@ -34,10 +38,10 @@ const char* gTObjTitleRainbowName = "TObjTitleRainbow";
 TObjTitleRainbow::TObjTitleRainbow(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00   = (u32)gTObjTitleRainbowName;
-	mSize = 0x8C;
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x2A, 0);
-	NJS_OBJECT** models   = getTitleObjModels();
+	_00                 = (u32)gTObjTitleRainbowName;
+	mSize               = 0x8C;
+	mDraw               = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x2A, 0);
+	NJS_OBJECT** models = getTitleObjModels();
 	mModel.setModel(models[9]);
 	void** textures = (void**)getTitleObjTexLists();
 	mModel.mTexList = (NJS_TEXLIST*)textures[0];
@@ -57,7 +61,7 @@ void TObjTitleRainbow::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
 	f32 value = desc->getFloat(0) < -1.0f ? -1.0f : (desc->getFloat(0) > 10.0f ? 10.0f : desc->getFloat(0));
-	mScale = 1.0f + value;
+	mScale    = 1.0f + value;
 }
 
 // 0x801B4528
@@ -96,7 +100,7 @@ void TObjTitleRainbow::render()
 	}
 	state.mFlags |= DRAWSTATE_AMBIENT;
 	state.mAmbient = (alpha & 0xFF) | 0xFFFFFF00;
-	mModel.mState = &state;
+	mModel.mState  = &state;
 	njTranslateEx(&mPos);
 	gjRotateZ(mRot.z);
 	gjRotateX(mRot.x);

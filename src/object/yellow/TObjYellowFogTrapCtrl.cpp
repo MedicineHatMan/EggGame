@@ -42,8 +42,8 @@ const char* gTObjYellowFogTrapCtrlName = "TObjYellowFogTrapCtrl";
 TObjYellowFogTrapCtrl::TObjYellowFogTrapCtrl(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00   = (u32)gTObjYellowFogTrapCtrlName;
-	mSize = 0xBC;
+	_00       = (u32)gTObjYellowFogTrapCtrlName;
+	mSize     = 0xBC;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
 	createShape();
 	initFromDesc(desc);

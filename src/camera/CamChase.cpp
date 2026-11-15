@@ -16,15 +16,14 @@ struct TObjAction;
 
 /** Where the lock-on target is from camLockGetTarget */
 struct CamLockTarget {
-	u16 mId;    // _00
+	u16 mId; // _00
 	u8 _02[2];
 	Vec3f mPos; // _04
 };
 
 extern "C" {
 
-void camChasePush(CamChase* chase, MeshList* list, const Vec3f* dir, u32 hiBit, u32 loBit, f32 range, f32 cur,
-                  f32 min, f32 max);
+void camChasePush(CamChase* chase, MeshList* list, const Vec3f* dir, u32 hiBit, u32 loBit, f32 range, f32 cur, f32 min, f32 max);
 
 static inline void flatUnit(Vec3f* v)
 {
@@ -230,11 +229,11 @@ void camChaseReset(CamChase* chase, int rot)
 	chase->mHits  = 0;
 	chase->mFlags = 0;
 	camChaseClearFollow(chase);
-	chase->mSub      = 0;
-	chase->mTimer    = 0;
-	chase->mSubFlag  = 0;
-	chase->mSubRot   = 0;
-	chase->mSubStep  = 0.0f;
+	chase->mSub     = 0;
+	chase->mTimer   = 0;
+	chase->mSubFlag = 0;
+	chase->mSubRot  = 0;
+	chase->mSubStep = 0.0f;
 	camHeadGetPos(chase->mHead, &at);
 	camChaseEyeAt(chase, &at, &chase->mPos);
 }
@@ -253,9 +252,9 @@ void camChaseSnap(CamChase* chase, int rot)
 	if (camLineHit(hits.mHits, &at, &eye, 0x20) != 0) {
 		Vec3f pos;
 		Vec3f normal;
-		pos    = hits.mHits[0].mPos;
-		normal = hits.mHits[0].mNormal;
-		normal.y     = 0.0f;
+		pos      = hits.mHits[0].mPos;
+		normal   = hits.mHits[0].mNormal;
+		normal.y = 0.0f;
 		gjMulAddVector(10.0f, &chase->mPos, &pos, &normal);
 	} else {
 		chase->mPos = eye;
@@ -338,13 +337,12 @@ void camChaseEyeAt(CamChase* chase, const Vec3f* at, Vec3f* out)
 
 // 0x800961F4
 // Moves the eye along dir to keep it between the walls either way
-void camChasePush(CamChase* chase, MeshList* list, const Vec3f* dir, u32 hiBit, u32 loBit, f32 range, f32 cur,
-                  f32 min, f32 max)
+void camChasePush(CamChase* chase, MeshList* list, const Vec3f* dir, u32 hiBit, u32 loBit, f32 range, f32 cur, f32 min, f32 max)
 {
 	u32 flags;
-	f32 hi    = camProbeAlong(list, &chase->mPos, dir, -2.0f, range);
-	f32 lo    = -camProbeAlong(list, &chase->mPos, dir, 2.0f, -range);
-	cur = camFitRange(cur, hi, lo, min, max, &flags);
+	f32 hi = camProbeAlong(list, &chase->mPos, dir, -2.0f, range);
+	f32 lo = -camProbeAlong(list, &chase->mPos, dir, 2.0f, -range);
+	cur    = camFitRange(cur, hi, lo, min, max, &flags);
 	if (flags & 1) {
 		chase->mHits |= hiBit;
 	} else if (flags & 2) {
@@ -359,7 +357,7 @@ void camChasePushUp(CamChase* chase, f32 range, MeshList* list, const Vec3f* goa
 	f32 gy = goal->y;
 	Vec3f up;
 	up.z = up.x = up.y = 0.0f;
-	up.y = 1.0f;
+	up.y               = 1.0f;
 	gy -= chase->mPos.y;
 	camChasePush(chase, list, &up, 1, 2, range, gy, 5.0f, -5.0f);
 }
@@ -374,7 +372,7 @@ void camChasePushSide(CamChase* chase, f32 range, MeshList* list, const Vec3f* g
 	move = *goal;
 	njSubVector(&move, &chase->mPos);
 	move.y = 0.0f;
-	ahead = *head;
+	ahead  = *head;
 	njSubVector(&ahead, &chase->mPos);
 	ahead.y = 0.0f;
 	flatUnit(&ahead);
@@ -406,7 +404,7 @@ void camChaseMove(CamChase* chase)
 	camHeadGetPos(chase->mHead, &at);
 	camChaseEyeAt(chase, &at, &goal);
 	chase->mRise = goal.y;
-	rate   = chase->mFollowRate;
+	rate         = chase->mFollowRate;
 	goal.x *= rate;
 	goal.z *= rate;
 	goal.x = chase->mPos.x * (1.0f - rate) + goal.x;
@@ -421,7 +419,7 @@ void camChaseMove(CamChase* chase)
 		rate = chase->mRiseRate;
 	}
 	goal.y *= rate;
-	rate = 1.0f - rate;
+	rate   = 1.0f - rate;
 	goal.y = chase->mPos.y * rate + goal.y;
 
 	if ((chase->mFlags & 3) == 0) {
@@ -743,17 +741,17 @@ void camChaseClearFollow(CamChase* chase)
 // Watches how far the eye has been pushed off its place
 int camChaseCheckFollow(CamChase* chase)
 {
-	f32 gap = -(chase->mGap - chase->mOffset[1]);
+	f32 gap     = -(chase->mGap - chase->mOffset[1]);
 	f64 absRise = fabs(chase->mRise);
-	f32 rise = absRise;
+	f32 rise    = absRise;
 	if (chase->mWallFrames > 0 && (gap > 50.0f || rise >= 50.0f)) {
 		chase->mFollow = 3;
 		if ((chase->mFlags & 2) == 0) {
-			chase->mRot         = camHeadGetRot(chase->mHead);
-			chase->mWall        = 1.0f;
-			chase->mStick.mPos  = -0.5f;
-			chase->mStick.mVel  = 0.0f;
-			chase->mSide        = -0.5f;
+			chase->mRot        = camHeadGetRot(chase->mHead);
+			chase->mWall       = 1.0f;
+			chase->mStick.mPos = -0.5f;
+			chase->mStick.mVel = 0.0f;
+			chase->mSide       = -0.5f;
 		}
 		chase->mFlags |= 2;
 	}
@@ -880,7 +878,7 @@ int camChaseFindView(CamChase* chase, f32 step, int first, int second)
 	rot       = (int)(10430.38043493439 * (f32)atan2(gap.x, gap.z)) + 0x8000;
 	offset[0] = chase->mOffset[0];
 	offset[1] = chase->mOffset[1];
-	mode = first;
+	mode      = first;
 	for (int i = 0; i < 2; i++) {
 		if (mode == 1) {
 			if (camChaseTryTurn(chase, -step, offset, rot, &top) != 0) {
@@ -1129,37 +1127,37 @@ void camChaseStateFollow(CamChase* chase, int event)
 			close = 1.0f;
 		} else {
 			chase->mWallCount = 100;
-			close              = 0.0f;
+			close             = 0.0f;
 		}
-			if (chase->mSub == 2 || chase->mSub == 3 || chase->mSub == 4) {
-				camChaseCheckFollow(chase);
-				camChaseSteerGround(chase, 0.0f);
-				camChaseSteerStick(chase, 0.0f);
-				if (chase->mSub == 2) {
-					camChaseSteerSide(chase, 1.0f);
-				} else if (chase->mSub == 3) {
-					camChaseSteerSide(chase, -1.0f);
-				} else if (chase->mSub == 4) {
-					camChaseDampSide(chase);
-				}
-				camChaseBlendWall(chase, close);
-			} else {
-				camChaseCheckFollow(chase);
-				camChaseLookGround(chase);
-				camChaseReadStick(chase);
-				camChaseBlendWall(chase, close);
-				camChaseSteerSide(chase, 0.0f);
+		if (chase->mSub == 2 || chase->mSub == 3 || chase->mSub == 4) {
+			camChaseCheckFollow(chase);
+			camChaseSteerGround(chase, 0.0f);
+			camChaseSteerStick(chase, 0.0f);
+			if (chase->mSub == 2) {
+				camChaseSteerSide(chase, 1.0f);
+			} else if (chase->mSub == 3) {
+				camChaseSteerSide(chase, -1.0f);
+			} else if (chase->mSub == 4) {
+				camChaseDampSide(chase);
 			}
-			camChaseTiltGround(chase);
-			camChaseTiltStick(chase);
-			if (close >= 1.0f) {
-				camChasePullIn(chase, 7.0f);
-			} else {
-				camChasePullIn(chase, 20.0f);
-			}
-			camChaseTiltSide(chase);
-			camChaseMove(chase);
-			camChaseCheckSight(chase);
+			camChaseBlendWall(chase, close);
+		} else {
+			camChaseCheckFollow(chase);
+			camChaseLookGround(chase);
+			camChaseReadStick(chase);
+			camChaseBlendWall(chase, close);
+			camChaseSteerSide(chase, 0.0f);
+		}
+		camChaseTiltGround(chase);
+		camChaseTiltStick(chase);
+		if (close >= 1.0f) {
+			camChasePullIn(chase, 7.0f);
+		} else {
+			camChasePullIn(chase, 20.0f);
+		}
+		camChaseTiltSide(chase);
+		camChaseMove(chase);
+		camChaseCheckSight(chase);
 		break;
 	}
 	case CHASE_EXIT:
@@ -1348,15 +1346,15 @@ void camChaseStateLock(CamChase* chase, int event)
 			chase->mTarget   = target.mPos;
 			chase->mToTarget = chase->mTarget;
 			njSubVector(&chase->mToTarget, &at);
-			int rot   = 10430.38043493439 * (f32)atan2(chase->mToTarget.x, chase->mToTarget.z);
+			int rot = 10430.38043493439 * (f32)atan2(chase->mToTarget.x, chase->mToTarget.z);
 			int angle;
 			f32 sign;
 			f32 dist  = -chase->mOffset[1];
-			sign = camAngleSign(chase->mRot, rot, &angle);
+			sign      = camAngleSign(chase->mRot, rot, &angle);
 			f32 limit = camAngleToMove(dist, angle);
 			f32 vel   = chase->mRotVel * sign;
-			f32 max = camMaxScaled(limit, 0.09f, 0.3f);
-			vel = camAccel(vel, 0.4f, 0.8f, max);
+			f32 max   = camMaxScaled(limit, 0.09f, 0.3f);
+			vel       = camAccel(vel, 0.4f, 0.8f, max);
 			if (limit < vel) {
 				chase->mRot = rot;
 				vel         = 0.0f;
@@ -1409,7 +1407,7 @@ void camChaseStateIdle(CamChase* chase, int event)
 	case CHASE_UPDATE:
 		switch (chase->mSub) {
 		case 0:
-				camHeadGetStill(chase->mHead);
+			camHeadGetStill(chase->mHead);
 			break;
 		}
 		break;

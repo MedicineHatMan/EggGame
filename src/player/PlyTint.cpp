@@ -3,9 +3,9 @@
 
 #include "player/PlyTint.h"
 
-u32 sTintPulse  = ColorValue(0xFFFFFFFF).mValue; // 0x802C4F50
-u32 sTintFadeA  = ColorValue(0x00FF00FF).mValue; // 0x802C4F54
-u32 sTintFadeB  = ColorValue(0xFF0080FF).mValue; // 0x802C4F58
+u32 sTintPulse = ColorValue(0xFFFFFFFF).mValue; // 0x802C4F50
+u32 sTintFadeA = ColorValue(0x00FF00FF).mValue; // 0x802C4F54
+u32 sTintFadeB = ColorValue(0xFF0080FF).mValue; // 0x802C4F58
 
 // 0x80066BC0
 extern "C" void plyTintStop(PlyTint* tint)

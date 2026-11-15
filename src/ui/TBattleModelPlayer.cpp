@@ -16,7 +16,7 @@ struct GjActor;
 
 extern "C" {
 TArc* sBattleModelPlayerArc; // battlemodel_player.arc
-void* sBattlePlayerBlock; // block at arc+0x4C
+void* sBattlePlayerBlock;    // block at arc+0x4C
 }
 
 struct PlayerBlock {
@@ -35,7 +35,7 @@ extern "C" void loadBattleModelPlayer()
 {
 	loadArc("battlemodel_player.arc", &sBattleModelPlayerArc);
 	PlayerBlock* block = (PlayerBlock*)sBattleModelPlayerArc->mData;
-	sBattlePlayerBlock       = block;
+	sBattlePlayerBlock = block;
 	bindGvmTextures((u8*)*block->mGvm, (NJS_TEXLIST*)*block->mTex);
 }
 
@@ -56,11 +56,13 @@ extern "C" TBattleModelPlayer* createTBattleModelPlayer(TObject* parent, const V
 
 // 0x801AE718
 TBattleModelPlayer::TBattleModelPlayer(TObject* parent, const Vec3f* pos, int* angle, int kind)
-    : TObject(parent), mPos(*pos), mAngle(*(BattleAngle*)angle)
+    : TObject(parent)
+    , mPos(*pos)
+    , mAngle(*(BattleAngle*)angle)
 {
-	_00       = (u32)gTBattleModelPlayerName;
-	mSize     = 0xB8;
-	mDraw     = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	_00   = (u32)gTBattleModelPlayerName;
+	mSize = 0xB8;
+	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	setup(kind);
 }
 
@@ -78,10 +80,10 @@ TBattleModelPlayer::~TBattleModelPlayer()
 // Each kind owns three MotionEntry rows 0x54 bytes
 void TBattleModelPlayer::setup(int kind)
 {
-	s8 k = kind;
-	mDrop              = 0.0f;
-	void* model        = ((PlayerBlock*)sBattlePlayerBlock)->mModels[k];
-	mActor             = (GjActor*)(memAlloc(gjActorSize((NJS_OBJECT*)model)));
+	s8 k        = kind;
+	mDrop       = 0.0f;
+	void* model = ((PlayerBlock*)sBattlePlayerBlock)->mModels[k];
+	mActor      = (GjActor*)(memAlloc(gjActorSize((NJS_OBJECT*)model)));
 	gjCreateActor((NJS_OBJECT*)model, (u8*)mActor);
 	mMotion.init(&sBattleModelPlayerMotions[k * 3], ((PlayerBlock*)sBattlePlayerBlock)->mMotions);
 	mMotionId = 0;
@@ -112,7 +114,9 @@ void TBattleModelPlayer::draw()
 }
 
 // 0x801AE990
-void TBattleModelPlayer::vfn_10() { }
+void TBattleModelPlayer::vfn_10()
+{
+}
 
 // 0x801AE994
 void TBattleModelPlayer::render()
@@ -146,7 +150,7 @@ void TBattleModelPlayer::stepMotion()
 		if (mMotion.isBlending() != 0) {
 			gjMotionLinkActor(mActor, (void*)mMotion.getBlend(), mMotion.mBlendTime);
 		} else {
-			int cur = mMotion.mCurrent;
+			int cur   = mMotion.mCurrent;
 			f32 frame = mMotion.mFrame;
 			gjMotionActor(frame, mActor, mMotion.getMotion(cur));
 		}

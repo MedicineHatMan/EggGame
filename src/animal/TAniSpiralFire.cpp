@@ -26,14 +26,10 @@ const ColliShape sSpiralFireShape = { 0 };
 
 // One ring x y z u v and colour
 const SpiralVtx sSpiralFireRing[8] = {
-	{ 1.0f, 0.0f, 0.0f, 0.01f, 0.01f, 0xFFFFFFFF },
-	{ 0.7071f, 0.0f, 0.7071f, 0.24f, 0.01f, 0xFFFFFFFF },
-	{ 0.0f, 1.0f, 1.0f, 0.01f, 0.01f, 0xFFFFFFFF },
-	{ -0.7071f, 1.0f, 0.7071f, 0.24f, 0.01f, 0xFFFFFFFF },
-	{ -1.0f, 1.0f, 0.0f, 0.01f, 0.01f, 0xFFFFFFFF },
-	{ -0.7071f, 1.0f, -0.7071f, 0.24f, 0.01f, 0xFFFFFFFF },
-	{ 0.0f, 1.0f, -1.0f, 0.01f, 0.01f, 0xFFFFFFFF },
-	{ 0.7071f, 1.0f, -0.7071f, 0.24f, 0.01f, 0xFFFFFFFF },
+	{ 1.0f, 0.0f, 0.0f, 0.01f, 0.01f, 0xFFFFFFFF },  { 0.7071f, 0.0f, 0.7071f, 0.24f, 0.01f, 0xFFFFFFFF },
+	{ 0.0f, 1.0f, 1.0f, 0.01f, 0.01f, 0xFFFFFFFF },  { -0.7071f, 1.0f, 0.7071f, 0.24f, 0.01f, 0xFFFFFFFF },
+	{ -1.0f, 1.0f, 0.0f, 0.01f, 0.01f, 0xFFFFFFFF }, { -0.7071f, 1.0f, -0.7071f, 0.24f, 0.01f, 0xFFFFFFFF },
+	{ 0.0f, 1.0f, -1.0f, 0.01f, 0.01f, 0xFFFFFFFF }, { 0.7071f, 1.0f, -0.7071f, 0.24f, 0.01f, 0xFFFFFFFF },
 };
 
 ObjClassName gTAniSpiralFireName = { "TAniSpiralFire", 0 };
@@ -89,7 +85,7 @@ void TAniSpiralFire::draw()
 	mInner = 0.2f * mGrowth + mInner;
 	mMid   = 0.5f * (mRadius + mInner);
 
-	f32 r = mRadius;
+	f32 r    = mRadius;
 	f32 size = r < 0.0f ? 0.0f : (r > 80.0f ? 80.0f : r);
 	colliPlaceShapes(mColli, &mPos, &sSpiralFireShape);
 	colliGetShapes(mColli)->mSizeX = size;

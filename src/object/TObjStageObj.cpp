@@ -46,14 +46,14 @@ struct Fx;
 
 // StageModelInfo::mFlags
 enum StageModelFlags {
-	STAGEMODEL_BREAK_PIECES = 0x1,  // breaks into pieces
-	STAGEMODEL_LATE_DRAW    = 0x2,  // drawn in task list 0x22
-	STAGEMODEL_FALLS        = 0x4,  // falls until it finds the ground
-	STAGEMODEL_NO_PUSH      = 0x8,  // its shapes block nothing
-	STAGEMODEL_HAS_FX       = 0x10,
+	STAGEMODEL_BREAK_PIECES  = 0x1, // breaks into pieces
+	STAGEMODEL_LATE_DRAW     = 0x2, // drawn in task list 0x22
+	STAGEMODEL_FALLS         = 0x4, // falls until it finds the ground
+	STAGEMODEL_NO_PUSH       = 0x8, // its shapes block nothing
+	STAGEMODEL_HAS_FX        = 0x10,
 	STAGEMODEL_BREAK_SHATTER = 0x20, // breaks by shattering the model
-	STAGEMODEL_NO_FADE      = 0x40,
-	STAGEMODEL_SHAPE_FLAG   = 0x200,
+	STAGEMODEL_NO_FADE       = 0x40,
+	STAGEMODEL_SHAPE_FLAG    = 0x200,
 };
 
 // One loaded model list
@@ -61,14 +61,14 @@ enum StageModelFlags {
 struct StageContact {
 	StageContact* mNext; // _00
 	u8 _04[8];
-	Vec3f mPos;          // _0C
+	Vec3f mPos; // _0C
 };
 
 /** What a model's node looks like when walking it to find its bounds */
 struct StageModelNode {
 	u8 _00[4];
-	f32* mModel;           // _04 a sphere x y z r at _14-_20 of this
-	Vec3f mPos;            // _08
+	f32* mModel; // _04 a sphere x y z r at _14-_20 of this
+	Vec3f mPos;  // _08
 	u8 _14[0x18];
 	StageModelNode* mChild; // _2C
 	StageModelNode* mNext;  // _30
@@ -116,7 +116,7 @@ void TObjStageObj::initFromDesc(SetDesc* desc)
 	mIndex    = desc->getInt(0);
 
 	StageModelList* list = mBank == 0 ? gCommonModels : gStageModels;
-	int index = mIndex;
+	int index            = mIndex;
 	if (index < 0) {
 		index = 0;
 	} else {
@@ -252,8 +252,8 @@ void TObjStageObj::vfn_74()
 
 	if (mColliId != -1) {
 		ObjCommonData* pack = mBank != 0 ? gGeObjCommon : gStgObjCommon;
-		MeshData* data = (MeshData*)pack->mFix.mMeshes[mColliId];
-		mColli = (MeshObject*)meshColliCreate();
+		MeshData* data      = (MeshData*)pack->mFix.mMeshes[mColliId];
+		mColli              = (MeshObject*)meshColliCreate();
 		if ((mModelFlags & STAGEMODEL_FALLS) != 0) {
 			meshSetFlag2(mColli, 1);
 		}
@@ -373,12 +373,12 @@ int TObjStageObj::checkContacts()
 		return 0;
 	}
 	StageContact* contact = (StageContact*)mShape->mContacts;
-	int touched = 0;
+	int touched           = 0;
 	while (contact != 0) {
 		touched = 1;
 		if (mMotionId != -1 && mAct != STAGEOBJ_WOBBLE) {
 			mTrack.mRate = 1.0f;
-			mAct = STAGEOBJ_WOBBLE;
+			mAct         = STAGEOBJ_WOBBLE;
 		}
 		if (colliContactHasBit8((ColliContact*)contact) != 0
 		    && ((mModelFlags & STAGEMODEL_BREAK_PIECES) != 0 || (mModelFlags & STAGEMODEL_BREAK_SHATTER) != 0)
@@ -392,7 +392,7 @@ int TObjStageObj::checkContacts()
 				shatterBank(mScale, this, &hit, &mPieceSize, mInfo->mPieces);
 			} else {
 				ObjCommonData* pack = mBank != 0 ? gGeObjCommon : gStgObjCommon;
-				hit = contact->mPos;
+				hit                 = contact->mPos;
 				shatterModel(this, &hit, getRotY(), pack->mFix.mModels[mModelId], pack->mFix.mTexLists[0], mScale, 1.5f);
 			}
 			sePlay3D(sStageObjBreakSounds[mInfo->mSound], &mPos);
@@ -403,7 +403,10 @@ int TObjStageObj::checkContacts()
 			}
 			TObjAction* other = findObjById(colliContactOwner((ColliContact*)contact));
 			if (other != 0) {
-				struct { ObjMsg m; u8 pad[6]; } a;
+				struct {
+					ObjMsg m;
+					u8 pad[6];
+				} a;
 				a.m.mType = 0x2A;
 				other->sendToHandle(&a.m);
 			}
@@ -478,11 +481,11 @@ void TObjStageObj::updateBroken()
 void TObjStageObj::fall()
 {
 	mFrames += 1;
-	f32 step = -0.16333334f * mFrames;
+	f32 step     = -0.16333334f * mFrames;
 	f32 toGround = mGroundPos.y - mPos.y;
 	if (!(toGround < step)) {
 		mFrames = 0;
-		step = toGround;
+		step    = toGround;
 	}
 	mPos.y += step;
 }
@@ -535,19 +538,19 @@ void TObjStageObj::updateShapes()
 	}
 	ColliShape* shapes = colliGetShape(mShape, 0);
 	for (int i = 0; i < count; i++) {
-		StageShapeInfo* info  = mInfo->mShapes[i];
-		int type = info->mType;
-		f32 x = info->mSizeX;
-		f32 y = info->mSizeY;
-		f32 z = info->mSizeZ;
+		StageShapeInfo* info = mInfo->mShapes[i];
+		int type             = info->mType;
+		f32 x                = info->mSizeX;
+		f32 y                = info->mSizeY;
+		f32 z                = info->mSizeZ;
 		colliShapeInit(&shapes[i]);
 		switch (type) {
 		case 0:
 			shapes[i].mType  = 0;
 			shapes[i].mSizeX = shapes[i].mSizeY = shapes[i].mSizeZ = x * mScale;
-			shapes[i].mPos.x = mScale * mInfo->mShapes[i]->mPos.x;
-			shapes[i].mPos.y = mScale * mInfo->mShapes[i]->mPos.y;
-			shapes[i].mPos.z = mScale * mInfo->mShapes[i]->mPos.z;
+			shapes[i].mPos.x                                       = mScale * mInfo->mShapes[i]->mPos.x;
+			shapes[i].mPos.y                                       = mScale * mInfo->mShapes[i]->mPos.y;
+			shapes[i].mPos.z                                       = mScale * mInfo->mShapes[i]->mPos.z;
 			break;
 		case 1:
 			shapes[i].mType  = 1;
@@ -561,10 +564,10 @@ void TObjStageObj::updateShapes()
 		case 2:
 			shapes[i].mType  = 2;
 			shapes[i].mSizeX = shapes[i].mSizeZ = x * mScale;
-			shapes[i].mSizeY = y * mScale;
-			shapes[i].mPos.x = mScale * mInfo->mShapes[i]->mPos.x;
-			shapes[i].mPos.y = mScale * mInfo->mShapes[i]->mPos.y;
-			shapes[i].mPos.z = mScale * mInfo->mShapes[i]->mPos.z;
+			shapes[i].mSizeY                    = y * mScale;
+			shapes[i].mPos.x                    = mScale * mInfo->mShapes[i]->mPos.x;
+			shapes[i].mPos.y                    = mScale * mInfo->mShapes[i]->mPos.y;
+			shapes[i].mPos.z                    = mScale * mInfo->mShapes[i]->mPos.z;
 			break;
 		}
 		if (((mModelFlags & STAGEMODEL_NO_PUSH) == 0 && mColliId == -1) || mColliId != -1) {

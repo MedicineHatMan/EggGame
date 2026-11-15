@@ -78,7 +78,7 @@ TAeObjStageSelectE3::TAeObjStageSelectE3(TObject* parent, void* data, void* asse
 		return;
 	}
 	mLayer->mBanks = gAeStageSelectE3Banks;
-	mPreview     = createLayer(0x17, 0);
+	mPreview       = createLayer(0x17, 0);
 	if (mPreview == 0) {
 		return;
 	}
@@ -87,7 +87,9 @@ TAeObjStageSelectE3::TAeObjStageSelectE3(TObject* parent, void* data, void* asse
 }
 
 // 0x8010194C
-TAeObjStageSelectE3::~TAeObjStageSelectE3() { }
+TAeObjStageSelectE3::~TAeObjStageSelectE3()
+{
+}
 
 // 0x801019A8
 void TAeObjStageSelectE3::draw()
@@ -115,7 +117,7 @@ extern "C" void showStageSelectE3(int stage)
 	if (sAeStageSelectE3 != 0 && sAeStageSelectE3->mPreview != 0) {
 		static_cast<TAeClip&>(*sAeStageSelectE3->mPreview).reset(gE3PreviewLayers[stage], 1);
 		sAeStageSelectE3->mPreview->mBanks = gAeStageSelectE3Banks;
-		sAeStageSelectE3->mStage          = stage;
+		sAeStageSelectE3->mStage           = stage;
 	}
 }
 

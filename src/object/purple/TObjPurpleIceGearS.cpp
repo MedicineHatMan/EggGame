@@ -73,7 +73,7 @@ void TObjPurpleIceGearS::initFromDesc(SetDesc* desc)
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 	mtxRotateX(mSpin, mMatrix, mAngle);
 
-	mCentre        = ((GearNode*)mGeo)->mMesh->mCentre;
+	mCentre = ((GearNode*)mGeo)->mMesh->mCentre;
 	mtxMultVec(mSpin, &mCentre, &mCentre);
 	mRadius = ((GearNode*)mGeo)->mMesh->mRadius * mScale;
 	placeShape();
@@ -182,13 +182,13 @@ void TObjPurpleIceGearS::spin()
 void TObjPurpleIceGearS::shatter()
 {
 	ShatterList burst;
-	burst.mModels = getGeObjModels();
-	burst.mTexture = getGeObjTextures()[0];
-	burst.mFirst = 3;
+	burst.mModels     = getGeObjModels();
+	burst.mTexture    = getGeObjTextures()[0];
+	burst.mFirst      = 3;
 	burst.mModelCount = 1;
-	burst.mCount = 10;
-	burst.mScale = 1.0f;
-	burst.mSpeed = 0.5f;
+	burst.mCount      = 10;
+	burst.mScale      = 1.0f;
+	burst.mSpeed      = 0.5f;
 
 	Vec3f at = mCentre;
 	at.y -= mRadius;

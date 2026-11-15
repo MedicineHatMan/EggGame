@@ -141,8 +141,10 @@ struct SpeakQuad {
 	f32 _2C;      // _2C
 };
 
-static const SpeakQuad sSpeakQuadA = { { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.296875f, 0.28125f }, { 3.8f, 3.6000001f }, 0.0f, 0xFFFFFFFF, 0.0f };
-static const SpeakQuad sSpeakQuadB = { { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.296875f, 0.296875f, 0.46875f }, { 3.8f, 2.2f }, 0.0f, 0xFFFFFFFF, 0.0f };
+static const SpeakQuad sSpeakQuadA
+    = { { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.296875f, 0.28125f }, { 3.8f, 3.6000001f }, 0.0f, 0xFFFFFFFF, 0.0f };
+static const SpeakQuad sSpeakQuadB
+    = { { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.296875f, 0.296875f, 0.46875f }, { 3.8f, 2.2f }, 0.0f, 0xFFFFFFFF, 0.0f };
 
 // 0x8010F544
 // Two quads copied from the tables at 0x80247F34 and 0x80247F64
@@ -164,7 +166,7 @@ void TSpeakCursor::render()
 	SpeakQuad quadB = sSpeakQuadB;
 
 	f32 anim = mAnim;
-	anim = anim < 0.5f ? anim : 1.0f - anim;
+	anim     = anim < 0.5f ? anim : 1.0f - anim;
 	anim *= 2.0f;
 	anim = 0.25f * anim + 1.0f;
 	quadA.mPos[1] += 5.0f;

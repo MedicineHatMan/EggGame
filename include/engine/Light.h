@@ -28,11 +28,11 @@ struct LightList {
 	LightList();  // 0x80043638
 	~LightList(); // 0x8004364C
 
-	void append(LightLink* link);                       // 0x80043694
-	void clear();                                       // 0x800436D4
-	void remove(LightLink* link);                       // 0x80043710
+	void append(LightLink* link);                        // 0x80043694
+	void clear();                                        // 0x800436D4
+	void remove(LightLink* link);                        // 0x80043710
 	void insertBefore(LightLink* link, LightLink* next); // 0x80043770
-	void unlinkAll();                                   // 0x800437AC leaves the counts alone
+	void unlinkAll();                                    // 0x800437AC leaves the counts alone
 
 	LightLink* mLast;  // _00
 	LightLink* mFirst; // _04
@@ -46,13 +46,13 @@ struct LightBase {
 	u32 mFlags; // _00
 
 	// _04 = vtable
-	inline virtual ~LightBase() { }                          // _08
+	inline virtual ~LightBase() { }                                // _08
 	virtual void init(GXLightObj* gxLight, const f32* matrix) = 0; // _0C
 
-	u8 mPriority;      // _08 lower comes first in a group
-	u8 mEnabled;       // _09
-	u32 mGxId;         // _0C
-	LightLink mLink;   // _10
+	u8 mPriority;        // _08 lower comes first in a group
+	u8 mEnabled;         // _09
+	u32 mGxId;           // _0C
+	LightLink mLink;     // _10
 	GXLightObj mGxLight; // _20
 };
 
@@ -74,7 +74,7 @@ struct DirLight : public LightBase { // size 0x70
 };
 
 struct PointLight : public LightBase { // size 0x7C
-	PointLight(); // 0x800433A8
+	PointLight();                      // 0x800433A8
 	inline virtual ~PointLight() { }
 	virtual void init(GXLightObj* gxLight, const f32* matrix);
 
@@ -97,7 +97,7 @@ struct SpotLight : public LightBase { // size 0x94
 
 /** The lights to give to a group, with nodes from a pool of 16; ~dlist frees the pool. @size 0x14 */
 struct LightSet {
-	LightSet();  // 0x80042D98
+	LightSet(); // 0x80042D98
 
 	void add(LightBase* light);    // 0x80042DCC
 	void remove(LightBase* light); // 0x80042DF4
@@ -110,19 +110,19 @@ struct LightGroup {
 	LightGroup();  // 0x80042E58
 	~LightGroup(); // 0x80042E98
 
-	void add(LightBase* light);     // 0x80042EE4 by priority
-	void remove(LightBase* light);  // 0x80042F7C
-	void addAll(LightSet* set);     // 0x80042FAC
-	void removeAll(LightSet* set);  // 0x80042FF4
-	void set(LightSet* set);        // 0x8004303C
-	void clear();                   // 0x80043078
+	void add(LightBase* light);    // 0x80042EE4 by priority
+	void remove(LightBase* light); // 0x80042F7C
+	void addAll(LightSet* set);    // 0x80042FAC
+	void removeAll(LightSet* set); // 0x80042FF4
+	void set(LightSet* set);       // 0x8004303C
+	void clear();                  // 0x80043078
 
-	LightList mList;  // _00
-	u32 mDiffuse;     // _0C
-	u32 mSpecular;    // _10
-	u32 mAlpha;       // _14
-	s32 mAlphaSpec;   // _18
-	f32 mMatrix[12];  // _1C
+	LightList mList; // _00
+	u32 mDiffuse;    // _0C
+	u32 mSpecular;   // _10
+	u32 mAlpha;      // _14
+	s32 mAlphaSpec;  // _18
+	f32 mMatrix[12]; // _1C
 };
 
 extern "C" void lightGroupLoad(LightGroup* group);
@@ -139,7 +139,9 @@ void lightInitDirectional(GXLightObj*, const f32*, const Vec3f*, const u32*);
 }
 
 #ifndef LIGHT_CPP
-inline SpotLight::~SpotLight() { }
+inline SpotLight::~SpotLight()
+{
+}
 #endif
 
 #endif

@@ -46,10 +46,10 @@ TEneAm02_Rock::TEneAm02_Rock(TObject* parent, Vec3f* pos, int rotY)
     , mFlight()
     , mShadow()
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0xF4;
 	setObjId(this, -1);
-	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
+	mTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
 	mState = 0;
 	mTimer = 0;
 	mScale = 0.1f;
@@ -59,8 +59,8 @@ TEneAm02_Rock::TEneAm02_Rock(TObject* parent, Vec3f* pos, int rotY)
 	mFlight.mBody.mGravity.x = 0.0f;
 	mFlight.mBody.mGravity.y = -0.08f;
 	mFlight.mBody.mGravity.z = 0.0f;
-	mFlight.mFriction = 0.2f;
-	mFlight.mMaxSpeed = 3.0f;
+	mFlight.mFriction        = 0.2f;
+	mFlight.mMaxSpeed        = 3.0f;
 
 	mShape = colliCreate(1, 1);
 	colliCopyShapes((CharaColli*)mShape, (const ColliShape*)sAm02_RockShape);
@@ -98,11 +98,11 @@ int TEneAm02_Rock::vfn_48(TObjAction* other)
 // A player takes 20 and the hit flags are cleared
 int TEneAm02_Rock::onHit(const TObjAction* other, int, int* result)
 {
-	int hit = 0;
+	int hit       = 0;
 	HitInfo* info = (HitInfo*)result;
 	if (isPlayerObj(other) != 0) {
 		info->mDamage = 20;
-		hit = 1;
+		hit           = 1;
 		info->mFlags.clear();
 	}
 	return hit;
@@ -137,9 +137,9 @@ void TEneAm02_Rock::throwAt(Vec3f* target)
 	Vec3f dir;
 	SetRot rot;
 	Vec3f delta = rockSub(target, &mFlight.mBody.mPos);
-	dir   = delta;
-	dir.y = 0.0f;
-	f32 len = njUnitVector(&dir);
+	dir         = delta;
+	dir.y       = 0.0f;
+	f32 len     = njUnitVector(&dir);
 	if (len < gUnitVectorMin) {
 		dir = gVecZero;
 	}
@@ -151,8 +151,8 @@ void TEneAm02_Rock::throwAt(Vec3f* target)
 		f32 h = 13.3125f;
 		h -= delta.y;
 		f32 arc = rockSqrt(1.0f + 8.0f * h / 0.08f);
-		f32 t = 0.5f * (-1.0f + arc);
-		speed = dist / (18.75f + t);
+		f32 t   = 0.5f * (-1.0f + arc);
+		speed   = dist / (18.75f + t);
 		if (speed > 20.0f) {
 			speed = 20.0f;
 		}
@@ -203,7 +203,7 @@ void TEneAm02_Rock::draw()
 		if (mScale <= 0.05f) {
 			mFlags |= 1;
 		}
-		f32 size = 2.0f * (10.0f * mScale);
+		f32 size    = 2.0f * (10.0f * mScale);
 		mShadow._30 = size;
 		mShadow._34 = size;
 		mFlight.mBody.mPos.y -= 10.0f * (prev - mScale);

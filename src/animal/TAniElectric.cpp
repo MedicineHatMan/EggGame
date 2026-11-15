@@ -78,9 +78,9 @@ void TAniElectric::draw()
 	}
 	mtxSetTransV(mMatrix, &mGround);
 
-	mVtx[0].x     = -0.5f * mWidth;
-	f32 u2 = 0.25f + u;
-	f32 v2 = 0.25f + v;
+	mVtx[0].x = -0.5f * mWidth;
+	f32 u2    = 0.25f + u;
+	f32 v2    = 0.25f + v;
 
 	mVtx[0].y     = 0.0f;
 	mVtx[0].z     = 0.0f;

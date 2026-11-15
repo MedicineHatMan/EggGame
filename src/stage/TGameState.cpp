@@ -24,15 +24,15 @@
 #include "stage/TGameState.h"
 
 struct MissionContextEntry {
-	int mType;                       // _00
+	int mType;                         // _00
 	void* (*mCreate)(TObject* parent); // _04
 };
 
 // 0x80255410
 static MissionContextEntry sMissionContexts[15] = {
-	{ 5, createGameGoldenEgg }, { 2, createGameDino },       { 9, createGameSnowman },    { 4, createGameGoal },
-	{ 1, createGameCollect },   { 7, createGameRace },       { 0, createGameBoss },       { 6, createGameMiniGame },
-	{ 8, createGameRescue },    { 12, createGameFireworks }, { 10, createGameGear },      { 11, createGameBattery },
+	{ 5, createGameGoldenEgg }, { 2, createGameDino },       { 9, createGameSnowman },   { 4, createGameGoal },
+	{ 1, createGameCollect },   { 7, createGameRace },       { 0, createGameBoss },      { 6, createGameMiniGame },
+	{ 8, createGameRescue },    { 12, createGameFireworks }, { 10, createGameGear },     { 11, createGameBattery },
 	{ 13, createGameWipeOut },  { 14, createGameBossAfter }, { 15, createGameLastBoss },
 };
 
@@ -78,9 +78,9 @@ TGameContext::TGameContext(TObject* parent)
     : TCustomGameContext(parent)
     , mTime(0)
 {
-	_00    = (u32)sGameContextName;
-	mSize  = 0x38;
-	mLives = 5;
+	_00        = (u32)sGameContextName;
+	mSize      = 0x38;
+	mLives     = 5;
 	void* pool = ::operator new(0xC);
 	if (pool != 0) {
 		pool = initPlyPool(pool, 0x40);

@@ -17,12 +17,12 @@ extern "C" void objHeapFree(void*, void*);
 struct EggBreakPiece {
 	EggBreakPiece();
 
-	void* mModel;  // _00
-	Vec3f mPos;    // _04
-	Vec3f mVel;    // _10
-	EggRot mRot;   // _1C
-	Vec3f mSpin;   // _2C
-	f32 mMtx[12];  // _38
+	void* mModel; // _00
+	Vec3f mPos;   // _04
+	Vec3f mVel;   // _10
+	EggRot mRot;  // _1C
+	Vec3f mSpin;  // _2C
+	f32 mMtx[12]; // _38
 };
 
 /**
@@ -40,16 +40,16 @@ public:
 	virtual void draw();   // _0C
 	virtual void render(); // _1C
 
-	u16 mId;       // _20 passed to the texture manager
-	u16 mLife;     // _22 starts at 0xB4
-	u16 mFrame;    // _24
-	u16 mCount;    // _26 child nodes of mModel
-	void* mAltTex; // _28 0 when the texture manager has no entry for mId
-	DrawTask* mTask;   // _2C draw list 0x21
-	u8 _30[0x30];  // _30
-	f32 mRadius;   // _60
-	void* mModel;  // _64 the "models" export
-	NJS_TEXLIST* mTexList; // _68 the "texlists" export
+	u16 mId;                // _20 passed to the texture manager
+	u16 mLife;              // _22 starts at 0xB4
+	u16 mFrame;             // _24
+	u16 mCount;             // _26 child nodes of mModel
+	void* mAltTex;          // _28 0 when the texture manager has no entry for mId
+	DrawTask* mTask;        // _2C draw list 0x21
+	u8 _30[0x30];           // _30
+	f32 mRadius;            // _60
+	void* mModel;           // _64 the "models" export
+	NJS_TEXLIST* mTexList;  // _68 the "texlists" export
 	EggBreakPiece* mPieces; // _6C
 };
 

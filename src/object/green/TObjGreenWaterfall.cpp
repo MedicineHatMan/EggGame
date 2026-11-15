@@ -24,13 +24,13 @@ struct SetLink;
 struct WaterfallContact {
 	WaterfallContact* mNext; // _00
 	u8 _04[8];
-	Vec3f mPos;              // _0C
+	Vec3f mPos; // _0C
 };
 
 f32 gGreenWaterfallSetRange = 3000.0f; // 0x802C45D0
 
-static f32 sDrawDist = gGreenWaterfallSetRange;          // 0x802C5940
-static f32 sKeepDist = gGreenWaterfallSetRange + 50.0f;  // 0x802C5944
+static f32 sDrawDist = gGreenWaterfallSetRange;         // 0x802C5940
+static f32 sKeepDist = gGreenWaterfallSetRange + 50.0f; // 0x802C5944
 
 typedef char TObjGreenWaterfall_size_check[(sizeof(TObjGreenWaterfall) == 0x13C) ? 1 : -1];
 

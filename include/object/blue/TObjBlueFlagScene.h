@@ -33,15 +33,15 @@ public:
 
 	void buildNormals();
 
-	DrawTask* mDraw;         // _64
-	NJS_TEXLIST* mTexList;   // _68 geobj texture 15
-	int mAnchor;             // _6C set int 0 -1 until the first init
-	s16 mTex;                // _70 set int 1 clamped to the list
+	DrawTask* mDraw;       // _64
+	NJS_TEXLIST* mTexList; // _68 geobj texture 15
+	int mAnchor;           // _6C set int 0 -1 until the first init
+	s16 mTex;              // _70 set int 1 clamped to the list
 	u8 _72[2];
-	FlagCloth* mCloth;       // _74
+	FlagCloth* mCloth; // _74
 	u8 _78[4];
-	f32 mRef;                // _7C set float 0 plus 0.5
-	HitVec mNormal[9][11];   // _80 one per cloth point
+	f32 mRef;              // _7C set float 0 plus 0.5
+	HitVec mNormal[9][11]; // _80 one per cloth point
 };
 
 extern "C" {

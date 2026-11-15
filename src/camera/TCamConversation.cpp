@@ -7,7 +7,6 @@
 
 extern "C" {
 TObject* gTL_01;
-
 }
 
 typedef char TCamConversation_size_check[(sizeof(TCamConversation) == 0x68) ? 1 : -1];
@@ -42,33 +41,27 @@ void TCamConversation::setFocus(const Vec3f* focus)
 	mFocus = *focus;
 }
 
-static f32 absf(f32 value)
-{
-	return value < 0.0f ? -value : value;
-}
-
 // 0x8008AC90
 void TCamConversation::vfn_20()
 {
 	Vec3f pos;
+	Vec3f from;
+	Vec3f eye;
+	Vec3f aim;
 	if (getTargetPos(&pos) == 0) {
 		return;
 	}
-	Vec3f aim;
 	aim = pos;
 	njAddVector(&aim, &mFocus);
 	gjScaleVector(0.5f, &aim, &aim);
-	Vec3f* view = (Vec3f*)mView;
-	view[1]     = aim;
+	((CamView*)mView)->mTarget = aim;
 
-	Vec3f from;
 	from = mFocus;
 	njSubVector(&from, &pos);
-	Vec3f eye;
-	eye = view[0];
+	eye = ((CamView*)mView)->mPos;
 	njSubVector(&eye, &aim);
-	int turn = vecCrossXZ(&from, &eye) <= 0.0f ? mRoll : -mRoll;
-	int face = (int)(10430.38043493439 * (double)atan2(from.x, from.z));
+	int turn = vecCrossXZ(&from, &eye) > 0.0f ? -mRoll : mRoll;
+	int face = (int)(10430.38043493439 * (double)(f32)atan2(from.x, from.z));
 	turn += face;
 
 	gjPushUnitMatrix();
@@ -78,20 +71,19 @@ void TCamConversation::vfn_20()
 	njCalcPointEx(&pos, &eye);
 	njPopMatrixEx();
 
-	f32 scale = *(f32*)((u8*)mView + 0x48) * 0.6000000238418579f;
-	f32 wide  = absf(eye.z) + absf(eye.x) / scale;
-	f32 tall  = absf(eye.z) + absf(eye.y) / (scale / *(f32*)((u8*)mView + 0x4C));
-	if (wide < tall) {
-		wide = tall;
-	}
-	Vec3f fit;
-	fit.x = 0.0f;
-	fit.y = 0.0f;
-	fit.z = -wide;
+	f32 scale = ((CamView*)mView)->mSlopeX;
+	scale *= 0.6000000238418579f;
+	f32 wide = (f32)fabs(eye.z) + (f32)fabs(eye.x) / scale;
+	scale    = scale / ((CamView*)mView)->mAspect;
+	f32 tall = (f32)fabs(eye.z) + (f32)fabs(eye.y) / scale;
+	f32 dist = tall > wide ? tall : wide;
+	eye.x    = 0.0f;
+	eye.y    = 0.0f;
+	eye.z    = -dist;
 	gjPushUnitMatrix();
 	njTranslateEx(&aim);
 	gjRotateY(turn);
 	gjRotateX(mYaw);
-	njCalcPointEx(&fit, view);
+	njCalcPointEx(&eye, &((CamView*)mView)->mPos);
 	njPopMatrixEx();
 }

@@ -41,19 +41,19 @@ public:
 	void open();
 	void place(const Vec3f* off);
 
-	u32 _30;               // _30
-	MeshObject* mLand;           // _34
-	SetLinkMember mLink;   // _38
-	DrawTask* mDrawTask;   // _44
-	Vec3f mHome;           // _48 the record position copied again into mTrans
-	SetTransform mTrans;   // _54
-	int mState;            // _98 0 waiting 1 dropping 2 swinging 3 opening
-	u16 mSwitch;           // _9C set int 0
-	u16 mOpenId;           // _9E set int 1
-	f32 mExtra;            // _A0 stored from sdata2 and not read again
-	int mAngle;            // _A4 copied into mTrans.mRot.x
-	int mSwing;            // _A8
-	int mRate;             // _AC
+	u32 _30;             // _30
+	MeshObject* mLand;   // _34
+	SetLinkMember mLink; // _38
+	DrawTask* mDrawTask; // _44
+	Vec3f mHome;         // _48 the record position copied again into mTrans
+	SetTransform mTrans; // _54
+	int mState;          // _98 0 waiting 1 dropping 2 swinging 3 opening
+	u16 mSwitch;         // _9C set int 0
+	u16 mOpenId;         // _9E set int 1
+	f32 mExtra;          // _A0 stored from sdata2 and not read again
+	int mAngle;          // _A4 copied into mTrans.mRot.x
+	int mSwing;          // _A8
+	int mRate;           // _AC
 };
 
 extern "C" {

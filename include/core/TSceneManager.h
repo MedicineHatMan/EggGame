@@ -32,8 +32,8 @@ public:
 	virtual void vfn_10();
 
 	SceneRecord* mRecord; // _20
-	void* mTask1;   // _24
-	void* mTask2;   // _28
+	void* mTask1;         // _24
+	void* mTask2;         // _28
 };
 
 extern "C" {

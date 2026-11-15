@@ -12,14 +12,16 @@ extern "C" void* createGameWipeOut(TObject* parent)
 TGameWipeOut::TGameWipeOut(TObject* parent)
     : TGameContext(parent)
 {
-	_00   = (u32)gTGameWipeOutName;
-	mSize = 0x40;
+	_00    = (u32)gTGameWipeOutName;
+	mSize  = 0x40;
 	mLeft  = 0x64;
 	mTotal = 0x64;
 }
 
 // 0x8015F2C4
-TGameWipeOut::~TGameWipeOut() { }
+TGameWipeOut::~TGameWipeOut()
+{
+}
 
 // 0x8015F320
 void TGameWipeOut::startState()
@@ -43,7 +45,10 @@ void TGameWipeOut::beaten()
 }
 
 // 0x8015F418
-int TGameWipeOut::isDone() { return mLeft == 0; }
+int TGameWipeOut::isDone()
+{
+	return mLeft == 0;
+}
 
 #include "stage/TGame.h"
 #include "stage/TGameStateWipeOut.h"

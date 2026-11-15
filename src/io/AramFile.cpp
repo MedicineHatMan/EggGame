@@ -3,8 +3,7 @@
 #include "Ninja/ninja.h"
 
 extern "C" {
-void ARQPostRequest(AramRequest*, u32 owner, u32 type, u32 priority, u32 source, u32 dest, u32 length,
-                    void (*callback)(AramRequest*));
+void ARQPostRequest(AramRequest*, u32 owner, u32 type, u32 priority, u32 source, u32 dest, u32 length, void (*callback)(AramRequest*));
 
 // 0x80065FD0
 int fileReadAll(TFile* file, void* dest, int size)
@@ -39,7 +38,9 @@ TAramFile::TAramFile(u32 aram, u32 size)
 }
 
 // 0x800660B4
-TAramFile::~TAramFile() { }
+TAramFile::~TAramFile()
+{
+}
 
 // 0x80066110
 int TAramFile::seek(int offset, int from)
@@ -65,7 +66,9 @@ int TAramFile::tell()
 }
 
 // 0x80066168
-void TAramFile::cancel() { }
+void TAramFile::cancel()
+{
+}
 
 // 0x8006616C
 int TAramFile::getSize()
@@ -173,7 +176,7 @@ int TAramFile::fill(int block)
 	}
 	if (mBlock != block) {
 		mBlock = block;
-		if ( (u32)mBlockCount > (u32)(block + mFillBlocks)) {
+		if ((u32)mBlockCount > (u32)(block + mFillBlocks)) {
 			mBufBlocks = mFillBlocks;
 			mBufBytes  = mBufBlocks << 5;
 		} else {
@@ -185,8 +188,7 @@ int TAramFile::fill(int block)
 		mDirect   = 0;
 		mDone     = 0;
 		DCInvalidateRange(mBuffer, (mBufBytes + 0x1F) & ~0x1F);
-		ARQPostRequest(&mRequest, (u32)this, 1, 1, mAram + block * 0x20, (u32)mBuffer, (mBufBytes + 0x1F) & ~0x1F,
-		               aramFileDone);
+		ARQPostRequest(&mRequest, (u32)this, 1, 1, mAram + block * 0x20, (u32)mBuffer, (mBufBytes + 0x1F) & ~0x1F, aramFileDone);
 	}
 	return 0;
 }

@@ -30,10 +30,10 @@ struct MotionKey {
 		KEY_END   = 3,
 	};
 
-	int mKind;   // _00
-	f32 mTime;   // _04 when the key starts
-	int mEntry;  // _08 a row of the motion table
-	int _0C;     // _0C
+	int mKind;  // _00
+	f32 mTime;  // _04 when the key starts
+	int mEntry; // _08 a row of the motion table
+	int _0C;    // _0C
 };
 
 #endif

@@ -31,7 +31,7 @@ public:
 	f32 mSpeed;         // _38C
 	f32 mAccel;         // _390
 	int _394;           // _394
-	Fx* mFx2;         // _398
+	Fx* mFx2;           // _398
 	f32 mFx2Matrix[12]; // _39C
 };
 

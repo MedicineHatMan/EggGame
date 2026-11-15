@@ -31,7 +31,7 @@ int adxt_time_vsync_on;
 /* ADXAMP the amplitude extractor */
 
 /* An ADX frame is 18 bytes per channel and holds 32 samples */
-#define ADX_FRAME_LEN 18
+#define ADX_FRAME_LEN  18
 #define ADX_FRAME_SMPL 32
 
 static inline void adxt_start_sj(ADXT adxt, SJ sj)
@@ -44,14 +44,14 @@ static inline void adxt_start_sj(ADXT adxt, SJ sj)
 	ADXSJD_SetInSj(adxt->sjd, sj);
 	adxt->sji = sj;
 	ADXSJD_Start(adxt->sjd);
-	adxt->stat = ADXT_STAT_DECINFO;
-	adxt->lpcnt = 0;
+	adxt->stat          = ADXT_STAT_DECINFO;
+	adxt->lpcnt         = 0;
 	adxt->pstready_flag = 0;
-	adxt->lesct = 0x7FFFFFFF;
-	adxt->trpnsmpl = -1;
-	adxt->tvofst = 0;
-	adxt->decofst = 0;
-	adxt->svcnt = adxt_svcnt;
+	adxt->lesct         = 0x7FFFFFFF;
+	adxt->trpnsmpl      = -1;
+	adxt->tvofst        = 0;
+	adxt->decofst       = 0;
+	adxt->svcnt         = adxt_svcnt;
 	if (adxt->amp != 0) {
 		ADXAMP_Start(adxt->amp);
 	}
@@ -76,7 +76,7 @@ static inline void adxt_GetTimeDec(ADXT adxt, int* ncount, int* tscale)
 
 	if (adxt->stat == ADXT_STAT_PLAYING || adxt->stat == ADXT_STAT_DECEND) {
 		*tscale = ADXSJD_GetSfreq(adxt->sjd);
-		ndec = ADXSJD_GetDecNumSmpl(adxt->sjd);
+		ndec    = ADXSJD_GetDecNumSmpl(adxt->sjd);
 		*ncount = ndec - (ADXRNA_GetNumData(adxt->rna) + adxt_GetNumSmplObuf(adxt, 0)) + adxt->decofst;
 	} else if (adxt->stat == ADXT_STAT_PLAYEND) {
 		*ncount = ADXSJD_GetTotalNumSmpl(adxt->sjd);
@@ -97,11 +97,11 @@ static inline void adxt_ResetTime(ADXT adxt)
 	int tscale;
 	int ncount;
 
-	save = adxt_time_vsync_on;
+	save               = adxt_time_vsync_on;
 	adxt_time_vsync_on = 0;
 	ADXT_GetTime(adxt, &ncount, &tscale);
 	adxt_time_vsync_on = save;
-	adxt->tvofst = (unsigned int)((float)adxt_vsync_rate * ((float)ncount / (float)tscale));
+	adxt->tvofst       = (unsigned int)((float)adxt_vsync_rate * ((float)ncount / (float)tscale));
 }
 
 // 0x80225004
@@ -113,7 +113,7 @@ ADXT ADXT_Create(int maxnch, void* work, int worksize)
 	int wsize;
 	int obuflen;
 
-	top = ((int)work + 0x3F) & ~0x3F;
+	top   = ((int)work + 0x3F) & ~0x3F;
 	wsize = worksize - (top - (int)work);
 	if (maxnch < 0 || work == 0 || worksize < 0) {
 		ADXERR_CallErrFunc1("E02080804 ADXT_Create: parameter error");
@@ -129,17 +129,17 @@ ADXT ADXT_Create(int maxnch, void* work, int worksize)
 	}
 	adxt = &adxt_obj[i];
 	memset(adxt, 0, sizeof(ADX_TALK));
-	adxt->maxnch = maxnch;
-	obuflen = maxnch * 0x3060 * sizeof(short);
-	adxt->ibuf = (char*)(top + obuflen);
-	adxt->ibuflen = ((wsize - obuflen - 0x124) / ADXSTM_SCT) * ADXSTM_SCT;
-	adxt->ibufxlen = ADXT_IBUF_XLEN;
+	adxt->maxnch    = maxnch;
+	obuflen         = maxnch * 0x3060 * sizeof(short);
+	adxt->ibuf      = (char*)(top + obuflen);
+	adxt->ibuflen   = ((wsize - obuflen - 0x124) / ADXSTM_SCT) * ADXSTM_SCT;
+	adxt->ibufxlen  = ADXT_IBUF_XLEN;
 	adxt->fname_buf = adxt->ibuflen + adxt->ibufxlen + adxt->ibuf;
-	adxt->obuf = (short*)top;
-	adxt->obufsize = ADXT_OBUF_SIZE;
-	adxt->obufdist = ADXT_OBUF_DIST;
-	adxt->sji = 0;
-	adxt->sjf = SJRBF_Create(adxt->ibuf, adxt->ibuflen, adxt->ibufxlen);
+	adxt->obuf      = (short*)top;
+	adxt->obufsize  = ADXT_OBUF_SIZE;
+	adxt->obufdist  = ADXT_OBUF_DIST;
+	adxt->sji       = 0;
+	adxt->sjf       = SJRBF_Create(adxt->ibuf, adxt->ibuflen, adxt->ibufxlen);
 	if (adxt->sjf == 0) {
 		ADXT_Destroy(adxt);
 		return 0;
@@ -149,8 +149,7 @@ ADXT ADXT_Create(int maxnch, void* work, int worksize)
 		return 0;
 	}
 	for (i = 0; i < maxnch; i++) {
-		adxt->sjo[i] = SJRBF_Create((char*)(adxt->obuf + adxt->obufdist * i), adxt->obufsize * 2,
-		                            (adxt->obufdist - adxt->obufsize) * 2);
+		adxt->sjo[i] = SJRBF_Create((char*)(adxt->obuf + adxt->obufdist * i), adxt->obufsize * 2, (adxt->obufdist - adxt->obufsize) * 2);
 		if (adxt->sjo[i] == 0) {
 			ADXT_Destroy(adxt);
 			return 0;
@@ -170,25 +169,25 @@ ADXT ADXT_Create(int maxnch, void* work, int worksize)
 	}
 	LSC_SetStmHndl(adxt->lsc, adxt->stm);
 	adxt->svrfreq = ADXT_DEF_SVRFREQ;
-	adxt->maxsct = adxt->ibuflen / ADXSTM_SCT;
-	adxt->minsct = (short)(0.85f * adxt->maxsct);
-	adxt->outvol = 0;
+	adxt->maxsct  = adxt->ibuflen / ADXSTM_SCT;
+	adxt->minsct  = (short)(0.85f * adxt->maxsct);
+	adxt->outvol  = 0;
 	for (i = 0; i < maxnch; i++) {
 		adxt->outpan[i] = ADXT_PAN_AUTO;
 	}
-	adxt->lpflg = 1;
-	adxt->trp = 0;
-	adxt->wpos = 0;
-	adxt->mofst = 0;
-	adxt->ercode = 0;
-	adxt->edecpos = 0;
-	adxt->edeccnt = 0;
-	adxt->eshrtcnt = 0;
-	adxt->autorcvr = 1;
+	adxt->lpflg      = 1;
+	adxt->trp        = 0;
+	adxt->wpos       = 0;
+	adxt->mofst      = 0;
+	adxt->ercode     = 0;
+	adxt->edecpos    = 0;
+	adxt->edeccnt    = 0;
+	adxt->eshrtcnt   = 0;
+	adxt->autorcvr   = 1;
 	adxt->pause_flag = 0;
-	adxt->time_ofst = 0;
-	adxt->lnkflg = 0;
-	adxt->used = 1;
+	adxt->time_ofst  = 0;
+	adxt->lnkflg     = 0;
+	adxt->used       = 1;
 	return adxt;
 }
 
@@ -267,7 +266,7 @@ void ADXT_StartSj(ADXT adxt, SJ sj)
 	ADXT_Stop(adxt);
 	ADXCRS_Lock();
 	adxt_start_sj(adxt, sj);
-	adxt->pmode = ADXT_PMODE_SJ;
+	adxt->pmode  = ADXT_PMODE_SJ;
 	adxt->lnkflg = 1;
 	ADXCRS_Unlock();
 }
@@ -299,8 +298,8 @@ void ADXT_Stop(ADXT adxt)
 	if (adxt->amp != 0) {
 		ADXAMP_Stop(adxt->amp);
 	}
-	adxt->sji = 0;
-	adxt->stat = ADXT_STAT_STOP;
+	adxt->sji       = 0;
+	adxt->stat      = ADXT_STAT_STOP;
 	adxt->stm_start = 0;
 	ADXCRS_Unlock();
 	ADXCRS_Unlock();
@@ -343,21 +342,21 @@ void ADXT_GetTime(ADXT adxt, int* ncount, int* tscale)
 		adxt_time_diff_ms = 1000.0f * ((float)nc / (float)ts - (float)*ncount / (float)adxt_vsync_rate);
 		if (adxt_time_diff_ms > 60.0f || adxt_time_diff_ms < -60.0f) {
 			if (adxt_time_resync_on == 1) {
-				save = adxt_time_vsync_on;
+				save               = adxt_time_vsync_on;
 				adxt_time_vsync_on = 0;
 				ADXT_GetTime(adxt, &nc, &ts);
 				adxt_time_vsync_on = save;
 				adxt_time_resync_cnt++;
 			}
 			adxt->tvofst = (unsigned int)((float)adxt_vsync_rate * ((float)nc / (float)ts));
-			adxt->svcnt = adxt_svcnt;
+			adxt->svcnt  = adxt_svcnt;
 		}
 	} else if (adxt->stat == ADXT_STAT_PLAYEND) {
-		nc = ADXSJD_GetTotalNumSmpl(adxt->sjd);
-		ts = ADXSJD_GetSfreq(adxt->sjd);
-		bps = ADXSJD_GetOutBps(adxt->sjd);
-		bps = 16 / bps;
-		nc = nc * bps;
+		nc      = ADXSJD_GetTotalNumSmpl(adxt->sjd);
+		ts      = ADXSJD_GetSfreq(adxt->sjd);
+		bps     = ADXSJD_GetOutBps(adxt->sjd);
+		bps     = 16 / bps;
+		nc      = nc * bps;
 		*ncount = (int)((float)adxt_vsync_rate * ((float)nc / (float)ts));
 		*ncount += adxt->tvofst + 1;
 	} else {
@@ -561,8 +560,8 @@ float ADXT_GetIbufRemainTime(ADXT adxt)
 		ADXERR_CallErrFunc1("E02080835 ADXT_GetIbufRemainTime: parameter error");
 		return -1.0f;
 	}
-	stat = ADXT_GetStat(adxt);
-	nch = ADXT_GetNumChan(adxt);
+	stat  = ADXT_GetStat(adxt);
+	nch   = ADXT_GetNumChan(adxt);
 	sfreq = ADXT_GetSfreq(adxt);
 	nobuf = adxt_GetNumSmplObuf(adxt, 0);
 	if (stat == ADXT_STAT_PLAYING || nch == 0) {
@@ -606,9 +605,9 @@ void ADXT_ClearErrCode(ADXT adxt)
 		ADXERR_CallErrFunc1("E02080844 ADXT_ClearErrCode: parameter error");
 		return;
 	}
-	adxt->ercode = 0;
-	adxt->edecpos = 0;
-	adxt->edeccnt = 0;
+	adxt->ercode   = 0;
+	adxt->edecpos  = 0;
+	adxt->edeccnt  = 0;
 	adxt->eshrtcnt = 0;
 }
 
@@ -722,13 +721,13 @@ int adxt_GetTimePause(ADXT adxt)
 	}
 	ret = ADXRNA_GetPauseTime(adxt->rna);
 	ADXT_ExecServer();
-	save = adxt_time_vsync_on;
+	save               = adxt_time_vsync_on;
 	adxt_time_vsync_on = 0;
 	ADXT_GetTime(adxt, &ncount, &tscale);
 	adxt_time_vsync_on = save;
-	adxt->tvofst = (unsigned int)((float)adxt_vsync_rate * ((float)ncount / (float)tscale));
-	vcnt = adxt_svcnt;
-	adxt->svcnt = vcnt;
+	adxt->tvofst       = (unsigned int)((float)adxt_vsync_rate * ((float)ncount / (float)tscale));
+	vcnt               = adxt_svcnt;
+	adxt->svcnt        = vcnt;
 	return ret;
 }
 
@@ -793,7 +792,7 @@ int ADXT_InsertSilence(ADXT adxt, int nch, int nsmpl)
 		return 0;
 	}
 	unit = nch * ADX_FRAME_LEN;
-	len = (nsmpl / ADX_FRAME_SMPL) * unit;
+	len  = (nsmpl / ADX_FRAME_SMPL) * unit;
 	SJ_GetChunk(adxt->sji, SJ_LIN_FREE, len, &ck);
 	n1 = unit * (ck.len / unit);
 	memset(ck.data, 0, n1);

@@ -26,8 +26,8 @@ int colliBoxContains(const Vec3f* point, const Vec3f* center, int angle, f32 siz
 			f32 s, c;
 			njSinCos(-angle, &s, &c);
 			f32 x = dx;
-			dx = c * dx + s * dz;
-			dz = c * dz - s * x;
+			dx    = c * dx + s * dz;
+			dz    = c * dz - s * x;
 		}
 		if ((f32)__fabs(dx) < sizeX && (f32)__fabs(dz) < sizeZ) {
 			return 1;

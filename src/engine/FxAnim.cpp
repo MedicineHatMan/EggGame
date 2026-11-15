@@ -17,27 +17,27 @@ struct FxSimpleMaterial {
 };
 
 struct FxTevStage {
-	u8 mTex;    // _00
-	u8 mCoord;  // _01
+	u8 mTex;   // _00
+	u8 mCoord; // _01
 	u8 _02;
 	u8 mCombine; // _03
-	u8 mWarp;   // _04
+	u8 mWarp;    // _04
 	u8 _05[3];
 };
 
 struct FxFullMaterial {
-	u8 mBlendMode;  // _00
-	u8 mBlendSrc;   // _01
-	u8 mBlendDst;   // _02
-	u8 mBlendOp;    // _03
+	u8 mBlendMode; // _00
+	u8 mBlendSrc;  // _01
+	u8 mBlendDst;  // _02
+	u8 mBlendOp;   // _03
 	u8 _04;
-	u8 mZMode;      // _05
-	u8 mZRef;       // _06
-	u8 mTexCount;   // _07
-	u8 mStages;     // _08
+	u8 mZMode;    // _05
+	u8 mZRef;     // _06
+	u8 mTexCount; // _07
+	u8 mStages;   // _08
 	u8 _09;
-	u8 mCoords;     // _0A
-	u8 mInds;       // _0B
+	u8 mCoords;             // _0A
+	u8 mInds;               // _0B
 	FxTevStage* mStageList; // _0C
 	u32 _10;
 	u8* mCoordList; // _14
@@ -104,8 +104,8 @@ f32 fxKeyValue(FxKey* key)
 // A hermite curve
 f32 hermite(f32 p0, f32 m0, f32 p1, f32 m1, f32 t)
 {
-	f32 t2 = t * t;
-	f32 t3 = t2 * t;
+	f32 t2  = t * t;
+	f32 t3  = t2 * t;
 	f32 h00 = 1.0f + (2.0f * t3 - 3.0f * t2);
 	f32 h10 = t + (t3 - 2.0f * t2);
 	f32 h01 = -2.0f * t3 + 3.0f * t2;
@@ -133,7 +133,7 @@ f32 fxWaveValue(FxWave* wave)
 // Sets up a material and turns the fog callback on or off with the effect's flag
 void fxSetMaterial(Fx* fx, FxMaterialRef* ref)
 {
-	FxBank* bank = gFxBanks[fx->mBank];
+	FxBank* bank           = gFxBanks[fx->mBank];
 	FxMaterialEntry* entry = &bank->mMaterials[ref->mMaterial];
 	if (gFxFlag40Callback != NULL) {
 		u32 flag = fx->mFlags & 0x40;
@@ -288,7 +288,7 @@ void fxEmitterFree(FxEmitter* fx)
 	if (fx->mKids != NULL) {
 		fxPartFreeList(fx->mKids);
 	}
-	fx->mNext = (Fx*)gFxRigFreeList;
+	fx->mNext      = (Fx*)gFxRigFreeList;
 	gFxRigFreeList = fx;
 }
 
@@ -328,10 +328,40 @@ void fxEmitterStop(Fx* fx, FxEmitter* self)
 	}
 	if ((u32)self->mCount != 0) {
 		self->mRate = 0.0f;
-		fx->mStop = 1;
+		fx->mStop   = 1;
 	} else {
 		fx->mFlags |= 0x40000000;
 	}
+}
+
+// Clears a shape's script and animation state
+static inline void fxShapeReset(FxShape* fx, FxDesc* desc)
+{
+	fx->mPc          = 0;
+	fx->mWait        = desc->mScript != NULL ? 1 : 0;
+	fx->mLoops       = 0;
+	fx->mColorFrames = 0;
+	fx->mAlphaFrames = 0;
+	fx->mUvFrames[1] = 0;
+	fx->mUvFrames[0] = 0;
+	fx->mRotFrames   = 0;
+	fx->mColor[3]    = 0xFF;
+	fx->mColor[2]    = 0xFF;
+	fx->mColor[1]    = 0xFF;
+	fx->mColor[0]    = 0xFF;
+	fx->mV           = 1.0f;
+	fx->mU           = 1.0f;
+	fx->mRotTo       = 0.0f;
+	fx->mRot         = 0.0f;
+	fx->mUv[0][1]    = 0.0f;
+	fx->mUv[0][0]    = 0.0f;
+	fx->mUv[1][1]    = 0.0f;
+	fx->mUv[1][0]    = 0.0f;
+	fx->mUvTo[0][1]  = 0.0f;
+	fx->mUvTo[0][0]  = 0.0f;
+	fx->mUvTo[1][1]  = 0.0f;
+	fx->mUvTo[1][0]  = 0.0f;
+	syMemSet(fx->mTex, 0, 3);
 }
 
 // 0x800DC104
@@ -343,45 +373,22 @@ FxShape* fxShapeNew(FxBank* bank, int index)
 		return NULL;
 	}
 	gFxShapeFreeList = (FxShape*)fx->mNext;
-	fx->mFlags = 0;
-	FxDesc* desc = (FxDesc*)bank->mDescs[index * 2 + 1];
-	fx->mRemove = (void (*)(Fx*))fxShapeFree;
+	fx->mFlags       = 0;
+	Fx* base         = fx;
+	FxDesc* desc     = (FxDesc*)bank->mDescs[index * 2 + 1];
+	fx->mRemove      = (void (*)(Fx*))fxShapeFree;
 	fx->mFlags |= desc->mFlags;
 	fx->mDesc = desc;
 	fx->mStop = desc->mLife != 0 ? desc->mLife : 0xFFFF;
-	fx->mPc    = 0;
-	fx->mWait  = desc->mScript != NULL ? 1 : 0;
-	fx->mLoops = 0;
-	fx->mColorFrames = 0;
-	fx->mAlphaFrames = 0;
-	fx->mUvFrames[1] = 0;
-	fx->mUvFrames[0] = 0;
-	fx->mRotFrames   = 0;
-	fx->mColor[3] = 0xFF;
-	fx->mColor[2] = 0xFF;
-	fx->mColor[1] = 0xFF;
-	fx->mColor[0] = 0xFF;
-	fx->mV = 1.0f;
-	fx->mU = 1.0f;
-	fx->mRotTo = 0.0f;
-	fx->mRot   = 0.0f;
-	fx->mUv[0][1] = 0.0f;
-	fx->mUv[0][0] = 0.0f;
-	fx->mUv[1][1] = 0.0f;
-	fx->mUv[1][0] = 0.0f;
-	fx->mUvTo[0][1] = 0.0f;
-	fx->mUvTo[0][0] = 0.0f;
-	fx->mUvTo[1][1] = 0.0f;
-	fx->mUvTo[1][0] = 0.0f;
-	syMemSet(fx->mTex, 0, 3);
-	gFxShapeInits[desc->mShape](fx, fx, desc->mParams);
+	fxShapeReset((FxShape*)base, desc);
+	gFxShapeInits[desc->mShape](fx, (FxShape*)base, desc->mParams);
 	return fx;
 }
 
 // 0x800DC258
 void fxShapeFree(FxShape* fx)
 {
-	fx->mNext = (Fx*)gFxShapeFreeList;
+	fx->mNext        = (Fx*)gFxShapeFreeList;
 	gFxShapeFreeList = fx;
 }
 
@@ -419,8 +426,8 @@ void fxChannelsUpdate(FxShape* fx, const FxChannel* channels, int count)
 	}
 	for (i = 0; i < count; i++) {
 		const FxChannel* ch = &channels[i];
-		FxKey* key = &fx->mKeys[ch->mKey];
-		FxWave* wave = &fx->mWaves[ch->mWave];
+		FxKey* key          = &fx->mKeys[ch->mKey];
+		FxWave* wave        = &fx->mWaves[ch->mWave];
 		f32 sum;
 		switch (ch->mMode) {
 		case 1:
@@ -430,7 +437,7 @@ void fxChannelsUpdate(FxShape* fx, const FxChannel* channels, int count)
 			fx->mValues[i] = fxWaveValue(wave);
 			break;
 		case 3:
-			sum = fxWaveValue(wave);
+			sum            = fxWaveValue(wave);
 			fx->mValues[i] = fxKeyValue(key) + sum;
 			break;
 		case 4:
@@ -440,7 +447,7 @@ void fxChannelsUpdate(FxShape* fx, const FxChannel* channels, int count)
 			fx->mValues[i] = ch->mBase + fxWaveValue(wave);
 			break;
 		case 6:
-			sum = fxWaveValue(wave);
+			sum            = fxWaveValue(wave);
 			fx->mValues[i] = (ch->mBase + fxKeyValue(key)) + sum;
 			break;
 		}

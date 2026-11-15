@@ -4,7 +4,7 @@
 #include "stage/Stage.h"
 
 struct GameSelectItem {
-	int mScene;     // _00 the scene to go to
+	int mScene;       // _00 the scene to go to
 	char mName[0x20]; // _04
 };
 

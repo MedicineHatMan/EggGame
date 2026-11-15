@@ -35,19 +35,19 @@ public:
 	int repeated(u32 mask);
 
 	// State entries Each sets mState
-	void enterMap();       // 0
-	void enterWorlds();    // 1
-	void enterStages();    // 3
-	void enterStageWait(); // 4
-	void enterGba();       // 5
-	void enterGbaWait();   // 7
-	void enterGbaSend();   // 8
-	void enterGbaBack();   // 9
-	void enterOptions();   // 10
+	void enterMap();        // 0
+	void enterWorlds();     // 1
+	void enterStages();     // 3
+	void enterStageWait();  // 4
+	void enterGba();        // 5
+	void enterGbaWait();    // 7
+	void enterGbaSend();    // 8
+	void enterGbaBack();    // 9
+	void enterOptions();    // 10
 	void enterOptionWait(); // 11
-	void enterStart();     // 12
-	void enterLeave();     // 13
-	void enterQuit();      // 15
+	void enterStart();      // 12
+	void enterLeave();      // 13
+	void enterQuit();       // 15
 
 	// State updates
 	void updateMap();        // 0
@@ -107,44 +107,44 @@ public:
 	int runBox();
 	int choseYes();
 
-	s16 mTimer;       // _0C
-	f32 mMoveT;       // _10 0 to 1 while the cursor moves
-	void* mLight;     // _14
-	s8 mState;        // _18
-	s8 mSub;          // _19
-	s8 mWorld;        // _1A
-	s8 mStage;        // _1B
-	u8 _1C;           // _1C
-	s8 mGbaBack;      // _1D 1 = "back" is chosen on the GBA page
-	s8 mGba;          // _1E the chosen GBA game -1 for none
-	TSimpleText* mTitle;     // _20
-	TSimpleText* mInfoHead;  // _24
-	TSimpleText* mInfo;      // _28
-	TSimpleText* mBox;       // _2C
-	TSimpleText* mTab[2];    // _30
-	TSimpleText* mYes;       // _38
-	TSimpleText* mNo;        // _3C
-	TSimpleText* mCancel;    // _40
-	TSimpleText* mHelp;      // _44
-	s8 mBoxKind;             // _48
-	s8 mChoice;              // _49
-	s16 mBoxTimer;           // _4A
-	TAeObjMsgWindow* mWindow; // _4C
-	Vec3f mMoveFrom;         // _50
+	s16 mTimer;                     // _0C
+	f32 mMoveT;                     // _10 0 to 1 while the cursor moves
+	void* mLight;                   // _14
+	s8 mState;                      // _18
+	s8 mSub;                        // _19
+	s8 mWorld;                      // _1A
+	s8 mStage;                      // _1B
+	u8 _1C;                         // _1C
+	s8 mGbaBack;                    // _1D 1 = "back" is chosen on the GBA page
+	s8 mGba;                        // _1E the chosen GBA game -1 for none
+	TSimpleText* mTitle;            // _20
+	TSimpleText* mInfoHead;         // _24
+	TSimpleText* mInfo;             // _28
+	TSimpleText* mBox;              // _2C
+	TSimpleText* mTab[2];           // _30
+	TSimpleText* mYes;              // _38
+	TSimpleText* mNo;               // _3C
+	TSimpleText* mCancel;           // _40
+	TSimpleText* mHelp;             // _44
+	s8 mBoxKind;                    // _48
+	s8 mChoice;                     // _49
+	s16 mBoxTimer;                  // _4A
+	TAeObjMsgWindow* mWindow;       // _4C
+	Vec3f mMoveFrom;                // _50
 	TStageSelectModel* mModels[12]; // _5C
 	TStageSelectModel* mMarker;     // _8C
-	Vec3f mMarkerPos;        // _90
-	u8 mFlags;               // _9C bit 1 keeps the title up while moving
-	int mNext;               // _A0 the result _08 gets on leaving
-	int mWorldOpen[7];       // _A4
-	int _C0;                 // _C0
-	int mHasGba;             // _C4
-	int mStageOpen[7][8];    // _C8
-	int mStageClear[7][8];   // _1A8
-	int mGbaOpen[5];         // _288
-	u8 _29C;                 // _29C
-	u8 _29D;                 // _29D
-	s8 mGbaStep;             // _29E
+	Vec3f mMarkerPos;               // _90
+	u8 mFlags;                      // _9C bit 1 keeps the title up while moving
+	int mNext;                      // _A0 the result _08 gets on leaving
+	int mWorldOpen[7];              // _A4
+	int _C0;                        // _C0
+	int mHasGba;                    // _C4
+	int mStageOpen[7][8];           // _C8
+	int mStageClear[7][8];          // _1A8
+	int mGbaOpen[5];                // _288
+	u8 _29C;                        // _29C
+	u8 _29D;                        // _29D
+	s8 mGbaStep;                    // _29E
 };
 
 // The light of each map look mStageClear decides which 0x80262120 ambient colour and direction

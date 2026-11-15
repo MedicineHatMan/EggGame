@@ -45,10 +45,10 @@ struct KeyNode {
 		mList = 0;
 	}
 
-	KeyNode* mNext;          // _00
-	KeyNode* mPrev;          // _04
-	TObjKey00* mObj;         // _08
-	struct KeyList* mList;   // _0C
+	KeyNode* mNext;        // _00
+	KeyNode* mPrev;        // _04
+	TObjKey00* mObj;       // _08
+	struct KeyList* mList; // _0C
 };
 
 /** Every live key initTObjKey00 makes it when the stage's objects load */
@@ -104,31 +104,31 @@ public:
 	void useTimed();
 	void spawnTimer();
 
-	KeyNode mNode;     // _64
+	KeyNode mNode;       // _64
 	NJS_OBJECT* mPiece0; // _74
 	NJS_OBJECT* mPiece1; // _78 the model's first child
 	NJS_OBJECT* mPiece2; // _7C
 	NJS_OBJECT* mPiece3; // _80
-	MeshObject* mActor;      // _84
-	void* mMaterial;   // _88
-	DrawTask* mDraw;   // _8C
-	KeyGlow mLight0;   // _90
-	KeyGlow mLight1;   // _B4
-	f32 mMtx[12];      // _D8
-	Fx* mEffect;     // _108
-	int mKind;         // _10C set int 0 kept in 0..5
-	int mModel;        // _110 -1 when this kind has no model
-	int mModel2;       // _114
-	int mUse;          // _118 set int 1 kept in 0..3
-	int mSwitch;       // _11C set int 3 kept in 0..0x7FF
-	int mWho;          // _120 0 either 1 the player 2 the egg
-	int mHold;         // _124 frames use 3 stays taken
-	int mHoldFrame;    // _128
-	f32 mScale;        // _12C
-	f32 mRadius;       // _130
-	int mSpin;         // _134
-	int mLatched;      // _138
-	int mOpen;         // _13C
+	MeshObject* mActor;  // _84
+	void* mMaterial;     // _88
+	DrawTask* mDraw;     // _8C
+	KeyGlow mLight0;     // _90
+	KeyGlow mLight1;     // _B4
+	f32 mMtx[12];        // _D8
+	Fx* mEffect;         // _108
+	int mKind;           // _10C set int 0 kept in 0..5
+	int mModel;          // _110 -1 when this kind has no model
+	int mModel2;         // _114
+	int mUse;            // _118 set int 1 kept in 0..3
+	int mSwitch;         // _11C set int 3 kept in 0..0x7FF
+	int mWho;            // _120 0 either 1 the player 2 the egg
+	int mHold;           // _124 frames use 3 stays taken
+	int mHoldFrame;      // _128
+	f32 mScale;          // _12C
+	f32 mRadius;         // _130
+	int mSpin;           // _134
+	int mLatched;        // _138
+	int mOpen;           // _13C
 };
 
 extern "C" {

@@ -12,7 +12,9 @@ SetDesc::SetDesc()
 	mObjId = 0xFFFF;
 }
 
-SetDesc::~SetDesc() { }
+SetDesc::~SetDesc()
+{
+}
 
 int SetDesc::isValid()
 {
@@ -54,7 +56,9 @@ SetDescObj::SetDescObj()
 	mRecord = 0;
 }
 
-SetDescObj::~SetDescObj() { }
+SetDescObj::~SetDescObj()
+{
+}
 
 void SetDescObj::setRecord(SetRecord* record)
 {
@@ -63,10 +67,10 @@ void SetDescObj::setRecord(SetRecord* record)
 
 static void clearRecord(SetRecord* record)
 {
-	record->mId = 0;
-	record->mPos.x = 0.0f;
-	record->mPos.y = 0.0f;
-	record->mPos.z = 0.0f;
+	record->mId     = 0;
+	record->mPos.x  = 0.0f;
+	record->mPos.y  = 0.0f;
+	record->mPos.z  = 0.0f;
 	record->mRot[0] = 0;
 	record->mRot[1] = 0;
 	record->mRot[2] = 0;
@@ -211,7 +215,9 @@ SetDescEnemy::SetDescEnemy()
 	mRecord = 0;
 }
 
-SetDescEnemy::~SetDescEnemy() { }
+SetDescEnemy::~SetDescEnemy()
+{
+}
 
 void SetDescEnemy::setRecord(SetEnemyRecord* record)
 {
@@ -220,16 +226,16 @@ void SetDescEnemy::setRecord(SetEnemyRecord* record)
 
 static void clearEnemyRecord(SetEnemyRecord* record)
 {
-	record->mId = 0;
-	record->mPos.x = 0.0f;
-	record->mPos.y = 0.0f;
-	record->mPos.z = 0.0f;
+	record->mId     = 0;
+	record->mPos.x  = 0.0f;
+	record->mPos.y  = 0.0f;
+	record->mPos.z  = 0.0f;
 	record->mRot[0] = 0;
 	record->mRot[1] = 0;
 	record->mRot[2] = 0;
-	record->_1C = 0;
-	record->_1E = 0;
-	record->_20 = 0;
+	record->_1C     = 0;
+	record->_1E     = 0;
+	record->_20     = 0;
 	for (int i = 0; i < 3; i++) {
 		record->_24[i] = 0;
 	}

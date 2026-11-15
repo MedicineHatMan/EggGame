@@ -12,7 +12,9 @@ extern "C" TStage* createYellowBossStage()
 	return new TStageYellowBoss;
 }
 
-TStageYellowBoss::TStageYellowBoss() { }
+TStageYellowBoss::TStageYellowBoss()
+{
+}
 
 void TStageYellowBoss::loadAssets()
 {
@@ -31,4 +33,6 @@ void TStageYellowBoss::vfn_14()
 	createTObjYellowTornadoScene(gTL_02, 4, 1);
 }
 
-TStageYellowBoss::~TStageYellowBoss() { }
+TStageYellowBoss::~TStageYellowBoss()
+{
+}

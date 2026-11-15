@@ -62,31 +62,31 @@ const char* gTMsnObjCoinName = "TMsnObjCoin";
 TMsnObjCoin::TMsnObjCoin(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00 = (u32)gTMsnObjCoinName;
-	mSize = 0x16C;
-	NJS_OBJECT** models = getStgObjModels();
-	mModel = models[52];
+	_00                    = (u32)gTMsnObjCoinName;
+	mSize                  = 0x16C;
+	NJS_OBJECT** models    = getStgObjModels();
+	mModel                 = models[52];
 	NJS_TEXLIST** textures = getStgObjTextures();
-	mTexList = textures[45];
-	GjModel* part = mModel->model;
-	mRadius = part->r;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
-	mShape = colliCreate(1, 1);
+	mTexList               = textures[45];
+	GjModel* part          = mModel->model;
+	mRadius                = part->r;
+	mDrawTask              = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
+	mShape                 = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks((CharaColli*)mShape, 4, 255, 254, 254);
-	mScale.x = 1.0f;
-	mScale.y = 1.0f;
-	mScale.z = 1.0f;
-	mSpin = 128;
-	mPulse = 0;
-	mState = 0;
-	f32 scaled = mRadius * 2.0f;
+	mScale.x    = 1.0f;
+	mScale.y    = 1.0f;
+	mScale.z    = 1.0f;
+	mSpin       = 128;
+	mPulse      = 0;
+	mState      = 0;
+	f32 scaled  = mRadius * 2.0f;
 	mShadow._30 = scaled;
 	mShadow._34 = scaled;
 	initFromDesc(desc);
 	TParticleGenerator* made = particleGenById((TObject*)this, &mPos, 0, 0x19C);
-	mGen = (TObject*)made;
-	made = (TParticleGenerator*)mGen;
+	mGen                     = (TObject*)made;
+	made                     = (TParticleGenerator*)mGen;
 	if (made != 0) {
 		made->mAttach = mMatrix;
 	}

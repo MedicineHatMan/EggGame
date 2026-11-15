@@ -22,7 +22,7 @@ void fxDrawBegin(FxGroup* group)
 	gFxLastMatrixSlot = 3;
 	fxSetCurrentMtx(0);
 	gFxLastBlendMode = -1;
-	gFxLastArray = 0;
+	gFxLastArray     = 0;
 	fxSetCoordArray(gFxCoordArray, 8);
 	gFxLastMode = 0;
 	fxSetCull(2);
@@ -40,10 +40,10 @@ void fxDrawBegin(FxGroup* group)
 	gFxLastColor[2] = 0xFF;
 	gFxLastColor[1] = 0xFF;
 	gFxLastColor[0] = 0xFF;
-	u32 color = *(u32*)gFxLastColor;
+	u32 color       = *(u32*)gFxLastColor;
 	GXSetTevColor(GX_TEVREG0, *(GXColor*)&color);
 	gFxRenderReady = 0;
-	int* in = (int*)(state + 0x260);
+	int* in        = (int*)(state + 0x260);
 	GXSetTevColorIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
 	in = (int*)(state + 0x280);
 	GXSetTevAlphaIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);

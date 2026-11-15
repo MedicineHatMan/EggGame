@@ -11,7 +11,7 @@ EnemySeekBrain::EnemySeekBrain()
 {
 	mSight.reset();
 	mMemory.reset();
-	mStep = 0;
+	mStep  = 0;
 	mTimer = 0;
 }
 
@@ -34,7 +34,9 @@ int EnemySeekBrain::checkInterrupt()
 
 // 0x80049F8C
 // Slot _20
-void EnemySeekBrain::onDeathStart() { }
+void EnemySeekBrain::onDeathStart()
+{
+}
 
 // 0x80049F90
 void EnemySeekBrain::phaseAppear(int phase)
@@ -90,17 +92,21 @@ void EnemySeekBrain::phaseDie(int phase)
 }
 
 // 0x8004A0D0
-Am01WanderBrain::Am01WanderBrain() { }
+Am01WanderBrain::Am01WanderBrain()
+{
+}
 
 // 0x8004A10C
-Am01WanderBrain::~Am01WanderBrain() { }
+Am01WanderBrain::~Am01WanderBrain()
+{
+}
 
 // 0x8004A18C
 // Slot _24
 void Am01WanderBrain::attach(TEneAm01* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	mState = STATE_APPEAR;
 	onPhase(mState, 0);
 	if (mNext != -1) {
@@ -181,11 +187,11 @@ void Am01WanderBrain::phaseWander(int phase)
 {
 	switch (phase) {
 	case 0:
-		mStep = 1;
+		mStep  = 1;
 		mTimer = 0;
 		pickTarget();
 		mOwner->mTopSpeed = 0.3f;
-		mNext = TEneAm01::ACT_WALK;
+		mNext             = TEneAm01::ACT_WALK;
 		break;
 	case 2:
 		if (mStep == 2) {
@@ -203,8 +209,8 @@ void Am01WanderBrain::phaseWander(int phase)
 			if (mOwner->hasArrived() != 0 || mTimer >= 600) {
 				if (random01() < 0.2f) {
 					mTimer = (int)(420.0f * random01() + 180.0f);
-					mStep = 0;
-					mNext = TEneAm01::ACT_IDLE;
+					mStep  = 0;
+					mNext  = TEneAm01::ACT_IDLE;
 				} else {
 					mTimer = 0;
 					pickTarget();
@@ -215,10 +221,10 @@ void Am01WanderBrain::phaseWander(int phase)
 			mTimer--;
 			if (mTimer <= 0) {
 				mTimer = 0;
-				mStep = 1;
+				mStep  = 1;
 				pickTarget();
 				mOwner->mTopSpeed = 0.3f;
-				mNext = TEneAm01::ACT_WALK;
+				mNext             = TEneAm01::ACT_WALK;
 			}
 			break;
 		}
@@ -234,9 +240,9 @@ void Am01WanderBrain::phaseChase(int phase)
 {
 	switch (phase) {
 	case 0:
-		mStep = 0;
+		mStep             = 0;
 		mOwner->mTopSpeed = 0.5f;
-		mNext = TEneAm01::ACT_CHASE;
+		mNext             = TEneAm01::ACT_CHASE;
 		mOwner->mBody.mVel.y += 1.0f;
 		mOwner->startEffect();
 		break;
@@ -262,17 +268,21 @@ void Am01WanderBrain::phaseChase(int phase)
 }
 
 // 0x8004A854
-Am01LeapBrain::Am01LeapBrain() { }
+Am01LeapBrain::Am01LeapBrain()
+{
+}
 
 // 0x8004A890
-Am01LeapBrain::~Am01LeapBrain() { }
+Am01LeapBrain::~Am01LeapBrain()
+{
+}
 
 // 0x8004A910
 // Slot _24
 void Am01LeapBrain::attach(TEneAm01* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	mState = STATE_APPEAR;
 	onPhase(mState, 0);
 	if (mNext != -1) {
@@ -367,7 +377,7 @@ void Am01LeapBrain::phaseLeap(int phase)
 {
 	switch (phase) {
 	case 0:
-		mStep = 0;
+		mStep  = 0;
 		mTimer = 0;
 		startWander();
 		mNext = TEneAm01::ACT_LEAP;
@@ -392,7 +402,7 @@ void Am01LeapBrain::phaseLeap(int phase)
 				lost = 1;
 			}
 			if (lost != 0) {
-				mStep = 0;
+				mStep  = 0;
 				mTimer = 0;
 				startWander();
 			}

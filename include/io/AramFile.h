@@ -4,13 +4,13 @@
 #include "io/Resource.h"
 
 struct AramRequest {
-	AramRequest* mNext; // _00
-	u32 mOwner;         // _04
-	u32 mType;          // _08
-	u32 mPriority;      // _0C
-	u32 mSource;        // _10
-	u32 mDest;          // _14
-	u32 mLength;        // _18
+	AramRequest* mNext;              // _00
+	u32 mOwner;                      // _04
+	u32 mType;                       // _08
+	u32 mPriority;                   // _0C
+	u32 mSource;                     // _10
+	u32 mDest;                       // _14
+	u32 mLength;                     // _18
 	void (*mCallback)(AramRequest*); // _1C
 };
 
@@ -22,18 +22,18 @@ struct AramRequest {
  */
 class TAramFile : public TFile {
 public:
-	TAramFile(u32 aram, u32 size); // 0x80066040
-	virtual ~TAramFile();           // 0x800660B4
-	virtual int seek(int offset, int from);  // 0x80066110
-	virtual int tell();                      // 0x80066160
-	virtual void cancel();                   // 0x80066168 does nothing
-	virtual int getSize();                   // 0x8006616C
-	virtual int getStatus();                 // 0x80066174
-	virtual int read(void* dest, int size);  // 0x800661B4
+	TAramFile(u32 aram, u32 size);          // 0x80066040
+	virtual ~TAramFile();                   // 0x800660B4
+	virtual int seek(int offset, int from); // 0x80066110
+	virtual int tell();                     // 0x80066160
+	virtual void cancel();                  // 0x80066168 does nothing
+	virtual int getSize();                  // 0x8006616C
+	virtual int getStatus();                // 0x80066174
+	virtual int read(void* dest, int size); // 0x800661B4
 
-	int fill(int block);                     // 0x8006642C into the buffer
-	int fetch(int block, int size);          // 0x8006652C straight to mDest when it can
-	int isBuffered(int block);               // 0x80066608 1 or -1
+	int fill(int block);            // 0x8006642C into the buffer
+	int fetch(int block, int size); // 0x8006652C straight to mDest when it can
+	int isBuffered(int block);      // 0x80066608 1 or -1
 
 	AramRequest mRequest; // _04
 	u8 mBuf[0x40];        // _24 mBuffer is the aligned block inside

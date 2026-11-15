@@ -31,13 +31,13 @@ public:
 
 	inline void killFx2();
 
-	Vec3f mFlyDir;       // _384
-	f32 mSpeed;          // _390
-	f32 mSpread;         // _394 how far each copy sits from the middle
-	int mSpin;           // _398
-	f32 mTravelled;      // _39C
-	Fx* mFx2;          // _3A0
-	f32 mFx2Matrix[12];  // _3A4
+	Vec3f mFlyDir;      // _384
+	f32 mSpeed;         // _390
+	f32 mSpread;        // _394 how far each copy sits from the middle
+	int mSpin;          // _398
+	f32 mTravelled;     // _39C
+	Fx* mFx2;           // _3A0
+	f32 mFx2Matrix[12]; // _3A4
 };
 
 struct SpiralVtx {

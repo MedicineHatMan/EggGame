@@ -95,7 +95,7 @@ void dlist<T>::makePool(int count)
 		mPool[i].mNext = &mPool[i + 1];
 	}
 	mPool[count - 1].mNext = NULL;
-	mSize = count;
+	mSize                  = count;
 }
 
 template <typename T>
@@ -117,8 +117,8 @@ void dlist<T>::unlink(node* n)
 	if (n->mPrev == n) {
 		mHead = NULL;
 	} else if (mHead == n) {
-		mHead              = n->mNext;
-		n->mPrev->mNext    = NULL;
+		mHead           = n->mNext;
+		n->mPrev->mNext = NULL;
 		if (n->mNext != NULL) {
 			n->mNext->mPrev = n->mPrev;
 		}
@@ -146,10 +146,10 @@ typename dlist<T>::iterator dlist<T>::insert(iterator pos, const T& value)
 			n->mNext = NULL;
 			mHead    = n;
 		} else {
-			n->mPrev               = mHead->mPrev;
-			n->mNext               = NULL;
-			mHead->mPrev->mNext    = n;
-			mHead->mPrev           = n;
+			n->mPrev            = mHead->mPrev;
+			n->mNext            = NULL;
+			mHead->mPrev->mNext = n;
+			mHead->mPrev        = n;
 		}
 	} else {
 		if (mHead == at) {

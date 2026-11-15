@@ -31,7 +31,7 @@ TCameraCtrl::TCameraCtrl()
 		mLock[i]   = new TCamLockOnCursor(gTL_06);
 		camAimClear(&mAim[i]);
 		camPadInit(&mPath[i]);
-		mPad[i]   = i;
+		mPad[i]    = i;
 		mEditor[i] = 0;
 		camSavedClear(&mSaved[i]);
 	}
@@ -41,7 +41,9 @@ TCameraCtrl::TCameraCtrl()
 }
 
 // 0x80006244
-CamView::CamView() { }
+CamView::CamView()
+{
+}
 
 // 0x80006248
 TCameraCtrl::~TCameraCtrl()
@@ -69,13 +71,13 @@ TCameraCtrl::~TCameraCtrl()
 void TCameraCtrl::draw()
 {
 	for (int i = 0; i < 4; i++) {
-		int pad      = mPad[i];
+		int pad = mPad[i];
 		CamPath* cam; // declared here for its register r27
-		u16 right    = (u16)padGet(i)->mTriggerR;
-		u16 left     = padGet(i)->mTriggerL;
-		s16 x        = padGet(i)->mSubX;
-		s16 y        = padGet(i)->mSubY;
-		cam = &mPath[pad];
+		u16 right = (u16)padGet(i)->mTriggerR;
+		u16 left  = padGet(i)->mTriggerL;
+		s16 x     = padGet(i)->mSubX;
+		s16 y     = padGet(i)->mSubY;
+		cam       = &mPath[pad];
 		camPadClear(cam);
 		int downB = padGet(pad)->mHold & 0x20;
 		camPadUpdate(cam, padGet(pad)->mHold & 0x40, left, downB, right, x, y);
@@ -533,9 +535,9 @@ int TCameraCtrl::isVisible(const Vec3f* pos, Vec3f* out, f32 far, f32 radius)
 	if (depth > far) {
 		return 0;
 	}
-	f32 scale  = 1.0f / depth;
-	f32 slope  = mView[mDrawIndex].mSlopeX;
-	f32 dx     = (f32)__fabs(view.x) - radius;
+	f32 scale = 1.0f / depth;
+	f32 slope = mView[mDrawIndex].mSlopeX;
+	f32 dx    = (f32)__fabs(view.x) - radius;
 	if (dx * scale > slope) {
 		return 0;
 	}

@@ -34,16 +34,16 @@ public:
 	virtual void vfn_10(); // _10 empty
 	virtual void render(); // _1C
 
-	void setup();                                      // 0x801795EC
-	void updateMatrix();                               // 0x80179864
-	void applyNodes(struct SelectNode* node, int depth);            // 0x80179900
-	void attachBurst(const f32* mtx);                  // 0x80179A28
-	void spawnIndex2();                                // 0x80179A68
-	void spawnIndex5();                                // 0x80179ACC
-	void spawnIndex4();                                // 0x80179B30
-	void spawnIndex1();                                // 0x80179B94
-	void spawnIndex6();                                // 0x80179C1C
-	void setMaterial(int kind);                        // 0x80179C80
+	void setup();                                        // 0x801795EC
+	void updateMatrix();                                 // 0x80179864
+	void applyNodes(struct SelectNode* node, int depth); // 0x80179900
+	void attachBurst(const f32* mtx);                    // 0x80179A28
+	void spawnIndex2();                                  // 0x80179A68
+	void spawnIndex5();                                  // 0x80179ACC
+	void spawnIndex4();                                  // 0x80179B30
+	void spawnIndex1();                                  // 0x80179B94
+	void spawnIndex6();                                  // 0x80179C1C
+	void setMaterial(int kind);                          // 0x80179C80
 
 	int mIndex;        // _20
 	int _24;           // _24
@@ -52,7 +52,7 @@ public:
 	Vec3f mPos;        // _5C
 	int mAngle[3];     // _68
 	f32 mScale;        // _74
-	DrawTask* mDraw;       // _78
+	DrawTask* mDraw;   // _78
 	u32 _7C;           // _7C
 	u8 _80[0x1C];      // _80
 	u32 _9C;           // _9C
@@ -66,9 +66,9 @@ public:
 	f32 mLightZ;       // _CC
 	void* mBurst;      // _D0
 	u32 _D4;           // _D4
-	Fx* mFx;         // _D8
+	Fx* mFx;           // _D8
 	f32 mMtxA[12];     // _DC
-	Fx* mFxB;        // _10C
+	Fx* mFxB;          // _10C
 	f32 mMtxB[12];     // _110
 };
 

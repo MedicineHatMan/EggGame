@@ -17,10 +17,10 @@ struct BalloonPuff {
 	BalloonPuff* mNext; // _00
 	u8 mKind;           // _04
 	u8 _05;
-	u16 mCell;          // _06 index into the octree positions
-	f32 mX;             // _08
-	f32 mY;             // _0C
-	f32 mZ;             // _10
+	u16 mCell; // _06 index into the octree positions
+	f32 mX;    // _08
+	f32 mY;    // _0C
+	f32 mZ;    // _10
 };
 
 /**
@@ -44,14 +44,14 @@ public:
 	static void bindTex(int kind);
 	static void bindShape(int lod);
 
-	DrawTask* mDrawTask;     // _20
+	DrawTask* mDrawTask; // _20
 	u32 _24;
-	BalloonPuff* mPool;      // _28
-	BalloonPuff* mActive;    // _2C
-	BalloonPuff* mFree;      // _30
-	int mCount;              // _34
-	int mTimer;              // _38 counts down to a query then reloads to 60
-	u8* mGrid;               // _3C balloons currently in each cell
+	BalloonPuff* mPool;   // _28
+	BalloonPuff* mActive; // _2C
+	BalloonPuff* mFree;   // _30
+	int mCount;           // _34
+	int mTimer;           // _38 counts down to a query then reloads to 60
+	u8* mGrid;            // _3C balloons currently in each cell
 };
 
 extern "C" {

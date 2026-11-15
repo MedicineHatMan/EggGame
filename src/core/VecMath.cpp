@@ -4,6 +4,7 @@
 extern const f32 gUnitVectorMin = 1e-06f;
 
 // 0x8001A16C
+// clang-format off
 extern "C" asm void vecAdd(Vec3f* out, const Vec3f* a, const Vec3f* b)
 {
 	nofralloc
@@ -17,8 +18,10 @@ extern "C" asm void vecAdd(Vec3f* out, const Vec3f* a, const Vec3f* b)
 	psq_st f1, 8(r3), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x8001A190
+// clang-format off
 extern "C" asm void vecSub(Vec3f* out, const Vec3f* a, const Vec3f* b)
 {
 	nofralloc
@@ -32,12 +35,14 @@ extern "C" asm void vecSub(Vec3f* out, const Vec3f* a, const Vec3f* b)
 	psq_st f1, 8(r3), 1, 0
 	blr
 }
+// clang-format on
 
 // The zero vecNormalize writes It has its own pool entry apart from the 0.0f in __sinit
 static const f32 sNormZero = 0.0f;
 
 // 0x8001A1B4
 // Returns the length or zero and a zero vector if it's too short
+// clang-format off
 extern "C" asm f32 vecNormalize(Vec3f* out, const Vec3f* in)
 {
 	nofralloc
@@ -66,9 +71,11 @@ ok:
 	fres f1, f0
 	blr
 }
+// clang-format on
 
 // 0x8001A210
 // out = a * scale + b
+// clang-format off
 extern "C" asm void vecScaleAdd(f32 scale, Vec3f* out, const Vec3f* a, const Vec3f* b)
 {
 	nofralloc
@@ -82,8 +89,10 @@ extern "C" asm void vecScaleAdd(f32 scale, Vec3f* out, const Vec3f* a, const Vec
 	psq_st f5, 8(r3), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x8001A234
+// clang-format off
 extern "C" asm void vecScale(f32 scale, Vec3f* out, const Vec3f* in)
 {
 	nofralloc
@@ -95,6 +104,7 @@ extern "C" asm void vecScale(f32 scale, Vec3f* out, const Vec3f* in)
 	psq_st f5, 8(r3), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x8001A250
 // The distance between two points
@@ -113,6 +123,7 @@ extern "C" f32 vecDistance(const Vec3f* a, const Vec3f* b)
 
 // 0x8001A29C
 // The squared distance between two points
+// clang-format off
 extern "C" asm f32 vecDistanceSq(const Vec3f* a, const Vec3f* b)
 {
 	nofralloc
@@ -127,8 +138,10 @@ extern "C" asm f32 vecDistanceSq(const Vec3f* a, const Vec3f* b)
 	ps_sum0 f1, f0, f4, f0
 	blr
 }
+// clang-format on
 
 // 0x8001A2C4
+// clang-format off
 extern "C" asm void vecNegate(Vec3f* out, const Vec3f* in)
 {
 	nofralloc
@@ -140,9 +153,11 @@ extern "C" asm void vecNegate(Vec3f* out, const Vec3f* in)
 	psq_st f5, 8(r3), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x8001A2E0
 // The length of a vector estimated
+// clang-format off
 extern "C" asm f32 vecLength(const Vec3f* in)
 {
 	nofralloc
@@ -156,9 +171,11 @@ extern "C" asm f32 vecLength(const Vec3f* in)
 	fres f1, f1
 	blr
 }
+// clang-format on
 
 // 0x8001A304
 // The squared length of a vector
+// clang-format off
 extern "C" asm f32 vecLengthSq(const Vec3f* in)
 {
 	nofralloc
@@ -170,6 +187,7 @@ extern "C" asm f32 vecLengthSq(const Vec3f* in)
 	fmadds f1, f2, f2, f0
 	blr
 }
+// clang-format on
 
 // Zero and the unit axes which many files read
 struct AxisVec : public Vec3f {
@@ -178,7 +196,7 @@ struct AxisVec : public Vec3f {
 
 extern "C" {
 AxisVec gVecZero(0.0f, 0.0f, 0.0f); // all zero
-AxisVec gAxisX(1.0f, 0.0f, 0.0f); // the X axis
-AxisVec gVecUp(0.0f, 1.0f, 0.0f); // the Y axis
-AxisVec gAxisZ(0.0f, 0.0f, 1.0f); // the Z axis
+AxisVec gAxisX(1.0f, 0.0f, 0.0f);   // the X axis
+AxisVec gVecUp(0.0f, 1.0f, 0.0f);   // the Y axis
+AxisVec gAxisZ(0.0f, 0.0f, 1.0f);   // the Z axis
 }

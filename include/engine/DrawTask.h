@@ -37,7 +37,7 @@ struct DrawTaskList {
 
 extern "C" {
 DrawTask* addDrawTask(void* owner, void (*func)(void*), u16 list, u16 sortKey); // 0x80029064 0 when the pool is empty
-void drawObjectTask(TObject* obj); // 0x800141E8 the usual task function calls obj->render()
+void drawObjectTask(TObject* obj);                                              // 0x800141E8 the usual task function calls obj->render()
 }
 
 extern "C" {

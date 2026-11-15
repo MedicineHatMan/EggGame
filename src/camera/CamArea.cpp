@@ -107,9 +107,9 @@ void CamAreaCtrl::testOuter(CamArea* area, Vec3f* pos, u8* state)
 		*state &= ~6;
 		return;
 	}
-	f64 ady = __fabs(pos->y - area->mPos.y);
-	f32 dx = pos->x - area->mPos.x;
-	f32 dz = pos->z - area->mPos.z;
+	f64 ady    = __fabs(pos->y - area->mPos.y);
+	f32 dx     = pos->x - area->mPos.x;
+	f32 dz     = pos->z - area->mPos.z;
 	f32 height = area->mOuterHeight;
 	*state &= ~1;
 	f32 radius = area->mOuterRadius;

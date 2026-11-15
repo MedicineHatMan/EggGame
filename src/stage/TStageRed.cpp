@@ -10,21 +10,22 @@ extern "C" TStage* createRedStage()
 	return new TStageRed;
 }
 
-TStageRed::TStageRed() { }
+TStageRed::TStageRed()
+{
+}
 
 void TStageRed::loadAssets()
 {
-
 }
 
 void TStageRed::freeAssets()
 {
-
 }
 
 void TStageRed::vfn_14()
 {
-
 }
 
-TStageRed::~TStageRed() { }
+TStageRed::~TStageRed()
+{
+}

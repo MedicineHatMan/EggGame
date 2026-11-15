@@ -105,7 +105,7 @@ f32 MirrorRipple::farthestSq(f32 x, f32 y, int vert, f32 best)
 {
 	f32 dx = mVerts[0][vert].mX - x;
 	f32 dy = mVerts[0][vert].mY - y;
-	f32 d = dx * dx + dy * dy;
+	f32 d  = dx * dx + dy * dy;
 
 	if (d > best) {
 		best = d;
@@ -149,7 +149,7 @@ static inline void pushVert(RippleVert* v, f32 x, f32 y, f32 strength)
 {
 	f32 dy = v->mY - y;
 	f32 dx = v->mX - x;
-	f32 k = strength * (f32)__frsqrte(dx * dx + dy * dy);
+	f32 k  = strength * (f32)__frsqrte(dx * dx + dy * dy);
 
 	v->mVelX += dx * k;
 	v->mVelY += dy * k;
@@ -165,11 +165,11 @@ void MirrorRipple::pushRing(const RippleSource* src, f32 outer, f32 inner, f32 s
 	f32 width;
 	f32 down;
 	f32 left;
-	x = src->mPos.x;
-	left = x - mVerts[0][0].mX;
-	y = src->mPos.y;
+	x     = src->mPos.x;
+	left  = x - mVerts[0][0].mX;
+	y     = src->mPos.y;
 	width = mVerts[0][15].mX - mVerts[0][0].mX;
-	down = -(y - mVerts[0][0].mY);
+	down  = -(y - mVerts[0][0].mY);
 	f32 colScale;
 	f32 height;
 	f32 rowScale;
@@ -181,13 +181,13 @@ void MirrorRipple::pushRing(const RippleSource* src, f32 outer, f32 inner, f32 s
 		return;
 	}
 	colScale = 15.0f / width;
-	height = mVerts[0][0].mY - mVerts[15][0].mY;
+	height   = mVerts[0][0].mY - mVerts[15][0].mY;
 	if (down - outer > height || down + outer < 0.0f) {
 		return;
 	}
 	rowScale = 15.0f / height;
-	rowStep = __fres(rowScale);
-	row = (int)(f32)ceil((down - outer) * rowScale);
+	rowStep  = __fres(rowScale);
+	row      = (int)(f32)ceil((down - outer) * rowScale);
 	if (row < 0) {
 		row = 0;
 	}
@@ -207,7 +207,7 @@ void MirrorRipple::pushRing(const RippleSource* src, f32 outer, f32 inner, f32 s
 		int col;
 
 		dy *= dy;
-		half = rippleSqrt(outer - dy);
+		half     = rippleSqrt(outer - dy);
 		colStart = (int)(f32)ceil(colScale * (left - half));
 		if (colStart < 0) {
 			colStart = 0;
@@ -218,11 +218,11 @@ void MirrorRipple::pushRing(const RippleSource* src, f32 outer, f32 inner, f32 s
 		}
 		if (dy > inner) {
 			innerStart = colEnd + 1;
-			innerEnd = innerStart;
+			innerEnd   = innerStart;
 		} else {
-			half = rippleSqrt(inner - dy);
+			half       = rippleSqrt(inner - dy);
 			innerStart = (int)(f32)ceil(colScale * (left - half));
-			innerEnd = (int)(f32)floor(colScale * (left + half));
+			innerEnd   = (int)(f32)floor(colScale * (left + half));
 		}
 		for (col = colStart; col < innerStart; col++) {
 			pushVert(&mVerts[row][col], x, y, strength);
@@ -266,7 +266,7 @@ int MirrorRipple::spread()
 int MirrorRipple::settle()
 {
 	RippleVert* v = mVerts[0];
-	int moving = 0;
+	int moving    = 0;
 
 	for (int i = 0; i < 256; i++) {
 		if ((u32)v->mMoving != 0) {
@@ -283,7 +283,7 @@ int MirrorRipple::settle()
 			f32 inv;
 
 			moving = 1;
-			pull = v->mDist;
+			pull   = v->mDist;
 			pull *= -0.2f;
 			velY = v->mVelY;
 			velX = v->mVelX;
@@ -291,22 +291,22 @@ int MirrorRipple::settle()
 			velX += v->mDirX * pull;
 			velY *= 0.945f;
 			velX *= 0.945f;
-			newV = v->mV;
+			newV  = v->mV;
 			homeY = v->mY;
-			newU = v->mU;
+			newU  = v->mU;
 			homeX = v->mX;
 			newV += velY;
 			newU += velX;
-			dy = newV - homeY;
-			dx = newU - homeX;
+			dy   = newV - homeY;
+			dx   = newU - homeX;
 			dist = __fres((f32)__frsqrte(dx * dx + dy * dy));
-			inv = __fres(dist);
+			inv  = __fres(dist);
 			dx *= inv;
 			dy *= inv;
 			if (dist <= 0.05f && velX * velX + velY * velY <= 0.0025000002f) {
 				v->mMoving = 0;
-				newU = homeX;
-				newV = homeY;
+				newU       = homeX;
+				newV       = homeY;
 				dist = velY = velX = dy = dx = 0.0f;
 			}
 			v->mU    = newU;
@@ -327,7 +327,7 @@ void MirrorRipple::update()
 {
 	if (mBusy != 0) {
 		int spreading = spread();
-		int settling = settle();
+		int settling  = settle();
 
 		if ((spreading | settling) == 0) {
 			mBusy = 0;

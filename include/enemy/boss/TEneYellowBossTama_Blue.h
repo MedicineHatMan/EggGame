@@ -26,25 +26,25 @@ class TEneYellowBossTama_Blue : public TObjAction {
 public:
 	TEneYellowBossTama_Blue(TObject* parent, const Vec3f* pos, const Vec3f* dir);
 	virtual ~TEneYellowBossTama_Blue();
-	virtual void draw();                                        // _0C
-	virtual void vfn_10();                                      // _10 hidden while off camera
-	virtual void render();                                      // _1C
-	virtual Vec3f* getPos();                                    // _20 defined in TEneYellowBossTama_ShockWave.cpp
-	virtual int getKind();                                      // _2C defined in TEneYellowBossTama_ShockWave.cpp
+	virtual void draw();                                              // _0C
+	virtual void vfn_10();                                            // _10 hidden while off camera
+	virtual void render();                                            // _1C
+	virtual Vec3f* getPos();                                          // _20 defined in TEneYellowBossTama_ShockWave.cpp
+	virtual int getKind();                                            // _2C defined in TEneYellowBossTama_ShockWave.cpp
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58
 
 	void* operator new(unsigned long size) { return objHeapAlloc(gObjHeap, size); }
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	void placeColli();                                           // 0x801514B0
+	void placeColli();                                             // 0x801514B0
 	void launchAt(const Vec3f* from, const Vec3f* to, Vec3f* vel); // 0x80151514
 
 	SetTransform mXform; // _30
 	ObjShadow mShadow;   // _74
-	DrawTask* mDraw;         // _AC
-	CharaColli* mShape;        // _B0
+	DrawTask* mDraw;     // _AC
+	CharaColli* mShape;  // _B0
 	EnemySight mSight;   // _B4 mHeightLimit is the range
-	NJS_OBJECT* mModel;        // _E4
+	NJS_OBJECT* mModel;  // _E4
 	Vec3f mDir;          // _E8 where the next hop lands
 	int mState;          // _F4 a BlueTamaState
 	int mBounces;        // _F8

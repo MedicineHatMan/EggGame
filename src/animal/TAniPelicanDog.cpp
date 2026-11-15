@@ -27,16 +27,11 @@ f32 sPelicanDogRate2 = 0.55f;
 f32 sPelicanDogRate3 = 0.6f;
 
 MotionEntry gPelicanMotions[] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 15.0f, sPelicanDogRate0, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 33.0f, sPelicanDogRate1, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, sPelicanDogRate2, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 15.0f, sPelicanDogRate3, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 15.0f, sPelicanDogRate3, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, sPelicanDogRate2, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 33.0f, sPelicanDogRate1, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 30.0f, sPelicanDogRate2, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, sPelicanDogRate2, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 15.0f, sPelicanDogRate0, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 33.0f, sPelicanDogRate1, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, sPelicanDogRate2, 0.0f, 0 }, { MOTION_LOOP, 3, -1, 0, 0.0f, 15.0f, sPelicanDogRate3, 0.0f, 0 },
+	{ MOTION_ONCE, 3, -1, 0, 0.0f, 15.0f, sPelicanDogRate3, 0.0f, 0 }, { MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, sPelicanDogRate2, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 33.0f, sPelicanDogRate1, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 30.0f, sPelicanDogRate2, 0.0f, 0 }, { MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, sPelicanDogRate2, 0.0f, 0 },
 };
 ColliShape sPelicanDogFirstShape[] = {
 	{ { 0.0f, 5.0f, 0.0f }, 0x0, 0, 0x0, 5.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
@@ -70,13 +65,13 @@ TAniPelicanDog::TAniPelicanDog(TObject* parent, int player, int kind, const Vec3
 	mNodes     = gPelicanMotions;
 	mShape     = sPelicanDogFirstShape;
 	initColli();
-	m270       = sPelicanDogCallbacks;
-	mShowExtra = 0;
+	m270        = sPelicanDogCallbacks;
+	mShowExtra  = 0;
 	mExtraFrame = 0.0f;
-	mTravelled = 0.0f;
-	mSpeed     = 0.0f;
-	mSpin      = 0;
-	mNodeKind  = -1;
+	mTravelled  = 0.0f;
+	mSpeed      = 0.0f;
+	mSpin       = 0;
+	mNodeKind   = -1;
 }
 
 // 0x8013CE40
@@ -93,7 +88,7 @@ void TAniPelicanDog::draw()
 {
 	TEggCreatureTypeE::draw();
 	const MotionEntry* table = (const MotionEntry*)mNodes;
-	int kind = table[mPlayer.mCurrent].mMotion;
+	int kind                 = table[mPlayer.mCurrent].mMotion;
 	if (kind != mNodeKind) {
 		if (kind == 1) {
 			mShowExtra  = 1;
@@ -160,18 +155,18 @@ void TAniPelicanDog::onPhase(int phase)
 		playMotion(3, 1, 0.075f);
 		eggTypeStopAllFx(this);
 		startFollowers();
-		mTimer = 0x3C;
-		mAniFlags   = 0;
-		mStep  = 0x17;
+		mTimer    = 0x3C;
+		mAniFlags = 0;
+		mStep     = 0x17;
 		makeAttackShape(1, 1);
 		mtxSetTransV(mFxMatrix, &mPos);
-		mFx       = fxSpawnFollow(1, mFxBank, 1, mFxMatrix);
-		mStartPos = mPos;
-		mRot[1]   = vecAngleXZ(&mDir) - 0x8000;
+		mFx        = fxSpawnFollow(1, mFxBank, 1, mFxMatrix);
+		mStartPos  = mPos;
+		mRot[1]    = vecAngleXZ(&mDir) - 0x8000;
 		mTravelled = 0.0f;
-		mSpeed    = 0.0f;
-		mSpin     = 0x580;
-		mSubMode  = 5;
+		mSpeed     = 0.0f;
+		mSpin      = 0x580;
+		mSubMode   = 5;
 	} else if (phase == 2) {
 		switch (mStep) {
 		case 0x17:
@@ -226,7 +221,7 @@ static inline Vec3f pelicanAdd(const Vec3f* a, const Vec3f* b)
 static inline void pelicanSetScaled(Vec3f* out, f32 s, const Vec3f* v)
 {
 	Vec3f r = pelicanScale(s, v);
-	*out = r;
+	*out    = r;
 }
 
 /** Adds v scaled by s to out */
@@ -264,7 +259,7 @@ void TAniPelicanDog::runFly()
 
 	int rot = mRot[1];
 	rot += mSpin;
-	rot = (u16)rot;
+	rot     = (u16)rot;
 	mRot[1] = rot;
 	Vec3f forward;
 	forward.x = 0.0f;
@@ -274,14 +269,15 @@ void TAniPelicanDog::runFly()
 	pelicanSetScaled(&mVel, mSpeed, &forward);
 
 	f32 drift = 0.75f;
-	drift = 0.5f * mSpeed > drift ? drift : 0.5f * mSpeed;
+	drift     = 0.5f * mSpeed > drift ? drift : 0.5f * mSpeed;
 	pelicanAddScaled(&mVel, drift, &mDir);
 	mTravelled += drift;
 
 	EggHits hits;
 	EggProbe probe;
 	Vec3f to = pelicanAhead(&mPos, &mVel);
-	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&mPos, (const Vec3f*)&to, (unsigned long)((-1))) != 0 || mTravelled >= mParams->mValues[3] || touchedTarget() != 0) {
+	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&mPos, (const Vec3f*)&to, (unsigned long)((-1))) != 0
+	    || mTravelled >= mParams->mValues[3] || touchedTarget() != 0) {
 		notifyHolder();
 		sePlay3D(0x1BA, &mPos);
 		killFx();
@@ -299,7 +295,7 @@ void TAniPelicanDog::runShrink()
 {
 	colliGetShapes(mColli)->mSizeX = 3.5f * mParams->mValues[5];
 	colliGetShapes(mColli)->mSizeY = 3.5f * mParams->mValues[6];
-	f32 base = mParams->mBaseScale;
+	f32 base                       = mParams->mBaseScale;
 	if (mScale.x <= base) {
 		mScale.x = base;
 		mScale.y = base;

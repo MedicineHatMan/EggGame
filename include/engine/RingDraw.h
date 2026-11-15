@@ -16,10 +16,10 @@ struct RingDraw {
 	void drawShadow();     // 0x800F36C4
 	void drawShadowHoop(); // 0x800F37C0
 
-	f32 mRadius;     // _00
-	int mLod;        // _04 0 near 1 middle 2 far
-	int mShadowLod;  // _08
-	u32 mColor;      // _0C RGBA
+	f32 mRadius;    // _00
+	int mLod;       // _04 0 near 1 middle 2 far
+	int mShadowLod; // _08
+	u32 mColor;     // _0C RGBA
 };
 
 extern "C" {

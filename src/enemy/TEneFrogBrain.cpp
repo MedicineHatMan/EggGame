@@ -8,7 +8,7 @@ extern "C" {
 void FrogBrain::update(TEneFrog* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}
@@ -25,7 +25,9 @@ FrogBrainBase::FrogBrainBase()
 }
 
 // 0x800F0F30
-FrogBrainBase::~FrogBrainBase() { }
+FrogBrainBase::~FrogBrainBase()
+{
+}
 
 // 0x800F0F8C
 FrogHuntBrain* FrogHuntBrain::create(TEneFrog* owner)
@@ -38,12 +40,12 @@ FrogHuntBrain::FrogHuntBrain(TEneFrog* owner)
 {
 	mSight.reset();
 	mMemory.reset();
-	mTimer = 0;
+	mTimer   = 0;
 	mResting = 0;
-	mHops = 0;
-	mOwner = owner;
-	mNext = -1;
-	mState = STATE_APPEAR;
+	mHops    = 0;
+	mOwner   = owner;
+	mNext    = -1;
+	mState   = STATE_APPEAR;
 	onPhase(mState, 0);
 	if (mNext != -1) {
 		mOwner->setAction(mNext);
@@ -51,7 +53,9 @@ FrogHuntBrain::FrogHuntBrain(TEneFrog* owner)
 }
 
 // 0x800F1090
-FrogHuntBrain::~FrogHuntBrain() { }
+FrogHuntBrain::~FrogHuntBrain()
+{
+}
 
 // 0x800F10F8
 // A hard hit stuns it and it goes after who hit it
@@ -148,10 +152,10 @@ void FrogHuntBrain::phaseWander(int phase)
 	switch (phase) {
 	case 0:
 		pickTarget();
-		mNext = TEneFrog::ACT_HOP;
-		mTimer = randomInt(300.0f, 120.0f);
+		mNext    = TEneFrog::ACT_HOP;
+		mTimer   = randomInt(300.0f, 120.0f);
 		mResting = 0;
-		mHops = 0;
+		mHops    = 0;
 		break;
 	case 2:
 		if (look() != 0 && mOwner->isGrounded() != 0) {
@@ -168,9 +172,9 @@ void FrogHuntBrain::phaseWander(int phase)
 				if (mOwner->hasArrived() != 0) {
 					mHops++;
 					if (mHops >= 3) {
-						mHops = 0;
+						mHops    = 0;
 						mResting = 1;
-						mNext = TEneFrog::ACT_IDLE;
+						mNext    = TEneFrog::ACT_IDLE;
 					} else {
 						repick = 1;
 					}
@@ -182,8 +186,8 @@ void FrogHuntBrain::phaseWander(int phase)
 		case 1:
 			if (mTimer <= 0) {
 				mResting = 0;
-				repick = 1;
-				mNext = TEneFrog::ACT_HOP;
+				repick   = 1;
+				mNext    = TEneFrog::ACT_HOP;
 			}
 			break;
 		}
@@ -204,8 +208,8 @@ void FrogHuntBrain::phaseAttack(int phase)
 {
 	switch (phase) {
 	case 0:
-		mNext = TEneFrog::ACT_LICK;
-		mTimer = *gFrogParams;
+		mNext    = TEneFrog::ACT_LICK;
+		mTimer   = *gFrogParams;
 		mResting = 0;
 		break;
 	case 2:
@@ -225,7 +229,7 @@ void FrogHuntBrain::phaseAttack(int phase)
 			mTimer--;
 			if (mTimer <= 0) {
 				mResting = 1;
-				mNext = TEneFrog::ACT_RETRACT;
+				mNext    = TEneFrog::ACT_RETRACT;
 			}
 			break;
 		}

@@ -30,8 +30,7 @@ asm void PSMTXReorder(const register Mtx src, register ROMtx dest)
 }
 
 /** dstBase[i] = m * srcBase[i] for count points */
-asm void PSMTXROMultVecArray(const register ROMtx m, const register Vec* srcBase, register Vec* dstBase,
-                             register u32 count)
+asm void PSMTXROMultVecArray(const register ROMtx m, const register Vec* srcBase, register Vec* dstBase, register u32 count)
 {
 #ifdef __MWERKS__ // clang-format off
 	nofralloc

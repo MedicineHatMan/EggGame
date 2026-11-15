@@ -131,8 +131,8 @@ class TEneLastBoss : public TObjEnemy {
 public:
 	enum {
 		BOSS_SUIT    = 0x1,
-		BOSS_OPEN    = 0x2,  // hits count for more
-		BOSS_GUARD   = 0x4,  // hits on the guard shape count less
+		BOSS_OPEN    = 0x2, // hits count for more
+		BOSS_GUARD   = 0x4, // hits on the guard shape count less
 		BOSS_NOTOUCH = 0x8,
 		BOSS_ARRIVED = 0x10, // reached mMoveTo
 		BOSS_LANDED  = 0x20,
@@ -220,44 +220,44 @@ public:
 	void actFlinch(int phase);
 	void actDie(int phase);
 
-	EnemyMotion mMotionData; // _158
-	LastBossAi* mAi;       // _194
-	GjActor* mPose;           // _198
-	DrawTask* mDrawTask;       // _19C
-	void* mFeatherPose;    // _1A0
-	u32 mBossFlags;        // _1A4
-	Vec3f mHitDir;         // _1A8
-	HitVec mPoint[16];      // _1B4
-	f32 mFeatherMtx[7][12]; // _274
-	Vec3f mMoveTo;         // _3C4
-	Vec3f mAim;            // _3D0
-	int mAimRot;           // _3DC
-	Vec3f mFrom;           // _3E0
-	int mMaxHealth;        // _3EC
-	ObjShadow mShadow;     // _3F0
-	EnemyLight mLight;     // _428
-	EnemyTint mTint;       // _468
-	BossSuit mSuit;        // _470
-	f32 mRadiusVel;        // _4A8
-	int mAngleVel;         // _4AC
-	f32 mFeatherSize[7];   // _4B0
-	int mDarkCount;        // _4CC
-	TEneLastBossFeather_Dark* mDark[10];    // _4D0
-	int mHomeCount;        // _4F8
-	TEneLastBossFeather_Home* mHome[4]; // _4FC
-	TObject* mFx;          // _50C
-	FxHolder mGlow;        // _510
-	FxHolder mGlow2;       // _544
-	FxAttach mTail;        // _578
-	TCamPath* mDemo;       // _5AC
-	SeCue mSe;                // _5B0
-	int mColorMode;        // _5B4
-	TObject* mDarkness;    // _5B8
-	int mStep;             // _5BC
-	int mWait;             // _5C0
-	int _5C4;              // _5C4
-	int _5C8;              // _5C8
-	f32 _5CC;              // _5CC
+	EnemyMotion mMotionData;             // _158
+	LastBossAi* mAi;                     // _194
+	GjActor* mPose;                      // _198
+	DrawTask* mDrawTask;                 // _19C
+	void* mFeatherPose;                  // _1A0
+	u32 mBossFlags;                      // _1A4
+	Vec3f mHitDir;                       // _1A8
+	HitVec mPoint[16];                   // _1B4
+	f32 mFeatherMtx[7][12];              // _274
+	Vec3f mMoveTo;                       // _3C4
+	Vec3f mAim;                          // _3D0
+	int mAimRot;                         // _3DC
+	Vec3f mFrom;                         // _3E0
+	int mMaxHealth;                      // _3EC
+	ObjShadow mShadow;                   // _3F0
+	EnemyLight mLight;                   // _428
+	EnemyTint mTint;                     // _468
+	BossSuit mSuit;                      // _470
+	f32 mRadiusVel;                      // _4A8
+	int mAngleVel;                       // _4AC
+	f32 mFeatherSize[7];                 // _4B0
+	int mDarkCount;                      // _4CC
+	TEneLastBossFeather_Dark* mDark[10]; // _4D0
+	int mHomeCount;                      // _4F8
+	TEneLastBossFeather_Home* mHome[4];  // _4FC
+	TObject* mFx;                        // _50C
+	FxHolder mGlow;                      // _510
+	FxHolder mGlow2;                     // _544
+	FxAttach mTail;                      // _578
+	TCamPath* mDemo;                     // _5AC
+	SeCue mSe;                           // _5B0
+	int mColorMode;                      // _5B4
+	TObject* mDarkness;                  // _5B8
+	int mStep;                           // _5BC
+	int mWait;                           // _5C0
+	int _5C4;                            // _5C4
+	int _5C8;                            // _5C8
+	f32 _5CC;                            // _5CC
 };
 
 #include "io/ResBank.h"

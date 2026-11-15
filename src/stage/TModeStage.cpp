@@ -106,7 +106,7 @@ struct Unk8000FAC8 {
 	u8 _24; // _24
 };
 struct PadQuery {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[0xE];
 };
 struct StagePad {
@@ -131,11 +131,21 @@ struct StageFactory {
 };
 
 static const StageFactory sStageFactories[] = {
-	{ "blue", createBlueStage },       { "red", createRedStage },        { "purple", createPurpleStage },
-	{ "orange", createOrangeStage },     { "yellow", createYellowStage },     { "last", createLastStage },
-	{ "greenboss", createGreenBossStage },  { "blueboss", createBlueBossStage },   { "redboss", createRedBossStage },
-	{ "purpleboss", createPurpleBossStage }, { "orangeboss", createOrangeBossStage }, { "yellowboss", createYellowBossStage },
-	{ "lastboss", createLastBossStage },   { "lastboss2", createLastBoss2Stage },  { 0, 0 },
+	{ "blue", createBlueStage },
+	{ "red", createRedStage },
+	{ "purple", createPurpleStage },
+	{ "orange", createOrangeStage },
+	{ "yellow", createYellowStage },
+	{ "last", createLastStage },
+	{ "greenboss", createGreenBossStage },
+	{ "blueboss", createBlueBossStage },
+	{ "redboss", createRedBossStage },
+	{ "purpleboss", createPurpleBossStage },
+	{ "orangeboss", createOrangeBossStage },
+	{ "yellowboss", createYellowBossStage },
+	{ "lastboss", createLastBossStage },
+	{ "lastboss2", createLastBoss2Stage },
+	{ 0, 0 },
 };
 
 struct MissionType {
@@ -144,9 +154,9 @@ struct MissionType {
 };
 
 static const MissionType sMissionTypes[15] = {
-	{ "boss", 0 },     { "collect", 1 },   { "dino", 2 },    { "goal", 4 },       { "gold", 5 },
-	{ "mini", 6 },     { "rescue", 8 },    { "snowman", 9 }, { "battery", 11 },   { "gear", 10 },
-	{ "wipeout", 13 }, { "elder", 14 },    { "lastboss", 15 }, { "race", 7 },     { "fireworks", 12 },
+	{ "boss", 0 },     { "collect", 1 }, { "dino", 2 },      { "goal", 4 },     { "gold", 5 },
+	{ "mini", 6 },     { "rescue", 8 },  { "snowman", 9 },   { "battery", 11 }, { "gear", 10 },
+	{ "wipeout", 13 }, { "elder", 14 },  { "lastboss", 15 }, { "race", 7 },     { "fireworks", 12 },
 };
 
 TModeStage* TModeStage::create(TModeAllocator* allocator)
@@ -166,7 +176,7 @@ TModeStage::TModeStage()
 	mPauseMenu = 0;
 	mIntro     = 0;
 	mResult    = 0;
-	mContext    = 0;
+	mContext   = 0;
 
 	mStartTime.mHour   = 0;
 	mStartTime.mMinute = 0;
@@ -235,8 +245,7 @@ void TModeStage::loadFiles()
 }
 
 static const CountUnlock sCountUnlocks[9] = {
-	{ 0x80, 20 },  { 0x81, 40 },  { 0x82, 60 },  { 0x83, 80 },  { 0x84, 100 },
-	{ 0x85, 140 }, { 0x86, 180 }, { 0x87, 220 }, { 0x77, 280 },
+	{ 0x80, 20 }, { 0x81, 40 }, { 0x82, 60 }, { 0x83, 80 }, { 0x84, 100 }, { 0x85, 140 }, { 0x86, 180 }, { 0x87, 220 }, { 0x77, 280 },
 };
 
 struct ResultFlag {
@@ -346,7 +355,7 @@ void TModeStage::endFrame()
 		gjDoneRender();
 		int retrace = VIGetRetraceCount();
 		if (retrace > gjLastRetrace) {
-			mSkipDraw    = 1;
+			mSkipDraw     = 1;
 			gjLastRetrace = retrace;
 		} else {
 			mSkipDraw = 0;
@@ -609,7 +618,7 @@ void TModeStage::stateIntro(int phase)
 		TIntro* intro = mIntro;
 		if (intro != 0 && intro->mDone != 0) {
 			intro->mFlags |= 1;
-			mIntro       = 0;
+			mIntro             = 0;
 			TChrPlayer* player = (TChrPlayer*)findPlayer(0);
 			if (player != 0) {
 				player->resetCamera();
@@ -701,7 +710,7 @@ void TModeStage::statePlay(int phase)
 				int firstEgg = mStageIndex * 5 + 300;
 				for (int i = 0; i < 5; i++) {
 					int flag = firstEgg;
-					flag = flag + i;
+					flag     = flag + i;
 					if (isEggFlag(flag)) {
 						eggs++;
 					}
@@ -748,9 +757,9 @@ void TModeStage::stateResult(int phase)
 		}
 
 		u32 i;
-		u32 flags = 0;
+		u32 flags   = 0;
 		int flagged = countFlags(0x3C, 0x73);
-		int saved = countSaved(0x3C, 0x73);
+		int saved   = countSaved(0x3C, 0x73);
 		if (saved != flagged) {
 			flags |= 1;
 		}

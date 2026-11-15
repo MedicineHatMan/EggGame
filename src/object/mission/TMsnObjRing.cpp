@@ -41,7 +41,9 @@ extern "C" {
 static const char* sClassName = "TMsnObjRing";
 
 __declspec(section ".sdata") int sRingBurstEffects[] = {
-	249, 250, 0,
+	249,
+	250,
+	0,
 }; // the burst effect of each kind
 }
 
@@ -56,7 +58,7 @@ typedef char TMsnObjRing_size_check[(sizeof(TMsnObjRing) == 0x188) ? 1 : -1];
 // 0x8010718C
 extern "C" void initRingArc()
 {
-	gRingArc = 0;
+	gRingArc    = 0;
 	gRingAsset0 = 0;
 	gRingAsset1 = 0;
 	gRingAsset2 = 0;
@@ -72,7 +74,7 @@ extern "C" void releaseRingArc()
 		releaseTextures((NJS_TEXLIST*)gRingAsset1);
 		releaseTextures((NJS_TEXLIST*)gRingAsset0);
 		releaseResource(gRingArc);
-		gRingArc = 0;
+		gRingArc    = 0;
 		gRingAsset0 = 0;
 		gRingAsset1 = 0;
 		gRingAsset2 = 0;
@@ -95,10 +97,10 @@ static void loadRingArc()
 {
 	loadArc("geobj_ring.arc", &gRingArc);
 	gRingShineModel = (NJS_OBJECT*)findArcExport(gRingArc, "model");
-	gRingAsset0 = findArcExport(gRingArc, "texlist_mini");
-	gRingAsset1 = findArcExport(gRingArc, "texlist_big");
-	gRingAsset2 = findArcExport(gRingArc, "texlist_eff_mini");
-	gRingAsset3 = findArcExport(gRingArc, "texlist_eff_big");
+	gRingAsset0     = findArcExport(gRingArc, "texlist_mini");
+	gRingAsset1     = findArcExport(gRingArc, "texlist_big");
+	gRingAsset2     = findArcExport(gRingArc, "texlist_eff_mini");
+	gRingAsset3     = findArcExport(gRingArc, "texlist_eff_big");
 	bindGvmTextures((u8*)findArcExport(gRingArc, "texture"), (NJS_TEXLIST*)gRingAsset0);
 	bindGvmTextures((u8*)findArcExport(gRingArc, "texture"), (NJS_TEXLIST*)gRingAsset1);
 	bindGvmTextures((u8*)findArcExport(gRingArc, "texture"), (NJS_TEXLIST*)gRingAsset2);
@@ -127,16 +129,16 @@ static inline int clamp(int value, int lo, int hi)
 void TMsnObjRing::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
-	mKind = desc->getInt(0);
-	int kind           = mKind;
+	mKind    = desc->getInt(0);
+	int kind = mKind;
 	if (kind < 0) {
 		kind = 0;
 	} else if (kind > 1) {
 		kind = 1;
 	}
-	mKind = kind;
+	mKind   = kind;
 	mSwitch = desc->getInt(3);
-	int id             = mSwitch;
+	int id  = mSwitch;
 	if (id < 0) {
 		id = 0;
 	} else if (id > 0x800) {
@@ -147,15 +149,15 @@ void TMsnObjRing::initFromDesc(SetDesc* desc)
 	switch (mKind) {
 	case 0:
 		mShineTex = gRingAsset2;
-		mTexList = (NJS_TEXLIST*)gRingAsset0;
-		mScale  = 1.0f;
-		mLife  = 10;
+		mTexList  = (NJS_TEXLIST*)gRingAsset0;
+		mScale    = 1.0f;
+		mLife     = 10;
 		break;
 	case 1:
 		mShineTex = gRingAsset3;
-		mTexList = (NJS_TEXLIST*)gRingAsset1;
-		mScale  = 1.6f;
-		mLife  = 100;
+		mTexList  = (NJS_TEXLIST*)gRingAsset1;
+		mScale    = 1.6f;
+		mLife     = 100;
 		break;
 	}
 
@@ -164,13 +166,13 @@ void TMsnObjRing::initFromDesc(SetDesc* desc)
 	mPlace.mPos.y = mPos.y;
 	mPlace.mPos.z = mPos.z;
 	njXYZAngleToQuaternion((const s32*)&mRot, (NJS_QUATERNION*)mPlace.mRot);
-	f32 scale         = mScale;
+	f32 scale       = mScale;
 	mPlace.mScale.x = scale;
 	mPlace.mScale.y = scale;
 	mPlace.mScale.z = scale;
 	mPlace.update();
 
-	f32 radius = sRingShapes[mKind].mRadius;
+	f32 radius  = sRingShapes[mKind].mRadius;
 	mShadow._30 = 2.0f * radius;
 	mShadow._34 = 0.5 * radius;
 
@@ -198,7 +200,7 @@ void TMsnObjRing::debugPrint(void*)
 TMsnObjRing::TMsnObjRing(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0x188;
 	initFromDesc(desc);
 	setLinkDone((SetLink*)&mLink);
@@ -217,11 +219,11 @@ TMsnObjRing::~TMsnObjRing()
 // 0x801076D4
 void TMsnObjRing::setup()
 {
-	mMode = RING_WAIT;
-	mSpin = 0x80;
-	mSpeed = 0.0f;
+	mMode           = RING_WAIT;
+	mSpin           = 0x80;
+	mSpeed          = 0.0f;
 	mState.mAmbient = 0xFF;
-	mShape = colliCreate(1, 1);
+	mShape          = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks(mShape, 4, 0xFF, 0xFE, 0xF6);
 	colliCopyShapes(mShape, (const ColliShape*)&sRingShapes[mKind]);
@@ -270,7 +272,7 @@ void TMsnObjRing::checkHits()
 			if (colliContactInGroup8(contact)) {
 				RingMsg hit;
 				TObjAction* other = findObjById(colliContactOwner(contact));
-				hit.mType = 0x2A;
+				hit.mType         = 0x2A;
 				other->sendToHandle((ObjMsg*)&hit);
 			}
 		}
@@ -288,7 +290,7 @@ void TMsnObjRing::floatAway()
 		mPos.y = y;
 	}
 	int spin = mSpin + 0x200;
-	mSpin = spin < 0x80 ? 0x80 : (spin > 0x1000 ? 0x1000 : spin);
+	mSpin    = spin < 0x80 ? 0x80 : (spin > 0x1000 ? 0x1000 : spin);
 	if (mSpeed < 0.0f) {
 		addColorAlpha(&mState.mAmbient, -8);
 	}
@@ -313,7 +315,7 @@ void TMsnObjRing::hop()
 	} else {
 		mPos.y = y;
 	}
-	spin = mSpin + 0x200 < 0x80 ? 128.0f : ((f32)(mSpin + 0x200) > 2048.0f ? 2048.0f : mSpin + 0x200);
+	spin  = mSpin + 0x200 < 0x80 ? 128.0f : ((f32)(mSpin + 0x200) > 2048.0f ? 2048.0f : mSpin + 0x200);
 	mSpin = spin;
 	colliPlaceShapes(mShape, &mPos, (const ColliShape*)&sRingShapes[mKind]);
 }
@@ -333,7 +335,7 @@ void TMsnObjRing::draw()
 			hop();
 			break;
 		}
-		mRot.y = mSpin + mRot.y;
+		mRot.y        = mSpin + mRot.y;
 		mPlace.mPos.x = mPos.x;
 		mPlace.mPos.y = mPos.y;
 		mPlace.mPos.z = mPos.z;

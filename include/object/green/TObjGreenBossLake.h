@@ -31,9 +31,9 @@ public:
 	virtual void debugPrint(void*);
 	virtual void vfn_74();
 
-	NJS_OBJECT* mModel;         // _64
-	NJS_TEXLIST* mTexList;       // _68
-	DrawTask* mDrawTask;      // _6C
+	NJS_OBJECT* mModel;    // _64
+	NJS_TEXLIST* mTexList; // _68
+	DrawTask* mDrawTask;   // _6C
 	GreenBossWater mWater; // _70
 };
 

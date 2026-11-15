@@ -139,9 +139,9 @@ void TObjYellowPillar::setColliBox(void* colli, const Vec3f* center, f32 radius)
 	high.z = size.z;
 	Vec3f low;
 	Vec3f t = colliNeg(size);
-	low.x = t.x;
-	low.y = t.y;
-	low.z = t.z;
+	low.x   = t.x;
+	low.y   = t.y;
+	low.z   = t.z;
 
 	gjPushUnitMatrix();
 	njTranslateEx(center);
@@ -161,7 +161,7 @@ void TObjYellowPillar::updateMatrix()
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 	mtxRotateX(mMatrix, mMatrix, mRot.x);
 	GjModel* model = mModelData->model;
-	mCenter  = *(Vec3f*)&model->center;
+	mCenter        = *(Vec3f*)&model->center;
 	mtxMultVec(mMatrix, &mCenter, &mCenter);
 	mRadius = mModelData->model->r;
 }
@@ -198,14 +198,14 @@ void TObjYellowPillar::updateShapes()
 {
 	for (int i = 0; i < colliGetShapeCount(mShape); i++) {
 		ColliShape* shape = colliGetShape(mShape, i);
-		shape->mPos.x = 0.0f;
-		f32 y = 12.5f * (f32)i;
-		shape->mPos.y = 12.5f + y;
-		shape->mPos.z = -12.5f;
+		shape->mPos.x     = 0.0f;
+		f32 y             = 12.5f * (f32)i;
+		shape->mPos.y     = 12.5f + y;
+		shape->mPos.z     = -12.5f;
 		njCalcPoint(mMatrix, &shape->mPos, &shape->mPos);
 	}
 	ColliShape* shape = colliGetShape(mTerritory, 0);
-	shape->mPos   = mPos;
+	shape->mPos       = mPos;
 	shape->mPos.y += 50.0f;
 	shape->mSizeX = mTerritoryRad;
 }
@@ -262,7 +262,7 @@ void TObjYellowPillar::breakApart(const Vec3f* hit)
 	Vec3f pos = *hit;
 	pos.y -= mRadius;
 	NJS_TEXLIST** textures = getGeObjTextures();
-	NJS_OBJECT** models     = getGeObjModels();
+	NJS_OBJECT** models    = getGeObjModels();
 	shatterModelRot(0, &pos, &mPos, &mRot, models[6], textures[6], 1.0f, 2.0f);
 	sePlay3D(0x4C, &mCenter);
 }
@@ -344,8 +344,7 @@ void TObjYellowPillar::stateLanded()
 		if (colliContactInGroup1(hit) == 0) {
 			TObjAction* other = (TObjAction*)findObjById((u16)colliContactOwner(hit));
 			HitInfo info;
-			if (colliContactHasBit8(hit) != 0
-			    && (colliContactInGroup8(hit) != 0 || other->onHit(this, 0, (int*)&info) != 0)) {
+			if (colliContactHasBit8(hit) != 0 && (colliContactInGroup8(hit) != 0 || other->onHit(this, 0, (int*)&info) != 0)) {
 				breakApart(&hit->mPos);
 				TObjAction* target = (TObjAction*)findObjById((u16)colliContactOwner(hit));
 				if (target != 0) {

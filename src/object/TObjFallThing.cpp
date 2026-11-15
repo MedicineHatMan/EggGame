@@ -166,9 +166,9 @@ void TObjFallThing::fall()
 					pieces.mCount      = mPieceCount;
 					pieces.mScale      = 1.0f;
 					pieces.mSpeed      = 1.0f;
-					size.x = mRadius;
-					size.y = mRadius;
-					size.z = mRadius;
+					size.x             = mRadius;
+					size.y             = mRadius;
+					size.z             = mRadius;
 					shatterList(NULL, &mPos, 0, &mPos, &size, &pieces);
 					if (mLandSe != 0xFFFFFFFF) {
 						sePlay3D(mLandSe, &mPos);
@@ -219,9 +219,9 @@ void TObjFallThing::initColli()
 	colliSetMasks(mColli, 4, 0xFF, 0xFF, 0xFE);
 	ColliShape shape;
 	colliShapeInit(&shape);
-	shape.mPos    = mPos;
-	shape.mType   = COLLISHAPE_SPHERE;
-	shape.mSizeX  = mRadius;
+	shape.mPos   = mPos;
+	shape.mType  = COLLISHAPE_SPHERE;
+	shape.mSizeX = mRadius;
 	shape.mFlags |= 8;
 	colliCopyShapes(mColli, &shape);
 }

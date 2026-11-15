@@ -30,9 +30,9 @@
 #include "core/MathUtil.h"
 #include "stage/Stage.h"
 
-BinFile* sGalleryMes;     // 0x802C5AC0
-int sGalleryMesCount;  // 0x802C5AC4
-int* sGalleryMesText;  // 0x802C5AC8
+BinFile* sGalleryMes; // 0x802C5AC0
+int sGalleryMesCount; // 0x802C5AC4
+int* sGalleryMesText; // 0x802C5AC8
 
 #define GALLERY_STRING(i) ((void*)sGalleryMesText[i])
 
@@ -52,8 +52,8 @@ static TextVec sGalleryInfoAt    = textVec(430.0f, 345.0f, -2.0f); // 0x80286848
 static TextVec sGalleryNameGlyph = textVec(0.91f, 0.91f, 0.91f);   // 0x80286854
 static TextVec sGalleryNameBox   = textVec(264.0f, 22.0f, 0.0f);   // 0x80286860
 static TextVec sGalleryNameAt    = textVec(430.0f, 306.0f, -2.0f); // 0x8028686C
-static TextVec sGalleryHelpAt0 = textVec(565.0f, 38.0f, -2.0f); // 0x80286878
-static TextVec sGalleryHelpAt1 = textVec(565.0f, 75.0f, -2.0f); // 0x80286884
+static TextVec sGalleryHelpAt0   = textVec(565.0f, 38.0f, -2.0f);  // 0x80286878
+static TextVec sGalleryHelpAt1   = textVec(565.0f, 75.0f, -2.0f);  // 0x80286884
 static TextVec sGalleryEggPos    = textVec(20.0f, 1.5f, 64.0f);    // 0x80286890
 // These two are built in place by a constructor
 struct GalleryVec : public Vec3f {
@@ -64,8 +64,8 @@ struct GalleryVec : public Vec3f {
 		z = newZ;
 	}
 };
-static GalleryVec sGalleryNearPos(-12.0f, 0.0f, 65.0f);  // 0x8028689C
-static GalleryVec sGalleryFarPos(-12.0f, -5.0f, 65.0f);  // 0x802868A8
+static GalleryVec sGalleryNearPos(-12.0f, 0.0f, 65.0f); // 0x8028689C
+static GalleryVec sGalleryFarPos(-12.0f, -5.0f, 65.0f); // 0x802868A8
 
 struct GalleryMtx {
 	f32 m[12];
@@ -163,7 +163,9 @@ TModeGallery::TModeGallery()
 }
 
 // 0x801B5110
-TModeGallery::~TModeGallery() { }
+TModeGallery::~TModeGallery()
+{
+}
 
 // 0x801B516C
 void TModeGallery::loadText()
@@ -176,8 +178,8 @@ void TModeGallery::loadText()
 	data = (u32*)sGalleryMes->mData;
 	text = *data;
 	text += (u32)data++;
-	u32 size = *data++;
-	sGalleryMesText = (int*)data;
+	u32 size         = *data++;
+	sGalleryMesText  = (int*)data;
 	sGalleryMesCount = size >> 2;
 	for (i = 0; i < sGalleryMesCount; i++) {
 		sGalleryMesText[i] += text + 8;
@@ -523,9 +525,9 @@ void TModeGallery::showName(int text)
 	if (mName != 0) {
 		mName->resetPage(GALLERY_STRING(text));
 		TSimpleText* name = mName;
-		name->mBox.x = box.x;
-		name->mBox.y = box.y;
-		name->mBox.z = box.z;
+		name->mBox.x      = box.x;
+		name->mBox.y      = box.y;
+		name->mBox.z      = box.z;
 		mName->_A8        = 1;
 		mName->mFlags &= ~0x10;
 	}
@@ -550,9 +552,9 @@ void TModeGallery::showInfo(int text)
 	if (mInfo != 0) {
 		mInfo->resetPage(GALLERY_STRING(text));
 		TSimpleText* info = mInfo;
-		info->mBox.x = box.x;
-		info->mBox.y = box.y;
-		info->mBox.z = box.z;
+		info->mBox.x      = box.x;
+		info->mBox.y      = box.y;
+		info->mBox.z      = box.z;
 		mInfo->_A8        = 1;
 		mInfo->mFlags &= ~0x10;
 	}

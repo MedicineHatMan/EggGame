@@ -4,31 +4,31 @@
 #include <CRI/adx.h>
 #include <CRI/cri_std.h>
 
-#define GCCI_MAX_HNDL 40
-#define GCCI_SCT 0x800
-#define GCCI_PATH_LEN 0x100
+#define GCCI_MAX_HNDL       40
+#define GCCI_SCT            0x800
+#define GCCI_PATH_LEN       0x100
 #define GCCI_CANCEL_TIMEOUT 2000
 
 #define GCCI_STAT_STOP 0
-#define GCCI_STAT_END 1
+#define GCCI_STAT_END  1
 #define GCCI_STAT_EXEC 2
-#define GCCI_STAT_ERR 3
+#define GCCI_STAT_ERR  3
 
 typedef struct {
-	signed char used;     /* 00 */
-	signed char unk01;    /* 01 */
-	signed char stat;     /* 02 */
-	char pad03;           /* 03 */
-	int unk04;            /* 04 */
-	void* rdbuf;          /* 08 the caller's buffer */
-	int cmdstat;          /* 0C DVD command block state */
-	int sctlen;           /* 10 */
-	int fsize;            /* 14 */
-	int fnsct;            /* 18 */
-	int pos;              /* 1C in sectors */
-	int trsize;           /* 20 bytes of the last read */
-	int reqnsct;          /* 24 */
-	DVDFileInfo fi;       /* 28 */
+	signed char used;  /* 00 */
+	signed char unk01; /* 01 */
+	signed char stat;  /* 02 */
+	char pad03;        /* 03 */
+	int unk04;         /* 04 */
+	void* rdbuf;       /* 08 the caller's buffer */
+	int cmdstat;       /* 0C DVD command block state */
+	int sctlen;        /* 10 */
+	int fsize;         /* 14 */
+	int fnsct;         /* 18 */
+	int pos;           /* 1C in sectors */
+	int trsize;        /* 20 bytes of the last read */
+	int reqnsct;       /* 24 */
+	DVDFileInfo fi;    /* 28 */
 } GCCI_OBJ;
 
 typedef GCCI_OBJ* GCCI;
@@ -38,10 +38,10 @@ const char gcci_build[] = "\nGCCI Ver.1.09 Build:Mar  3 2003 16:46:38\n";
 
 /* The command state the first of the file's variables in .bss */
 typedef struct {
-	int laststat;                  /* 00 the last command block state seen */
-	unsigned char stat;            /* 04 the last handle state set */
-	char pad05[3];                 /* 05 */
-	int cancel;                    /* 08 set around DVDCancel */
+	int laststat;       /* 00 the last command block state seen */
+	unsigned char stat; /* 04 the last handle state set */
+	char pad05[3];      /* 05 */
+	int cancel;         /* 08 set around DVDCancel */
 } GCCI_WORK;
 
 /* In .bss gcci_work gcci_errobj gcci_errfn gcci_hn gcci_unk */
@@ -106,11 +106,11 @@ static inline void gcci_ExecServer(void)
 		if (hn->used != 1 || hn->stat != GCCI_STAT_EXEC) {
 			continue;
 		}
-		hn->cmdstat = DVDGetCommandBlockStatus(&hn->fi.cBlock);
+		hn->cmdstat        = DVDGetCommandBlockStatus(&hn->fi.cBlock);
 		gcci_work.laststat = hn->cmdstat;
 		switch (hn->cmdstat) {
 		case DVD_STATE_FATAL_ERROR:
-			hn->stat = GCCI_STAT_ERR;
+			hn->stat       = GCCI_STAT_ERR;
 			gcci_work.stat = GCCI_STAT_ERR;
 			break;
 		case DVD_STATE_END:
@@ -120,11 +120,11 @@ static inline void gcci_ExecServer(void)
 			hn->pos += hn->reqnsct;
 			if (hn->pos * hn->sctlen > hn->fsize) {
 				over = hn->pos * hn->sctlen - hn->fsize;
-				p = (char*)hn->rdbuf + hn->trsize - over;
+				p    = (char*)hn->rdbuf + hn->trsize - over;
 				memset(p, 0, over);
 				DCStoreRange(p, over);
 			}
-			hn->stat = GCCI_STAT_END;
+			hn->stat       = GCCI_STAT_END;
 			gcci_work.stat = GCCI_STAT_END;
 			break;
 		case DVD_STATE_CANCELED:
@@ -157,7 +157,7 @@ static inline void gcci_StopTr(void* fd)
 	DVDGetCommandBlockStatus(&hn->fi.cBlock);
 	DVDGetDriveStatus();
 	gcci_work.cancel = 1;
-	ret = DVDCancel(&hn->fi.cBlock);
+	ret              = DVDCancel(&hn->fi.cBlock);
 	gcci_work.cancel = 0;
 	if (ret < 0) {
 		gcci_CallErrW("E0092917:DVDCancel failed.", hn);
@@ -165,16 +165,16 @@ static inline void gcci_StopTr(void* fd)
 	}
 	start = GCCI_TICKS_MS(OSGetTick());
 	while (!gcci_IsIdle(hn)) {
-		hn->cmdstat = DVDGetCommandBlockStatus(&hn->fi.cBlock);
+		hn->cmdstat        = DVDGetCommandBlockStatus(&hn->fi.cBlock);
 		gcci_work.laststat = hn->cmdstat;
-		now = GCCI_TICKS_MS(OSGetTick());
-		ms = (now >= start) ? now - start : 0xFFFFFFFF - start + now;
+		now                = GCCI_TICKS_MS(OSGetTick());
+		ms                 = (now >= start) ? now - start : 0xFFFFFFFF - start + now;
 		if (ms > GCCI_CANCEL_TIMEOUT) {
 			gcci_CallErrW("E0092918:DVDCancel time out.", hn);
 			break;
 		}
 	}
-	hn->stat = GCCI_STAT_STOP;
+	hn->stat       = GCCI_STAT_STOP;
 	gcci_work.stat = GCCI_STAT_STOP;
 	DVDGetCommandBlockStatus(&hn->fi.cBlock);
 	DVDGetDriveStatus();
@@ -191,7 +191,7 @@ CVFS_DEV* gcCiGetInterface(void)
 {
 	*(volatile int*)&gcci_unk = *(volatile int*)&gcci_unk;
 	memset(gcci_tmp_path, 0, sizeof(gcci_tmp_path));
-	gcci_errfn = 0;
+	gcci_errfn  = 0;
 	gcci_errobj = 0;
 	memset(&gcci_work, 0, sizeof(gcci_work));
 	return &gcci_dev_vtbl;
@@ -207,7 +207,7 @@ void gcCiExecServer(void)
 // 0x8022AEAC
 void gcCiEntryErrFunc(CVFS_ERRFN func, void* obj)
 {
-	gcci_errfn = func;
+	gcci_errfn  = func;
 	gcci_errobj = obj;
 }
 
@@ -284,18 +284,18 @@ void* gcCiOpen(const char* fname, void* dir, int rw)
 		return 0;
 	}
 	hn->sctlen = GCCI_SCT;
-	len = hn->fi.length;
+	len        = hn->fi.length;
 	if (len & 0x80000000) {
 		len = 0x7FFFFFFF;
 	}
-	hn->fsize = len;
-	hn->fnsct = (hn->sctlen - 1 + hn->fsize) / hn->sctlen;
-	hn->pos = 0;
-	hn->rdbuf = 0;
+	hn->fsize   = len;
+	hn->fnsct   = (hn->sctlen - 1 + hn->fsize) / hn->sctlen;
+	hn->pos     = 0;
+	hn->rdbuf   = 0;
 	hn->reqnsct = 0;
-	hn->trsize = 0;
-	hn->stat = GCCI_STAT_STOP;
-	hn->used = 1;
+	hn->trsize  = 0;
+	hn->stat    = GCCI_STAT_STOP;
+	hn->used    = 1;
 	return hn;
 }
 
@@ -398,12 +398,12 @@ int gcCiReqRd(void* fd, int nsct, void* buf)
 		return 0;
 	}
 	if (nsct == 0) {
-		hn->stat = GCCI_STAT_END;
+		hn->stat       = GCCI_STAT_END;
 		gcci_work.stat = GCCI_STAT_END;
 		return 0;
 	}
-	hn->trsize = 0;
-	hn->rdbuf = buf;
+	hn->trsize  = 0;
+	hn->rdbuf   = buf;
 	hn->reqnsct = nsct;
 	gcci_ExecServer();
 	pos = hn->pos * hn->sctlen;
@@ -411,7 +411,7 @@ int gcCiReqRd(void* fd, int nsct, void* buf)
 	if (pos + len > hn->fsize) {
 		len = hn->fsize - pos;
 		if (len < 0) {
-			hn->stat = GCCI_STAT_END;
+			hn->stat       = GCCI_STAT_END;
 			gcci_work.stat = GCCI_STAT_END;
 			return nsct;
 		}
@@ -426,7 +426,7 @@ int gcCiReqRd(void* fd, int nsct, void* buf)
 	if (ret == 0) {
 		return 0;
 	}
-	hn->stat = GCCI_STAT_EXEC;
+	hn->stat       = GCCI_STAT_EXEC;
 	gcci_work.stat = GCCI_STAT_EXEC;
 	return hn->reqnsct;
 }
@@ -452,7 +452,7 @@ void gcCiStopTr(void* fd)
 	DVDGetCommandBlockStatus(&hn->fi.cBlock);
 	DVDGetDriveStatus();
 	gcci_work.cancel = 1;
-	ret = DVDCancel(&hn->fi.cBlock);
+	ret              = DVDCancel(&hn->fi.cBlock);
 	gcci_work.cancel = 0;
 	if (ret < 0) {
 		gcci_CallErrW("E0092917:DVDCancel failed.", hn);
@@ -460,16 +460,16 @@ void gcCiStopTr(void* fd)
 	}
 	start = GCCI_TICKS_MS(OSGetTick());
 	while (!gcci_IsIdle(hn)) {
-		hn->cmdstat = DVDGetCommandBlockStatus(&hn->fi.cBlock);
+		hn->cmdstat        = DVDGetCommandBlockStatus(&hn->fi.cBlock);
 		gcci_work.laststat = hn->cmdstat;
-		now = GCCI_TICKS_MS(OSGetTick());
-		ms = (now >= start) ? now - start : 0xFFFFFFFF - start + now;
+		now                = GCCI_TICKS_MS(OSGetTick());
+		ms                 = (now >= start) ? now - start : 0xFFFFFFFF - start + now;
 		if (ms > GCCI_CANCEL_TIMEOUT) {
 			gcci_CallErrW("E0092918:DVDCancel time out.", hn);
 			break;
 		}
 	}
-	hn->stat = GCCI_STAT_STOP;
+	hn->stat       = GCCI_STAT_STOP;
 	gcci_work.stat = GCCI_STAT_STOP;
 	DVDGetCommandBlockStatus(&hn->fi.cBlock);
 	DVDGetDriveStatus();
@@ -517,10 +517,10 @@ void gcCiSetSctLen(void* fd, int len)
 		gcci_CallErr("E0040303:invalidate size.");
 		return;
 	}
-	bpos = hn->pos * hn->sctlen;
+	bpos       = hn->pos * hn->sctlen;
 	hn->sctlen = len;
-	hn->fnsct = (hn->sctlen - 1 + hn->fsize) / hn->sctlen;
-	hn->pos = bpos / hn->sctlen;
+	hn->fnsct  = (hn->sctlen - 1 + hn->fsize) / hn->sctlen;
+	hn->pos    = bpos / hn->sctlen;
 	hn->trsize = hn->reqnsct * len;
 }
 
@@ -543,5 +543,6 @@ void gcci_read_cb(s32 result, DVDFileInfo* fi)
 {
 }
 
-CVFS_DEV gcci_dev_vtbl = { gcCiExecServer, gcCiEntryErrFunc, gcCiGetFileSize, 0, gcCiOpen, gcCiClose, gcCiSeek, gcCiTell, gcCiReqRd, 0, gcCiStopTr, gcCiGetStat,
-	gcCiGetSctLen, gcCiSetSctLen, gcCiGetNumTr };
+CVFS_DEV gcci_dev_vtbl
+    = { gcCiExecServer, gcCiEntryErrFunc, gcCiGetFileSize, 0,           gcCiOpen, gcCiClose, gcCiSeek, gcCiTell, gcCiReqRd, 0, gcCiStopTr,
+        gcCiGetStat,    gcCiGetSctLen,    gcCiSetSctLen,   gcCiGetNumTr };

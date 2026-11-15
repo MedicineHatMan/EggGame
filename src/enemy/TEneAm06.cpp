@@ -28,22 +28,14 @@ struct ObjShadow;
 extern "C" {
 
 MotionEntry sAm06Motions[] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 29.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 19.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 22.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 16.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 16.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 10, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 11, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 12, -1, 0, 0.0f, 39.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_LOOP, 13, -1, 0, 0.0f, 20.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 14, -1, 0, 0.0f, 20.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_LOOP, 15, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 16, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 1, -1, 0, 0.0f, 29.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 3, -1, 0, 0.0f, 19.0f, 0.2f, 0.0f, 0 },
+	{ MOTION_ONCE, 4, -1, 0, 0.0f, 22.0f, 0.5f, 0.0f, 0 },  { MOTION_ONCE, 5, -1, 0, 0.0f, 16.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 16.0f, 0.5f, 0.0f, 0 },  { MOTION_LOOP, 10, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 11, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 }, { MOTION_ONCE, 12, -1, 0, 0.0f, 39.0f, 0.2f, 0.0f, 0 },
+	{ MOTION_LOOP, 13, -1, 0, 0.0f, 20.0f, 0.2f, 0.0f, 0 }, { MOTION_ONCE, 7, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_LOOP, 14, -1, 0, 0.0f, 20.0f, 0.2f, 0.0f, 0 }, { MOTION_LOOP, 15, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 16, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 }, { MOTION_ONCE, 9, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
 };
 extern const int sAm06Bones[] = {
 	17, 25, 26, 27, 29, 46, 49, -1,
@@ -78,9 +70,9 @@ extern "C" void initTEneAm06()
 {
 	resBankLoad(&sAm06Bank, "ar_ene_snake.arc");
 	resBankAddTextures(&sAm06Bank, 0, "ene_snake.gvm");
-	sAm06Models = resBankGetModels(&sAm06Bank);
+	sAm06Models   = resBankGetModels(&sAm06Bank);
 	sAm06Textures = resBankGetTextures(&sAm06Bank);
-	sAm06Motion = resBankGetMotion(&sAm06Bank, 0);
+	sAm06Motion   = resBankGetMotion(&sAm06Bank, 0);
 	sAm06SegAngle = 0;
 }
 
@@ -88,9 +80,9 @@ extern "C" void shutdownTEneAm06()
 {
 	resBankRemoveTextures(&sAm06Bank, 0);
 	resBankRelease(&sAm06Bank);
-	sAm06Models = 0;
+	sAm06Models   = 0;
 	sAm06Textures = 0;
-	sAm06Motion = 0;
+	sAm06Motion   = 0;
 }
 
 // 0x8004665C
@@ -103,7 +95,7 @@ extern "C" TObject* createTEneAm06(TObject* parent, SetDesc* desc)
 TEneAm06::TEneAm06(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0x2E4;
 	init(desc);
 }
@@ -114,7 +106,7 @@ void TEneAm06::init(SetDesc* desc)
 	motionCtrlInit(&mAnim, sAm06Motions, sAm06Motion);
 	motionCtrlPlay(&mAnim, 7);
 	mBody.mRot.x = 0;
-	mCollider = colliCreate(4, 1);
+	mCollider    = colliCreate(4, 1);
 	colliCopyShapes(mCollider, (const ColliShape*)sAm06BodyShapes);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 255, 0, 0);
@@ -136,11 +128,11 @@ void TEneAm06::init(SetDesc* desc)
 	hideHead();
 	hideBite();
 	mBrain = 0;
-	mYaw = 0;
+	mYaw   = 0;
 	readEnemyDesc(desc);
-	mPose = allocPose(*(void**)sAm06Models);
-	mModel = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mFlags2 = 0;
+	mPose     = allocPose(*(void**)sAm06Models);
+	mModel    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mFlags2   = 0;
 	mTarget.x = 0.0f;
 	mTarget.y = 0.0f;
 	mTarget.z = 0.0f;
@@ -150,18 +142,18 @@ void TEneAm06::init(SetDesc* desc)
 		mSeg[i].y = 0.0f;
 		mSeg[i].z = 0.0f;
 	}
-	mAim = 0;
+	mAim      = 0;
 	mTurnMode = 0;
-	mTurn = 0;
-	mHold = 0;
+	mTurn     = 0;
+	mHold     = 0;
 	shadowSetGround(&mShadow, &mBody.mPos, 0);
 	mShadow._30 = 26.0f;
 	mShadow._34 = 26.0f;
 	shadowEnable(&mShadow);
 	mGrabId = -1;
-	mGrab = 0;
-	mFx = 0;
-	mBar = new TEnemyLifeBar(this);
+	mGrab   = 0;
+	mFx     = 0;
+	mBar    = new TEnemyLifeBar(this);
 	mBar->setMax((s16)mHealth);
 	mBar->setMark((s16)mHealthStep);
 	mBar->setValue((s16)mHealth);
@@ -169,11 +161,11 @@ void TEneAm06::init(SetDesc* desc)
 	mLight.reset();
 	mTint.reset();
 	enemyEffectSetLarge(10.0f, &mEffect, &mSeg[3]);
-	mStep = 0;
+	mStep   = 0;
 	mWindup = 0;
 	mBitten = 0;
-	_2DC = 0;
-	_2E0 = 0.0f;
+	_2DC    = 0;
+	_2E0    = 0.0f;
 	createBrain();
 }
 
@@ -205,10 +197,10 @@ TEneAm06::~TEneAm06()
 // 0x80046B9C
 void TEneAm06::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -241,12 +233,12 @@ void TEneAm06::syncCollider()
 void TEneAm06::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
-	mYaw = mBody.mRot.y;
-	mVariant = pickVariant(desc);
-	int health = desc->getInt(0);
-	mHealth = health <= 0 ? 30 : health;
+	mYaw        = mBody.mRot.y;
+	mVariant    = pickVariant(desc);
+	int health  = desc->getInt(0);
+	mHealth     = health <= 0 ? 30 : health;
 	mHealthStep = divideBy5(mHealth);
-	int stun = desc->getInt(3);
+	int stun    = desc->getInt(3);
 	mStunFrames = stun <= 0 ? 300 : stun;
 }
 
@@ -255,15 +247,15 @@ void TEneAm06::readEnemyDesc(SetDesc* desc)
 int TEneAm06::onHit(const TObjAction* other, int shape, int* result)
 {
 	HitInfo* info = (HitInfo*)result;
-	int hit = 0;
+	int hit       = 0;
 	if ((mFlags2 & AM_HURTING) != 0 && shape == 3) {
 		if (isPlayerOrKind4(other) != 0) {
 			info->mDamage = 20;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 		} else if (isEggObj(other) != 0) {
 			info->mDamage = 1;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			info->mFlags.setBit(0xD);
 		}
@@ -580,7 +572,7 @@ void TEneAm06::clearTurn()
 void TEneAm06::track()
 {
 	int diff = angleDiff(mYaw, mAim);
-	int gap = diff < 0 ? -diff : diff;
+	int gap  = diff < 0 ? -diff : diff;
 	if (mTurnMode == 1) {
 		if (gap > 0x471C) {
 			mTurnMode = 0;
@@ -661,10 +653,10 @@ void TEneAm06::hideBite()
 void TEneAm06::placeBody()
 {
 	Vec3f* part = (Vec3f*)colliGetShapes(mCollider);
-	part[0] = mSeg[0];
-	part[4] = mSeg[5];
-	part[8] = mSeg[6];
-	part[12] = mSeg[3];
+	part[0]     = mSeg[0];
+	part[4]     = mSeg[5];
+	part[8]     = mSeg[6];
+	part[12]    = mSeg[3];
 	colliRefreshBounds(mCollider);
 	colliBoundsOn(mCollider);
 }
@@ -687,10 +679,10 @@ void TEneAm06::placeBite()
 	njAddVector(&mid, &mSeg[4]);
 	gjScaleVector(0.5f, &mid, &mid);
 	f32 height = 0.5f * (0.5f * (mSeg[2].y - mSeg[4].y));
-	part[0] = mid;
+	part[0]    = mid;
 	colliShapeSetCylHeight((ColliShape*)&part[0], height);
 	Vec3f head;
-	head = mSeg[0];
+	head   = mSeg[0];
 	head.y = mid.y;
 	gjScaleVector(0.6f, &head, &head);
 	gjScaleVector(0.4f, &mid, &mid);
@@ -756,7 +748,7 @@ void TEneAm06::actAppear(int phase)
 		motionCtrlPlay(&mAnim, 10);
 		beginAppear(step);
 		mFrameKey = 2;
-		mTurn = 0;
+		mTurn     = 0;
 		break;
 	case 1:
 		motionCtrlUpdate(&mAnim);
@@ -799,8 +791,8 @@ void TEneAm06::actGlow(int phase)
 	case 0:
 		motionCtrlPlay(&mAnim, 10);
 		mFrameKey = 2;
-		mTurn = 0;
-		mStep = 60;
+		mTurn     = 0;
+		mStep     = 60;
 		mFlags2 |= AM_GLOW;
 		break;
 	case 1:
@@ -878,15 +870,15 @@ void TEneAm06::actStrike(int phase)
 		motionCtrlPlay(&mAnim, 0);
 		mFlags2 &= ~(AM_STRUCK | AM_HURTING);
 		mFrameKey = 4;
-		mStep = 0;
+		mStep     = 0;
 		break;
 	case 1:
 		motionCtrlUpdate(&mAnim);
 		switch (mStep) {
 		case 0: {
-			mTurn = approachAngle(mTurn, 0, 0x300);
+			mTurn   = approachAngle(mTurn, 0, 0x300);
 			int aim = (mHold - 0x2A00) & 0xFFFF;
-			mYaw = angleApproach(mYaw, aim, 0x400);
+			mYaw    = angleApproach(mYaw, aim, 0x400);
 			if (mYaw == aim && mTurn == 0) {
 				mStep = 1;
 				mFlags2 |= AM_HURTING;
@@ -931,8 +923,8 @@ void TEneAm06::actBite(int phase)
 		mFlags2 &= ~AM_BITTEN;
 		mFrameKey = 4;
 		hideBite();
-		mGrab = 0;
-		mStep = 0;
+		mGrab   = 0;
+		mStep   = 0;
 		mWindup = 1;
 		mBitten = 0;
 		break;
@@ -950,7 +942,7 @@ void TEneAm06::actBite(int phase)
 			delta = *pos;
 			njSubVector(&delta, &mBody.mPos);
 			int angle = (int)(10430.38043493439 * (f32)atan2(delta.x, delta.z));
-			mYaw = angleApproach(mYaw, angle, 0x200);
+			mYaw      = angleApproach(mYaw, angle, 0x200);
 		}
 		switch (mStep) {
 		case 0:
@@ -989,7 +981,7 @@ void TEneAm06::actBite(int phase)
 					grabbed->mFlags |= 1;
 				} else {
 					mBitten = 0;
-					mGrab = 0;
+					mGrab   = 0;
 				}
 				mStep = 2;
 				hideBite();
@@ -1187,7 +1179,7 @@ void TEneAm06::actDown(int phase)
 // 0x80048840
 void TEneAm06::vfn_3C()
 {
-	int x = kEnemyInfoX << 16;
+	int x    = kEnemyInfoX << 16;
 	int line = kEnemyInfoLine;
 	njPrint(x | line, ":HP %4d", mHealth);
 	njPrint(x | (line + 3), ":StunFrm %4d", mStunFrames);

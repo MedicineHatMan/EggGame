@@ -30,11 +30,11 @@ public:
 	void pickPoint();
 	inline void killAllFx();
 
-	int mDashes;        // _384
-	s8 mMotionCount;    // _388 how many motions it can pick between after the first ten
+	int mDashes;     // _384
+	s8 mMotionCount; // _388 how many motions it can pick between after the first ten
 	u8 _389[3];
-	Fx* mFx2;         // _38C
-	Fx* mFx3;         // _390
+	Fx* mFx2;           // _38C
+	Fx* mFx3;           // _390
 	f32 mFx2Matrix[12]; // _394
 	f32 mFx3Matrix[12]; // _3C4
 };

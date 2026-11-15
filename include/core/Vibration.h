@@ -23,19 +23,19 @@ struct VibTable {
 
 /** A running pattern. @size 0x20 */
 struct VibNode {
-	VibNode* mNext;    // _00
-	VibNode* mPrev;    // _04 the head's points at the tail
-	void* mOwner;      // _08
-	void* mArg;        // _0C
-	u8 mMotor;         // _10 0 off 1 on 2 stop hard
-	u8 mFlags;         // _11 1 paused 2 silent
-	u8 mPriority;      // _12
-	u8 mLoop;          // _13
-	u16 mWait;         // _14
-	u16 mPc;           // _16
-	u16 mLoopPc;       // _18
-	u16 mMarkPc;       // _1A
-	const u8* mCode;   // _1C
+	VibNode* mNext;  // _00
+	VibNode* mPrev;  // _04 the head's points at the tail
+	void* mOwner;    // _08
+	void* mArg;      // _0C
+	u8 mMotor;       // _10 0 off 1 on 2 stop hard
+	u8 mFlags;       // _11 1 paused 2 silent
+	u8 mPriority;    // _12
+	u8 mLoop;        // _13
+	u16 mWait;       // _14
+	u16 mPc;         // _16
+	u16 mLoopPc;     // _18
+	u16 mMarkPc;     // _1A
+	const u8* mCode; // _1C
 };
 
 /** One pad's patterns. @size 0xC */

@@ -33,10 +33,9 @@ extern const MotionEntry sYellowFogTrapStatueMotions[] = {
 	{ MOTION_ONCE, 1, -1, 0, 0.0f, 10.0f, 0.3f, 0.0f, 0 },
 	{ MOTION_ONCE, 1, -1, 0, 10.0f, 20.0f, 0.3f, 0.0f, 0 },
 };
-
 }
 
-#define sInstance  sFogTrapStatueObj
+#define sInstance sFogTrapStatueObj
 
 /** The offset of the camera's start from the statue */
 struct FogTrapCamOffset : public Vec3f {
@@ -184,17 +183,17 @@ void TObjYellowFogTrapStatue::updatePlace()
 	mtxSetTransV(mMatrix, &base);
 
 	// The breath comes out of the mouth a node two levels down
-	object = mModelData;
+	object            = mModelData;
 	NJS_OBJECT* mouth = object->child->sibling;
-	breath.x = mouth->pos[0] - object->model->center.x;
-	breath.y = mouth->pos[1] - object->model->center.y;
-	breath.z = mouth->pos[2] - object->model->center.z;
+	breath.x          = mouth->pos[0] - object->model->center.x;
+	breath.y          = mouth->pos[1] - object->model->center.y;
+	breath.z          = mouth->pos[2] - object->model->center.z;
 	vecAdd(&breath, &mPos, &breath);
 	mtxSetTransV(mBreathMtx, &breath);
 	mtxRotateY(mBreathMtx, mBreathMtx, 0x4000);
 
 	GjModel* body = mModelData->model;
-	mCenter  = *(Vec3f*)&body->center;
+	mCenter       = *(Vec3f*)&body->center;
 	mtxMultVec(mMatrix, &mCenter, &mCenter);
 	mRadius = mModelData->model->r;
 	colliShapeMakeSphere(colliGetShape(mShape, 0), &mCenter, 0, mRadius);

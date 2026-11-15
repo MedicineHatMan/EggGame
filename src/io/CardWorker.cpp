@@ -686,7 +686,7 @@ void CardWorker::pollCreate()
 			return;
 		}
 		switch (result) {
-	
+
 		case CARD_RESULT_EXIST:
 			mResult = 12;
 			finishFail();

@@ -108,8 +108,8 @@ void cooldownListUpdate(EnemyCooldownList* list)
 		list->mTimers[i]--;
 		if (list->mTimers[i] <= 0) {
 			list->mCount--;
-			list->mTimers[i] = list->mTimers[list->mCount];
-			list->mIds[i]    = list->mIds[list->mCount];
+			list->mTimers[i]            = list->mTimers[list->mCount];
+			list->mIds[i]               = list->mIds[list->mCount];
 			list->mTimers[list->mCount] = 0;
 			list->mIds[list->mCount]    = 0xFFFF;
 			i--;
@@ -178,11 +178,11 @@ void enemyParamLoad()
 {
 	loadArc("ar_ene_param.arc", &sEnemyHitArc);
 	EnemyCommonParams* params = (EnemyCommonParams*)enemyParamGet(0);
-	gEnemyParams = params;
-	gEnemyFilterX = params->mFilterX;
-	int angle = params->mFilterAngle;
-	gEnemyFilterZ = njCos(angle);
-	gEnemyFilterY = njCos(angle);
+	gEnemyParams              = params;
+	gEnemyFilterX             = params->mFilterX;
+	int angle                 = params->mFilterAngle;
+	gEnemyFilterZ             = njCos(angle);
+	gEnemyFilterY             = njCos(angle);
 	enemyFxLoadStub();
 }
 
@@ -219,9 +219,9 @@ struct TAeObjBossConsole;
 struct EnemyShape {
 	Vec3f mCenter; // _00
 	u8 _0C[0xC];
-	f32 mRadius;   // _18
+	f32 mRadius; // _18
 	u8 _1C[8];
-	u32 mFlags;    // _24 0x400 = hurts
+	u32 mFlags; // _24 0x400 = hurts
 };
 
 // What sendGameMsg and bossConsoleMsg deliver and sendToHandle
@@ -248,7 +248,8 @@ int TObjAction::getKind()
 
 // 0x8000C928
 // No description a fresh id
-TObjEnemy::TObjEnemy(TObject* parent) : TObjAction(parent)
+TObjEnemy::TObjEnemy(TObject* parent)
+    : TObjAction(parent)
 {
 	setObjId(this, 0xFFFF);
 	setup();
@@ -256,7 +257,8 @@ TObjEnemy::TObjEnemy(TObject* parent) : TObjAction(parent)
 
 // 0x8000CA00
 // The description's id wins unless that id is already taken
-TObjEnemy::TObjEnemy(TObject* parent, SetDesc* desc) : TObjAction(parent)
+TObjEnemy::TObjEnemy(TObject* parent, SetDesc* desc)
+    : TObjAction(parent)
 {
 	u16 id = (u16)(int)desc->mObjId;
 	if (findObjById(id) != 0) {
@@ -274,19 +276,19 @@ TObjEnemy::TObjEnemy(TObject* parent, SetDesc* desc) : TObjAction(parent)
 // The 10 is at the body's start and passes through its slot _0C
 void TObjEnemy::setup()
 {
-	_00 = (u32)gTObjEnemyName;
-	mSize = 0x158;
-	mBody.mGravity.x = 0.0f;
-	mBody.mGravity.y = -0.16333334f;
-	mBody.mGravity.z = 0.0f;
-	mBody.mRadius = 10.0f;
+	_00                = (u32)gTObjEnemyName;
+	mSize              = 0x158;
+	mBody.mGravity.x   = 0.0f;
+	mBody.mGravity.y   = -0.16333334f;
+	mBody.mGravity.z   = 0.0f;
+	mBody.mRadius      = 10.0f;
 	SetTransform* body = &mBody;
 	body->vfn_0C();
 	motionCtrlSetPlayer(&mAnim, &mMotion);
-	mCollider = 0;
-	mHitFlags = 0;
+	mCollider   = 0;
+	mHitFlags   = 0;
 	mEnemyFlags = 0;
-	mHealth = 0;
+	mHealth     = 0;
 	touchListInit(&mTouching);
 	cooldownListInit(&mCooldown);
 	hatchClear(&mAppearTimer);
@@ -294,7 +296,7 @@ void TObjEnemy::setup()
 	enemyHitInit(&mHit);
 	enemyContactInit(&mContact);
 	mFrameKey = 0;
-	mArea = 0;
+	mArea     = 0;
 }
 
 // 0x8000CB90
@@ -370,8 +372,8 @@ extern "C" NJS_MOTION* firstMotionFrame(NJS_MOTION** table, int count, f32* fram
 	int index = 0;
 	clampIndex(index, 0, count - 1);
 	NJS_MOTION* motion = table[index];
-	f32 last = motion->nbFrame - 1;
-	*frame = 0.0f > last ? last : 0.0f;
+	f32 last           = motion->nbFrame - 1;
+	*frame             = 0.0f > last ? last : 0.0f;
 	return motion;
 }
 
@@ -385,10 +387,10 @@ u16 TObjEnemy::getHitPlayer()
 // Slot _74
 void TObjEnemy::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 }
@@ -679,7 +681,7 @@ void TObjEnemy::updateTouches()
 					if (other != 0) {
 						EnemyMsg msg;
 						msg.mType = 0x2A;
-						msg.mId = mObjId;
+						msg.mId   = mObjId;
 						other->sendToHandle((ObjMsg*)&msg);
 					}
 				}
@@ -720,11 +722,11 @@ int TObjEnemy::takeHits(EnemyHit* hit, EnemyContact* contact)
 						} else if (info.mDamage > 0) {
 							int kind = getHitKind(t, &info);
 							if (best.mKind < kind) {
-								best.mKind = kind;
-								bestTouch = t;
-								best.mObjId = id;
+								best.mKind     = kind;
+								bestTouch      = t;
+								best.mObjId    = id;
 								best.mHolderId = other->mHolderId;
-								best.mInfo = info;
+								best.mInfo     = info;
 							}
 						}
 					}
@@ -739,10 +741,10 @@ int TObjEnemy::takeHits(EnemyHit* hit, EnemyContact* contact)
 		HitInfo unused;
 		cooldownListAdd(&mCooldown, best.mObjId);
 		colliContactTag((ColliContact*)bestTouch);
-		*hit = best;
+		*hit        = best;
 		hit->mShape = bestTouch->mShape;
 
-		contact->mPos = bestTouch->mPos;
+		contact->mPos     = bestTouch->mPos;
 		EnemyShape* shape = (EnemyShape*)colliGetShape(mCollider, bestTouch->mShape);
 		if (shape != 0) {
 			contact->mCenter = shape->mCenter;
@@ -769,7 +771,10 @@ int TObjEnemy::takeHits(EnemyHit* hit, EnemyContact* contact)
 }
 
 // 0x8000DA00
-int TObjAction::onHit(const TObjAction*, int, int*) { return 0; }
+int TObjAction::onHit(const TObjAction*, int, int*)
+{
+	return 0;
+}
 
 // 0x8000DA08
 // Slot _88
@@ -1011,7 +1016,7 @@ extern "C" int isEggObj(const TObjAction* obj)
 extern "C" int isPlayerOrKind4(const TObjAction* obj)
 {
 	int kind = ((TObjAction*)obj)->getKind();
-	u8 yes = 0;
+	u8 yes   = 0;
 	if (kind == 0 || kind == 4) {
 		yes = 1;
 	}
@@ -1042,7 +1047,9 @@ int probeGround(Vec3f* pos, Vec3f* outPos, Vec3f* outNormal)
 }
 
 // 0x8000E1CC
-EggHit::EggHit() { }
+EggHit::EggHit()
+{
+}
 
 // 0x8000E214
 // The ground along a line
@@ -1074,10 +1081,10 @@ extern "C" void drawModelLit(void* model)
 extern "C" void beginLit(void* stageObj, void* tint)
 {
 	DrawState light;
-	((u32*)&light)[0] = 0;
-	((u32*)&light)[8] = 0;
+	((u32*)&light)[0]     = 0;
+	((u32*)&light)[8]     = 0;
 	DrawStateSlot* lights = getDrawStateSlot();
-	light = *getDefaultDrawState();
+	light                 = *getDefaultDrawState();
 	if (stageObj != 0) {
 		setDrawAmbient((EnemyLight*)stageObj, &light);
 	}
@@ -1113,7 +1120,7 @@ extern "C" void initBossBar()
 extern "C" void setBossBar(int max, int value)
 {
 	EnemyMsg msg;
-	msg.mType = 0xB9;
+	msg.mType  = 0xB9;
 	msg.mRatio = (f32)value / (f32)max;
 	bossConsoleMsg((BossConsoleMsg*)&msg);
 }
@@ -1217,7 +1224,9 @@ extern "C" void spawnDropB(void* pos)
 }
 
 // 0x8000E744
-void TObjEnemy::noOp() { }
+void TObjEnemy::noOp()
+{
+}
 
 // 0x8000E748
 int TObjEnemy::getKind()
@@ -1238,7 +1247,9 @@ Vec3f* TObjEnemy::getPos()
 }
 
 // 0x8000E760
-void TObjEnemy::syncCollider() { }
+void TObjEnemy::syncCollider()
+{
+}
 
 // 0x8000E764
 int TObjEnemy::isAirborne()
@@ -1285,16 +1296,30 @@ int TObjEnemy::vfn_A0()
 // TObjAction's defaults that sit in this range
 
 // 0x8000E7C8
-void TObjAction::getNodeMatrix(int, f32*) { }
+void TObjAction::getNodeMatrix(int, f32*)
+{
+}
 
 // 0x8000E7CC
-f32 TObjAction::vfn_40() { return 0.0f; }
+f32 TObjAction::vfn_40()
+{
+	return 0.0f;
+}
 
 // 0x8000E7D4
-int TObjAction::vfn_48(TObjAction*) { return 0; }
+int TObjAction::vfn_48(TObjAction*)
+{
+	return 0;
+}
 
 // 0x8000E7DC
-int TObjAction::vfn_50() { return 0; }
+int TObjAction::vfn_50()
+{
+	return 0;
+}
 
 // 0x8000E7E4
-f32 TObjAction::getRadiusV() { return 0.0f; }
+f32 TObjAction::getRadiusV()
+{
+	return 0.0f;
+}

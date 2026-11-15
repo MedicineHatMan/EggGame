@@ -6,12 +6,12 @@
 
 TArc::TArc()
 {
-	mData   = 0;
-	mRelocs = 0;
+	mData    = 0;
+	mRelocs  = 0;
 	mExports = 0;
 	mImports = 0;
-	mNames  = 0;
-	mState  = 0;
+	mNames   = 0;
+	mState   = 0;
 }
 
 TArc::TArc(void* memory)
@@ -20,16 +20,16 @@ TArc::TArc(void* memory)
 	syMemCopy(&mFileSize, file, 0x20);
 	mExportsSize = *(int*)(file + 0xC) << 3;
 	mImportsSize = *(int*)(file + 0x10) << 3;
-	u8* next = file + 0x20;
-	mData    = next;
+	u8* next     = file + 0x20;
+	mData        = next;
 	next += *(int*)(file + 4);
-	mRelocs  = next;
+	mRelocs = next;
 	next += *(int*)(file + 8);
 	mExports = (int*)next;
 	next += mExportsSize;
 	mImports = (int*)next;
 	next += mImportsSize;
-	mNames   = (char*)next;
+	mNames = (char*)next;
 	relocateArc(mData, mRelocs, *(int*)(file + 8));
 	mState = 3;
 }
@@ -59,7 +59,7 @@ TArc::~TArc()
 extern "C" void* findArcExport(TArc* arc, const char* name)
 {
 	int* entry = arc->mExports;
-	int i = arc->mExportCount;
+	int i      = arc->mExportCount;
 	while (i > 0) {
 		if (strcmp(name, arc->mNames + entry[1]) == 0) {
 			return arc->mData + entry[0];
@@ -79,14 +79,14 @@ const char* TArc::getImportName(int index)
 void TArc::link(const char* name, void* value)
 {
 	int* entry = mImports;
-	u32 i = 0;
+	u32 i      = 0;
 	while (i < (u32)mImportCount) {
 		if (strcmp(name, mNames + entry[1]) == 0) {
 			u32 offset = entry[0];
 			while (offset != 0xFFFFFFFF) {
 				int* place = (int*)(mData + offset);
-				offset = *place;
-				*place = (int)value;
+				offset     = *place;
+				*place     = (int)value;
 			}
 			return;
 		}
@@ -140,7 +140,7 @@ int TArc::loadStep(TFile* file)
 		if (result == 1) {
 			mExportsSize = mExportCount << 3;
 			mImportsSize = mImportCount << 3;
-			mNamesSize = mFileSize - 0x20 - mDataSize - mRelocSize - mExportsSize - mImportsSize;
+			mNamesSize   = mFileSize - 0x20 - mDataSize - mRelocSize - mExportsSize - mImportsSize;
 			if (mDataSize != 0) {
 				mData = (u8*)memAlloc(mDataSize);
 			}
@@ -208,7 +208,7 @@ extern "C" void relocateArc(u8* data, u8* list, u32 size)
 	u8 b2;
 	u8 b3;
 	u8* relocs = list;
-	int pos = 0;
+	int pos    = 0;
 
 	while (size != 0) {
 		u32 step;

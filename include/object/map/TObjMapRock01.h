@@ -33,12 +33,12 @@ public:
 	void stateBroken();
 	void setSize(f32 scale);
 
-	ObjModel mModel;  // _64
-	ObjPlace mPlace;  // _84
-	DrawTask* mDraw;      // _E0
-	int mAct;         // _E4 0 = whole 1 = broken
-	f32 mScale;       // _E8
-	int mKeyBit;      // _EC
+	ObjModel mModel; // _64
+	ObjPlace mPlace; // _84
+	DrawTask* mDraw; // _E0
+	int mAct;        // _E4 0 = whole 1 = broken
+	f32 mScale;      // _E8
+	int mKeyBit;     // _EC
 };
 
 extern "C" {

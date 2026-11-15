@@ -35,7 +35,7 @@ struct SetLink;
 struct AnimusIdMsg {
 	u16 mType; // _00
 	u8 _02[2];
-	u16 mId;   // _04
+	u16 mId; // _04
 };
 
 /** Message 0x43 asks an object how it is moving */
@@ -55,7 +55,7 @@ enum AnimusState {
 
 typedef char TObjLastAnimus_size_check[(sizeof(TObjLastAnimus) == 0x1E0) ? 1 : -1];
 
-#define ANIMUS_RAND() ((1.0f / 32768.0f) * rand())
+#define ANIMUS_RAND()           ((1.0f / 32768.0f) * rand())
 #define ANIMUS_CLAMP(x, lo, hi) ((x) < (lo) ? (lo) : ((x) > (hi) ? (hi) : (x)))
 
 // ObjScript.h's static tables come first in .rodata 0x8024B968 though nothing here reads them
@@ -63,12 +63,9 @@ typedef char TObjLastAnimus_size_check[(sizeof(TObjLastAnimus) == 0x1E0) ? 1 : -
 
 // 0x8024BA64
 const MotionEntry sLastAnimusMotionTable[] = {
-	{ MOTION_LOOP, 6, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 30.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 50.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 25.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_LOOP, 4, -1, 0, 0.0f, 40.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_LOOP, 5, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_LOOP, 6, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 }, { MOTION_LOOP, 3, -1, 0, 0.0f, 30.0f, 0.6f, 0.0f, 0 },
+	{ MOTION_ONCE, 1, -1, 0, 0.0f, 50.0f, 0.3f, 0.0f, 0 }, { MOTION_ONCE, 2, -1, 0, 0.0f, 25.0f, 0.6f, 0.0f, 0 },
+	{ MOTION_LOOP, 4, -1, 0, 0.0f, 40.0f, 0.6f, 0.0f, 0 }, { MOTION_LOOP, 5, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
 };
 
 const f32 gLastAnimusSetRange = 800.0f;
@@ -134,11 +131,11 @@ TObjLastAnimus::~TObjLastAnimus()
 // 0x8018F0E0
 void TObjLastAnimus::reset()
 {
-	mModel   = getGeObjModels()[2];
-	mTexList = getGeObjTextures()[2];
-	mScale.x = 1.0f;
-	mScale.y = 1.0f;
-	mScale.z = 1.0f;
+	mModel     = getGeObjModels()[2];
+	mTexList   = getGeObjTextures()[2];
+	mScale.x   = 1.0f;
+	mScale.y   = 1.0f;
+	mScale.z   = 1.0f;
 	mHop       = 0.0f;
 	_144       = 0.0f;
 	mSquashVel = 0.0f;
@@ -511,8 +508,8 @@ void TObjLastAnimus::stateTalk()
 	ObjMsg done;
 
 	if (mText != 0 && mText->mState == 3) {
-		mText->mHold = 1;
-		mText        = 0;
+		mText->mHold       = 1;
+		mText              = 0;
 		TObjAction* talker = mTalker.get();
 		if (talker != 0) {
 			done.mType = 0x30;
@@ -554,7 +551,7 @@ int TObjLastAnimus::sendToHandle(ObjMsg* msg)
 	case 0x40:
 		return 0x40;
 	case 0x70: {
-		u16 from = ((AnimusIdMsg*)msg)->mId;
+		u16 from        = ((AnimusIdMsg*)msg)->mId;
 		TObjAction* obj = findObjById(from);
 		if (obj != 0) {
 			Vec3f* at    = obj->getPos();

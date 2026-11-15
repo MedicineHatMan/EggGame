@@ -11,13 +11,13 @@ static inline void adxf_SetCmdHstry(int cmdid, int fg, int prm1, int prm2, int p
 	ADXF_CMD_HSTRY* h;
 
 	adxf_hstry_no = adxf_hstry_no % ADXF_HSTRY_NUM;
-	h = &adxf_cmd_hstry[adxf_hstry_no];
+	h             = &adxf_cmd_hstry[adxf_hstry_no];
 	if (fg == 0) {
 		adxf_cmd_ncall[cmdid]++;
 	}
-	h->cmdid = cmdid;
-	h->fg = fg;
-	h->ncall = adxf_cmd_ncall[cmdid];
+	h->cmdid  = cmdid;
+	h->fg     = fg;
+	h->ncall  = adxf_cmd_ncall[cmdid];
 	h->prm[0] = prm1;
 	h->prm[1] = prm2;
 	h->prm[2] = prm3;
@@ -100,15 +100,15 @@ static inline ADXF adxf_CreateAdxFs(void)
 		ADXERR_CallErrFunc1("E02111001:can't create stm handle (adxf_CreateAdxFs)");
 		return 0;
 	}
-	adxf->stat = ADXF_STAT_STOP;
-	adxf->rdstpos = 0;
-	adxf->rqsct = 0;
-	adxf->rdsct = 0;
-	adxf->rqrdsct = 0x200;
-	adxf->sjflag = 0;
-	adxf->sj = 0;
+	adxf->stat       = ADXF_STAT_STOP;
+	adxf->rdstpos    = 0;
+	adxf->rqsct      = 0;
+	adxf->rdsct      = 0;
+	adxf->rqrdsct    = 0x200;
+	adxf->sjflag     = 0;
+	adxf->sj         = 0;
 	adxf->stopnw_flg = 0;
-	adxf->used = 1;
+	adxf->used       = 1;
 	return adxf;
 }
 
@@ -126,7 +126,7 @@ static inline int adxf_ChkPrmPt(int ptid, ADXF_PTINFO* ptinfo)
 }
 
 int adxf_LoadPtBothNw(int ptid, int afsptid, int afsflid, const char* fname, void* dir, ADXF_PTINFO* ptinfo, void* tmpbuf, int tbsize,
-                int rev);
+                      int rev);
 int ADXF_GetPtStatEx(int ptid);
 
 // 0x802290D0
@@ -138,7 +138,7 @@ int ADXF_LoadPartitionNw(int ptid, const char* fname, void* dir, ADXF_PTINFO* pt
 /* Loads partition ptid's table from the file fname or when it is null from entry afsflid of partition afsptid */
 // 0x80228E80
 int adxf_LoadPtBothNw(int ptid, int afsptid, int afsflid, const char* fname, void* dir, ADXF_PTINFO* ptinfo, void* tmpbuf, int tbsize,
-                int rev)
+                      int rev)
 {
 	int ret;
 	int ofst;
@@ -160,11 +160,11 @@ int adxf_LoadPtBothNw(int ptid, int afsptid, int afsflid, const char* fname, voi
 		ADXERR_CallErrFunc1("E0042401:multi-load partition.(load partition)");
 		return -1;
 	}
-	adxf_afs_ptid = ptid;
+	adxf_afs_ptid     = ptid;
 	adxf_ldptnw_nfile = 0;
 	memset(ptinfo, 0, sizeof(ADXF_PTINFO));
 	adxf_ptinfo[ptid] = ptinfo;
-	ptinfo->next = 0;
+	ptinfo->next      = 0;
 	if (fname == 0) {
 		adxf_afs_hndl = ADXF_OpenAfs(afsptid, afsflid);
 		if (adxf_afs_hndl == 0) {
@@ -184,12 +184,12 @@ int adxf_LoadPtBothNw(int ptid, int afsptid, int afsflid, const char* fname, voi
 		}
 		strncpy(ptinfo->fname, fname, ADXF_FNAME_LEN);
 	}
-	ptinfo->curdir = dir;
-	ptinfo->type = 0;
-	ptinfo->rev = rev;
-	adxf_tmpbuf = tmpbuf;
+	ptinfo->curdir  = dir;
+	ptinfo->type    = 0;
+	ptinfo->rev     = rev;
+	adxf_tmpbuf     = tmpbuf;
 	adxf_tbsize_sct = tbsize / ADXF_SCT;
-	ret = adxf_ReadNw(adxf_afs_hndl, adxf_tbsize_sct, tmpbuf);
+	ret             = adxf_ReadNw(adxf_afs_hndl, adxf_tbsize_sct, tmpbuf);
 	if (ret < 0) {
 		ADXF_Close(adxf_afs_hndl);
 		return ret;
@@ -202,10 +202,10 @@ int adxf_LoadPtBothNw(int ptid, int afsptid, int afsflid, const char* fname, voi
 void adxf_CloseLdptnwHn(void)
 {
 	ADXF_Close(adxf_afs_hndl);
-	adxf_afs_hndl = 0;
-	adxf_afs_ptid = -1;
+	adxf_afs_hndl     = 0;
+	adxf_afs_ptid     = -1;
 	adxf_ldptnw_nfile = 0;
-	adxf_tbsize_sct = 0;
+	adxf_tbsize_sct   = 0;
 }
 
 // 0x80228BFC
@@ -241,9 +241,9 @@ int ADXF_GetPtStat(int ptid)
 	int nsct;
 	unsigned char* p;
 
-	sz16 = 0;
+	sz16  = 0;
 	top16 = 0;
-	sz32 = 0;
+	sz32  = 0;
 	top32 = 0;
 	if (ptid != adxf_afs_ptid) {
 		ADXERR_CallErrFunc1("E0041303:illigal parameter 'ptid'.(ADXF_GetPtStat)");
@@ -256,10 +256,10 @@ int ADXF_GetPtStat(int ptid)
 	pt = adxf_ptinfo[ptid];
 	if (pt->rev == 1) {
 		top32 = pt->sz.i;
-		sz32 = top32 + 1;
+		sz32  = top32 + 1;
 	} else {
 		top16 = pt->sz.s;
-		sz16 = top16 + 1;
+		sz16  = top16 + 1;
 	}
 	if (pt->nfile == 0) {
 		if (memcmp(adxf_tmpbuf, "AFS", 3) != 0) {
@@ -274,7 +274,7 @@ int ADXF_GetPtStat(int ptid)
 			return ADXF_STAT_ERROR;
 		}
 		pt->nentry = n;
-		pt->nfile = (unsigned short)n;
+		pt->nfile  = (unsigned short)n;
 		if (pt->rev == 1) {
 			pt->size = ((pt->nfile + 1) * 4 + 0x11C) & ~3;
 		} else {
@@ -292,16 +292,16 @@ int ADXF_GetPtStat(int ptid)
 	len = (adxf_tbsize_sct * ADXF_SCT) / 4;
 	for (; i < len; i += 2) {
 		if (pt->rev == 1) {
-			p = adxf_tmpbuf + i * 4;
-			n = ADXF_LE32(p);
+			p    = adxf_tmpbuf + i * 4;
+			n    = ADXF_LE32(p);
 			nsct = n / ADXF_SCT;
 			if (n % ADXF_SCT > 0) {
 				nsct++;
 			}
 			sz32[adxf_ldptnw_nfile++] = nsct;
 		} else {
-			p = adxf_tmpbuf + i * 4;
-			n = ADXF_LE32(p);
+			p    = adxf_tmpbuf + i * 4;
+			n    = ADXF_LE32(p);
 			nsct = n / ADXF_SCT;
 			if (n % ADXF_SCT > 0) {
 				nsct++;
@@ -338,7 +338,7 @@ ADXF ADXF_Open(const char* fname, void* dir)
 			ADXERR_CallErrFunc1("E9081901:illigal parameter fname=null.(ADXF_Open)");
 			ret = -1;
 		} else {
-			adxf->dir = dir;
+			adxf->dir   = dir;
 			adxf->fname = fname;
 			adxf->skpos = 0;
 			ADXSTM_BindFile(adxf->stm, adxf->fname, adxf->dir, 0, ADXSTM_RD_ALL);
@@ -349,7 +349,7 @@ ADXF ADXF_Open(const char* fname, void* dir)
 				adxf->fsize = ADXSTM_GetFileLen(adxf->stm);
 				adxf->fnsct = adxf->fsize / ADXF_SCT;
 				adxf->ofst2 = ret = 0;
-				adxf->nsct = adxf->fnsct;
+				adxf->nsct        = adxf->fnsct;
 			}
 		}
 		if (ret < 0) {
@@ -377,10 +377,10 @@ ADXF ADXF_OpenAfs(int ptid, int flid)
 		if (ADXF_GetFnameRangeEx(ptid, flid, fname, &dir, &ofst, &fnsct) < 0) {
 			ret = ADXF_ERR_PRM;
 		} else {
-			adxf->ofst = ofst;
-			adxf->dir = dir;
+			adxf->ofst  = ofst;
+			adxf->dir   = dir;
 			adxf->fname = adxf_ptinfo[ptid]->fname;
-			adxf->nsct = fnsct;
+			adxf->nsct  = fnsct;
 			adxf->ofst2 = ofst;
 			adxf->skpos = 0;
 			ADXSTM_BindFile(adxf->stm, adxf->fname, adxf->dir, adxf->ofst2, adxf->nsct);
@@ -389,7 +389,7 @@ ADXF ADXF_OpenAfs(int ptid, int flid)
 				ret = -1;
 			} else {
 				adxf->fnsct = fnsct;
-				ret = 0;
+				ret         = 0;
 				adxf->fsize = fnsct * ADXF_SCT;
 			}
 		}
@@ -482,7 +482,7 @@ int ADXF_ReadNw32(ADXF adxf, int nsct, void* buf)
 	if (sj == 0) {
 		return -2;
 	}
-	adxf->buf = buf;
+	adxf->buf   = buf;
 	adxf->bsize = nsct * ADXF_SCT;
 	ADXCRS_Lock();
 	if (adxf_ocbi_fg == 1) {
@@ -493,8 +493,8 @@ int ADXF_ReadNw32(ADXF adxf, int nsct, void* buf)
 	}
 	ADXCRS_Lock();
 	adxf->rdstpos = adxf->ofst + adxf->skpos;
-	rest = adxf->fnsct - adxf->skpos;
-	adxf->rqsct = nsct < rest ? nsct : rest;
+	rest          = adxf->fnsct - adxf->skpos;
+	adxf->rqsct   = nsct < rest ? nsct : rest;
 	adxf->rdsct = ret = 0;
 	if (adxf->rqsct == 0) {
 		adxf->stat = ADXF_STAT_READEND;
@@ -502,7 +502,7 @@ int ADXF_ReadNw32(ADXF adxf, int nsct, void* buf)
 		ADXSTM_SetEos(adxf->stm, -1);
 		ADXSTM_SetSj(adxf->stm, sj);
 		ADXSTM_SetReqRdSize(adxf->stm, adxf->rqrdsct);
-		adxf->stat = ADXF_STAT_READING;
+		adxf->stat       = ADXF_STAT_READING;
 		adxf->stopnw_flg = 0;
 		ADXSTM_SetPause(adxf->stm, 0);
 		ADXSTM_Seek(adxf->stm, adxf->skpos);
@@ -621,7 +621,7 @@ void ADXF_ExecServer(void)
 			continue;
 		}
 		if (adxf->stat == ADXF_STAT_READING) {
-			adxf->stat = ADXSTM_GetStat(adxf->stm);
+			adxf->stat  = ADXSTM_GetStat(adxf->stm);
 			adxf->rdsct = ADXSTM_Tell(adxf->stm) - adxf->skpos;
 			if (adxf->stat == ADXF_STAT_READEND || adxf->stat == ADXF_STAT_ERROR) {
 				adxf->skpos += adxf->rdsct;
@@ -631,7 +631,7 @@ void ADXF_ExecServer(void)
 		if (adxf->stopnw_flg == 1 && ADXSTM_GetStat(adxf->stm) == ADXF_STAT_STOP) {
 			adxf->rdsct = ADXSTM_Tell(adxf->stm) - adxf->skpos;
 			adxf_DestroySj(adxf);
-			adxf->stat = ADXF_STAT_STOP;
+			adxf->stat       = ADXF_STAT_STOP;
 			adxf->stopnw_flg = 0;
 		}
 	}
@@ -660,8 +660,8 @@ int ADXF_GetFnameRangeEx(int ptid, int flid, char* fname, void** dir, int* ofst,
 		ret = 0;
 	}
 	if (ret < 0) {
-		*dir = 0;
-		*ofst = -1;
+		*dir   = 0;
+		*ofst  = -1;
 		*fnsct = -1;
 		return ret;
 	}
@@ -680,7 +680,7 @@ int ADXF_GetFnameRangeEx(int ptid, int flid, char* fname, void** dir, int* ofst,
 		*fnsct = pt->sz.s[flid + 1];
 	}
 	strncpy(fname, pt->fname, ADXF_FNAME_LEN);
-	*dir = pt->curdir;
+	*dir  = pt->curdir;
 	*ofst = pt->ofst + sct;
 	return ret;
 }

@@ -12,7 +12,7 @@ struct Fx;
 typedef char TObjGreenRay_size_check[(sizeof(TObjGreenRay) == 0x98) ? 1 : -1];
 
 const char* gTObjGreenRayName = "TObjGreenRay";
-const f32 gGreenRaySetRange = 2000.0f;
+const f32 gGreenRaySetRange   = 2000.0f;
 
 // 0x801A2B34
 extern "C" TObject* createTObjGreenRay(TObject* parent, SetDesc* desc)

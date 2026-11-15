@@ -38,28 +38,21 @@ static const char* sClassName = "TEneAm07";
 
 extern "C" {
 // The frame keys sAm07FrameKeys points at
-extern const EnemyFrameKey sAm07KeyRise[2] = { { 21.0f, 0 }, { -1.0f, 5 } };
-extern const EnemyFrameKey sAm07KeyLand[2] = { { 15.0f, 5 }, { -1.0f, 0 } };
-extern const EnemyFrameKey sAm07KeyTug[2] = { { 15.0f, 3 }, { -1.0f, 0 } };
-extern const EnemyFrameKey sAm07KeyPull[3] = { { 10.0f, 0 }, { 15.0f, 4 }, { -1.0f, 0 } };
-extern const EnemyFrameKey sAm07KeyAim[2] = { { 15.0f, 0 }, { -1.0f, 5 } };
+extern const EnemyFrameKey sAm07KeyRise[2]    = { { 21.0f, 0 }, { -1.0f, 5 } };
+extern const EnemyFrameKey sAm07KeyLand[2]    = { { 15.0f, 5 }, { -1.0f, 0 } };
+extern const EnemyFrameKey sAm07KeyTug[2]     = { { 15.0f, 3 }, { -1.0f, 0 } };
+extern const EnemyFrameKey sAm07KeyPull[3]    = { { 10.0f, 0 }, { 15.0f, 4 }, { -1.0f, 0 } };
+extern const EnemyFrameKey sAm07KeyAim[2]     = { { 15.0f, 0 }, { -1.0f, 5 } };
 extern const EnemyFrameKey sAm07KeyRecover[2] = { { 9.0f, 5 }, { -1.0f, 0 } };
 
 MotionEntry sAm07Motions[] = {
-	{ MOTION_LOOP, 13, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_BLEND, 7, -1, 3, 0.0f, 4.0f, 0.4f, 0.1f, 0 },
-	{ MOTION_LOOP, 8, -1, 0, 0.0f, 10.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 10, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 11, -1, 0, 0.0f, 13.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 12, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_LOOP, 13, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 }, { MOTION_ONCE, 6, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_BLEND, 7, -1, 3, 0.0f, 4.0f, 0.4f, 0.1f, 0 },  { MOTION_LOOP, 8, -1, 0, 0.0f, 10.0f, 0.8f, 0.0f, 0 },
+	{ MOTION_ONCE, 9, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 10, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 11, -1, 0, 0.0f, 13.0f, 0.3f, 0.0f, 0 }, { MOTION_ONCE, 12, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.6f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 3, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 5, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 4, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
 };
 const EnemyFrameKey* sAm07FrameKeys[] = { sAm07KeyRise, sAm07KeyLand, sAm07KeyTug, sAm07KeyPull, sAm07KeyAim, sAm07KeyRecover };
 extern const ColliShape sAm07Shapes[] = {
@@ -91,10 +84,10 @@ extern "C" void initTEneAm07()
 {
 	resBankLoad(&sAm07Bank, "ar_ene_bee.arc");
 	resBankAddTextures(&sAm07Bank, 0, "ene_bee.gvm");
-	sAm07Models = resBankGetModels(&sAm07Bank);
+	sAm07Models   = resBankGetModels(&sAm07Bank);
 	sAm07Textures = resBankGetTextures(&sAm07Bank);
-	sAm07Motion = resBankGetMotion(&sAm07Bank, 0);
-	sAm07Param = (int*)enemyParamGet(12);
+	sAm07Motion   = resBankGetMotion(&sAm07Bank, 0);
+	sAm07Param    = (int*)enemyParamGet(12);
 }
 
 extern "C" void shutdownTEneAm07()
@@ -102,9 +95,9 @@ extern "C" void shutdownTEneAm07()
 	sAm07Param = 0;
 	resBankRemoveTextures(&sAm07Bank, 0);
 	resBankRelease(&sAm07Bank);
-	sAm07Models = 0;
+	sAm07Models   = 0;
 	sAm07Textures = 0;
-	sAm07Motion = 0;
+	sAm07Motion   = 0;
 }
 
 extern "C" TObject* createTEneAm07(TObject* parent, SetDesc* desc)
@@ -115,7 +108,7 @@ extern "C" TObject* createTEneAm07(TObject* parent, SetDesc* desc)
 TEneAm07::TEneAm07(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0x360;
 	init(desc);
 }
@@ -126,7 +119,7 @@ void TEneAm07::init(SetDesc* desc)
 	motionCtrlInit(&mAnim, sAm07Motions, sAm07Motion);
 	motionCtrlPlay(&mAnim, 0);
 	mBody.mRot.x = 0;
-	mCollider = colliCreate(4, 1);
+	mCollider    = colliCreate(4, 1);
 	colliCopyShapes(mCollider, (const ColliShape*)sAm07Shapes);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 255, 0, 0);
@@ -136,30 +129,30 @@ void TEneAm07::init(SetDesc* desc)
 	}
 	mBrain = 0;
 	readEnemyDesc(desc);
-	mPose = allocPose(*(void**)sAm07Models);
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mFlags2 = 0;
-	mPush.x = 0.0f;
-	mPush.y = 0.0f;
-	mPush.z = 0.0f;
-	mFrameKey = 0;
-	mHover = 46.0f;
-	mTurnVel = 0.0f;
-	mRadius = 1.0f;
+	mPose      = allocPose(*(void**)sAm07Models);
+	mDrawTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mFlags2    = 0;
+	mPush.x    = 0.0f;
+	mPush.y    = 0.0f;
+	mPush.z    = 0.0f;
+	mFrameKey  = 0;
+	mHover     = 46.0f;
+	mTurnVel   = 0.0f;
+	mRadius    = 1.0f;
 	mCylRadius = mRadius;
 	for (int i = 0; i < 10; i++) {
 		mPoints[i].x = 0.0f;
 		mPoints[i].y = 0.0f;
 		mPoints[i].z = 0.0f;
 	}
-	mCenter.x = 0.0f;
-	mCenter.y = 0.0f;
-	mCenter.z = 0.0f;
-	mAnchor = mBody.mPos;
-	mGoal.x = 0.0f;
-	mGoal.y = 0.0f;
-	mGoal.z = 0.0f;
-	mGroundPos = mBody.mPos;
+	mCenter.x       = 0.0f;
+	mCenter.y       = 0.0f;
+	mCenter.z       = 0.0f;
+	mAnchor         = mBody.mPos;
+	mGoal.x         = 0.0f;
+	mGoal.y         = 0.0f;
+	mGoal.z         = 0.0f;
+	mGroundPos      = mBody.mPos;
 	mGroundNormal.x = 0.0f;
 	mGroundNormal.y = 1.0f;
 	mGroundNormal.z = 0.0f;
@@ -167,7 +160,7 @@ void TEneAm07::init(SetDesc* desc)
 	mShadow._30 = 18.0f * 1.4f;
 	mShadow._34 = 18.0f * 1.4f;
 	shadowEnable(&mShadow);
-	mFx = 0;
+	mFx  = 0;
 	mBar = new TEnemyLifeBar(this);
 	mBar->setMax((s16)mHealth);
 	mBar->setMark((s16)mHealthStep);
@@ -176,14 +169,14 @@ void TEneAm07::init(SetDesc* desc)
 	mLight.reset();
 	mTint.reset();
 	enemyEffectSetLarge(10.0f, &mEffect, &mBody.mPos);
-	mSound = 0;
+	mSound     = 0;
 	mPrevSound = mSound;
 	seHolderStop(&mSe);
-	mStep = 0;
+	mStep  = 0;
 	mTimer = 0;
 	mPhase = 0;
-	_358 = 0;
-	mDist = 0.0f;
+	_358   = 0;
+	mDist  = 0.0f;
 	createBrain();
 }
 
@@ -212,10 +205,10 @@ TEneAm07::~TEneAm07()
 // 0x8006CAF4
 void TEneAm07::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -233,10 +226,10 @@ void TEneAm07::syncCollider()
 {
 	Vec3f* part = (Vec3f*)colliGetShapes(mCollider);
 	Vec3f* body = &part[8];
-	part[0] = mPoints[0];
-	part[4] = mPoints[1];
+	part[0]     = mPoints[0];
+	part[4]     = mPoints[1];
 	Vec3f v;
-	v = mPoints[5];
+	v       = mPoints[5];
 	mRadius = 14.0f * njScalor(&v);
 	if ((mFlags2 & AM_CYLINDER) != 0) {
 		*body = mPoints[6];
@@ -254,7 +247,7 @@ void TEneAm07::syncCollider()
 	part[12] = v;
 	colliRefreshBounds(mCollider);
 	colliBoundsOn(mCollider);
-	f32 size = 2.1f * mRadius;
+	f32 size    = 2.1f * mRadius;
 	mShadow._30 = size;
 	mShadow._34 = size;
 }
@@ -264,8 +257,8 @@ void TEneAm07::syncCollider()
 void TEneAm07::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
-	int health = desc->getInt(0);
-	mHealth = health > 0 ? health : 100;
+	int health  = desc->getInt(0);
+	mHealth     = health > 0 ? health : 100;
 	mHealthStep = divideBy5(mHealth);
 }
 
@@ -288,18 +281,18 @@ int TEneAm07::stingDamage(int shape)
 // A player takes the sting's damage an egg 1
 int TEneAm07::onHit(const TObjAction* other, int shape, int* result)
 {
-	int hit = 0;
+	int hit       = 0;
 	HitInfo* info = (HitInfo*)result;
 	if (isPlayerOrKind4(other) != 0) {
 		int damage = stingDamage(shape);
 		if (damage > 0) {
 			info->mDamage = damage;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 		}
 	} else if (isEggObj(other) != 0 && stingDamage(shape) > 0) {
 		info->mDamage = 1;
-		hit = 1;
+		hit           = 1;
 		info->mFlags.clear();
 		info->mFlags.setBit(0xD);
 	}
@@ -502,7 +495,7 @@ void TEneAm07::placePoints()
 	njCalcPoints(0, mPoints, mPoints, 10);
 	njPopMatrixEx();
 	mPoints[5] = axis;
-	mCenter = mPoints[4];
+	mCenter    = mPoints[4];
 	njAddVector(&mCenter, &mPoints[6]);
 	gjScaleVector(0.5f, &mCenter, &mCenter);
 }
@@ -551,10 +544,10 @@ int TEneAm07::moveFlat(f32 bounce, Vec3f* vel)
 	start.x = mCenter.x;
 	start.y = mCenter.y;
 	start.z = mCenter.z;
-	dir.x = vel->x;
-	dir.y = vel->y;
-	dir.z = vel->z;
-	dir.y = 0.0f;
+	dir.x   = vel->x;
+	dir.y   = vel->y;
+	dir.z   = vel->z;
+	dir.y   = 0.0f;
 	f32 len = njUnitVector(&dir);
 	if (len < gUnitVectorMin) {
 		dir = gVecZero;
@@ -564,8 +557,8 @@ int TEneAm07::moveFlat(f32 bounce, Vec3f* vel)
 	Vec3f hit;
 	Vec3f normal;
 	if (probeGroundLine(&start, &end, &hit, &normal) != 0) {
-		hit.x = hit.x - dir.x * mRadius;
-		hit.z = hit.z - dir.z * mRadius;
+		hit.x   = hit.x - dir.x * mRadius;
+		hit.z   = hit.z - dir.z * mRadius;
 		start.x = start.x - hit.x;
 		start.z = start.z - hit.z;
 		mBody.mPos.x += start.x;
@@ -615,7 +608,7 @@ int TEneAm07::updateGround()
 	if (hit == 0) {
 		shadowDisable(&mShadow);
 	} else {
-		mGroundPos = pos;
+		mGroundPos    = pos;
 		mGroundNormal = normal;
 		shadowEnable(&mShadow);
 		shadowSetGround(&mShadow, &pos, &normal);
@@ -645,13 +638,13 @@ int TEneAm07::moveVertical(f32 damp, const Vec3f* head, const Vec3f* tail, f32* 
 	top.y += *dy;
 	bottom.y += *dy;
 	getCenter(&center);
-	up = center;
-	up.y = top.y;
-	stop = top;
+	up          = center;
+	up.y        = top.y;
+	stop        = top;
 	int ceiling = probeGroundLine(&center, &up, &stop, 0);
-	f32 down = stop.y - top.y;
-	int floor = updateGround();
-	f32 lift = mGroundPos.y - bottom.y;
+	f32 down    = stop.y - top.y;
+	int floor   = updateGround();
+	f32 lift    = mGroundPos.y - bottom.y;
 	if (floor != 0) {
 		if (lift > 0.0f) {
 			floor = 1;
@@ -659,7 +652,7 @@ int TEneAm07::moveVertical(f32 damp, const Vec3f* head, const Vec3f* tail, f32* 
 			floor = 0;
 		}
 	} else {
-		lift = 0.0f;
+		lift  = 0.0f;
 		floor = 0;
 	}
 	if (ceiling != 0 && floor != 0) {
@@ -698,9 +691,9 @@ void TEneAm07::move()
 // Turns toward angle through a spring on mTurnVel
 int TEneAm07::turnToward(int angle, f32 a, f32 b, f32 c, f32 d, f32 e)
 {
-	int yaw = mBody.mRot.y;
-	int diff = angleDiff(yaw, angle);
-	mTurnVel = approachSpeed(mTurnVel, (f32)diff, a, b, c, d, e);
+	int yaw      = mBody.mRot.y;
+	int diff     = angleDiff(yaw, angle);
+	mTurnVel     = approachSpeed(mTurnVel, (f32)diff, a, b, c, d, e);
 	mBody.mRot.y = yaw + (int)mTurnVel;
 	return diff;
 }
@@ -766,7 +759,7 @@ int TEneAm07::strafe(int* side, f32* dist, Vec3f* out)
 	from.x = mBody.mPos.x;
 	from.y = 0.5f * (mPoints[0].y + mPoints[8].y);
 	from.z = mBody.mPos.z;
-	dir = mGoal;
+	dir    = mGoal;
 	njSubVector(&dir, &mBody.mPos);
 	dir.y = 0.0f;
 	if (njUnitVector(&dir) < gUnitVectorMin) {
@@ -786,7 +779,7 @@ int TEneAm07::strafe(int* side, f32* dist, Vec3f* out)
 		njSubVector(&hit, &from);
 		f32 d = njScalor2(&hit);
 		if (*dist <= 0.0f) {
-			*dist = d;
+			*dist   = d;
 			blocked = 1;
 			if (*side == 1) {
 				*side = 2;
@@ -810,9 +803,9 @@ void TEneAm07::wander(int* angle, int* rising)
 {
 	Vec3f to;
 	Vec3f vel;
-	vel = mBody.mVel;
+	vel   = mBody.mVel;
 	vel.y = 0.0f;
-	to = mAnchor;
+	to    = mAnchor;
 	njSubVector(&to, &mBody.mPos);
 	to.y = 0.0f;
 	if (springVelocity(0.08f, 0.9f, &vel, 0.1f, &to, 0.1f, 5.0f, 0.05f) < 2.0f) {
@@ -823,7 +816,7 @@ void TEneAm07::wander(int* angle, int* rising)
 	}
 	mBody.mVel.x = vel.x;
 	mBody.mVel.z = vel.z;
-	int wall = moveFlat(-0.8f, &mBody.mVel);
+	int wall     = moveFlat(-0.8f, &mBody.mVel);
 	turnSlow(*angle);
 	bank();
 	Vec3f tail;
@@ -856,7 +849,7 @@ void TEneAm07::hover(u32* phase)
 {
 	*phase += 0x300;
 	*phase &= 0xFFFF;
-	f32 side = 25.0f * njSin(*phase);
+	f32 side   = 25.0f * njSin(*phase);
 	f32 height = 8.0f * (0.8f + njSin(*phase << 1)) + 46.0f;
 	f32 s;
 	f32 c;
@@ -879,14 +872,14 @@ int TEneAm07::dive(int* timer)
 	Vec3f to;
 	to = mGoal;
 	njSubVector(&to, &mBody.mPos);
-	to.y = 0.0f;
+	to.y         = 0.0f;
 	mBody.mRot.y = angleApproach(mBody.mRot.y, (int)(10430.38043493439 * (f32)atan2(to.x, to.z)), 0x200);
 	if (njUnitVector(&to) < gUnitVectorMin) {
 		to = gVecZero;
 	}
 	Vec3f vel;
-	vel = mBody.mVel;
-	vel.y = 0.0f;
+	vel       = mBody.mVel;
+	vel.y     = 0.0f;
 	f32 along = njInnerProduct(&vel, &to);
 	gjMulAddVector(-along, &vel, &vel, &to);
 	along += 0.12f;
@@ -913,8 +906,8 @@ int TEneAm07::dive(int* timer)
 	Vec3f tail;
 	getTail(&tail);
 	tail.y += 10.0f;
-	f32 vy = mBody.mVel.y;
-	f32 gap = mGoal.y - tail.y;
+	f32 vy   = mBody.mVel.y;
+	f32 gap  = mGoal.y - tail.y;
 	f32 dist = gap;
 	if (gap < 0.0f) {
 		dist *= -1.0f;
@@ -942,15 +935,15 @@ void TEneAm07::chase()
 {
 	Vec3f to;
 	Vec3f vel;
-	vel = mBody.mVel;
-	vel.y = 0.0f;
+	vel       = mBody.mVel;
+	vel.y     = 0.0f;
 	f32 speed = njUnitVector(&vel);
 	if (speed < gUnitVectorMin) {
 		vel = gVecZero;
 	}
 	to = mGoal;
 	njSubVector(&to, &mBody.mPos);
-	to.y = 0.0f;
+	to.y     = 0.0f;
 	f32 dist = njUnitVector(&to);
 	if (dist < gUnitVectorMin) {
 		to = gVecZero;
@@ -1046,13 +1039,13 @@ void TEneAm07::actAppear(int phase)
 // 0x8006E818
 void TEneAm07::actWander(int phase)
 {
-	int* angle = &mPhase;
+	int* angle  = &mPhase;
 	int* rising = &mStep;
 	switch (phase) {
 	case 0:
 		motionCtrlPlay(&mAnim, 0);
 		updateGround();
-		*angle = 0;
+		*angle  = 0;
 		*rising = 0;
 		mFlags2 &= ~AM_STALLED;
 		clearFrameKey();
@@ -1079,9 +1072,9 @@ void TEneAm07::actHover(int phase)
 	case 0:
 		motionCtrlPlay(&mAnim, 0);
 		updateGround();
-		mAnchor = mGroundPos;
+		mAnchor   = mGroundPos;
 		mFrameKey = 5;
-		mSound = SOUND_BUZZ;
+		mSound    = SOUND_BUZZ;
 		break;
 	case 1:
 		motionCtrlUpdate(&mAnim);
@@ -1102,15 +1095,15 @@ void TEneAm07::actHover(int phase)
 void TEneAm07::actDive(int phase)
 {
 	int* timer = &mTimer;
-	f32* dist = &mDist;
+	f32* dist  = &mDist;
 	switch (phase) {
 	case 0:
 		motionCtrlPlay(&mAnim, 8);
 		mFlags2 |= AM_PITCH;
 		updateGround();
-		mStep = 0;
+		mStep  = 0;
 		*timer = 0;
-		*dist = 0.0f;
+		*dist  = 0.0f;
 		mBody.mVel.y += 0.2f;
 		mBody.mRot.x = 0;
 		clearFrameKey();
@@ -1125,9 +1118,9 @@ void TEneAm07::actDive(int phase)
 			levelOut();
 			if (motionCtrlIsDone(&mAnim) != 0 && left < 0x400 && left > -0x400) {
 				motionCtrlPlay(&mAnim, 9);
-				mStep = 1;
-				*timer = 0;
-				*dist = 0.0f;
+				mStep     = 1;
+				*timer    = 0;
+				*dist     = 0.0f;
 				mFrameKey = 4;
 			}
 			gjScaleVector(0.92f, &mBody.mVel, &mBody.mVel);
@@ -1141,9 +1134,9 @@ void TEneAm07::actDive(int phase)
 			gjScaleVector(0.92f, &mBody.mVel, &mBody.mVel);
 			Vec3f dir;
 			if (strafe(timer, dist, &dir) != 0) {
-				mStep = 2;
+				mStep  = 2;
 				*timer = 60;
-				*dist = 1000000.0f;
+				*dist  = 1000000.0f;
 				gjScaleVector(6.0f, &dir, &dir);
 				mBody.mVel.x = dir.x;
 				mBody.mVel.z = dir.z;
@@ -1172,7 +1165,7 @@ void TEneAm07::actDive(int phase)
 				fxSpawnScaled(2.0f, 1.0f, 2.0f, 5, (void*)0x14, (const Vec3f*)&tail, 0, heading);
 			}
 			if (done != 0) {
-				mStep = 3;
+				mStep  = 3;
 				*timer = 5;
 				if (mFx != 0) {
 					mFx->mFlags |= 1;
@@ -1223,7 +1216,7 @@ void TEneAm07::actSting(int phase)
 		motionCtrlPlay(&mAnim, 0);
 		mFlags2 |= AM_STINGING;
 		updateGround();
-		mStep = 0;
+		mStep  = 0;
 		mTimer = 0;
 		mSound = SOUND_DIVE;
 		break;
@@ -1248,14 +1241,14 @@ void TEneAm07::actSting(int phase)
 			moveVertical(-0.01f, &mBody.mVel.y);
 			if (motionCtrlPassed(7.0f, &mAnim) != 0) {
 				quadRoots(1.0f, -0.02f, -2.0f, &jump, 0);
-				mStep = 2;
+				mStep        = 2;
 				mBody.mVel.y = jump;
-				mDist = jump / 0.02f;
-				to.x = mGoal.x;
-				to.y = mGoal.y;
-				to.z = mGoal.z;
+				mDist        = jump / 0.02f;
+				to.x         = mGoal.x;
+				to.y         = mGoal.y;
+				to.z         = mGoal.z;
 				njSubVector(&to, &mBody.mPos);
-				to.y = 0.0f;
+				to.y    = 0.0f;
 				f32 len = njUnitVector(&to);
 				if (len < gUnitVectorMin) {
 					to = gVecZero;
@@ -1282,8 +1275,8 @@ void TEneAm07::actSting(int phase)
 				motionCtrlPlay(&mAnim, 2);
 				mFlags2 |= AM_STINGER | AM_CYLINDER;
 				mCylRadius = mRadius;
-				mAnchor = mGoal;
-				mFrameKey = 4;
+				mAnchor    = mGoal;
+				mFrameKey  = 4;
 			}
 			break;
 		case 3: {
@@ -1470,8 +1463,8 @@ void TEneAm07::actFall(int phase)
 		mBody.mVel.x = 0.0f;
 		mBody.mVel.y = 0.0f;
 		mBody.mVel.z = 0.0f;
-		mStep = 0;
-		mDist = mBody.mPos.y;
+		mStep        = 0;
+		mDist        = mBody.mPos.y;
 		mBody.mVel.y = 2.0f;
 		break;
 	case 1:
@@ -1489,8 +1482,8 @@ void TEneAm07::actFall(int phase)
 			if (updateGround() != 0) {
 				f32 floor = mGroundPos.y - drop;
 				if (vy < floor) {
-					mStep = 2;
-					vy = floor;
+					mStep  = 2;
+					vy     = floor;
 					mTimer = 60;
 					particleOnceByIdDefault(&mGroundPos, 0, 0x46);
 					seEnemyPuff(&mBody.mPos);

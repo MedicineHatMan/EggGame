@@ -56,14 +56,13 @@ void NoiseTex::fill(f32 freq, f32 x, f32 y, f32 amp)
 	u32 row;
 	f32 step = (1.0f / B) * freq;
 	f32 nx;
-	f32 v    = y;
+	f32 v = y;
 	for (row = 0; row < mHeight; row++) {
 		nx = x;
 		for (col = 0; col < mWidth; col++) {
 			f32 n = 0.5f * (1.0f + noise2(nx, v));
 			nx += step;
-			mData[((row & 3) << 3) + (col & 7) + ((col >> 3) + (row >> 2) * (mWidth >> 3)) * 32]
-			    = (int)(n * amp + 0.5f);
+			mData[((row & 3) << 3) + (col & 7) + ((col >> 3) + (row >> 2) * (mWidth >> 3)) * 32] = (int)(n * amp + 0.5f);
 		}
 		v += step;
 	}
@@ -98,24 +97,24 @@ static inline void GXVertex(f32 x, f32 y, f32 z, f32 nx, f32 ny, f32 nz, f32 s, 
 typedef char TObjFractalCloud_size_check[(sizeof(TObjFractalCloud) == 0xD0) ? 1 : -1];
 
 // 0x80148014
-static const GXColor sPuffWhite = {0xFF, 0xFF, 0xFF, 0xFF};
+static const GXColor sPuffWhite = { 0xFF, 0xFF, 0xFF, 0xFF };
 
 FractalPuff::FractalPuff()
 {
-	mTex      = 0;
-	_04       = 0.0f;
-	_08       = 0.0f;
-	mSpeedX   = 0.05f;
-	mSpeedY   = 0.05f;
-	mFreq     = 8.0f;
-	mOctaves  = 4;
-	mThreshold = 0;
+	mTex           = 0;
+	_04            = 0.0f;
+	_08            = 0.0f;
+	mSpeedX        = 0.05f;
+	mSpeedY        = 0.05f;
+	mFreq          = 8.0f;
+	mOctaves       = 4;
+	mThreshold     = 0;
 	*(u32*)&mColor = *(const u32*)&sPuffWhite;
-	mScrollU  = 0.0f;
-	mScrollV  = 0.0f;
-	mDU       = 0.0f;
-	mDV       = 0.0f;
-	mRepeat   = 8.0f;
+	mScrollU       = 0.0f;
+	mScrollV       = 0.0f;
+	mDU            = 0.0f;
+	mDV            = 0.0f;
+	mRepeat        = 8.0f;
 }
 
 // 0x80148068
@@ -201,9 +200,9 @@ void FractalPuff::draw()
 	Vec3f scale;
 	f32 scrollU = mScrollU;
 	f32 scrollV = mScrollV;
-	scale.x = mRepeat;
-	scale.y = mRepeat;
-	scale.z = 0.0f;
+	scale.x     = mRepeat;
+	scale.y     = mRepeat;
+	scale.z     = 0.0f;
 	mtxSetTrans(base, scrollU, scrollV, 0.0f);
 	mtxScale(scale.x, scale.y, 1.0f, tex0, base);
 	vecAdd(&scale, &scale, &scale);
@@ -291,7 +290,9 @@ extern "C" void initTObjFractalCloud()
 }
 
 // 0x801488FC
-extern "C" void termTObjFractalCloud() { }
+extern "C" void termTObjFractalCloud()
+{
+}
 
 // 0x80148900
 extern "C" TObject* createTObjFractalCloud(TObject* parent, SetDesc* desc)
@@ -329,9 +330,9 @@ void TObjFractalCloud::initFromDesc(SetDesc* desc)
 	mScale           = 10.0f + desc->getFloat(0);
 	mPuff.mFreq      = desc->getFloat(1);
 	mPuff.setOctaves((u8)mRot.x);
-	f32 speedY     = 0.001f * desc->getFloat(3);
-	mPuff.mSpeedX  = 0.001f * desc->getFloat(2);
-	mPuff.mSpeedY  = speedY;
+	f32 speedY    = 0.001f * desc->getFloat(3);
+	mPuff.mSpeedX = 0.001f * desc->getFloat(2);
+	mPuff.mSpeedY = speedY;
 	mPuff.setColor(0xFF, 0xFF, 0xFF, 0xFF - mRot.y);
 	mtxSetTransV(mMtx, &mPos);
 	mtxScale(mScale, mScale, mScale, mMtx, mMtx);

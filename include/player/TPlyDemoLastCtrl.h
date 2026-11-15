@@ -26,8 +26,8 @@ public:
 	void stepAfterSuper();
 	void stepDone();
 
-	int mTimer;                           // _20
-	void (TPlyDemoLastCtrl::*mStep)();    // _24
+	int mTimer;                        // _20
+	void (TPlyDemoLastCtrl::*mStep)(); // _24
 };
 
 extern "C" {

@@ -17,13 +17,13 @@ struct TObjYellowTornadoScene;
 
 // Palette banks the last is unused
 static const u32 gAeStageSelectBanks[] = { 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0xFFFFFFFF };
-static const u32 gWorldCells[] = { 0xDF, 0xE1, 0xE3, 0xE5, 0xE7, 0xDD, 0xE9, 0xD9, 0xDB };
-static const int gWorldFrames[] = { 0x12, 0x13, 0x14, 0x15, 0x16, 0x11, 0x17, 0xF, 0x10 };
-static const int gStageKindCells[] = { 0xB3, 0xB6, 0xB9, 0xBC };
-static const u32 gStageIconSlots[] = { 0xC3, 0xC2, 0xC1, 0xC0, 0xBF, 0xC6, 0xC5, 0xC4, 0xCB, 0xCA, 0xC9, 0xC8, 0xC7, 0xCE, 0xCD, 0xCC };
-static const u32 gRankAnims[] = { 0x8A, 0x86, 0x82, 0x75, 0x90, 0x8E };
-static const u32 gGbaRowSlots[] = { 0x145, 0x144, 0x143, 0x142, 0x141 };
-static const int gGbaCells[] = { 0x8, 0xA, 0xC, 0xE, 0x10 };
+static const u32 gWorldCells[]         = { 0xDF, 0xE1, 0xE3, 0xE5, 0xE7, 0xDD, 0xE9, 0xD9, 0xDB };
+static const int gWorldFrames[]        = { 0x12, 0x13, 0x14, 0x15, 0x16, 0x11, 0x17, 0xF, 0x10 };
+static const int gStageKindCells[]     = { 0xB3, 0xB6, 0xB9, 0xBC };
+static const u32 gStageIconSlots[]     = { 0xC3, 0xC2, 0xC1, 0xC0, 0xBF, 0xC6, 0xC5, 0xC4, 0xCB, 0xCA, 0xC9, 0xC8, 0xC7, 0xCE, 0xCD, 0xCC };
+static const u32 gRankAnims[]          = { 0x8A, 0x86, 0x82, 0x75, 0x90, 0x8E };
+static const u32 gGbaRowSlots[]        = { 0x145, 0x144, 0x143, 0x142, 0x141 };
+static const int gGbaCells[]           = { 0x8, 0xA, 0xC, 0xE, 0x10 };
 // Each world's colour as r g b and a
 static const f32 gWorldTints[8][4] = {
 	{ 1.0f, 0.01961f, 0.4902f, 0.92157f },
@@ -46,7 +46,7 @@ extern "C" void loadAeStageSelect()
 	loadArc(getLangFileName("ae_stage_select.arc"), &sAeStageSelectArc);
 	if (sAeStageSelectArc != 0) {
 		AeArcBlock* block = aeArcBlock(sAeStageSelectArc);
-		sAeStageSelectAe = block->mAe;
+		sAeStageSelectAe  = block->mAe;
 		relocateAe(sAeStageSelectAe);
 		sAeStageSelectTexList = block->mTexList;
 		bindGvmTextures((u8*)block->mGvm, sAeStageSelectTexList);
@@ -89,7 +89,7 @@ extern "C" void freeAeStageSelect()
 		sAeStageSelectTexList = 0;
 		releaseResource(sAeStageSelectArc);
 		sAeStageSelectArc = 0;
-		sAeStageSelectAe = 0;
+		sAeStageSelectAe  = 0;
 	}
 }
 
@@ -101,14 +101,18 @@ extern "C" TAeObjStageSelect* createAeStageSelect()
 	if (sAeStageSelectArc == 0) {
 		return 0;
 	}
-	made = new TAeObjStageSelect(gTL_07, sAeStageSelectAe, sAeStageSelectTexList);
+	made           = new TAeObjStageSelect(gTL_07, sAeStageSelectAe, sAeStageSelectTexList);
 	gAeStageSelect = made;
 	return made;
 }
 
 // 0x8017BF7C
 // Stores the new layer in field then gives it the palettes
-#define MAKE_LAYER(field, id, flags) field = createLayer(id, flags); if (field != 0) { field->mBanks = gAeStageSelectBanks; }
+#define MAKE_LAYER(field, id, flags)         \
+	field = createLayer(id, flags);          \
+	if (field != 0) {                        \
+		field->mBanks = gAeStageSelectBanks; \
+	}
 
 TAeObjStageSelect::TAeObjStageSelect(TObject* parent, void* data, void* assets)
     : TAeObject(parent, data, assets)
@@ -154,11 +158,14 @@ TAeObjStageSelect::TAeObjStageSelect(TObject* parent, void* data, void* assets)
 	attachWorld();
 	mWorld = 0;
 	mStage = 0;
-	mDone = 0;
+	mDone  = 0;
 }
 
 // 0x8017C2DC
-TAeObjStageSelect::~TAeObjStageSelect() { gAeStageSelect = 0; }
+TAeObjStageSelect::~TAeObjStageSelect()
+{
+	gAeStageSelect = 0;
+}
 
 // 0x8017C340
 void TAeObjStageSelect::draw()
@@ -561,7 +568,7 @@ extern "C" void aeStageSelectSetScore(int score)
 	s8 d5, d4, d3, d2, d1;
 
 	if (gAeStageSelect != 0 && (panel = gAeStageSelect->mPanel) != 0) {
-		v = score < 0 ? 0 : (score > 999999 ? 999999 : score);
+		v  = score < 0 ? 0 : (score > 999999 ? 999999 : score);
 		d5 = DIGIT(v / 100000);
 		n  = v % 100000;
 		d4 = DIGIT(n / 10000);

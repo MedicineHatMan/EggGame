@@ -126,7 +126,10 @@ void TObjBridgeIta::render()
 }
 
 // 0x800D519C
-Vec3f* TObjBridgeIta::getPos() { return &mPrevPos; }
+Vec3f* TObjBridgeIta::getPos()
+{
+	return &mPrevPos;
+}
 
 // 0x800D51A4
 void TObjBridgeIta::setPos(const Vec3f* pos)
@@ -137,7 +140,13 @@ void TObjBridgeIta::setPos(const Vec3f* pos)
 }
 
 // 0x800D51C0
-int TObjBridgeIta::getKind() { return 3; }
+int TObjBridgeIta::getKind()
+{
+	return 3;
+}
 
 // 0x800D51C8
-int TObjBridgeIta::getRotY() { return mRotY; }
+int TObjBridgeIta::getRotY()
+{
+	return mRotY;
+}

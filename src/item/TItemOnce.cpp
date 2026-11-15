@@ -23,8 +23,8 @@ TItemOnce::TItemOnce(TObject* parent, const ItemSpec* spec)
     , mHolder()
     , mGlow()
 {
-	_00     = (u32)gTItemOnceName;
-	mSize   = 0x104;
+	_00   = (u32)gTItemOnceName;
+	mSize = 0x104;
 	itemHolderAttach(spec->mKind, &mHolder);
 	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	mGlow.stop(&mHolder);
@@ -69,7 +69,9 @@ void TItemOnce::draw()
 }
 
 // 0x801AFD08
-void TItemOnce::vfn_10() { }
+void TItemOnce::vfn_10()
+{
+}
 
 // 0x801AFD0C
 void TItemOnce::render()
@@ -93,8 +95,8 @@ void TItemOnce::vfn_6C()
 	pos     = owner->getPos();
 	mPos    = *pos;
 	mPos.y += gItemOnceStartHeight;
-	owner   = getOwner();
-	mAngle  = owner->getRotY();
+	owner  = getOwner();
+	mAngle = owner->getRotY();
 	mtxSetTransV(mMtx, &mPos);
 	mtxRotateY(mMtx, mMtx, mAngle);
 }

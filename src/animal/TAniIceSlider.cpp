@@ -12,6 +12,7 @@ struct DrawTask;
 #include "stl/math.h"
 #include "animal/TAniIceSlider.h"
 #include "core/TMainTask.h"
+#include "animal/AniModel.h"
 struct ColliShape;
 struct CharaColli;
 
@@ -27,25 +28,25 @@ const char* gTAniIceSliderName = "TAniIceSlider";
 TAniIceSlider::TAniIceSlider(TEggCreatureTypeE* owner, const Vec3f* pos, const Vec3f* vel, u16 ownerId, u16 targetId)
     : TObject(owner)
 {
-	_00       = (u32)gTAniIceSliderName;
-	mSize     = 0x70;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
-	mObject   = ((void***)owner->mMotion)[0][1];
-	mTexList  = owner->mTexList;
-	mState    = 0;
-	mPos      = *pos;
-	mVel      = *vel;
-	mRot[0]   = 0;
-	mRot[1]   = 0;
-	mRot[2]   = 0;
-	mRot[1]   = vecAngleXZ(&mVel);
-	mTargetId = targetId;
-	mOwnerId  = ownerId;
-	mDone     = 0;
-	mTicks    = 0;
-	mRange    = 0.0f;
+	_00        = (u32)gTAniIceSliderName;
+	mSize      = 0x70;
+	mDrawTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
+	mObject    = owner->mMotion->mObject[1];
+	mTexList   = owner->mTexList;
+	mState     = 0;
+	mPos       = *pos;
+	mVel       = *vel;
+	mRot[0]    = 0;
+	mRot[1]    = 0;
+	mRot[2]    = 0;
+	mRot[1]    = vecAngleXZ(&mVel);
+	mTargetId  = targetId;
+	mOwnerId   = ownerId;
+	mDone      = 0;
+	mTicks     = 0;
+	mRange     = 0.0f;
 	mTravelled = 0.0f;
-	mGround   = 0;
+	mGround    = 0;
 
 	AniParams* params = (AniParams*)gAnimalParams[2];
 	if (params == 0) {
@@ -183,7 +184,8 @@ void TAniIceSlider::run()
 	}
 
 	Vec3f to = iceAdd(&from, &mVel);
-	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&from, (const Vec3f*)&to, (unsigned long)((-1))) != 0 || touchedTarget() != 0 || mTravelled >= mRange) {
+	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&from, (const Vec3f*)&to, (unsigned long)((-1))) != 0 || touchedTarget() != 0
+	    || mTravelled >= mRange) {
 		mVel.x = 0.0f;
 		mVel.y = 0.0f;
 		mVel.z = 0.0f;

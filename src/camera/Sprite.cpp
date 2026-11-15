@@ -34,22 +34,13 @@ const f32 gSpriteCoords[8] = { 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f };
 // 0x802407D0
 // Sixteen quads a 4 by 4 grid of a texture
 const f32 gSpriteCoordGrid[0x80] = {
-	0.0f, 0.0f, 0.25f, 0.0f, 0.25f, 0.25f, 0.0f, 0.25f,
-	0.25f, 0.0f, 0.5f, 0.0f, 0.5f, 0.25f, 0.25f, 0.25f,
-	0.5f, 0.0f, 0.75f, 0.0f, 0.75f, 0.25f, 0.5f, 0.25f,
-	0.75f, 0.0f, 1.0f, 0.0f, 1.0f, 0.25f, 0.75f, 0.25f,
-	0.0f, 0.25f, 0.25f, 0.25f, 0.25f, 0.5f, 0.0f, 0.5f,
-	0.25f, 0.25f, 0.5f, 0.25f, 0.5f, 0.5f, 0.25f, 0.5f,
-	0.5f, 0.25f, 0.75f, 0.25f, 0.75f, 0.5f, 0.5f, 0.5f,
-	0.75f, 0.25f, 1.0f, 0.25f, 1.0f, 0.5f, 0.75f, 0.5f,
-	0.0f, 0.5f, 0.25f, 0.5f, 0.25f, 0.75f, 0.0f, 0.75f,
-	0.25f, 0.5f, 0.5f, 0.5f, 0.5f, 0.75f, 0.25f, 0.75f,
-	0.5f, 0.5f, 0.75f, 0.5f, 0.75f, 0.75f, 0.5f, 0.75f,
-	0.75f, 0.5f, 1.0f, 0.5f, 1.0f, 0.75f, 0.75f, 0.75f,
-	0.0f, 0.75f, 0.25f, 0.75f, 0.25f, 1.0f, 0.0f, 1.0f,
-	0.25f, 0.75f, 0.5f, 0.75f, 0.5f, 1.0f, 0.25f, 1.0f,
-	0.5f, 0.75f, 0.75f, 0.75f, 0.75f, 1.0f, 0.5f, 1.0f,
-	0.75f, 0.75f, 1.0f, 0.75f, 1.0f, 1.0f, 0.75f, 1.0f,
+	0.0f,  0.0f,  0.25f, 0.0f,  0.25f, 0.25f, 0.0f,  0.25f, 0.25f, 0.0f,  0.5f,  0.0f,  0.5f,  0.25f, 0.25f, 0.25f, 0.5f,  0.0f,  0.75f,
+	0.0f,  0.75f, 0.25f, 0.5f,  0.25f, 0.75f, 0.0f,  1.0f,  0.0f,  1.0f,  0.25f, 0.75f, 0.25f, 0.0f,  0.25f, 0.25f, 0.25f, 0.25f, 0.5f,
+	0.0f,  0.5f,  0.25f, 0.25f, 0.5f,  0.25f, 0.5f,  0.5f,  0.25f, 0.5f,  0.5f,  0.25f, 0.75f, 0.25f, 0.75f, 0.5f,  0.5f,  0.5f,  0.75f,
+	0.25f, 1.0f,  0.25f, 1.0f,  0.5f,  0.75f, 0.5f,  0.0f,  0.5f,  0.25f, 0.5f,  0.25f, 0.75f, 0.0f,  0.75f, 0.25f, 0.5f,  0.5f,  0.5f,
+	0.5f,  0.75f, 0.25f, 0.75f, 0.5f,  0.5f,  0.75f, 0.5f,  0.75f, 0.75f, 0.5f,  0.75f, 0.75f, 0.5f,  1.0f,  0.5f,  1.0f,  0.75f, 0.75f,
+	0.75f, 0.0f,  0.75f, 0.25f, 0.75f, 0.25f, 1.0f,  0.0f,  1.0f,  0.25f, 0.75f, 0.5f,  0.75f, 0.5f,  1.0f,  0.25f, 1.0f,  0.5f,  0.75f,
+	0.75f, 0.75f, 0.75f, 1.0f,  0.5f,  1.0f,  0.75f, 0.75f, 1.0f,  0.75f, 1.0f,  1.0f,  0.75f, 1.0f,
 };
 
 int gSpriteCount;    // 0x802C4C70
@@ -60,18 +51,18 @@ int gSpriteRoll;     // 0x802C4C78
 // 0x80015C90
 extern "C" void spriteInit(Sprite* sprite)
 {
-	sprite->mPos.x        = 0.0f;
-	sprite->mPos.y        = 0.0f;
-	sprite->mPos.z        = 0.0f;
-	sprite->mWidth        = 0.0f;
-	sprite->mHeight       = 0.0f;
-	sprite->mColor        = 0;
-	sprite->mPush         = 0.0f;
-	sprite->mKey.mWord   = 0;
-	sprite->mRoll         = 0;
-	sprite->mCoord        = 0;
-	sprite->mRotX         = 0;
-	sprite->mRotY         = 0;
+	sprite->mPos.x     = 0.0f;
+	sprite->mPos.y     = 0.0f;
+	sprite->mPos.z     = 0.0f;
+	sprite->mWidth     = 0.0f;
+	sprite->mHeight    = 0.0f;
+	sprite->mColor     = 0;
+	sprite->mPush      = 0.0f;
+	sprite->mKey.mWord = 0;
+	sprite->mRoll      = 0;
+	sprite->mCoord     = 0;
+	sprite->mRotX      = 0;
+	sprite->mRotY      = 0;
 }
 
 // 0x80015CCC
@@ -122,8 +113,8 @@ BOOL spriteIsFreeSlot(int slot)
 extern "C" void spriteClear()
 {
 	gSpriteHead.mNext = 0;
-	gSpriteCount         = 0;
-	gSpriteTail          = &gSpriteHead;
+	gSpriteCount      = 0;
+	gSpriteTail       = &gSpriteHead;
 }
 
 // 0x80015DA8
@@ -185,7 +176,7 @@ extern "C" int spriteAddTexList(NJS_TEXLIST* list)
 	for (i = SPRITE_FIXED_SLOTS; i < SPRITE_SLOTS; i++) {
 		if (gSpriteTexList[i] == 0) {
 			gSpriteTexList[i] = list;
-			slot                 = i;
+			slot              = i;
 			break;
 		}
 	}
@@ -347,8 +338,8 @@ extern "C" void spriteDrawAll()
 
 	spriteSetupGX();
 	gSpriteRoll = camGetDrawRoll();
-	first = 0;
-	run   = 1;
+	first       = 0;
+	run         = 1;
 	last.mWord  = gSpriteSorted[0]->mKey.mWord;
 	key.mWord   = last.mWord;
 	last.mField.mSlot++;
@@ -363,8 +354,8 @@ extern "C" void spriteDrawAll()
 			} else {
 				spriteDrawQuads(&gSpriteSorted[first], run);
 			}
-			first = j;
-			run   = 1;
+			first      = j;
+			run        = 1;
 			last.mWord = key.mWord;
 			key.mWord  = gSpriteSorted[j]->mKey.mWord;
 		} else {
@@ -403,17 +394,17 @@ void spriteDrawQuads(Sprite** list, int count)
 		f32 z;
 		f32 w;
 		f32 h;
-		sprite = *list++;
-		rotX = sprite->mRotX;
-		coord = sprite->mCoord;
-		roll = sprite->mRoll + gSpriteRoll;
-		x              = sprite->mView.x;
-		y              = sprite->mView.y;
-		z              = sprite->mView.z;
-		w              = sprite->mWidth;
-		h              = sprite->mHeight;
-		u32 color      = sprite->mColor;
-		int rotY       = sprite->mRotY;
+		sprite    = *list++;
+		rotX      = sprite->mRotX;
+		coord     = sprite->mCoord;
+		roll      = sprite->mRoll + gSpriteRoll;
+		x         = sprite->mView.x;
+		y         = sprite->mView.y;
+		z         = sprite->mView.z;
+		w         = sprite->mWidth;
+		h         = sprite->mHeight;
+		u32 color = sprite->mColor;
+		int rotY  = sprite->mRotY;
 
 		if (rotX != 0 || rotY != 0) {
 			Vec3f corner;

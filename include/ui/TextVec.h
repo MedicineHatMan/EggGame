@@ -4,9 +4,8 @@
 #include "stage/Stage.h"
 #include "stage/SetManager.h"
 
-struct TextVec : public Vec3f
-{
-	inline TextVec() {}
+struct TextVec : public Vec3f {
+	inline TextVec() { }
 };
 
 inline TextVec textVec(f32 x, f32 y, f32 z)
@@ -19,14 +18,12 @@ inline TextVec textVec(f32 x, f32 y, f32 z)
 }
 
 // A file-scope vector the static initializer stores straight into with no temporary
-struct InitVec : public Vec3f
-{
+struct InitVec : public Vec3f {
 	inline InitVec(f32 x, f32 y, f32 z) { set(x, y, z); }
 };
 
-struct TextRot : public SetRot
-{
-	inline TextRot() {}
+struct TextRot : public SetRot {
+	inline TextRot() { }
 };
 
 inline TextRot textRot(int x, int y, int z)

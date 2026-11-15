@@ -24,20 +24,20 @@ public:
 	void makeOwnDesc();
 	ParticleDesc* getOwnDesc();
 
-	u32 mGenFlags;            // _20 1 timed 2 ended 4 stay when ended 8 own record
-	Vec3f mPos;               // _24
-	int mRotX;                // _30
-	int mRotY;                // _34
+	u32 mGenFlags;             // _20 1 timed 2 ended 4 stay when ended 8 own record
+	Vec3f mPos;                // _24
+	int mRotX;                 // _30
+	int mRotY;                 // _34
 	const ParticleDesc* mDesc; // _38
-	f32 mRate;                // _3C
-	f32 mCount;               // _40 particles owed
-	int mPhase;               // _44
-	int mTime;                // _48 negative while waiting
-	int mLife;                // _4C
-	f32 mScale;               // _50
-	s16 mPosSlot;             // _54
-	s16 mDescSlot;            // _56
-	const f32* mAttach;       // _58 a matrix to follow
+	f32 mRate;                 // _3C
+	f32 mCount;                // _40 particles owed
+	int mPhase;                // _44
+	int mTime;                 // _48 negative while waiting
+	int mLife;                 // _4C
+	f32 mScale;                // _50
+	s16 mPosSlot;              // _54
+	s16 mDescSlot;             // _56
+	const f32* mAttach;        // _58 a matrix to follow
 };
 
 extern "C" {
@@ -103,9 +103,9 @@ extern int sParticleDescCount;
 }
 
 extern "C" {
-extern u8 sParticlePosUsed[0x40];    // position slot in use
-extern Vec3f sParticlePosSlots[0x40]; // position slots
-extern u8 sParticleDescUsed[0x40];    // record slot in use
+extern u8 sParticlePosUsed[0x40];             // position slot in use
+extern Vec3f sParticlePosSlots[0x40];         // position slots
+extern u8 sParticleDescUsed[0x40];            // record slot in use
 extern ParticleDesc sParticleDescSlots[0x40]; // record slots
 }
 

@@ -36,9 +36,9 @@ struct SandfallNode {
 		mList = 0;
 	}
 
-	SandfallNode* mNext;       // _00
-	SandfallNode* mPrev;       // _04
-	TObjYellowSandfall* mObj;  // _08
+	SandfallNode* mNext;        // _00
+	SandfallNode* mPrev;        // _04
+	TObjYellowSandfall* mObj;   // _08
 	struct SandfallList* mList; // _0C
 };
 
@@ -85,22 +85,22 @@ public:
 	void start();
 	void stop();
 
-	SandfallNode mNode;  // _64
-	NJS_OBJECT* mModelData;    // _74
-	NJS_TEXLIST* mTexList;      // _78
-	DrawTask* mDrawTask;     // _7C
-	ObjModel mModel;     // _80
+	SandfallNode mNode;     // _64
+	NJS_OBJECT* mModelData; // _74
+	NJS_TEXLIST* mTexList;  // _78
+	DrawTask* mDrawTask;    // _7C
+	ObjModel mModel;        // _80
 	ObjDrawState mState;    // _A0
-	f32 mMatrix[12];     // _C4
-	s16 mType;           // _F4 0 = NORMAL 1 = EVENT
-	f32 mScrollU;        // _F8
-	f32 mScrollV;        // _FC
-	SandfallFx* mEffect; // _100
-	Vec3f mEffectPos;    // _104
-	Vec3f mCenter;       // _110
-	f32 mRadius;         // _11C
-	SoundHandle mSound;  // _120
-	int mAct;            // _14C
+	f32 mMatrix[12];        // _C4
+	s16 mType;              // _F4 0 = NORMAL 1 = EVENT
+	f32 mScrollU;           // _F8
+	f32 mScrollV;           // _FC
+	SandfallFx* mEffect;    // _100
+	Vec3f mEffectPos;       // _104
+	Vec3f mCenter;          // _110
+	f32 mRadius;            // _11C
+	SoundHandle mSound;     // _120
+	int mAct;               // _14C
 };
 
 extern "C" {

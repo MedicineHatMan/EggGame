@@ -32,20 +32,20 @@ public:
 	void markFound();         // 0x801B4E2C
 	void markMissing();       // 0x801B4E64
 
-	DrawTask* mTask;    // _34
-	TAeLayer* _38;  // _38 the grid
-	TAeLayer* _3C;  // _3C the view frame
-	TAeLayer* _40;  // _40 the found mark
-	TAeLayer* _44;  // _44 the cursor
-	int mCursor;    // _48
-	u32 mGridDone;  // _4C set when _38's clip ends
-	u32 mFrameDone; // _50 set when _3C's clip ends
+	DrawTask* mTask; // _34
+	TAeLayer* _38;   // _38 the grid
+	TAeLayer* _3C;   // _3C the view frame
+	TAeLayer* _40;   // _40 the found mark
+	TAeLayer* _44;   // _44 the cursor
+	int mCursor;     // _48
+	u32 mGridDone;   // _4C set when _38's clip ends
+	u32 mFrameDone;  // _50 set when _3C's clip ends
 };
 
 extern "C" {
 void loadGallery();             // loads ae_gallery.arc
 void freeGallery();             // frees it
-TAeObjGallery* createGallery();   // creates the screen null without the archive
+TAeObjGallery* createGallery(); // creates the screen null without the archive
 }
 
 #include "Ninja/njtypes.h"

@@ -197,7 +197,8 @@ extern "C" {
 // Wrappers around the single manager
 
 extern const int sSetListSizes[2] = {
-	1024, 512,
+	1024,
+	512,
 };
 }
 

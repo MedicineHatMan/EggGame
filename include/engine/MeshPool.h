@@ -48,12 +48,12 @@ void meshPoolUpdate(MeshPool*);
 }
 
 struct MeshTreeNode { // size 0x20
-	u16 mIsLeaf; // _00
-	u16 mSlot;   // _02
-	u16 mLeft;   // _04
-	u16 mRight;  // _06
-	f32 mMin[3]; // _08
-	f32 mMax[3]; // _14
+	u16 mIsLeaf;      // _00
+	u16 mSlot;        // _02
+	u16 mLeft;        // _04
+	u16 mRight;       // _06
+	f32 mMin[3];      // _08
+	f32 mMax[3];      // _14
 };
 
 template <typename T>

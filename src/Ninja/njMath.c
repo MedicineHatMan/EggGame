@@ -5,6 +5,7 @@
 f32 njMathZeroOne[2] = { 0.0f, 1.0f }; // only the 1.0f is read
 
 // 0x8020F4E0
+// clang-format off
 asm void njAddVector(NJS_VECTOR* a, const NJS_VECTOR* b)
 {
 	nofralloc
@@ -18,6 +19,7 @@ asm void njAddVector(NJS_VECTOR* a, const NJS_VECTOR* b)
 	psq_st f1, 0x8(r3), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x8020F504
 void njCalcPoint(f32* m, const NJS_POINT3* src, NJS_POINT3* dst)
@@ -59,6 +61,7 @@ void njGetTranslation(f32* m, NJS_POINT3* p)
 }
 
 // 0x8020F5B8
+// clang-format off
 asm f32 njInnerProduct(const NJS_VECTOR* a, const NJS_VECTOR* b)
 {
 	nofralloc
@@ -73,6 +76,7 @@ asm f32 njInnerProduct(const NJS_VECTOR* a, const NJS_VECTOR* b)
 	fmadds f1, f2, f5, f0
 	blr
 }
+// clang-format on
 
 // 0x8020F5E0
 void njInvertMatrix(f32* m)
@@ -95,13 +99,14 @@ void njMultiQuaternion(const NJS_QUATERNION* a, const NJS_QUATERNION* b, NJS_QUA
 	f32 by = b->im[1];
 	f32 bz = b->im[2];
 
-	out->re = ar * br - ax * bx - ay * by - az * bz;
+	out->re    = ar * br - ax * bx - ay * by - az * bz;
 	out->im[0] = ay * bz + (ax * br + ar * bx - az * by);
 	out->im[1] = ar * by + (ay * br + az * bx) - ax * bz;
 	out->im[2] = ar * bz + (ax * by + (az * br - ay * bx));
 }
 
 // 0x8020F6B4
+// clang-format off
 asm f32 njOuterProduct(const NJS_VECTOR* a, const NJS_VECTOR* b, NJS_VECTOR* out)
 {
 	nofralloc
@@ -127,6 +132,7 @@ asm f32 njOuterProduct(const NJS_VECTOR* a, const NJS_VECTOR* b, NJS_VECTOR* out
 	fres f1, f1
 	blr
 }
+// clang-format on
 
 // 0x8020F708
 // Applies Z then X then Y to a point
@@ -158,6 +164,7 @@ void njScale(f32* m, f32 x, f32 y, f32 z)
 }
 
 // 0x8020F7D0
+// clang-format off
 asm f32 njScalor(const NJS_VECTOR* v)
 {
 	nofralloc
@@ -171,7 +178,9 @@ asm f32 njScalor(const NJS_VECTOR* v)
 	fres f1, f1
 	blr
 }
+// clang-format on
 // 0x8020F7F4
+// clang-format off
 asm void __nj_unit_matrix(f32* m)
 {
 	nofralloc
@@ -187,6 +196,7 @@ asm void __nj_unit_matrix(f32* m)
 	psq_st f1, 0x28(r3), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x8020F820
 void njUnitMatrix(f32* m)
@@ -204,13 +214,13 @@ void njUnitRotPortion(f32* m)
 	if (m == NULL) {
 		m = _gj_matrix_;
 	}
-	m[0] = 1.0f;
-	m[1] = 0.0f;
-	m[2] = 0.0f;
-	m[4] = 0.0f;
-	m[5] = 1.0f;
-	m[6] = 0.0f;
-	m[8] = 0.0f;
-	m[9] = 0.0f;
+	m[0]  = 1.0f;
+	m[1]  = 0.0f;
+	m[2]  = 0.0f;
+	m[4]  = 0.0f;
+	m[5]  = 1.0f;
+	m[6]  = 0.0f;
+	m[8]  = 0.0f;
+	m[9]  = 0.0f;
 	m[10] = 1.0f;
 }

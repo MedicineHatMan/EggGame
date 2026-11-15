@@ -41,19 +41,19 @@ TEneAntsBomb::TEneAntsBomb(TObject* parent, Vec3f* pos, Vec3f* target, Vec3f* ve
 	colliShapeSetTag(mColli, 0, 0);
 	mBody.mPos = *pos;
 	mLife      = 600;
-	Vec3f to = *target;
+	Vec3f to   = *target;
 	njSubVector(&to, pos);
-	f32 height = to.y;
-	f32 dist   = vecLenXZ(&to);
-	f32 velY   = vel->y;
-	f32 speed  = vecLenXZ(vel);
-	mBody.mRot.y = (int)(10430.38043493439 * (f32)atan2(vel->x, vel->z));
-	f64 angle    = atan2(speed, velY);
-	f32 a = 2.0f * (dist * (velY / speed) - height);
-	f32 b = -0.24f * dist;
-	f32 c = dist * (-0.12f * dist);
-	mBody.mRot.x = (int)(10430.38043493439 * angle);
-	mBody.mRot.z = 0;
+	f32 height     = to.y;
+	f32 dist       = vecLenXZ(&to);
+	f32 velY       = vel->y;
+	f32 speed      = vecLenXZ(vel);
+	mBody.mRot.y   = (int)(10430.38043493439 * (f32)atan2(vel->x, vel->z));
+	f64 angle      = atan2(speed, velY);
+	f32 a          = 2.0f * (dist * (velY / speed) - height);
+	f32 b          = -0.24f * dist;
+	f32 c          = dist * (-0.12f * dist);
+	mBody.mRot.x   = (int)(10430.38043493439 * angle);
+	mBody.mRot.z   = 0;
 	mBody.mForce.z = speed;
 	f32 scale;
 	if (quadDiscriminant(a, b, c) < 0.0f) {
@@ -82,7 +82,7 @@ int TEneAntsBomb::onHit(const TObjAction* other, int arg, int* result)
 	if (isPlayerObj(other) != 0) {
 		HitInfo* hit = (HitInfo*)result;
 		hit->mDamage = 0x14;
-		hurt = 1;
+		hurt         = 1;
 		hit->mFlags.clear();
 	}
 	return hurt;
@@ -103,7 +103,7 @@ void TEneAntsBomb::draw()
 	mBody.mVel.y += -0.12f;
 	if (mColli != 0) {
 		ColliShape* shape = colliGetShapes(mColli);
-		*(Vec3f*)shape = mBody.mPos;
+		*(Vec3f*)shape    = mBody.mPos;
 	}
 	int rotX = mBody.mRot.x;
 	rotX -= 0x100;
@@ -158,17 +158,17 @@ TEneAntsBomb_Blast::TEneAntsBomb_Blast(TObject* parent, Vec3f* pos)
 	f32 z;
 	f32 y;
 	f32 x;
-	x = pos->x;
-	y = pos->y;
-	z = pos->z;
+	x                  = pos->x;
+	y                  = pos->y;
+	z                  = pos->z;
 	((Vec3f*)shape)->x = x;
 	((Vec3f*)shape)->y = y;
 	((Vec3f*)shape)->z = z;
-	mPos.x = x;
-	mPos.y = y;
-	mPos.z = z;
-	mRadius = 0.0f;
-	mTime   = -8;
+	mPos.x             = x;
+	mPos.y             = y;
+	mPos.z             = z;
+	mRadius            = 0.0f;
+	mTime              = -8;
 	fxSpawnFlat(5, (void*)8, pos);
 }
 
@@ -187,7 +187,7 @@ int TEneAntsBomb_Blast::onHit(const TObjAction* other, int arg, int* result)
 	if (mTime >= 0 && isPlayerObj(other) != 0) {
 		HitInfo* hit = (HitInfo*)result;
 		hit->mDamage = 0x14;
-		hurt = 1;
+		hurt         = 1;
 		hit->mFlags.clear();
 	}
 	return hurt;

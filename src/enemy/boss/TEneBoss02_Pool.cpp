@@ -51,7 +51,7 @@ extern "C" int shrinkRadius(f32* radius, f32 step)
 		return 1;
 	}
 	f32 root = __frsqrte(step);
-	*radius = __fres(root);
+	*radius  = __fres(root);
 	return 0;
 }
 
@@ -71,11 +71,11 @@ TEneBoss02_Pool::TEneBoss02_Pool(TObject* parent, const Vec3f* pos)
 	mSize = 0x54;
 	setObjId(this, 0xFFFF);
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
-	mState  = 0;
-	mRadius = 2.0f;
-	mAlpha  = 1.0f;
+	mState    = 0;
+	mRadius   = 2.0f;
+	mAlpha    = 1.0f;
 	mPos.set(pos->x, pos->y, pos->z);
-	mTime   = 0;
+	mTime    = 0;
 	mSurface = createBossRipple();
 	bossRippleSetPos(mSurface, pos);
 }
@@ -98,7 +98,7 @@ int TEneBoss02_Pool::onHit(const TObjAction* other, int arg, int* result)
 	if (isPlayerObj(other) != 0) {
 		HitInfo* hit = (HitInfo*)result;
 		hit->mDamage = 0xA;
-		hurt = 1;
+		hurt         = 1;
 		hit->mFlags.clear();
 	}
 	return hurt;
@@ -152,12 +152,12 @@ void TEneBoss02_Pool::render()
 extern "C" void initBossGates()
 {
 	sBoss02GatePlaces = new Vec3f[6];
-	sBoss02GateTaken = new int[6];
-	sBoss02Gates = new TEneBoss02_Gate*[6];
-	sBoss02GateCount = 0;
-	f32 s = 112.0f;
-	f32 c = 133.0f;
-	f32 sign = 1.0f;
+	sBoss02GateTaken  = new int[6];
+	sBoss02Gates      = new TEneBoss02_Gate*[6];
+	sBoss02GateCount  = 0;
+	f32 s             = 112.0f;
+	f32 c             = 133.0f;
+	f32 sign          = 1.0f;
 	for (int i = 0; i < 6; i++) {
 		njSinCos((i << 16) / 6, &s, &c);
 		f32 radius = 10.5f * (3.0517578125e-05f * (f32)rand());
@@ -172,7 +172,7 @@ extern "C" void initBossGates()
 	}
 	for (int i = 0; i < 6; i++) {
 		sBoss02GateTaken[i] = 0;
-		sBoss02Gates[i] = 0;
+		sBoss02Gates[i]     = 0;
 	}
 }
 
@@ -205,7 +205,7 @@ extern "C" void resetBossGates()
 	sBoss02GateCount = 0;
 	for (int i = 0; i < 6; i++) {
 		sBoss02GateTaken[i] = 0;
-		sBoss02Gates[i] = 0;
+		sBoss02Gates[i]     = 0;
 	}
 }
 
@@ -253,7 +253,7 @@ extern "C" int takeFreeGateSlot(Vec3f* out)
 	int slot = pickGateSlot(0);
 	if (slot != -1) {
 		sBoss02GateTaken[slot] = 1;
-		*out = sBoss02GatePlaces[slot];
+		*out                   = sBoss02GatePlaces[slot];
 	}
 	return slot;
 }
@@ -275,7 +275,7 @@ extern "C" void findTakenGateSlot(Vec3f* out)
 extern "C" void takeGateSlot(int slot, Vec3f* out)
 {
 	sBoss02GateTaken[slot] = 1;
-	*out = sBoss02GatePlaces[slot];
+	*out                   = sBoss02GatePlaces[slot];
 }
 
 // 0x80060268
@@ -290,7 +290,7 @@ extern "C" void removeBossGate(TEneBoss02_Gate* gate)
 	for (int i = 0; i < sBoss02GateCount; i++) {
 		if (sBoss02Gates[i] == gate) {
 			sBoss02GateCount--;
-			sBoss02Gates[i] = sBoss02Gates[sBoss02GateCount];
+			sBoss02Gates[i]                = sBoss02Gates[sBoss02GateCount];
 			sBoss02Gates[sBoss02GateCount] = 0;
 			return;
 		}
@@ -313,7 +313,7 @@ extern "C" TEneBoss02_Gate* makeBossGateAt(TObject* parent, int slot)
 	}
 	Vec3f pos;
 	takeGateSlot(slot, &pos);
-	TEneBoss02_Gate* gate = new TEneBoss02_Gate(parent, slot, &pos);
+	TEneBoss02_Gate* gate            = new TEneBoss02_Gate(parent, slot, &pos);
 	sBoss02Gates[sBoss02GateCount++] = gate;
 	return gate;
 }
@@ -325,8 +325,8 @@ extern "C" TEneBoss02_Gate* makeBossGate(TObject* parent, Vec3f* pos)
 		return 0;
 	}
 	Vec3f at;
-	int slot = takeFreeGateSlot(&at);
-	TEneBoss02_Gate* gate = new TEneBoss02_Gate(parent, slot, pos);
+	int slot                         = takeFreeGateSlot(&at);
+	TEneBoss02_Gate* gate            = new TEneBoss02_Gate(parent, slot, pos);
 	sBoss02Gates[sBoss02GateCount++] = gate;
 	return gate;
 }
@@ -341,12 +341,12 @@ TEneBoss02_Gate::TEneBoss02_Gate(TObject* parent, int slot, const Vec3f* pos)
 	mSize = 0x54;
 	setObjId(this, 0xFFFF);
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mState  = 0;
-	mRadius = 2.0f;
-	mSlot   = slot;
-	mPos    = *pos;
-	_3C     = 0;
-	mSurface = createBossRipple();
+	mState    = 0;
+	mRadius   = 2.0f;
+	mSlot     = slot;
+	mPos      = *pos;
+	_3C       = 0;
+	mSurface  = createBossRipple();
 	bossRippleSetPos(mSurface, &mPos);
 	createPoolPowGen(objParent(this), pos, 0xC);
 }
@@ -371,7 +371,7 @@ int TEneBoss02_Gate::onHit(const TObjAction* other, int arg, int* result)
 	if (isPlayerObj(other) != 0) {
 		HitInfo* hit = (HitInfo*)result;
 		hit->mDamage = 0xA;
-		hurt = 1;
+		hurt         = 1;
 		hit->mFlags.clear();
 	}
 	return hurt;

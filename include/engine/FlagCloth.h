@@ -17,10 +17,10 @@ public:
 	FlagCloth(ClothMatrix base, u16 cols, u16 rows, f32 width, f32 height, f32 spring, f32 loss, f32 param); // 0x800A98C4
 
 	void build(const ClothMatrix* base, u16 cols, u16 rows, f32 width, f32 height); // 0x800A9A0C
-	void rebuild(const ClothMatrix* base);                                         // 0x800A9F54
-	void pin(u16 x, u16 y);                                                        // 0x800AA0BC
-	void setWind(const Vec3f* dir, s16 speed, f32 strength);                       // 0x800AA0F4
-	SpringPoint* point(u16 x, u16 y);                                              // 0x800AA1B0
+	void rebuild(const ClothMatrix* base);                                          // 0x800A9F54
+	void pin(u16 x, u16 y);                                                         // 0x800AA0BC
+	void setWind(const Vec3f* dir, s16 speed, f32 strength);                        // 0x800AA0F4
+	SpringPoint* point(u16 x, u16 y);                                               // 0x800AA1B0
 
 	void addLink(u32 from, u32 to, f32 rest)
 	{

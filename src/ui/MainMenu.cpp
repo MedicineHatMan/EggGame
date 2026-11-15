@@ -51,11 +51,11 @@ enum MenuPhase {
 };
 
 struct MenuPad {
-	u32 mHold;    // _00
+	u32 mHold; // _00
 	u8 _04[4];
 	u32 mTrigger; // _08
 	u8 _0C[8];
-	u32 mRepeat;  // _14
+	u32 mRepeat; // _14
 };
 
 inline Vec3f vec3f(f32 x, f32 y, f32 z)
@@ -76,29 +76,36 @@ static TextVec sCaptionAt1[3] = { textVec(159.0f, 208.0f, -2.0f), textVec(318.0f
 static TextVec sCaptionAt2[3] = { textVec(159.0f, 248.0f, -2.0f), textVec(318.0f, 248.0f, -2.0f), textVec(477.0f, 248.0f, -2.0f) };
 // "Yes" and "No" mText[4] mText[5] under each file then in the message box
 static TextVec sYesAt[4] = {
-	textVec(159.0f, 181.0f, -2.0f), textVec(318.0f, 181.0f, -2.0f), textVec(477.0f, 181.0f, -2.0f), textVec(512.0f, 320.0f, -2.0f),
+	textVec(159.0f, 181.0f, -2.0f),
+	textVec(318.0f, 181.0f, -2.0f),
+	textVec(477.0f, 181.0f, -2.0f),
+	textVec(512.0f, 320.0f, -2.0f),
 };
 static TextVec sNoAt[4] = {
-	textVec(159.0f, 234.0f, -2.0f), textVec(318.0f, 234.0f, -2.0f), textVec(477.0f, 234.0f, -2.0f), textVec(512.0f, 373.0f, -2.0f),
+	textVec(159.0f, 234.0f, -2.0f),
+	textVec(318.0f, 234.0f, -2.0f),
+	textVec(477.0f, 234.0f, -2.0f),
+	textVec(512.0f, 373.0f, -2.0f),
 };
 // The three lines of the sound page
-static TextVec sLineAt0 = textVec(127.0f, 271.0f, -2.0f);
-static TextVec sLineAt1 = textVec(319.0f, 271.0f, -2.0f);
-static TextVec sLineAt2 = textVec(511.0f, 271.0f, -2.0f);
-static TextVec sLeftAt    = textVec(210.0f, 273.0f, -2.0f);
-static TextVec sRightAt   = textVec(402.0f, 273.0f, -2.0f);
-static TextVec sTabAt     = textVec(570.0f, 36.0f, -2.0f);
-static TextVec sTab2At    = textVec(570.0f, 73.0f, -2.0f);
-static TextVec sHelpAt    = textVec(57.0f, 341.0f, -2.0f);
-static TextVec sHelpBox   = textVec(528.0f, 66.0f, 0.0f);
+static TextVec sLineAt0    = textVec(127.0f, 271.0f, -2.0f);
+static TextVec sLineAt1    = textVec(319.0f, 271.0f, -2.0f);
+static TextVec sLineAt2    = textVec(511.0f, 271.0f, -2.0f);
+static TextVec sLeftAt     = textVec(210.0f, 273.0f, -2.0f);
+static TextVec sRightAt    = textVec(402.0f, 273.0f, -2.0f);
+static TextVec sTabAt      = textVec(570.0f, 36.0f, -2.0f);
+static TextVec sTab2At     = textVec(570.0f, 73.0f, -2.0f);
+static TextVec sHelpAt     = textVec(57.0f, 341.0f, -2.0f);
+static TextVec sHelpBox    = textVec(528.0f, 66.0f, 0.0f);
 static TextVec sIconPos[3] = { textVec(-20.0f, -2.0f, -60.0f), textVec(0.0f, -2.0f, -60.0f), textVec(20.0f, -2.0f, -60.0f) };
 static TextRot sIconRot[3] = { textRot(0, 0xC00, 0), textRot(0, 0, 0), textRot(0, 0xF400, 0) };
-static TextVec sCenterPos     = textVec(0.0f, 0.0f, 20.0f);
-static TextRot sCenterRot = textRot(0, 0, 0);
+static TextVec sCenterPos  = textVec(0.0f, 0.0f, 20.0f);
+static TextRot sCenterRot  = textRot(0, 0, 0);
 
 // One string record in mes_main_menu.bin
 // Sets the object's retire bit and drops the pointer
-template <typename T> inline void freeObj(T*& obj)
+template <typename T>
+inline void freeObj(T*& obj)
 {
 	if (obj != 0) {
 		((TObject*)obj)->mFlags |= 1;
@@ -211,35 +218,35 @@ int TModeMainMenu::shutdown()
 // 0x8017027C
 TModeMainMenu::TModeMainMenu()
 {
-	mOpened    = 0;
-	mFlow      = 0;
-	mPage      = 0;
-	mState     = 0;
-	mBackState = 0;
-	mNextState = 0;
-	mSelect    = 0;
-	mCopyTo = 0;
-	mFile = 0;
-	_30 = 0;
-	_34 = 0;
-	mFileStep = 0;
-	mSlot = 0;
-	mSoundStep = 0;
-	mSoundMode = 0;
-	_48 = 0;
-	_4C = 0;
-	mBoxKind = 0;
-	mChoice = 0;
-	mBoxTimer = 0;
-	_5C = 0;
+	mOpened     = 0;
+	mFlow       = 0;
+	mPage       = 0;
+	mState      = 0;
+	mBackState  = 0;
+	mNextState  = 0;
+	mSelect     = 0;
+	mCopyTo     = 0;
+	mFile       = 0;
+	_30         = 0;
+	_34         = 0;
+	mFileStep   = 0;
+	mSlot       = 0;
+	mSoundStep  = 0;
+	mSoundMode  = 0;
+	_48         = 0;
+	_4C         = 0;
+	mBoxKind    = 0;
+	mChoice     = 0;
+	mBoxTimer   = 0;
+	_5C         = 0;
 	mCursor     = 0;
 	mPrevCursor = mCursor;
 	mFrame      = 0;
 	mPressedA   = 0;
-	mFade      = 0;
+	mFade       = 0;
 	mFadeTimer  = 0;
 
-	sMainMenuCount = 0;
+	sMainMenuCount   = 0;
 	sMainMenuEntries = 0;
 
 	mText[0] = 0;
@@ -252,9 +259,9 @@ TModeMainMenu::TModeMainMenu()
 		mLine[i]    = 0;
 		mCaption[i] = 0;
 	}
-	mBox = 0;
+	mBox          = 0;
 	mChoiceWindow = 0;
-	mYesNoWindow = 0;
+	mYesNoWindow  = 0;
 	for (int i = 0; i < 4; i++) {
 		mIcon[i] = 0;
 	}
@@ -277,20 +284,20 @@ void TModeMainMenu::buildText()
 	data = (u32*)sMainMenuFile->mData;
 	text = *data;
 	text += (u32)data++;
-	u32 size = *data++;
+	u32 size         = *data++;
 	sMainMenuEntries = (int*)data;
-	sMainMenuCount = size >> 2;
+	sMainMenuCount   = size >> 2;
 	for (i = 0; i < sMainMenuCount; i++) {
 		sMainMenuEntries[i] += text + 8;
 	}
 
-	mText[0] = createSimpleTextOnTask(1, -1, &sTextAt, &sTextBox, &sTextGlyph, (void*)sMainMenuEntries[0]);
+	mText[0]      = createSimpleTextOnTask(1, -1, &sTextAt, &sTextBox, &sTextGlyph, (void*)sMainMenuEntries[0]);
 	mText[0]->_A9 = 1;
-	mText[1] = createSimpleTextOnTask(1, -1, &sHelpAt, &sHelpBox, &sTextGlyph, (void*)sMainMenuEntries[0]);
-	mText[2] = createSimpleTextOnTask(1, -1, &sTabAt, &sTextBox, &sTextGlyph, (void*)sMainMenuEntries[9]);
-	mText[3] = createSimpleTextOnTask(1, -1, &sTab2At, &sTextBox, &sTextGlyph, (void*)sMainMenuEntries[10]);
-	mText[4] = createSimpleTextOnTask(1, -1, &sTextAt, &sTextBox, &sTextGlyph, getStageSelectWarning(0x27));
-	mText[5] = createSimpleTextOnTask(1, -1, &sTextAt, &sTextBox, &sTextGlyph, getStageSelectWarning(0x28));
+	mText[1]      = createSimpleTextOnTask(1, -1, &sHelpAt, &sHelpBox, &sTextGlyph, (void*)sMainMenuEntries[0]);
+	mText[2]      = createSimpleTextOnTask(1, -1, &sTabAt, &sTextBox, &sTextGlyph, (void*)sMainMenuEntries[9]);
+	mText[3]      = createSimpleTextOnTask(1, -1, &sTab2At, &sTextBox, &sTextGlyph, (void*)sMainMenuEntries[10]);
+	mText[4]      = createSimpleTextOnTask(1, -1, &sTextAt, &sTextBox, &sTextGlyph, getStageSelectWarning(0x27));
+	mText[5]      = createSimpleTextOnTask(1, -1, &sTextAt, &sTextBox, &sTextGlyph, getStageSelectWarning(0x28));
 
 	for (int i = 0; i < 3; i++) {
 		mLine[i] = createSimpleTextOnTask(1, -1, &sTextAt, &sTextBox, &sTextGlyph, (void*)sMainMenuEntries[0x10 + i]);
@@ -396,9 +403,9 @@ void TModeMainMenu::resetRoot()
 {
 	mSelect = 0;
 	mCopyTo = 0;
-	mFile = 0;
-	_30 = 0;
-	_34 = 0;
+	mFile   = 0;
+	_30     = 0;
+	_34     = 0;
 }
 
 // 0x801708F0
@@ -492,7 +499,7 @@ int TModeMainMenu::updateRoot()
 			aeMainMenuHidePanels();
 			showTitle(0);
 			mBoxKind = 5;
-			mSelect        = 2;
+			mSelect  = 2;
 		}
 		break;
 	case 6:
@@ -525,9 +532,9 @@ int TModeMainMenu::updateRoot()
 void TModeMainMenu::chooseFiles()
 {
 	FileInfo info;
-	info.mWorld = -1;
+	info.mWorld   = -1;
 	info.mEmblems = 0;
-	info.mLives = 0;
+	info.mLives   = 0;
 
 	switch (mSelect) {
 	case 0:
@@ -638,7 +645,7 @@ void TModeMainMenu::readFileInfo(FileInfo* info, s8 slot)
 void TModeMainMenu::resetFile()
 {
 	mFileStep = 0;
-	mSlot          = 0;
+	mSlot     = 0;
 }
 
 // 0x80171038
@@ -721,7 +728,7 @@ int TModeMainMenu::updateFile()
 			aeMainMenuHideFileCursor();
 			hideAll();
 			fadeOutFileBack();
-			mSlot          = -1;
+			mSlot     = -1;
 			mFileStep = 4;
 		}
 		break;
@@ -762,8 +769,8 @@ void TModeMainMenu::resetSound()
 {
 	mSoundStep = 0;
 	mSoundMode = 0;
-	_48 = 0;
-	_4C = 0;
+	_48        = 0;
+	_4C        = 0;
 }
 
 // 0x80171388
@@ -876,11 +883,11 @@ int TModeMainMenu::updateSound()
 void TModeMainMenu::closeBox()
 {
 	mBoxKind = 0;
-	mChoice = 0;
-	_5C = 0;
+	mChoice  = 0;
+	_5C      = 0;
 	if (mBox != 0) {
 		mBox->mHold = 1;
-		mBox = 0;
+		mBox        = 0;
 	}
 	closeYesNoWindow();
 	closeChoiceWindow();
@@ -915,7 +922,7 @@ void TModeMainMenu::closeChoiceWindow()
 void TModeMainMenu::openYesNo(void* message)
 {
 	closeBox();
-	mBoxKind = 1;
+	mBoxKind  = 1;
 	mBoxTimer = 0;
 	if (mBox == 0) {
 		mBox = createSimpleTextByKind(gTL_07, message, -1);
@@ -938,7 +945,7 @@ void TModeMainMenu::openYesNo(void* message)
 void TModeMainMenu::openMessage(void* message, s8 kind)
 {
 	closeBox();
-	mBoxKind = 2;
+	mBoxKind  = 2;
 	mBoxTimer = 0;
 	if (mBox == 0) {
 		mBox = createSimpleTextByKind(gTL_07, message, kind);
@@ -953,7 +960,7 @@ void TModeMainMenu::openMessage(void* message, s8 kind)
 void TModeMainMenu::openNotice(void* message)
 {
 	closeBox();
-	mBoxKind = 3;
+	mBoxKind  = 3;
 	mBoxTimer = 0;
 	if (mBox == 0) {
 		mBox = createSimpleTextId2(gTL_07, message);
@@ -968,7 +975,7 @@ void TModeMainMenu::openNotice(void* message)
 void TModeMainMenu::openTimed(void* message)
 {
 	closeBox();
-	mBoxKind = 4;
+	mBoxKind  = 4;
 	mBoxTimer = 0x1E;
 	if (mBox == 0) {
 		mBox = createSimpleTextId2(gTL_07, message);
@@ -983,7 +990,7 @@ void TModeMainMenu::openTimed(void* message)
 void TModeMainMenu::openFileChoice(s8 kind)
 {
 	closeBox();
-	mBoxKind = 5;
+	mBoxKind  = 5;
 	mBoxTimer = 0;
 	if (mChoiceWindow == 0) {
 		mChoiceWindow = createMsgWindow(gTL_07, 8);
@@ -1002,9 +1009,9 @@ void TModeMainMenu::openFileChoice(s8 kind)
 // 0x80171A60
 void TModeMainMenu::openCardChoice(s8 kind)
 {
-	mChoice = 1;
-	_5C = 0;
-	mBoxKind = 6;
+	mChoice   = 1;
+	_5C       = 0;
+	mBoxKind  = 6;
 	mBoxTimer = 0;
 	if (mYesNoWindow == 0) {
 		mYesNoWindow = createMsgWindow(gTL_07, 7);
@@ -1019,9 +1026,9 @@ void TModeMainMenu::openCardChoice(s8 kind)
 // 0x80171AF0
 void TModeMainMenu::openSoundChoice()
 {
-	mChoice = 0;
-	_5C = 0;
-	mBoxKind = 7;
+	mChoice   = 0;
+	_5C       = 0;
+	mBoxKind  = 7;
 	mBoxTimer = 0;
 	switch (OSGetSoundMode()) {
 	case 0:
@@ -1049,9 +1056,9 @@ void TModeMainMenu::openSoundChoice()
 // 0x80171BC4
 void TModeMainMenu::openVibration()
 {
-	mChoice = 0;
-	_5C = 0;
-	mBoxKind = 8;
+	mChoice   = 0;
+	_5C       = 0;
+	mBoxKind  = 8;
 	mBoxTimer = 0;
 	if (padGetVibEnabled() != 0) {
 		mChoice = 0;
@@ -1105,7 +1112,7 @@ int TModeMainMenu::runBox()
 		}
 		if (pressedB()) {
 			sePlay(0x20);
-			done                 = 1;
+			done    = 1;
 			mChoice = 1;
 		} else if (pressedA()) {
 			sePlay(0x1C);
@@ -1193,7 +1200,7 @@ int TModeMainMenu::runBox()
 		}
 		if (pressedB()) {
 			sePlay(0x20);
-			done                 = 1;
+			done    = 1;
 			mChoice = 1;
 		} else if (pressedA()) {
 			sePlay(0x1C);
@@ -1281,7 +1288,7 @@ void TModeMainMenu::freeFade()
 void TModeMainMenu::fadeOutBack()
 {
 	freeFade();
-	mFade         = new TWhiteFadeInOut(gTL_01, 1);
+	mFade      = new TWhiteFadeInOut(gTL_01, 1);
 	mFadeTimer = 0x3C;
 }
 
@@ -1289,7 +1296,7 @@ void TModeMainMenu::fadeOutBack()
 void TModeMainMenu::fadeOutRoot()
 {
 	freeFade();
-	mFade         = new TWhiteFadeInOut(gTL_01, 1);
+	mFade      = new TWhiteFadeInOut(gTL_01, 1);
 	mFadeTimer = 0x3C;
 }
 
@@ -1297,7 +1304,7 @@ void TModeMainMenu::fadeOutRoot()
 void TModeMainMenu::fadeOutFileBack()
 {
 	freeFade();
-	mFade         = new TWhiteFadeInOut(gTL_01, 1);
+	mFade      = new TWhiteFadeInOut(gTL_01, 1);
 	mFadeTimer = 0x3C;
 }
 
@@ -1305,7 +1312,7 @@ void TModeMainMenu::fadeOutFileBack()
 void TModeMainMenu::fadeOutFile0()
 {
 	freeFade();
-	mFade         = new TWhiteFadeInOut(gTL_01, 1);
+	mFade      = new TWhiteFadeInOut(gTL_01, 1);
 	mFadeTimer = 0x3C;
 }
 
@@ -1313,7 +1320,7 @@ void TModeMainMenu::fadeOutFile0()
 void TModeMainMenu::fadeOutFile1()
 {
 	freeFade();
-	mFade         = new TWhiteFadeInOut(gTL_01, 1);
+	mFade      = new TWhiteFadeInOut(gTL_01, 1);
 	mFadeTimer = 0x3C;
 }
 

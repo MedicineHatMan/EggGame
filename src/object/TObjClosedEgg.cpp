@@ -42,17 +42,16 @@ struct TEggTextureManager;
 extern "C" {
 
 // The shell's models and textures from gEggArc
-NJS_OBJECT** gClosedEggModels;       // 0x802C5B10
+NJS_OBJECT** gClosedEggModels;   // 0x802C5B10
 NJS_TEXLIST** gClosedEggTexList; // 0x802C5B14 the arc's "texlists" export slot
 
 // While GalleryEgg::update runs the nodes counted so far and the egg
 int gGalleryNodeCount;          // 0x802C5B18
 GalleryEgg* gGalleryEggCurrent; // 0x802C5B1C
-
 }
 
 // Each gallery egg's archive and what it holds
-TArc* gGalleryEggArcs[GALLERY_EGG_COUNT];               // 0x80286908
+TArc* gGalleryEggArcs[GALLERY_EGG_COUNT];              // 0x80286908
 GalleryEggAsset* gGalleryEggAssets[GALLERY_EGG_COUNT]; // 0x80286A28
 // Where each of gGalleryFxNodes was this frame
 f32 gGalleryFxMtx[5][12]; // 0x80286B48
@@ -189,8 +188,8 @@ void TObjClosedEgg::render()
 	ObjDrawState state;
 	mtxScale(1.5f, 1.5f, 1.5f, mtx, mtx);
 	state.mFlags |= 0x101;
-	state.mMaterial  = 0xFFFFFF80;
-	state.mBlend     = 0;
+	state.mMaterial   = 0xFFFFFF80;
+	state.mBlend      = 0;
 	texList.textures  = &tex;
 	texList.nbTexture = 1;
 	if (mModel == 0) {
@@ -385,8 +384,8 @@ struct GalleryActor {
 
 // The head of an NJS_MOTION see TObjOrangeClockTower.h
 struct GalleryMotion {
-	void* mdata;  // _00
-	u32 nbFrame;  // _04
+	void* mdata; // _00
+	u32 nbFrame; // _04
 };
 
 // 0x801BB56C
@@ -454,9 +453,9 @@ void GalleryEgg::update()
 				mPart[i] = particleGenByIdDefault(&at, 0, mAsset->mFx[i * 2 + 1]);
 			} else {
 				TParticleGenerator* part = mPart[i];
-				part->mPos.x = at.x;
-				part->mPos.y = at.y;
-				part->mPos.z = at.z;
+				part->mPos.x             = at.x;
+				part->mPos.y             = at.y;
+				part->mPos.z             = at.z;
 			}
 		}
 	}

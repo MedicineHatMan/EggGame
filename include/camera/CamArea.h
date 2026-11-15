@@ -17,8 +17,8 @@ struct CamLookParam {
 
 /** A path's or a start's parameters */
 struct CamPathParam {
-	Vec3f mPos;   // _00
-	Vec3f mDir;   // _0C
+	Vec3f mPos; // _00
+	Vec3f mDir; // _0C
 	f32 _18[2];
 };
 
@@ -29,20 +29,20 @@ struct CamPathParam {
  * @size 0x80
  */
 struct CamArea {
-	void init();                             // 0x800A8D00
-	int isEnd();                             // 0x800A8D94 an empty kind ends the table
-	void prepare();                          // 0x800A8DA4
-	void getPoint(Vec3f* out) const;               // 0x800A8E4C
-	void getLine(Vec3f* pos, Vec3f* line) const;   // 0x800A8E68
-	void getWatch(Vec3f* out) const;               // 0x800A8E98
-	void getPath(Vec3f* pos, Vec3f* dir) const;    // 0x800A8EB4
+	void init();                                 // 0x800A8D00
+	int isEnd();                                 // 0x800A8D94 an empty kind ends the table
+	void prepare();                              // 0x800A8DA4
+	void getPoint(Vec3f* out) const;             // 0x800A8E4C
+	void getLine(Vec3f* pos, Vec3f* line) const; // 0x800A8E68
+	void getWatch(Vec3f* out) const;             // 0x800A8E98
+	void getPath(Vec3f* pos, Vec3f* dir) const;  // 0x800A8EB4
 
-	s16 mType;        // _00 0 = end 1 = settings 2 = point look 3 = vertical line 4 = watch 5 = path 6 = start
-	s16 mPriority;    // _02 the highest wins for a start the player
-	f32 mFar;         // _04 the far clip given to the camera on entering
-	f32 mFarBack;     // _08 the far clip given back on leaving
+	s16 mType;     // _00 0 = end 1 = settings 2 = point look 3 = vertical line 4 = watch 5 = path 6 = start
+	s16 mPriority; // _02 the highest wins for a start the player
+	f32 mFar;      // _04 the far clip given to the camera on entering
+	f32 mFarBack;  // _08 the far clip given back on leaving
 	union {
-		f32 mParam[8];    // _0C read differently by each kind
+		f32 mParam[8];      // _0C read differently by each kind
 		CamLookParam mLook; // _0C point looks and watches
 		CamPathParam mPath; // _0C paths and starts
 	};
@@ -79,26 +79,26 @@ public:
 	void checkRide(int player);                           // 0x800A89B4
 	void update();                                        // 0x800A8A74
 
-	int mScan;            // _00 the first zone of the next outer test
-	u8 mState[4][64];     // _04 per player and zone 1 = near 2 = inside 4 = may be picked
-	int mArea[4];         // _104 the zone each player is in -1 = none
-	TCamera* mCamera[4];  // _114 the camera the zone made
-	int mFirst;           // _124 test every zone on the next update
+	int mScan;           // _00 the first zone of the next outer test
+	u8 mState[4][64];    // _04 per player and zone 1 = near 2 = inside 4 = may be picked
+	int mArea[4];        // _104 the zone each player is in -1 = none
+	TCamera* mCamera[4]; // _114 the camera the zone made
+	int mFirst;          // _124 test every zone on the next update
 };
 
 typedef char CamAreaCtrl_size_check[(sizeof(CamAreaCtrl) == 0x128) ? 1 : -1];
 
 extern "C" {
 extern BinFile* gCamAreaFile; // 0x802C5148
-extern CamArea* gCamAreas;        // 0x802C514C
-extern int gCamAreaCount;         // 0x802C5150
+extern CamArea* gCamAreas;    // 0x802C514C
+extern int gCamAreaCount;     // 0x802C5150
 
-void clearCamAreas();                                  // 0x800A80D4
-void loadCamAreas(const char* name);                   // 0x800A80E8 0 makes 64 empty zones
-void freeCamAreas();                                   // 0x800A8274
-CamAreaCtrl* createCamAreaCtrl();                      // 0x800A82D0
-int countCamAreas();                                   // 0x800A8CA4
-int findCamStart(int player, Vec3f* pos, Vec3f* dir);  // 0x800A8EE8 0 when there is none
+void clearCamAreas();                                 // 0x800A80D4
+void loadCamAreas(const char* name);                  // 0x800A80E8 0 makes 64 empty zones
+void freeCamAreas();                                  // 0x800A8274
+CamAreaCtrl* createCamAreaCtrl();                     // 0x800A82D0
+int countCamAreas();                                  // 0x800A8CA4
+int findCamStart(int player, Vec3f* pos, Vec3f* dir); // 0x800A8EE8 0 when there is none
 }
 
 #endif

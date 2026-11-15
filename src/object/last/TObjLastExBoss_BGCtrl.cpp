@@ -48,7 +48,7 @@ extern "C" void createTObjLastExBoss_BGCtrl()
 		return;
 	}
 	void* mem = objHeapAlloc(gObjHeap, 0x60);
-	mem = new (mem) TObjLastExBoss_BGCtrl(gTL_TIMESTOP);
+	mem       = new (mem) TObjLastExBoss_BGCtrl(gTL_TIMESTOP);
 	sLastExBg = mem;
 }
 
@@ -110,11 +110,11 @@ void TObjLastExBoss_BGCtrl::draw()
 	if (wait >= 24) {
 		wait = 23;
 	}
-	mWait = wait + 6;
+	mWait    = wait + 6;
 	f32 dist = 800.0f * (3.0517578125e-05f * (f32)(int)rand()) + 450.0f;
 	Vec3f pos;
 	vecFromAngleXZ(dist, &pos, (int)(65536.0f * (3.0517578125e-05f * (f32)(int)rand())));
-	pos.y = -600.0f;
+	pos.y    = -600.0f;
 	int size = (int)(5.0f * (3.0517578125e-05f * (f32)(int)rand()));
 	if (size >= 5) {
 		size = 4;
@@ -125,7 +125,6 @@ void TObjLastExBoss_BGCtrl::draw()
 struct DrawStateSlot;
 
 extern "C" {
-
 }
 
 typedef char TObjLastExBoss_Gareki_size_check[(sizeof(TObjLastExBoss_Gareki) == 0x88) ? 1 : -1];
@@ -176,7 +175,9 @@ TObjLastExBoss_Gareki::TObjLastExBoss_Gareki(TObject* parent, const Vec3f* pos, 
 }
 
 // 0x8017B7B8
-TObjLastExBoss_Gareki::~TObjLastExBoss_Gareki() {}
+TObjLastExBoss_Gareki::~TObjLastExBoss_Gareki()
+{
+}
 
 // 0x8017B814
 void TObjLastExBoss_Gareki::draw()
@@ -230,7 +231,7 @@ void TObjLastExBoss_Gareki::render()
 	}
 	njSetTexture(lastBossGetTexList(0));
 	if (mAlpha < 0xFF) {
-		use = &buf;
+		use  = &buf;
 		*use = *def;
 		use->mFlags |= 0x200;
 		use->mAmbient = (u8)mAlpha;

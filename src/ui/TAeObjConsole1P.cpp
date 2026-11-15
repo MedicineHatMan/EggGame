@@ -13,18 +13,18 @@ struct NJS_TEXLIST;
 typedef char TAeObjConsole1P_size_check[(sizeof(TAeObjConsole1P) == 0xC4) ? 1 : -1];
 
 // The pulse the gauge and the egg kind take when they run low
-static const AeColor sPulseA = { 1.0f, 0.98f, 0.588f, 0.588f };
-static const AeColor sPulseB = { 1.0f, 0.9f, 0.196f, 0.196f };
-static const u32 sConsoleBanks[3]   = { 0x16, 0x17, 0x18 };                    // palette banks
-static const u32 sCellSlots[5]      = { 0x111, 0x112, 0x113, 0x114, 0x115 };  // frame slots for the cells
-static const u32 sStarSlots[5]      = { 0x174, 0x175, 0x176, 0x177, 0x178 };  // star frame slots
-static const u32 sStarOn[4]         = { 0x12A, 0x130, 0x136, 0x13C };         // a star got by kind
-static const u32 sStarOff[4]        = { 0x12C, 0x132, 0x138, 0x13E };         // a star lost by kind
-static const u32 sKindIcons[4]      = { 2, 5, 9, 0xE };                         // the egg kind icon
-static const u32 sKindTimers[4]     = { 0x3C, 0x42, 0x48, 0x4E };              // the hatched egg by kind
-static const int sBannerCells[17]   = { 0xAB, 0xC6, 0xC9, 0xCC, 0xCF, 0xD2, 0xD5, 0xD8, 0xDB,
-                                        0xAE, 0xB1, 0xB4, 0xB7, 0xBA, 0xBD, 0xC0, 0xC3 };
-static const f32 sLevelTimes[4]     = { 0.23f, 0.47f, 0.7f, 0.93f };           // egg meter time per level
+static const AeColor sPulseA      = { 1.0f, 0.98f, 0.588f, 0.588f };
+static const AeColor sPulseB      = { 1.0f, 0.9f, 0.196f, 0.196f };
+static const u32 sConsoleBanks[3] = { 0x16, 0x17, 0x18 };                  // palette banks
+static const u32 sCellSlots[5]    = { 0x111, 0x112, 0x113, 0x114, 0x115 }; // frame slots for the cells
+static const u32 sStarSlots[5]    = { 0x174, 0x175, 0x176, 0x177, 0x178 }; // star frame slots
+static const u32 sStarOn[4]       = { 0x12A, 0x130, 0x136, 0x13C };        // a star got by kind
+static const u32 sStarOff[4]      = { 0x12C, 0x132, 0x138, 0x13E };        // a star lost by kind
+static const u32 sKindIcons[4]    = { 2, 5, 9, 0xE };                      // the egg kind icon
+static const u32 sKindTimers[4]   = { 0x3C, 0x42, 0x48, 0x4E };            // the hatched egg by kind
+static const int sBannerCells[17]
+    = { 0xAB, 0xC6, 0xC9, 0xCC, 0xCF, 0xD2, 0xD5, 0xD8, 0xDB, 0xAE, 0xB1, 0xB4, 0xB7, 0xBA, 0xBD, 0xC0, 0xC3 };
+static const f32 sLevelTimes[4] = { 0.23f, 0.47f, 0.7f, 0.93f }; // egg meter time per level
 
 static const char* sConsole1PName = "TAeObjConsole1P";
 
@@ -154,7 +154,10 @@ TAeObjConsole1P::TAeObjConsole1P(TObject* parent, void* data, void* assets)
 }
 
 // 0x800CF7E8
-TAeObjConsole1P::~TAeObjConsole1P() { removeDrawTask(mTask); }
+TAeObjConsole1P::~TAeObjConsole1P()
+{
+	removeDrawTask(mTask);
+}
 
 // 0x800CF850
 void TAeObjConsole1P::setupSolo()

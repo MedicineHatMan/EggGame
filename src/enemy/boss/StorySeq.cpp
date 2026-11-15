@@ -6,8 +6,8 @@
 #include "Ninja/ninja.h"
 
 extern "C" {
-TArc* gStorySeqArc;   // 0x802C5A60
-StorySeq* gStorySeq;  // 0x802C5A64
+TArc* gStorySeqArc;  // 0x802C5A60
+StorySeq* gStorySeq; // 0x802C5A64
 }
 // Where a run is the offset into the code and the stack
 struct StoryRun {
@@ -59,26 +59,32 @@ u8* storyReadOffset(u8* pc, s16* out)
 u8* storyReadWord(u8* pc, int* out)
 {
 	u8* dst = (u8*)out;
-	dst[0] = *pc++;
-	dst[1] = *pc++;
-	dst[2] = *pc++;
-	dst[3] = *pc++;
+	dst[0]  = *pc++;
+	dst[1]  = *pc++;
+	dst[2]  = *pc++;
+	dst[3]  = *pc++;
 	return pc;
 }
 
 // 0x801AA5C4
 void storyPushRef(StoryRun* run, const int* value)
 {
-	int* sp = run->mSp;
+	int* sp  = run->mSp;
 	run->mSp = sp + 1;
-	*sp = *value;
+	*sp      = *value;
 }
 
 // 0x801AA5DC
-void storyPush(StoryRun* run, int value) { *run->mSp++ = value; }
+void storyPush(StoryRun* run, int value)
+{
+	*run->mSp++ = value;
+}
 
 // 0x801AA5F0
-int* storyPop(StoryRun* run) { return --run->mSp; }
+int* storyPop(StoryRun* run)
+{
+	return --run->mSp;
+}
 
 // 0x801AA604
 // Runs to op 0x10 which leaves the top in place of the program's own words
@@ -91,8 +97,8 @@ void storyRun(StoryRun* run, StoryProgram* program)
 	u8* pc;
 	int* base;
 
-	base       = run->mSp - program->mArgs;
-	run->mSp   = base + program->mLocals;
+	base     = run->mSp - program->mArgs;
+	run->mSp = base + program->mLocals;
 	syMemSet(base + program->mArgs, 0, (program->mLocals - program->mArgs) * 4);
 	pc = program->mCode + run->mPc;
 	do {

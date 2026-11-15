@@ -2,28 +2,28 @@
 #include <CRI/adx.h>
 #include <CRI/cri_std.h>
 
-#define MFCI_MAX_OBJ 40
-#define MFCI_SCT_LEN 0x800
+#define MFCI_MAX_OBJ   40
+#define MFCI_SCT_LEN   0x800
 #define MFCI_FNAME_LEN 17
 
 enum {
-	MFCI_STAT_STOP = 0,
+	MFCI_STAT_STOP     = 0,
 	MFCI_STAT_COMPLETE = 1,
-	MFCI_STAT_TRANS = 2,
+	MFCI_STAT_TRANS    = 2,
 };
 
 typedef struct {
-	signed char used;   /* 00 */
-	signed char stat;   /* 01 */
-	int sct_len;        /* 04 */
-	int fsize;          /* 08 */
-	int fsize_sct;      /* 0C */
-	int cur_sct;        /* 10 */
-	int trns_size;      /* 14 */
-	int rd_sct;         /* 18 */
-	char fname[0x14];   /* 1C */
-	int rd_ofst;        /* 30 */
-	int rd_size;        /* 34 */
+	signed char used; /* 00 */
+	signed char stat; /* 01 */
+	int sct_len;      /* 04 */
+	int fsize;        /* 08 */
+	int fsize_sct;    /* 0C */
+	int cur_sct;      /* 10 */
+	int trns_size;    /* 14 */
+	int rd_sct;       /* 18 */
+	char fname[0x14]; /* 1C */
+	int rd_ofst;      /* 30 */
+	int rd_size;      /* 34 */
 } MFCI_OBJ;
 
 typedef MFCI_OBJ* MFCI;
@@ -72,28 +72,15 @@ void mfCiSetSctLen(MFCI hn, int len);
 int mfCiGetNumTr(MFCI hn);
 
 static MFCI_IF mfci_vtbl = {
-	mfCiExecServer,
-	mfCiEntryErrFunc,
-	mfCiGetFileSize,
-	0,
-	mfCiOpen,
-	mfCiClose,
-	mfCiSeek,
-	mfCiTell,
-	mfCiReqRd,
-	0,
-	mfCiStopTr,
-	mfCiGetStat,
-	mfCiGetSctLen,
-	mfCiSetSctLen,
-	mfCiGetNumTr,
+	mfCiExecServer, mfCiEntryErrFunc, mfCiGetFileSize, 0, mfCiOpen, mfCiClose, mfCiSeek, mfCiTell, mfCiReqRd, 0, mfCiStopTr, mfCiGetStat,
+	mfCiGetSctLen,  mfCiSetSctLen,    mfCiGetNumTr,
 };
 
-#define MFCI_ERR(msg, hn)                                  \
-	do {                                                   \
-		if (mfci_err_func != 0) {                          \
-			mfci_err_func(mfci_err_obj, (msg), (hn));      \
-		}                                                  \
+#define MFCI_ERR(msg, hn)                             \
+	do {                                              \
+		if (mfci_err_func != 0) {                     \
+			mfci_err_func(mfci_err_obj, (msg), (hn)); \
+		}                                             \
 	} while (0)
 
 // 0x8022EA04
@@ -109,8 +96,7 @@ MFCI_IF* mfCiGetInterface(void)
 void mfCiExecServer(void)
 {
 	int i;
-	for (i = 0; i < MFCI_MAX_OBJ; i++) {
-	}
+	for (i = 0; i < MFCI_MAX_OBJ; i++) { }
 }
 #pragma opt_propagation reset
 
@@ -118,7 +104,7 @@ void mfCiExecServer(void)
 void mfCiEntryErrFunc(MFCI_ERRFN func, void* obj)
 {
 	mfci_err_func = func;
-	mfci_err_obj = obj;
+	mfci_err_obj  = obj;
 }
 
 /* Splits a file name into its address and size */
@@ -134,7 +120,7 @@ static void mfci_get_adr_size(const char* fname, unsigned long* adr, int* size)
 		sprintf(mfci_err_msg, "E01100309:illegal file name format '%s'(mfci_get_adr_size)", fname);
 		MFCI_ERR(mfci_err_msg, 0);
 	}
-	p = (char*)fname;
+	p    = (char*)fname;
 	*adr = strtoul(p, &p, 16);
 	if (*p != '\0') {
 		p++;
@@ -192,13 +178,13 @@ MFCI mfCiOpen(const char* fname, void* dir, int rw)
 	strcpy(hn->fname, fname);
 	hn->sct_len = MFCI_SCT_LEN;
 	mfci_get_adr_size(hn->fname, &adr, &size);
-	hn->fsize = size;
+	hn->fsize     = size;
 	hn->fsize_sct = (hn->sct_len - 1 + hn->fsize) / hn->sct_len;
-	hn->cur_sct = 0;
-	hn->rd_sct = 0;
+	hn->cur_sct   = 0;
+	hn->rd_sct    = 0;
 	hn->trns_size = 0;
-	hn->stat = MFCI_STAT_STOP;
-	hn->used = 1;
+	hn->stat      = MFCI_STAT_STOP;
+	hn->used      = 1;
 	return hn;
 }
 
@@ -273,10 +259,10 @@ int mfCiReqRd(MFCI hn, int nsct, void* buf)
 	}
 	SVM_Lock();
 	hn->trns_size = 0;
-	len = hn->fsize_sct - hn->cur_sct;
-	hn->rd_sct = (nsct < len) ? nsct : len;
-	ofst = hn->cur_sct * hn->sct_len;
-	nbyte = hn->rd_sct * hn->sct_len;
+	len           = hn->fsize_sct - hn->cur_sct;
+	hn->rd_sct    = (nsct < len) ? nsct : len;
+	ofst          = hn->cur_sct * hn->sct_len;
+	nbyte         = hn->rd_sct * hn->sct_len;
 	if (nbyte == 0) {
 		hn->stat = MFCI_STAT_COMPLETE;
 		SVM_Unlock();
@@ -284,15 +270,15 @@ int mfCiReqRd(MFCI hn, int nsct, void* buf)
 	}
 	hn->rd_ofst = ofst;
 	hn->rd_size = nbyte;
-	hn->stat = MFCI_STAT_TRANS;
+	hn->stat    = MFCI_STAT_TRANS;
 	mfci_get_adr_size(hn->fname, &adr, &size);
 	len = size - hn->rd_ofst;
 	len = (hn->rd_size > len) ? len : hn->rd_size;
 	memcpy(buf, (void*)(adr + hn->rd_ofst), hn->rd_size);
 	memset((char*)buf + len, 0, hn->rd_size - len);
 	hn->trns_size = hn->rd_sct * hn->sct_len;
-	hn->cur_sct = hn->cur_sct + hn->rd_sct;
-	hn->stat = MFCI_STAT_COMPLETE;
+	hn->cur_sct   = hn->cur_sct + hn->rd_sct;
+	hn->stat      = MFCI_STAT_COMPLETE;
 	SVM_Unlock();
 	return hn->rd_sct;
 }
@@ -338,10 +324,10 @@ void mfCiSetSctLen(MFCI hn, int len)
 		MFCI_ERR("E0040302:handl is null.", 0);
 		return;
 	}
-	old = hn->cur_sct * hn->sct_len;
-	hn->sct_len = len;
+	old           = hn->cur_sct * hn->sct_len;
+	hn->sct_len   = len;
 	hn->fsize_sct = (hn->sct_len - 1 + hn->fsize) / hn->sct_len;
-	hn->cur_sct = old / hn->sct_len;
+	hn->cur_sct   = old / hn->sct_len;
 	hn->trns_size = hn->rd_sct * len;
 }
 
@@ -385,10 +371,10 @@ MFCI mfCiOpenEntry(const char** names, int flid, int rw)
 	hn->sct_len = MFCI_SCT_LEN;
 	mfci_get_adr_size(hn->fname, &adr, &hn->fsize);
 	hn->fsize_sct = (hn->sct_len + hn->fsize - 1) / hn->sct_len;
-	hn->cur_sct = 0;
-	hn->rd_sct = 0;
+	hn->cur_sct   = 0;
+	hn->rd_sct    = 0;
 	hn->trns_size = 0;
-	hn->stat = MFCI_STAT_STOP;
-	hn->used = 1;
+	hn->stat      = MFCI_STAT_STOP;
+	hn->used      = 1;
 	return hn;
 }

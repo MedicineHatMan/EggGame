@@ -538,18 +538,18 @@ static SetTheme sThemes[] = {
 
 extern "C" void loadSetTheme(const char* theme)
 {
-	sSetCommonInits = sCommonTheme[0].mInits;
+	sSetCommonInits   = sCommonTheme[0].mInits;
 	sSetCommonClasses = sCommonTheme[0].mClasses;
 	if (sSetCommonInits != 0) {
 		runInits((const ObjInitPair*)sSetCommonInits->mPairs, sSetCommonInits->mCount);
 	}
 
-	sSetThemeInits = 0;
+	sSetThemeInits   = 0;
 	sSetThemeClasses = 0;
 	if (theme != 0) {
 		for (const SetTheme* entry = sThemes; entry->mName != 0; entry++) {
 			if (strncmp(theme, entry->mName, 0x80) == 0) {
-				sSetThemeInits = entry->mInits;
+				sSetThemeInits   = entry->mInits;
 				sSetThemeClasses = entry->mClasses;
 				runInits((const ObjInitPair*)sSetThemeInits->mPairs, sSetThemeInits->mCount);
 				return;
@@ -596,7 +596,7 @@ extern "C" const SetClass* findSetClassIn(const SetClassList* list, int id, int*
 
 extern "C" const SetClass* findSetClass(int id, int* outIndex)
 {
-	*outIndex            = 0;
+	*outIndex             = 0;
 	const SetClass* found = findSetClassIn(sSetCommonClasses, id, outIndex);
 	if (found == 0) {
 		found = findSetClassIn(sSetThemeClasses, id, outIndex);

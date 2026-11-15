@@ -16,11 +16,11 @@ extern "C" void objHeapFree(void*, void*);
  * @size 0x8
  */
 struct ItemSpec {
-	u8 mKind;    // _00 the item id
-	u8 mFlags;   // _01
-	u16 mType;   // _02 for equipment 0 comb 1 wing 2 shoes
-	u16 mParam;  // _04
-	u16 mTime;   // _06 seconds for the status effects
+	u8 mKind;   // _00 the item id
+	u8 mFlags;  // _01
+	u16 mType;  // _02 for equipment 0 comb 1 wing 2 shoes
+	u16 mParam; // _04
+	u16 mTime;  // _06 seconds for the status effects
 } __attribute__((aligned(4)));
 
 /**

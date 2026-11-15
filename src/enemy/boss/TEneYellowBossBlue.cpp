@@ -91,7 +91,10 @@ TEneYellowBossBlue::~TEneYellowBossBlue()
 }
 
 // 0x80152330
-u8 TEneYellowBossBlue::isBroken() { return mBlueFlags & 1; }
+u8 TEneYellowBossBlue::isBroken()
+{
+	return mBlueFlags & 1;
+}
 
 // 0x8015233C
 int TEneYellowBossBlue::onHit(const TObjAction* other, int arg, int* result)
@@ -113,7 +116,10 @@ int TEneYellowBossBlue::onHit(const TObjAction* other, int arg, int* result)
 }
 
 // 0x801523C8
-f32 TEneYellowBossBlue::vfn_40() { return 90.0f; }
+f32 TEneYellowBossBlue::vfn_40()
+{
+	return 90.0f;
+}
 
 // 0x801523D0
 void TEneYellowBossBlue::pose()
@@ -156,7 +162,10 @@ void TEneYellowBossBlue::bodyMatrix()
 }
 
 // 0x80152500
-void TEneYellowBossBlue::dropShadow() { fitShadow(50.02f, &mXform.mPos, mPoint, &mShadow); }
+void TEneYellowBossBlue::dropShadow()
+{
+	fitShadow(50.02f, &mXform.mPos, mPoint, &mShadow);
+}
 
 // 0x80152534
 void TEneYellowBossBlue::draw()
@@ -253,12 +262,12 @@ void TEneYellowBossBlue::actShoot(int phase)
 	case 0:
 		motionCtrlPlay(&mClip, 1);
 		motionCtrlSetSpeed(&mClip, 2.0f);
-		mStep     = 0;
-		*turn     = 0;
-		mShots    = 0;
+		mStep       = 0;
+		*turn       = 0;
+		mShots      = 0;
 		f32 fanStep = 5851.4287f;
-		mAimStep  = (int)fanStep;
-		mAimAngle = mHome + 0x3000;
+		mAimStep    = (int)fanStep;
+		mAimAngle   = mHome + 0x3000;
 		aimAt(mXform.mPos, mAimAngle, &mTarget, &mTargetAngle);
 		break;
 	case 1:
@@ -334,7 +343,10 @@ void TEneYellowBossBlue::actDie(int phase)
 }
 
 // 0x80152B10
-void TEneYellowBossBlue::vfn_10() { cull(mDraw, 3000.0f, 70.0f, &mXform.mPos, 0); }
+void TEneYellowBossBlue::vfn_10()
+{
+	cull(mDraw, 3000.0f, 70.0f, &mXform.mPos, 0);
+}
 
 // 0x80152B44
 void TEneYellowBossBlue::render()

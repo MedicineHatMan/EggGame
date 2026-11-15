@@ -17,9 +17,8 @@ TModeMovie* gModeMovie;
 extern GXColor sMovieClearColor;
 
 static const char* sMovieNames[MOVIE_COUNT] = {
-	"mv_demo_movie.sfd",  "mv_demo_play.sfd",   "mv_opening.sfd",     "mv_ending.sfd",
-	"mv_boss_clear1.sfd", "mv_boss_clear2.sfd", "mv_boss_clear3.sfd", "mv_boss_clear4.sfd",
-	"mv_boss_clear5.sfd", "mv_boss_clear6.sfd", "mv_boss_clear7.sfd", "mv_staffroll.sfd",
+	"mv_demo_movie.sfd",  "mv_demo_play.sfd",   "mv_opening.sfd",     "mv_ending.sfd",      "mv_boss_clear1.sfd", "mv_boss_clear2.sfd",
+	"mv_boss_clear3.sfd", "mv_boss_clear4.sfd", "mv_boss_clear5.sfd", "mv_boss_clear6.sfd", "mv_boss_clear7.sfd", "mv_staffroll.sfd",
 };
 
 static inline int clampMovie(int movie)

@@ -39,7 +39,6 @@ extern const char* gTObjLastHeavensGateName;
 
 // 0x802C4650
 const char* gTObjLastCrowLemuresCtrlName = "TObjLastCrowLemuresCtrl";
-
 }
 
 typedef char TObjLastCrowLemuresCtrl_size_check[(sizeof(TObjLastCrowLemuresCtrl) == 0xA0) ? 1 : -1];
@@ -53,12 +52,12 @@ extern "C" TObject* createTObjLastCrowLemuresCtrl(TObject* parent, SetDesc* desc
 TObjLastCrowLemuresCtrl::TObjLastCrowLemuresCtrl(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_70    = 0;
-	_90    = 0;
-	mTimer = 60;
-	_00    = (u32)gTObjLastCrowLemuresCtrlName;
-	mSize  = 0xA0;
-	mModel = getGeObjModels()[3];
+	_70        = 0;
+	_90        = 0;
+	mTimer     = 60;
+	_00        = (u32)gTObjLastCrowLemuresCtrlName;
+	mSize      = 0xA0;
+	mModel     = getGeObjModels()[3];
 	void* bank = *(void**)((u8*)gGeObjCommon + 0xC);
 	mMotion    = *(void**)((u8*)bank + 0x1C);
 	mDraw      = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x23, 0);
@@ -131,7 +130,7 @@ void TObjLastCrowLemuresCtrl::arm()
 // 0x80190A40
 void TObjLastCrowLemuresCtrl::place(Vec3f* pos, f32* radius) const
 {
-	*pos = mPos;
+	*pos    = mPos;
 	*radius = *(f32*)((u8*)colliGetShape(mShape, 0) + 0x18);
 }
 
@@ -178,8 +177,7 @@ void TObjLastCrowLemuresCtrl::stateWatch()
 		}
 	}
 	int any = 0;
-	for (TObject* child = mChild; child != 0;
-	     child = child->mNext) {
+	for (TObject* child = mChild; child != 0; child = child->mNext) {
 		if (child->_00 == (u32)gTObjLastCrowLemuresName) {
 			((TObjLastCrowLemures*)child)->touch(touched);
 			any = 1;
@@ -194,7 +192,7 @@ void TObjLastCrowLemuresCtrl::stateWatch()
 void TObjLastCrowLemuresCtrl::stateOpen()
 {
 	u16 left = mTimer;
-	mTimer    = left - 1;
+	mTimer   = left - 1;
 	if (left == 0) {
 		setKeyBit(mSwitchId);
 		mMode = 2;
@@ -231,8 +229,7 @@ void TObjLastCrowLemuresCtrl::vfn_10()
 void TObjLastCrowLemuresCtrl::render()
 {
 	shadowVolumeBegin();
-	for (TObject* child = mChild; child != 0;
-	     child = child->mNext) {
+	for (TObject* child = mChild; child != 0; child = child->mNext) {
 		if (child->_00 == (u32)gTObjLastCrowLemuresName) {
 			child->render();
 		}
@@ -253,7 +250,6 @@ struct CharaColli;
 struct Fx;
 
 extern "C" {
-
 }
 
 /** A message that carries a vector back */
@@ -272,7 +268,8 @@ static inline f32 randomRange(f32 lo, f32 span)
 }
 
 TObjLastCrowLemures::TObjLastCrowLemures(TSetActor* owner)
-    : TObject(owner), mOwner(owner)
+    : TObject(owner)
+    , mOwner(owner)
 {
 	mScale = randomRange(2.0f, 1.0f);
 	mYaw   = 0;
@@ -301,7 +298,7 @@ TObjLastCrowLemures::~TObjLastCrowLemures()
 void TObjLastCrowLemures::touch(int on)
 {
 	if (on != 0) {
-		colliEnable(mShape);	
+		colliEnable(mShape);
 	} else {
 		colliDisable(mShape);
 	}
@@ -358,11 +355,11 @@ void TObjLastCrowLemures::draw()
 		if (target->onHit(mOwner, 0, (int*)&hit) == 0) {
 			continue;
 		}
-		where = *target->getPos();
+		where        = *target->getPos();
 		hitMsg.mType = 0x43;
 		target->sendToHandle(&hitMsg);
 		vecSub(&away, &mPos, &where);
-		away.y = 0.0f;
+		away.y        = 0.0f;
 		hitMsg.mVec.y = 0.0f;
 		vecNormalize(&hitMsg.mVec, &hitMsg.mVec);
 		vecNormalize(&away, &away);

@@ -21,7 +21,9 @@ extern "C" TStage* createYellowStage()
 }
 
 // 0x8017D868
-TStageYellow::TStageYellow() { }
+TStageYellow::TStageYellow()
+{
+}
 
 // 0x8017D8A4
 void TStageYellow::loadAssets()
@@ -45,4 +47,6 @@ void TStageYellow::vfn_14()
 }
 
 // 0x8017D934
-TStageYellow::~TStageYellow() { }
+TStageYellow::~TStageYellow()
+{
+}

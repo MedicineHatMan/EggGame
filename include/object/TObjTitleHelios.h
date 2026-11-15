@@ -29,8 +29,8 @@ public:
 	virtual void initFromDesc(SetDesc* desc); // _30
 	virtual void vfn_74();                    // _74
 
-	void setup();          // ours
-	void ride();           // ours
+	void setup();           // ours
+	void ride();            // ours
 	void setPace(int pace); // ours path speed is pace times 10/9
 
 	DrawTask* mDraw;      // _64

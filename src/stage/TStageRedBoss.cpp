@@ -11,7 +11,9 @@ extern "C" TStage* createRedBossStage()
 	return new TStageRedBoss;
 }
 
-TStageRedBoss::TStageRedBoss() { }
+TStageRedBoss::TStageRedBoss()
+{
+}
 
 void TStageRedBoss::loadAssets()
 {
@@ -29,4 +31,6 @@ void TStageRedBoss::vfn_14()
 	createBoss03Magma();
 }
 
-TStageRedBoss::~TStageRedBoss() { }
+TStageRedBoss::~TStageRedBoss()
+{
+}

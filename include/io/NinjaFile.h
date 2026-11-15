@@ -67,24 +67,24 @@ void gvmLoaderFromMemory(GvmLoader*, u8*);
 
 /** @size 0x28 */
 struct NinjaFile {
-	void* mData;    // _00
-	void* mPof;     // _04
-	int mState;     // _08
-	int mStep;      // _0C
-	u32 mMagic;     // _10
-	u32 mSize;      // _14
-	u32 mKind;      // _18 '****' until known
-	void* mDst;     // _1C
-	u32 mDstSize;   // _20
-	u32* mKinds;    // _24 more magics to accept ending with 0
+	void* mData;  // _00
+	void* mPof;   // _04
+	int mState;   // _08
+	int mStep;    // _0C
+	u32 mMagic;   // _10
+	u32 mSize;    // _14
+	u32 mKind;    // _18 '****' until known
+	void* mDst;   // _1C
+	u32 mDstSize; // _20
+	u32* mKinds;  // _24 more magics to accept ending with 0
 };
 
 /** @size 0xC */
 struct GvmHeader {
-	u32 mMagic;   // _00 GVMH
-	u32 mSize;    // _04 from _08 to the first GVR
-	u16 mFlags;   // _08 GvmHeaderFlags
-	s16 mCount;   // _0A
+	u32 mMagic; // _00 GVMH
+	u32 mSize;  // _04 from _08 to the first GVR
+	u16 mFlags; // _08 GvmHeaderFlags
+	s16 mCount; // _0A
 };
 
 /** @size 0x10 */

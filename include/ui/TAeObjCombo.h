@@ -30,7 +30,7 @@ public:
 	TAeLayer* mRank;      // _38
 	TAeLayer* mWord;      // _3C
 	TAeLayer* mCounts[3]; // _40
-	DrawTask* mTask;          // _4C
+	DrawTask* mTask;      // _4C
 	int mNextCount;       // _50 the counter showCount uses next
 	int mFrameTime;       // _54
 };

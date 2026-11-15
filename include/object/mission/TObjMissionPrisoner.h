@@ -63,40 +63,40 @@ public:
 
 	static int startEvent(u32 id);
 
-	u8 mKind;             // _30 one of four people
-	s8 mState;            // _31
-	FlagByte mFlagBits;         // _32
-	u16 mEventId;         // _34
-	u16 mTimer;           // _36
-	u16 mMsgId;           // _38
-	int  mLightSet;      // _3C
-	TPlyComb* mActor;     // _40 draws the body
-	CharaColli* mColli;         // _44
-	CharaColli* mSense;         // _48
-	DrawTask* mDrawTask;      // _4C
-	SetLinkMember mLink;  // _50
-	MotionPlayer mMotion; // _5C
-	f32 mMatrix[12];      // _98
-	f32 mBondsMatrix[12]; // _C8
-	f32 mFaceMatrix[12];  // _F8
-	f32 mLeftMatrix[12];  // _128
-	f32 mRightMatrix[12]; // _158
-	f32 mBodyMatrix[12];  // _188
-	f32 mEventMatrix[12]; // _1B8
-	Vec3f mPos;           // _1E8
-	int mRotY;            // _1F4
-	ObjShadow mShadow;    // _1F8
-	void** mModels;       // _230
-	void** mTexLists;     // _234
-	GjActor* mBody;          // _238
-	GjActor* mLeft;          // _23C
-	GjActor* mRight;         // _240
-	GjActor* mFace;          // _244
-	int mTargetRotY;      // _248
-	ObjRef mRescuer;      // _24C
+	u8 mKind;                  // _30 one of four people
+	s8 mState;                 // _31
+	FlagByte mFlagBits;        // _32
+	u16 mEventId;              // _34
+	u16 mTimer;                // _36
+	u16 mMsgId;                // _38
+	int mLightSet;             // _3C
+	TPlyComb* mActor;          // _40 draws the body
+	CharaColli* mColli;        // _44
+	CharaColli* mSense;        // _48
+	DrawTask* mDrawTask;       // _4C
+	SetLinkMember mLink;       // _50
+	MotionPlayer mMotion;      // _5C
+	f32 mMatrix[12];           // _98
+	f32 mBondsMatrix[12];      // _C8
+	f32 mFaceMatrix[12];       // _F8
+	f32 mLeftMatrix[12];       // _128
+	f32 mRightMatrix[12];      // _158
+	f32 mBodyMatrix[12];       // _188
+	f32 mEventMatrix[12];      // _1B8
+	Vec3f mPos;                // _1E8
+	int mRotY;                 // _1F4
+	ObjShadow mShadow;         // _1F8
+	void** mModels;            // _230
+	void** mTexLists;          // _234
+	GjActor* mBody;            // _238
+	GjActor* mLeft;            // _23C
+	GjActor* mRight;           // _240
+	GjActor* mFace;            // _244
+	int mTargetRotY;           // _248
+	ObjRef mRescuer;           // _24C
 	TCamConversation* mCamera; // _258
-	TCamPath* mEvent;     // _25C
-	int* mWindow;         // _260 the message window
+	TCamPath* mEvent;          // _25C
+	int* mWindow;              // _260 the message window
 };
 
 extern "C" {

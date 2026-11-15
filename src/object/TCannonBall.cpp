@@ -34,12 +34,12 @@ static const GXColor sBallColor = { 0x20, 0x20, 0x20, 0xFF };
 TCannonBall::TCannonBall(TObject* parent, const Vec3f* pos, const Vec3f* vel, const Vec3f* target, f32 scale)
     : TObject(parent)
 {
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mDraw             = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	mXform.mGravity.x = 0.0f;
 	mXform.mGravity.y = -CANNON_GRAVITY;
 	mXform.mGravity.z = 0.0f;
-	mXform.mPos = *pos;
-	mXform.mVel = *vel;
+	mXform.mPos       = *pos;
+	mXform.mVel       = *vel;
 	mXform.vfn_0C();
 	mScale  = scale;
 	mTarget = *target;

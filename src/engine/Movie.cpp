@@ -11,18 +11,18 @@
 
 struct MovieModule {
 	u8 _00[0x20];
-	u32 mBssSize;          // _20
+	u32 mBssSize; // _20
 	u8 _24[0x10];
-	void (*mProlog)();     // _34
-	void (*mEpilog)();     // _38
+	void (*mProlog)(); // _34
+	void (*mEpilog)(); // _38
 };
 
 /** What the decoder starts with. @size 0x20 */
 struct MovieConfig {
-	f32 mFps;    // _00
-	int _04;     // _04
-	int _08;     // _08
-	int _0C;     // _0C
+	f32 mFps; // _00
+	int _04;  // _04
+	int _08;  // _08
+	int _0C;  // _0C
 	u8 _10[0x10];
 };
 
@@ -123,9 +123,9 @@ static void movieLoaded(int event, int id, void* target, void* user)
 void movieLoad()
 {
 	BinFile* file = new BinFile;
-	sMovieModule = 0;
-	sMovieBss    = 0;
-	sMovieFile   = file;
+	sMovieModule  = 0;
+	sMovieBss     = 0;
+	sMovieFile    = file;
 	FileReader::get()->read("movie_module.rel", sMovieFile, movieLoaded, 0);
 }
 

@@ -29,17 +29,17 @@ public:
 	void turnBack(int angle);
 	inline void killAllFx();
 
-	int mImageWait;       // _384
-	f32 mTravelled;       // _388
-	f32 mSpeed;           // _38C
-	f32 mTopSpeed;        // _390
-	int mTurnRate;        // _394
-	f32 mBob;             // _398
-	int mBobAngle;        // _39C
-	f32 mSpinMatrix[12];  // _3A0
-	int mSpinAngle;       // _3D0
-	Fx* mFx2;           // _3D4
-	f32 mFx2Matrix[12];   // _3D8
+	int mImageWait;      // _384
+	f32 mTravelled;      // _388
+	f32 mSpeed;          // _38C
+	f32 mTopSpeed;       // _390
+	int mTurnRate;       // _394
+	f32 mBob;            // _398
+	int mBobAngle;       // _39C
+	f32 mSpinMatrix[12]; // _3A0
+	int mSpinAngle;      // _3D0
+	Fx* mFx2;            // _3D4
+	f32 mFx2Matrix[12];  // _3D8
 };
 
 #include "engine/MotionPlayer.h"

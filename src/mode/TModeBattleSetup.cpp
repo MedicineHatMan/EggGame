@@ -31,9 +31,9 @@ static const int sBattleStageOrder[8] = { 6, 0, 1, 2, 3, 4, 5, 7 }; // 0x8024BF8
 static const int sBattleStageModel[8] = { 0, 0, 1, 2, 3, 4, 5, 6 }; // 0x8024BFA0
 
 // mes_battle_menu.bin fixed up like mes_main_menu.bin
-BinFile* sBattleMes;      // 0x802C5998
-int sBattleMesCount;   // 0x802C599C
-int* sBattleMesText;   // 0x802C59A0
+BinFile* sBattleMes; // 0x802C5998
+int sBattleMesCount; // 0x802C599C
+int* sBattleMesText; // 0x802C59A0
 
 #define BATTLE_STRING(i) ((void*)sBattleMesText[i])
 
@@ -56,35 +56,42 @@ inline SetRot setRot(int x, int y, int z)
 }
 
 // Built by the static initializer at 0x80196190
-static TextVec sBattleGlyph      = textVec(0.91f, 0.91f, 0.91f);   // 0x80286688
-static TextVec sBattleBox        = textVec(394.0f, 44.0f, 0.0f);   // 0x80286694
-static TextVec sBattleTitleAt    = textVec(44.0f, 41.0f, -2.0f);   // 0x802866A0
-static TextVec sBattleHelpBox    = textVec(432.0f, 50.0f, 0.0f);   // 0x802866AC
-static TextVec sBattleHelpAt     = textVec(142.0f, 378.0f, -2.0f); // 0x802866B8
-static TextVec sBattleTab0At = textVec(565.0f, 38.0f, -2.0f); // 0x802866C4
-static TextVec sBattleTab1At = textVec(565.0f, 75.0f, -2.0f); // 0x802866D0
-static TextVec sBattleHead0At = textVec(98.0f, 125.0f, -2.0f); // 0x802866DC
-static TextVec sBattleHead1At = textVec(98.0f, 180.0f, -2.0f); // 0x802866E8
-static TextVec sBattleHead2At = textVec(98.0f, 235.0f, -2.0f); // 0x802866F4
-static TextVec sBattleKindAt     = textVec(294.0f, 121.0f, -2.0f); // 0x80286700
-static TextVec sBattleAmountAt   = textVec(294.0f, 177.0f, -2.0f); // 0x8028670C
-static TextVec sBattleYesAt = textVec(512.0f, 320.0f, -2.0f); // 0x80286718
-static TextVec sBattleNoAt = textVec(512.0f, 373.0f, -2.0f); // 0x80286724
+static TextVec sBattleGlyph        = textVec(0.91f, 0.91f, 0.91f);   // 0x80286688
+static TextVec sBattleBox          = textVec(394.0f, 44.0f, 0.0f);   // 0x80286694
+static TextVec sBattleTitleAt      = textVec(44.0f, 41.0f, -2.0f);   // 0x802866A0
+static TextVec sBattleHelpBox      = textVec(432.0f, 50.0f, 0.0f);   // 0x802866AC
+static TextVec sBattleHelpAt       = textVec(142.0f, 378.0f, -2.0f); // 0x802866B8
+static TextVec sBattleTab0At       = textVec(565.0f, 38.0f, -2.0f);  // 0x802866C4
+static TextVec sBattleTab1At       = textVec(565.0f, 75.0f, -2.0f);  // 0x802866D0
+static TextVec sBattleHead0At      = textVec(98.0f, 125.0f, -2.0f);  // 0x802866DC
+static TextVec sBattleHead1At      = textVec(98.0f, 180.0f, -2.0f);  // 0x802866E8
+static TextVec sBattleHead2At      = textVec(98.0f, 235.0f, -2.0f);  // 0x802866F4
+static TextVec sBattleKindAt       = textVec(294.0f, 121.0f, -2.0f); // 0x80286700
+static TextVec sBattleAmountAt     = textVec(294.0f, 177.0f, -2.0f); // 0x8028670C
+static TextVec sBattleYesAt        = textVec(512.0f, 320.0f, -2.0f); // 0x80286718
+static TextVec sBattleNoAt         = textVec(512.0f, 373.0f, -2.0f); // 0x80286724
 static TextVec sBattlePlayerPos[4] = {
-	textVec(30.0f, -4.0f, 75.0f), textVec(10.0f, -4.0f, 75.0f), textVec(-10.0f, -4.0f, 75.0f), textVec(-30.0f, -4.0f, 75.0f),
+	textVec(30.0f, -4.0f, 75.0f),
+	textVec(10.0f, -4.0f, 75.0f),
+	textVec(-10.0f, -4.0f, 75.0f),
+	textVec(-30.0f, -4.0f, 75.0f),
 }; // 0x80286730
 static TextRot sBattlePlayerRot[4] = {
-	textRot(0, 0x8B00, 0), textRot(0, 0x8500, 0), textRot(0, 0x7B00, 0), textRot(0, 0x7500, 0),
+	textRot(0, 0x8B00, 0),
+	textRot(0, 0x8500, 0),
+	textRot(0, 0x7B00, 0),
+	textRot(0, 0x7500, 0),
 }; // 0x80286760
-static TextVec sBattleStagePos   = textVec(-34.0f, 7.0f, 100.0f);   // 0x80286790
-static TextRot sBattleStageRot  = textRot(0x1000, 0x7800, 0);      // 0x8028679C
-static TextVec sBattleHiyokoPos  = textVec(40.0f, -27.5f, 85.0f);    // 0x802867A8
-static TextRot sBattleHiyokoRot = textRot(-0x800, 0xA000, 0);      // 0x802867B4
-static TextVec sBattleChickPos   = textVec(45.0f, -36.0f, 89.0f);    // 0x802867C0
-static TextRot sBattleChickRot  = textRot(-0x800, 0x8000, 0);      // 0x802867CC
+static TextVec sBattleStagePos  = textVec(-34.0f, 7.0f, 100.0f); // 0x80286790
+static TextRot sBattleStageRot  = textRot(0x1000, 0x7800, 0);    // 0x8028679C
+static TextVec sBattleHiyokoPos = textVec(40.0f, -27.5f, 85.0f); // 0x802867A8
+static TextRot sBattleHiyokoRot = textRot(-0x800, 0xA000, 0);    // 0x802867B4
+static TextVec sBattleChickPos  = textVec(45.0f, -36.0f, 89.0f); // 0x802867C0
+static TextRot sBattleChickRot  = textRot(-0x800, 0x8000, 0);    // 0x802867CC
 
 // Sets the object's retire bit and drops the pointer
-template <typename T> inline void freeObj(T*& obj)
+template <typename T>
+inline void freeObj(T*& obj)
 {
 	if (obj != 0) {
 		((TObject*)obj)->mFlags |= 1;
@@ -113,7 +120,7 @@ inline void setTabBox(TSimpleText* text)
 		text->mBox.x = 0.0f;
 		text->mBox.y = 24.0f;
 		text->mBox.z = 0.0f;
-		text->_A8 = 1;
+		text->_A8    = 1;
 	}
 }
 
@@ -125,7 +132,7 @@ inline void showTab(TSimpleText* text)
 		text->mBox.x = 0.0f;
 		text->mBox.y = 24.0f;
 		text->mBox.z = 0.0f;
-		text->_A8 = 1;
+		text->_A8    = 1;
 	}
 }
 
@@ -173,12 +180,12 @@ int TModeBattleSetup::init()
 	char* file = getLangFileName("mes_battle_menu.bin");
 	loadSizedResource(file, &sBattleMes);
 	MessageFile* header = (MessageFile*)sBattleMes->mData;
-	int base        = header->mTextOffset;
-	u32 size        = header->mTableSize;
-	u32 text        = base + (u32)header;
-	int* msgs       = (int*)header->mOffsets;
-	sBattleMesText  = msgs;
-	sBattleMesCount = size >> 2;
+	int base            = header->mTextOffset;
+	u32 size            = header->mTableSize;
+	u32 text            = base + (u32)header;
+	int* msgs           = (int*)header->mOffsets;
+	sBattleMesText      = msgs;
+	sBattleMesCount     = size >> 2;
 	int i;
 	for (i = 0; i < sBattleMesCount; i++) {
 		sBattleMesText[i] += text + 8;
@@ -188,9 +195,9 @@ int TModeBattleSetup::init()
 	buildText();
 	hideAll();
 
-	mStagePos = sBattleStagePos;
+	mStagePos              = sBattleStagePos;
 	*(RotBlock*)&mStageRot = *(RotBlock*)&sBattleStageRot;
-	mStage    = createTStageSelectModel(gTL_05, &mStagePos, &mStageRot.x, sBattleStageModel[1], 0x21);
+	mStage                 = createTStageSelectModel(gTL_05, &mStagePos, &mStageRot.x, sBattleStageModel[1], 0x21);
 	if (mStage != 0) {
 		mStage->mLightColor.set(1.0f, 1.0f, 1.0f);
 		mStage->mAmbient.set(0.7f, 0.7f, 0.7f);
@@ -198,17 +205,17 @@ int TModeBattleSetup::init()
 	}
 
 	for (i = 0; i < 4; i++) {
-		mPlayerPos[i] = sBattlePlayerPos[i];
+		mPlayerPos[i]              = sBattlePlayerPos[i];
 		*(RotBlock*)&mPlayerRot[i] = *(RotBlock*)&sBattlePlayerRot[i];
-		mPlayer[i]    = createTBattleModelPlayer(gTL_05, &mPlayerPos[i], &mPlayerRot[i].x, i);
+		mPlayer[i]                 = createTBattleModelPlayer(gTL_05, &mPlayerPos[i], &mPlayerRot[i].x, i);
 	}
 
-	mHiyokoPos = sBattleHiyokoPos;
+	mHiyokoPos              = sBattleHiyokoPos;
 	*(RotBlock*)&mHiyokoRot = *(RotBlock*)&sBattleHiyokoRot;
-	mHiyoko    = createTBattleModelHiyoko(gTL_05, &mHiyokoPos, &mHiyokoRot.x);
-	mChickPos  = sBattleChickPos;
-	*(RotBlock*)&mChickRot = *(RotBlock*)&sBattleChickRot;
-	mChick     = createTBattleModelHiyokoProp(gTL_05, &mChickPos, &mChickRot.x);
+	mHiyoko                 = createTBattleModelHiyoko(gTL_05, &mHiyokoPos, &mHiyokoRot.x);
+	mChickPos               = sBattleChickPos;
+	*(RotBlock*)&mChickRot  = *(RotBlock*)&sBattleChickRot;
+	mChick                  = createTBattleModelHiyokoProp(gTL_05, &mChickPos, &mChickRot.x);
 
 	StageDefTable* table = getStageDefTable();
 	for (i = 0; i < table->mCount; i++) {
@@ -809,8 +816,8 @@ void TModeBattleSetup::updateRuleStage()
 			}
 			aeBattleSelectShowStage(mStageIdx);
 			TStageSelectModel* stage = mStage;
-			stage->mIndex = sBattleStageModel[mStageIdx];
-			stage->mFrame = 0.0f;
+			stage->mIndex            = sBattleStageModel[mStageIdx];
+			stage->mFrame            = 0.0f;
 		} else if ((padGet((u8)i)->mRepeat & 0x800000) || (padGet((u8)i)->mRepeat & 2)) {
 			sePlay(0x1B);
 			if (mStageIdx < 7) {
@@ -841,8 +848,8 @@ void TModeBattleSetup::updateRuleStage()
 			}
 			aeBattleSelectShowStage(mStageIdx);
 			TStageSelectModel* stage = mStage;
-			stage->mIndex = sBattleStageModel[mStageIdx];
-			stage->mFrame = 0.0f;
+			stage->mIndex            = sBattleStageModel[mStageIdx];
+			stage->mFrame            = 0.0f;
 		}
 	}
 }
@@ -1057,7 +1064,11 @@ int TModeBattleSetup::fadeDone()
 }
 
 // 0x8019560C
-#define SET_TAB_BOX(t) if ((t) != 0) { (t)->mBox.set(0.0f, 24.0f, 0.0f); (t)->_A8 = 1; }
+#define SET_TAB_BOX(t)                    \
+	if ((t) != 0) {                       \
+		(t)->mBox.set(0.0f, 24.0f, 0.0f); \
+		(t)->_A8 = 1;                     \
+	}
 
 void TModeBattleSetup::buildText()
 {
@@ -1317,12 +1328,12 @@ void TModeBattleSetup::showYesNo()
 	if (mYes != 0) {
 		mYes->mFlags &= ~0x10;
 		mYes->mBox = box;
-		mYes->_A8 = 1;
+		mYes->_A8  = 1;
 	}
 	if (mNo != 0) {
 		mNo->mFlags &= ~0x10;
 		mNo->mBox = box;
-		mNo->_A8 = 1;
+		mNo->_A8  = 1;
 	}
 }
 
@@ -1374,4 +1385,6 @@ void TModeBattleSetup::showStageIcons()
 	}
 }
 
-inline FxVec::FxVec() { }
+inline FxVec::FxVec()
+{
+}

@@ -21,7 +21,7 @@ extern "C" {
 
 // 0x802C3EA8
 // then WAIT / ALWAYS / null at 0x802C3EAC
-const char* gTObjRedMagmaShotName = "TObjRedMagmaShot";
+const char* gTObjRedMagmaShotName                                 = "TObjRedMagmaShot";
 __declspec(section ".sdata") const char* sRedMagmaShotTypeNames[] = { "WAIT", "ALWAYS", 0 };
 
 // 0x802440D8
@@ -41,7 +41,6 @@ struct MagmaShotOffset : public Vec3f {
 // 0x80280330
 // the offset a new shot copies into mOffset
 MagmaShotOffset gMagmaShotOffset(0.0f, -40.0f, 0.0f);
-
 }
 
 typedef char TObjRedMagmaShot_size_check[(sizeof(TObjRedMagmaShot) == 0x120) ? 1 : -1];
@@ -57,14 +56,14 @@ void TObjRedMagmaShot::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
 
-	mType = desc->getInt(0);
+	mType    = desc->getInt(0);
 	int type = mType;
 	if (type < 0) {
 		type = 0;
 	} else if (type > 1) {
 		type = 1;
 	}
-	mType = type;
+	mType   = type;
 	mPower  = desc->getInt(1);
 	mWait   = desc->getInt(2);
 	mRadius = 100.0f + desc->getFloat(0);
@@ -142,13 +141,13 @@ void TObjRedMagmaShot::makeShapes()
 	ColliShape shapes[2];
 
 	colliShapeInit(&shapes[0]);
-	shapes[0].mType = COLLISHAPE_CYLINDER;
+	shapes[0].mType  = COLLISHAPE_CYLINDER;
 	shapes[0].mSizeX = mRadius;
 	shapes[0].mSizeY = 10000.0f;
 	shapes[0].mFlags |= 0x10;
 
 	colliShapeInit(&shapes[1]);
-	shapes[1].mType = COLLISHAPE_SPHERE;
+	shapes[1].mType  = COLLISHAPE_SPHERE;
 	shapes[1].mSizeX = 40.0f;
 	shapes[1].mFlags |= 8;
 
@@ -160,7 +159,7 @@ void TObjRedMagmaShot::makeShapes()
 void TObjRedMagmaShot::placeShapes()
 {
 	sRedMagmaShotShapes[0].mPos.x = sRedMagmaShotShapes[0].mPos.y = sRedMagmaShotShapes[0].mPos.z = 0.0f;
-	sRedMagmaShotShapes[1].mPos   = mOffset;
+	sRedMagmaShotShapes[1].mPos                                                                   = mOffset;
 	colliPlaceShapes(mShape, &mHome, sRedMagmaShotShapes);
 }
 
@@ -184,11 +183,11 @@ void TObjRedMagmaShot::draw()
 	} else {
 		switch (mState) {
 		case 0:
-				idle();
-				break;
+			idle();
+			break;
 		case 1:
-				rise();
-				break;
+			rise();
+			break;
 		}
 	}
 }
@@ -241,7 +240,10 @@ void TObjRedMagmaShot::rise()
 }
 
 // Not in the DOL the linker strips it
-f32 magmaShotFar() { return 2000.0f; }
+f32 magmaShotFar()
+{
+	return 2000.0f;
+}
 
 // 0x800A38C4
 void TObjRedMagmaShot::vfn_10()
@@ -249,11 +251,11 @@ void TObjRedMagmaShot::vfn_10()
 	if (objDebugEnabled(this) != 0) {
 		mDrawTask->mFlags &= ~1;
 	} else {
-		ColliShape* shape = colliGetShape(mShape, 1);
-		f32 size = shape->mSizeX;
-		size = 2.0f * size;
-		int visible = cameraIsVisible(2000.0f, size, &mPos, 0);
-		sRedMagmaShotVisible      = visible;
+		ColliShape* shape    = colliGetShape(mShape, 1);
+		f32 size             = shape->mSizeX;
+		size                 = 2.0f * size;
+		int visible          = cameraIsVisible(2000.0f, size, &mPos, 0);
+		sRedMagmaShotVisible = visible;
 		if (visible != 0 && mState == 1) {
 			mDrawTask->mFlags &= ~1;
 		} else {
@@ -273,4 +275,3 @@ void TObjRedMagmaShot::render()
 		colliDrawShapes(mShape);
 	}
 }
-

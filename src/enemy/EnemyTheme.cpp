@@ -39,7 +39,7 @@ static SetInitPair sCommonInitPairs[] = {
 	{ enemyParamLoad, enemyParamRelease },
 	{ enemyCommonLoad, enemyCommonRelease },
 };
-static SetInitList sCommonInits = { sCommonInitPairs, 2 };
+static SetInitList sCommonInits      = { sCommonInitPairs, 2 };
 static SetInitPair sGreenInitPairs[] = {
 	{ initZakoMotions, shutdownZakoMotions },
 	{ loadZakoCat, 0 },
@@ -49,7 +49,7 @@ static SetInitPair sGreenInitPairs[] = {
 	{ initTEneAntsQueen, shutdownTEneAntsQueen },
 	{ greenDemoBankInit, greenDemoBankExit },
 };
-static SetInitList sGreenInits = { sGreenInitPairs, 7 };
+static SetInitList sGreenInits      = { sGreenInitPairs, 7 };
 static SetInitPair sBlueInitPairs[] = {
 	{ initZakoMotions, shutdownZakoMotions },
 	{ loadZakoSnake, 0 },
@@ -58,7 +58,7 @@ static SetInitPair sBlueInitPairs[] = {
 	{ initTEnePenguin, shutdownTEnePenguin },
 	{ initTEneFrog, shutdownTEneFrog },
 };
-static SetInitList sBlueInits = { sBlueInitPairs, 6 };
+static SetInitList sBlueInits      = { sBlueInitPairs, 6 };
 static SetInitPair sRedInitPairs[] = {
 	{ initZakoMotions, shutdownZakoMotions },
 	{ loadZakoSnake, 0 },
@@ -67,7 +67,7 @@ static SetInitPair sRedInitPairs[] = {
 	{ initTEneBat, shutdownTEneBat },
 	{ initTEneArmadillo, shutdownTEneArmadillo },
 };
-static SetInitList sRedInits = { sRedInitPairs, 6 };
+static SetInitList sRedInits          = { sRedInitPairs, 6 };
 static SetInitPair sPurpleInitPairs[] = {
 	{ initZakoMotions, shutdownZakoMotions },
 	{ loadZakoCat, 0 },
@@ -76,7 +76,7 @@ static SetInitPair sPurpleInitPairs[] = {
 	{ initTEnePenguin, shutdownTEnePenguin },
 	{ initTEneAm02, shutdownTEneAm02 },
 };
-static SetInitList sPurpleInits = { sPurpleInitPairs, 6 };
+static SetInitList sPurpleInits       = { sPurpleInitPairs, 6 };
 static SetInitPair sOrangeInitPairs[] = {
 	{ initZakoMotions, shutdownZakoMotions },
 	{ loadZakoSnake, 0 },
@@ -85,7 +85,7 @@ static SetInitPair sOrangeInitPairs[] = {
 	{ initTEneAntsQueen, shutdownTEneAntsQueen },
 	{ initTEnePenguin, shutdownTEnePenguin },
 };
-static SetInitList sOrangeInits = { sOrangeInitPairs, 6 };
+static SetInitList sOrangeInits       = { sOrangeInitPairs, 6 };
 static SetInitPair sYellowInitPairs[] = {
 	{ initZakoMotions, shutdownZakoMotions },
 	{ loadZakoCat, 0 },
@@ -95,7 +95,7 @@ static SetInitPair sYellowInitPairs[] = {
 	{ initTEneAm08, shutdownTEneAm08 },
 	{ initTEneArmadillo, shutdownTEneArmadillo },
 };
-static SetInitList sYellowInits = { sYellowInitPairs, 7 };
+static SetInitList sYellowInits     = { sYellowInitPairs, 7 };
 static SetInitPair sLastInitPairs[] = {
 	{ initZakoMotions, shutdownZakoMotions },
 	{ loadZakoCat, 0 },
@@ -105,35 +105,35 @@ static SetInitPair sLastInitPairs[] = {
 	{ initTEneAm08, shutdownTEneAm08 },
 	{ initTEneBat, shutdownTEneBat },
 };
-static SetInitList sLastInits = { sLastInitPairs, 7 };
+static SetInitList sLastInits            = { sLastInitPairs, 7 };
 static SetInitPair sGreenBossInitPairs[] = {
 	{ initTEneGreenBoss, shutdownTEneGreenBoss },
 };
-static SetInitList sGreenBossInits = { sGreenBossInitPairs, 1 };
+static SetInitList sGreenBossInits      = { sGreenBossInitPairs, 1 };
 static SetInitPair sBlueBossInitPairs[] = {
 	{ initTEneBoss02, shutdownTEneBoss02 },
 };
-static SetInitList sBlueBossInits = { sBlueBossInitPairs, 1 };
+static SetInitList sBlueBossInits      = { sBlueBossInitPairs, 1 };
 static SetInitPair sRedBossInitPairs[] = {
 	{ initTEneBoss03Mole, shutdownTEneBoss03Mole },
 };
-static SetInitList sRedBossInits = { sRedBossInitPairs, 1 };
+static SetInitList sRedBossInits          = { sRedBossInitPairs, 1 };
 static SetInitPair sPurpleBossInitPairs[] = {
 	{ initTEnePurpleBoss, shutdownTEnePurpleBoss },
 };
-static SetInitList sPurpleBossInits = { sPurpleBossInitPairs, 1 };
+static SetInitList sPurpleBossInits       = { sPurpleBossInitPairs, 1 };
 static SetInitPair sOrangeBossInitPairs[] = {
 	{ initTEneOrangeBoss, shutdownTEneOrangeBoss },
 };
-static SetInitList sOrangeBossInits = { sOrangeBossInitPairs, 1 };
+static SetInitList sOrangeBossInits       = { sOrangeBossInitPairs, 1 };
 static SetInitPair sYellowBossInitPairs[] = {
 	{ initTEneYellowBoss, shutdownTEneYellowBoss },
 };
-static SetInitList sYellowBossInits = { sYellowBossInitPairs, 1 };
+static SetInitList sYellowBossInits     = { sYellowBossInitPairs, 1 };
 static SetInitPair sLastBossInitPairs[] = {
 	{ initTEneLastBoss, shutdownTEneLastBoss },
 };
-static SetInitList sLastBossInits = { sLastBossInitPairs, 1 };
+static SetInitList sLastBossInits        = { sLastBossInitPairs, 1 };
 static SetInitPair sLastBoss2InitPairs[] = {
 	{ initTEneLastExBoss, shutdownTEneLastExBoss },
 };
@@ -142,84 +142,84 @@ static SetInitList sLastBoss2Inits = { sLastBoss2InitPairs, 1 };
 static SetClass sCommonClassesTable[] = {
 	{ 0x0002, createTEneGroupCollision, 0, kEnemyRange },
 };
-static SetClassList sCommonClasses = { sCommonClassesTable, 1 };
+static SetClassList sCommonClasses   = { sCommonClassesTable, 1 };
 static SetClass sGreenClassesTable[] = {
 	{ 0x0101, createTEneAm01, 0, kEnemyRange },
 	{ 0x0102, createTEneAm02, 0, kEnemyRange },
 	{ 0x0104, createTEneAm07, 0, kEnemyRange },
 	{ 0x0106, createTEneAntsQueen, 0, kEnemyRange },
 };
-static SetClassList sGreenClasses = { sGreenClassesTable, 4 };
+static SetClassList sGreenClasses   = { sGreenClassesTable, 4 };
 static SetClass sBlueClassesTable[] = {
 	{ 0x0101, createTEneAm01, 0, kEnemyRange },
 	{ 0x0103, createTEneAm06, 0, kEnemyRange },
 	{ 0x0107, createTEnePenguin, 0, kEnemyRange },
 	{ 0x0109, createTEneFrog, 0, kEnemyRange },
 };
-static SetClassList sBlueClasses = { sBlueClassesTable, 4 };
+static SetClassList sBlueClasses   = { sBlueClassesTable, 4 };
 static SetClass sRedClassesTable[] = {
 	{ 0x0101, createTEneAm01, 0, kEnemyRange },
 	{ 0x0105, createTEneAm08, 0, kEnemyRange },
 	{ 0x0108, createTEneBat, 0, kEnemyRange },
 	{ 0x010A, createTEneArmadillo, 0, kEnemyRange },
 };
-static SetClassList sRedClasses = { sRedClassesTable, 4 };
+static SetClassList sRedClasses       = { sRedClassesTable, 4 };
 static SetClass sPurpleClassesTable[] = {
 	{ 0x0101, createTEneAm01, 0, kEnemyRange },
 	{ 0x0103, createTEneAm06, 0, kEnemyRange },
 	{ 0x0107, createTEnePenguin, 0, kEnemyRange },
 	{ 0x0102, createTEneAm02, 0, kEnemyRange },
 };
-static SetClassList sPurpleClasses = { sPurpleClassesTable, 4 };
+static SetClassList sPurpleClasses    = { sPurpleClassesTable, 4 };
 static SetClass sOrangeClassesTable[] = {
 	{ 0x0101, createTEneAm01, 0, kEnemyRange },
 	{ 0x0102, createTEneAm02, 0, kEnemyRange },
 	{ 0x0106, createTEneAntsQueen, 0, kEnemyRange },
 	{ 0x0107, createTEnePenguin, 0, kEnemyRange },
 };
-static SetClassList sOrangeClasses = { sOrangeClassesTable, 4 };
+static SetClassList sOrangeClasses    = { sOrangeClassesTable, 4 };
 static SetClass sYellowClassesTable[] = {
 	{ 0x0101, createTEneAm01, 0, kEnemyRange },
 	{ 0x0104, createTEneAm07, 0, kEnemyRange },
 	{ 0x0105, createTEneAm08, 0, kEnemyRange },
 	{ 0x010A, createTEneArmadillo, 0, kEnemyRange },
 };
-static SetClassList sYellowClasses = { sYellowClassesTable, 4 };
+static SetClassList sYellowClasses  = { sYellowClassesTable, 4 };
 static SetClass sLastClassesTable[] = {
 	{ 0x0101, createTEneAm01, 0, kEnemyRange },
 	{ 0x0102, createTEneAm02, 0, kEnemyRange },
 	{ 0x0105, createTEneAm08, 0, kEnemyRange },
 	{ 0x0108, createTEneBat, 0, kEnemyRange },
 };
-static SetClassList sLastClasses = { sLastClassesTable, 4 };
+static SetClassList sLastClasses         = { sLastClassesTable, 4 };
 static SetClass sGreenBossClassesTable[] = {
 	{ 0x0900, createTEneGreenBoss, 0, kEnemyRange },
 };
-static SetClassList sGreenBossClasses = { sGreenBossClassesTable, 1 };
+static SetClassList sGreenBossClasses   = { sGreenBossClassesTable, 1 };
 static SetClass sBlueBossClassesTable[] = {
 	{ 0x0200, createTEneBoss02, 0, kEnemyRange },
 };
-static SetClassList sBlueBossClasses = { sBlueBossClassesTable, 1 };
+static SetClassList sBlueBossClasses   = { sBlueBossClassesTable, 1 };
 static SetClass sRedBossClassesTable[] = {
 	{ 0x0300, createTEneBoss03Mole, 0, kEnemyRange },
 };
-static SetClassList sRedBossClasses = { sRedBossClassesTable, 1 };
+static SetClassList sRedBossClasses       = { sRedBossClassesTable, 1 };
 static SetClass sPurpleBossClassesTable[] = {
 	{ 0x0400, createTEnePurpleBoss, 0, kEnemyRange },
 };
-static SetClassList sPurpleBossClasses = { sPurpleBossClassesTable, 1 };
+static SetClassList sPurpleBossClasses    = { sPurpleBossClassesTable, 1 };
 static SetClass sOrangeBossClassesTable[] = {
 	{ 0x0500, createTEneOrangeBoss, 0, kEnemyRange },
 };
-static SetClassList sOrangeBossClasses = { sOrangeBossClassesTable, 1 };
+static SetClassList sOrangeBossClasses    = { sOrangeBossClassesTable, 1 };
 static SetClass sYellowBossClassesTable[] = {
 	{ 0x0600, createTEneYellowBoss, 0, kEnemyRange },
 };
-static SetClassList sYellowBossClasses = { sYellowBossClassesTable, 1 };
+static SetClassList sYellowBossClasses  = { sYellowBossClassesTable, 1 };
 static SetClass sLastBossClassesTable[] = {
 	{ 0x0700, createTEneLastBoss, 0, kEnemyRange },
 };
-static SetClassList sLastBossClasses = { sLastBossClassesTable, 1 };
+static SetClassList sLastBossClasses     = { sLastBossClassesTable, 1 };
 static SetClass sLastBoss2ClassesTable[] = {
 	{ 0x0800, createTEneLastExBoss, 0, kEnemyRange },
 };
@@ -258,18 +258,18 @@ static EnemyTheme sEnemyThemes[] = {
 // 0x8001CE24
 extern "C" void loadEnemyTheme(const char* theme)
 {
-	sEnemyCommonInits = sCommonTheme[0].mInits;
+	sEnemyCommonInits   = sCommonTheme[0].mInits;
 	sEnemyCommonClasses = sCommonTheme[0].mClasses;
 	if (sEnemyCommonInits != 0) {
 		runInits((const ObjInitPair*)sEnemyCommonInits->mPairs, sEnemyCommonInits->mCount);
 	}
 
-	sEnemyThemeInits = 0;
+	sEnemyThemeInits   = 0;
 	sEnemyThemeClasses = 0;
 	if (theme != 0) {
 		for (const EnemyTheme* entry = sEnemyThemes; entry->mName != 0; entry++) {
 			if (strncmp(theme, entry->mName, 0x80) == 0) {
-				sEnemyThemeInits = entry->mInits;
+				sEnemyThemeInits   = entry->mInits;
 				sEnemyThemeClasses = entry->mClasses;
 				runInits((const ObjInitPair*)sEnemyThemeInits->mPairs, sEnemyThemeInits->mCount);
 				return;
@@ -335,4 +335,3 @@ extern "C" const SetClass* lookupEnemyClass(int id)
 	int index;
 	return findEnemyClass(id, &index);
 }
-

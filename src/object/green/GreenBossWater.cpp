@@ -7,7 +7,7 @@
 extern "C" void bossWaterChan()
 {
 	static const GXColor sWhite = { 255, 255, 255, 255 }; // 0x802CBBA8
-	GXColor color = sWhite;
+	GXColor color               = sWhite;
 
 	GXSetNumChans(1);
 	GXSetChanCtrl(GX_COLOR0A0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT0, GX_DF_CLAMP, GX_AF_NONE);
@@ -22,7 +22,7 @@ void GreenBossWater::beginDraw()
 	_nj_control_3d_flag_ |= 0x80000;
 	info[4] = (u32)waterTexGen0;
 	info[5] = (u32)bossWaterChan;
-	gjChangeDrawObjIF((void*const*)info, (u32)0xC0);
+	gjChangeDrawObjIF((void* const*)info, (u32)0xC0);
 	gjSetNumPostChans(0);
 	gjSetPostChanCallback(0);
 	gjSetNumPostTevStages(1);
@@ -41,7 +41,7 @@ void GreenBossWater::endDraw()
 	GXSetTevDirect(GX_TEVSTAGE1);
 	info[4] = 0;
 	info[5] = 0;
-	gjChangeDrawObjIF((void*const*)info, (u32)0xC0);
+	gjChangeDrawObjIF((void* const*)info, (u32)0xC0);
 	gjSetNumPostChans(0);
 	gjSetNumPostTexGens(0);
 	gjSetNumPostTevStages(0);

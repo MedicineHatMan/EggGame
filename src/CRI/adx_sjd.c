@@ -36,35 +36,35 @@ ADXSJD ADXSJD_Create(SJ sji, int maxnch, SJ* sjo)
 	if (i == ADXSJD_MAX_OBJ) {
 		return 0;
 	}
-	sjd = &adxsjd_obj[i];
-	buf = SJRBF_GetBufPtr(rbf);
-	bsize = SJRBF_GetBufSize(rbf) / 2;
-	xsize = SJRBF_GetXtrSize(rbf) / 2;
+	sjd       = &adxsjd_obj[i];
+	buf       = SJRBF_GetBufPtr(rbf);
+	bsize     = SJRBF_GetBufSize(rbf) / 2;
+	xsize     = SJRBF_GetXtrSize(rbf) / 2;
 	sjd->adxb = ADXB_Create(maxnch, (short*)buf, bsize, bsize + xsize);
 	if (sjd->adxb == 0) {
 		return 0;
 	}
 	ADXB_EntryGetWrFunc(sjd->adxb, adxsjd_get_wr, sjd);
-	sjd->sji = sji;
+	sjd->sji    = sji;
 	sjd->maxnch = maxnch;
 	for (i = 0; i < maxnch; i++) {
 		sjd->sjo[i] = sjo[i];
 	}
-	sjd->stat = ADXSJD_STAT_STOP;
-	sjd->hdr_len = 0;
-	sjd->dec_nsmpl = 0;
-	sjd->dec_dtlen = 0;
-	sjd->dec_pos = 0;
+	sjd->stat         = ADXSJD_STAT_STOP;
+	sjd->hdr_len      = 0;
+	sjd->dec_nsmpl    = 0;
+	sjd->dec_dtlen    = 0;
+	sjd->dec_pos      = 0;
 	sjd->max_dec_smpl = 0x7FFFFFFF;
-	sjd->trap_nsmpl = -1;
-	sjd->trap_cnt = 0;
-	sjd->trap_dtlen = 0;
-	sjd->term_flg = 0;
-	sjd->trap_func = 0;
-	sjd->trap_obj = 0;
-	sjd->flt_func = 0;
-	sjd->flt_obj = 0;
-	sjd->used = 1;
+	sjd->trap_nsmpl   = -1;
+	sjd->trap_cnt     = 0;
+	sjd->trap_dtlen   = 0;
+	sjd->term_flg     = 0;
+	sjd->trap_func    = 0;
+	sjd->trap_obj     = 0;
+	sjd->flt_func     = 0;
+	sjd->flt_obj      = 0;
+	sjd->used         = 1;
 	return sjd;
 }
 
@@ -109,16 +109,16 @@ void ADXSJD_TermSupply(ADXSJD sjd)
 // 0x8021AAF8
 void ADXSJD_Start(ADXSJD sjd)
 {
-	sjd->hdr_len = 0;
-	sjd->dec_nsmpl = 0;
-	sjd->dec_dtlen = 0;
-	sjd->dec_pos = 0;
+	sjd->hdr_len      = 0;
+	sjd->dec_nsmpl    = 0;
+	sjd->dec_dtlen    = 0;
+	sjd->dec_pos      = 0;
 	sjd->max_dec_smpl = 0x7FFFFFFF;
-	sjd->trap_nsmpl = -1;
-	sjd->trap_cnt = 0;
-	sjd->trap_dtlen = 0;
-	sjd->term_flg = 0;
-	sjd->stat = ADXSJD_STAT_DECHDR;
+	sjd->trap_nsmpl   = -1;
+	sjd->trap_cnt     = 0;
+	sjd->trap_dtlen   = 0;
+	sjd->term_flg     = 0;
+	sjd->stat         = ADXSJD_STAT_DECHDR;
 }
 
 // 0x8021AAC0
@@ -138,7 +138,7 @@ static void adxsjd_decode_prep(ADXSJD sjd)
 	SJCK ck;
 	SJCK ck2;
 
-	sji = sjd->sji;
+	sji  = sjd->sji;
 	adxb = sjd->adxb;
 	SJ_GetChunk(sji, SJ_LIN_DATA, 0x1000, &ck);
 	if (ck.len < 0x10) {
@@ -187,7 +187,7 @@ static void* adxsjd_get_wr(void* obj, int* wpos, int* wlen, int* nsmpl)
 		SJ_GetChunk(sjd->sjo[i], SJ_LIN_FREE, 0x4000, &sjd->cko[i]);
 	}
 	*wpos = (sjd->cko[0].data - SJRBF_GetBufPtr(sjo)) / 2;
-	n = sjd->max_dec_smpl;
+	n     = sjd->max_dec_smpl;
 	if (sjd->cko[0].len / 2 < n) {
 		n = sjd->cko[0].len / 2;
 	}
@@ -209,7 +209,7 @@ static void adxsjd_decexec_start(ADXSJD sjd)
 	SJ sji;
 
 	adxb = sjd->adxb;
-	sji = sjd->sji;
+	sji  = sjd->sji;
 	if (sjd->trap_nsmpl >= 0 && sjd->trap_cnt >= sjd->trap_nsmpl && sjd->trap_func != 0) {
 		sjd->trap_func(sjd->trap_obj);
 	}
@@ -253,12 +253,12 @@ static void adxsjd_decexec_end(ADXSJD sjd)
 	SJCK ck1;
 	SJCK ck2;
 
-	adxb = sjd->adxb;
-	sji = sjd->sji;
+	adxb  = sjd->adxb;
+	sji   = sjd->sji;
 	total = ADXB_GetTotalNumSmpl(adxb);
 	dtlen = ADXB_GetDecDtLen(adxb);
 	nsmpl = ADXB_GetDecNumSmpl(adxb);
-	n = total - sjd->dec_pos;
+	n     = total - sjd->dec_pos;
 	if (nsmpl < n) {
 		n = nsmpl;
 	}
@@ -290,11 +290,11 @@ static void adxsjd_decexec_extern(ADXSJD sjd)
 	int nsmpl;
 	int n;
 
-	adxb = sjd->adxb;
+	adxb  = sjd->adxb;
 	total = ADXB_GetTotalNumSmpl(adxb);
 	dtlen = ADXB_GetDecDtLen(adxb);
 	nsmpl = ADXB_GetDecNumSmpl(adxb);
-	n = total - sjd->dec_pos;
+	n     = total - sjd->dec_pos;
 	if (nsmpl < n) {
 		n = nsmpl;
 	}
@@ -355,7 +355,7 @@ void ADXSJD_SetDecPos(ADXSJD sjd, int pos)
 void ADXSJD_EntryTrapFunc(ADXSJD sjd, void (*func)(void*), void* obj)
 {
 	sjd->trap_func = func;
-	sjd->trap_obj = obj;
+	sjd->trap_obj  = obj;
 }
 
 // 0x8021A0D0

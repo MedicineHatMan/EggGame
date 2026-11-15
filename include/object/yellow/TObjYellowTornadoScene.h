@@ -28,7 +28,7 @@ public:
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
 	EggCollide mRail; // _20
-	Fx* mFx;        // _3C bank 8
+	Fx* mFx;          // _3C bank 8
 	int mKind;        // _40 0 or 1 which effect id
 	f32 mMatrix[12];  // _44 where the effect is drawn
 	f32 mSwing;       // _74 50 times abs(sin) of the angle

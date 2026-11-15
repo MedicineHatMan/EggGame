@@ -14,7 +14,6 @@ struct DrawTask;
 struct NJS_TEXLIST;
 
 extern "C" {
-
 }
 
 typedef char TAeObjStageTitle_size_check[(sizeof(TAeObjStageTitle) == 0x54) ? 1 : -1];
@@ -22,13 +21,13 @@ typedef char TAeObjStageTitle_size_check[(sizeof(TAeObjStageTitle) == 0x54) ? 1 
 // 0x80246028
 // The layer each world's banner plays -1 = none
 static const s32 sTitleLayers[7] = { 3, 3, 3, 3, 2, 3, 3 };
-static const char* sClassName = "TAeObjStageTitle"; // 0x802C4108
+static const char* sClassName    = "TAeObjStageTitle"; // 0x802C4108
 
-TArc* sTitleRes;     // 0x802C5320 the archive
-void* sTitleAe;      // 0x802C5324
-NJS_TEXLIST* sTitleTex;     // 0x802C5328
-s32 sTitleWorld;     // 0x802C532C -1 = none
-s32 sTitleMission;   // 0x802C5330 -1 = none
+TArc* sTitleRes;        // 0x802C5320 the archive
+void* sTitleAe;         // 0x802C5324
+NJS_TEXLIST* sTitleTex; // 0x802C5328
+s32 sTitleWorld;        // 0x802C532C -1 = none
+s32 sTitleMission;      // 0x802C5330 -1 = none
 
 // 0x800E90AC
 extern "C" int stageTitleHideObjs()
@@ -122,7 +121,7 @@ TAeObjStageTitle::TAeObjStageTitle(TObject* parent, void* data, void* assets)
 	if (sTitleWorld != -1 && sTitleLayers[sTitleWorld] != -1) {
 		mLayer = createLayer(sTitleLayers[sTitleWorld], 0x10);
 	}
-	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3C, 0);
+	mTask        = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3C, 0);
 	mMissionText = 0;
 	if (sTitleMission != -1) {
 		char* text = getStageSelectMission(sTitleMission);
@@ -190,7 +189,7 @@ void TAeObjStageTitle::draw()
 	}
 	if (mHintTried == 0 && mHintCam == 0) {
 		const char* name = "hint";
-		mHintCam = eventCamArcPlayNamed(1.0f, 0.0f, name);
+		mHintCam         = eventCamArcPlayNamed(1.0f, 0.0f, name);
 		if (mHintCam != 0) {
 			((TCamera*)mHintCam)->setCut();
 		}

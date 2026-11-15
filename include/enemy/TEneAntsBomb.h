@@ -28,10 +28,10 @@ public:
 	virtual int getKind();
 	virtual int onHit(const TObjAction* other, int arg, int* result);
 
-	Vec3f mPos;   // _30
-	f32 mRadius;  // _3C
+	Vec3f mPos;         // _30
+	f32 mRadius;        // _3C
 	CharaColli* mColli; // _40
-	int mTime;    // _44 from -8 It only hurts from 0
+	int mTime;          // _44 from -8 It only hurts from 0
 };
 
 typedef char TEneAntsBomb_Blast_size_check[(sizeof(TEneAntsBomb_Blast) == 0x48) ? 1 : -1];
@@ -53,10 +53,10 @@ public:
 	virtual int getKind();
 	virtual int onHit(const TObjAction* other, int arg, int* result);
 
-	SetTransform mBody; // _30
-	DrawTask* mDrawTask;    // _74
-	CharaColli* mColli;       // _78
-	int mLife;          // _7C
+	SetTransform mBody;  // _30
+	DrawTask* mDrawTask; // _74
+	CharaColli* mColli;  // _78
+	int mLife;           // _7C
 };
 
 typedef char TEneAntsBomb_size_check[(sizeof(TEneAntsBomb) == 0x80) ? 1 : -1];

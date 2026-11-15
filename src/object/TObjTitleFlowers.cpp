@@ -12,10 +12,14 @@ const char* gTObjTitleFlowersName = "TObjTitleFlowers";
 
 // 0x801AD5A0
 // The set init pair both empty
-extern "C" void initTObjTitleFlowers() { }
+extern "C" void initTObjTitleFlowers()
+{
+}
 
 // 0x801AD5A4
-extern "C" void termTObjTitleFlowers() { }
+extern "C" void termTObjTitleFlowers()
+{
+}
 
 // 0x801AD5A8
 extern "C" TObject* createTObjTitleFlowers(TObject* parent, SetDesc* desc)
@@ -27,10 +31,10 @@ extern "C" TObject* createTObjTitleFlowers(TObject* parent, SetDesc* desc)
 TObjTitleFlowers::TObjTitleFlowers(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00   = (u32)gTObjTitleFlowersName;
-	mSize = 0x8C;
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	NJS_OBJECT** models   = getTitleObjModels();
+	_00                 = (u32)gTObjTitleFlowersName;
+	mSize               = 0x8C;
+	mDraw               = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	NJS_OBJECT** models = getTitleObjModels();
 	mModel.setModel(models[1]);
 	void** textures = (void**)getTitleObjTexLists();
 	mModel.mTexList = (NJS_TEXLIST*)textures[0];
@@ -50,7 +54,7 @@ void TObjTitleFlowers::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
 	f32 value = desc->getFloat(0) < -1.0f ? -1.0f : (desc->getFloat(0) > 10.0f ? 10.0f : desc->getFloat(0));
-	mScale = 1.0f + value;
+	mScale    = 1.0f + value;
 }
 
 // 0x801AD7D4

@@ -32,29 +32,24 @@ struct ObjShadow;
 extern "C" {
 
 MotionEntry sAntsQueenMotions[] = {
-	{ MOTION_LOOP, 10, -1, 0, 0.0f, 20.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_LOOP, 10, -1, 0, 20.0f, 0.0f, -2.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 8, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 9, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 49.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 19.0f, 1.2f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 39.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 44.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 49.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 9.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 10, -1, 0, 0.0f, 20.0f, 0.25f, 0.0f, 0 }, { MOTION_LOOP, 10, -1, 0, 20.0f, 0.0f, -2.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 8, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },   { MOTION_LOOP, 9, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 7, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },   { MOTION_ONCE, 3, -1, 0, 0.0f, 49.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 5, -1, 0, 0.0f, 19.0f, 1.2f, 0.0f, 0 },   { MOTION_ONCE, 6, -1, 0, 0.0f, 39.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 0.6f, 0.0f, 0 },   { MOTION_ONCE, 1, -1, 0, 0.0f, 44.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 49.0f, 0.35f, 0.0f, 0 },  { MOTION_ONCE, 4, -1, 0, 0.0f, 9.0f, 1.0f, 0.0f, 0 },
 };
 extern const int sAntsQueenBones[] = {
 	9, 12, 16, 19, 65, 68, 69, -1,
 }; // the bones mParts follow
-const char* gTEneAntsQueenName = "TEneAntsQueen";
+const char* gTEneAntsQueenName                   = "TEneAntsQueen";
 extern const EnemyFrameKey sAntsQueenFrameKey0[] = { { 13.0f, 0 }, { -1.0f, 3 } };
 extern const EnemyFrameKey sAntsQueenFrameKey1[] = { { 9.0f, 0 }, { 14.0f, 5 }, { 26.0f, 3 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sAntsQueenFrameKey2[] = { { 1.0f, 0 }, { 16.0f, 3 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sAntsQueenFrameKey3[] = { { 1.0f, 0 }, { 31.0f, 3 }, { -1.0f, 4 } };
 extern const EnemyFrameKey sAntsQueenFrameKey4[] = { { 1.0f, 0 }, { -1.0f, 3 } };
-const EnemyFrameKey* sAntsQueenFrameKeys[5] = { sAntsQueenFrameKey0, sAntsQueenFrameKey1, sAntsQueenFrameKey2, sAntsQueenFrameKey3, sAntsQueenFrameKey4 };
+const EnemyFrameKey* sAntsQueenFrameKeys[5]
+    = { sAntsQueenFrameKey0, sAntsQueenFrameKey1, sAntsQueenFrameKey2, sAntsQueenFrameKey3, sAntsQueenFrameKey4 };
 extern const ColliShape sAntsQueenShape[] = {
 	{ { 0.0f, 0.0f, 0.0f }, 0x0, 0, 0x0, 13.0f, 19.0f, 0.0f, 0x0, COLLISHAPE_CYLINDER, 0x0 },
 };
@@ -69,9 +64,9 @@ static inline int toAngle(f32 x, f32 z)
 // 0x800923E0
 AntLink::AntLink()
 {
-	mPrev = 0;
-	mNext = 0;
-	mSlot = -1;
+	mPrev  = 0;
+	mNext  = 0;
+	mSlot  = -1;
 	mBrain = 0;
 	mOwner = 0;
 }
@@ -120,18 +115,18 @@ void AntLink::insert(AntLink* head, int slot, void* brain)
 		}
 		at = next;
 	}
-	mNext = at->mNext;
+	mNext     = at->mNext;
 	at->mNext = this;
-	mPrev = at;
-	mSlot = slot;
-	mBrain = brain;
-	mOwner = at->mOwner;
+	mPrev     = at;
+	mSlot     = slot;
+	mBrain    = brain;
+	mOwner    = at->mOwner;
 }
 
 // 0x800924E0
 int AntLink::count()
 {
-	int n = 0;
+	int n         = 0;
 	AntLink* link = this;
 	while ((link = link->mNext) != 0) {
 		n++;
@@ -144,18 +139,18 @@ extern "C" void initTEneAntsQueen()
 {
 	resBankLoad(&sAntsQueenBank, "ar_ene_ants_queen.arc");
 	resBankAddTextures(&sAntsQueenBank, 0, "ene_ants_queen.gvm");
-	sAntsQueenModels = resBankGetModels(&sAntsQueenBank);
+	sAntsQueenModels   = resBankGetModels(&sAntsQueenBank);
 	sAntsQueenTextures = resBankGetTextures(&sAntsQueenBank);
-	sAntsQueenMotion = resBankGetMotion(&sAntsQueenBank, 0);
+	sAntsQueenMotion   = resBankGetMotion(&sAntsQueenBank, 0);
 }
 
 extern "C" void shutdownTEneAntsQueen()
 {
 	resBankRemoveTextures(&sAntsQueenBank, 0);
 	resBankRelease(&sAntsQueenBank);
-	sAntsQueenModels = 0;
+	sAntsQueenModels   = 0;
 	sAntsQueenTextures = 0;
-	sAntsQueenMotion = 0;
+	sAntsQueenMotion   = 0;
 }
 
 extern "C" TObject* createTEneAntsQueen(TObject* parent, SetDesc* desc)
@@ -166,7 +161,7 @@ extern "C" TObject* createTEneAntsQueen(TObject* parent, SetDesc* desc)
 TEneAntsQueen::TEneAntsQueen(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)gTEneAntsQueenName;
+	_00   = (u32)gTEneAntsQueenName;
 	mSize = 0x2E0;
 	init(desc);
 }
@@ -177,7 +172,7 @@ void TEneAntsQueen::init(SetDesc* desc)
 	motionCtrlInit(&mAnim, sAntsQueenMotions, sAntsQueenMotion);
 	motionCtrlPlay(&mAnim, 2);
 	mBody.mRot.x = 0;
-	mCollider = colliCreate(1, 1);
+	mCollider    = colliCreate(1, 1);
 	colliCopyShapes(mCollider, (const ColliShape*)sAntsQueenShape);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 0x14, 0, 0x10);
@@ -185,24 +180,24 @@ void TEneAntsQueen::init(SetDesc* desc)
 	colliShapeSetTag(mCollider, 0, 0);
 	mBrain = 0;
 	readEnemyDesc(desc);
-	mPose = allocPose(*(void**)sAntsQueenModels);
+	mPose      = allocPose(*(void**)sAntsQueenModels);
 	mModelTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mFlags2 = 0;
-	mKnock.x = 0.0f;
-	mKnock.y = 0.0f;
-	mKnock.z = 0.0f;
-	mFrameKey = 0;
+	mFlags2    = 0;
+	mKnock.x   = 0.0f;
+	mKnock.y   = 0.0f;
+	mKnock.z   = 0.0f;
+	mFrameKey  = 0;
 	for (int i = 0; i < 7; i++) {
 		mParts[i].x = 0.0f;
 		mParts[i].y = 0.0f;
 		mParts[i].z = 0.0f;
 	}
-	mAim.x = 0.0f;
-	mAim.y = 0.0f;
-	mAim.z = 0.0f;
+	mAim.x    = 0.0f;
+	mAim.y    = 0.0f;
+	mAim.z    = 0.0f;
 	mAimAngle = 0;
-	mMaxAnts = 10;
-	mSlot = -1;
+	mMaxAnts  = 10;
+	mSlot     = -1;
 	shadowSetGround(&mShadow, &mBody.mPos, 0);
 	mShadow._30 = 26.0f;
 	mShadow._34 = 26.0f;
@@ -217,8 +212,8 @@ void TEneAntsQueen::init(SetDesc* desc)
 	mTint.reset();
 	mAnts.setOwner(this);
 	enemyEffectSetLarge(38.0f, &mEffect, &mBody.mPos);
-	mStep = 0;
-	mTurnStep = 0;
+	mStep         = 0;
+	mTurnStep     = 0;
 	mAppearTimer2 = 0.0f;
 	createBrain();
 }
@@ -244,10 +239,10 @@ TEneAntsQueen::~TEneAntsQueen()
 // 0x80092A04
 void TEneAntsQueen::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -264,8 +259,8 @@ f32 TEneAntsQueen::vfn_40()
 void TEneAntsQueen::syncCollider()
 {
 	Vec3f* body = (Vec3f*)colliGetShapes(mCollider);
-	*body = mParts[4];
-	body->y = 19.0f + mBody.mPos.y;
+	*body       = mParts[4];
+	body->y     = 19.0f + mBody.mPos.y;
 	colliRefreshBounds(mCollider);
 	colliBoundsOn(mCollider);
 }
@@ -276,7 +271,7 @@ void TEneAntsQueen::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
 	int health = desc->getInt(0);
-	mHealth = health <= 0 ? 200 : health;
+	mHealth    = health <= 0 ? 200 : health;
 }
 
 // 0x80092B14
@@ -295,7 +290,7 @@ void TEneAntsQueen::setTarget(const Vec3f* target)
 // 0x80092B38
 void TEneAntsQueen::setAim(const Vec3f* pos, int angle)
 {
-	mAim = *pos;
+	mAim      = *pos;
 	mAimAngle = angle;
 }
 
@@ -365,7 +360,7 @@ int TEneAntsQueen::hasSummoned()
 void TEneAntsQueen::setSlot(int angle, int slot)
 {
 	mAimAngle = angle;
-	mSlot = slot;
+	mSlot     = slot;
 }
 
 // 0x80092CA0
@@ -595,8 +590,8 @@ void TEneAntsQueen::getMouth(Vec3f* pos, Vec3f* dir)
 	base.x = mParts[5].x;
 	base.y = mParts[5].y;
 	base.z = mParts[5].z;
-	*dir = mParts[6];
-	*pos = *dir;
+	*dir   = mParts[6];
+	*pos   = *dir;
 	njSubVector(dir, &base);
 	if (njUnitVector(dir) < gUnitVectorMin) {
 		*dir = gVecZero;
@@ -611,12 +606,12 @@ void TEneAntsQueen::throwEffects(Vec3f* pos, Vec3f* dir)
 	Vec3f at;
 	gjMulAddVector(2.0f, &at, pos, dir);
 	int rotY = mBody.mRot.y;
-	f32 x = dir->x;
-	f32 z = dir->z;
+	f32 x    = dir->x;
+	f32 z    = dir->z;
 	x *= x;
 	z *= z;
 	x += z;
-	f32 flat = __fres((f32)__frsqrte(x));
+	f32 flat  = __fres((f32)__frsqrte(x));
 	int pitch = toAngle(dir->y, flat);
 	particleOnceByIdRotDefault(&at, 0, 0x73, pitch, rotY, 0.0f);
 	seStartAt(0xF6, &at);
@@ -635,7 +630,7 @@ void TEneAntsQueen::getSlotPos(int slot, Vec3f* out)
 	f32 sin;
 	f32 cos;
 	njSinCos((slot << 16) / mMaxAnts, &sin, &cos);
-	*out = mBody.mPos;
+	*out   = mBody.mPos;
 	out->x = 80.0f * sin + out->x;
 	out->z = 80.0f * cos + out->z;
 }
@@ -771,7 +766,7 @@ void TEneAntsQueen::actSummon(int phase)
 	switch (phase) {
 	case 0: {
 		mFlags2 &= ~QUEEN_SUMMONED;
-		mStep = 0;
+		mStep        = 0;
 		mBody.mVel.x = 0.0f;
 		mBody.mVel.z = 0.0f;
 		int frames;
@@ -783,7 +778,7 @@ void TEneAntsQueen::actSummon(int phase)
 			frames = (int)(f32)ceil(10.0);
 		}
 		frames += (int)(f32)ceil(1.6666666269302368);
-		mStep = frames;
+		mStep     = frames;
 		mTurnStep = angleDiff(mBody.mRot.y, mAimAngle);
 		mTurnStep = mTurnStep / mStep;
 		clearFrameKey();
@@ -917,7 +912,7 @@ void TEneAntsQueen::actDie(int phase)
 		killed(1);
 		dieEffects();
 		mFrameKey = 3;
-		mStep = 60;
+		mStep     = 60;
 		break;
 	case 1:
 		motionCtrlUpdate(&mAnim);
@@ -951,7 +946,7 @@ void TEneAntsQueen::actDie(int phase)
 // Slot _3C
 void TEneAntsQueen::vfn_3C()
 {
-	int x = kEnemyInfoX << 16;
+	int x    = kEnemyInfoX << 16;
 	int line = kEnemyInfoLine;
 	njPrint(x | line, ":HP %4d", mHealth);
 }

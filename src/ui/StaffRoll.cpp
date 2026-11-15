@@ -48,16 +48,16 @@ public:
 	StaffRollItem* mNext; // _14
 
 	// _18 = vtable
-	virtual ~StaffRollItem();           // 0x801C659C
-	virtual void draw() { }             // 0x801C75F8
+	virtual ~StaffRollItem(); // 0x801C659C
+	virtual void draw() { }   // 0x801C75F8
 };
 
 /** A line of text drawn twice a dark copy a little down and right then the text */
 class StaffRollText : public StaffRollItem {
 public:
 	StaffRollText(f32 x, f32 start, f32 height, StaffRollItem* head, const u8* text, u32 color); // 0x801C692C
-	virtual ~StaffRollText(); // 0x801C6A84
-	virtual void draw();      // 0x801C6B24
+	virtual ~StaffRollText();                                                                    // 0x801C6A84
+	virtual void draw();                                                                         // 0x801C6B24
 
 	int mCount;         // _1C
 	FontGlyph* mGlyphs; // _20
@@ -68,22 +68,22 @@ public:
 class StaffRollLogo : public StaffRollItem {
 public:
 	StaffRollLogo(f32 x, f32 start, f32 size, StaffRollItem* head, int tex, const f32* uv); // 0x801C6DC8
-	virtual ~StaffRollLogo(); // 0x801C6EBC
-	virtual void draw();      // 0x801C6F14
+	virtual ~StaffRollLogo();                                                               // 0x801C6EBC
+	virtual void draw();                                                                    // 0x801C6F14
 
-	int mTex;    // _1C
-	f32 mWidth;  // _20
-	f32 mU0;     // _24
-	f32 mV0;     // _28
-	f32 mU1;     // _2C
-	f32 mV1;     // _30
+	int mTex;   // _1C
+	f32 mWidth; // _20
+	f32 mU0;    // _24
+	f32 mV0;    // _28
+	f32 mU1;    // _2C
+	f32 mV1;    // _30
 };
 
 /** One line of staff_list.arc */
 struct StaffLine {
-	s16 mKind;        // _00
-	s16 mIndent;      // _02 in steps of 8 pixels
-	const u8* mText;  // _04
+	s16 mKind;       // _00
+	s16 mIndent;     // _02 in steps of 8 pixels
+	const u8* mText; // _04
 };
 
 /**
@@ -98,24 +98,24 @@ public:
 
 	f32 getScroll();
 
-	DrawTask* mDrawTask;   // _20
-	int mCount;            // _24
-	StaffLine* mLines;     // _28
-	int mNext;             // _2C the next line to bring on
-	f32* mStarts;          // _30 where each line comes on
-	f32 mLength;           // _34 the scroll position at the end
-	StaffRollItem* mHead;  // _38
-	int mFrame;            // _3C
+	DrawTask* mDrawTask;  // _20
+	int mCount;           // _24
+	StaffLine* mLines;    // _28
+	int mNext;            // _2C the next line to bring on
+	f32* mStarts;         // _30 where each line comes on
+	f32 mLength;          // _34 the scroll position at the end
+	StaffRollItem* mHead; // _38
+	int mFrame;           // _3C
 };
 
-TArc* sStaffList;          // 0x802C5C38
-TArc* sStaffLogo;          // 0x802C5C3C
+TArc* sStaffList;           // 0x802C5C38
+TArc* sStaffLogo;           // 0x802C5C3C
 NJS_TEXLIST* sStaffLogoTex; // 0x802C5C40
 
 // By style the space after a line the space before the first line of a new style and how far in it starts
-static const f32 sStyleAfter[9] = { 22.0f, 24.0f, 28.0f, 12.0f, 176.0f, 128.0f, 128.0f, 52.0f, 80.0f };
+static const f32 sStyleAfter[9]  = { 22.0f, 24.0f, 28.0f, 12.0f, 176.0f, 128.0f, 128.0f, 52.0f, 80.0f };
 static const f32 sStyleBefore[9] = { 8.0f, 38.0f, 72.0f, 16.0f, 4.0f, 4.0f, 4.0f, 72.0f, 72.0f };
-static const f32 sStyleX[9] = { 28.0f, 10.0f, 0.0f, 0.0f, 20.0f, 20.0f, 20.0f, 6.0f, 6.0f };
+static const f32 sStyleX[9]      = { 28.0f, 10.0f, 0.0f, 0.0f, 20.0f, 20.0f, 20.0f, 6.0f, 6.0f };
 // Each logo's rectangle in its texture as u0 v0 u1 v1
 static const f32 sLogoUV[16][4] = {
 	{ 0.0f, 0.0f, 1.0f, 0.6875f },
@@ -259,8 +259,8 @@ int StaffRollItem::clip(f32 x0, f32 y0, f32 x1, f32 y1, f32 u0, f32 v0, f32 u1, 
 	f32 du;
 	f32 w;
 	f32 cut = 10.0f - x0;
-	w  = x1 - x0;
-	du = u1 - u0;
+	w       = x1 - x0;
+	du      = u1 - u0;
 	if (cut > 0.0f) {
 		x0 = 10.0f;
 		u0 = du * (cut / w) + u0;
@@ -275,8 +275,8 @@ int StaffRollItem::clip(f32 x0, f32 y0, f32 x1, f32 y1, f32 u0, f32 v0, f32 u1, 
 	out->mU0 = u0;
 	out->mU1 = u1;
 
-	f32 h  = y1 - y0;
-	f32 dv = v1 - v0;
+	f32 h   = y1 - y0;
+	f32 dv  = v1 - v0;
 	f32 top = 40.0f - y0;
 	if (top > 0.0f) {
 		y0 = 40.0f;
@@ -299,12 +299,12 @@ void StaffRollItem::beginDraw()
 {
 	njDrawTexture2DExStart(1);
 	GXClearVtxDesc();
-	GXSetVtxDesc(GX_VA_POS, GX_DIRECT);   // position direct
-	GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);  // colour 0 direct
-	GXSetVtxDesc(GX_VA_TEX0, GX_DIRECT);  // texture coordinate 0 direct
-	GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);  // xyz f32
+	GXSetVtxDesc(GX_VA_POS, GX_DIRECT);                                // position direct
+	GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);                               // colour 0 direct
+	GXSetVtxDesc(GX_VA_TEX0, GX_DIRECT);                               // texture coordinate 0 direct
+	GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);     // xyz f32
 	GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_CLR_RGBA, GX_RGBA8, 0); // rgba8
-	GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0); // st f32
+	GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0);     // st f32
 	GXSetAlphaCompare(GX_GREATER, 0x20, GX_AOP_AND, GX_LEQUAL, 0xFF);
 	GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_COPY);
 	GXSetZCompLoc(GX_FALSE);
@@ -353,7 +353,7 @@ StaffRollText::StaffRollText(f32 x, f32 start, f32 height, StaffRollItem* head, 
 	mStart  = start;
 	mColor  = color;
 
-	mCount = 0;
+	mCount      = 0;
 	const u8* p = text;
 	for (int i = 0; i < 0x40; i++) {
 		if (*p++ == 0) {
@@ -427,8 +427,8 @@ void StaffRollText::draw()
 StaffRollLogo::StaffRollLogo(f32 x, f32 start, f32 size, StaffRollItem* head, int tex, const f32* uv)
     : StaffRollItem(head)
 {
-	mX     = x;
-	mStart = start;
+	mX      = x;
+	mStart  = start;
 	mTex    = tex < 0 ? 0 : (tex > 4 ? 4 : tex);
 	mU0     = uv[0];
 	mV0     = uv[1];
@@ -510,9 +510,9 @@ TStaffRoll::TStaffRoll(TObject* parent)
 
 	StaffLine* line;
 	f32* start = mStarts;
-	line = mLines;
-	f32 pos = 0.0f;
-	int prev = 0;
+	line       = mLines;
+	f32 pos    = 0.0f;
+	int prev   = 0;
 	for (int i = 0; i < mCount; i++) {
 		int style = staffStyle(line->mKind);
 		if (style != prev) {

@@ -30,7 +30,7 @@ struct MoviePlayerFuncs {
 	void (*pause)(MoviePlayer* player);                  // _1C
 	int (*getState)(MoviePlayer* player);                // _20 3 once it has ended
 	void* _24;
-	void (*setPaused)(MoviePlayer* player, int paused);  // _28 while the disc can't be read
+	void (*setPaused)(MoviePlayer* player, int paused); // _28 while the disc can't be read
 };
 
 struct MoviePlayer {

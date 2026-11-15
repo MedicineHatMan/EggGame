@@ -3,7 +3,9 @@
 #include "Ninja/ninja.h"
 #include "egg/EggCreature.h"
 
-inline Am02SeekBrain::~Am02SeekBrain() { }
+inline Am02SeekBrain::~Am02SeekBrain()
+{
+}
 
 // 0 to 1 from the game's random number
 #define random01() (3.0517578e-5f * rand())
@@ -13,7 +15,7 @@ Am02SeekBrain::Am02SeekBrain()
 {
 	mSight.reset();
 	mMemory.reset();
-	mStep = 0;
+	mStep  = 0;
 	mTimer = 0;
 }
 
@@ -133,7 +135,9 @@ Am02AttackBrain::Am02AttackBrain(TEneAm02* owner)
 }
 
 // 0x8004B384
-Am02AttackBrain::~Am02AttackBrain() { }
+Am02AttackBrain::~Am02AttackBrain()
+{
+}
 
 // 0x8004B404
 void Am02AttackBrain::pickHomeTarget()
@@ -214,7 +218,7 @@ void Am02AttackBrain::phaseWander(int phase)
 {
 	switch (phase) {
 	case 0:
-		mStep = 1;
+		mStep  = 1;
 		mTimer = 0;
 		pickHomeTarget();
 		mNext = TEneAm02::ACT_WALK;
@@ -301,13 +305,15 @@ void Am02AttackBrain::phaseAttack(int phase)
 // 0x8004BA00
 Am02ThrowBrain::Am02ThrowBrain(TEneAm02* owner)
 {
-	mWanderStep = 0;
+	mWanderStep  = 0;
 	mWanderTimer = 0;
 	start(owner);
 }
 
 // 0x8004BA8C
-Am02ThrowBrain::~Am02ThrowBrain() { }
+Am02ThrowBrain::~Am02ThrowBrain()
+{
+}
 
 // 0x8004BB0C
 void Am02ThrowBrain::pickHomeTarget()
@@ -385,7 +391,7 @@ void Am02ThrowBrain::phaseWander(int phase)
 {
 	switch (phase) {
 	case 0:
-		mWanderStep = 1;
+		mWanderStep  = 1;
 		mWanderTimer = 0;
 		pickHomeTarget();
 		mNext = TEneAm02::ACT_WALK;

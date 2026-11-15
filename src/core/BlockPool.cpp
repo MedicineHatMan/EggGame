@@ -6,7 +6,7 @@ BlockPool::BlockPool(u32 size, int count)
 {
 	u32 stride = ((size + 0x1F) & ~0x1F) + sizeof(Block);
 	mBlocks    = (Block*)memAlloc(stride * count);
-	u8* block = (u8*)mBlocks;
+	u8* block  = (u8*)mBlocks;
 	if (block != 0) {
 		for (int i = count - 1; i > 0; i--) {
 			((Block*)block)->mNext = (Block*)(block + stride);

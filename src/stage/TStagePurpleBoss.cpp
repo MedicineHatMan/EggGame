@@ -25,7 +25,9 @@ extern "C" TStage* createPurpleBossStage()
 }
 
 // 0x800FC518
-TStagePurpleBoss::TStagePurpleBoss() { }
+TStagePurpleBoss::TStagePurpleBoss()
+{
+}
 
 // 0x800FC554
 // stageLoadBossConsole calls bossConsoleLoad(mName)
@@ -49,4 +51,6 @@ void TStagePurpleBoss::vfn_14()
 }
 
 // 0x800FC5B4
-TStagePurpleBoss::~TStagePurpleBoss() { }
+TStagePurpleBoss::~TStagePurpleBoss()
+{
+}

@@ -83,7 +83,7 @@ public:
 		// mEnemyFlags
 		ENEMY_AIRBORNE   = 0x1,
 		ENEMY_APPEARING  = 0x2,
-		ENEMY_INTANGIBLE = 0x4,  // takeHits does nothing
+		ENEMY_INTANGIBLE = 0x4, // takeHits does nothing
 		ENEMY_FLIPPING   = 0x8,
 		ENEMY_BLOCKED    = 0x10, // canAct says no
 		ENEMY_THROWN     = 0x20,
@@ -99,33 +99,33 @@ public:
 
 	inline void operator delete(void* mem);
 
-	virtual void draw();                       // _0C
-	virtual Vec3f* getPos();                   // _20
-	virtual int getRotY();                     // _28
-	virtual int getKind();                     // _2C
-	virtual void readEnemyDesc(SetDesc* desc); // _38
-	virtual int canAct();                      // _44
-	virtual void enterAction(int action);      // _5C
-	virtual void exitAction(int action);       // _60
-	virtual void vfn_64(int action);           // _64
-	virtual void vfn_68(int action);           // _68
-	virtual void vfn_6C() = 0;                 // _6C
-	virtual void updateBody() = 0;             // _70 the per-frame work
-	virtual void setPos(const Vec3f* pos);           // _74
-	virtual void syncCollider();               // _78 moves the collider to the body
-	virtual void onActionPhase(int action, int phase) = 0; // _7C
-	virtual int isAirborne();                  // _80
-	virtual int isAppearing();                 // _84
-	virtual int isIntangible();                // _88
-	virtual int isFlipping();                  // _8C
-	virtual int isBlocked();                   // _90
-	virtual int isThrown();                    // _94
-	virtual int vfn_98();                      // _98 flag 0x40
-	virtual int vfn_9C();                      // _9C not blocked
-	virtual int vfn_A0();                      // _A0 not blocked
-	virtual int getDamage(EnemyHit* hit);      // _A4
+	virtual void draw();                                      // _0C
+	virtual Vec3f* getPos();                                  // _20
+	virtual int getRotY();                                    // _28
+	virtual int getKind();                                    // _2C
+	virtual void readEnemyDesc(SetDesc* desc);                // _38
+	virtual int canAct();                                     // _44
+	virtual void enterAction(int action);                     // _5C
+	virtual void exitAction(int action);                      // _60
+	virtual void vfn_64(int action);                          // _64
+	virtual void vfn_68(int action);                          // _68
+	virtual void vfn_6C()     = 0;                            // _6C
+	virtual void updateBody() = 0;                            // _70 the per-frame work
+	virtual void setPos(const Vec3f* pos);                    // _74
+	virtual void syncCollider();                              // _78 moves the collider to the body
+	virtual void onActionPhase(int action, int phase) = 0;    // _7C
+	virtual int isAirborne();                                 // _80
+	virtual int isAppearing();                                // _84
+	virtual int isIntangible();                               // _88
+	virtual int isFlipping();                                 // _8C
+	virtual int isBlocked();                                  // _90
+	virtual int isThrown();                                   // _94
+	virtual int vfn_98();                                     // _98 flag 0x40
+	virtual int vfn_9C();                                     // _9C not blocked
+	virtual int vfn_A0();                                     // _A0 not blocked
+	virtual int getDamage(EnemyHit* hit);                     // _A4
 	virtual int getHitKind(const void* touch, HitInfo* info); // _A8
-	virtual int showsHitEffect();              // _AC
+	virtual int showsHitEffect();                             // _AC
 
 	void setup();
 	int returnZero();
@@ -199,7 +199,7 @@ public:
 	u32 mEnemyFlags;             // _70
 	SetTransform mBody;          // _74
 	EnemyAnim mAnim;             // _B8
-	CharaColli* mCollider;             // _C4
+	CharaColli* mCollider;       // _C4
 	Vec3f mHome;                 // _C8
 	int mHealth;                 // _D4
 	SetLinkMember mLink;         // _D8

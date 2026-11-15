@@ -45,11 +45,11 @@ const char* gTObjTitleHeliosName = "TObjTitleHelios";
 TObjTitleHelios::TObjTitleHelios(TObject* parent)
     : TSetActor(parent)
 {
-	_110  = 0;
-	_130  = 0;
-	_00   = (u32)gTObjTitleHeliosName;
-	mSize = 0x13C;
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	_110   = 0;
+	_130   = 0;
+	_00    = (u32)gTObjTitleHeliosName;
+	mSize  = 0x13C;
+	mDraw  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	mFlare = lensFlareCreate(this, &mPos);
 	vfn_74();
 }

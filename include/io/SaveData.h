@@ -24,7 +24,7 @@ struct SaveSlot {
 	u8 mSoundMode;             // _241 1 mono
 	u8 mRumbleOff;             // _242 0 rumble on 1 off
 	u8 _243;
-	u8 mUsed;                  // _244
+	u8 mUsed; // _244
 	u8 _245[0x1B];
 };
 
@@ -53,25 +53,25 @@ void saveReset();                               // 0x8019910C
 void saveRead(const SaveData* src);             // 0x80199140
 void saveWrite(SaveData* dst);                  // 0x80199180
 void saveSeal();                                // 0x801991B8
-int saveTimeIs(u32 time);                        // 0x801991EC
+int saveTimeIs(u32 time);                       // 0x801991EC
 SaveSlot* saveGetSlot(int slot);                // 0x80199224
 SaveRecord* saveGetRecord(int slot, int stage); // 0x8019925C
 void saveSelectSlot(int slot);                  // 0x801992B4
 void saveCopySlot(int from, int to);            // 0x801992F4
 void saveClearSlot(int slot);                   // 0x80199354
-int saveSlotLives(int slot);                     // 0x80199380
-int saveSlotUsed(int slot);                      // 0x801993B4
+int saveSlotLives(int slot);                    // 0x80199380
+int saveSlotUsed(int slot);                     // 0x801993B4
 int saveGetKeyBit(int bit);                     // 0x801993F4
 void saveSetKeyBit(int bit, int on);            // 0x8019945C
 int saveGetTime(int stage);                     // 0x801994E4
 int saveGetPoints(int stage);                   // 0x80199520
 void saveSetTime(int stage, int time);          // 0x8019955C
 void saveSetPoints(int stage, int points);      // 0x801995A0
-int saveGetLives();                              // 0x801995E4
+int saveGetLives();                             // 0x801995E4
 void saveSetLives(u8 lives);                    // 0x80199608
-int saveGetSoundMode();                          // 0x80199644
+int saveGetSoundMode();                         // 0x80199644
 void saveSetSoundMode(int mode);                // 0x8019967C
-int saveGetRumbleOff();                          // 0x801996B8
+int saveGetRumbleOff();                         // 0x801996B8
 void saveSetRumbleOff(int off);                 // 0x801996F0
 
 extern SaveData* gSaveData; // the live save

@@ -92,7 +92,7 @@ void njDrawLineExStart(f32 width, u32 col, s32 trans)
 		gjStartVertexNonTexOpaque();
 	}
 	gjLineColor = ARGB_TO_RGBA(col);
-	w = 2.0f * (6.0f * width);
+	w           = 2.0f * (6.0f * width);
 	if (w > 0xFF) {
 		w = 0xFF;
 	}

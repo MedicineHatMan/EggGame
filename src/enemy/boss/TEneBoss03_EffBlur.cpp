@@ -21,12 +21,12 @@ const char* gTEneBoss03_EffBlurName = "TEneBoss03_EffBlur";
 TEneBoss03_EffBlur::TEneBoss03_EffBlur(TObject* parent, const Vec3f* pos)
     : TObject(parent)
 {
-	_00    = (u32)gTEneBoss03_EffBlurName;
-	mSize  = 0x3C;
-	mPos   = *pos;
-	mColor = 0xFFFFFF00;
-	mEnding = 0;
-	mScale  = 1.0f;
+	_00       = (u32)gTEneBoss03_EffBlurName;
+	mSize     = 0x3C;
+	mPos      = *pos;
+	mColor    = 0xFFFFFF00;
+	mEnding   = 0;
+	mScale    = 1.0f;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3B, 0);
 }
 
@@ -89,8 +89,8 @@ void TEneBoss03_EffBlur::render()
 			f32 persp = -1.0f / at.z;
 			persp *= *(f32*)((u8*)&gProjection + 0x50);
 			f32 zoom = 1.0f / mScale;
-			f32 u = 0.5f + (at.x * persp) / 640.0f;
-			f32 v = 0.5f + -(at.y * persp) / 320.0f;
+			f32 u    = 0.5f + (at.x * persp) / 640.0f;
+			f32 v    = 0.5f + -(at.y * persp) / 320.0f;
 			quad.mX0 = 0.0f;
 			quad.mY0 = 0.0f;
 			quad.mX1 = 640.0f;

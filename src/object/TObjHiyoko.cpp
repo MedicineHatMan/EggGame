@@ -38,12 +38,12 @@ struct SetLink;
 struct HiyokoIdMsg {
 	u16 mType; // _00
 	u8 _02[2];
-	u16 mId;   // _04
+	u16 mId; // _04
 };
 
 /** Message 0x43 asks an object how it is moving */
 struct HiyokoVelMsg {
-	u16 mType; // _00
+	u16 mType;  // _00
 	Vec3f mVel; // _04
 };
 
@@ -68,15 +68,9 @@ enum HiyokoState {
 // An earlier motion table that nothing reads five motions and an end row then three more rows
 extern const MotionEntry sHiyokoOldMotionTable[9];
 const MotionEntry sHiyokoOldMotionTable[9] = {
-	{ 0, 0, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ 0, 1, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 },
-	{ 0, 2, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 },
-	{ 0, 3, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ 0, 4, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ -1, 0, 0, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
-	{ 0, 0, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ 0, 1, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 },
-	{ 2, 0, 0, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
+	{ 0, 0, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 }, { 0, 1, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 }, { 0, 2, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 },
+	{ 0, 3, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 }, { 0, 4, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 }, { -1, 0, 0, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
+	{ 0, 0, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 }, { 0, 1, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 }, { 2, 0, 0, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 };
 
 // 0x80246834
@@ -85,15 +79,9 @@ const char sHiyokoClassName[] = "TObjHiyoko";
 
 // 0x80246840
 const MotionEntry sHiyokoMotionTable[] = {
-	{ 0, 9, -1, 0, 0.0f, 40.0f, 0.4f, 0.0f, 0 },
-	{ 0, 6, -1, 0, 0.0f, 20.0f, 0.6f, 0.0f, 0 },
-	{ 1, 1, -1, 0, 0.0f, 15.0f, 0.3f, 0.0f, 0 },
-	{ 0, 2, -1, 0, 0.0f, 10.0f, 0.3f, 0.0f, 0 },
-	{ 1, 3, -1, 0, 0.0f, 15.0f, 0.4f, 0.0f, 0 },
-	{ 1, 4, -1, 0, 0.0f, 50.0f, 0.3f, 0.0f, 0 },
-	{ 1, 5, -1, 0, 0.0f, 25.0f, 0.5f, 0.0f, 0 },
-	{ 0, 7, -1, 0, 0.0f, 40.0f, 0.5f, 0.0f, 0 },
-	{ 0, 8, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
+	{ 0, 9, -1, 0, 0.0f, 40.0f, 0.4f, 0.0f, 0 }, { 0, 6, -1, 0, 0.0f, 20.0f, 0.6f, 0.0f, 0 }, { 1, 1, -1, 0, 0.0f, 15.0f, 0.3f, 0.0f, 0 },
+	{ 0, 2, -1, 0, 0.0f, 10.0f, 0.3f, 0.0f, 0 }, { 1, 3, -1, 0, 0.0f, 15.0f, 0.4f, 0.0f, 0 }, { 1, 4, -1, 0, 0.0f, 50.0f, 0.3f, 0.0f, 0 },
+	{ 1, 5, -1, 0, 0.0f, 25.0f, 0.5f, 0.0f, 0 }, { 0, 7, -1, 0, 0.0f, 40.0f, 0.5f, 0.0f, 0 }, { 0, 8, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
 };
 
 // Which parts each equip index draws
@@ -108,10 +96,10 @@ ColorValue sHiyokoColors[6] = {
 	ColorValue(0xAA32C8FF), ColorValue(0x00BFBFFF), ColorValue(0xFF8000FF),
 };
 
-const char* gTObjHiyokoName = sHiyokoClassName; // 0x802C4150
+const char* gTObjHiyokoName     = sHiyokoClassName;  // 0x802C4150
 const char* sHiyokoModeNames[2] = { "WAIT", "RUN" }; // 0x802C4154
 
-static int sHiyokoMatCount;       // 0x802C5410 materials hiyokoMatColor has set this draw
+static int sHiyokoMatCount;         // 0x802C5410 materials hiyokoMatColor has set this draw
 static HiyokoRGBA sHiyokoBodyColor; // 0x802C5414 the first material's colour
 
 typedef char TObjHiyoko_size_check[(sizeof(TObjHiyoko) == 0x29C) ? 1 : -1];
@@ -119,10 +107,14 @@ typedef char TObjHiyoko_size_check[(sizeof(TObjHiyoko) == 0x29C) ? 1 : -1];
 #define HIYOKO_RAND() ((1.0f / 32768.0f) * rand())
 
 // 0x800F44AC
-extern "C" void initTObjHiyoko() { }
+extern "C" void initTObjHiyoko()
+{
+}
 
 // 0x800F44B0
-extern "C" void termTObjHiyoko() { }
+extern "C" void termTObjHiyoko()
+{
+}
 
 // 0x800F44B4
 extern "C" TObject* createTObjHiyoko(TObject* parent, SetDesc* desc)
@@ -134,17 +126,17 @@ extern "C" TObject* createTObjHiyoko(TObject* parent, SetDesc* desc)
 void TObjHiyoko::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
-	mMsgId = desc->getInt(0);
-	mMsgId = HIYOKO_CLAMP(mMsgId, 0, getMessageCount() - 1);
-	int mode = desc->getInt(1);
-	mMode    = HIYOKO_CLAMP(mode, 0, 1);
-	mEquip   = sHiyokoEquip[HIYOKO_CLAMP(desc->getInt(2), 0, 14)];
+	mMsgId                  = desc->getInt(0);
+	mMsgId                  = HIYOKO_CLAMP(mMsgId, 0, getMessageCount() - 1);
+	int mode                = desc->getInt(1);
+	mMode                   = HIYOKO_CLAMP(mode, 0, 1);
+	mEquip                  = sHiyokoEquip[HIYOKO_CLAMP(desc->getInt(2), 0, 14)];
 	mEquip10State.mMaterial = sHiyokoColors[HIYOKO_CLAMP(desc->getInt(3), 0, 5)].mValue;
 	mEquip8State.mMaterial  = mEquip10State.mMaterial;
 	mEquip2State.mMaterial  = mEquip8State.mMaterial;
 	mEquip1State.mMaterial  = mEquip2State.mMaterial;
-	mRange = 50.0f + desc->getFloat(1);
-	mSpeed = 0.5f + desc->getFloat(2);
+	mRange                  = 50.0f + desc->getFloat(1);
+	mSpeed                  = 0.5f + desc->getFloat(2);
 }
 
 // 0x800F471C
@@ -196,13 +188,13 @@ void TObjHiyoko::reset()
 	mTexLists[3] = getStgObjTextures()[17];
 	mTexLists[4] = getStgObjTextures()[14];
 	mTexLists[5] = getStgObjTextures()[18];
-	mScale.x   = 1.0f;
-	mScale.y   = 1.0f;
-	mScale.z   = 1.0f;
-	mHop       = 0.0f;
-	_1FC       = 0.0f;
-	mSquashVel = 0.0f;
-	_204       = 0.0f;
+	mScale.x     = 1.0f;
+	mScale.y     = 1.0f;
+	mScale.z     = 1.0f;
+	mHop         = 0.0f;
+	_1FC         = 0.0f;
+	mSquashVel   = 0.0f;
+	_204         = 0.0f;
 	mTalker.setId(0xFFFF);
 	mTarget.x     = mPos.x;
 	mTarget.y     = mPos.y;
@@ -226,8 +218,8 @@ void TObjHiyoko::reset()
 	mObj.mMotion  = &mMotion;
 	mObj.calcMotion();
 	mEquip1State.mFlags = mEquip2State.mFlags = mEquip8State.mFlags = mEquip10State.mFlags = DRAWSTATE_MATERIAL;
-	mShadow._30 = 8.0f;
-	mShadow._34 = 8.0f;
+	mShadow._30                                                                            = 8.0f;
+	mShadow._34                                                                            = 8.0f;
 	calcShadow();
 	mLight.reset();
 	mLight.setFadeDist(5.0f);
@@ -445,7 +437,8 @@ int TObjHiyoko::setState(int state)
 		}
 		startConversation();
 		ColliShape* shape = colliGetShape(mShape, 0);
-		Vec3f at;		at.set(shape->mPos.x, shape->mPos.y, shape->mPos.z);
+		Vec3f at;
+		at.set(shape->mPos.x, shape->mPos.y, shape->mPos.z);
 		sePlay3D(0x65, &at);
 		if (HIYOKO_RAND() < 0.8f) {
 			mMotion.playBlend(7, 0.05f);
@@ -610,8 +603,8 @@ void TObjHiyoko::stateTalk()
 	ObjMsg done;
 
 	if (mText != 0 && mText->mState == 3) {
-		mText->mHold = 1;
-		mText        = 0;
+		mText->mHold       = 1;
+		mText              = 0;
 		TObjAction* talker = mTalker.get();
 		if (talker != 0) {
 			done.mType = 0x30;
@@ -653,7 +646,7 @@ int TObjHiyoko::sendToHandle(ObjMsg* msg)
 	case 0x40:
 		return 0x40;
 	case 0x70: {
-		u16 from = ((HiyokoIdMsg*)msg)->mId;
+		u16 from        = ((HiyokoIdMsg*)msg)->mId;
 		TObjAction* obj = findObjById(from);
 		if (obj != 0) {
 			Vec3f* at    = obj->getPos();
@@ -677,7 +670,8 @@ int TObjHiyoko::sendToHandle(ObjMsg* msg)
 void TObjHiyoko::vfn_10()
 {
 	ColliShape* shape = colliGetShape(mShape, 0);
-	Vec3f center;	center.set(shape->mPos.x, shape->mPos.y, shape->mPos.z);
+	Vec3f center;
+	center.set(shape->mPos.x, shape->mPos.y, shape->mPos.z);
 	if (mLight.isVisible(mDraw, 700.0f, &center, colliGetShape(mShape, 0)->mSizeX, 0)) {
 		setDrawAmbient(&mLight, &mEquip1State);
 		setDrawAmbient(&mLight, &mEquip2State);
@@ -715,8 +709,8 @@ void TObjHiyoko::render()
 	njMultiMatrix(0, mMatrix);
 	funcs[1] = (void*)hiyokoMatColor;
 	gjChangeDrawObjIF(funcs, 2);
-	sHiyokoMatCount = 0;
-	u32 color = mEquip2State.mMaterial;
+	sHiyokoMatCount    = 0;
+	u32 color          = mEquip2State.mMaterial;
 	sHiyokoBodyColor.r = color >> 24;
 	sHiyokoBodyColor.g = color >> 16;
 	sHiyokoBodyColor.b = color >> 8;

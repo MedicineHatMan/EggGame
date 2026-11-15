@@ -21,7 +21,7 @@ static inline f32 random01()
 void BatBrain::update(TEneBat* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}
@@ -38,7 +38,9 @@ BatBrainBase::BatBrainBase()
 }
 
 // 0x800D8F70
-BatBrainBase::~BatBrainBase() { }
+BatBrainBase::~BatBrainBase()
+{
+}
 
 // 0x800D8FCC
 BatHuntBrain* BatHuntBrain::create(TEneBat* owner)
@@ -51,11 +53,11 @@ BatHuntBrain::BatHuntBrain(TEneBat* owner)
 {
 	mSight.reset();
 	mMemory.reset();
-	mTimer = 0;
+	mTimer   = 0;
 	mResting = 0;
-	mOwner = owner;
-	mNext = -1;
-	mState = STATE_APPEAR;
+	mOwner   = owner;
+	mNext    = -1;
+	mState   = STATE_APPEAR;
 	onPhase(mState, 0);
 	if (mNext != -1) {
 		mOwner->setAction(mNext);
@@ -63,7 +65,9 @@ BatHuntBrain::BatHuntBrain(TEneBat* owner)
 }
 
 // 0x800D90CC
-BatHuntBrain::~BatHuntBrain() { }
+BatHuntBrain::~BatHuntBrain()
+{
+}
 
 // 0x800D9134
 // A hard hit flips it low in a dive and stuns it otherwise
@@ -178,8 +182,8 @@ void BatHuntBrain::phaseWander(int phase)
 	switch (phase) {
 	case 0:
 		pickTarget();
-		mTimer = randomInt(300.0f, 120.0f);
-		mNext = TEneBat::ACT_FLY;
+		mTimer   = randomInt(300.0f, 120.0f);
+		mNext    = TEneBat::ACT_FLY;
 		mResting = 0;
 		break;
 	case 2:
@@ -197,11 +201,11 @@ void BatHuntBrain::phaseWander(int phase)
 			mTimer = randomInt(300.0f, 120.0f);
 			if (mResting != 0) {
 				mResting = 0;
-				mNext = TEneBat::ACT_FLY;
+				mNext    = TEneBat::ACT_FLY;
 			}
 		} else if (mOwner->hasArrived() != 0) {
 			mResting = 1;
-			mNext = TEneBat::ACT_HOVER;
+			mNext    = TEneBat::ACT_HOVER;
 		}
 		break;
 	case 3:
@@ -216,7 +220,7 @@ void BatHuntBrain::phaseRise(int phase)
 	switch (phase) {
 	case 0:
 		aim();
-		mNext = TEneBat::ACT_RISE;
+		mNext  = TEneBat::ACT_RISE;
 		mTimer = 0;
 		break;
 	case 2:
@@ -236,7 +240,7 @@ void BatHuntBrain::phaseRise(int phase)
 		case 0:
 			if (mOwner->isRiseDone() != 0) {
 				mTimer = 1;
-				mNext = TEneBat::ACT_AIM;
+				mNext  = TEneBat::ACT_AIM;
 			}
 			break;
 		case 1:

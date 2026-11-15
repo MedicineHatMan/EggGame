@@ -13,11 +13,11 @@ class TGameContextBattle;
 class TGameState : public TGameStateRoot {
 public:
 	TGameState();
-	virtual ~TGameState() { }                                      // 0x80042A94
-	virtual void run(TGameContext* context) { update(context); }   // _14 0x80042A58
-	virtual void vfn_18(TGameContext* context) { }                 // _18 0x80042A50
-	virtual void update(TGameContext* context) { }                 // _1C 0x80042A54
-	virtual int onMessage(TGameContext* context, ObjMsg* msg);     // _20 1 = handled
+	virtual ~TGameState() { }                                    // 0x80042A94
+	virtual void run(TGameContext* context) { update(context); } // _14 0x80042A58
+	virtual void vfn_18(TGameContext* context) { }               // _18 0x80042A50
+	virtual void update(TGameContext* context) { }               // _1C 0x80042A54
+	virtual int onMessage(TGameContext* context, ObjMsg* msg);   // _20 1 = handled
 };
 
 /**
@@ -26,14 +26,16 @@ public:
 class TGameStateBattle : public TBattleStateRoot {
 public:
 	TGameStateBattle();
-	virtual ~TGameStateBattle();                                       // 0x8019EC44
-	virtual void vfn_18(TGameContextBattle* context) { }               // _18 0x8019EF7C
-	virtual int onMessage(TGameContextBattle* context, ObjMsg* msg);   // _1C
+	virtual ~TGameStateBattle();                                     // 0x8019EC44
+	virtual void vfn_18(TGameContextBattle* context) { }             // _18 0x8019EF7C
+	virtual int onMessage(TGameContextBattle* context, ObjMsg* msg); // _1C
 };
 
 #pragma push
 #pragma sym off
-inline TGameStateBattle::~TGameStateBattle() { }
+inline TGameStateBattle::~TGameStateBattle()
+{
+}
 #pragma pop
 
 /**
@@ -42,31 +44,31 @@ inline TGameStateBattle::~TGameStateBattle() { }
  * @size 0x18
  */
 struct BattlePlayer {
-	u8 _00;      // _00 passed along in the 0xB1 message
-	u8 _01;      // _01
-	u16 mId;     // _02
-	u16 mTimer;  // _04 frames until the 0x2B message tells the player they can be hit again
-	u8 _06[2];   // _06
-	s8 mPlace;   // _08 0 until it is decided
-	u8 _09[3];   // _09
-	int mPoints; // _0C
-	int mLost;   // _10
+	u8 _00;       // _00 passed along in the 0xB1 message
+	u8 _01;       // _01
+	u16 mId;      // _02
+	u16 mTimer;   // _04 frames until the 0x2B message tells the player they can be hit again
+	u8 _06[2];    // _06
+	s8 mPlace;    // _08 0 until it is decided
+	u8 _09[3];    // _09
+	int mPoints;  // _0C
+	int mLost;    // _10
 	int mHatched; // _14 eggs hatched
 };
 
 /** The battle context's current state, like GameStateSlot. The name is ours. @size 0x4 */
 struct BattleStateSlot {
-	BattleStateSlot();  // 0x8019EF84
-	~BattleStateSlot(); // 0x8019EF90
+	BattleStateSlot();                        // 0x8019EF84
+	~BattleStateSlot();                       // 0x8019EF90
 	void update(TGameContextBattle* context); // 0x8019EFCC
 
 	TGameStateBattle* mState; // _00
 };
 
 extern "C" {
-int battleDefaultMessage(TGameContextBattle* context, ObjMsg* msg);                  // 0x8019E838
-void battleAddPlayer(TGameContextBattle* context, u16 id, u8 chara);                 // 0x8019E9C8
-int battleFindPlayer(TGameContextBattle* context, u16 id);                           // 0x8019E9E8 -1 if none
+int battleDefaultMessage(TGameContextBattle* context, ObjMsg* msg);                 // 0x8019E838
+void battleAddPlayer(TGameContextBattle* context, u16 id, u8 chara);                // 0x8019E9C8
+int battleFindPlayer(TGameContextBattle* context, u16 id);                          // 0x8019E9E8 -1 if none
 int battlePlayerOut(TGameContextBattle* context, u16 player, u16 other, int guard); // 0x8019EA30
 }
 
@@ -78,23 +80,23 @@ int battlePlayerOut(TGameContextBattle* context, u16 player, u16 other, int guar
 class TGameContextBattle : public TCustomGameContext {
 public:
 	TGameContextBattle(TObject* parent); // 0x8019E6D8
-	virtual ~TGameContextBattle();    // 0x8019E7AC
-	virtual void draw();                       // _0C 0x8019E914
-	virtual int onMessage(ObjMsg* msg);        // _20 0x8019E870
-	virtual int getStatus();                   // _24 0x8019EAE0
-	virtual void startState();        // _28 0x8002FAA4 inline at the end of TModeBattle.cpp
-	virtual void start() { }          // _2C 0x8019EF80
+	virtual ~TGameContextBattle();       // 0x8019E7AC
+	virtual void draw();                 // _0C 0x8019E914
+	virtual int onMessage(ObjMsg* msg);  // _20 0x8019E870
+	virtual int getStatus();             // _24 0x8019EAE0
+	virtual void startState();           // _28 0x8002FAA4 inline at the end of TModeBattle.cpp
+	virtual void start() { }             // _2C 0x8019EF80
 
 	void endOnResult0(); // 0x8019EB58 with kind 5
 	void endOnResult1(); // 0x8019EAFC with kind 6
 
 	int mPlayerCount; // _20
-	int mTime;       // _24
-	int mEndKind;    // _28
-	FlagByte mDone;  // _2C bit 0 = finished
+	int mTime;        // _24
+	int mEndKind;     // _28
+	FlagByte mDone;   // _2C bit 0 = finished
 	u8 _2D[3];
-	BattlePlayer mPlayers[4]; // _30
-	void* mPool;     // _90
+	BattlePlayer mPlayers[4];   // _30
+	void* mPool;                // _90
 	BattleStateSlot mStateSlot; // _94
 };
 
@@ -109,14 +111,14 @@ struct HatchMsg : public ObjMsg {
 	u8 _02[2];
 	u16 mPlayer; // _04
 	u16 mObject; // _06
-	int mKind4;    // _08
-	int mKind5;   // _0C
+	int mKind4;  // _08
+	int mKind5;  // _0C
 };
 
 struct RescueMsg : public ObjMsg {
 	u8 _02[2];
-	u32 mLimit;  // _04
-	u32 mTime;   // _08
+	u32 mLimit; // _04
+	u32 mTime;  // _08
 };
 
 struct AddTimeMsg : public ObjMsg {
@@ -302,7 +304,7 @@ public:
 
 	u16 mTimer; // _14
 	u8 _16[2];
-	int mSent;  // _18 message 0x7A has gone out
+	int mSent; // _18 message 0x7A has gone out
 };
 
 // 0x80111294
@@ -458,9 +460,9 @@ public:
 	virtual void run(TGameContextBattle* context);
 	virtual ~TGameStateBattleStart();
 
-	s8 mStep;    // _14
+	s8 mStep; // _14
 	u8 _15[3];
-	int mTimer;  // _18
+	int mTimer; // _18
 };
 
 // 0x8019EDB4
@@ -502,9 +504,9 @@ public:
 	virtual int onMessage(TGameContextBattle* context, ObjMsg* msg);
 	int onPlayerOut(TGameContextBattle* context, BattleMsg* msg);
 
-	s8 mStep;    // _14
+	s8 mStep; // _14
 	u8 _15;
-	u16 mTimer;  // _16
+	u16 mTimer; // _16
 };
 
 // 0x801AC144
@@ -584,9 +586,9 @@ void* createGameStateHatch(void* pool, TGameContextBattle* context);
 }
 
 // Swaps the context into a new state and returns the old one's memory to the pool
-#define SET_GAME_STATE(context, create) \
-	do { \
-		void* pool = (context)->mPool; \
+#define SET_GAME_STATE(context, create)                                                                       \
+	do {                                                                                                      \
+		void* pool = (context)->mPool;                                                                        \
 		releasePlyState(pool, (context)->mStateSlot.change((context), (TGameState*)create(pool, (context)))); \
 	} while (0)
 

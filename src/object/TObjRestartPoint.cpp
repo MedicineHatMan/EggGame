@@ -19,7 +19,7 @@ const char* gTObjRestartPointName = "TObjRestartPoint";
 TObjRestartPoint::TObjRestartPoint(TObject* parent, const SetDesc* desc)
     : TObjAction(parent)
 {
-	_00 = (u32)gTObjRestartPointName;
+	_00   = (u32)gTObjRestartPointName;
 	mSize = 0x50;
 	setObjId(this, desc->mObjId);
 	mLink.get()->attach((SetDesc*)desc);
@@ -41,7 +41,7 @@ void TObjRestartPoint::initFromDesc(SetDesc* desc)
 	SetRot rot;
 	desc->getPos(&mPos);
 	desc->getRot(&rot);
-	mRotY = rot.y;
+	mRotY    = rot.y;
 	mPointId = (u16)desc->getInt(0);
 }
 

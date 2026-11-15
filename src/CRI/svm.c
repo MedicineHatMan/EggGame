@@ -151,7 +151,7 @@ int SVM_SetCbSvr(int type, SVM_SVRFN fn, void* obj)
 	cb = svm_svr[type];
 	for (i = 0; i < 6; cb++, i++) {
 		if (cb->fn == 0) {
-			cb->fn = fn;
+			cb->fn  = fn;
 			cb->obj = obj;
 			break;
 		}
@@ -173,7 +173,7 @@ void SVM_DelCbSvr(int type, int id)
 		svm_err("1051002:SVM_DelCbSvr:illegal id");
 	}
 	svm_lock(1);
-	svm_svr[type][id].fn = 0;
+	svm_svr[type][id].fn  = 0;
 	svm_svr[type][id].obj = 0;
 	svm_unlock(1);
 }
@@ -194,7 +194,7 @@ void SVM_SetCbSvrId(int type, int id, SVM_SVRFN fn, void* obj)
 	if (cb->fn != 0) {
 		svm_err("2100801:SVM_SetCbSvrId:over write callback function.");
 	}
-	cb->fn = fn;
+	cb->fn  = fn;
 	cb->obj = obj;
 	svm_unlock(1);
 }
@@ -219,7 +219,7 @@ void SVM_ExecSvrFuncId(int type, int id)
 void SVM_SetCbBdr(int id, SVM_SVRFN fn, void* obj)
 {
 	svm_lock(1);
-	svm_bdr[id].fn = fn;
+	svm_bdr[id].fn  = fn;
 	svm_bdr[id].obj = obj;
 	svm_unlock(1);
 }
@@ -235,14 +235,14 @@ void SVM_CallBdr(int id)
 // 0x8022D620
 void SVM_SetCbLock(void (*fn)(void*), void* obj)
 {
-	svm_lockcb.fn = fn;
+	svm_lockcb.fn  = fn;
 	svm_lockcb.obj = obj;
 }
 
 // 0x8022D610
 void SVM_SetCbUnlock(void (*fn)(void*), void* obj)
 {
-	svm_unlockcb.fn = fn;
+	svm_unlockcb.fn  = fn;
 	svm_unlockcb.obj = obj;
 }
 
@@ -329,9 +329,9 @@ int SVM_TestAndSet(int* mem)
 		ret = svm_tas_fn(mem);
 	} else {
 		svm_lock(1);
-		ret = *mem;
+		ret  = *mem;
 		*mem = 1;
-		ret = ret != 1;
+		ret  = ret != 1;
 		svm_unlock(1);
 	}
 	return ret;

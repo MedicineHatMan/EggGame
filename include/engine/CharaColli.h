@@ -59,20 +59,20 @@ struct ColliContact {
  * @size 0x88
  */
 struct CharaColli {
-	CharaColli* mPrev;   // _00
-	CharaColli* mNext;   // _04
-	int mShapeCount;     // _08
-	ColliShape mInline;  // _0C used when mShapeCount is 1
-	ColliShape* mShapes; // _3C
-	u32 mOwner;          // _40 an object id
-	ColliShape mBounds;  // _44
-	u32 mState;          // _74 1 disabled 2 test mBounds first
-	u8 mGroup;           // _78 the bit for what this is
-	u8 mFirmMask;        // _79 groups that decide who gets moved in a contact
-	u8 mSensorMask;      // _7A groups that are tested in contact mode 0
-	u8 mIgnoreMask;      // _7B groups that are never tested
-	int mContactCount;   // _7C
-	ColliContact* mContacts; // _80
+	CharaColli* mPrev;          // _00
+	CharaColli* mNext;          // _04
+	int mShapeCount;            // _08
+	ColliShape mInline;         // _0C used when mShapeCount is 1
+	ColliShape* mShapes;        // _3C
+	u32 mOwner;                 // _40 an object id
+	ColliShape mBounds;         // _44
+	u32 mState;                 // _74 1 disabled 2 test mBounds first
+	u8 mGroup;                  // _78 the bit for what this is
+	u8 mFirmMask;               // _79 groups that decide who gets moved in a contact
+	u8 mSensorMask;             // _7A groups that are tested in contact mode 0
+	u8 mIgnoreMask;             // _7B groups that are never tested
+	int mContactCount;          // _7C
+	ColliContact* mContacts;    // _80
 	ColliContact* mLastContact; // _84
 
 	CharaColli();  // 0x800084C4

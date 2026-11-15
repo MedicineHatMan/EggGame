@@ -25,12 +25,12 @@ public:
 
 	void setTime(int frame);
 
-	int mShape; // _20
-	int mOpen;  // _24
-	int mTime;  // _28
-	f32 mZoom;  // _2C
-	int mRotZ;  // _30
-	int mAlpha; // _34
+	int mShape;      // _20
+	int mOpen;       // _24
+	int mTime;       // _28
+	f32 mZoom;       // _2C
+	int mRotZ;       // _30
+	int mAlpha;      // _34
 	DrawTask* mTask; // _38
 };
 

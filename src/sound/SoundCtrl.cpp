@@ -26,12 +26,12 @@ void soundInit()
 	loadOwnedResource("BGMRegular.bin", 'MSMP', &sBGMMapFile);
 	gBGMMap = (BGMMap*)sBGMMapFile->mData;
 
-	gSoundEffect         = new TSoundEffect(0);
-	gSoundEffect->mTable = (u8*)gSEMap->mVoices;
+	gSoundEffect            = new TSoundEffect(0);
+	gSoundEffect->mTable    = (u8*)gSEMap->mVoices;
 	gSoundEffectAdx         = new TSoundEffectAdx(0);
 	gSoundEffectAdx->mTable = (u8*)gSEMap->mAdxVoices;
-	gMusic   = new TMusicADX(0);
-	gSound3D = new TSoundEffect3DCtrl(0);
+	gMusic                  = new TMusicADX(0);
+	gSound3D                = new TSoundEffect3DCtrl(0);
 	soundSetMode(1);
 }
 

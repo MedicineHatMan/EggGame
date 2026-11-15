@@ -38,18 +38,18 @@ extern GXRenderModeObj GXMpal480IntDf;
 // Not defined here the DOL keeps these in .sbss blocks that come before njTexture.c's lbl_802C6140 before njPrint's
 // gjOneOver65535 after so other data-only files own them
 extern void (*gjSwapCallback)(void); // called after each swap
-extern void* gjFifo;         // the GX fifo object
+extern void* gjFifo;                 // the GX fifo object
 extern void* gjFifo2;
-extern u32 gjFifoSize;           // fifo size
-extern void* gjFifoMem;         // fifo memory
-extern u32 gjLastRetrace;           // retrace count at the last swap
-extern u32 gjRetracesPerFrame;           // retraces per frame
-extern void* gjFrameDrawing;         // the frame being drawn
+extern u32 gjFifoSize;         // fifo size
+extern void* gjFifoMem;        // fifo memory
+extern u32 gjLastRetrace;      // retrace count at the last swap
+extern u32 gjRetracesPerFrame; // retraces per frame
+extern void* gjFrameDrawing;   // the frame being drawn
 extern void* gjFrameB;         // frame B
 extern void* gjFrameA;         // frame A
 extern s32 lbl_802C6140;
 extern f32 gjOneOver65535;
-u8 gjScreenBlanked = 1;            // the screen is still blanked
+u8 gjScreenBlanked = 1; // the screen is still blanked
 
 void gjSysSetRenderMode(GXRenderModeObj* rmode, s32 unused);
 void gjSysSetBuffers(GjSysParams* params);
@@ -73,13 +73,13 @@ void gjSelectContext(s32 index)
 // 0x80214998
 void gjContextInit(NJS_CONTEXT* ctx)
 {
-	ctx->_00 = 0x808C0000;
-	ctx->tex = NULL;
-	ctx->blend = 0x949004C0;
-	ctx->_10 = 0x80012;
-	ctx->_14 = -1;
-	ctx->_18 = -1;
-	ctx->_1C = 0x20000000;
+	ctx->_00     = 0x808C0000;
+	ctx->tex     = NULL;
+	ctx->blend   = 0x949004C0;
+	ctx->_10     = 0x80012;
+	ctx->_14     = -1;
+	ctx->_18     = -1;
+	ctx->_1C     = 0x20000000;
 	ctx->texlist = NULL;
 }
 
@@ -104,8 +104,8 @@ void njColorBlendingMode(s32 target, s32 mode)
 void gjGXSetBlendMode(s32 enable)
 {
 	u32 blend = _nj_current_ctx_->blend;
-	s32 src = gjBlendFactorTable[(blend & 0xE0000000) >> 29];
-	s32 dst = gjBlendFactorTable[(blend & 0x1C000000) >> 26];
+	s32 src   = gjBlendFactorTable[(blend & 0xE0000000) >> 29];
+	s32 dst   = gjBlendFactorTable[(blend & 0x1C000000) >> 26];
 	if (enable != 0) {
 		GXSetBlendMode(1, src, dst, 0);
 	} else {
@@ -249,13 +249,13 @@ void gjFlip(void)
 void gjSysSetBuffers(GjSysParams* params)
 {
 	LCEnable();
-	gjFrameA = params->frameA;
+	gjFrameA       = params->frameA;
 	gjFrameDrawing = gjFrameB = params->frameB;
-	gjFifoMem = params->fifo;
-	gjFifoSize = params->fifoSize;
-	gjTexHeapHandle = OSCreateHeap(params->texHeap, (u8*)params->texHeap + params->texHeapSize);
-	gjTexHeap = params->texHeap;
-	gjTexHeapSize = params->texHeapSize;
+	gjFifoMem                 = params->fifo;
+	gjFifoSize                = params->fifoSize;
+	gjTexHeapHandle           = OSCreateHeap(params->texHeap, (u8*)params->texHeap + params->texHeapSize);
+	gjTexHeap                 = params->texHeap;
+	gjTexHeapSize             = params->texHeapSize;
 }
 
 // 0x80214FBC
@@ -264,14 +264,14 @@ void gjSysSetRenderMode(GXRenderModeObj* rmode, s32 unused)
 	int flag;
 	if (rmode != NULL) {
 		_gj_rmode_ = rmode;
-		flag = 1;
+		flag       = 1;
 	} else {
 		gjFitRenderMode(_gj_rmode_, &gjRenderModeCopy);
 		_gj_rmode_ = &gjRenderModeCopy;
-		flag = 1;
+		flag       = 1;
 	}
 	gjRetracesPerFrame = flag;
-	gjLastRetrace = VIGetRetraceCount();
+	gjLastRetrace      = VIGetRetraceCount();
 }
 
 // 0x80215018
@@ -296,7 +296,7 @@ void gjSysInitTluts(void)
 	}
 
 	offset = 0xC0000;
-	index = 0;
+	index  = 0;
 	for (i = 0; i < 0x40; i++, index++) {
 		GXInitTlutRegion(&gjTlutRegions[index], offset, 1);
 		offset += 0x200;
@@ -335,19 +335,19 @@ void gjSysDefaults(void)
 	NJS_CONTEXT* ctx;
 	s32 i;
 
-	njProjection2[7] = 1.0f;
-	njProjection2[8] = 1.0f;
-	njProjection2[9] = 1.0f;
-	njProjection2[6] = 500.0f;
-	njProjection2[0] = njProjection2[7] * njProjection2[6];
-	njProjection2[1] = -(njProjection2[8] * njProjection2[6]);
-	njProjection2[4] = 1.0f / njProjection2[0];
-	njProjection2[5] = 1.0f / njProjection2[1];
-	njProjection[0] = 60000.0f;
-	njProjection[1] = 1.0f;
+	njProjection2[7]     = 1.0f;
+	njProjection2[8]     = 1.0f;
+	njProjection2[9]     = 1.0f;
+	njProjection2[6]     = 500.0f;
+	njProjection2[0]     = njProjection2[7] * njProjection2[6];
+	njProjection2[1]     = -(njProjection2[8] * njProjection2[6]);
+	njProjection2[4]     = 1.0f / njProjection2[0];
+	njProjection2[5]     = 1.0f / njProjection2[1];
+	njProjection[0]      = 60000.0f;
+	njProjection[1]      = 1.0f;
 	_nj_control_3d_flag_ = 0;
-	lbl_802C6140 = 0;
-	gjOneOver65535 = 1.5259022e-05f;
+	lbl_802C6140         = 0;
+	gjOneOver65535       = 1.5259022e-05f;
 	njBuildSinTable();
 	for (i = 0; i < 6; i++) {
 		gjContextInit(&gjContexts[i]);
@@ -406,9 +406,9 @@ void njBuildSinTable(void)
 	table = OSGetArenaLo();
 	OSSetArenaLo(table + 0x80000);
 	njSinTable = table;
-	entry = (NjSinCos*)table;
+	entry      = (NjSinCos*)table;
 	for (i = 0, ang = 0; i < 0x10000; i++) {
-		rad = 3.141592f * ang / 65536.0f;
+		rad        = 3.141592f * ang / 65536.0f;
 		entry->sin = sin(rad);
 		entry->cos = cos(rad);
 		entry++;

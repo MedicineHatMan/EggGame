@@ -188,14 +188,30 @@ int LastBossAi::getStunFrames()
 void LastBossAi::onPhase(int state, int phase)
 {
 	switch (state) {
-	case 0: stateIntro(phase); break;
-	case 1: stateWalk(phase); break;
-	case 2: stateCircle(phase); break;
-	case 3: stateSpiral(phase); break;
-	case 4: stateStun(phase); break;
-	case 5: stateHome(phase); break;
-	case 6: stateStun(phase); break;
-	case 7: stateDie(phase); break;
+	case 0:
+		stateIntro(phase);
+		break;
+	case 1:
+		stateWalk(phase);
+		break;
+	case 2:
+		stateCircle(phase);
+		break;
+	case 3:
+		stateSpiral(phase);
+		break;
+	case 4:
+		stateStun(phase);
+		break;
+	case 5:
+		stateHome(phase);
+		break;
+	case 6:
+		stateStun(phase);
+		break;
+	case 7:
+		stateDie(phase);
+		break;
 	}
 }
 

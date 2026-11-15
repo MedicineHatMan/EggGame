@@ -15,15 +15,15 @@
 struct FxEmitter;
 struct FxShape;
 
-#define FX_PIPE (*(volatile f32*)0xCC008000)
+#define FX_PIPE  (*(volatile f32*)0xCC008000)
 #define FX_PIPE8 (*(volatile u8*)0xCC008000)
 #define FX_ANGLE 10430.38043493439
 
 struct FxRigDesc {
-	u16 mBoneCount;  // _00
-	u16 mLife;       // _02
-	u32 mFlags;      // _04
-	u8* mScript; // _08
+	u16 mBoneCount; // _00
+	u16 mLife;      // _02
+	u32 mFlags;     // _04
+	u8* mScript;    // _08
 };
 
 // 0x800DEE60
@@ -34,37 +34,37 @@ FxEmitter* fxEmitterNew(FxBank* bank, int index)
 		return NULL;
 	}
 	FxEmitterDesc* desc = (FxEmitterDesc*)bank->mDescs[index * 2 + 1];
-	fx->mUpdate = (void (*)(Fx*))sFxEmitterUpdaters[desc->mKind];
-	fx->mDraw   = sFxEmitterDrawers[desc->mKind];
-	fx->mRemove = (void (*)(Fx*))fxEmitterFree;
+	fx->mUpdate         = (void (*)(Fx*))sFxEmitterUpdaters[desc->mKind];
+	fx->mDraw           = sFxEmitterDrawers[desc->mKind];
+	fx->mRemove         = (void (*)(Fx*))fxEmitterFree;
 	fx->mFlags |= desc->mFlags;
-	fx->mKind = desc->mKind;
-	fx->mStop = desc->mLife != 0 ? desc->mLife : 0xFFFF;
-	fx->mRate      = desc->mRate;
-	fx->mAccum     = 0.0f;
-	fx->mMax       = desc->mMax;
-	fx->mPartLife  = desc->mPartLife;
-	fx->mPartFlags = desc->mPartFlags;
-	fx->mTex[0]    = desc->mTex[0];
-	fx->mTex[1]    = desc->mTex[1];
-	fx->mTexGroup  = desc->mTexGroup;
-	fx->mMaterial  = desc->mMaterial;
-	fx->mDir[0] = desc->mDir[0];
-	fx->mDir[1] = desc->mDir[1];
-	fx->mDir[2] = desc->mDir[2];
-	fx->mGravity = desc->mGravity;
-	fx->mDamp    = desc->mDamp;
-	fx->mScale   = desc->mScale;
+	fx->mKind       = desc->mKind;
+	fx->mStop       = desc->mLife != 0 ? desc->mLife : 0xFFFF;
+	fx->mRate       = desc->mRate;
+	fx->mAccum      = 0.0f;
+	fx->mMax        = desc->mMax;
+	fx->mPartLife   = desc->mPartLife;
+	fx->mPartFlags  = desc->mPartFlags;
+	fx->mTex[0]     = desc->mTex[0];
+	fx->mTex[1]     = desc->mTex[1];
+	fx->mTexGroup   = desc->mTexGroup;
+	fx->mMaterial   = desc->mMaterial;
+	fx->mDir[0]     = desc->mDir[0];
+	fx->mDir[1]     = desc->mDir[1];
+	fx->mDir[2]     = desc->mDir[2];
+	fx->mGravity    = desc->mGravity;
+	fx->mDamp       = desc->mDamp;
+	fx->mScale      = desc->mScale;
 	fx->mPartScript = desc->mPartScript;
-	fx->mCount = 0;
-	fx->mKids  = NULL;
-	fx->_A0 = desc->_14;
-	fx->_A4 = desc->_18;
+	fx->mCount      = 0;
+	fx->mKids       = NULL;
+	fx->_A0         = desc->_14;
+	fx->_A4         = desc->_18;
 	switch (fx->mKind) {
 	case 1:
 		*(u8*)&fx->mShapeA = desc->mCount;
-		fx->mShapeB = desc->mShapeB;
-		fx->mShapeC = desc->mShapeC;
+		fx->mShapeB        = desc->mShapeB;
+		fx->mShapeC        = desc->mShapeC;
 		break;
 	}
 	fx->mLoops  = 0;
@@ -80,7 +80,7 @@ void fxEmitterStep(FxEmitter* fx, FxEmitter* self)
 {
 	if (self->mWait != 0 && --self->mWait == 0) {
 		const u8* pc = self->mScript + self->mPc;
-		u16 wait = 0;
+		u16 wait     = 0;
 		do {
 			u32 op = *pc++;
 			if (op == 0xFF) {
@@ -181,10 +181,10 @@ void fxRibbonUpdate(FxEmitter* fx)
 	part = ((FxEmitter*)part)->mKids;
 	if (part != NULL && !(fx->mFlags & 0x10000000)) {
 		FxExtra* extra = part->mExtra;
-		f32* m = fx->mFollow != NULL ? fx->mFollow : fx->mMatrix;
-		part->mPos[0] = m[3];
-		part->mPos[1] = m[7];
-		part->mPos[2] = m[11];
+		f32* m         = fx->mFollow != NULL ? fx->mFollow : fx->mMatrix;
+		part->mPos[0]  = m[3];
+		part->mPos[1]  = m[7];
+		part->mPos[2]  = m[11];
 		f32 up[3];
 		up[0] = 0.0f;
 		up[1] = 0.0f;
@@ -206,8 +206,8 @@ static inline void fxRibbonVertex(f32* pos, u8* color, f32 s, f32 t)
 	FX_PIPE8 = color[1];
 	FX_PIPE8 = color[2];
 	FX_PIPE8 = color[3];
-	FX_PIPE = s;
-	FX_PIPE = t;
+	FX_PIPE  = s;
+	FX_PIPE  = t;
 }
 
 void fxRibbonDraw(Fx* obj)
@@ -243,7 +243,7 @@ void fxRibbonDraw(Fx* obj)
 		u8 color[4];
 		fxPartColor(part, color);
 		GXPosition3f32(part->mPos[0], part->mPos[1], part->mPos[2]);
-		u8 c0 = color[0];
+		u8 c0    = color[0];
 		FX_PIPE8 = c0;
 		FX_PIPE8 = color[1];
 		FX_PIPE8 = color[2];
@@ -257,7 +257,7 @@ void fxRibbonDraw(Fx* obj)
 		FX_PIPE8 = color[3];
 		FX_PIPE  = u;
 		u += du;
-		FX_PIPE  = v1;
+		FX_PIPE = v1;
 	}
 	fxRibbonDrawEnd(fx, fx);
 }
@@ -269,19 +269,19 @@ void fxSweepUpdate(FxEmitter* fx)
 	FxParticle* part = fx->mKids;
 	if (part != NULL && !(fx->mFlags & 0x10000000)) {
 		FxExtra* extra = part->mExtra;
-		f32* m = fx->mFollow != NULL ? fx->mFollow : fx->mMatrix;
-		part->mPos[0] = m[3];
-		part->mPos[1] = m[7];
-		part->mPos[2] = m[11];
-		extra->mA[0] = m[0];
-		extra->mA[1] = m[1];
-		extra->mA[2] = m[2];
-		extra->mB[0] = m[4];
-		extra->mB[1] = m[5];
-		extra->mB[2] = m[6];
-		extra->mC[0] = m[8];
-		extra->mC[1] = m[9];
-		extra->mC[2] = m[10];
+		f32* m         = fx->mFollow != NULL ? fx->mFollow : fx->mMatrix;
+		part->mPos[0]  = m[3];
+		part->mPos[1]  = m[7];
+		part->mPos[2]  = m[11];
+		extra->mA[0]   = m[0];
+		extra->mA[1]   = m[1];
+		extra->mA[2]   = m[2];
+		extra->mB[0]   = m[4];
+		extra->mB[1]   = m[5];
+		extra->mB[2]   = m[6];
+		extra->mC[0]   = m[8];
+		extra->mC[1]   = m[9];
+		extra->mC[2]   = m[10];
 	}
 }
 
@@ -293,22 +293,22 @@ FxParticle* fxSweepLoadMatrices(FxParticle* part, int count, const void* view)
 	for (; count > 0; count--) {
 		f32 m[3][4];
 		FxExtra* extra = part->mExtra;
-		m[0][0] = extra->mA[0] * part->mScale;
-		m[0][1] = extra->mA[1] * part->mScale;
-		m[0][2] = extra->mA[2] * part->mScale;
-		m[0][3] = part->mPos[0];
-		m[1][0] = extra->mB[0] * part->mScale;
-		m[1][1] = extra->mB[1] * part->mScale;
-		m[1][2] = extra->mB[2] * part->mScale;
-		m[1][3] = part->mPos[1];
-		m[2][0] = extra->mC[0] * part->mScale;
-		m[2][1] = extra->mC[1] * part->mScale;
-		m[2][2] = extra->mC[2] * part->mScale;
-		m[2][3] = part->mPos[2];
+		m[0][0]        = extra->mA[0] * part->mScale;
+		m[0][1]        = extra->mA[1] * part->mScale;
+		m[0][2]        = extra->mA[2] * part->mScale;
+		m[0][3]        = part->mPos[0];
+		m[1][0]        = extra->mB[0] * part->mScale;
+		m[1][1]        = extra->mB[1] * part->mScale;
+		m[1][2]        = extra->mB[2] * part->mScale;
+		m[1][3]        = part->mPos[1];
+		m[2][0]        = extra->mC[0] * part->mScale;
+		m[2][1]        = extra->mC[1] * part->mScale;
+		m[2][2]        = extra->mC[2] * part->mScale;
+		m[2][3]        = part->mPos[2];
 		PSMTXConcat((const float*)view, (const float*)m, (float*)m);
 		GXLoadPosMtxImm((const float*)m, slot);
 		slot += 3;
-		part = part->mNext;	
+		part = part->mNext;
 	}
 	return part;
 }
@@ -317,8 +317,8 @@ FxParticle* fxSweepLoadMatrices(FxParticle* part, int count, const void* view)
 // Strips between one matrix and the next
 FxParticle* fxSweepDrawSpans(FxParticle* part, int count, const f32* table, int steps)
 {
-	f32 du  = 1.0f / (f32)(steps - 1);
-	int mtx = 6;
+	f32 du   = 1.0f / (f32)(steps - 1);
+	int mtx  = 6;
 	int next = 9;
 	for (; count > 0; count--) {
 		u8 a[4];
@@ -348,7 +348,7 @@ FxParticle* fxSweepDrawSpans(FxParticle* part, int count, const f32* table, int 
 			FX_PIPE8 = b[3];
 			FX_PIPE  = u;
 			u += du;
-			FX_PIPE  = 1.0f;
+			FX_PIPE = 1.0f;
 		}
 		part = part->mNext;
 		mtx  = next;
@@ -379,7 +379,7 @@ void fxSweepDraw(Fx* obj)
 	f32 view[3][4];
 	njGetMatrix((f32*)view);
 	FxParticle* part = fx->mKids;
-	int runs = spans / 7;
+	int runs         = spans / 7;
 	for (int i = 0; i < runs; i++) {
 		fxSweepLoadMatrices(part, 8, view);
 		part = fxSweepDrawSpans(part, 7, table[0], steps + 1);
@@ -425,35 +425,35 @@ FxParticle* fxRibbonSpawn(FxEmitter* fx, f32 x, f32 y, f32 z, f32 vx, f32 vy, f3
 	FxParticle* part = fxPartAllocExtra();
 	if (part != NULL) {
 		fx->mCount++;
-		part->mNext = fx->mKids;
-		fx->mKids   = part;
-		part->mLoops   = 0;
-		part->_05   = 0;
-		part->mFlags = fx->mPartFlags;
-		part->mLife  = fx->mPartLife != 0 ? fx->mPartLife : 0xFFFF;
-		part->mScript = fx->mPartScript;
-		part->mWait   = fx->mPartScript != NULL ? 1 : 0;
-		part->mPc     = 0;
+		part->mNext        = fx->mKids;
+		fx->mKids          = part;
+		part->mLoops       = 0;
+		part->_05          = 0;
+		part->mFlags       = fx->mPartFlags;
+		part->mLife        = fx->mPartLife != 0 ? fx->mPartLife : 0xFFFF;
+		part->mScript      = fx->mPartScript;
+		part->mWait        = fx->mPartScript != NULL ? 1 : 0;
+		part->mPc          = 0;
 		part->mScaleFrames = 0;
-		part->mRotFrames = 0;
+		part->mRotFrames   = 0;
 		part->mColorFrames = 0;
 		part->mAlphaFrames = 0;
-		part->mGravity = fx->mGravity;
-		part->mDamp    = fx->mDamp;
+		part->mGravity     = fx->mGravity;
+		part->mDamp        = fx->mDamp;
 		part->mScale = part->mScaleTo = fx->mScale;
-		part->mRotTo = 0.0f;
-		part->mRot = 0.0f;
-		part->mVel[0] = vx;
-		part->mVel[1] = vy;
-		part->mVel[2] = vz;
-		part->mPos[0] = x;
-		part->mPos[1] = y;
-		part->mPos[2] = z;
-		part->mColor[3] = 0xFF;
-		part->mColor[2] = 0xFF;
-		part->mColor[1] = 0xFF;
-		part->mColor[0] = 0xFF;
-		part->mStep = NULL;
+		part->mRotTo                  = 0.0f;
+		part->mRot                    = 0.0f;
+		part->mVel[0]                 = vx;
+		part->mVel[1]                 = vy;
+		part->mVel[2]                 = vz;
+		part->mPos[0]                 = x;
+		part->mPos[1]                 = y;
+		part->mPos[2]                 = z;
+		part->mColor[3]               = 0xFF;
+		part->mColor[2]               = 0xFF;
+		part->mColor[1]               = 0xFF;
+		part->mColor[0]               = 0xFF;
+		part->mStep                   = NULL;
 	}
 	return part;
 }
@@ -463,18 +463,18 @@ FxRig* fxRigNew(FxBank* bank, int index)
 {
 	FxRig* fx;
 	FxRigDesc* desc = (FxRigDesc*)bank->mDescs[index * 2 + 1];
-	fx = (FxRig*)gFxRigAlloc(desc->mBoneCount * 0x88 + 0x7C);
+	fx              = (FxRig*)gFxRigAlloc(desc->mBoneCount * 0x88 + 0x7C);
 	if (fx != NULL) {
-		fx->mUpdate = (void (*)(Fx*))fxRigUpdate;
-		fx->mDraw   = NULL;
-		fx->mRemove = (void (*)(Fx*))fxRigFree;
-		fx->mFlags  = desc->mFlags;
-		fx->mStop   = desc->mLife != 0 ? desc->mLife : 0xFFFF;
-		fx->mWait   = desc->mScript != NULL ? 1 : 0;
-		fx->mPc     = 0;
-		fx->mScript = desc->mScript;
+		fx->mUpdate    = (void (*)(Fx*))fxRigUpdate;
+		fx->mDraw      = NULL;
+		fx->mRemove    = (void (*)(Fx*))fxRigFree;
+		fx->mFlags     = desc->mFlags;
+		fx->mStop      = desc->mLife != 0 ? desc->mLife : 0xFFFF;
+		fx->mWait      = desc->mScript != NULL ? 1 : 0;
+		fx->mPc        = 0;
+		fx->mScript    = desc->mScript;
 		fx->mBoneCount = desc->mBoneCount;
-		fx->mBones  = (FxBone*)((u8*)fx + 0x7C);
+		fx->mBones     = (FxBone*)((u8*)fx + 0x7C);
 		for (int i = 0; i < fx->mBoneCount; i++) {
 			fx->mBones[i].mFlags = 0;
 			njUnitMatrix(fx->mBones[i].mLocal[0]);
@@ -560,7 +560,7 @@ void fxBoneWorld(FxRig* fx, FxBone* bone)
 void fxRigUpdate(FxRig* fx)
 {
 	const f32* base = fx->mFollow != NULL ? fx->mFollow : fx->mMatrix;
-	FxBone* bone = fx->mBones;
+	FxBone* bone    = fx->mBones;
 	for (int i = 0; i < fx->mBoneCount; i++, bone++) {
 		if (bone->mFlags != 0) {
 			fxBoneBuild(bone);
@@ -588,7 +588,7 @@ void fxRigUpdate(FxRig* fx)
 				}
 				continue;
 			}
-			wait = 0;
+			wait     = 0;
 			u32 code = op;
 			if ((op & 0xF8) >= 0xD0 && (op & 0xF8) <= 0xE0) {
 				code = op & 0xF8;
@@ -602,8 +602,8 @@ void fxRigUpdate(FxRig* fx)
 			case 0xF9:
 				group = pc[1];
 				bone  = &fx->mBones[pc[0]];
-				pc   += 2;
-				pc    = fxRead16(pc, (u8*)&effect);
+				pc += 2;
+				pc = fxRead16(pc, (u8*)&effect);
 				if (bone->mFlags != 0) {
 					fxBoneBuild(bone);
 				}
@@ -616,8 +616,8 @@ void fxRigUpdate(FxRig* fx)
 			case 0xFA:
 				group = pc[1];
 				bone  = &fx->mBones[pc[0]];
-				pc   += 2;
-				pc    = fxRead16(pc, (u8*)&effect);
+				pc += 2;
+				pc = fxRead16(pc, (u8*)&effect);
 				if (bone->mFlags != 0) {
 					fxBoneBuild(bone);
 				}
@@ -631,15 +631,15 @@ void fxRigUpdate(FxRig* fx)
 			case 0xD0:
 				n = *pc++;
 				if (op & 1) {
-					pc = fxRead32(pc, (u8*)&value);
+					pc                    = fxRead32(pc, (u8*)&value);
 					fx->mBones[n].mPos[0] = value;
 				}
 				if (op & 2) {
-					pc = fxRead32(pc, (u8*)&value);
+					pc                    = fxRead32(pc, (u8*)&value);
 					fx->mBones[n].mPos[1] = value;
 				}
 				if (op & 4) {
-					pc = fxRead32(pc, (u8*)&value);
+					pc                    = fxRead32(pc, (u8*)&value);
 					fx->mBones[n].mPos[2] = value;
 				}
 				fx->mBones[n].mFlags |= 1;
@@ -647,15 +647,15 @@ void fxRigUpdate(FxRig* fx)
 			case 0xD8:
 				n = *pc++;
 				if (op & 1) {
-					pc = fxRead32(pc, (u8*)&value);
+					pc                    = fxRead32(pc, (u8*)&value);
 					fx->mBones[n].mRot[0] = (int)(FX_ANGLE * value);
 				}
 				if (op & 2) {
-					pc = fxRead32(pc, (u8*)&value);
+					pc                    = fxRead32(pc, (u8*)&value);
 					fx->mBones[n].mRot[1] = (int)(FX_ANGLE * value);
 				}
 				if (op & 4) {
-					pc = fxRead32(pc, (u8*)&value);
+					pc                    = fxRead32(pc, (u8*)&value);
 					fx->mBones[n].mRot[2] = (int)(FX_ANGLE * value);
 				}
 				fx->mBones[n].mFlags |= 2;
@@ -663,15 +663,15 @@ void fxRigUpdate(FxRig* fx)
 			case 0xE0:
 				n = *pc++;
 				if (op & 1) {
-					pc = fxRead32(pc, (u8*)&value);
+					pc                      = fxRead32(pc, (u8*)&value);
 					fx->mBones[n].mScale[0] = value;
 				}
 				if (op & 2) {
-					pc = fxRead32(pc, (u8*)&value);
+					pc                      = fxRead32(pc, (u8*)&value);
 					fx->mBones[n].mScale[1] = value;
 				}
 				if (op & 4) {
-					pc = fxRead32(pc, (u8*)&value);
+					pc                      = fxRead32(pc, (u8*)&value);
 					fx->mBones[n].mScale[2] = value;
 				}
 				fx->mBones[n].mFlags |= 4;
@@ -701,6 +701,32 @@ void fxRigUpdate(FxRig* fx)
 	}
 }
 
+// The fields every emitter kind reads from its description
+static inline void fxEmitterReadDesc(FxEmitter* fx, FxEmitterDesc* desc)
+{
+	fx->mRate       = desc->mRate;
+	fx->mAccum      = 0.0f;
+	fx->mMax        = desc->mMax;
+	fx->mPartLife   = desc->mPartLife;
+	fx->mPartFlags  = desc->mPartFlags;
+	fx->mTex[0]     = desc->mTex[0];
+	fx->mTex[1]     = desc->mTex[1];
+	fx->mTexGroup   = desc->mTexGroup;
+	fx->mMaterial   = desc->mMaterial;
+	fx->mDir[0]     = desc->mDir[0];
+	fx->mDir[1]     = desc->mDir[1];
+	fx->mDir[2]     = desc->mDir[2];
+	fx->mGravity    = desc->mGravity;
+	fx->mDamp       = desc->mDamp;
+	fx->mScale      = desc->mScale;
+	fx->mPartScript = desc->mPartScript;
+	fx->mCount      = 0;
+	fx->mKids       = NULL;
+	fx->_A0         = desc->_14;
+	fx->_A4         = desc->_18;
+	fxEmitterReadShape(fx, desc);
+}
+
 // 0x800E062C
 FxEmitter* fxSpriteNew(FxBank* bank, int index)
 {
@@ -709,83 +735,63 @@ FxEmitter* fxSpriteNew(FxBank* bank, int index)
 		return NULL;
 	}
 	FxEmitterDesc* desc = (FxEmitterDesc*)bank->mDescs[index * 2 + 1];
-	fx->mUpdate = (void (*)(Fx*))fxSpriteUpdate;
-	fx->mDraw   = (void (*)(Fx*))fxSpriteDrawKind;
-	fx->mRemove = (void (*)(Fx*))fxEmitterFree;
+	Fx* base            = fx;
+	fx->mUpdate         = (void (*)(Fx*))fxSpriteUpdate;
+	fx->mDraw           = (void (*)(Fx*))fxSpriteDrawKind;
+	fx->mRemove         = (void (*)(Fx*))fxEmitterFree;
 	fx->mFlags |= desc->mFlags;
 	fx->mKind = desc->mKind;
 	fx->mStop = desc->mLife != 0 ? desc->mLife : 0xFFFF;
-	FxEmitter* e = fx;
-	e->mRate      = desc->mRate;
-	e->mAccum     = 0.0f;
-	e->mMax       = desc->mMax;
-	e->mPartLife  = desc->mPartLife;
-	e->mPartFlags = desc->mPartFlags;
-	e->mTex[0]    = desc->mTex[0];
-	e->mTex[1]    = desc->mTex[1];
-	e->mTexGroup  = desc->mTexGroup;
-	e->mMaterial  = desc->mMaterial;
-	e->mDir[0] = desc->mDir[0];
-	e->mDir[1] = desc->mDir[1];
-	e->mDir[2] = desc->mDir[2];
-	e->mGravity = desc->mGravity;
-	e->mDamp    = desc->mDamp;
-	e->mScale   = desc->mScale;
-	e->mPartScript = desc->mPartScript;
-	e->mCount = 0;
-	e->mKids  = NULL;
-	e->_A0 = desc->_14;
-	e->_A4 = desc->_18;
-	fxEmitterReadShape(e, desc);
-	return e;
+	fxEmitterReadDesc((FxEmitter*)base, desc);
+	return fx;
 }
 
 // 0x800E077C
 // Starts a particle from these values
-FxParticle* fxSpriteSpawn(u16 flags, u16 life, u8* script, FxEmitter* fx, f32 x, f32 y, f32 z, f32 vx, f32 vy, f32 vz, f32 gravity, f32 damp,
-                        f32 scale)
+FxParticle* fxSpriteSpawn(u16 flags, u16 life, u8* script, FxEmitter* fx, f32 x, f32 y, f32 z, f32 vx, f32 vy, f32 vz, f32 gravity,
+                          f32 damp, f32 scale)
 {
 	FxParticle* part = fxPartAlloc();
 	if (part != NULL) {
 		fx->mCount++;
-		part->mNext = fx->mKids;
-		fx->mKids   = part;
-		part->mLoops   = 0;
-		part->_05   = 0;
-		part->_09   = 0;
-		part->_08   = 0;
-		part->mFlags = flags;
-		part->mLife  = life != 0 ? life : 0xFFFF;
-		part->mScript = script;
-		part->mWait   = script != NULL ? 1 : 0;
-		part->mPc     = 0;
-		part->mExtraCount = 0;
+		part->mNext        = fx->mKids;
+		fx->mKids          = part;
+		part->mLoops       = 0;
+		part->_05          = 0;
+		part->_09          = 0;
+		part->_08          = 0;
+		part->mFlags       = flags;
+		part->mLife        = life != 0 ? life : 0xFFFF;
+		part->mScript      = script;
+		part->mWait        = script != NULL ? 1 : 0;
+		part->mPc          = 0;
+		part->mExtraCount  = 0;
 		part->mScaleFrames = 0;
-		part->mRotFrames = 0;
+		part->mRotFrames   = 0;
 		part->mColorFrames = 0;
 		part->mAlphaFrames = 0;
-		part->mGravity = gravity;
-		part->mDamp    = damp;
-		part->mScaleTo = scale;
-		part->mScale   = scale;
-		part->mRotTo = 0.0f;
-		part->mRot = 0.0f;
-		part->mVel[0] = vx;
-		part->mVel[1] = vy;
-		part->mVel[2] = vz;
-		part->mPos[0] = x;
-		part->mPos[1] = y;
-		part->mPos[2] = z;
-		part->mColor[0] = 0xFF;
-		part->mColor[1] = 0xFF;
-		part->mColor[2] = 0xFF;
-		part->mColor[3] = 0xFF;
-		part->mStep = NULL;
-		part->mExtra = NULL;
-		part->mOwner = fx;
+		part->mGravity     = gravity;
+		part->mDamp        = damp;
+		part->mScaleTo     = scale;
+		part->mScale       = scale;
+		part->mRotTo       = 0.0f;
+		part->mRot         = 0.0f;
+		part->mVel[0]      = vx;
+		part->mVel[1]      = vy;
+		part->mVel[2]      = vz;
+		part->mPos[0]      = x;
+		part->mPos[1]      = y;
+		part->mPos[2]      = z;
+		part->mColor[0]    = 0xFF;
+		part->mColor[1]    = 0xFF;
+		part->mColor[2]    = 0xFF;
+		part->mColor[3]    = 0xFF;
+		part->mStep        = NULL;
+		part->mExtra       = NULL;
+		part->mOwner       = fx;
 	}
 	return part;
 }
 
 void (*sFxEmitterUpdaters[2])(FxEmitter*) = { fxRibbonUpdate, fxSweepUpdate };
-void (*sFxEmitterDrawers[2])(Fx*) = { fxRibbonDraw, fxSweepDraw };
+void (*sFxEmitterDrawers[2])(Fx*)         = { fxRibbonDraw, fxSweepDraw };

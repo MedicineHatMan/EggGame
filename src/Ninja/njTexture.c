@@ -32,9 +32,9 @@ s32 gjTexHeapBusy(void);
 #define GVR_GBIX 0x58494247
 #define GVR_GVRT 0x54525647
 
-s32 gjTexSlotCount;      // number of slots
+s32 gjTexSlotCount; // number of slots
 GjTexHeader* gjTexHeaders;
-s32 gjTexHeaderCount;      // number of headers
+s32 gjTexHeaderCount; // number of headers
 
 u8* gvrFindImage(GjTexDesc* desc, u32* gbix, u8* p);
 s32 gjTexMemCreateSurface(GjTexMem* mem, const GjTexDesc* desc);
@@ -65,7 +65,7 @@ s32 gjTexSurfaceFree(GjTexInfo* surface);
 // A 32 bit swap
 void gvrSwap32(u32* value)
 {
-	u32 v = *value;
+	u32 v  = *value;
 	*value = (v & 0xFF) << 24 | ((v & 0xFF00) << 8 | ((v & 0xFF000000) >> 24 | (v & 0xFF0000) >> 8));
 }
 
@@ -128,24 +128,24 @@ s32 gjTexHeapReady(void)
 s32 gjTexListDecode(NJS_TEXLIST* list, u32 num, u32* gbix, s32* bank)
 {
 	NJS_TEXNAME* textures = list->textures;
-	NJS_TEXNAME* t = &textures[num];
-	u32 attr = t->attr;
+	NJS_TEXNAME* t        = &textures[num];
+	u32 attr              = t->attr;
 	GjTexMem* mem;
 	GjTexMem* prev;
 	s32 slot;
 
 	if ((attr & 0x10000) && num != 0) {
 		*bank = ((u32)t->texaddr & 0xFC000000) >> 26;
-		prev = ((GjTexMem**)&textures[(s32)(num - 1)])[2];
+		prev  = ((GjTexMem**)&textures[(s32)(num - 1)])[2];
 		*gbix = (u32)prev->hdr->texaddr;
-		slot = gjTexFindGbixBank(*gbix, *bank);
+		slot  = gjTexFindGbixBank(*gbix, *bank);
 		if (slot < 0) {
 			if (gjTexFindFree(&mem, NULL) < 0) {
 				return -1;
 			}
 			t->texaddr = mem;
-			mem->tlut = *bank;
-			mem->hdr = prev->hdr;
+			mem->tlut  = *bank;
+			mem->hdr   = prev->hdr;
 			mem->count = 1;
 			mem->hdr->count++;
 			mem->_14 = prev->_14;
@@ -226,7 +226,7 @@ s32 njReleaseTexture(NJS_TEXLIST* list)
 		if (t->attr & 0x200000) {
 			if (gjTexMemRelease(t->texaddr) < 0 && ret != -1) {
 				gTexErrStat.texno = i;
-				ret = -1;
+				ret               = -1;
 			}
 			list->textures[i].attr &= ~0x200000;
 			list->textures[i].texaddr = NULL;
@@ -238,8 +238,8 @@ s32 njReleaseTexture(NJS_TEXLIST* list)
 // 0x80210B84
 void njSetTextureInfo(NJS_TEXINFO* info, void* texaddr, s32 type, s32 width, s32 height)
 {
-	info->texaddr = texaddr;
-	info->info.width = width;
+	info->texaddr     = texaddr;
+	info->info.width  = width;
 	info->info.height = height;
 	info->info.format = type;
 }
@@ -250,28 +250,28 @@ void njSetTextureName(NJS_TEXNAME* t, void* filename, void* texaddr, u32 attr)
 {
 	if (attr & 0x40000000) {
 		t->filename = filename;
-		t->attr = attr;
-		t->texaddr = texaddr;
+		t->attr     = attr;
+		t->texaddr  = texaddr;
 		return;
 	}
 	t->filename = filename;
-	t->attr = attr;
-	t->texaddr = texaddr;
+	t->attr     = attr;
+	t->texaddr  = texaddr;
 }
 
 // 0x80210BC4
 void gjTexSlotsInit(GjTexMem* mems, s32 count)
 {
 	s32 i;
-	gjTexSlots = mems;
+	gjTexSlots     = mems;
 	gjTexSlotCount = count;
 	for (i = 0; i < count; i++) {
-		mems->_00 = 0;
-		mems->_04 = 0;
-		mems->tlut = -1;
-		mems->hdr = NULL;
+		mems->_00   = 0;
+		mems->_04   = 0;
+		mems->tlut  = -1;
+		mems->hdr   = NULL;
 		mems->count = 0;
-		mems->_14 = 0;
+		mems->_14   = 0;
 		mems++;
 	}
 }
@@ -280,19 +280,19 @@ void gjTexSlotsInit(GjTexMem* mems, s32 count)
 void gjTexHeadersInit(GjTexHeader* hdrs, s32 count)
 {
 	s32 i;
-	gjTexHeaders = hdrs;
+	gjTexHeaders     = hdrs;
 	gjTexHeaderCount = count;
 	for (i = 0; i < count; i++) {
-		hdrs->texaddr = (void*)-1;
+		hdrs->texaddr     = (void*)-1;
 		hdrs->info.format = 0;
-		hdrs->info._04 = 0;
-		hdrs->info._08 = 0;
-		hdrs->info.width = 0;
+		hdrs->info._04    = 0;
+		hdrs->info._08    = 0;
+		hdrs->info.width  = 0;
 		hdrs->info.height = 0;
-		hdrs->info._14 = 0;
-		hdrs->info.flags = 0;
-		hdrs->info.image = NULL;
-		hdrs->count = 0;
+		hdrs->info._14    = 0;
+		hdrs->info.flags  = 0;
+		hdrs->info.image  = NULL;
+		hdrs->count       = 0;
 		hdrs++;
 	}
 }
@@ -320,11 +320,11 @@ s32 gjTexFindFree(GjTexMem** outMem, GjTexHeader** outHdr)
 	s32 index;
 
 	*outMem = NULL;
-	mem = gjTexSlots;
+	mem     = gjTexSlots;
 	for (i = 0; i < gjTexSlotCount; i++) {
 		if (mem->hdr == NULL) {
 			*outMem = mem;
-			index = i;
+			index   = i;
 			break;
 		}
 		mem++;
@@ -335,7 +335,7 @@ s32 gjTexFindFree(GjTexMem** outMem, GjTexHeader** outHdr)
 	}
 	if (outHdr != NULL) {
 		*outHdr = NULL;
-		hdr = gjTexHeaders;
+		hdr     = gjTexHeaders;
 		for (i = 0; i < gjTexHeaderCount; i++) {
 			if ((u32)hdr->texaddr == 0xFFFFFFFF) {
 				*outHdr = hdr;
@@ -373,23 +373,23 @@ void gjTexHeaderTidy(GjTexMem* mem)
 {
 	GjTexHeader* hdr = mem->hdr;
 	if (hdr->count <= 0) {
-		hdr->texaddr = (void*)-1;
+		hdr->texaddr     = (void*)-1;
 		hdr->info.format = 0;
-		hdr->info._04 = 0;
-		hdr->info._08 = 0;
-		hdr->info.width = 0;
+		hdr->info._04    = 0;
+		hdr->info._08    = 0;
+		hdr->info.width  = 0;
 		hdr->info.height = 0;
-		hdr->info._14 = 0;
-		hdr->info.flags = 0;
-		hdr->info.image = NULL;
+		hdr->info._14    = 0;
+		hdr->info.flags  = 0;
+		hdr->info.image  = NULL;
 		gjTexHeadersUsed--;
 	}
 	if (mem->count <= 0) {
 		mem->tlut = -1;
-		mem->_00 = 0;
-		mem->_04 = 0;
-		mem->hdr = NULL;
-		mem->_14 = 0;
+		mem->_00  = 0;
+		mem->_04  = 0;
+		mem->hdr  = NULL;
+		mem->_14  = 0;
 	}
 }
 
@@ -416,9 +416,9 @@ NJS_TEXLIST* njGetCurrentTexList(void)
 // 0x80211134
 s32 njSetTextureNum(s32 num)
 {
-	NJS_CONTEXT* ctx = _nj_current_ctx_;
-	GjTexMem* mem = ctx->texlist->textures[num].texaddr;
-	ctx->tex = &mem->hdr->info;
+	NJS_CONTEXT* ctx      = _nj_current_ctx_;
+	GjTexMem* mem         = ctx->texlist->textures[num].texaddr;
+	ctx->tex              = &mem->hdr->info;
 	_nj_current_ctx_->_18 = mem->tlut;
 	return 1;
 }
@@ -427,10 +427,10 @@ s32 njSetTextureNum(s32 num)
 void gjTexClearErr(void)
 {
 	gTexErrStat.texno = -1;
-	gTexErrStat.n = -1;
-	gTexErrStat.err = 0;
-	gTexErrStat._0C = 0;
-	gTexErrStat._10 = 0;
+	gTexErrStat.n     = -1;
+	gTexErrStat.err   = 0;
+	gTexErrStat._0C   = 0;
+	gTexErrStat._10   = 0;
 }
 
 // 0x80211194
@@ -481,10 +481,10 @@ s32 gjTexLookup(u32 gbix, s32 bank, u32 format, s32* out)
 				return -1;
 			}
 			mem->tlut = bank;
-			mem->hdr = gjTexSlots[found].hdr;
+			mem->hdr  = gjTexSlots[found].hdr;
 			mem->hdr->count++;
 			mem->count = 1;
-			mem->_14 = gjTexSlots[found]._14;
+			mem->_14   = gjTexSlots[found]._14;
 			gjTexMemStub(mem);
 			*out = n;
 			return 1;
@@ -528,7 +528,7 @@ s32 gjTexCreateSlot(u32 gbix, s32 bank, const GjTexDesc* desc)
 		mem->tlut = -1;
 	}
 	gjTexMemStub(mem);
-	mem->count = 1;
+	mem->count      = 1;
 	mem->hdr->count = 1;
 	gjTexHeadersUsed++;
 	return n;
@@ -612,7 +612,7 @@ s32 gjTexMemRelease(GjTexMem* mem)
 // The same swap as gvrSwap32
 void gjTexSwap32(u32* value)
 {
-	u32 v = *value;
+	u32 v  = *value;
 	*value = (v & 0xFF) << 24 | ((v & 0xFF00) << 8 | ((v & 0xFF000000) >> 24 | (v & 0xFF0000) >> 8));
 }
 
@@ -638,13 +638,13 @@ s32 njLoadPaletteData(const GjPaletteFile* file, GjPalette* palette)
 	gjTexSwap32(&v);
 	switch (v) {
 	case 0x4C505647:
-			v = file->size;
-			gjTexSwap32(&v);
-			syMemCopy(palette->data, file->data, v - 8);
-			palette->_06 = file->_0A;
-			palette->_08 = file->_0C;
-			palette->_0A = file->_0E;
-			palette->_04 = file->_08;
+		v = file->size;
+		gjTexSwap32(&v);
+		syMemCopy(palette->data, file->data, v - 8);
+		palette->_06 = file->_0A;
+		palette->_08 = file->_0C;
+		palette->_0A = file->_0E;
+		palette->_04 = file->_08;
 		break;
 	default:
 		return -1;
@@ -668,9 +668,9 @@ s32 gjTexSurfaceSetup(GjTexInfo* surface, u32 w, u32 h, u32 format)
 	u32 flags = 0;
 
 	surface->format = (u8)format;
-	surface->width = w;
+	surface->width  = w;
 	surface->height = h;
-	mipmap = format & 0x100;
+	mipmap          = format & 0x100;
 	if (mipmap && w != h) {
 		err = 4;
 	}
@@ -717,8 +717,8 @@ u32 gjTexCalcSize(int w, int h, u32 format)
 // 0x80211A04
 u32 gjTexDescSize(GjTexDesc* desc)
 {
-	u16 w = desc->width;
-	u16 h = desc->height;
+	u16 w  = desc->width;
+	u16 h  = desc->height;
 	u8 fmt = desc->format;
 	u8 mipmap;
 	if (desc->format & 0x100) {
@@ -732,7 +732,7 @@ u32 gjTexDescSize(GjTexDesc* desc)
 // 0x80211A54
 s32 gjTexSurfaceAlloc(GjTexInfo* surface)
 {
-	s32 err = 0;
+	s32 err   = 0;
 	void* mem = OSAllocFromHeap(gjTexHeapHandle, surface->_14);
 	if (mem == NULL) {
 		err = 3;

@@ -63,25 +63,25 @@ public:
 	void freeFx();
 	void freeFxB();
 
-	int mCount;            // _64
-	MagmaRec* mRecs;       // _68
-	DrawTask* mDrawTask;   // _6C
-	void* mGeo;            // _70
-	void* mTex;            // _74
-	ScrollModel mScroll;   // _78
-	SetTransform mTrans;   // _98
-	ObjModel mModel;       // _DC
-	MotionPlayer mMotion;  // _FC
-	u16 mModelId;          // _138 set int 0 clamped to 0..2
-	u16 mEventId;          // _13A set int 3
-	EventCamRef mCam;         // _13C
-	int mStep;             // _144 cleared by setAct
-	TObject* mFx;          // _148
-	TObject* mFxB;         // _14C
-	int mSound;            // _150 -1 means none
-	Vec3f mCentre;         // _154
-	f32 mRadius;           // _160
-	int mAct;              // _164 0 waiting 1 playing 2 done
+	int mCount;           // _64
+	MagmaRec* mRecs;      // _68
+	DrawTask* mDrawTask;  // _6C
+	void* mGeo;           // _70
+	void* mTex;           // _74
+	ScrollModel mScroll;  // _78
+	SetTransform mTrans;  // _98
+	ObjModel mModel;      // _DC
+	MotionPlayer mMotion; // _FC
+	u16 mModelId;         // _138 set int 0 clamped to 0..2
+	u16 mEventId;         // _13A set int 3
+	EventCamRef mCam;     // _13C
+	int mStep;            // _144 cleared by setAct
+	TObject* mFx;         // _148
+	TObject* mFxB;        // _14C
+	int mSound;           // _150 -1 means none
+	Vec3f mCentre;        // _154
+	f32 mRadius;          // _160
+	int mAct;             // _164 0 waiting 1 playing 2 done
 };
 
 void loadMagmaArc();

@@ -30,18 +30,18 @@ public:
 	virtual void vfn_10(); // _10 empty
 	virtual void render(); // _1C
 
-	void setup(int kind);     // 0x801AE850
-	void updateMatrix();      // 0x801AEA08
-	void stepMotion();        // 0x801AEA4C
-	void play(s16 id);        // 0x801AEAEC
-	void startFall();         // 0x801AEB28
+	void setup(int kind); // 0x801AE850
+	void updateMatrix();  // 0x801AEA08
+	void stepMotion();    // 0x801AEA4C
+	void play(s16 id);    // 0x801AEAEC
+	void startFall();     // 0x801AEB28
 
-	GjActor* mActor;         // _20
+	GjActor* mActor;      // _20
 	f32 mMtx[12];         // _24
 	Vec3f mPos;           // _54
 	BattleAngle mAngle;   // _60
 	f32 mDrop;            // _6C
-	DrawTask* mDraw;          // _70
+	DrawTask* mDraw;      // _70
 	MotionPlayer mMotion; // _74
 	s16 mMotionId;        // _B0
 	u16 _B2;              // _B2

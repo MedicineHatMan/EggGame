@@ -8,7 +8,7 @@
 #include "core/TMainTask.h"
 #include "core/SdkCalls.h"
 
-TArc* sFontArc;          // 0x802C4F68
+TArc* sFontArc;             // 0x802C4F68
 FontData* sFontData;        // 0x802C4F6C
 u16 sFontDefaultBlock;      // 0x802C4F70
 u16 sFontDefaultIndex;      // 0x802C4F72
@@ -137,7 +137,7 @@ extern "C" void fontDrawCell(u8* src, u32* dst)
 	for (ty = 0; ty < 3; ty++) {
 		tile = dst;
 		for (tx = 0; tx < 3; tx++) {
-			out = tile;
+			out  = tile;
 			line = work + tx * 8;
 			for (row = 0; row < 8; row++) {
 				word = 0;
@@ -193,10 +193,10 @@ extern "C" int fontFindSlot(u16 block, u16 index, int hint)
 // 0x80068C08
 extern "C" void fontFillGlyph(int slot, FontCacheEntry* e, FontGlyph* glyph)
 {
-	glyph->mSlot  = slot;
-	glyph->mBlock = e->mBlock;
-	glyph->mIndex = e->mIndex;
-	glyph->_10    = 0;
+	glyph->mSlot     = slot;
+	glyph->mBlock    = e->mBlock;
+	glyph->mIndex    = e->mIndex;
+	glyph->_10       = 0;
 	FontBlock* block = sFontData->mBlocks[e->mBlock];
 	FontCell* cell   = &sFontCells[e->mCell];
 	if (block->mWidths != 0) {
@@ -380,8 +380,8 @@ extern "C" void fontFlush()
 	int x;
 
 	if (sFontDirty != 0) {
-		sFontDirty        = 0;
-		e = sFontCache;
+		sFontDirty = 0;
+		e          = sFontCache;
 		for (y = 0; y < 10; y++) {
 			for (x = 0; x < 10; x++, e++) {
 				if (e->mFlags & 2) {
@@ -396,7 +396,9 @@ extern "C" void fontFlush()
 }
 
 // 0x80069274
-TFontTask::~TFontTask() { }
+TFontTask::~TFontTask()
+{
+}
 
 // 0x800692D0
 void TFontTask::draw()

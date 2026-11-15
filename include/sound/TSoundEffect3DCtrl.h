@@ -22,7 +22,7 @@ struct Sound3DList {
 
 	SoundHandle* mTail; // _00
 	SoundHandle* mHead; // _04
-	int mCount;           // _08
+	int mCount;         // _08
 };
 
 /**
@@ -45,10 +45,10 @@ public:
 	void pauseAll();
 	void resumeAll();
 
-	int mMono;        // _20
+	int mMono;         // _20
 	Sound3DList mList; // _24
-	Vec3f mPos;       // _30
-	Vec3f mDir;       // _3C
+	Vec3f mPos;        // _30
+	Vec3f mDir;        // _3C
 };
 
 extern "C" {

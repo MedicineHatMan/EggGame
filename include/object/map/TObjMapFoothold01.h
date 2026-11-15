@@ -43,23 +43,23 @@ public:
 	int isTouched();
 	void updateTouchShape();
 
-	ObjModel mModel;   // _64
-	ObjPlace mPlace;   // _84
-	DrawTask* mDrawTask;   // _E0
-	MeshObject* mColli;      // _E4
-	ObjDrawState mState;  // _E8
-	int mType;         // _10C FootholdType
-	int mPhase;        // _110 an angle
-	int mSpeed;        // _114
-	f32 mRange;        // _118
-	f32 mOffset;       // _11C
-	u32 mWait;         // _120
-	Vec3f mVel;        // _124
-	u32 mTimer;        // _130
-	int mVisible;      // _134
-	int mStep;         // _138
-	u8 _13C[0xC];      // _13C
-	EnemyLight mLight; // _148
+	ObjModel mModel;     // _64
+	ObjPlace mPlace;     // _84
+	DrawTask* mDrawTask; // _E0
+	MeshObject* mColli;  // _E4
+	ObjDrawState mState; // _E8
+	int mType;           // _10C FootholdType
+	int mPhase;          // _110 an angle
+	int mSpeed;          // _114
+	f32 mRange;          // _118
+	f32 mOffset;         // _11C
+	u32 mWait;           // _120
+	Vec3f mVel;          // _124
+	u32 mTimer;          // _130
+	int mVisible;        // _134
+	int mStep;           // _138
+	u8 _13C[0xC];        // _13C
+	EnemyLight mLight;   // _148
 };
 
 #endif

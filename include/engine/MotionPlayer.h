@@ -31,8 +31,8 @@ struct MotionEntry {
 struct MotionBlend {
 	NJS_MOTION* mFrom; // _00
 	NJS_MOTION* mTo;   // _04
-	f32 mFromFrame; // _08
-	f32 mToFrame;   // _0C
+	f32 mFromFrame;    // _08
+	f32 mToFrame;      // _0C
 };
 
 /**
@@ -67,19 +67,19 @@ struct MotionPlayer {
 	f32 getBlendRate(s16 id);
 	void getCurrent(void** motion, void** shape);
 
-	s8 mState;           // _00 1 = started 2 = playing 3 = blending 4 = blending at the same frame
-	s16 mCurrent;        // _02
-	s16 mPrev;           // _04
-	u32 mFlags;          // _08 1 = blending 2/4/8 = a pending play 0x10 = done 0x100 = reached the end
-	f32 mFrame;          // _0C
-	f32 mPrevFrame;      // _10
-	f32 mBlendTime;      // _14 0 to 1
-	f32 mBlendRate;      // _18
-	f32 mSpeed;          // _1C scales every motion's rate
-	MotionBlend mBlend;  // _20
+	s8 mState;                 // _00 1 = started 2 = playing 3 = blending 4 = blending at the same frame
+	s16 mCurrent;              // _02
+	s16 mPrev;                 // _04
+	u32 mFlags;                // _08 1 = blending 2/4/8 = a pending play 0x10 = done 0x100 = reached the end
+	f32 mFrame;                // _0C
+	f32 mPrevFrame;            // _10
+	f32 mBlendTime;            // _14 0 to 1
+	f32 mBlendRate;            // _18
+	f32 mSpeed;                // _1C scales every motion's rate
+	MotionBlend mBlend;        // _20
 	const MotionEntry* mTable; // _30
-	NJS_MOTION** mMotions; // _34
-	void** mShapes;      // _38
+	NJS_MOTION** mMotions;     // _34
+	void** mShapes;            // _38
 };
 
 extern "C" {

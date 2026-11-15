@@ -25,8 +25,8 @@ int TGameStateBattle::onMessage(TGameContextBattle* context, ObjMsg* msg)
 TGameContextBattle::TGameContextBattle(TObject* parent)
     : TCustomGameContext(parent)
 {
-	_00   = (u32)sGameContextBattleName;
-	mSize = 0x98;
+	_00        = (u32)sGameContextBattleName;
+	mSize      = 0x98;
 	void* pool = ::operator new(0xC);
 	if (pool != 0) {
 		pool = initPlyPool(pool, 0x40);
@@ -107,7 +107,7 @@ void TGameContextBattle::draw()
 // From the battle mode for each port that plays
 extern "C" void battleAddPlayer(TGameContextBattle* context, u16 id, u8 chara)
 {
-	int index = context->mPlayerCount++;
+	int index                    = context->mPlayerCount++;
 	context->mPlayers[index].mId = id;
 	context->mPlayers[index]._00 = chara;
 }
@@ -158,7 +158,7 @@ int TGameContextBattle::getStatus()
 // 0x8019EAFC
 void TGameContextBattle::endOnResult1()
 {
-	mEndKind = 6;
+	mEndKind   = 6;
 	void* pool = mPool;
 	releasePlyState(pool, changeBattleState(&mStateSlot, this, createGameStateBattleEnd(pool, this)));
 }
@@ -166,7 +166,7 @@ void TGameContextBattle::endOnResult1()
 // 0x8019EB58
 void TGameContextBattle::endOnResult0()
 {
-	mEndKind = 5;
+	mEndKind   = 5;
 	void* pool = mPool;
 	releasePlyState(pool, changeBattleState(&mStateSlot, this, createGameStateBattleEnd(pool, this)));
 }
@@ -220,8 +220,8 @@ extern "C" void* createGameStateBattleEnd(void* pool, TGameContextBattle*)
 // 0x8019EDB4
 TGameStateBattleEnd::TGameStateBattleEnd()
 {
-	mName = gTGameStateBattleEndName; // "TGameStateBattleEnd"
-	mSize = 0x18;
+	mName  = gTGameStateBattleEndName; // "TGameStateBattleEnd"
+	mSize  = 0x18;
 	mTimer = 120;
 }
 

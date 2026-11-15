@@ -45,7 +45,7 @@ extern "C" int motionKeyOnce(f32 time, MotionEntry* entry, f32* frame)
 extern "C" void motionKeyLoop(f32 time, const MotionEntry* entry, f32* frame)
 {
 	f32 length = entry->mEnd - entry->mStart;
-	f32 at = njFraction(time * entry->mRate / length);
+	f32 at     = njFraction(time * entry->mRate / length);
 	if (at < 0.0f) {
 		at += 1.0f;
 	}
@@ -186,15 +186,15 @@ inline void TEneBoss02::operator delete(void* mem)
 {
 	objHeapFree(gObjHeap, mem);
 }
-extern const int sBoss02Nodes[] = { 0, 65, 72, 105, 124, 125, -1 };
-const char* gTEneBoss02Name = "TEneBoss02";
+extern const int sBoss02Nodes[]               = { 0, 65, 72, 105, 124, 125, -1 };
+const char* gTEneBoss02Name                   = "TEneBoss02";
 extern const EnemyFrameKey sBoss02FrameKey0[] = { { 4.0f, 0 }, { 15.0f, 5 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sBoss02FrameKey1[] = { { 5.0f, 4 }, { 20.0f, 3 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sBoss02FrameKey2[] = { { 1.0f, 0 }, { 14.0f, 3 }, { -1.0f, 0 } };
 
 // 0x80256380
 // the first data of the file
-const EnemyFrameKey* sBoss02FrameKeys[3] = { sBoss02FrameKey0, sBoss02FrameKey1, sBoss02FrameKey2 };
+const EnemyFrameKey* sBoss02FrameKeys[3]     = { sBoss02FrameKey0, sBoss02FrameKey1, sBoss02FrameKey2 };
 extern const ColliShape sBoss02BodyShapes[1] = {
 	{ { 0.0f, 35.0f, 0.0f }, 0x0, 0, 0x0, 40.0f, 35.0f, 0.0f, 0x0, COLLISHAPE_CYLINDER, 0x0 },
 };
@@ -207,13 +207,13 @@ extern const ColliShape sBoss02SlamShapes[1] = {
 }
 
 // The node walk the motion callbacks share
-static int sNode;          // 0x802C4EE8
-static int sPick;          // 0x802C4EEC
+static int sNode;            // 0x802C4EE8
+static int sPick;            // 0x802C4EEC
 static const int* sPickList; // 0x802C4EF0
-static Vec3f* sPickOut;    // 0x802C4EF4
-static f32* sPickMtx;      // 0x802C4EF8
-static int sTailCount;     // 0x802C4EFC
-static int* sTailNodes;    // 0x802C4F00
+static Vec3f* sPickOut;      // 0x802C4EF4
+static f32* sPickMtx;        // 0x802C4EF8
+static int sTailCount;       // 0x802C4EFC
+static int* sTailNodes;      // 0x802C4F00
 
 static inline int toAngle(f32 x, f32 z)
 {
@@ -226,13 +226,13 @@ extern "C" void initTEneBoss02()
 	resBankLoad(&sBoss02Bank, "ar_ene_blue_boss.arc");
 	resBankAddTextures(&sBoss02Bank, 0, "ene_blue_boss.gvm");
 	resBankAddTextures(&sBoss02Bank, 1, "ene_blue_boss_suimen.gvm");
-	sBoss02Models = resBankGetModels(&sBoss02Bank);
+	sBoss02Models   = resBankGetModels(&sBoss02Bank);
 	sBoss02Textures = resBankGetTextures(&sBoss02Bank);
-	sBoss02Motion = resBankGetMotion(&sBoss02Bank, 0);
-	gBoss02Params = (Boss02Params*)enemyParamGet(2);
+	sBoss02Motion   = resBankGetMotion(&sBoss02Bank, 0);
+	gBoss02Params   = (Boss02Params*)enemyParamGet(2);
 	fxBankLoadDefault(&sBlueBossFx, "pa_blueboss.pad");
-	sNode = 0;
-	sPick = 0;
+	sNode    = 0;
+	sPick    = 0;
 	sPickOut = 0;
 	sPickMtx = 0;
 	initBoss02Tail();
@@ -252,9 +252,9 @@ extern "C" void shutdownTEneBoss02()
 	resBankRemoveTextures(&sBoss02Bank, 1);
 	resBankRemoveTextures(&sBoss02Bank, 0);
 	resBankRelease(&sBoss02Bank);
-	sBoss02Models = 0;
+	sBoss02Models   = 0;
 	sBoss02Textures = 0;
-	sBoss02Motion = 0;
+	sBoss02Motion   = 0;
 }
 
 // 0x800597D8
@@ -285,7 +285,7 @@ extern "C" const void* paramsTEneBoss02()
 TEneBoss02::TEneBoss02(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)gTEneBoss02Name;
+	_00   = (u32)gTEneBoss02Name;
 	mSize = 0x3F8;
 	init(desc);
 	initBossBar();
@@ -299,21 +299,21 @@ void TEneBoss02::init(SetDesc* desc)
 	motionCtrlPlay(&mAnim, 0);
 	mBody.mRot.x = 0;
 	makeColliders();
-	mTail = new BossTail(8);
+	mTail      = new BossTail(8);
 	mTransform = 0;
-	mNextNode = 0;
-	mBrain = 0;
+	mNextNode  = 0;
+	mBrain     = 0;
 	readEnemyDesc(desc);
-	mPose = (GjActor*)allocPose(sBoss02Models[1]);
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mLayer = 0x21;
+	mPose      = (GjActor*)allocPose(sBoss02Models[1]);
+	mDrawTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mLayer     = 0x21;
 	mBossFlags = 0;
-	mKnock.x = 0.0f;
-	mKnock.y = 0.0f;
-	mKnock.z = 0.0f;
-	mFrameKey = 0;
+	mKnock.x   = 0.0f;
+	mKnock.y   = 0.0f;
+	mKnock.z   = 0.0f;
+	mFrameKey  = 0;
 	mMaxHealth = 500;
-	mHealth = 500;
+	mHealth    = 500;
 	shadowSetGround(&mShadow, &mBody.mPos, 0);
 	mShadow._30 = 80.0f;
 	mShadow._34 = 80.0f;
@@ -321,36 +321,36 @@ void TEneBoss02::init(SetDesc* desc)
 	mTarget.x = 0.0f;
 	mTarget.y = 0.0f;
 	mTarget.z = 0.0f;
-	mAim.x = 0.0f;
-	mAim.y = 0.0f;
-	mAim.z = 0.0f;
-	mAimSlot = 0;
-	mBaseY = 0.0f;
-	mGlowFx = 0;
-	mTrail = 0;
+	mAim.x    = 0.0f;
+	mAim.y    = 0.0f;
+	mAim.z    = 0.0f;
+	mAimSlot  = 0;
+	mBaseY    = 0.0f;
+	mGlowFx   = 0;
+	mTrail    = 0;
 	glowOff();
-	mSwimPhase = 0.0f;
-	mTurnStep = 0;
-	mTurnFrom = 0;
+	mSwimPhase  = 0.0f;
+	mTurnStep   = 0;
+	mTurnFrom   = 0;
 	mMoveFrom.x = 0.0f;
 	mMoveFrom.y = 0.0f;
 	mMoveFrom.z = 0.0f;
-	mTurnRate = 1.0f;
-	mMoveRate = 1.0f;
+	mTurnRate   = 1.0f;
+	mMoveRate   = 1.0f;
 	mTint.reset();
-	mView = 0;
+	mView      = 0;
 	mViewShown = -1;
-	mDemo = 0;
+	mDemo      = 0;
 	seCueClear(&mCue);
-	_1BC = 0;
-	mStep = 0;
-	mCount = 0;
+	_1BC       = 0;
+	mStep      = 0;
+	mCount     = 0;
 	mTurnSpeed = 0;
-	mTime = 0.0f;
-	mTime1 = 0.0f;
-	mTime2 = 0.0f;
-	mTime3 = 0.0f;
-	mTime4 = 0.0f;
+	mTime      = 0.0f;
+	mTime1     = 0.0f;
+	mTime2     = 0.0f;
+	mTime3     = 0.0f;
+	mTime4     = 0.0f;
 	measure();
 	createBrain();
 }
@@ -376,7 +376,7 @@ extern "C" void* createBoss02Body(int id)
 void TEneBoss02::makeColliders()
 {
 	mCollider = (CharaColli*)createBoss02Body(mObjId);
-	mAttack = colliCreate(1, 1);
+	mAttack   = colliCreate(1, 1);
 	colliCopyShapes(mAttack, (const ColliShape*)sBoss02BiteShapes);
 	colliSetOwner(mAttack, (u16)mObjId);
 	colliSetMasks(mAttack, 2, 0xFF, 0, 4);
@@ -425,7 +425,7 @@ void TEneBoss02::measure()
 // Where the head sits from the body at frame 4 of motion 1 flat
 void TEneBoss02::measureBody()
 {
-	int nodes[3] = {0x68, 0x69, -1};
+	int nodes[3] = { 0x68, 0x69, -1 };
 	Vec3f pts[2];
 	void* motion;
 
@@ -436,7 +436,7 @@ void TEneBoss02::measureBody()
 	njStartMotionObj(motion, 4.0f);
 	walkBody(sBoss02Models[1]);
 	njPopMatrixEx();
-	mNeck = pts[1];
+	mNeck    = pts[1];
 	mNeckDir = pts[1];
 	njSubVector(&mNeckDir, &pts[0]);
 	mNeckDir.y = 0.0f;
@@ -464,9 +464,9 @@ void TEneBoss02::measureTail()
 		nodes[i] = i + 0x41;
 	}
 	nodes[8] = -1;
-	motion = sBoss02Motion[0x12];
-	pts = mTail->mPoints;
-	lens = mTail->mLengths;
+	motion   = sBoss02Motion[0x12];
+	pts      = mTail->mPoints;
+	lens     = mTail->mLengths;
 	beginPick(nodes, pts);
 	sPickMtx = mtx;
 	gjPushUnitMatrix();
@@ -475,8 +475,8 @@ void TEneBoss02::measureTail()
 	walkBody(sBoss02Models[1]);
 	njPopMatrixEx();
 	gjSetMotionCallback(0);
-	sn = (f32*)&d + 1;
-	cs = (f32*)&d + 2;
+	sn      = (f32*)&d + 1;
+	cs      = (f32*)&d + 2;
 	lens[0] = 0.0f;
 	for (j = 1; j < 8; j++) {
 		d = pts[j];
@@ -534,10 +534,10 @@ TEneBoss02::~TEneBoss02()
 // 0x8005A12C
 void TEneBoss02::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -601,13 +601,13 @@ void fitShadow(f32 waterY, const Vec3f* pos, const HitVec* parts, ObjShadow* sha
 	ground.x = parts[5].x;
 	ground.z = parts[5].z;
 	ground.y = waterY;
-	d.x = parts[4].x;
-	d.y = parts[4].y;
-	d.z = parts[4].z;
+	d.x      = parts[4].x;
+	d.y      = parts[4].y;
+	d.z      = parts[4].z;
 	njSubVector(&d, &parts[5]);
-	size = 1.7f * njScalor(&d);
-	f64 h = fabs(pos->y - waterY);
-	size = size * distanceFalloff(h);
+	size        = 1.7f * njScalor(&d);
+	f64 h       = fabs(pos->y - waterY);
+	size        = size * distanceFalloff(h);
 	shadow->_30 = size;
 	shadow->_34 = size;
 	shadowSetGround(shadow, &ground, 0);
@@ -616,7 +616,7 @@ void fitShadow(f32 waterY, const Vec3f* pos, const HitVec* parts, ObjShadow* sha
 // 0x8005A368
 void TEneBoss02::playDemo(int model, int motion)
 {
-	void* object = resBankGetObjects(&sBoss02Bank)[model];
+	void* object       = resBankGetObjects(&sBoss02Bank)[model];
 	NJS_MOTION** table = resBankGetMotion(&sBoss02Bank, 1);
 
 	mDemo = createCamPath(0, 3, object, table[motion], 0, 1.0f, 1.0f);
@@ -658,7 +658,7 @@ int TEneBoss02::getHitKind(const void* touch, HitInfo* info)
 int TEneBoss02::onHit(const TObjAction* other, int shape, int* result)
 {
 	HitInfo* info = (HitInfo*)result;
-	int hit = 0;
+	int hit       = 0;
 	if (isPlayerObj(other) != 0) {
 		info->mFlags.clear();
 		info->mPos.x = 0.0f;
@@ -677,9 +677,9 @@ int TEneBoss02::onHit(const TObjAction* other, int shape, int* result)
 	} else if (isEggObj(other) != 0 && shape == 1) {
 		hit = 1;
 		info->mFlags.clear();
-		info->mPos.x = 0.0f;
-		info->mPos.y = 0.0f;
-		info->mPos.z = 0.0f;
+		info->mPos.x  = 0.0f;
+		info->mPos.y  = 0.0f;
+		info->mPos.z  = 0.0f;
 		info->mDamage = 1;
 		info->mFlags.setBit(0xD);
 	}
@@ -718,7 +718,7 @@ int TEneBoss02::finishMotion()
 void TEneBoss02::setHealth(int health)
 {
 	mMaxHealth = health;
-	mHealth = health;
+	mHealth    = health;
 }
 
 // 0x8005A604
@@ -754,9 +754,9 @@ int TEneBoss02::isShootDone()
 // 0x8005A688
 void TEneBoss02::setAimSlot(Vec3f* aim, int slot)
 {
-	mAim.x = aim->x;
-	mAim.y = aim->y;
-	mAim.z = aim->z;
+	mAim.x   = aim->x;
+	mAim.y   = aim->y;
+	mAim.z   = aim->z;
 	mAimSlot = slot;
 }
 
@@ -813,9 +813,9 @@ int TEneBoss02::isGateRiseDone()
 void TEneBoss02::onLightHit()
 {
 	Vec3f at;
-	at.x = mContact.mSurface.x;
-	at.y = mContact.mSurface.y;
-	at.z = mContact.mSurface.z;
+	at.x      = mContact.mSurface.x;
+	at.y      = mContact.mSurface.y;
+	at.z      = mContact.mSurface.z;
 	int angle = toAngle(at.x - mContact.mCenter.x, at.z - mContact.mCenter.z);
 	particleOnceByIdRotDefault(&at, 1, 0x40, 0, angle, 30.0f);
 	particleOnceByIdRotDefault(&at, 1, 0x41, 0, angle, 30.0f);
@@ -919,10 +919,10 @@ void TEneBoss02::createBrain()
 static void beginPick(const int* list, Vec3f* out)
 {
 	sPickList = list;
-	sNode = 0;
-	sPick = 0;
-	sPickOut = out;
-	sPickMtx = 0;
+	sNode     = 0;
+	sPick     = 0;
+	sPickOut  = out;
+	sPickMtx  = 0;
 }
 
 // 0x8005AB84
@@ -1015,17 +1015,17 @@ static int countTail(NJS_OBJECT* obj, int* index, int* out, int max);
 extern "C" void initBoss02Tail()
 {
 	int count;
-	sPick = 0x42;
+	sPick      = 0x42;
 	sTailCount = 0;
 	sTailNodes = 0;
-	sNode = 0;
-	count = 0;
+	sNode      = 0;
+	count      = 0;
 	countTail(sBoss02Models[1], &count, 0, -1);
-	sTailCount = count + 1;
-	sTailNodes = new int[sTailCount + 1];
+	sTailCount             = count + 1;
+	sTailNodes             = new int[sTailCount + 1];
 	sTailNodes[sTailCount] = -1;
-	sNode = 0;
-	count = 0;
+	sNode                  = 0;
+	count                  = 0;
 	countTail(sBoss02Models[1], &count, sTailNodes, sTailCount);
 }
 
@@ -1085,31 +1085,31 @@ void TEneBoss02::poseTail()
 	nodes[1] = sBoss02TailNodes[1];
 	nodes[2] = sBoss02TailNodes[2];
 	gjPushUnitMatrix();
-	sNode = 0;
-	sPick = 0;
+	sNode     = 0;
+	sPick     = 0;
 	sPickList = nodes;
-	sPickOut = pts;
-	sPickMtx = mtx;
-	index = 0;
+	sPickOut  = pts;
+	sPickMtx  = mtx;
+	index     = 0;
 	bodyMatrix();
 	bodyTilt();
 	if (motionCtrlIsBlending(&mAnim) != 0) {
 		f32 frame = motionCtrlBlendTime(&mAnim);
 		njStartMotionLink((const NJS_MOTION_LINK*)motionCtrlGetBlend(&mAnim), frame);
 		mTransform = njMotionLinkTransformEx;
-		mNextNode = njSetNextMotionLinkNode;
+		mNextNode  = njSetNextMotionLinkNode;
 	} else {
 		f32 frame = motionCtrlFrame(&mAnim);
 		njStartMotionObj(motionCtrlGetMotion(&mAnim), frame);
 		mTransform = njMotionTransformEx;
-		mNextNode = njSetNextMotionNodeEx;
+		mNextNode  = njSetNextMotionNodeEx;
 	}
 	walkTail(sBoss02Models[1], &index);
 	njPopMatrixEx();
 	mTail->update(pts, &mTip);
 	njInvertMatrix(mtx);
 	links = mTail->mPoints;
-	mats = mTail->mMatrices;
+	mats  = mTail->mMatrices;
 	njPushMatrix(mtx);
 	prev = pts[1];
 	njSubVector(&prev, &pts[0]);
@@ -1192,8 +1192,8 @@ void TEneBoss02::disarm()
 void TEneBoss02::setShape(const void* shapes)
 {
 	f32* shape = (f32*)colliGetShape(mAttack, 0);
-	shape[6] = ((const f32*)shapes)[6];
-	shape[7] = ((const f32*)shapes)[7];
+	shape[6]   = ((const f32*)shapes)[6];
+	shape[7]   = ((const f32*)shapes)[7];
 }
 
 // 0x8005B478
@@ -1246,8 +1246,8 @@ void TEneBoss02::glowOff()
 {
 	mBossFlags &= ~BOSS_GLOW;
 	mGlowState = 2;
-	mGlow = 0.0f;
-	mGlowWave = 0.0f;
+	mGlow      = 0.0f;
+	mGlowWave  = 0.0f;
 	mGlowAngle = 0;
 	if (mGlowFx != 0) {
 		mGlowFx->mFlags |= 1;
@@ -1260,8 +1260,8 @@ void TEneBoss02::glowOn()
 {
 	mBossFlags |= BOSS_GLOW;
 	mGlowState = 0;
-	mGlow = 0.8f;
-	mGlowWave = 0.0f;
+	mGlow      = 0.8f;
+	mGlowWave  = 0.0f;
 	mGlowAngle = 0;
 	keepGlowFx();
 }
@@ -1301,7 +1301,7 @@ void TEneBoss02::updateGlow()
 	case 1:
 		mGlow += 0.02f;
 		if (mGlow >= 0.8f) {
-			mGlow = 0.8f;
+			mGlow      = 0.8f;
 			mGlowState = 0;
 		}
 		break;
@@ -1310,7 +1310,7 @@ void TEneBoss02::updateGlow()
 	case 3:
 		mGlow -= 0.02f;
 		if (mGlow <= 0.0f) {
-			mGlow = 0.0f;
+			mGlow      = 0.0f;
 			mGlowState = 2;
 		}
 		break;
@@ -1341,7 +1341,7 @@ void TEneBoss02::startMove(f32 time, const Vec3f* from, const Vec3f* to)
 // 0x8005B850
 f32 TEneBoss02::swim(f32 time, f32 rate, f32 phase)
 {
-	f32 dy = jumpHeightAt(time, rate, phase);
+	f32 dy       = jumpHeightAt(time, rate, phase);
 	mBody.mPos.y = mBaseY + dy;
 	return dy;
 }
@@ -1366,7 +1366,7 @@ void TEneBoss02::moveEase(f32 time, f32 end, f32 rate)
 // The turn from the facing to the velocity a step for each frame of time
 void TEneBoss02::startTurn(f32 x, f32 z, f32 time)
 {
-	int from = mBody.mRot.y;
+	int from  = mBody.mRot.y;
 	mTurnFrom = from;
 	mTurnStep = angleDiff(from, toAngle(x, z)) / (int)time;
 }
@@ -1398,7 +1398,9 @@ void TEneBoss02::setGuarded()
 }
 
 // 0x8005BA0C
-void TEneBoss02::onShoot() { }
+void TEneBoss02::onShoot()
+{
+}
 
 // 0x8005BA10
 void TEneBoss02::shotFx()
@@ -1545,9 +1547,9 @@ void TEneBoss02::actAppear(int phase)
 		setCantAct();
 		glowOn();
 		clearFrameKey();
-		mDemo = 0;
+		mDemo  = 0;
 		mCount = 0;
-		mStep = 0;
+		mStep  = 0;
 		break;
 	case 1: {
 		f32 frame;
@@ -1595,7 +1597,7 @@ void TEneBoss02::actAppear(int phase)
 		break;
 	}
 	case 2:
-		mBaseY = mTarget.y;
+		mBaseY       = mTarget.y;
 		mBody.mPos.x = mTarget.x;
 		mBody.mPos.y = mTarget.y;
 		mBody.mPos.z = mTarget.z;
@@ -1645,7 +1647,7 @@ void TEneBoss02::actRise(int phase)
 				t *= t;
 				dy = 46.0f - (46.0f / d) * t;
 			} else {
-				dy = 0.0f;
+				dy    = 0.0f;
 				mStep = 1;
 				seStartAtFar(0x111, &mBody.mPos);
 			}
@@ -1677,7 +1679,7 @@ int turnToward(f32 frame, f32 rate, int target, int* angle, int* step)
 		}
 	}
 	*angle = (u16)angleApproach(*angle, target, *step);
-	done = 0;
+	done   = 0;
 	if (*angle == target && frame >= 17.5f) {
 		done = 1;
 	}
@@ -1708,7 +1710,7 @@ void TEneBoss02::actTurn(int phase)
 		motionCtrlUpdate(&mAnim);
 		d = mAim;
 		njSubVector(&d, &mBody.mPos);
-		d.y = 0.0f;
+		d.y    = 0.0f;
 		distSq = njScalor2(&d);
 		target = toAngle(d.x, d.z) & 0xFFFF;
 		if (distSq < 10000.0f) {
@@ -1896,23 +1898,23 @@ void TEneBoss02::planDive(f32 height, int motion, f32* time, f32* travel, f32* e
 	f32 length;
 	f32 swim;
 
-	*time = -motionEntryTimeAt(entry, height);
-	length = *time + motionEntryLength(entry);
-	phase = jumpSpeed(0.12f, 120.0f);
-	swim = jumpRiseTime(0.12f, phase);
-	*travel = 2.0f * swim;
-	*end = *travel;
-	*tilt = swim - 42.666668f;
-	mSwimPhase = phase;
-	keys[0].mKind = 0;
+	*time          = -motionEntryTimeAt(entry, height);
+	length         = *time + motionEntryLength(entry);
+	phase          = jumpSpeed(0.12f, 120.0f);
+	swim           = jumpRiseTime(0.12f, phase);
+	*travel        = 2.0f * swim;
+	*end           = *travel;
+	*tilt          = swim - 42.666668f;
+	mSwimPhase     = phase;
+	keys[0].mKind  = 0;
 	keys[0].mValue = *time;
-	keys[1].mKind = motion;
+	keys[1].mKind  = motion;
 	keys[1].mValue = 0.0f;
-	keys[2].mKind = 1;
+	keys[2].mKind  = 1;
 	keys[2].mValue = length;
-	keys[3].mKind = 10;
+	keys[3].mKind  = 10;
 	keys[3].mValue = 0.0f;
-	keys[4].mKind = 3;
+	keys[4].mKind  = 3;
 }
 
 // 0x8005CA00
@@ -1920,7 +1922,7 @@ void TEneBoss02::planDive(f32 height, int motion, f32* time, f32* travel, f32* e
 void TEneBoss02::actDive(int phase, int action)
 {
 	f32* time = &mTime;
-	f32* end = &mTime1;
+	f32* end  = &mTime1;
 	f32* tilt = &mTime2;
 	switch (phase) {
 	case 0: {
@@ -1934,10 +1936,10 @@ void TEneBoss02::actDive(int phase, int action)
 		f32 speed;
 		if (action == ACT_DIVE) {
 			mCount = 9;
-			speed = 12.0f;
+			speed  = 12.0f;
 		} else {
 			mCount = 8;
-			speed = 12.0f;
+			speed  = 12.0f;
 		}
 		planDive(speed, mCount, time, &travel, end, tilt, mKeys);
 		startMove(travel, &mBody.mPos, &mTarget);
@@ -1950,7 +1952,7 @@ void TEneBoss02::actDive(int phase, int action)
 			f32 dy;
 			f32 over;
 			mView = 1;
-			dy = swim(*time, 0.12f, mSwimPhase);
+			dy    = swim(*time, 0.12f, mSwimPhase);
 			moveEase(*time, *end, 0.0005f);
 			if (dy < 0.0f) {
 				if (!(mBossFlags & BOSS_SPLASHED)) {
@@ -1971,7 +1973,7 @@ void TEneBoss02::actDive(int phase, int action)
 				x = (int)(-384.0f * over);
 				if (x < -0x8000) {
 					*tilt = 100000.0f;
-					x = -0x8000;
+					x     = -0x8000;
 				}
 				mBody.mRot.x = x;
 			}
@@ -2012,58 +2014,58 @@ void TEneBoss02::planLeap(f32* time, f32* travel, f32* top, f32* fall, f32* land
 	f32 b;
 	f32 start;
 
-	blend = motionBlendLength(0.2f);
-	rise = &sBoss02Motions[11];
-	riseStart = motionEntryTimeAt(rise, 10.0f);
+	blend      = motionBlendLength(0.2f);
+	rise       = &sBoss02Motions[11];
+	riseStart  = motionEntryTimeAt(rise, 10.0f);
 	riseLength = motionEntryLength(rise);
-	drop = &sBoss02Motions[5];
-	dropStart = motionEntryTimeAt(drop, 4.0f);
+	drop       = &sBoss02Motions[5];
+	dropStart  = motionEntryTimeAt(drop, 4.0f);
 	dropLength = motionEntryLength(drop);
 	mSwimPhase = jumpSpeed(0.12f, 150.0f);
-	*travel = jumpRiseTime(0.12f, mSwimPhase);
+	*travel    = jumpRiseTime(0.12f, mSwimPhase);
 	jumpTimesAt(0.12f, mSwimPhase, -200.0f, &a, &b);
-	*time = b;
-	start = *travel - riseStart;
-	*top = start + riseLength;
-	*fall = 2.0f * *travel;
-	*fall = *fall + (*top - *travel);
-	*land = *fall + dropLength - dropStart;
-	keys[0].mKind = 1;
-	keys[0].mValue = *time;
-	keys[1].mKind = 10;
-	keys[1].mValue = 0.0f;
-	keys[2].mKind = 2;
-	keys[2].mValue = start - blend;
-	keys[3].mKind = 11;
-	keys[3].mValue = 0.2f;
-	keys[4].mKind = 0;
-	keys[4].mValue = start;
-	keys[5].mKind = 11;
-	keys[5].mValue = 0.0f;
-	keys[6].mKind = 0;
-	keys[6].mValue = *top;
-	keys[7].mKind = 7;
-	keys[7].mValue = 0.0f;
-	keys[8].mKind = 2;
-	keys[8].mValue = *fall - blend - dropStart;
-	keys[9].mKind = 5;
-	keys[9].mValue = 0.2f;
-	keys[10].mKind = 0;
+	*time           = b;
+	start           = *travel - riseStart;
+	*top            = start + riseLength;
+	*fall           = 2.0f * *travel;
+	*fall           = *fall + (*top - *travel);
+	*land           = *fall + dropLength - dropStart;
+	keys[0].mKind   = 1;
+	keys[0].mValue  = *time;
+	keys[1].mKind   = 10;
+	keys[1].mValue  = 0.0f;
+	keys[2].mKind   = 2;
+	keys[2].mValue  = start - blend;
+	keys[3].mKind   = 11;
+	keys[3].mValue  = 0.2f;
+	keys[4].mKind   = 0;
+	keys[4].mValue  = start;
+	keys[5].mKind   = 11;
+	keys[5].mValue  = 0.0f;
+	keys[6].mKind   = 0;
+	keys[6].mValue  = *top;
+	keys[7].mKind   = 7;
+	keys[7].mValue  = 0.0f;
+	keys[8].mKind   = 2;
+	keys[8].mValue  = *fall - blend - dropStart;
+	keys[9].mKind   = 5;
+	keys[9].mValue  = 0.2f;
+	keys[10].mKind  = 0;
 	keys[10].mValue = *fall - dropStart;
-	keys[11].mKind = 5;
+	keys[11].mKind  = 5;
 	keys[11].mValue = 0.0f;
-	keys[12].mKind = 3;
+	keys[12].mKind  = 3;
 }
 
 // 0x8005CEAC
 // Leaps out of a gate onto the aim and slams down
 void TEneBoss02::actLeap(int phase)
 {
-	f32* time = &mTime;
+	f32* time   = &mTime;
 	f32* travel = &mTime1;
-	f32* top = &mTime2;
-	f32* fall = &mTime3;
-	f32* land = &mTime4;
+	f32* top    = &mTime2;
+	f32* fall   = &mTime3;
+	f32* land   = &mTime4;
 	switch (phase) {
 	case 0:
 		disarm();
@@ -2216,29 +2218,29 @@ void TEneBoss02::planGateRise(f32* time, f32* travel, Boss02Key* keys)
 	mSwimPhase = jumpSpeed(0.12f, 150.0f);
 	jumpTimesAt(0.12f, mSwimPhase, 36.0f, &a, &b);
 	*travel = a;
-	blend = motionBlendLength(0.2f);
-	length = motionEntryLength(&sBoss02Motions[12]);
+	blend   = motionBlendLength(0.2f);
+	length  = motionEntryLength(&sBoss02Motions[12]);
 	jumpTimesAt(0.12f, mSwimPhase, -200.0f, &a, &b);
-	*time = b;
-	keys[0].mKind = 1;
+	*time          = b;
+	keys[0].mKind  = 1;
 	keys[0].mValue = -20.0f;
-	keys[1].mKind = 10;
+	keys[1].mKind  = 10;
 	keys[1].mValue = 0.0f;
-	keys[2].mKind = 2;
+	keys[2].mKind  = 2;
 	keys[2].mValue = *travel - length - blend;
-	keys[3].mKind = 12;
+	keys[3].mKind  = 12;
 	keys[3].mValue = 0.2f;
-	keys[4].mKind = 0;
+	keys[4].mKind  = 0;
 	keys[4].mValue = *travel - length;
-	keys[5].mKind = 12;
+	keys[5].mKind  = 12;
 	keys[5].mValue = 0.0f;
-	keys[6].mKind = 2;
+	keys[6].mKind  = 2;
 	keys[6].mValue = *travel;
-	keys[7].mKind = 0;
+	keys[7].mKind  = 0;
 	keys[7].mValue = 0.2f;
-	keys[8].mKind = 1;
+	keys[8].mKind  = 1;
 	keys[8].mValue = *travel + blend;
-	keys[9].mKind = 0;
+	keys[9].mKind  = 0;
 	keys[9].mValue = 0.0f;
 	keys[10].mKind = 3;
 }
@@ -2247,7 +2249,7 @@ void TEneBoss02::planGateRise(f32* time, f32* travel, Boss02Key* keys)
 // Rises out of a gate and swims to the aim closing the gates
 void TEneBoss02::actGateRise(int phase)
 {
-	f32* time = &mTime;
+	f32* time   = &mTime;
 	f32* travel = &mTime1;
 	switch (phase) {
 	case 0:
@@ -2318,7 +2320,7 @@ void TEneBoss02::actDie(int phase)
 {
 	switch (phase) {
 	case 0:
-		mStep = 0;
+		mStep  = 0;
 		mCount = 18;
 		mTint.start();
 		mEnemyFlags |= ENEMY_BLOCKED;
@@ -2351,7 +2353,7 @@ void TEneBoss02::actDie(int phase)
 			playDemo(0, 0);
 			bossSuitSetFade(gBoss02Params->mSuitA, gBoss02Params->mSuitB, &mSuit);
 			bossSuitSetSink(gBoss02Params->mSuitC, gBoss02Params->mSuitD, gBoss02Params->mSuitE,
-			            gBoss02Params->mSuitTop - gBoss02Params->mSuitBase, gBoss02Params->mSuitBase, &mSuit);
+			                gBoss02Params->mSuitTop - gBoss02Params->mSuitBase, gBoss02Params->mSuitBase, &mSuit);
 			bossSuitSetFx(&mSuit, 1, 0x53, 0x52);
 			seStartArg(0x2A5, 0x1E5);
 			seCueSet(&mCue, 0x69, 0xA5);
@@ -2423,7 +2425,9 @@ void TEneBoss02::actDie(int phase)
 }
 
 // 0x8005DB2C
-void TEneBoss02::vfn_3C() { }
+void TEneBoss02::vfn_3C()
+{
+}
 
 // 0x8005DB30
 // Hidden off screen unless shown
@@ -2495,10 +2499,10 @@ void TEneBoss02::render()
 		drawSuit();
 	} else if (mTint.isActive() != 0) {
 		Boss02Color c;
-		c.r = mTint.mLevel;
-		c.g = 0;
-		c.b = 0;
-		c.a = 0;
+		c.r       = mTint.mLevel;
+		c.g       = 0;
+		c.b       = 0;
+		c.a       = 0;
 		GXColor k = *(GXColor*)&c;
 		beginKColor(&k);
 	}

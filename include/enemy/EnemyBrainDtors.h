@@ -3,8 +3,12 @@
 
 #include "enemy/TEneAm01.h"
 
-inline EnemyBrain::~EnemyBrain() { }
+inline EnemyBrain::~EnemyBrain()
+{
+}
 
-inline EnemySeekBrain::~EnemySeekBrain() { }
+inline EnemySeekBrain::~EnemySeekBrain()
+{
+}
 
 #endif

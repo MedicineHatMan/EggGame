@@ -19,7 +19,7 @@ struct SceneRecord;
 
 struct DrawCamera {
 	u8 _00[0x44];
-	int mFov;    // _44
+	int mFov; // _44
 	u8 _48[4];
 	f32 mAspect; // _4C
 };
@@ -43,14 +43,14 @@ static void blendAdd();
 static void drawPostTev(int stage);
 }
 
-u32 sDrawLights;           // the scene's diffuse lights and the extra ones
-s32 sDrawSpecLights;       // the scene's alpha-specular lights
-u8 sDrawTevFlags;          // 1 specular 2 TEV colour 1 4 TEV colour 2 8 extra stages
-s32 sDrawLit;              // the model's lighting enable from drawChanCtrl
+u32 sDrawLights;     // the scene's diffuse lights and the extra ones
+s32 sDrawSpecLights; // the scene's alpha-specular lights
+u8 sDrawTevFlags;    // 1 specular 2 TEV colour 1 4 TEV colour 2 8 extra stages
+s32 sDrawLit;        // the model's lighting enable from drawChanCtrl
 DrawStateExtra* sDrawExtra;
 int sDrawAmbientOn;
 GXColor sDrawAmbient;
-GXColor sDrawGlowColor;    // only the alpha is set from the state's ambient
+GXColor sDrawGlowColor; // only the alpha is set from the state's ambient
 s32 sDrawSavedBlend;
 
 static void (*sDrawBlendFuncs[])() = { blendAlpha, blendAdd };
@@ -72,8 +72,8 @@ void drawStateExit()
 DrawStateSlot::DrawStateSlot()
 {
 	NJS_TEXINFO info;
-	mTexList.textures = &mTexName;
-	mTexList.nbTexture    = 1;
+	mTexList.textures  = &mTexName;
+	mTexList.nbTexture = 1;
 	njSetTextureInfo(&info, NULL, 3, 0x20, 0x20);
 	njSetTextureName(&mTexName, (void*)&info, (void*)1000, (u32)0x08800000);
 	njLoadTexture(&mTexList);
@@ -157,7 +157,7 @@ void beginDrawState(DrawStateSlot* slot, const DrawState* state)
 		if (flags & DRAWSTATE_EXTRA) {
 			tev |= 8;
 			sDrawExtra = (DrawStateExtra*)state->mExtra;
-			texGens = texGens + sDrawExtra->mTexGens;
+			texGens    = texGens + sDrawExtra->mTexGens;
 			tevStages += sDrawExtra->mTevStages;
 			if (texGens != 0) {
 				gjSetNumPostTexGens(texGens);
@@ -438,9 +438,9 @@ void makeDrawNoise(u8* image)
 	int y;
 	for (y = 0; y < 32; y++) {
 		for (x = 0; x < 32; x++) {
-			u8 i     = (int)(4.0f * ((1.0f / 32768.0f) * rand() - 0.5f)) + 0x80;
-			f32 s    = njSin((x << 16) / 32);
-			int texel = ((y >> 2) << 7) | (((y & 3) << 2) | ((x & 3) | ((x >> 2) << 4)));
+			u8 i                 = (int)(4.0f * ((1.0f / 32768.0f) * rand() - 0.5f)) + 0x80;
+			f32 s                = njSin((x << 16) / 32);
+			int texel            = ((y >> 2) << 7) | (((y & 3) << 2) | ((x & 3) | ((x >> 2) << 4)));
 			image[texel * 2]     = i;
 			image[texel * 2 + 1] = (int)(3.0f * s) + 0x80;
 		}

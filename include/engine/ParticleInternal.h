@@ -26,13 +26,13 @@ enum {
 };
 
 enum {
-	PART_Fading  = 0x1,
-	PART_Stretch = 0x2,
-	PART_Spin    = 0x4,
+	PART_Fading   = 0x1,
+	PART_Stretch  = 0x2,
+	PART_Spin     = 0x4,
 	PART_SpinBack = 0x8,
-	PART_Colour  = 0x10,
-	PART_Bit100  = 0x100, // emit speed runs along mAxis
-	PART_Bit200  = 0x200, // vacuum its rise is turned by the matrix
+	PART_Colour   = 0x10,
+	PART_Bit100   = 0x100, // emit speed runs along mAxis
+	PART_Bit200   = 0x200, // vacuum its rise is turned by the matrix
 };
 
 #define partRand() (3.0517578125e-05f * (f32)rand())

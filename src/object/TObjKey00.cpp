@@ -179,7 +179,7 @@ extern "C" void setKeySwitch(u16 bit, int on)
 		return;
 	}
 	if (on != 0) {
-		setKeyBit(bit);	
+		setKeyBit(bit);
 	} else {
 		clearKeyBit(bit);
 	}
@@ -190,7 +190,7 @@ extern "C" void setKeySwitch(u16 bit, int on)
 extern "C" void saveKeyBits(u8* dest, u16 first, u32 count)
 {
 	u8* flags = sKeyFlags;
-	u8* p = dest;
+	u8* p     = dest;
 	int index = first;
 	int rest;
 	int i;
@@ -355,8 +355,8 @@ public:
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	u16 mBit;  // _20
-	u16 _22;   // _22
+	u16 mBit;   // _20
+	u16 _22;    // _22
 	int mTimer; // _24 counts down from 60
 };
 
@@ -445,17 +445,17 @@ void TObjKey00::initFromDesc(SetDesc* desc)
 		mHold = (int)(60.0f * (1.0f + desc->getFloat(3)));
 	}
 	if (mModel == -1) {
-		mPiece0 = 0;
-		mPiece1 = 0;
-		mPiece2 = 0;
-		mPiece3 = 0;
+		mPiece0   = 0;
+		mPiece1   = 0;
+		mPiece2   = 0;
+		mPiece3   = 0;
 		mMaterial = 0;
 	} else {
 		NJS_OBJECT* entry = getStgObjModels()[mModel];
-		mPiece1   = entry->child;
-		mPiece0   = mPiece1->sibling;
-		mPiece2   = mPiece0->sibling;
-		mPiece3   = mPiece2->sibling;
+		mPiece1           = entry->child;
+		mPiece0           = mPiece1->sibling;
+		mPiece2           = mPiece0->sibling;
+		mPiece3           = mPiece2->sibling;
 		mPiece1->evalflags &= ~1u;
 		mMaterial = getStgObjTextures()[mModel2];
 	}
@@ -547,10 +547,10 @@ void TObjKey00::debugPrint(void*)
 TObjKey00::TObjKey00(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00         = (u32)gTObjKey00Name.mName;
-	mSize       = 0x140;
-	mShape      = 0;
-	mShape      = colliCreate(1, 1);
+	_00    = (u32)gTObjKey00Name.mName;
+	mSize  = 0x140;
+	mShape = 0;
+	mShape = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks(mShape, 4, 255, 255, 0xF6);
 	initFromDesc(desc);
@@ -603,8 +603,8 @@ void TObjKey00::build()
 	mtxSetTransV(mMtx, &mPos);
 	mtxRotateZYX((f32*)mMtx, (const f32*)mMtx, (const int*)&mRot);
 	if (mModel != -1) {
-		pack  = gStgObjCommon;
-		model = (MeshData*)pack->mSet.mMeshes[3];
+		pack   = gStgObjCommon;
+		model  = (MeshData*)pack->mSet.mMeshes[3];
 		mActor = (MeshObject*)meshColliCreate();
 		if (mRot.x != 0 || mRot.z != 0) {
 			meshSetState100(mActor, 1);
@@ -683,9 +683,9 @@ void TObjKey00::fitBounds()
 	high.z = size.z;
 	Vec3f low;
 	Vec3f t = keyNeg(size);
-	low.x = t.x;
-	low.y = t.y;
-	low.z = t.z;
+	low.x   = t.x;
+	low.y   = t.y;
+	low.z   = t.z;
 
 	gjPushUnitMatrix();
 	njTranslateEx(&mPos);
@@ -736,7 +736,7 @@ int TObjKey00::touched()
 	int count = colliGetContactCount(mShape);
 	int i;
 	for (i = 0; i < count; i++) {
-		ColliContact* hit   = colliGetContact(mShape, i);
+		ColliContact* hit = colliGetContact(mShape, i);
 		ColliShape* cur   = colliContactShape(hit);
 		if ((cur->mFlags & 0x10) != 0) {
 			continue;
@@ -849,7 +849,7 @@ void TObjKey00::useTimed()
 			spawnTimer();
 		}
 	} else if (mOpen == 1) {
-		int frame = mHoldFrame;
+		int frame  = mHoldFrame;
 		mHoldFrame = frame + 1;
 		if (frame > mHold) {
 			mHoldFrame = 0;
@@ -908,9 +908,9 @@ void TObjKey00::draw()
 		mScale = 0.0f;
 		mSpin += 0x800;
 		mSpin &= 0xFFFF;
-		f32 s = 0.5f * (1.0f + njSin(mSpin));
+		f32 s          = 0.5f * (1.0f + njSin(mSpin));
 		mLight0.mColor = 0xFF0000FF;
-		shade = 160.0f * s + 80.0f;
+		shade          = 160.0f * s + 80.0f;
 		mLight1.mColor = (shade << 24) | (shade << 16) | (shade << 8) | 0xFF;
 	}
 }

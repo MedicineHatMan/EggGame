@@ -36,19 +36,15 @@ extern "C" {
 // 0x80240BA0
 // Nothing in this file reads it
 extern const f32 sAm02Rates[4] = { 0.3f, 0.4f, 0.2f, 0.1f };
-extern const int sAm02Bones[] = {
+extern const int sAm02Bones[]  = {
 	17, 24, 28, 38, 51, -1,
 }; // the nodes nodeTrackBeginOrigins records
 MotionEntry sAm02Motions[] = {
-	{ MOTION_LOOP, 6, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 5, -1, 0, 0.0f, 25.0f, 1.2f, 0.0f, 0 },
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 39.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 49.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 9.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_LOOP, 6, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },  { MOTION_LOOP, 5, -1, 0, 0.0f, 25.0f, 1.2f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 39.0f, 0.25f, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 49.0f, 0.25f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 9.0f, 0.6f, 0.0f, 0 },   { MOTION_ONCE, 3, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
 	{ MOTION_ONCE, 4, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
 };
-
 }
 
 static const char* sClassName = "TEneAm02";
@@ -99,33 +95,33 @@ inline void TEneAm02::operator delete(void* mem)
 	objHeapFree(gObjHeap, mem);
 }
 
-static ResBank sAm02Bank;              // 0x8027CB08
-static ColliShape sAm02Shapes[2];      // 0x8027CB14
-static ColliShape sAm02Bounds;         // 0x8027CB74
-static ColliShape sAm02SwingBounds;    // 0x8027CBA4
+static ResBank sAm02Bank;           // 0x8027CB08
+static ColliShape sAm02Shapes[2];   // 0x8027CB14
+static ColliShape sAm02Bounds;      // 0x8027CB74
+static ColliShape sAm02SwingBounds; // 0x8027CBA4
 
 // 0x8001F7C0
 extern "C" void initTEneAm02()
 {
 	resBankLoad(&sAm02Bank, "ar_ene_am02.arc");
 	resBankAddTextures(&sAm02Bank, 0, "ene_am02.gvm");
-	sAm02Models = resBankGetModels(&sAm02Bank);
+	sAm02Models   = resBankGetModels(&sAm02Bank);
 	sAm02Textures = resBankGetTextures(&sAm02Bank);
-	sAm02Motion = resBankGetMotion(&sAm02Bank, 0);
+	sAm02Motion   = resBankGetMotion(&sAm02Bank, 0);
 
 	for (int i = 0; i < 2; i++) {
 		((u32*)&sAm02Shapes[i].mPos)[0] = ((const u32*)&sAm02ShapeData[i].mPos)[0];
 		((u32*)&sAm02Shapes[i].mPos)[1] = ((const u32*)&sAm02ShapeData[i].mPos)[1];
 		((u32*)&sAm02Shapes[i].mPos)[2] = ((const u32*)&sAm02ShapeData[i].mPos)[2];
-		sAm02Shapes[i]._0C = sAm02ShapeData[i]._0C;
-		sAm02Shapes[i].mRotY = sAm02ShapeData[i].mRotY;
-		sAm02Shapes[i]._14 = sAm02ShapeData[i]._14;
-		sAm02Shapes[i].mSizeX = sAm02ShapeData[i].mSizeX;
-		sAm02Shapes[i].mSizeY = sAm02ShapeData[i].mSizeY;
-		sAm02Shapes[i].mSizeZ = sAm02ShapeData[i].mSizeZ;
-		sAm02Shapes[i].mFlags = sAm02ShapeData[i].mFlags;
-		sAm02Shapes[i].mType = sAm02ShapeData[i].mType;
-		sAm02Shapes[i].mTag = sAm02ShapeData[i].mTag;
+		sAm02Shapes[i]._0C              = sAm02ShapeData[i]._0C;
+		sAm02Shapes[i].mRotY            = sAm02ShapeData[i].mRotY;
+		sAm02Shapes[i]._14              = sAm02ShapeData[i]._14;
+		sAm02Shapes[i].mSizeX           = sAm02ShapeData[i].mSizeX;
+		sAm02Shapes[i].mSizeY           = sAm02ShapeData[i].mSizeY;
+		sAm02Shapes[i].mSizeZ           = sAm02ShapeData[i].mSizeZ;
+		sAm02Shapes[i].mFlags           = sAm02ShapeData[i].mFlags;
+		sAm02Shapes[i].mType            = sAm02ShapeData[i].mType;
+		sAm02Shapes[i].mTag             = sAm02ShapeData[i].mTag;
 	}
 	colliCalcBounds(&sAm02Bounds, sAm02Shapes, 2);
 	colliCalcBounds(&sAm02SwingBounds, (ColliShape*)sAm02SwingShapes, 1);
@@ -136,9 +132,9 @@ extern "C" void shutdownTEneAm02()
 {
 	resBankRemoveTextures(&sAm02Bank, 0);
 	resBankRelease(&sAm02Bank);
-	sAm02Models = 0;
+	sAm02Models   = 0;
 	sAm02Textures = 0;
-	sAm02Motion = 0;
+	sAm02Motion   = 0;
 }
 
 // 0x8001F924
@@ -174,9 +170,10 @@ extern "C" void* modelTEneAm02()
 }
 
 // 0x8001F9E0
-TEneAm02::TEneAm02(TObject* parent, SetDesc* desc) : TObjEnemy(parent, desc)
+TEneAm02::TEneAm02(TObject* parent, SetDesc* desc)
+    : TObjEnemy(parent, desc)
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0x2C0;
 	init(desc);
 }
@@ -205,24 +202,24 @@ void TEneAm02::init(SetDesc* desc)
 
 	mBrain = 0;
 	readEnemyDesc(desc);
-	mPose = allocPose(sAm02Models[1]);
+	mPose      = allocPose(sAm02Models[1]);
 	mModelTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mFlags2 = 0;
-	mTarget.x = 0.0f;
-	mTarget.y = 0.0f;
-	mTarget.z = 0.0f;
-	mHitPos.x = 0.0f;
-	mHitPos.y = 0.0f;
-	mHitPos.z = 0.0f;
+	mFlags2    = 0;
+	mTarget.x  = 0.0f;
+	mTarget.y  = 0.0f;
+	mTarget.z  = 0.0f;
+	mHitPos.x  = 0.0f;
+	mHitPos.y  = 0.0f;
+	mHitPos.z  = 0.0f;
 	shadowSetGround(&mShadow, &mBody.mPos, 0);
 	mShadow._30 = 45.0f;
 	mShadow._34 = 30.0f;
-	mRock = 0;
-	mTrailA = 0;
-	mTrailB = 0;
-	mFrameKey = 0;
+	mRock       = 0;
+	mTrailA     = 0;
+	mTrailB     = 0;
+	mFrameKey   = 0;
 	mLastDamage = 0;
-	mThrow = 0;
+	mThrow      = 0;
 
 	mBar = new TEnemyLifeBar(this);
 	mBar->setMax((s16)mHealth);
@@ -238,7 +235,7 @@ void TEneAm02::init(SetDesc* desc)
 		mParts[i].z = 0.0f;
 	}
 	enemyEffectSetLarge(60.0f, &mEffect, &mBody.mPos);
-	mStep = 0;
+	mStep  = 0;
 	mTimer = 0;
 	mAngle = 0;
 	mSpeed = 0.0f;
@@ -272,9 +269,9 @@ TEneAm02::~TEneAm02()
 // Slot _74
 void TEneAm02::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
-	f32 z = pos->z;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
+	f32 z        = pos->z;
 	mBody.mPos.x = x;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
@@ -294,7 +291,7 @@ int TEneAm02::onHit(const TObjAction* other, int shape, int* result)
 {
 	int hit;
 	HitInfo* info;
-	hit = 0;
+	hit  = 0;
 	info = (HitInfo*)result;
 	if (isThrown() != 0) {
 		if (isEnemyObj(other) != 0) {
@@ -304,11 +301,11 @@ int TEneAm02::onHit(const TObjAction* other, int shape, int* result)
 	} else if (shape == 1) {
 		if (isPlayerOrKind4(other) != 0) {
 			info->mDamage = 20;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 		} else if (isEggObj(other) != 0) {
 			info->mDamage = 1;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			info->mFlags.setBit(13);
 		}
@@ -332,13 +329,13 @@ void TEneAm02::syncCollider()
 void TEneAm02::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
-	mVariant = pickVariant(desc);
+	mVariant   = pickVariant(desc);
 	int health = desc->getInt(1);
-	int value = 10;
+	int value  = 10;
 	if (health > 0) {
 		value = health;
 	}
-	mHealth = value;
+	mHealth     = value;
 	mHealthStep = divideBy5(mHealth);
 	if (desc->getInt(2) != 0) {
 		mFlags2 |= AM_WEAK;
@@ -418,9 +415,9 @@ int TEneAm02::isAppearDone()
 // 0x80020340
 void TEneAm02::setTarget(const Vec3f* target)
 {
-	f32 x = target->x;
-	f32 y = target->y;
-	f32 z = target->z;
+	f32 x     = target->x;
+	f32 y     = target->y;
+	f32 z     = target->z;
 	mTarget.x = x;
 	mTarget.y = y;
 	mTarget.z = z;
@@ -767,8 +764,8 @@ void TEneAm02::actChase(int phase)
 	case 0:
 		motionCtrlPlayBlend(0.2f, &mAnim, 1);
 		mFrameKey = 5;
-		mStep = 0;
-		mSpeed = 0.2f;
+		mStep     = 0;
+		mSpeed    = 0.2f;
 		break;
 	case 1: {
 		motionCtrlUpdate(&mAnim);
@@ -811,7 +808,7 @@ void TEneAm02::actAttack(int phase)
 		motionCtrlPlayBlend(0.2f, &mAnim, 2);
 		mFlags2 &= ~AM_ATTACK_DONE;
 		mFlags2 |= AM_BRACED;
-		mStep = 0;
+		mStep  = 0;
 		mTimer = 0;
 		colliDisable(mSwing);
 		break;
@@ -954,13 +951,13 @@ void TEneAm02::actStun(int phase)
 		motionCtrlPlay(&mAnim, 6);
 		mFlags2 &= ~AM_STUN_DONE;
 		mFrameKey = 4;
-		mStep = 0;
+		mStep     = 0;
 		Vec3f dir;
 		dir.x = mContact.mSurface.x;
 		dir.y = mContact.mSurface.y;
 		dir.z = mContact.mSurface.z;
 		njSubVector(&dir, &mContact.mCenter);
-		mAngle = toAngle(dir.x, dir.z);
+		mAngle  = toAngle(dir.x, dir.z);
 		f32 len = njUnitVector(&dir);
 		if (len < gUnitVectorMin) {
 			dir.x = gVecZero.x;
@@ -999,7 +996,7 @@ void TEneAm02::actFlip(int phase)
 		mEnemyFlags |= ENEMY_FLIPPING;
 		hitSound();
 		mFlags2 &= ~AM_FLIP_DONE;
-		mStep = 0;
+		mStep        = 0;
 		mBody.mVel.x = mHitPos.x;
 		mBody.mVel.y = mHitPos.y;
 		mBody.mVel.z = mHitPos.z;
@@ -1032,7 +1029,7 @@ void TEneAm02::actDie(int phase)
 		mEnemyFlags |= ENEMY_BLOCKED;
 		motionCtrlPlayBlend(0.2f, &mAnim, 5);
 		mFlags2 |= AM_DYING;
-		mStep = 0;
+		mStep  = 0;
 		mTimer = 0;
 		colliDisable(mCollider);
 		mBar->hide();
@@ -1048,7 +1045,7 @@ void TEneAm02::actDie(int phase)
 			setFrameKey(sAm02FrameKeys[3]);
 			coast(0.96f);
 			if (motionCtrlIsDone(&mAnim) != 0) {
-				mStep = 1;
+				mStep  = 1;
 				mTimer = 0;
 			}
 			if (motionCtrlPassed(7.0f, &mAnim) != 0) {
@@ -1059,8 +1056,8 @@ void TEneAm02::actDie(int phase)
 		case 1:
 			mTimer++;
 			if (mTimer >= 90) {
-				mStep = 2;
-				mTimer = 0;
+				mStep     = 2;
+				mTimer    = 0;
 				Vec3f pos = mBody.mPos;
 				pos.y += 8.0f;
 				enemyFxDeath4ASe(&pos);
@@ -1117,9 +1114,9 @@ void TEneAm02::actDieThrown(int phase)
 		}
 		{
 			RockFlight* rock = mThrow;
-			mBody.mPos.x = rock->mBody.mPos.x;
-			mBody.mPos.y = rock->mBody.mPos.y;
-			mBody.mPos.z = rock->mBody.mPos.z;
+			mBody.mPos.x     = rock->mBody.mPos.x;
+			mBody.mPos.y     = rock->mBody.mPos.y;
+			mBody.mPos.z     = rock->mBody.mPos.z;
 		}
 		EggHits hits;
 		if (meshColliProbe((EggHit*)&hits, (const Vec3f*)&mBody.mPos, -1) != 0 && (hits.mMask & 1) != 0) {
@@ -1210,17 +1207,22 @@ void TEneAm02::render()
 
 // 0x80021D2C
 // Defined here after ~TEneAm02 first used it so it is generated here
-inline Am02SeekBrain::~Am02SeekBrain() { }
+inline Am02SeekBrain::~Am02SeekBrain()
+{
+}
 
 // Never called Referencing update here keeps its body in place
-static void am02BrainUpdate(Am02Brain* brain, TEneAm02* owner) { brain->Am02Brain::update(owner); }
+static void am02BrainUpdate(Am02Brain* brain, TEneAm02* owner)
+{
+	brain->Am02Brain::update(owner);
+}
 
 // 0x80021D9C
 // Runs the current state's phases then asks the owner to change action if the state chose one
 inline void Am02Brain::update(TEneAm02* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}
@@ -1229,4 +1231,3 @@ inline void Am02Brain::update(TEneAm02* owner)
 		mOwner->setAction(mNext);
 	}
 }
-

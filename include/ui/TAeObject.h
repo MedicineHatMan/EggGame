@@ -14,8 +14,8 @@ class TAeLayer;
  * @size 0x8
  */
 struct AeFile {
-	u32 _00;      // _00
-	void* mList;  // _04 first record
+	u32 _00;     // _00
+	void* mList; // _04 first record
 };
 
 /**
@@ -28,22 +28,22 @@ struct AeFile {
  * @size 0x38
  */
 struct AeRecord {
-	u16 mKind;   // _00 0 ends the group
-	u16 mChild;  // _02
-	u16 mFlags;  // _04 or'ed into the frame's mark
-	u8 _06[2];   // _06
-	f32 mSizeX;  // _08 half of it is the spin centre
-	f32 mSizeY;  // _0C
-	f32 mRate;   // _10
-	f32 mDelay;  // _14
-	f32 mStart;  // _18
-	f32 mEnd;    // _1C
-	u32 mOff20;  // _20 anchor keys 2 values
-	u32 mOff24;  // _24 position keys 2 values
-	u32 mOff28;  // _28 scale keys 2 values
-	u32 mOff2C;  // _2C spin keys in degrees
-	u32 mOff30;  // _30 alpha keys
-	u32 mOff34;  // _34 colour keys 3 values
+	u16 mKind;  // _00 0 ends the group
+	u16 mChild; // _02
+	u16 mFlags; // _04 or'ed into the frame's mark
+	u8 _06[2];  // _06
+	f32 mSizeX; // _08 half of it is the spin centre
+	f32 mSizeY; // _0C
+	f32 mRate;  // _10
+	f32 mDelay; // _14
+	f32 mStart; // _18
+	f32 mEnd;   // _1C
+	u32 mOff20; // _20 anchor keys 2 values
+	u32 mOff24; // _24 position keys 2 values
+	u32 mOff28; // _28 scale keys 2 values
+	u32 mOff2C; // _2C spin keys in degrees
+	u32 mOff30; // _30 alpha keys
+	u32 mOff34; // _34 colour keys 3 values
 };
 
 /**

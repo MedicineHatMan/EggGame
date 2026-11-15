@@ -30,23 +30,23 @@ public:
 	virtual void render();
 	virtual void initFromDesc(SetDesc* desc);
 	virtual void debugPrint(void*);
-	virtual void arm();  // _74 0x801909F4
+	virtual void arm();                        // _74 0x801909F4
 	void place(Vec3f* pos, f32* radius) const; // 0x80190A40
-	f32 range();         // 0x80190A94 how far a crow may fly
-	void stateWatch();   // 0x80190BB0
-	void stateOpen();    // 0x80190C54
-	void stateDone();    // 0x80190CA0
+	f32 range();                               // 0x80190A94 how far a crow may fly
+	void stateWatch();                         // 0x80190BB0
+	void stateOpen();                          // 0x80190C54
+	void stateDone();                          // 0x80190CA0
 
-	NJS_OBJECT* mModel;    // _64
-	void* mMotion;   // _68
-	DrawTask* mDraw;     // _6C
-	int _70;         // _70
-	u8 _74[0x1C];    // _74
-	int _90;         // _90
-	u16 mTimer;      // _94 counts down once the crows are gone
-	u16 mSwitchId;   // _96
+	NJS_OBJECT* mModel;         // _64
+	void* mMotion;              // _68
+	DrawTask* mDraw;            // _6C
+	int _70;                    // _70
+	u8 _74[0x1C];               // _74
+	int _90;                    // _90
+	u16 mTimer;                 // _94 counts down once the crows are gone
+	u16 mSwitchId;              // _96
 	TObjLastHeavensGate* mGate; // _98
-	int mMode;       // _9C 0 watching 1 opening 2 done
+	int mMode;                  // _9C 0 watching 1 opening 2 done
 };
 
 #endif

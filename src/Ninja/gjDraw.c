@@ -26,7 +26,7 @@ typedef struct GjDrawState {
 typedef void (*GjStageCallback)(s32 first);
 
 GjDrawState gjDrawState;
-extern void* gjDrawFuncs[8]; // the current draw functions
+extern void* gjDrawFuncs[8];        // the current draw functions
 extern void* gjDefaultDrawFuncs[8]; // the default ones
 extern GjStageCallback gjPreStageCb0;
 extern GjStageCallback gjPreStageCb1;
@@ -51,8 +51,8 @@ typedef struct GjMeshParam {
 
 // One vertex array of a model
 typedef struct GjVtxArray {
-	u8 type;    // _00
-	u8 stride;  // _01
+	u8 type;   // _00
+	u8 stride; // _01
 	u8 _02[6];
 	void* data; // _08
 	u8 _0C[4];
@@ -60,11 +60,11 @@ typedef struct GjVtxArray {
 
 // The calls gjChangeDrawObjIF can replace as they get used here
 #define DRAW_IF_CHANCOLOR ((void (*)(s32, GXColor))gjDrawFuncs[1])
-#define DRAW_IF_TEVORDER ((void (*)(s32, s32, s32, s32))gjDrawFuncs[3])
-#define DRAW_IF_TEXGEN ((void (*)(s32, s32, s32, s32))gjDrawFuncs[4])
-#define DRAW_IF_CHANCTRL ((void (*)(s32, s32, s32, s32, u32))gjDrawFuncs[5])
-#define DRAW_IF_BLEND ((void (*)(s32, s32, s32, s32))gjDrawFuncs[6])
-#define DRAW_IF_TEXTURE ((void (*)(s32, s32, s32, s32))gjDrawFuncs[7])
+#define DRAW_IF_TEVORDER  ((void (*)(s32, s32, s32, s32))gjDrawFuncs[3])
+#define DRAW_IF_TEXGEN    ((void (*)(s32, s32, s32, s32))gjDrawFuncs[4])
+#define DRAW_IF_CHANCTRL  ((void (*)(s32, s32, s32, s32, u32))gjDrawFuncs[5])
+#define DRAW_IF_BLEND     ((void (*)(s32, s32, s32, s32))gjDrawFuncs[6])
+#define DRAW_IF_TEXTURE   ((void (*)(s32, s32, s32, s32))gjDrawFuncs[7])
 
 void gjDrawListAdd(NJS_OBJECT* obj, const f32* m);
 void gjDrawListDraw(u32 count);
@@ -94,10 +94,10 @@ void gjDrawMotionObj(NJS_OBJECT* obj);
 void gjSetBlendMode(u32 flags);
 
 // By parameter type
-#define MESH_PARAM(f) (void (*)(u32))f
+#define MESH_PARAM(f) (void (*)(u32)) f
 void (*gjMeshParamFuncs[11])(u32) = {
-	MESH_PARAM(gjParamVtxFmt), MESH_PARAM(gjParamVtxDesc), MESH_PARAM(gjSetBlendMode), 0,
-	MESH_PARAM(gjParamBlend), MESH_PARAM(gjParamDiffuse), MESH_PARAM(gjParamStubA), MESH_PARAM(gjParamStubB),
+	MESH_PARAM(gjParamVtxFmt),  MESH_PARAM(gjParamVtxDesc),  MESH_PARAM(gjSetBlendMode), 0,
+	MESH_PARAM(gjParamBlend),   MESH_PARAM(gjParamDiffuse),  MESH_PARAM(gjParamStubA),   MESH_PARAM(gjParamStubB),
 	MESH_PARAM(gjParamTexture), MESH_PARAM(gjParamTevOrder), MESH_PARAM(gjParamTexGen),
 };
 
@@ -106,30 +106,25 @@ void* gjDrawFuncs[8] = { 0, gjSetChanMatColor, 0, gjSetTevStage, gjSetTexGen, gj
 void* gjDefaultDrawFuncs[8] = { 0, gjSetChanMatColor, 0, gjSetTevStage, gjSetTexGen, gjSetChanCtrl, GXSetBlendMode, gjLoadTextureNum };
 
 u32 gjVtxAttrTable[] = {
-	0x00000000, 0x00000009, 0x0000000A, 0x0000000B, 0x0000000C, 0x0000000D, 0x0000000E, 0x0000000F,
-	0x00000010, 0x00000011, 0x00000012, 0x00000013, 0x00000014, 0x000000FF,
+	0x00000000, 0x00000009, 0x0000000A, 0x0000000B, 0x0000000C, 0x0000000D, 0x0000000E,
+	0x0000000F, 0x00000010, 0x00000011, 0x00000012, 0x00000013, 0x00000014, 0x000000FF,
 };
 u32 gjTexCoordTable[] = {
-	0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000005, 0x00000006, 0x00000007,
-	0x000000FF,
+	0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000005, 0x00000006, 0x00000007, 0x000000FF,
 };
 u32 gjTexMapTable[] = {
-	0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000005, 0x00000006, 0x00000007,
-	0x000000FF,
+	0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000005, 0x00000006, 0x00000007, 0x000000FF,
 };
 u32 gjTexCompCntTable[] = {
-	0x00000000, 0x00000001, 0x00000000, 0x00000001, 0x00000002, 0x00000000, 0x00000001, 0x00000000,
-	0x00000001,
+	0x00000000, 0x00000001, 0x00000000, 0x00000001, 0x00000002, 0x00000000, 0x00000001, 0x00000000, 0x00000001,
 };
 u32 gjTexCoordTypeTable[] = {
-	0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000000, 0x00000001, 0x00000002,
-	0x00000003, 0x00000004, 0x00000005,
+	0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000005,
 };
 u32 gjPosMtxTable[] = {
-	0x0000001E, 0x00000021, 0x00000024, 0x00000027, 0x0000002A, 0x0000002D, 0x00000030, 0x00000033,
-	0x00000036, 0x00000039, 0x0000003C,
+	0x0000001E, 0x00000021, 0x00000024, 0x00000027, 0x0000002A, 0x0000002D, 0x00000030, 0x00000033, 0x00000036, 0x00000039, 0x0000003C,
 };
-u32 gjBlendOverride = 0x250F;    // a blend value that overrides the meshes'
+u32 gjBlendOverride = 0x250F; // a blend value that overrides the meshes'
 
 // 0x80211CF4
 // Walks the tree Flags 1 2 and 4 skip the translation rotation and scale and 7 skips the matrix too
@@ -217,10 +212,10 @@ void gjMeshRunParams(GjMesh* mesh)
 	n = mesh->nbParam;
 
 	while (n > 0) {
-		type = p->type;
-		value = p->value;
-		last = &gjDrawState._08[type];
-		diff = value ^ *last;
+		type    = p->type;
+		value   = p->value;
+		last    = &gjDrawState._08[type];
+		diff    = value ^ *last;
 		changed = &gjDrawState._34[type];
 		diff |= *changed;
 
@@ -228,7 +223,7 @@ void gjMeshRunParams(GjMesh* mesh)
 		if (diff != 0) {
 			gjMeshParamFuncs[type](value);
 		}
-		*last = value;
+		*last    = value;
 		*changed = 0;
 		n--;
 		p++;
@@ -251,7 +246,7 @@ void gjModelCheckState(GjModel* model)
 	if (((u32)gjDrawState._6C ^ (u32)_nj_control_3d_flag_) & 0x80000) {
 		gjDrawState._6C = _nj_control_3d_flag_;
 		gjDrawState._34[2] |= 0xF00F3;
-		gjDrawState._34[9] = -1;
+		gjDrawState._34[9]  = -1;
 		gjDrawState._34[10] = -1;
 	}
 }
@@ -267,7 +262,7 @@ s32 _gjDrawModel(GjModel* model)
 		gjSetVtxArrays(model->verts);
 	}
 	if (gjDrawPass & 1) {
-		n = model->nbOpaque;
+		n    = model->nbOpaque;
 		mesh = model->opaque;
 		while (n > 0) {
 			gjMeshRunParams(mesh);
@@ -277,7 +272,7 @@ s32 _gjDrawModel(GjModel* model)
 		}
 	}
 	if (gjDrawPass & 2) {
-		n = model->nbTrans;
+		n    = model->nbTrans;
 		mesh = model->trans;
 		while (n > 0) {
 			gjMeshRunParams(mesh);
@@ -332,13 +327,13 @@ void gjSetRenderMode(s32 mode)
 	gjDrawPass = mode;
 }
 
-#define CHANGE_DRAW_IF(bit, index)                       \
-	if (mask & (bit)) {                                  \
-		if (funcs[index] == NULL) {                      \
-			gjDrawFuncs[index] = gjDefaultDrawFuncs[index];   \
-		} else {                                         \
-			gjDrawFuncs[index] = funcs[index];          \
-		}                                                \
+#define CHANGE_DRAW_IF(bit, index)                          \
+	if (mask & (bit)) {                                     \
+		if (funcs[index] == NULL) {                         \
+			gjDrawFuncs[index] = gjDefaultDrawFuncs[index]; \
+		} else {                                            \
+			gjDrawFuncs[index] = funcs[index];              \
+		}                                                   \
 	}
 
 // 0x80212280
@@ -429,8 +424,8 @@ void gjSetChanFlags(s32 chan, u32 flags)
 	s32 mat;
 
 	enable = (flags & 0x100) ? 0 : 1;
-	amb = (flags & 0x1000) ? 1 : 0;
-	mat = ((u32)_nj_control_3d_flag_ & 0x30) ? 0 : ((flags & 0x800) ? 1 : 0);
+	amb    = (flags & 0x1000) ? 1 : 0;
+	mat    = ((u32)_nj_control_3d_flag_ & 0x30) ? 0 : ((flags & 0x800) ? 1 : 0);
 	DRAW_IF_CHANCTRL(chan + 4, enable, amb, mat, gjLightsOn);
 }
 
@@ -472,10 +467,10 @@ void gjSetBlendMode(u32 flags)
 		s32 post;
 		n = flags & 3;
 		if ((u32)_nj_control_3d_flag_ & 0x80000) {
-			pre = gjDrawState.preChans;
-			post = gjDrawState.postChans;
-			gjDrawState.numChans = n;
-			count = pre + n;
+			pre                    = gjDrawState.preChans;
+			post                   = gjDrawState.postChans;
+			gjDrawState.numChans   = n;
+			count                  = pre + n;
 			gjDrawState.totalChans = post + count;
 			GXSetNumChans(post + count);
 			if (pre != 0 && gjPreStageCb0 != NULL) {
@@ -499,10 +494,10 @@ void gjSetBlendMode(u32 flags)
 		s32 post;
 		u8 gens = (flags & 0xF0) >> 4;
 		if ((u32)_nj_control_3d_flag_ & 0x80000) {
-			pre = gjDrawState.preTexGens;
-			post = gjDrawState.postTexGens;
-			gjDrawState.numTexGens = gens;
-			count = pre + gens;
+			pre                      = gjDrawState.preTexGens;
+			post                     = gjDrawState.postTexGens;
+			gjDrawState.numTexGens   = gens;
+			count                    = pre + gens;
 			gjDrawState.totalTexGens = post + count;
 			GXSetNumTexGens(post + count);
 			if (pre != 0 && gjPreStageCb1 != NULL) {
@@ -520,11 +515,11 @@ void gjSetBlendMode(u32 flags)
 		s32 n;
 		s32 pre;
 		s32 post;
-		n = (flags & 0xF0000) >> 16;
-		pre = gjDrawState.preTevStages;
+		n    = (flags & 0xF0000) >> 16;
+		pre  = gjDrawState.preTevStages;
 		post = gjDrawState.postTevStages;
 		if (changed & 0xF0000) {
-			gjDrawState.numTevStages = n;
+			gjDrawState.numTevStages   = n;
 			gjDrawState.totalTevStages = pre + n + post;
 			GXSetNumTevStages(pre + n + post);
 			gjDrawState._34[9] = -1;
@@ -597,9 +592,9 @@ void gjParamBlend(u32 value)
 void gjParamVtxFmt(u32 value)
 {
 	s32 attr = gjVtxAttrTable[(value & 0xFF0000) >> 16];
-	u32 cnt = gjTexCompCntTable[(value & 0xF000) >> 12];
+	u32 cnt  = gjTexCompCntTable[(value & 0xF000) >> 12];
 	u32 type = gjTexCoordTypeTable[(value & 0xF00) >> 8];
-	u8 frac = value & 0xFF;
+	u8 frac  = value & 0xFF;
 
 	if (gjVertsAreFloat != 0 && (attr == 9 || attr == 10)) {
 		type = 4;
@@ -618,7 +613,7 @@ void gjParamTevOrder(u32 value)
 {
 	s32 stage = (value & 0xF000) >> 12;
 	s32 coord = gjTexCoordTable[(value & 0xF00) >> 8];
-	s32 map = gjTexMapTable[(value & 0xF0) >> 4];
+	s32 map   = gjTexMapTable[(value & 0xF0) >> 4];
 	s32 color = value & 0xF;
 
 	if ((u32)_nj_control_3d_flag_ & 0x80000) {
@@ -630,10 +625,10 @@ void gjParamTevOrder(u32 value)
 // 0x80212CB8
 void gjParamTexGen(u32 value)
 {
-	s32 dst = gjTexCoordTable[(value & 0xF0000) >> 16];
+	s32 dst  = gjTexCoordTable[(value & 0xF0000) >> 16];
 	s32 func = (value & 0xF000) >> 12;
-	s32 src = (value & 0xFF0) >> 4;
-	s32 mtx = gjPosMtxTable[value & 0xF];
+	s32 src  = (value & 0xFF0) >> 4;
+	s32 mtx  = gjPosMtxTable[value & 0xF];
 
 	if ((u32)_nj_control_3d_flag_ & 0x80000) {
 		dst += gjDrawState.preTexGens;

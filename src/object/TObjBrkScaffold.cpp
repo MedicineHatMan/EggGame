@@ -37,16 +37,16 @@ const char* gTObjBrkScaffoldName = "TObjBrkScaffold";
 TObjBrkScaffold::TObjBrkScaffold(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	mBlink        = 0;
-	mAct          = 0;
-	_00           = (u32)gTObjBrkScaffoldName;
-	mSize         = 0x104;
-	mObject       = getStgObjModels()[53];
-	mTexList      = getStgObjTextures()[47];
-	mRadius       = mObject->model->r + 10.0f;
-	mMesh         = gStgObjCommon->mSet.mMeshes[6];
-	mDrawTask     = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
-	mShape        = colliCreate(1, 1);
+	mBlink    = 0;
+	mAct      = 0;
+	_00       = (u32)gTObjBrkScaffoldName;
+	mSize     = 0x104;
+	mObject   = getStgObjModels()[53];
+	mTexList  = getStgObjTextures()[47];
+	mRadius   = mObject->model->r + 10.0f;
+	mMesh     = gStgObjCommon->mSet.mMeshes[6];
+	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
+	mShape    = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks(mShape, 4, 255, 255, 247);
 	mMeshColli = (MeshObject*)meshColliCreate();

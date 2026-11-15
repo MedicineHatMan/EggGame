@@ -39,9 +39,9 @@ extern "C" void loadFireworksBallArc()
 	TArc* arc;
 	loadArc("obj_ms_fwball.arc", &arc);
 	if (arc != 0) {
-		sOrangeFireworksBallModels = (NJS_OBJECT**)findArcExport(arc, "models");
+		sOrangeFireworksBallModels   = (NJS_OBJECT**)findArcExport(arc, "models");
 		sOrangeFireworksBallTexLists = (NJS_TEXLIST**)findArcExport(arc, "texlists");
-		void** textures = (void**)findArcExport(arc, "textures");
+		void** textures              = (void**)findArcExport(arc, "textures");
 		bindGvmTextures((u8*)textures[0], sOrangeFireworksBallTexLists[0]);
 	}
 	sFireworkBallArc = arc;
@@ -56,8 +56,8 @@ extern "C" void releaseFireworksBallArc()
 	if (sFireworkBallArc != 0) {
 		releaseResource(sFireworkBallArc);
 	}
-	sFireworkBallArc = 0;
-	sOrangeFireworksBallModels = 0;
+	sFireworkBallArc             = 0;
+	sOrangeFireworksBallModels   = 0;
 	sOrangeFireworksBallTexLists = 0;
 }
 
@@ -90,12 +90,12 @@ TObjOrangeFireworksBall::TObjOrangeFireworksBall(TObject* parent, const SetDesc*
 	colliShapeSetSphere(colliGetShape((CharaColli*)mShape, 0));
 	colliGetShape((CharaColli*)mShape, 0)->mFlags = 0x42C;
 	colliGetShape((CharaColli*)mShape, 0)->mSizeX = 7.5f;
-	mDrawTask     = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mBody.mBounce     = 0.0f;
-	mBody.mRadius = 7.5f;
-	roll()->mOwner = (TObjEgg*)this;
-	roll()->mBody  = &mBody;
-	mHandle.mOwner = this;
+	mDrawTask                                     = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mBody.mBounce                                 = 0.0f;
+	mBody.mRadius                                 = 7.5f;
+	roll()->mOwner                                = (TObjEgg*)this;
+	roll()->mBody                                 = &mBody;
+	mHandle.mOwner                                = this;
 	mLink.get()->attach((SetDesc*)desc);
 	initFromDesc((SetDesc*)desc);
 	mShadow._30 = 15.0f;
@@ -346,8 +346,8 @@ void TObjOrangeFireworksBall::stateHeld(int phase)
 		TMobileObject* holder = (TMobileObject*)mHandle.mHolder;
 		Vec3f pos;
 		EggRot rot;
-		pos = holder->mBody.mPos;
-		rot = holder->mBody.mRot;
+		pos        = holder->mBody.mPos;
+		rot        = holder->mBody.mRot;
 		mBody.mPos = pos;
 		mBody.mRot = rot;
 		updateMatrices();
@@ -483,7 +483,7 @@ int TObjOrangeFireworksBall::onGetFlags()
 	int flags = getHolderFlags();
 	switch ((u8)mState) {
 	case BALL_ROLLING:
-			flags |= 0x200;
+		flags |= 0x200;
 		break;
 	}
 	return flags;
@@ -583,7 +583,10 @@ f32 TObjOrangeFireworksBall::getRadiusV()
 }
 
 // Not in the DOL calling the handler here before its body makes the compiler generate it in place
-static int fireworksHandleMessage(FireworksBallHandle* handle, ObjMsg* msg) { return handle->FireworksBallHandle::onMessage(msg); }
+static int fireworksHandleMessage(FireworksBallHandle* handle, ObjMsg* msg)
+{
+	return handle->FireworksBallHandle::onMessage(msg);
+}
 
 // 0x80130380
 int FireworksBallHandle::onMessage(ObjMsg* msg)

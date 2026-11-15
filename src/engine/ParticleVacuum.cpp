@@ -81,7 +81,9 @@ TParticleVacuumG::TParticleVacuumG(TObject* parent, const ParticleDesc* desc, co
 }
 
 // 0x80028BD4
-TParticleVacuumG::~TParticleVacuumG() { }
+TParticleVacuumG::~TParticleVacuumG()
+{
+}
 
 // 0x80028C30
 void TParticleVacuumG::draw()
@@ -93,7 +95,10 @@ void TParticleVacuumG::draw()
 }
 
 // 0x80028C80
-void TParticleVacuumG::vfn_10() { mPart.updateStretch(); }
+void TParticleVacuumG::vfn_10()
+{
+	mPart.updateStretch();
+}
 
 // 0x80028CA4
 extern "C" void* particleVacuumLNew(TObject* parent, const ParticleDesc* desc, int slot, f32 scale, int rotX, int rotY)
@@ -117,7 +122,9 @@ TParticleVacuumL::TParticleVacuumL(TObject* parent, const ParticleDesc* desc, in
 }
 
 // 0x80028DE0
-TParticleVacuumL::~TParticleVacuumL() { }
+TParticleVacuumL::~TParticleVacuumL()
+{
+}
 
 // 0x80028E3C
 void TParticleVacuumL::draw()
@@ -131,4 +138,7 @@ void TParticleVacuumL::draw()
 }
 
 // 0x80028EA4
-void TParticleVacuumL::vfn_10() { mPart.updateStretchAt(&mLocal); }
+void TParticleVacuumL::vfn_10()
+{
+	mPart.updateStretchAt(&mLocal);
+}

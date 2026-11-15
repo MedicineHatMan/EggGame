@@ -41,7 +41,9 @@ void TItemEquipWing::vfn_84()
 }
 
 // 0x801AF944
-void TItemEquipWing::vfn_10() { }
+void TItemEquipWing::vfn_10()
+{
+}
 
 // 0x801AF948
 void TItemEquipWing::render()

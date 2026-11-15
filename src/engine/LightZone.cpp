@@ -68,19 +68,19 @@ int LightZoneSun::isOn() const
 // 0x800A156C
 void LightZoneSpot::init()
 {
-	mPos.x  = 0.0f;
-	mPos.y  = 0.0f;
-	mPos.z  = 0.0f;
-	mDir.x  = 0.0f;
-	mDir.y  = -1.0f;
-	mDir.z  = 0.0f;
-	mColor  = 0xFFFFFFFF;
-	mA[0]   = 1.0f;
-	mA[1]   = 0.0f;
-	mA[2]   = 0.0f;
-	mK[0]   = 1.0f;
-	mK[1]   = 0.0f;
-	mK[2]   = 0.0f;
+	mPos.x = 0.0f;
+	mPos.y = 0.0f;
+	mPos.z = 0.0f;
+	mDir.x = 0.0f;
+	mDir.y = -1.0f;
+	mDir.z = 0.0f;
+	mColor = 0xFFFFFFFF;
+	mA[0]  = 1.0f;
+	mA[1]  = 0.0f;
+	mA[2]  = 0.0f;
+	mK[0]  = 1.0f;
+	mK[1]  = 0.0f;
+	mK[2]  = 0.0f;
 }
 
 // 0x800A15B4
@@ -170,7 +170,9 @@ LightZoneCtrl::LightZoneCtrl()
 }
 
 // 0x800A1838
-LightZoneCtrl::~LightZoneCtrl() { }
+LightZoneCtrl::~LightZoneCtrl()
+{
+}
 
 // 0x800A18A0
 extern "C" LightParam* getLightParam(int param)
@@ -230,7 +232,7 @@ void LightZoneCtrl::applySun(u16 id)
 	Vec3f dir;
 	u32 color;
 
-	mId = id;
+	mId                = id;
 	SceneLights* scene = getSceneLights();
 	if (scene == 0) {
 		return;

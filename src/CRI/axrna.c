@@ -7,54 +7,54 @@
 #include <CRI/adx.h>
 #include <CRI/cri_std.h>
 
-#define AXRNA_MAX_OBJ 16
-#define AXRNA_MAX_CH 2
-#define AXRNA_BUF_SMPL 0x1000
+#define AXRNA_MAX_OBJ    16
+#define AXRNA_MAX_CH     2
+#define AXRNA_BUF_SMPL   0x1000
 #define AXRNA_FLASH_SIZE 0x1000
-#define AXRNA_OWNER_ID 0x80000000
+#define AXRNA_OWNER_ID   0x80000000
 
 #define AXRNA_FLG_TRANS 1
-#define AXRNA_FLG_PLAY 2
+#define AXRNA_FLG_PLAY  2
 
 typedef struct _adxrna_obj {
-	signed char used;              /* 00 */
-	unsigned char flags;           /* 01 AXRNA_FLG_* */
-	signed char maxnch;            /* 02 */
-	signed char nch;               /* 03 */
-	int rd_pos;                    /* 04 play position in the ring in samples */
-	AXVPB* vpb[AXRNA_MAX_CH];      /* 08 */
-	AXRNARES res[AXRNA_MAX_CH];    /* 10 */
-	u32 aram_adr[AXRNA_MAX_CH];    /* 18 */
-	int buf_len;                   /* 20 */
-	int sfreq;                     /* 24 */
-	u32 owner[AXRNA_MAX_CH];       /* 28 */
-	SJ sji[AXRNA_MAX_CH];          /* 30 */
-	SJ sjrbf[AXRNA_MAX_CH];        /* 38 */
-	SJCK ck_data[AXRNA_MAX_CH];    /* 40 */
-	SJCK ck_room[AXRNA_MAX_CH];    /* 50 */
-	int dma_busy[AXRNA_MAX_CH];    /* 60 */
-	int dma_smpl;                  /* 68 */
-	int dma_total;                 /* 6C */
-	int flash_busy[AXRNA_MAX_CH];  /* 70 */
-	int flash_smpl;                /* 78 */
-	int flash_total;               /* 7C */
-	int bps;                       /* 80 */
-	int outvol;                    /* 84 */
-	int pan[AXRNA_MAX_CH];         /* 88 */
-	int span;                      /* 90 */
-	int aux_a;                     /* 94 */
-	int aux_b;                     /* 98 */
-	int fader;                     /* 9C */
-	s16 sfreq_fix;                 /* A0 1 when the output runs at 32029 Hz as the AI does at 48 kHz */
-	s16 srctype_set;               /* A2 */
-	u32 srctype;                   /* A4 */
-	ARQRequest req[AXRNA_MAX_CH];  /* A8 */
+	signed char used;             /* 00 */
+	unsigned char flags;          /* 01 AXRNA_FLG_* */
+	signed char maxnch;           /* 02 */
+	signed char nch;              /* 03 */
+	int rd_pos;                   /* 04 play position in the ring in samples */
+	AXVPB* vpb[AXRNA_MAX_CH];     /* 08 */
+	AXRNARES res[AXRNA_MAX_CH];   /* 10 */
+	u32 aram_adr[AXRNA_MAX_CH];   /* 18 */
+	int buf_len;                  /* 20 */
+	int sfreq;                    /* 24 */
+	u32 owner[AXRNA_MAX_CH];      /* 28 */
+	SJ sji[AXRNA_MAX_CH];         /* 30 */
+	SJ sjrbf[AXRNA_MAX_CH];       /* 38 */
+	SJCK ck_data[AXRNA_MAX_CH];   /* 40 */
+	SJCK ck_room[AXRNA_MAX_CH];   /* 50 */
+	int dma_busy[AXRNA_MAX_CH];   /* 60 */
+	int dma_smpl;                 /* 68 */
+	int dma_total;                /* 6C */
+	int flash_busy[AXRNA_MAX_CH]; /* 70 */
+	int flash_smpl;               /* 78 */
+	int flash_total;              /* 7C */
+	int bps;                      /* 80 */
+	int outvol;                   /* 84 */
+	int pan[AXRNA_MAX_CH];        /* 88 */
+	int span;                     /* 90 */
+	int aux_a;                    /* 94 */
+	int aux_b;                    /* 98 */
+	int fader;                    /* 9C */
+	s16 sfreq_fix;                /* A0 1 when the output runs at 32029 Hz as the AI does at 48 kHz */
+	s16 srctype_set;              /* A2 */
+	u32 srctype;                  /* A4 */
+	ARQRequest req[AXRNA_MAX_CH]; /* A8 */
 } AXRNA_OBJ;
 
 typedef char axrna_size_ok[(sizeof(AXRNA_OBJ) == 0xE8) ? 1 : -1];
 
-const char* const volatile axrna_build = "\nAXRNA Ver.1.02 Build:Mar  3 2003 16:47:43\n";
-static const char* const axrna_sw_str[] = {"OFF", "ON "};
+const char* const volatile axrna_build  = "\nAXRNA Ver.1.02 Build:Mar  3 2003 16:47:43\n";
+static const char* const axrna_sw_str[] = { "OFF", "ON " };
 
 static u32 axrna_srctype = 1;
 /* MIX pan for -15..15 */
@@ -96,7 +96,7 @@ int AXRNA_GetNumRoom(AXRNA rna);
 static void axrna_init_srctype(AXRNA rna);
 
 #define AXRNA_GET_TRANS_SW(rna) (((rna) == 0) ? -1 : ((rna)->flags & AXRNA_FLG_TRANS))
-#define AXRNA_GET_PLAY_SW(rna) (((rna) == 0) ? -1 : (((rna)->flags >> 1) & 1))
+#define AXRNA_GET_PLAY_SW(rna)  (((rna) == 0) ? -1 : (((rna)->flags >> 1) & 1))
 
 // 0x80230230
 void AXRNA_Init(void)
@@ -175,17 +175,17 @@ AXRNA AXRNA_Create(SJ* sj, int maxnch, short* work)
 		axrna_call_errfn("E1070304:Not enough RNA handle.\n");
 		return 0;
 	}
-	rna = &axrna_obj[i];
-	rna->nch = maxnch;
+	rna         = &axrna_obj[i];
+	rna->nch    = maxnch;
 	rna->maxnch = maxnch;
 	for (ch = 0; ch < rna->maxnch; ch++) {
 		rna->sji[ch] = sj[ch];
 	}
 	rna->outvol = 0;
-	rna->span = 0x7F;
-	rna->aux_a = -999;
-	rna->aux_b = -999;
-	rna->fader = 0;
+	rna->span   = 0x7F;
+	rna->aux_a  = -999;
+	rna->aux_b  = -999;
+	rna->fader  = 0;
 	for (ch = 0; ch < rna->maxnch; ch++) {
 		rna->owner[ch] = ((i << 1) + ch) | AXRNA_OWNER_ID;
 		if ((rna->res[ch] = AXRNARES_Create()) == 0) {
@@ -194,8 +194,8 @@ AXRNA AXRNA_Create(SJ* sj, int maxnch, short* work)
 			return 0;
 		}
 		rna->aram_adr[ch] = AXRNARES_GetAdr(rna->res[ch]);
-		rna->buf_len = AXRNARES_GetLen(rna->res[ch]);
-		rna->sjrbf[ch] = SJRBF_Create((char*)(rna->aram_adr[ch] << 1), rna->buf_len << 1, 0);
+		rna->buf_len      = AXRNARES_GetLen(rna->res[ch]);
+		rna->sjrbf[ch]    = SJRBF_Create((char*)(rna->aram_adr[ch] << 1), rna->buf_len << 1, 0);
 		if (rna->sjrbf[ch] == 0) {
 			axrna_call_errfn("E1070306:Can't create SJ.\n");
 			AXRNA_Destroy(rna);
@@ -223,7 +223,7 @@ AXRNA AXRNA_Create(SJ* sj, int maxnch, short* work)
 		AXRNA_SetOutPan(rna, 0, 0);
 	}
 	rna->flags = 0;
-	rna->used = 1;
+	rna->used  = 1;
 	return rna;
 }
 
@@ -234,7 +234,7 @@ static void axrna_set_srctype(AXRNA rna, u32 type)
 	if (rna == 0) {
 		return;
 	}
-	rna->srctype = type;
+	rna->srctype     = type;
 	rna->srctype_set = 1;
 }
 
@@ -302,11 +302,11 @@ void AXRNA_SetTransSw(AXRNA rna, int sw)
 			memset(&rna->req[ch], 0, sizeof(ARQRequest));
 			rna->dma_busy[ch] = 0;
 		}
-		rna->dma_smpl = 0;
-		rna->dma_total = 0;
-		rna->flash_smpl = 0;
+		rna->dma_smpl    = 0;
+		rna->dma_total   = 0;
+		rna->flash_smpl  = 0;
 		rna->flash_total = 0;
-		rna->rd_pos = -1;
+		rna->rd_pos      = -1;
 		rna->flags |= AXRNA_FLG_TRANS;
 		axrna_unlock();
 	} else if (sw == 0) {
@@ -315,8 +315,7 @@ void AXRNA_SetTransSw(AXRNA rna, int sw)
 				if (rna->dma_busy[ch] == 0) {
 					break;
 				}
-				for (wait = 0; wait < 100000; wait++) {
-				}
+				for (wait = 0; wait < 100000; wait++) { }
 			}
 			if (i == 200) {
 				axrna_call_errfn("E2071701:DMA transfer(data) to A-RAM did not finish.\n");
@@ -326,8 +325,7 @@ void AXRNA_SetTransSw(AXRNA rna, int sw)
 				if (rna->flash_busy[ch] == 0) {
 					break;
 				}
-				for (wait = 0; wait < 100000; wait++) {
-				}
+				for (wait = 0; wait < 100000; wait++) { }
 			}
 			if (i == 200) {
 				axrna_call_errfn("E2071701:DMA transfer(flash) to A-RAM did not finish.\n");
@@ -360,15 +358,15 @@ void AXRNA_SetPlaySw(AXRNA rna, int sw)
 		rna->rd_pos = -1;
 		for (ch = 0; ch < rna->nch; ch++) {
 			if (rna->vpb[ch] != 0) {
-				end = rna->buf_len - 1;
-				adr = rna->aram_adr[ch];
-				addr.loopFlag = 1;
-				addr.format = 10;
+				end                = rna->buf_len - 1;
+				adr                = rna->aram_adr[ch];
+				addr.loopFlag      = 1;
+				addr.format        = 10;
 				addr.loopAddressHi = adr >> 16;
 				addr.loopAddressLo = adr;
 				end += adr;
-				addr.endAddressHi = end >> 16;
-				addr.endAddressLo = end;
+				addr.endAddressHi     = end >> 16;
+				addr.endAddressLo     = end;
 				addr.currentAddressHi = adr >> 16;
 				addr.currentAddressLo = adr;
 				AXSetVoiceAddr(rna->vpb[ch], &addr);
@@ -425,24 +423,23 @@ void axrna_update_pos(AXRNA rna)
 	int len;
 
 	rd_pos = rna->rd_pos;
-	vpb = rna->vpb[rna->nch - 1];
+	vpb    = rna->vpb[rna->nch - 1];
 	if (vpb == 0) {
 		return;
 	}
-	pos = *(u32*)&vpb->pb.addr.currentAddressHi - rna->aram_adr[rna->nch - 1];
+	pos                            = *(u32*)&vpb->pb.addr.currentAddressHi - rna->aram_adr[rna->nch - 1];
 	axrna_pos_log[axrna_pos_idx++] = pos;
 	if (axrna_pos_idx == 32) {
 		axrna_pos_idx = 0;
 	}
 	if (pos < 0 || pos > rna->buf_len) {
-		for (;;) {
-		}
+		for (;;) { }
 	}
 	if (rd_pos == -1) {
 		if (pos == 0) {
 			nsmpl = 0;
 		} else {
-			rd_pos = 0;
+			rd_pos      = 0;
 			rna->rd_pos = 0;
 		}
 	}
@@ -453,7 +450,7 @@ void axrna_update_pos(AXRNA rna)
 			nsmpl = AXRNA_BUF_SMPL - (rd_pos - pos);
 		}
 	}
-	nsct = nsmpl / 0x800;
+	nsct  = nsmpl / 0x800;
 	nsmpl = nsct * 0x800;
 	if (nsmpl <= 0) {
 		return;
@@ -477,9 +474,9 @@ void axrna_dma_cb(u32 req)
 	int id;
 	int ch;
 
-	id = ((ARQRequest*)req)->owner & 0x7FFFFFFF;
+	id  = ((ARQRequest*)req)->owner & 0x7FFFFFFF;
 	rna = &axrna_obj[id / 2];
-	ch = id % 2;
+	ch  = id % 2;
 	if (rna->dma_busy[ch] != 1) {
 		return;
 	}
@@ -499,9 +496,9 @@ void axrna_flash_cb(u32 req)
 	int id;
 	int ch;
 
-	id = ((ARQRequest*)req)->owner & 0x7FFFFFFF;
+	id  = ((ARQRequest*)req)->owner & 0x7FFFFFFF;
 	rna = &axrna_obj[id / 2];
-	ch = id % 2;
+	ch  = id % 2;
 	if (rna->flash_busy[ch] != 1) {
 		return;
 	}
@@ -538,7 +535,7 @@ void axrna_exec_hndl(AXRNA rna)
 			SJ_GetChunk(rna->sjrbf[ch], SJ_LIN_FREE, 0x2000, &room);
 			SJ_GetChunk(rna->sji[ch], SJ_LIN_DATA, room.len, &data);
 			len = (data.len < room.len) ? data.len : room.len;
-			n = len / 32;
+			n   = len / 32;
 			len = n * 32;
 			SJ_SplitChunk(&room, len, &room, &room_rest);
 			SJ_UngetChunk(rna->sjrbf[ch], SJ_LIN_FREE, &room_rest);
@@ -548,12 +545,11 @@ void axrna_exec_hndl(AXRNA rna)
 				return;
 			}
 			if (data.len != room.len) {
-				for (;;) {
-				}
+				for (;;) { }
 			}
 			rna->ck_data[ch] = data;
 			rna->ck_room[ch] = room;
-			rna->dma_smpl = n * 16;
+			rna->dma_smpl    = n * 16;
 			DCFlushRange(rna->ck_data[ch].data, rna->ck_data[ch].len);
 			rna->dma_busy[ch] = 1;
 			ARQPostRequest(&rna->req[ch], rna->owner[ch], 0, 1, (u32)data.data, (u32)room.data, len, axrna_dma_cb);
@@ -564,7 +560,7 @@ void axrna_exec_hndl(AXRNA rna)
 				continue;
 			}
 			SJ_GetChunk(rna->sjrbf[ch], SJ_LIN_FREE, 0x2000, &room);
-			n = room.len / 32;
+			n   = room.len / 32;
 			len = n * 32;
 			SJ_SplitChunk(&room, len, &room, &room_rest);
 			SJ_UngetChunk(rna->sjrbf[ch], SJ_LIN_FREE, &room_rest);
@@ -572,11 +568,10 @@ void axrna_exec_hndl(AXRNA rna)
 				return;
 			}
 			rna->ck_room[ch] = room;
-			rna->flash_smpl = n * 16;
+			rna->flash_smpl  = n * 16;
 			DCFlushRange(axrna_flash_buf, AXRNA_FLASH_SIZE);
 			rna->flash_busy[ch] = 1;
-			ARQPostRequest(&rna->req[ch], rna->owner[ch], 0, 1, (u32)axrna_flash_buf, (u32)room.data, len,
-			               axrna_flash_cb);
+			ARQPostRequest(&rna->req[ch], rna->owner[ch], 0, 1, (u32)axrna_flash_buf, (u32)room.data, len, axrna_flash_cb);
 		}
 	}
 }
@@ -623,7 +618,7 @@ void AXRNA_SetSfreq(AXRNA rna, int sfreq)
 					axrna_set_srctype(rna, 0);
 				}
 				/* Computed here the DOL hoists fixed out of the loop but keeps its unsigned divisions inside */
-				fixed = (sfreq * 1124 + 1124) / 1125;
+				fixed       = (sfreq * 1124 + 1124) / 1125;
 				src.ratioHi = (u32)fixed / 32000;
 				src.ratioLo = ((u32)fixed << 8) / 125;
 			} else {
@@ -631,10 +626,10 @@ void AXRNA_SetSfreq(AXRNA rna, int sfreq)
 				src.ratioLo = ((sfreq << 8) / 125) & 0xFFFF;
 			}
 			src.currentAddressFrac = 0;
-			src.last_samples[0] = 0;
-			src.last_samples[1] = 0;
-			src.last_samples[2] = 0;
-			src.last_samples[3] = 0;
+			src.last_samples[0]    = 0;
+			src.last_samples[1]    = 0;
+			src.last_samples[2]    = 0;
+			src.last_samples[3]    = 0;
 			AXSetVoiceSrcType(rna->vpb[ch], rna->srctype);
 			AXSetVoiceSrc(rna->vpb[ch], &src);
 		}

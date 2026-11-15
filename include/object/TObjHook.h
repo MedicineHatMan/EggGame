@@ -24,9 +24,9 @@ public:
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();                         // _0C
-	virtual void vfn_10();                       // _10
-	virtual void render();                       // _1C
+	virtual void draw();                            // _0C
+	virtual void vfn_10();                          // _10
+	virtual void render();                          // _1C
 	virtual void getNodeMatrix(int node, f32* mtx); // _24
 	virtual void initFromDesc(SetDesc* desc);
 	virtual void debugPrint(void*);

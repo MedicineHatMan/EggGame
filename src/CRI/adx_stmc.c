@@ -13,45 +13,45 @@ void adxstmf_stat_exec(ADXSTM stm);
 void adxstmf_stat_read(ADXSTM stm);
 
 /* Floor division by a sector */
-#define ADXSTM_SCT_FLOOR(n) (((n) >> 11) + ((n) < 0 && ((n) & 0x7FF) != 0))
+#define ADXSTM_SCT_FLOOR(n)   (((n) >> 11) + ((n) < 0 && ((n) & 0x7FF) != 0))
 #define ADXSTM_SCT_ROUNDUP(n) (((n) + 0x7FF) / ADXSTM_SCT)
-#define ADXSTM_SCT_CEIL(n) ((n) / ADXSTM_SCT + ((n) % ADXSTM_SCT > 0 ? 1 : 0))
+#define ADXSTM_SCT_CEIL(n)    ((n) / ADXSTM_SCT + ((n) % ADXSTM_SCT > 0 ? 1 : 0))
 
-#define ADXSTM_EXEC()                                          \
-	do {                                                       \
-		int _i;                                                \
-		if (SVM_TestAndSet(&adxstm_lock) != 0) {              \
-			for (_i = 0; _i < ADXSTM_MAX; _i++) {              \
-				if (adxstm_obj[_i].used == 1) {                \
-					adxstmf_stat_exec(&adxstm_obj[_i]);        \
-				}                                              \
-			}                                                  \
-			adxstm_lock = 0;                                  \
-		}                                                      \
+#define ADXSTM_EXEC()                                   \
+	do {                                                \
+		int _i;                                         \
+		if (SVM_TestAndSet(&adxstm_lock) != 0) {        \
+			for (_i = 0; _i < ADXSTM_MAX; _i++) {       \
+				if (adxstm_obj[_i].used == 1) {         \
+					adxstmf_stat_exec(&adxstm_obj[_i]); \
+				}                                       \
+			}                                           \
+			adxstm_lock = 0;                            \
+		}                                               \
 	} while (0)
 
-#define ADXSTM_REQ_STOP(stm)                       \
-	do {                                           \
-		SVM_Lock();                                \
+#define ADXSTM_REQ_STOP(stm)                            \
+	do {                                                \
+		SVM_Lock();                                     \
 		if ((stm)->stat == 2 && (stm)->read_flg == 1) { \
-			(stm)->stop_req = 1;                   \
-			if ((stm)->start_req == 1) {           \
-				(stm)->start_req = 0;              \
-			}                                      \
-		} else {                                   \
-			(stm)->stat = 1;                       \
-		}                                          \
-		SVM_Unlock();                              \
+			(stm)->stop_req = 1;                        \
+			if ((stm)->start_req == 1) {                \
+				(stm)->start_req = 0;                   \
+			}                                           \
+		} else {                                        \
+			(stm)->stat = 1;                            \
+		}                                               \
+		SVM_Unlock();                                   \
 	} while (0)
 
-#define ADXSTM_REQ_CLOSE(stm)          \
-	do {                               \
-		SVM_Lock();                    \
-		if ((stm)->cvfs_open == 1) {   \
-			(stm)->close_req = 1;      \
-		}                              \
-		(stm)->bind_req = 0;           \
-		SVM_Unlock();                  \
+#define ADXSTM_REQ_CLOSE(stm)        \
+	do {                             \
+		SVM_Lock();                  \
+		if ((stm)->cvfs_open == 1) { \
+			(stm)->close_req = 1;    \
+		}                            \
+		(stm)->bind_req = 0;         \
+		SVM_Unlock();                \
 	} while (0)
 
 #define ADXSTM_STOP_BODY(stm)                              \
@@ -59,9 +59,9 @@ void adxstmf_stat_read(ADXSTM stm);
 		if ((stm)->cvfs != 0) {                            \
 			cvFsStopTr((stm)->cvfs);                       \
 		}                                                  \
-		(stm)->stat = 1;                                   \
+		(stm)->stat     = 1;                               \
 		(stm)->read_flg = 0;                               \
-		(stm)->ck.data = 0;                                \
+		(stm)->ck.data  = 0;                               \
 		ADXSTM_REQ_STOP(stm);                              \
 		do {                                               \
 			ADXSTM_ExecServer();                           \
@@ -93,29 +93,29 @@ static inline ADXSTM adxstm_CreateIn(SJ sj, int start, int num)
 	if (i == num) {
 		return 0;
 	}
-	stm->stat = 1;
+	stm->stat     = 1;
 	stm->read_flg = 0;
-	stm->sj = sj;
-	stm->cvfs = 0;
-	stm->ofst = 0;
+	stm->sj       = sj;
+	stm->cvfs     = 0;
+	stm->ofst     = 0;
 	stm->file_len = 0;
-	stm->req_rd = 0x200;
+	stm->req_rd   = 0x200;
 	stm->cur_ofst = 0;
 	stm->rd_limit = ADXSTM_RD_ALL;
-	stm->eos = stm->file_len / ADXSTM_SCT;
+	stm->eos      = stm->file_len / ADXSTM_SCT;
 	if (stm->file_len % ADXSTM_SCT > 0) {
 		stm->eos++;
 	}
 	if (stm->sj != 0) {
 		ADXCRS_Lock();
-		data = SJ_GetNumData(sj, SJ_LIN_DATA);
+		data          = SJ_GetNumData(sj, SJ_LIN_DATA);
 		stm->sj_total = SJ_GetNumData(sj, SJ_LIN_FREE) + data;
 		ADXCRS_Unlock();
-		stm->buf_max = stm->sj_total;
+		stm->buf_max    = stm->sj_total;
 		stm->flow_limit = stm->sj_total;
 	}
 	stm->pause = 0;
-	stm->used = 1;
+	stm->used  = 1;
 	return stm;
 }
 
@@ -166,10 +166,10 @@ void ADXSTM_Destroy(ADXSTM stm)
 void ADXSTM_BindFileNw(ADXSTM stm, const char* fname, void* dir, int ofst, int nsct)
 {
 	SVM_Lock();
-	stm->ofst = ofst;
+	stm->ofst     = ofst;
 	stm->file_len = nsct << 11;
-	stm->fname = fname;
-	stm->dir = dir;
+	stm->fname    = fname;
+	stm->dir      = dir;
 	stm->bind_req = 1;
 	SVM_Unlock();
 }
@@ -178,10 +178,10 @@ void ADXSTM_BindFileNw(ADXSTM stm, const char* fname, void* dir, int ofst, int n
 void ADXSTM_BindFile(ADXSTM stm, const char* fname, void* dir, int ofst, int nsct)
 {
 	SVM_Lock();
-	stm->ofst = ofst;
+	stm->ofst     = ofst;
 	stm->file_len = nsct << 11;
-	stm->fname = fname;
-	stm->dir = dir;
+	stm->fname    = fname;
+	stm->dir      = dir;
 	stm->bind_req = 1;
 	SVM_Unlock();
 	do {
@@ -239,17 +239,17 @@ int ADXSTM_Tell(ADXSTM stm)
 int ADXSTM_Start(ADXSTM stm)
 {
 	stm->rd_bytes = 0;
-	stm->err_cnt = 0;
+	stm->err_cnt  = 0;
 	if (stm->file_len == 0) {
 		stm->stat = 3;
 	} else {
 		stm->stat = 2;
 	}
-	stm->read_flg = 0;
-	stm->ck.data = 0;
-	stm->ck.len = 0;
+	stm->read_flg  = 0;
+	stm->ck.data   = 0;
+	stm->ck.len    = 0;
 	stm->start_req = 1;
-	stm->rd_limit = ADXSTM_RD_ALL;
+	stm->rd_limit  = ADXSTM_RD_ALL;
 	return 1;
 }
 
@@ -257,17 +257,17 @@ int ADXSTM_Start(ADXSTM stm)
 int ADXSTM_Start2(ADXSTM stm, unsigned int limit)
 {
 	stm->rd_bytes = 0;
-	stm->err_cnt = 0;
+	stm->err_cnt  = 0;
 	if (stm->file_len == 0) {
 		stm->stat = 3;
 	} else {
 		stm->stat = 2;
 	}
-	stm->read_flg = 0;
-	stm->ck.data = 0;
-	stm->ck.len = 0;
+	stm->read_flg  = 0;
+	stm->ck.data   = 0;
+	stm->ck.len    = 0;
 	stm->start_req = 1;
-	stm->rd_limit = limit;
+	stm->rd_limit  = limit;
 	return 1;
 }
 
@@ -287,7 +287,7 @@ void ADXSTM_Stop(ADXSTM stm)
 void ADXSTM_EntryEosFunc(ADXSTM stm, void (*func)(void*), void* obj)
 {
 	stm->eos_func = func;
-	stm->eos_obj = obj;
+	stm->eos_obj  = obj;
 }
 
 // 0x80222F34
@@ -326,9 +326,9 @@ void adxstmf_stat_read(ADXSTM stm)
 			stm->cur_ofst += stm->rd_sct;
 			stm->rd_bytes += nbyte;
 			stm->ck.data = 0;
-			stm->ck.len = 0;
-			nbyte = stm->file_len;
-			nsct = ADXSTM_SCT_CEIL(nbyte);
+			stm->ck.len  = 0;
+			nbyte        = stm->file_len;
+			nsct         = ADXSTM_SCT_CEIL(nbyte);
 			if (stm->cur_ofst == stm->eos && stm->eos_func != 0) {
 				stm->eos_func(stm->eos_obj);
 			}
@@ -343,7 +343,7 @@ void adxstmf_stat_read(ADXSTM stm)
 			SVM_Unlock();
 			SJ_UngetChunk(sj, SJ_LIN_FREE, &stm->ck);
 			stm->ck.data = 0;
-			stm->ck.len = 0;
+			stm->ck.len  = 0;
 			if (adxstm_retry_limit >= 0) {
 				if (stm->err_cnt >= adxstm_retry_limit) {
 					stm->stat = 4;
@@ -356,15 +356,15 @@ void adxstmf_stat_read(ADXSTM stm)
 		}
 	} else {
 		stm->read_flg = 1;
-		stm->ck.data = 0;
-		stm->ck.len = 0;
+		stm->ck.data  = 0;
+		stm->ck.len   = 0;
 		SVM_Unlock();
 		if (stm->pause == 1 || stm->stop_req == 1) {
 			stm->read_flg = 0;
 		} else if (stm->file_len == 0) {
 			stm->read_flg = 0;
-			stm->rd_sct = 0;
-			stm->stat = 3;
+			stm->rd_sct   = 0;
+			stm->stat     = 3;
 		} else if (sj == 0 || sj->vtbl == 0) {
 			stm->read_flg = 0;
 			adxstm_read_err_cnt++;
@@ -375,7 +375,7 @@ void adxstmf_stat_read(ADXSTM stm)
 			} else {
 				SJ_GetChunk(sj, SJ_LIN_FREE, stm->buf_max, &stm->ck);
 				chunk_sct = stm->ck.len / ADXSTM_SCT;
-				nsct = stm->eos - stm->cur_ofst;
+				nsct      = stm->eos - stm->cur_ofst;
 				if (chunk_sct < nsct) {
 					nsct = chunk_sct;
 				}
@@ -388,10 +388,10 @@ void adxstmf_stat_read(ADXSTM stm)
 				stm->rd_sct = cvFsReqRd(stm->cvfs, chunk_sct, stm->ck.data);
 				if (stm->rd_sct <= 0) {
 					SJ_UngetChunk(sj, SJ_LIN_FREE, &stm->ck);
-					stm->ck.data = 0;
-					stm->ck.len = 0;
+					stm->ck.data  = 0;
+					stm->ck.len   = 0;
 					stm->read_flg = 0;
-					st = cvFsGetStat(stm->cvfs);
+					st            = cvFsGetStat(stm->cvfs);
 					if (st == 3 && adxstm_retry_limit >= 0) {
 						if (stm->err_cnt >= adxstm_retry_limit) {
 							stm->stat = 4;
@@ -433,14 +433,14 @@ void adxstmf_stat_exec(ADXSTM stm)
 			if (stm->cvfs == 0) {
 				if ((stm->cvfs = cvFsOpen(stm->fname, stm->dir, 0)) == 0) {
 					ADXERR_CallErrFunc2("E02110501 adxstmf_stat_exec: can't open ", stm->fname);
-					stm->stat = 4;
+					stm->stat      = 4;
 					stm->cvfs_open = 0;
-					stm->bind_req = 0;
+					stm->bind_req  = 0;
 					return;
 				}
 				cvFsSeek(stm->cvfs, 0, 2);
 				size = cvFsTell(stm->cvfs);
-				len = size << 11;
+				len  = size << 11;
 				cvFsSeek(stm->cvfs, 0, 0);
 				if (stm->file_len == (ADXSTM_RD_ALL << 11)) {
 					stm->file_len = len;
@@ -480,7 +480,7 @@ void ADXSTM_ExecServer(void)
 int ADXSTM_SetBufSize(ADXSTM stm, int min, int max)
 {
 	stm->flow_limit = min;
-	stm->buf_max = max;
+	stm->buf_max    = max;
 	return 1;
 }
 
@@ -511,11 +511,11 @@ void ADXSTM_SetSj(ADXSTM stm, SJ sj)
 
 	stm->sj = sj;
 	ADXCRS_Lock();
-	data = SJ_GetNumData(sj, SJ_LIN_DATA);
-	free = SJ_GetNumData(sj, SJ_LIN_FREE);
+	data          = SJ_GetNumData(sj, SJ_LIN_DATA);
+	free          = SJ_GetNumData(sj, SJ_LIN_FREE);
 	stm->sj_total = free + data;
 	ADXCRS_Unlock();
-	free = stm->sj_total;
-	stm->buf_max = free;
+	free            = stm->sj_total;
+	stm->buf_max    = free;
 	stm->flow_limit = free;
 }

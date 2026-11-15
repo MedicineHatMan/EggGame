@@ -19,7 +19,9 @@ TGameGear::TGameGear(TObject* parent)
 }
 
 // 0x8013BB3C
-TGameGear::~TGameGear() { }
+TGameGear::~TGameGear()
+{
+}
 
 // 0x8013BB98
 void TGameGear::startState()

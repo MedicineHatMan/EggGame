@@ -1,7 +1,7 @@
 #include "engine/DrawTask.h"
 #include "Ninja/ninja.h"
 
-#define DRAWTASK_POOL  0x400
+#define DRAWTASK_POOL 0x400
 
 typedef char DrawTask_size_check[(sizeof(DrawTask) == 0x18) ? 1 : -1];
 
@@ -38,7 +38,7 @@ extern "C" void initDrawTasks()
 		gDrawTaskPool[i].mNext = &gDrawTaskPool[i + 1];
 	}
 	gDrawTaskPool[DRAWTASK_POOL - 1].mNext = 0;
-	gDrawTaskFree = gDrawTaskPool;
+	gDrawTaskFree                          = gDrawTaskPool;
 	setDrawTaskDepthRange(5000.0f, -5000.0f);
 }
 
@@ -136,15 +136,15 @@ extern "C" void sortDrawTasks(u16 list)
 	DrawTask* next;
 	DrawTask* task = target->mHead;
 	while (task != 0) {
-		next = task->mNext;
-		u32 key           = (task->mSortKey >> 10) & 0x3F;
-		DrawTask* first   = sDrawTaskBuckets[key];
+		next            = task->mNext;
+		u32 key         = (task->mSortKey >> 10) & 0x3F;
+		DrawTask* first = sDrawTaskBuckets[key];
 		if (first != 0) {
 			task->mPrev         = first->mPrev;
 			first->mPrev->mNext = task;
 			first->mPrev        = task;
 		} else {
-			task->mPrev            = task;
+			task->mPrev           = task;
 			sDrawTaskBuckets[key] = task;
 		}
 		task->mNext = 0;

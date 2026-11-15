@@ -81,6 +81,7 @@ int addColorAlpha(u32* color, int step)
 
 // 0x80045050
 // Each channel as a u8 through GQR1 out = from + to - from * t
+// clang-format off
 static asm void lerpColorPS(const u32* from, const u32* to, u32* out, f32 t)
 {
 	nofralloc
@@ -99,3 +100,4 @@ static asm void lerpColorPS(const u32* from, const u32* to, u32* out, f32 t)
 	psq_st f6, 0x2(r5), 0, 1
 	blr
 }
+// clang-format on

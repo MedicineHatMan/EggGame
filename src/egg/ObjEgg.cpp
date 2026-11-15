@@ -100,7 +100,9 @@ inline void TObjEgg::operator delete(void* mem)
 	objHeapFree(gObjHeap, mem);
 }
 
-inline EggHandle::~EggHandle() { }
+inline EggHandle::~EggHandle()
+{
+}
 
 // 0x80142E4C
 extern "C" void loadEggAssets()
@@ -108,10 +110,10 @@ extern "C" void loadEggAssets()
 	TArc* arc;
 	loadArc("ge_egg.arc", &arc);
 	if (arc != 0) {
-		sEggHatchModels = (NJS_OBJECT**)findArcExport(arc, "models");
+		sEggHatchModels     = (NJS_OBJECT**)findArcExport(arc, "models");
 		sEggHatchMotionData = (NJS_MOTION**)findArcExport(arc, "motions");
-		sEggTexLists = (NJS_TEXLIST**)findArcExport(arc, "texlists");
-		void** textures = (void**)findArcExport(arc, "textures");
+		sEggTexLists        = (NJS_TEXLIST**)findArcExport(arc, "texlists");
+		void** textures     = (void**)findArcExport(arc, "textures");
 		for (int i = 0; i < 7; i++) {
 			bindGvmTextures((u8*)*textures, sEggTexLists[i]);
 		}
@@ -124,9 +126,7 @@ extern "C" void loadEggAssets()
 
 extern "C" {
 extern const int sEggItemIdsHigh[] = {
-	1, 0, 3, 2, 5, 4, 6, 21,
-	22, 23, 10, 8, 7, 9, 11, 12,
-	13, 14, 15, 16, 17, 18, 19, 20,
+	1, 0, 3, 2, 5, 4, 6, 21, 22, 23, 10, 8, 7, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
 };
 }
 
@@ -144,12 +144,12 @@ const char* gTObjEggName = "TObjEgg";
 
 // 0x80142F64
 TObjEgg::TObjEgg(TObject* parent, const SetDesc* desc)
-	: TObjAction(parent)
-	, mAuraA(this)
-	, mAuraB(this)
+    : TObjAction(parent)
+    , mAuraA(this)
+    , mAuraB(this)
 {
-	_00    = (u32)gTObjEggName;
-	mSize  = sizeof(TObjEgg);
+	_00   = (u32)gTObjEggName;
+	mSize = sizeof(TObjEgg);
 	setObjId(this, desc->mObjId);
 	setup();
 	mLink.get()->attach((SetDesc*)desc);
@@ -169,7 +169,7 @@ TObjEgg::~TObjEgg()
 {
 	runState(mState, EGG_EXIT);
 	if (mTexture != 0) {
-		int id        = mLevel.getType();
+		int id                      = mLevel.getType();
 		TEggTextureManager* manager = getTEggTextureManager();
 		manager->release(id);
 	}
@@ -240,33 +240,33 @@ void TObjEgg::setup()
 	mFeedTimer = 0;
 	mPulse     = 0;
 	mTick      = 0;
-	_C0 = _C2 = (u16)0xFFFF;
-	mEggParam = playerGetParamsTail();
-	mPlayerParam = playerGetParams(0);
-	one        = 1.0f;
-	mState     = EGG_STATE_NONE;
-	mWobble    = one;
-	mWobbleVal = one;
-	mWobbleVel = 0.0f;
-	mTexture   = 0;
-	mForm      = 0;
-	mFormFx    = 0;
-	mDamageMul = 1;
-	mDamageAdd = 0;
+	_C0 = _C2      = (u16)0xFFFF;
+	mEggParam      = playerGetParamsTail();
+	mPlayerParam   = playerGetParams(0);
+	one            = 1.0f;
+	mState         = EGG_STATE_NONE;
+	mWobble        = one;
+	mWobbleVal     = one;
+	mWobbleVel     = 0.0f;
+	mTexture       = 0;
+	mForm          = 0;
+	mFormFx        = 0;
+	mDamageMul     = 1;
+	mDamageAdd     = 0;
 	mAuraDrawObj   = 0;
 	mHandle.mOwner = this;
-	mColl = colliCreate(1, 1);
+	mColl          = colliCreate(1, 1);
 	colliSetOwner(mColl, (u16)mObjId);
 	colliSetMasks(mColl, 8, 0xF3, 0xF0, 0);
 	colliShapeSetSphere(colliGetShape(mColl, 0));
 	*(int*)((u8*)colliGetShape(mColl, 0) + 0x24) = 0x42C;
-	mBody.mBounce = 0.0f;
-	mRoll.mOwner   = this;
-	mRoll.mPath = &mCollide;
-	mRoll.mBody    = &mBody;
-	mDrawObj       = addDrawTask(this, (void (*)(void*))eggDrawNormal, 0x21, 0);
-	mAuraA.mBody   = &mBody;
-	mAuraB.mBody   = &mBody;
+	mBody.mBounce                                = 0.0f;
+	mRoll.mOwner                                 = this;
+	mRoll.mPath                                  = &mCollide;
+	mRoll.mBody                                  = &mBody;
+	mDrawObj                                     = addDrawTask(this, (void (*)(void*))eggDrawNormal, 0x21, 0);
+	mAuraA.mBody                                 = &mBody;
+	mAuraB.mBody                                 = &mBody;
 }
 
 extern "C" TObject* createEgg(TObject* parent, SetDesc* desc)
@@ -338,7 +338,7 @@ Vec3f* TObjEgg::getPos()
 
 void TObjEgg::setPos(const Vec3f* pos)
 {
-	mDrawPos  = *pos;
+	mDrawPos   = *pos;
 	mBody.mPos = *pos;
 	colliShapeSetPos(colliGetShape(mColl, 0), pos);
 }
@@ -488,8 +488,8 @@ void TObjEgg::vfn_10()
 		if (mouth.z > screen.z) {
 			f32 scaleB = -1.0f / mouth.z;
 			f32 scaleA = -1.0f / screen.z;
-			f32 my = mouth.y * scaleB;
-			f32 mx = mouth.x * scaleB;
+			f32 my     = mouth.y * scaleB;
+			f32 mx     = mouth.x * scaleB;
 			radius *= scaleB;
 			f32 dx = screen.x * scaleA - mx;
 			f32 dy = screen.y * scaleA - my;
@@ -503,7 +503,7 @@ void TObjEgg::vfn_10()
 	}
 
 	if (alt != 0) {
-		_78 = 0.85f;
+		_78             = 0.85f;
 		mDrawObj->mFunc = (void (*)(void*))eggDrawAlt;
 		moveDrawTask(mDrawObj, 0x22);
 		mDrawObj->mSortKey = drawTaskDepthKey(mouth.z);
@@ -596,8 +596,8 @@ void TObjEgg::shatter()
 	mGlow.stop();
 	msg.mType = 0x15;
 	sendMsgById(mOwnerId, &msg);
-	pos = mBody.mPos;
-	rot = mBody.mRot;
+	pos        = mBody.mPos;
+	rot        = mBody.mRot;
 	f32 radius = mBody.mRadius;
 	((void (*)(f32, const Vec3f*, const EggRot*, int))createTEggEffBreak)(radius, &pos, &rot, mLevel.getType());
 	playSe(0x97);
@@ -612,8 +612,8 @@ void TObjEgg::updateMatrix()
 	u8 base[0x30];
 	u8 grow[0x30];
 
-	pos = mBody.mPos;
-	rot = mBody.mRot;
+	pos       = mBody.mPos;
+	rot       = mBody.mRot;
 	f32 scale = mBody.mRadius / 10.0f;
 	mtxSetTransV((f32*)base, &pos);
 	if (mTilt.getScale(grow) != 0) {
@@ -667,9 +667,9 @@ int TObjEgg::checkThrown()
 void TObjEgg::limitVel(f32 limit)
 {
 	Vec3f vel;
-	vel.x = mBody.mVel.x;
-	vel.y = mBody.mVel.y;
-	vel.z = mBody.mVel.z;
+	vel.x     = mBody.mVel.x;
+	vel.y     = mBody.mVel.y;
+	vel.z     = mBody.mVel.z;
 	f32 speed = njUnitVector(&vel);
 	if (speed < gUnitVectorMin) {
 		vel = gVecZero;
@@ -687,9 +687,9 @@ void TObjEgg::setRadius(f32 radius)
 		mHandle.mHolder->mBody.mRadius = radius;
 	}
 	colliGetShape(mColl, 0)->mSizeX = radius;
-	f32 value = 2.0f * getRadius();
-	mShadow._30 = value;
-	mShadow._34 = value;
+	f32 value                       = 2.0f * getRadius();
+	mShadow._30                     = value;
+	mShadow._34                     = value;
 }
 
 void TObjEgg::playSe(int id)
@@ -701,13 +701,13 @@ int TObjEgg::takeBy(void* message)
 {
 	EggHoldMsg* msg = (EggHoldMsg*)message;
 	if (mHandle.mHolder == 0 && mRoll.isGrounded() != 0) {
-		msg->mHandle = &mHandle;
-		msg->mPos    = mBody.mPos;
-		msg->mRot    = mBody.mRot;
-		msg->mRadius = mBody.mRadius;
-		mOwnerId = msg->mHolder;
+		msg->mHandle    = &mHandle;
+		msg->mPos       = mBody.mPos;
+		msg->mRot       = mBody.mRot;
+		msg->mRadius    = mBody.mRadius;
+		mOwnerId        = msg->mHolder;
 		mHandle.mDamage = mDamageMul * mLevel.getPower();
-		mHolderId = msg->mHolder;
+		mHolderId       = msg->mHolder;
 		return 1;
 	}
 	return 0;
@@ -832,8 +832,8 @@ void TObjEgg::render(int alt)
 	if (mForm == 6) {
 		eggSetTexMtx(0x21);
 		param.mFlags |= 0x2000;
-		tev.mStageA = 1;
-		tev.mStageB = 1;
+		tev.mStageA  = 1;
+		tev.mStageB  = 1;
 		tev.mTexFunc = eggTexAlphaOn;
 		tev.mTevFunc = eggTevAlphaOn;
 		param.mExtra = &tev;
@@ -841,8 +841,8 @@ void TObjEgg::render(int alt)
 		gjLoadTextureNum(3, 1, 1, 1);
 	} else if (mHits != 0) {
 		param.mFlags |= 0x2000;
-		tev.mStageA = 0;
-		tev.mStageB = 1;
+		tev.mStageA  = 0;
+		tev.mStageB  = 1;
 		tev.mTevFunc = eggTevCrack;
 		param.mExtra = &tev;
 		njSetTexture(sEggTexLists[6]);
@@ -850,8 +850,8 @@ void TObjEgg::render(int alt)
 	} else if (mEggFlags.mBits & 2) {
 		eggSetTexMtx(0x21);
 		param.mFlags |= 0x2000;
-		tev.mStageA = 1;
-		tev.mStageB = 1;
+		tev.mStageA  = 1;
+		tev.mStageB  = 1;
 		tev.mTexFunc = eggTexAlphaOff;
 		tev.mTevFunc = eggTevAlphaOff;
 		param.mExtra = &tev;
@@ -913,14 +913,14 @@ int TObjEgg::onHit(const TObjAction* other, int arg, int* result)
 	case EGG_STATE_ROLLED_P:
 	case EGG_STATE_ROLLED_P2:
 		((HitInfo*)result)->_14 = (u32)mThrowTag;
-		ret = mRoll.hitWhileRolling(result, power);
+		ret                     = mRoll.hitWhileRolling(result, power);
 		break;
 	case EGG_STATE_HELD:
 		ret = mHandle.mHolder->takeHit((HitInfo*)result, power);
 		break;
 	case EGG_STATE_SLAM:
 		((HitInfo*)result)->_14 = (u32)mThrowTag;
-		ret = mRoll.hitWhileHeld(result, power);
+		ret                     = mRoll.hitWhileHeld(result, power);
 		break;
 	default:
 		return 0;
@@ -1071,14 +1071,18 @@ void TObjEgg::enterFormE()
 	startEffect(0x73);
 }
 
-void TObjEgg::enterFormF() { }
+void TObjEgg::enterFormF()
+{
+}
 
 void TObjEgg::enterFormG()
 {
 	startEffect(0x78);
 }
 
-void TObjEgg::enterFormH() { }
+void TObjEgg::enterFormH()
+{
+}
 
 extern "C" void eggDrawAura(TObjEgg* egg)
 {
@@ -1135,8 +1139,8 @@ void TObjEgg::stateHeld(int phase)
 		updateWobble();
 		eggPushHeld((void*)mColl, (EggContact*)mColl->mContacts, 0, mHandle.mHolder);
 		TMobileObject* holder = (TMobileObject*)mHandle.mHolder;
-		pos = holder->mBody.mPos;
-		rot = holder->mBody.mRot;
+		pos                   = holder->mBody.mPos;
+		rot                   = holder->mBody.mRot;
 		setPos(&pos);
 		mBody.mRot = rot;
 		updateMatrix();
@@ -1182,10 +1186,10 @@ void TObjEgg::stateSlam(int phase)
 		} else if (checkThrown() != 0) {
 			setState(EGG_STATE_THROWN);
 		} else if (mRoll.hasLanded() != 0) {
-			pos.x = mDrawPos.x;
+			pos.x      = mDrawPos.x;
 			f32 radius = mBody.mRadius;
-			pos.y = mDrawPos.y - radius;
-			pos.z = mDrawPos.z;
+			pos.y      = mDrawPos.y - radius;
+			pos.z      = mDrawPos.z;
 			u16 holder = mHolderId;
 			u16 obj    = mObjId;
 			eggSpawnShockWave(radius, obj, holder, &pos, mLevel.getPower(), mThrowTag);
@@ -1221,7 +1225,7 @@ void TObjEgg::stateHatch(int phase)
 
 	if (phase == EGG_ENTER) {
 		mEggFlags.mBits |= 8;
-		mTimer = 60;
+		mTimer      = 60;
 		mHatchModel = new MotionPlayer;
 		mHatchModel->init(sEggHatchMotions, sEggHatchMotionData);
 		mHatchModel->play(0);
@@ -1251,7 +1255,7 @@ void TObjEgg::stateHatch(int phase)
 			}
 			spawnContent(first);
 			shatterPos = mBody.mPos;
-			rot = mBody.mRot;
+			rot        = mBody.mRot;
 			f32 radius = mBody.mRadius;
 			createTEggEffBreak(radius, &shatterPos, &rot, mLevel.getType());
 			playSe(0x97);
@@ -1265,22 +1269,22 @@ void TObjEgg::stateHatch(int phase)
 	} else if (phase == EGG_DRAW) {
 		mHatchModel->update();
 		walk.mCount = 0;
-		drawPos.x = mBody.mPos.x;
-		drawPos.y = mBody.mPos.y;
-		drawPos.z = mBody.mPos.z;
-		drawPos.y = mBody.mPos.y - mBody.mRadius;
+		drawPos.x   = mBody.mPos.x;
+		drawPos.y   = mBody.mPos.y;
+		drawPos.z   = mBody.mPos.z;
+		drawPos.y   = mBody.mPos.y - mBody.mRadius;
 		njPushMatrixEx();
 		njUnitMatrix(0);
 		njTranslateEx(&drawPos);
 		MotionPlayer* model = mHatchModel;
-		int cur = model->mCurrent;
-		f32 frame = model->mFrame;
-		NJS_MOTION* mot = model->getMotion(cur);
+		int cur             = model->mCurrent;
+		f32 frame           = model->mFrame;
+		NJS_MOTION* mot     = model->getMotion(cur);
 		walkMotion(frame, sEggHatchModels[4], mot, (NodeCallback)eggHatchCallback, (void*)&walk);
 		njPopMatrixEx();
 		mtxCopy((f32*)mRotMatrix, (const f32*)walk.mMtx);
 		mtxTranslate((float*)mRotMatrix, (const float*)mRotMatrix, 0.0f, mBody.mRadius - 5.0f, 0.0f);
-		rotB = mBody.mRot;
+		rotB      = mBody.mRot;
 		f32 scale = mBody.mRadius / 5.0f;
 		mtxConcatQuat((f32*)mRotMatrix, (const f32*)mRotMatrix, (const f32*)&rotB);
 		mtxScale(scale, scale, scale, mMatrix, mRotMatrix);
@@ -1326,7 +1330,7 @@ void TObjEgg::stateFall(int phase)
 			die();
 		}
 	} else if (phase == EGG_DRAW) {
-		mBody.mPos.y += -0.5f;
+		mBody.mPos.addY(-0.5f);
 		updateMatrix();
 	}
 }
@@ -1439,7 +1443,7 @@ void TObjEgg::stateExpire(int phase)
 		f32 scale = 0.2f * mBody.mRadius;
 		rot       = mBody.mRot;
 		f32 grow  = 0.5f * t + 1.0f;
-		xz    = scale * t;
+		xz        = scale * t;
 		scale *= grow;
 		mtxSetTransV(mtx, &mDrawPos);
 		mtxScale(xz, scale, xz, mtx, mtx);
@@ -1487,9 +1491,9 @@ void TObjEgg::stateRolledP(int phase)
 		mRoll.moveRolling();
 		updateMatrix();
 		Vec3f vel;
-		vel.x = mBody.mVel.x;
-		vel.y = mBody.mVel.y;
-		vel.z = mBody.mVel.z;
+		vel.x      = mBody.mVel.x;
+		vel.y      = mBody.mVel.y;
+		vel.z      = mBody.mVel.z;
 		mPushAngle = vecAngleXZ(&vel);
 	}
 }
@@ -1539,9 +1543,9 @@ void TObjEgg::stateRolledP2(int phase)
 		limitVel(*(f32*)((u8*)mEggParam + 4));
 		mRoll.moveRolling();
 		updateMatrix();
-		vel.x = mBody.mVel.x;
-		vel.y = mBody.mVel.y;
-		vel.z = mBody.mVel.z;
+		vel.x      = mBody.mVel.x;
+		vel.y      = mBody.mVel.y;
+		vel.z      = mBody.mVel.z;
 		mPushAngle = vecAngleXZ(&vel);
 		if (mPlayerFx != 0) {
 			pos.x = mBody.mPos.x;
@@ -1605,7 +1609,7 @@ int TObjEgg::msgRoll(ObjMsg* msg)
 // 0x801466F8
 int TObjEgg::msgFeedMax(ObjMsg* msg)
 {
-	int level     = mLevel.mSize;
+	int level    = mLevel.mSize;
 	mSavedPoints = mLevel.mPoints;
 	mLevel.feed(0, 100);
 	int now = mLevel.mSize;
@@ -1736,7 +1740,7 @@ int TObjEgg::msgRollByPlayer(ObjMsg* msg)
 	}
 	clearHolder();
 	EggThrowMsg* roll = (EggThrowMsg*)msg;
-	mPlayer = *((s8*)findObjById(((EggThrowMsg*)msg)->mHolder) + 0x24);
+	mPlayer           = *((s8*)findObjById(((EggThrowMsg*)msg)->mHolder) + 0x24);
 	camSetTarget((s8)mPlayer, this);
 	mPushAngle = vecAngleXZ(&roll->mVel);
 	mRoll.setVel(&roll->mVel);
@@ -1761,8 +1765,8 @@ int TObjEgg::msgTakeIdle(ObjMsg* msg)
 	data->mPos    = mBody.mPos;
 	data->mRot    = mBody.mRot;
 	data->mRadius = mBody.mRadius;
-	mOwnerId  = data->mHolder;
-	mHolderId = data->mHolder;
+	mOwnerId      = data->mHolder;
+	mHolderId     = data->mHolder;
 	setState(EGG_STATE_HELD);
 	return 1;
 }
@@ -1796,8 +1800,8 @@ extern "C" int eggContentA(int id)
 
 extern "C" {
 int sEggItemIdsLow[41] = {
-	22, 23, 24, 25, 26, 27, 28, 29, 30, 0, 1, 31, 2, 32, 33, 34, 35, 3, 4,
-	5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 18, 16, 19, 20, 21, 36, 39, 37, 38, 40,
+	22, 23, 24, 25, 26, 27, 28, 29, 30, 0,  1,  31, 2,  32, 33, 34, 35, 3,  4,  5,  6,
+	7,  8,  9,  10, 11, 12, 13, 14, 15, 17, 18, 16, 19, 20, 21, 36, 39, 37, 38, 40,
 };
 }
 

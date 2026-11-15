@@ -112,7 +112,7 @@ void FogRun::load(int id)
 void FogRun::update()
 {
 	FogRecord* record = fogRecord(mId);
-	int wave = record->mColorWave;
+	int wave          = record->mColorWave;
 	if (wave != 0) {
 		mColorTime += record->mColorSpeed;
 		mColor = fogMixColor(record->mColorA, record->mColorB, fogWave(wave, mColorTime));
@@ -195,10 +195,16 @@ void FogBlend::change(int id)
 }
 
 // 0x8004EA8C
-void FogBlend::useMain() { change(mMain); }
+void FogBlend::useMain()
+{
+	change(mMain);
+}
 
 // 0x8004EAB0
-void FogBlend::useOther() { change(mOther); }
+void FogBlend::useOther()
+{
+	change(mOther);
+}
 
 // 0x8004EAD4
 void FogBlend::update()
@@ -299,7 +305,10 @@ void FogMix::init()
 }
 
 // 0x8004EE78
-void FogMix::setMix(f32 mix) { mMix = mix; }
+void FogMix::setMix(f32 mix)
+{
+	mMix = mix;
+}
 
 // 0x8004EE80
 void FogMix::update()
@@ -326,11 +335,11 @@ void FogMix::apply()
 // 0x8004EF34
 extern "C" void fogLoad()
 {
-	sFogCtrlObj = 0;
-	sFogView = 0;
+	sFogCtrlObj  = 0;
+	sFogView     = 0;
 	sFogBlending = 0;
-	gFogMain = 0;
-	gFogOther = 0;
+	gFogMain     = 0;
+	gFogOther    = 0;
 	loadSizedResource("fog_param.bin", &sFogFile);
 	sFogRecords = (FogRecord*)sFogFile->mData;
 }
@@ -339,7 +348,7 @@ extern "C" void fogLoad()
 extern "C" void fogUnload()
 {
 	releaseResource(sFogFile);
-	sFogFile = 0;
+	sFogFile    = 0;
 	sFogRecords = 0;
 	if (sFogCtrlObj != 0) {
 		sFogCtrlObj->mFlags |= 1;
@@ -357,10 +366,16 @@ extern "C" TFogCtrl* fogCreate()
 }
 
 // 0x8004F020
-extern "C" void fogSetDefaultMain(int id) { gFogMain = id; }
+extern "C" void fogSetDefaultMain(int id)
+{
+	gFogMain = id;
+}
 
 // 0x8004F028
-extern "C" void fogSetDefaultOther(int id) { gFogOther = id; }
+extern "C" void fogSetDefaultOther(int id)
+{
+	gFogOther = id;
+}
 
 // 0x8004F030
 TFogCtrl::TFogCtrl(TObject* parent)
@@ -378,10 +393,14 @@ TFogCtrl::TFogCtrl(TObject* parent)
 }
 
 // 0x8004F11C
-FogMix::FogMix() { }
+FogMix::FogMix()
+{
+}
 
 // 0x8004F138
-FogBlend::FogBlend() { }
+FogBlend::FogBlend()
+{
+}
 
 // 0x8004F154
 TFogCtrl::~TFogCtrl()
@@ -441,7 +460,10 @@ void TFogCtrl::setOther(int id)
 }
 
 // 0x8004F378
-extern "C" int fogRangeFlag(FogRecord* record) { return record->mFlags & 1; }
+extern "C" int fogRangeFlag(FogRecord* record)
+{
+	return record->mFlags & 1;
+}
 
 // 0x8004F384
 extern "C" void fogApply()
@@ -467,7 +489,7 @@ void TFogCtrl::draw()
 	FogMix* fog;
 	int old;
 	f32 mix = fogBlendUpdate();
-	old = mMode;
+	old     = mMode;
 	if (mix <= 0.0f) {
 		mMode = 0;
 	} else if (mix >= 1.0f) {
@@ -500,7 +522,9 @@ void TFogCtrl::draw()
 }
 
 // 0x8004F548
-void TFogCtrl::vfn_10() { }
+void TFogCtrl::vfn_10()
+{
+}
 
 // 0x8004F54C
 void TFogCtrl::render()
@@ -519,7 +543,7 @@ void TFogCtrl::render()
 	getViewport(&x, &y, &width, &height);
 	GXInitFogAdjTable((_GXFogAdjTable*)mRangeTable, (u16)width, (const float*)&gProjection);
 	GXSetFogRangeAdj(fog->mRangeAdjust, (u16)(0.5f * width + x), (_GXFogAdjTable*)mRangeTable);
-	sFogView = (u16)view;
+	sFogView     = (u16)view;
 	sFogBlending = fog->mEnabled;
 	fog->apply();
 }

@@ -15,11 +15,11 @@ int adxt_dbg[3];
 
 /* ADXSJD the stream joint decoder */
 #define ADXSJD_STAT_DECINFO_END 2
-#define ADXSJD_STAT_DECEND 3
+#define ADXSJD_STAT_DECEND      3
 
 #define ADXSTM_STAT_READEND 3
-#define ADXSTM_STAT_ERROR 4
-#define LSC_STAT_ERROR 3
+#define ADXSTM_STAT_ERROR   4
+#define LSC_STAT_ERROR      3
 
 /* At the loop start sets the next trap at the loop end and hands the decoder over to adxt_trap_entry */
 // 0x802261BC
@@ -31,8 +31,8 @@ void adxt_trap_loop(void* obj)
 	int lofst;
 	int esmpl;
 
-	adxt = (ADXT)obj;
-	sjd = adxt->sjd;
+	adxt  = (ADXT)obj;
+	sjd   = adxt->sjd;
 	lsmpl = ADXSJD_GetLpStartPos(sjd);
 	lofst = ADXSJD_GetLpStartOfst(sjd);
 	esmpl = ADXSJD_GetLpEndPos(sjd);
@@ -56,9 +56,9 @@ void adxt_trap_entry(void* obj)
 	int lofst;
 	SJCK ck;
 
-	adxt = (ADXT)obj;
-	sjd = adxt->sjd;
-	sj = adxt->sji;
+	adxt  = (ADXT)obj;
+	sjd   = adxt->sjd;
+	sj    = adxt->sji;
 	lsmpl = ADXSJD_GetLpStartPos(sjd);
 	lofst = ADXSJD_GetLpStartOfst(sjd);
 	esmpl = ADXSJD_GetLpEndPos(sjd);
@@ -93,7 +93,7 @@ void adxt_eos_entry(void* obj)
 	int ofst;
 
 	adxt = (ADXT)obj;
-	stm = adxt->stm;
+	stm  = adxt->stm;
 	ofst = ADXSJD_GetLpStartOfst(adxt->sjd);
 	if (adxt->lpflg == 0) {
 		ADXSJD_SetTrapNumSmpl(adxt->sjd, -1);
@@ -122,8 +122,8 @@ void adxt_trap_link(void* obj)
 	SJCK ck4;
 
 	adxt = (ADXT)obj;
-	sjd = adxt->sjd;
-	sj = adxt->sji;
+	sjd  = adxt->sjd;
+	sj   = adxt->sji;
 	if (adxt->lnkflg == 0) {
 		return;
 	}
@@ -137,7 +137,7 @@ void adxt_trap_link(void* obj)
 		return;
 	}
 	skip1 = hdrlen;
-	ret1 = ADX_DecodeFooter(ck1.data + skip1, ck1.len - skip1, &hdrlen);
+	ret1  = ADX_DecodeFooter(ck1.data + skip1, ck1.len - skip1, &hdrlen);
 	if (ret1 == 0) {
 		ret2 = -1;
 	} else {
@@ -195,7 +195,7 @@ void adxt_stat_decinfo(ADXT adxt)
 	int bps;
 	void* info;
 
-	sjd = adxt->sjd;
+	sjd  = adxt->sjd;
 	prm1 = 0;
 	prm2 = 0;
 	if ((adxt->pmode == ADXT_PMODE_FNAME || adxt->pmode == ADXT_PMODE_AFS) && adxt->stm_start == 1) {
@@ -225,18 +225,18 @@ void adxt_stat_decinfo(ADXT adxt)
 	} else {
 		adxt->maxdecsmpl = (sfreq / adxt->svrfreq) * 3 / 2;
 	}
-	blk = ADXSJD_GetBlkSmpl(sjd) * 2;
+	blk              = ADXSJD_GetBlkSmpl(sjd) * 2;
 	adxt->maxdecsmpl = blk * ((adxt->maxdecsmpl + blk) / blk);
 	ADXSJD_SetMaxDecSmpl(sjd, adxt->maxdecsmpl);
 	if (nloop > 0) {
 		if (adxt->pmode == ADXT_PMODE_MEM) {
 			adxt->lp_skiplen = 0;
 		} else {
-			ofst = ADXSJD_GetLpEndOfst(sjd);
+			ofst             = ADXSJD_GetLpEndOfst(sjd);
 			adxt->lp_skiplen = ADXSTM_SCT - ofst % ADXSTM_SCT;
 			adxt->lp_skiplen = adxt->lp_skiplen % ADXSTM_SCT;
-			sct = (ofst + ADXSTM_SCT - 1) / ADXSTM_SCT;
-			adxt->lesct = sct;
+			sct              = (ofst + ADXSTM_SCT - 1) / ADXSTM_SCT;
+			adxt->lesct      = sct;
 			ADXSTM_SetEos(adxt->stm, sct);
 			ADXSTM_EntryEosFunc(adxt->stm, adxt_eos_entry, adxt);
 		}
@@ -256,9 +256,9 @@ void adxt_stat_decinfo(ADXT adxt)
 		ADXSJD_EntryTrapFunc(sjd, adxt_trap_link, adxt);
 	}
 	sfreq = ADXSJD_GetSfreq(sjd);
-	nch = ADXSJD_GetNumChan(sjd);
+	nch   = ADXSJD_GetNumChan(sjd);
 	nsmpl = ADXSJD_GetTotalNumSmpl(sjd);
-	bps = ADXSJD_GetOutBps(sjd);
+	bps   = ADXSJD_GetOutBps(sjd);
 	ADXRNA_SetBitPerSmpl(adxt->rna, bps);
 	ADXRNA_SetSfreq(adxt->rna, sfreq);
 	ADXRNA_SetNumChan(adxt->rna, nch);
@@ -319,7 +319,7 @@ void ADXT_ExecHndl(ADXT adxt)
 	}
 	if (adxt->stat == ADXT_STAT_PLAYING) {
 		if (ADXSJD_GetStat(adxt->sjd) == ADXSJD_STAT_DECEND) {
-			nch = ADXSJD_GetNumChan(adxt->sjd);
+			nch    = ADXSJD_GetNumChan(adxt->sjd);
 			dbg[2] = nch;
 			for (i = 0; i < nch; i++) {
 				dbg[1] = SJ_GetNumData(adxt->sjo[i], SJ_LIN_DATA);
@@ -335,8 +335,8 @@ void ADXT_ExecHndl(ADXT adxt)
 	} else if (adxt->stat == ADXT_STAT_DECINFO) {
 		adxt_stat_decinfo(adxt);
 	} else if (adxt->stat == ADXT_STAT_PREP) {
-		rna = adxt->rna;
-		sjd = adxt->sjd;
+		rna   = adxt->rna;
+		sjd   = adxt->sjd;
 		ndata = ADXRNA_GetNumData(rna);
 		nroom = ADXRNA_GetNumRoom(rna);
 		if (ndata >= adxt->maxdecsmpl * 2 || nroom <= ADXSJD_GetBlkSmpl(sjd) || ADXSJD_GetStat(adxt->sjd) == ADXSJD_STAT_DECEND) {
@@ -344,7 +344,7 @@ void ADXT_ExecHndl(ADXT adxt)
 				if (adxt->pause_flag == 0) {
 					ADXRNA_SetPlaySw(rna, 1);
 					adxt->tvofst = 0;
-					adxt->svcnt = adxt_svcnt;
+					adxt->svcnt  = adxt_svcnt;
 				}
 				adxt->stat = ADXT_STAT_PLAYING;
 			}
@@ -386,10 +386,10 @@ void ADXT_ExecHndl(ADXT adxt)
 	}
 	if (adxt->stm != 0 && ADXSTM_GetStat(adxt->stm) == ADXSTM_STAT_ERROR) {
 		adxt->ercode = -1;
-		adxt->stat = ADXT_STAT_ERROR;
+		adxt->stat   = ADXT_STAT_ERROR;
 	}
 	if (adxt->lsc != 0 && LSC_GetStat(adxt->lsc) == LSC_STAT_ERROR) {
 		adxt->ercode = -1;
-		adxt->stat = ADXT_STAT_ERROR;
+		adxt->stat   = ADXT_STAT_ERROR;
 	}
 }

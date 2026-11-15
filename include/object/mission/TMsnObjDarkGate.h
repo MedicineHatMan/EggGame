@@ -48,26 +48,26 @@ public:
 	void leaving();
 	void left();
 
-	DrawTask* mDrawTask;       // _64
-	ModelDraw mDraw;       // _68
-	ObjDrawState mState;   // _84
-	f32 mMatrix[12];       // _A8
+	DrawTask* mDrawTask; // _64
+	ModelDraw mDraw;     // _68
+	ObjDrawState mState; // _84
+	f32 mMatrix[12];     // _A8
 	Fx* mGlow;           // _D8
-	u8 mHidden;            // _DC
-	u16 mSwitch;           // _DE
-	ObjRef mUser;          // _E0 who goes through
-	EventCamRef mCamRef;   // _EC
-	void* mCamera;         // _F4
-	TCamPath* mEventCam;   // _F8
+	u8 mHidden;          // _DC
+	u16 mSwitch;         // _DE
+	ObjRef mUser;        // _E0 who goes through
+	EventCamRef mCamRef; // _EC
+	void* mCamera;       // _F4
+	TCamPath* mEventCam; // _F8
 	Fx* mOpenFx;         // _FC
-	u16 mTimer;            // _100
-	int mSetCam;           // _104
-	Vec3f mCamEye;         // _108
-	Vec3f mCamAt;          // _114
-	int mMusic;            // _120
-	int mDelay;            // _124
-	int mGate;             // _128
-	int mAppear;           // _12C
+	u16 mTimer;          // _100
+	int mSetCam;         // _104
+	Vec3f mCamEye;       // _108
+	Vec3f mCamAt;        // _114
+	int mMusic;          // _120
+	int mDelay;          // _124
+	int mGate;           // _128
+	int mAppear;         // _12C
 };
 
 struct NJS_TEXLIST;

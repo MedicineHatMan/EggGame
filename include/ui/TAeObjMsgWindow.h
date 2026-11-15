@@ -56,39 +56,39 @@ public:
 	virtual void vfn_10(); // _10
 	virtual void render(); // _1C
 
-	void build();                 // 0x800E9FC4
-	void makeTalk();              // 0x800EA12C
-	void makeNotice();            // 0x800EA1B0
-	void makeChoices();           // 0x800EA240
-	void makeYesNo();             // 0x800EA444
-	void makeChoice3();           // 0x800EA510
-	void makeYesNoSmall();        // 0x800EA600
-	void setPrompt(int prompt);   // 0x800EA834
-	void setCursor(int cursor);   // 0x800EA8A4
-	void setMark(int row);        // 0x800EAA64
-	BOOL close();                 // 0x800EAB38
-	void playArrow();             // 0x800EAD08
-	void showArrow();             // 0x800EADA4
-	void hideArrow();             // 0x800EAEA4
-	void pulse(int step);         // 0x800EB0E8
+	void build();               // 0x800E9FC4
+	void makeTalk();            // 0x800EA12C
+	void makeNotice();          // 0x800EA1B0
+	void makeChoices();         // 0x800EA240
+	void makeYesNo();           // 0x800EA444
+	void makeChoice3();         // 0x800EA510
+	void makeYesNoSmall();      // 0x800EA600
+	void setPrompt(int prompt); // 0x800EA834
+	void setCursor(int cursor); // 0x800EA8A4
+	void setMark(int row);      // 0x800EAA64
+	BOOL close();               // 0x800EAB38
+	void playArrow();           // 0x800EAD08
+	void showArrow();           // 0x800EADA4
+	void hideArrow();           // 0x800EAEA4
+	void pulse(int step);       // 0x800EB0E8
 
-	DrawTask* mTask;       // _34
-	int mKind;             // _38
-	TAeLayer* mWindow;     // _3C the box with the others bound into its slots
-	TAeLayer* mArrow;      // _40 the next-page arrow
-	TAeLayer* mChoices;    // _44 the choice panel
-	TAeLayer* mPanelA;     // _48
-	TAeLayer* mPanelB;     // _4C
-	TAeLayer* mCursorRow;  // _50 the row under the cursor
-	TAeLayer* mRow;        // _54 the other rows
-	TAeLayer* mMark;       // _58
-	TAeLayer* mIcon;       // _5C
-	int mState;            // _60
-	f32 mPulse;            // _64 0 to 1
-	u32 mPulseAngle;       // _68
-	BOOL mDieOnClose;      // _6C it kills itself once closed
-	s8 mArrowState;        // _70
-	u8 _71[3];             // _71
+	DrawTask* mTask;      // _34
+	int mKind;            // _38
+	TAeLayer* mWindow;    // _3C the box with the others bound into its slots
+	TAeLayer* mArrow;     // _40 the next-page arrow
+	TAeLayer* mChoices;   // _44 the choice panel
+	TAeLayer* mPanelA;    // _48
+	TAeLayer* mPanelB;    // _4C
+	TAeLayer* mCursorRow; // _50 the row under the cursor
+	TAeLayer* mRow;       // _54 the other rows
+	TAeLayer* mMark;      // _58
+	TAeLayer* mIcon;      // _5C
+	int mState;           // _60
+	f32 mPulse;           // _64 0 to 1
+	u32 mPulseAngle;      // _68
+	BOOL mDieOnClose;     // _6C it kills itself once closed
+	s8 mArrowState;       // _70
+	u8 _71[3];            // _71
 };
 
 extern "C" TAeObjMsgWindow* createMsgWindow(TObject* parent, u32 kind); // 0x800E9E48

@@ -21,9 +21,9 @@ TAniLionFireBall::TAniLionFireBall(TObject* parent, u16 ownerId, int fxBank, con
     , mPos(*pos)
     , mVel(*vel)
 {
-	_00      = (u32)gTAniLionFireBallName;
-	mSize    = 0x88;
-	mColli   = (CharaColli*)colliCreate(1, 1);
+	_00    = (u32)gTAniLionFireBallName;
+	mSize  = 0x88;
+	mColli = (CharaColli*)colliCreate(1, 1);
 	if (mColli != 0) {
 		colliSetOwner(mColli, (u16)ownerId);
 		colliSetMasks(mColli, 0x20, 0, 0xFF, 0x10);

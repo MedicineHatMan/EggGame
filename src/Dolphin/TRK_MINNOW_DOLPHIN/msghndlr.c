@@ -197,7 +197,7 @@ DSError TRKDoReadMemory(MessageBuffer* buffer)
 	}
 
 	tempLength = length;
-	result = TRKTargetAccessMemory(buf, start, &tempLength, options & DSMSGMEMORY_Userview ? 0 : 1, TRUE);
+	result     = TRKTargetAccessMemory(buf, start, &tempLength, options & DSMSGMEMORY_Userview ? 0 : 1, TRUE);
 
 	TRKResetBuffer(buffer, 0);
 

@@ -65,9 +65,9 @@ struct BombRope { // size 0x124
 
 /** Sent to a bomb when something picks it up and filled in by the bomb */
 struct BombHoldMsg {
-	u16 mType;     // _00
+	u16 mType; // _00
 	u8 _02[2];
-	u16 mHolder;   // _04
+	u16 mHolder; // _04
 	u8 _06[2];
 	void* mHandle; // _08
 	Vec3f mPos;    // _0C
@@ -76,11 +76,11 @@ struct BombHoldMsg {
 };
 
 struct BombThrowMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mHolder; // _04
 	u8 _06[2];
-	Vec3f mVel;  // _08
+	Vec3f mVel; // _08
 };
 
 class TObjMissionBomb : public TObjAction {
@@ -128,30 +128,30 @@ public:
 	int onDrop(ObjMsg* msg);
 	int onSlam(ObjMsg* msg);
 
-	u16 mOwner;          // _30
+	u16 mOwner;                // _30
 	FlagByte mFlagBits;        // _32
-	s8 mState;           // _33
-	s16 mTimer;          // _34
-	s16 mSwitch;         // _36 -1 = none
-	u32 mTimeLeft;       // _38 milliseconds
-	u32 mLimit;          // _3C
+	s8 mState;                 // _33
+	s16 mTimer;                // _34
+	s16 mSwitch;               // _36 -1 = none
+	u32 mTimeLeft;             // _38 milliseconds
+	u32 mLimit;                // _3C
 	CharaColli* mColli;        // _40
-	DrawTask* mDrawTask;     // _44
+	DrawTask* mDrawTask;       // _44
 	TParticleGenerator* mFuse; // _48 the spark effect
-	EggBody mBody;       // _4C
-	SetLinkMember mLink; // _164
-	f32 mMatrix[12];     // _170
-	BombHandle mHandle;  // _1A0
-	Vec3f mPos;          // _1B4
+	EggBody mBody;             // _4C
+	SetLinkMember mLink;       // _164
+	f32 mMatrix[12];           // _170
+	BombHandle mHandle;        // _1A0
+	Vec3f mPos;                // _1B4
 	// An EggRoll without the fields only TObjEgg uses the next member here starts 0x30 in
-	EggRoll mRoll;       // _1C0
-	ObjShadow mShadow;   // _1F0
-	BombRope mRope;      // _228
-	int mRopeSeg;        // _34C where the spark is
-	f32 mRopeFrac;       // _350
-	void** mModels;      // _354
-	void** mTexLists;    // _358
-	ItemHolder mItem;    // _35C
+	EggRoll mRoll;     // _1C0
+	ObjShadow mShadow; // _1F0
+	BombRope mRope;    // _228
+	int mRopeSeg;      // _34C where the spark is
+	f32 mRopeFrac;     // _350
+	void** mModels;    // _354
+	void** mTexLists;  // _358
+	ItemHolder mItem;  // _35C
 };
 
 extern "C" {

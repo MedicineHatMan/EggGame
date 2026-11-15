@@ -13,16 +13,22 @@ typedef char TSceneManager_size_check[(sizeof(TSceneManager) == 0x2C) ? 1 : -1];
 SceneRecord::SceneRecord()
 {
 	mCamera = 0;
-	mVis = 0;
-	_08 = 0;
+	mVis    = 0;
+	_08     = 0;
 	mLights = 0;
 }
 
 // 0x80057938
-extern "C" SceneRecord* getSceneRecord() { return sSceneRecord; }
+extern "C" SceneRecord* getSceneRecord()
+{
+	return sSceneRecord;
+}
 
 // 0x80057940
-extern "C" void setSceneRecord(SceneRecord* record) { sSceneRecord = record; }
+extern "C" void setSceneRecord(SceneRecord* record)
+{
+	sSceneRecord = record;
+}
 
 const char* gTSceneManagerName = "TSceneManager";
 
@@ -61,10 +67,16 @@ static inline void scenePass(TSceneManager* scene, int pass)
 }
 
 // 0x80057A44
-extern "C" void sceneDrawPass1(void* task) { scenePass((TSceneManager*)task, 1); }
+extern "C" void sceneDrawPass1(void* task)
+{
+	scenePass((TSceneManager*)task, 1);
+}
 
 // 0x80057A84
-extern "C" void sceneDrawPass2(void* task) { scenePass((TSceneManager*)task, 2); }
+extern "C" void sceneDrawPass2(void* task)
+{
+	scenePass((TSceneManager*)task, 2);
+}
 
 // 0x80057AC4
 void TSceneManager::draw()

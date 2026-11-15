@@ -33,7 +33,7 @@ extern "C" void loadAeMainMenu()
 	loadArc(getLangFileName("ae_main_menu.arc"), &sAeMainMenuArc);
 	if (sAeMainMenuArc != 0) {
 		AeArcBlock* block = aeArcBlock(sAeMainMenuArc);
-		sAeMainMenuAe = block->mAe;
+		sAeMainMenuAe     = block->mAe;
 		relocateAe(sAeMainMenuAe);
 		sAeMainMenuTexList = block->mTexList;
 		bindGvmTextures((u8*)block->mGvm, sAeMainMenuTexList);
@@ -68,7 +68,7 @@ extern "C" void freeAeMainMenu()
 		sAeMainMenuTexList = 0;
 		releaseResource(sAeMainMenuArc);
 		sAeMainMenuArc = 0;
-		sAeMainMenuAe = 0;
+		sAeMainMenuAe  = 0;
 	}
 }
 
@@ -80,7 +80,7 @@ extern "C" TAeObjMainMenu* createAeMainMenu()
 	if (sAeMainMenuArc == 0) {
 		return 0;
 	}
-	made = new TAeObjMainMenu(gTL_07, sAeMainMenuAe, sAeMainMenuTexList);
+	made        = new TAeObjMainMenu(gTL_07, sAeMainMenuAe, sAeMainMenuTexList);
 	gAeMainMenu = made;
 	return made;
 }
@@ -95,10 +95,10 @@ static inline TAeLayer* make(TAeObjMainMenu* self, int id, u32 flags)
 }
 
 // The ctor stores each layer first and tests the member it stored
-#define MAKE_LAYER(member, id, flags)                                                                            \
-	member = createLayer(id, flags);                                                                         \
-	if (member != 0) {                                                                                      \
-		member->mBanks = gAeMainMenuBanks;                                                                \
+#define MAKE_LAYER(member, id, flags)      \
+	member = createLayer(id, flags);       \
+	if (member != 0) {                     \
+		member->mBanks = gAeMainMenuBanks; \
 	}
 
 // 0x8017E294
@@ -111,7 +111,7 @@ TAeObjMainMenu::TAeObjMainMenu(TObject* parent, void* data, void* assets)
 	mSize = 0x80;
 	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3C, 0);
 	MAKE_LAYER(mBack, 0xBA, 0x10);
-	mReady   = 0;
+	mReady = 0;
 	MAKE_LAYER(mPage, 0x96, 0x10);
 	if (mPage != 0) {
 		mPage->setFrame(0xAA, 0x47);
@@ -133,7 +133,10 @@ TAeObjMainMenu::TAeObjMainMenu(TObject* parent, void* data, void* assets)
 }
 
 // 0x8017E4D4
-TAeObjMainMenu::~TAeObjMainMenu() { gAeMainMenu = 0; }
+TAeObjMainMenu::~TAeObjMainMenu()
+{
+	gAeMainMenu = 0;
+}
 
 // 0x8017E538
 void TAeObjMainMenu::draw()
@@ -432,10 +435,10 @@ extern "C" void aeMainMenuHideFileCursor()
 }
 
 // A macro the DOL reads the animation id at each use
-#define setSoundRow(row, anim)                                                                                   \
-	if (gAeMainMenu->mSoundRow[row] != 0 && (anim) != gAeMainMenu->mSoundRow[row]->getId()) {                    \
-		gAeMainMenu->mSoundRow[row]->reset((anim), 1);                                                         \
-		gAeMainMenu->mSoundRow[row]->mBanks = gAeMainMenuBanks;                                                \
+#define setSoundRow(row, anim)                                                                \
+	if (gAeMainMenu->mSoundRow[row] != 0 && (anim) != gAeMainMenu->mSoundRow[row]->getId()) { \
+		gAeMainMenu->mSoundRow[row]->reset((anim), 1);                                        \
+		gAeMainMenu->mSoundRow[row]->mBanks = gAeMainMenuBanks;                               \
 	}
 
 // 0x8017EF44

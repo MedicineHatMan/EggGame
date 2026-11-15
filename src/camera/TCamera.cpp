@@ -17,7 +17,6 @@ struct CamLookMsg : public ObjMsg {
 };
 
 extern "C" {
-
 }
 
 typedef char TCamera_size_check[(sizeof(TCamera) == 0x50) ? 1 : -1];
@@ -57,11 +56,11 @@ const char* gTCameraName = "TCamera";
 TCamera::TCamera(TObject* parent, int player, int look)
     : TObject(parent)
 {
-	_00        = (u32)gTCameraName;
-	mSize      = 0x50;
-	mView      = camGetView(player);
-	mKind      = camGetTarget(player);
-	mPlayer    = player;
+	_00     = (u32)gTCameraName;
+	mSize   = 0x50;
+	mView   = camGetView(player);
+	mKind   = camGetTarget(player);
+	mPlayer = player;
 	camLinkInit(&mLook, look);
 	camAddLink(player, &mLook);
 	mLift      = 0.0f;
@@ -150,7 +149,7 @@ void TCamera::draw()
 			lerpAngle(yaw, (int)(10430.38043493439 * oldYaw), &yaw, t);
 			vecLerp(t, &((CamView*)mView)->mTarget, &oldAt, &((CamView*)mView)->mTarget);
 			njSinCos(yaw, &d.x, &d.z);
-			((CamView*)mView)->mPos = ((CamView*)mView)->mTarget;
+			((CamView*)mView)->mPos   = ((CamView*)mView)->mTarget;
 			((CamView*)mView)->mPos.x = d.x * oldDist + ((CamView*)mView)->mPos.x;
 			((CamView*)mView)->mPos.y = ((CamView*)mView)->mPos.y + oldY;
 			((CamView*)mView)->mPos.z = d.z * oldDist + ((CamView*)mView)->mPos.z;

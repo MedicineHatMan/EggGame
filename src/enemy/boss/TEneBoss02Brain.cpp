@@ -11,7 +11,7 @@ static int sPlan[] = { 12, 1, 2, 3, 5, 9, 13 };
 void Boss02Brain::update(TEneBoss02* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}
@@ -22,10 +22,14 @@ void Boss02Brain::update(TEneBoss02* owner)
 }
 
 // 0x8005E034
-Boss02BrainBase::Boss02BrainBase() { }
+Boss02BrainBase::Boss02BrainBase()
+{
+}
 
 // 0x8005E064
-Boss02BrainBase::~Boss02BrainBase() { }
+Boss02BrainBase::~Boss02BrainBase()
+{
+}
 
 // 0x8005E0C0
 Boss02FightBrain* Boss02FightBrain::create(TEneBoss02* owner)
@@ -39,9 +43,9 @@ Boss02FightBrain::Boss02FightBrain(TEneBoss02* owner)
 	int i;
 	mSight.reset();
 	mPlanStep = 0;
-	mRound = 0;
+	mRound    = 0;
 	for (i = 0; i < 10; i++) {
-		mSlots[i] = -1;
+		mSlots[i]   = -1;
 		mGates[i].x = 0.0f;
 		mGates[i].y = 0.0f;
 		mGates[i].z = 0.0f;
@@ -49,20 +53,20 @@ Boss02FightBrain::Boss02FightBrain(TEneBoss02* owner)
 	mDives = 0;
 	mSlams = 0;
 	mFlags = 0;
-	mStep = 0;
+	mStep  = 0;
 	mTimer = 0;
-	mGap = 0;
+	mGap   = 0;
 	mShots = 0;
-	_10C = 0;
+	_10C   = 0;
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	mState = STATE_START;
 	onPhase(mState, 0);
 	if (mNext != -1) {
 		mOwner->setAction(mNext);
 	}
 	mHealthMark = mOwner->mHealth;
-	mFx = 0;
+	mFx         = 0;
 }
 
 // 0x8005E244
@@ -135,10 +139,10 @@ void Boss02FightBrain::aimAtPlayer(f32 margin)
 	Vec3f dir;
 	if (look() != 0) {
 		f32 len;
-		aim = mSight.mTarget;
-		dir = aim;
+		aim   = mSight.mTarget;
+		dir   = aim;
 		dir.y = 0.0f;
-		len = njUnitVector(&dir);
+		len   = njUnitVector(&dir);
 		if (len < gUnitVectorMin) {
 			dir = gVecZero;
 		}
@@ -194,8 +198,8 @@ void Boss02FightBrain::goHome()
 void Boss02FightBrain::setupShots(int* count, int* gap)
 {
 	int tier = getTier();
-	*count = 0;
-	*gap = gBoss02Params->mShotGap[tier];
+	*count   = 0;
+	*gap     = gBoss02Params->mShotGap[tier];
 	mOwner->setTurnRate(gBoss02Params->mTurnRate[tier]);
 }
 
@@ -218,8 +222,8 @@ int Boss02FightBrain::pickGates(int count)
 			taken++;
 		}
 	}
-	pos = *mOwner->getPos();
-	dir = pos;
+	pos   = *mOwner->getPos();
+	dir   = pos;
 	dir.y = 0.0f;
 	if (njUnitVector(&dir) < gUnitVectorMin) {
 		dir = gVecZero;
@@ -239,20 +243,20 @@ int Boss02FightBrain::pickGates(int count)
 		f32 top = -2.0f;
 		for (j = i; j < taken; j++) {
 			if (side[j] > top) {
-				top = side[j];
+				top  = side[j];
 				best = j;
 			}
 		}
 		if (i != best) {
 			Vec3f swap;
 			int slot;
-			side[best] = side[i];
-			side[i] = top;
-			swap = mGates[i];
-			mGates[i] = mGates[best];
+			side[best]   = side[i];
+			side[i]      = top;
+			swap         = mGates[i];
+			mGates[i]    = mGates[best];
 			mGates[best] = swap;
-			slot = mSlots[i];
-			mSlots[i] = mSlots[best];
+			slot         = mSlots[i];
+			mSlots[i]    = mSlots[best];
 			mSlots[best] = slot;
 		}
 	}
@@ -401,14 +405,14 @@ void Boss02FightBrain::phaseStart(int phase)
 // Turns to the player and shoots a few times then waits
 void Boss02FightBrain::phaseShoot(int phase)
 {
-	int* gap = &mGap;
+	int* gap   = &mGap;
 	int* shots = &mShots;
 	switch (phase) {
 	case 0:
 		goHome();
 		mNext = TEneBoss02::ACT_RISE;
 		setupShots(gap, shots);
-		mStep = 0;
+		mStep  = 0;
 		mTimer = 300;
 		glowOn();
 		mOwner->setNeutral();
@@ -457,8 +461,8 @@ void Boss02FightBrain::phaseShoot(int phase)
 		case 2:
 			if (mOwner->isShootDone() != 0) {
 				(*shots)--;
-				mNext = TEneBoss02::ACT_WAIT;
-				mStep = 3;
+				mNext  = TEneBoss02::ACT_WAIT;
+				mStep  = 3;
 				mTimer = *gap;
 			}
 			break;
@@ -486,8 +490,8 @@ void Boss02FightBrain::phaseShoot(int phase)
 			mStep = 4;
 		} else if (next == 1) {
 			aimAtPlayer(5.0f);
-			mNext = TEneBoss02::ACT_TURN;
-			mStep = 1;
+			mNext  = TEneBoss02::ACT_TURN;
+			mStep  = 1;
 			mTimer = 300;
 		}
 		break;
@@ -512,8 +516,8 @@ void Boss02FightBrain::phaseGates(int phase)
 	case 0:
 		mTimer = gateCount();
 		mTimer = pickGates(mTimer);
-		mStep = 0;
-		mGap = 0;
+		mStep  = 0;
+		mGap   = 0;
 		if (mTimer > 0) {
 			aimGate(mTimer);
 		}
@@ -537,7 +541,7 @@ void Boss02FightBrain::phaseGates(int phase)
 				mTimer--;
 				if (mTimer > 0) {
 					mStep = 0;
-					mGap = 0;
+					mGap  = 0;
 					aimGate(mTimer);
 				}
 			}
@@ -556,11 +560,11 @@ void Boss02FightBrain::phaseSpit(int phase)
 	switch (phase) {
 	case 0: {
 		Vec3f at;
-		mStep = 0;
+		mStep  = 0;
 		mTimer = 0;
-		at.x = 0.0f;
-		at.y = 610.2f;
-		at.z = 0.0f;
+		at.x   = 0.0f;
+		at.y   = 610.2f;
+		at.z   = 0.0f;
 		mOwner->setAim(&at);
 		mNext = TEneBoss02::ACT_TURN;
 		break;
@@ -583,8 +587,8 @@ void Boss02FightBrain::phaseSpit(int phase)
 			break;
 		case 1:
 			if (mOwner->isRoarDone() != 0) {
-				mNext = TEneBoss02::ACT_STUN;
-				mStep = 2;
+				mNext  = TEneBoss02::ACT_STUN;
+				mStep  = 2;
 				mTimer = 120;
 				glowOff();
 				beginStun();
@@ -629,10 +633,10 @@ void Boss02FightBrain::phaseSink(int phase)
 	switch (phase) {
 	case 0:
 		goToGate();
-		mNext = TEneBoss02::ACT_DIVE;
-		mTimer = 180;
-		mStep = 0;
-		mDives = 0;
+		mNext       = TEneBoss02::ACT_DIVE;
+		mTimer      = 180;
+		mStep       = 0;
+		mDives      = 0;
 		mHealthMark = mOwner->mHealth;
 		setMoveRate();
 		break;
@@ -663,9 +667,9 @@ void Boss02FightBrain::phaseSlam(int phase)
 	case 0:
 		goToGate();
 		aimAtPlayer(60.0f);
-		mNext = TEneBoss02::ACT_LEAP;
-		mStep = 0;
-		mSlams = 0;
+		mNext       = TEneBoss02::ACT_LEAP;
+		mStep       = 0;
+		mSlams      = 0;
 		mHealthMark = mOwner->mHealth;
 		setMoveRate();
 		beginStun();
@@ -716,9 +720,9 @@ void Boss02FightBrain::phaseDive(int phase)
 	switch (phase) {
 	case 0:
 		goToGate();
-		mNext = TEneBoss02::ACT_DIVE_DEEP;
+		mNext  = TEneBoss02::ACT_DIVE_DEEP;
 		mTimer = 1;
-		mStep = 0;
+		mStep  = 0;
 		break;
 	case 2:
 		if (mTimer <= 0) {
@@ -733,7 +737,7 @@ void Boss02FightBrain::phaseDive(int phase)
 	case 1:
 		if (mStep == 0) {
 			if (mOwner->isDiveDeepDone() != 0) {
-				mStep = 1;
+				mStep  = 1;
 				mTimer = diveWait();
 			}
 		} else {
@@ -776,8 +780,8 @@ void Boss02FightBrain::phaseReturn(int phase)
 		goToGate();
 		ringPoint(&at, 1);
 		mOwner->setAim(&at);
-		mNext = TEneBoss02::ACT_GATE_RISE;
-		mStep = 0;
+		mNext  = TEneBoss02::ACT_GATE_RISE;
+		mStep  = 0;
 		mTimer = 120;
 		break;
 	}

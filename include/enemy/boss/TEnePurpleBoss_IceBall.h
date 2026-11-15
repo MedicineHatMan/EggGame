@@ -25,12 +25,12 @@ void throwIceBalls(TObject*, const Vec3f*, const f32*, int, int, f32);
 struct IceChunk {
 	IceChunk();
 
-	Vec3f mPos;  // _00
-	Vec3f mVel;  // _0C
-	int mRotX;   // _18
-	int mRotY;   // _1C
-	int mSpinX;  // _20
-	int mSpinY;  // _24
+	Vec3f mPos; // _00
+	Vec3f mVel; // _0C
+	int mRotX;  // _18
+	int mRotY;  // _1C
+	int mSpinX; // _20
+	int mSpinY; // _24
 };
 
 /**
@@ -48,12 +48,12 @@ public:
 	virtual void vfn_10();
 	virtual void render();
 
-	IceChunk mChunks[26]; // _20
+	IceChunk mChunks[26];    // _20
 	NJS_OBJECT* mModels[26]; // _430
-	f32 mRot[4];          // _498 a quaternion
-	int mWait;            // _4A8
-	u32 mColor;           // _4AC
-	DrawTask* mDrawTask;      // _4B0
+	f32 mRot[4];             // _498 a quaternion
+	int mWait;               // _4A8
+	u32 mColor;              // _4AC
+	DrawTask* mDrawTask;     // _4B0
 };
 
 /**
@@ -84,15 +84,15 @@ public:
 
 	TEnePurpleBoss_IceBall* mPrev; // _30
 	TEnePurpleBoss_IceBall* mNext; // _34
-	Vec3f mPos;     // _38
-	f32 mRot[4];    // _44 a quaternion
-	f32 mSpeed;     // _54
-	Vec3f mVel;     // _58
-	f32 mRadius;    // _64
-	CharaColli* mColli;   // _68
-	DrawTask* mDrawTask; // _6C
-	int mState;     // _70 0 not yet solid 1 rolling 2 breaking
-	int mWait;      // _74
+	Vec3f mPos;                    // _38
+	f32 mRot[4];                   // _44 a quaternion
+	f32 mSpeed;                    // _54
+	Vec3f mVel;                    // _58
+	f32 mRadius;                   // _64
+	CharaColli* mColli;            // _68
+	DrawTask* mDrawTask;           // _6C
+	int mState;                    // _70 0 not yet solid 1 rolling 2 breaking
+	int mWait;                     // _74
 };
 
 extern "C" {

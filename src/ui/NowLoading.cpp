@@ -31,11 +31,11 @@ static const NowLoadingPart sParts[12] = {
 	{ 0.4296875f, 0.734375f, 0.84375f, 1.0f }, // the egg
 };
 
-static const int sTextParts[10]    = { 0, 1, 2, 3, 1, 4, 5, 6, 0, 7 };
-static const f32 sTextAdvance[10]  = { 0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-static const u8 sRed[4]            = { 0xFF, 0x00, 0x00, 0xFF };
-static const u8 sGreen[4]          = { 0xFF, 0xFF, 0xC8, 0x00 };
-static const u8 sBlue[4]           = { 0x00, 0x00, 0xFF, 0x00 };
+static const int sTextParts[10]   = { 0, 1, 2, 3, 1, 4, 5, 6, 0, 7 };
+static const f32 sTextAdvance[10] = { 0.0f, 0.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+static const u8 sRed[4]           = { 0xFF, 0x00, 0x00, 0xFF };
+static const u8 sGreen[4]         = { 0xFF, 0xFF, 0xC8, 0x00 };
+static const u8 sBlue[4]          = { 0x00, 0x00, 0xFF, 0x00 };
 
 static ResBank sNowLoadingBank;
 static f32 sColorT;
@@ -103,7 +103,7 @@ u32 nowLoadingGetColor(f32 t)
 	}
 	t *= 4.0f;
 
-	int i = 0;
+	int i    = 0;
 	f32 step = 1.0f;
 	while (true) {
 		if (t < step) {
@@ -175,11 +175,11 @@ f32 nowLoadingDrawPart(f32 x, f32 y, u32 color, int part)
 // A black screen
 void nowLoadingDrawBack()
 {
-	f32 left = -320.0f;
-	f32 top = 240.0f;
-	f32 zero = 0.0f;
-	f32 right = 320.0f;
-	f32 one = 1.0f;
+	f32 left   = -320.0f;
+	f32 top    = 240.0f;
+	f32 zero   = 0.0f;
+	f32 right  = 320.0f;
+	f32 one    = 1.0f;
 	f32 bottom = -240.0f;
 
 	GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
@@ -233,14 +233,14 @@ void nowLoadingDrawEgg(f32 t)
 	GXBegin(GX_QUADS, GX_VTXFMT0, 8);
 	f32 px, py;
 	const NowLoadingPart* p = &sParts[11];
-	f32 u0 = p->mU0;
-	f32 u1 = p->mU1;
-	f32 v0 = p->mV0;
-	f32 v1 = p->mV1;
-	f32 w  = -(128.0f * (u1 - u0));
-	f32 h  = 128.0f * (v1 - v0);
-	px = 240.0f - w;
-	py = -138.0f - h;
+	f32 u0                  = p->mU0;
+	f32 u1                  = p->mU1;
+	f32 v0                  = p->mV0;
+	f32 v1                  = p->mV1;
+	f32 w                   = -(128.0f * (u1 - u0));
+	f32 h                   = 128.0f * (v1 - v0);
+	px                      = 240.0f - w;
+	py                      = -138.0f - h;
 
 	t = njFraction(t);
 	if (t < 0.0f) {
@@ -262,10 +262,10 @@ void nowLoadingDrawEgg(f32 t)
 	f32 wc = w * c;
 	f32 ws = w * s;
 	f32 hx = h * -s;
-	wx = px + wc;
+	wx     = px + wc;
 	f32 hy = h * c;
-	wy = py + ws;
-	f32 z = 0.0f;
+	wy     = py + ws;
+	f32 z  = 0.0f;
 
 	GX_FIFO_F32 = hx + wx;
 	GX_FIFO_F32 = hy + wy;

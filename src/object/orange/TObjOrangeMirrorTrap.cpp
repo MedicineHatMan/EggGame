@@ -44,7 +44,7 @@ const char* gTObjOrangeMirrorTrapName = "TObjOrangeMirrorTrap";
 // 0x802C4324
 // Defined here ahead of the debug strings its text follows the trap's name in .rodata
 const char* gTMirrorBreakerName = "TMirrorBreaker";
-u8 sMirrorTrapFaceOrder[] = {
+u8 sMirrorTrapFaceOrder[]       = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 };
 }
@@ -52,15 +52,15 @@ u8 sMirrorTrapFaceOrder[] = {
 // The usual inline sqrtf three Newton steps on frsqrte
 static inline f32 sqrtfInline(f32 x)
 {
-	static const f64 _half = .5;
+	static const f64 _half  = .5;
 	static const f64 _three = 3.0;
 	volatile f32 y;
 	if (x > 0.0f) {
 		f64 guess = __frsqrte((f64)x);
-		guess = _half * guess * (_three - guess * guess * x);
-		guess = _half * guess * (_three - guess * guess * x);
-		guess = _half * guess * (_three - guess * guess * x);
-		y = (f32)(x * guess);
+		guess     = _half * guess * (_three - guess * guess * x);
+		guess     = _half * guess * (_three - guess * guess * x);
+		guess     = _half * guess * (_three - guess * guess * x);
+		y         = (f32)(x * guess);
 		return y;
 	}
 	return x;
@@ -125,13 +125,13 @@ TObjOrangeMirrorTrap::TObjOrangeMirrorTrap(TObject* parent, SetDesc* desc)
 	mSize        = 0x170;
 	mNode.mOwner = this;
 	gMirrorTraps.add(&mNode);
-	mModelA    = getGeObjModels()[10];
-	mModelB    = getGeObjModels()[9];
-	mTexA      = getGeObjTextures()[11];
-	mTexB      = getGeObjTextures()[10];
-	mTexC      = getGeObjTextures()[3];
-	mDrawTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mShape     = colliCreate(1, 1);
+	mModelA   = getGeObjModels()[10];
+	mModelB   = getGeObjModels()[9];
+	mTexA     = getGeObjTextures()[11];
+	mTexB     = getGeObjTextures()[10];
+	mTexC     = getGeObjTextures()[3];
+	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mShape    = colliCreate(1, 1);
 	colliSetOwner(mShape, 0xFFFF);
 	colliSetMasks((CharaColli*)mShape, 4, 0xFF, 0xFF, 0xD7);
 	mMesh[0] = meshColliCreate();
@@ -160,10 +160,10 @@ TObjOrangeMirrorTrap::~TObjOrangeMirrorTrap()
 void TObjOrangeMirrorTrap::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
-	mKind    = CLAMP_RANGE(desc->getInt(0), 0, 2);
-	mGroup   = desc->getInt(1);
-	mExtent  = sMirrorTrapSixty;
-	mAnswer  = desc->getInt(3);
+	mKind   = CLAMP_RANGE(desc->getInt(0), 0, 2);
+	mGroup  = desc->getInt(1);
+	mExtent = sMirrorTrapSixty;
+	mAnswer = desc->getInt(3);
 	mtxSetTransV(mMatrix, &mPos);
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 	mtxTranslate((float*)mBody, (const float*)mMatrix, 0.0f, 0.0f, -5.0f);
@@ -483,7 +483,7 @@ void TObjOrangeMirrorTrap::drawMark()
 	genTexLoadWrap(4, 1, 0);
 
 	CamView* cam = (CamView*)camGetView(0);
-	f32 fov = 0.75f * (360.0f * ((f32)cam->mFov / 65536.0f));
+	f32 fov      = 0.75f * (360.0f * ((f32)cam->mFov / 65536.0f));
 	f32 light[12];
 	C_MTXLightPerspective((float*)light, fov, cam->mAspect, 0.5f, -0.5f, 0.5f, 0.5f);
 	f32 lit[12];
@@ -555,41 +555,47 @@ public:
 	virtual void draw();
 	virtual void render();
 
-	DrawTask* mTask;       // _20
-	MirrorFrag* mBig;  // _24 50 of them
-	MirrorFrag* mMid;  // _28 100
+	DrawTask* mTask;    // _20
+	MirrorFrag* mBig;   // _24 50 of them
+	MirrorFrag* mMid;   // _28 100
 	MirrorFrag* mSmall; // _2C 300
-	f32 mFloor;        // _30
-	int mTime;         // _34
-	s16 mAlpha;        // _38
+	f32 mFloor;         // _30
+	int mTime;          // _34
+	s16 mAlpha;         // _38
 };
 
 typedef char TMirrorBreaker_size_check[(sizeof(TMirrorBreaker) == 0x3C) ? 1 : -1];
 
-static inline f32 mirrorRand() { return 3.0517578125e-05f * (f32)rand(); }
-static inline f32 mirrorSigned() { return 2.0f * (mirrorRand() - 0.5f); }
+static inline f32 mirrorRand()
+{
+	return 3.0517578125e-05f * (f32)rand();
+}
+static inline f32 mirrorSigned()
+{
+	return 2.0f * (mirrorRand() - 0.5f);
+}
 
 #define MIRROR_RAND()   (3.0517578125e-05f * (f32)rand())
 #define MIRROR_SIGNED() (2.0f * (MIRROR_RAND() - 0.5f))
-#define MIRROR_CORNER(frags, i, j, corner)                                        \
-	{                                                                             \
-		f32 z = MIRROR_SIGNED();                                                  \
-		f32 y = MIRROR_SIGNED();                                                  \
+#define MIRROR_CORNER(frags, i, j, corner)                                         \
+	{                                                                              \
+		f32 z = MIRROR_SIGNED();                                                   \
+		f32 y = MIRROR_SIGNED();                                                   \
 		frags[i].mCorner[j].set(corner * MIRROR_SIGNED(), corner * y, corner * z); \
 	}
-#define MIRROR_FILL(frags, count, speed, corner)                                  \
-	for (int i = 0; i < count; i++) {                                             \
-		frags[i].mPos.x = size->x * MIRROR_SIGNED() + pos->x;                     \
-		frags[i].mPos.y = raise + (size->y * MIRROR_SIGNED() + pos->y);           \
-		frags[i].mPos.z = size->z * MIRROR_SIGNED() + pos->z;                     \
-		frags[i].mVel.x = speed * MIRROR_RAND() + -0.5f * speed;                  \
-		frags[i].mVel.y = speed * MIRROR_RAND() + -0.5f * speed;                  \
-		frags[i].mVel.z = speed * MIRROR_RAND() + -0.5f * speed;                  \
-		MIRROR_CORNER(frags, i, 0, corner)                                        \
-		MIRROR_CORNER(frags, i, 1, corner)                                        \
-		MIRROR_CORNER(frags, i, 2, corner)                                        \
-		frags[i].mU = 0.5f * MIRROR_RAND();                                       \
-		frags[i].mV = 0.5f * MIRROR_RAND();                                       \
+#define MIRROR_FILL(frags, count, speed, corner)                        \
+	for (int i = 0; i < count; i++) {                                   \
+		frags[i].mPos.x = size->x * MIRROR_SIGNED() + pos->x;           \
+		frags[i].mPos.y = raise + (size->y * MIRROR_SIGNED() + pos->y); \
+		frags[i].mPos.z = size->z * MIRROR_SIGNED() + pos->z;           \
+		frags[i].mVel.x = speed * MIRROR_RAND() + -0.5f * speed;        \
+		frags[i].mVel.y = speed * MIRROR_RAND() + -0.5f * speed;        \
+		frags[i].mVel.z = speed * MIRROR_RAND() + -0.5f * speed;        \
+		MIRROR_CORNER(frags, i, 0, corner)                              \
+		MIRROR_CORNER(frags, i, 1, corner)                              \
+		MIRROR_CORNER(frags, i, 2, corner)                              \
+		frags[i].mU = 0.5f * MIRROR_RAND();                             \
+		frags[i].mV = 0.5f * MIRROR_RAND();                             \
 	}
 
 static inline void mirrorFill(MirrorFrag* frags, int count, const Vec3f* pos, const Vec3f* size, f32 raise, f32 speed, f32 corner)
@@ -603,8 +609,8 @@ static inline void mirrorFill(MirrorFrag* frags, int count, const Vec3f* pos, co
 		frag->mVel.y     = speed * mirrorRand() + -0.5f * speed;
 		frag->mVel.z     = speed * mirrorRand() + -0.5f * speed;
 		for (int j = 0; j < 3; j++) {
-			f32 z             = mirrorSigned();
-			f32 y             = mirrorSigned();
+			f32 z              = mirrorSigned();
+			f32 y              = mirrorSigned();
 			frag->mCorner[j].x = corner * mirrorSigned();
 			frag->mCorner[j].y = corner * y;
 			frag->mCorner[j].z = corner * z;
@@ -661,7 +667,9 @@ TMirrorBreaker::TMirrorBreaker(TObject* parent, const Vec3f* pos, const Vec3f* s
 }
 
 // 0x801293D8
-MirrorFrag::MirrorFrag() { }
+MirrorFrag::MirrorFrag()
+{
+}
 
 // 0x801293DC
 TMirrorBreaker::~TMirrorBreaker()
@@ -673,16 +681,16 @@ TMirrorBreaker::~TMirrorBreaker()
 }
 
 // 0x80129480
-#define MIRROR_STEP(frags, count, grip, bounce)                                 \
-	for (int i = 0; i < count; i++) {                                           \
-		frags[i].mVel.y = 0.98f * (-0.1f + frags[i].mVel.y);                    \
-		vecAdd(&frags[i].mPos, &frags[i].mPos, &frags[i].mVel);                 \
-		if (frags[i].mPos.y < mFloor) {                                         \
-			frags[i].mPos.y = mFloor;                                           \
-			frags[i].mVel.x = grip * frags[i].mVel.x;                           \
-			frags[i].mVel.y = bounce * -frags[i].mVel.y;                        \
-			frags[i].mVel.z = grip * frags[i].mVel.z;                           \
-		}                                                                       \
+#define MIRROR_STEP(frags, count, grip, bounce)                 \
+	for (int i = 0; i < count; i++) {                           \
+		frags[i].mVel.y = 0.98f * (-0.1f + frags[i].mVel.y);    \
+		vecAdd(&frags[i].mPos, &frags[i].mPos, &frags[i].mVel); \
+		if (frags[i].mPos.y < mFloor) {                         \
+			frags[i].mPos.y = mFloor;                           \
+			frags[i].mVel.x = grip * frags[i].mVel.x;           \
+			frags[i].mVel.y = bounce * -frags[i].mVel.y;        \
+			frags[i].mVel.z = grip * frags[i].mVel.z;           \
+		}                                                       \
 	}
 
 void TMirrorBreaker::draw()
@@ -744,17 +752,17 @@ void TMirrorBreaker::render()
 	GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0);
 	GXSetAlphaCompare(GX_ALWAYS, 0xFF, GX_AOP_AND, GX_ALWAYS, 0xFF);
 
-	volatile f32* fifo  = (volatile f32*)0xCC008000;
-	volatile u8* fifoB  = (volatile u8*)0xCC008000;
+	volatile f32* fifo = (volatile f32*)0xCC008000;
+	volatile u8* fifoB = (volatile u8*)0xCC008000;
 
-#define MIRROR_VERT(FRAG, N, GREY, U, V)         \
+#define MIRROR_VERT(FRAG, N, GREY, U, V)            \
 	*fifo  = (FRAG)->mPos.x + (FRAG)->mCorner[N].x; \
 	*fifo  = (FRAG)->mPos.y + (FRAG)->mCorner[N].y; \
 	*fifo  = (FRAG)->mPos.z + (FRAG)->mCorner[N].z; \
-	*fifoB = (GREY);                             \
-	*fifoB = (GREY);                             \
-	*fifoB = (GREY);                             \
-	*fifo  = (U);                                \
+	*fifoB = (GREY);                                \
+	*fifoB = (GREY);                                \
+	*fifoB = (GREY);                                \
+	*fifo  = (U);                                   \
 	*fifo  = (V)
 
 	GXBegin(GX_TRIANGLES, GX_VTXFMT0, 0x96);
@@ -865,9 +873,9 @@ void MirrorTrapList::clear()
 	MirrorTrapNode* node = mHead;
 	while (node != 0) {
 		MirrorTrapNode* next = node->mNext;
-		node->mList = 0;
-		node->mNext = 0;
-		node->mPrev = 0;
-		node        = next;
+		node->mList          = 0;
+		node->mNext          = 0;
+		node->mPrev          = 0;
+		node                 = next;
 	}
 }

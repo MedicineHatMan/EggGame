@@ -28,17 +28,17 @@ enum LastTorchMode {
 typedef char TObjLastTorch_size_check[(sizeof(TObjLastTorch) == 0x188) ? 1 : -1];
 
 const char* gTObjLastTorchName = "TObjLastTorch";
-const f32 gLastTorchSetRange = 800.0f;
+const f32 gLastTorchSetRange   = 800.0f;
 
 // 0x8018C9B8
 TObjLastTorch::TObjLastTorch(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00           = (u32)gTObjLastTorchName;
-	mSize         = 0x188;
-	mModel        = getGeObjModels()[1];
-	mDraw         = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mShape        = colliCreate(1, 1);
+	_00    = (u32)gTObjLastTorchName;
+	mSize  = 0x188;
+	mModel = getGeObjModels()[1];
+	mDraw  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mShape = colliCreate(1, 1);
 	colliSetOwner((CharaColli*)mShape, (u16)mObjId);
 	colliSetMasks((CharaColli*)mShape, 4, 0xFF, 0xD6, 0xD6);
 	mFlame = particleGenById(this, &gVecZero, 1, 1);
@@ -67,7 +67,7 @@ void TObjLastTorch::initFromDesc(SetDesc* desc)
 	GjModel* model = mModel->model;
 	center.set(model->center.x, model->center.y, model->center.z);
 	vecAdd(&mCenter, &mPos, &center);
-	mRadius = mModel->model->r;
+	mRadius           = mModel->model->r;
 	ColliShape* shape = colliGetShape((CharaColli*)mShape, 0);
 	NJS_OBJECT* child = mModel->child;
 	base.set(child->pos[0], child->pos[1], child->pos[2]);

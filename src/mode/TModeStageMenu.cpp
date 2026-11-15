@@ -36,68 +36,47 @@
 extern "C" {
 
 // The 2D overlay
-
 }
 
 // Rodata tables of this unit 0x8024A6A0
 extern "C" {
-const int sStageMenuWorldNodes[9] = { 7, 4, 3, 1, 2, 5, 6, 8, 9 };
+const int sStageMenuWorldNodes[9]  = { 7, 4, 3, 1, 2, 5, 6, 8, 9 };
 const int sStageMenuModelNodes[10] = { 9, 3, 4, 6, 7, 5, 8, 2, 1, 0 };
-const int sStageMenuBurstNodes[9] = { 1, 7, 6, 4, 3, 5, 2, 8, 9 };
-const int sStageMenuLinks[9][8] = {
-	{ 8, 1, 1, 4, 5, 5, -1, 8 },
-	{ 8, -1, 2, 2, 4, 0, 0, 8 },
-	{ 1, -1, 6, 6, 3, 4, 1, 1 },
-	{ 2, 6, 6, -1, 7, 7, 5, 4 },
-	{ 1, 2, 6, 3, 3, 5, 0, 0 },
-	{ 0, 4, 3, 7, 7, -1, -1, 0 },
-	{ 2, -1, -1, -1, 3, 3, 4, 2 },
-	{ 3, 3, -1, -1, -1, -1, 5, 5 },
-	{ -1, -1, -1, 1, 1, 0, 0, -1 }
-};
+const int sStageMenuBurstNodes[9]  = { 1, 7, 6, 4, 3, 5, 2, 8, 9 };
+const int sStageMenuLinks[9][8]    = { { 8, 1, 1, 4, 5, 5, -1, 8 },   { 8, -1, 2, 2, 4, 0, 0, 8 },    { 1, -1, 6, 6, 3, 4, 1, 1 },
+                                       { 2, 6, 6, -1, 7, 7, 5, 4 },   { 1, 2, 6, 3, 3, 5, 0, 0 },     { 0, 4, 3, 7, 7, -1, -1, 0 },
+                                       { 2, -1, -1, -1, 3, 3, 4, 2 }, { 3, 3, -1, -1, -1, -1, 5, 5 }, { -1, -1, -1, 1, 1, 0, 0, -1 } };
 // Two more key tables laid out like sStageMenuStageIds
-const s16 sStageMenuStageKeysA[7][8] = {
-	{ 0x9, 0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x10 },
-	{ 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18 },
-	{ 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20 },
-	{ 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28 },
-	{ 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F, 0x30 },
-	{ 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8 },
-	{ 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38 }
-};
-const s16 sStageMenuStageKeysB[7][8] = {
-	{ 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B },
-	{ 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52, 0x53 },
-	{ 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A, 0x5B },
-	{ 0x5C, 0x5D, 0x5E, 0x5F, 0x60, 0x61, 0x62, 0x63 },
-	{ 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B },
-	{ 0x3C, 0x3D, 0x3E, 0x3F, 0x40, 0x41, 0x42, 0x43 },
-	{ 0x6C, 0x6D, 0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73 }
-};
-const s16 sStageMenuStageIds[7][8] = {
-	{ 0x154, 0x159, 0x15E, 0x163, 0x168, 0x16D, 0x172, 0x177 },
-	{ 0x17C, 0x181, 0x186, 0x18B, 0x190, 0x195, 0x19A, 0x19F },
-	{ 0x1A4, 0x1A9, 0x1AE, 0x1B3, 0x1B8, 0x1BD, 0x1C2, 0x1C7 },
-	{ 0x1CC, 0x1D1, 0x1D6, 0x1DB, 0x1E0, 0x1E5, 0x1EA, 0x1EF },
-	{ 0x1F4, 0x1F9, 0x1FE, 0x203, 0x208, 0x20D, 0x212, 0x217 },
-	{ 0x12C, 0x131, 0x136, 0x13B, 0x140, 0x145, 0x14A, 0x14F },
-	{ 0x21C, 0x221, 0x226, 0x22B, 0x230, 0x235, 0x23A, 0x23F }
-};
-const s16 sStageMenuGbaFlags[5] = { 0x7B, 0x7D, 0x7F, 0x7E, 0x7C };
+const s16 sStageMenuStageKeysA[7][8]
+    = { { 0x9, 0xA, 0xB, 0xC, 0xD, 0xE, 0xF, 0x10 },        { 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18 },
+        { 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20 }, { 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28 },
+        { 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F, 0x30 }, { 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8 },
+        { 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38 } };
+const s16 sStageMenuStageKeysB[7][8]
+    = { { 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B }, { 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52, 0x53 },
+        { 0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5A, 0x5B }, { 0x5C, 0x5D, 0x5E, 0x5F, 0x60, 0x61, 0x62, 0x63 },
+        { 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x6B }, { 0x3C, 0x3D, 0x3E, 0x3F, 0x40, 0x41, 0x42, 0x43 },
+        { 0x6C, 0x6D, 0x6E, 0x6F, 0x70, 0x71, 0x72, 0x73 } };
+const s16 sStageMenuStageIds[7][8]
+    = { { 0x154, 0x159, 0x15E, 0x163, 0x168, 0x16D, 0x172, 0x177 }, { 0x17C, 0x181, 0x186, 0x18B, 0x190, 0x195, 0x19A, 0x19F },
+        { 0x1A4, 0x1A9, 0x1AE, 0x1B3, 0x1B8, 0x1BD, 0x1C2, 0x1C7 }, { 0x1CC, 0x1D1, 0x1D6, 0x1DB, 0x1E0, 0x1E5, 0x1EA, 0x1EF },
+        { 0x1F4, 0x1F9, 0x1FE, 0x203, 0x208, 0x20D, 0x212, 0x217 }, { 0x12C, 0x131, 0x136, 0x13B, 0x140, 0x145, 0x14A, 0x14F },
+        { 0x21C, 0x221, 0x226, 0x22B, 0x230, 0x235, 0x23A, 0x23F } };
+const s16 sStageMenuGbaFlags[5]  = { 0x7B, 0x7D, 0x7F, 0x7E, 0x7C };
 const int sStageMenuWorldBase[7] = { 8, 0x10, 0x18, 0x20, 0x28, 0, 0x30 };
 // The Japanese list is stripped from the DOL
 const char* sStageMenuGbaFilesJP[5] = { "Chu2ChallengeJP.bin", "NightsUS.gba", "BillyAGB.bin", "BillyAGB.bin", "puyojp.gba" };
-const char* sStageMenuGbaFiles[5] = { "Chu2ChallengeUS.bin", "NightsUS.gba", "BillyAGB.bin", "BillyAGB.bin", "puyous.gba" };
+const char* sStageMenuGbaFiles[5]   = { "Chu2ChallengeUS.bin", "NightsUS.gba", "BillyAGB.bin", "BillyAGB.bin", "puyous.gba" };
 }
 
 // mes_stg_select.bin fixed up like mes_main_menu.bin
-BinFile* gStageMesRes;     // 0x802C5870
-int gStageMesCount;     // 0x802C5874
+BinFile* gStageMesRes;   // 0x802C5870
+int gStageMesCount;      // 0x802C5874
 void** gStageMesStrings; // 0x802C5878
-int gStageNodeIndex;    // 0x802C587C counts nodes while walking the map
-int gStageMoveDelay;    // 0x802C5880
-TArc* gStagePadArc;     // 0x802C5884 pa_menu.pad
-u8* gStagePolyAnim;     // 0x802C5888
+int gStageNodeIndex;     // 0x802C587C counts nodes while walking the map
+int gStageMoveDelay;     // 0x802C5880
+TArc* gStagePadArc;      // 0x802C5884 pa_menu.pad
+u8* gStagePolyAnim;      // 0x802C5888
 
 struct StageMesString {
 	u8 _00[8];
@@ -114,31 +93,31 @@ inline Vec3f vec3f(f32 x, f32 y, f32 z)
 }
 
 // Built by the static initializer at 0x80178E80
-static TextVec sTitleGlyph    = textVec(0.91f, 0.91f, 0.91f);
-static TextVec sTitleBox      = textVec(394.0f, 44.0f, 0.0f);
-static TextVec sTitleAt       = textVec(44.0f, 41.0f, -2.0f);
-static TextVec sInfoGlyph     = textVec(0.81f, 0.81f, 0.81f);
-static TextVec sInfoBox       = textVec(240.0f, 60.0f, 0.0f);
-static TextVec sInfoAt        = textVec(465.0f, 186.0f, -2.0f);
-static TextVec sHeadGlyph     = textVec(0.91f, 0.91f, 0.91f);
-static TextVec sHeadBox       = textVec(132.0f, 22.0f, 0.0f);
-static TextVec sHeadAt        = textVec(465.0f, 132.0f, -2.0f);
-static TextVec sHelpGlyph     = textVec(0.91f, 0.91f, 0.91f);
-static TextVec sHelpBox       = textVec(110.0f, 22.0f, 0.0f);
-static TextVec sHelpAt        = textVec(171.0f, 316.0f, -2.0f);
-static TextVec sGbaInfoGlyph  = textVec(0.81f, 0.81f, 0.81f);
-static TextVec sGbaInfoBox    = textVec(240.0f, 60.0f, 0.0f);
-static TextVec sGbaInfoAt     = textVec(464.0f, 274.0f, -2.0f);
-static TextVec sHelpLowAt     = textVec(171.0f, 339.0f, -2.0f);
-static TextVec sTabAt0 = textVec(565.0f, 38.0f, -2.0f);
-static TextVec sTabAt1 = textVec(565.0f, 75.0f, -2.0f);
-static TextVec sYesNoAt0 = textVec(512.0f, 320.0f, -2.0f);
-static TextVec sYesNoAt1 = textVec(512.0f, 373.0f, -2.0f);
-static TextVec sChoice3At0 = textVec(512.0f, 305.0f, -2.0f);
-static TextVec sChoice3At1 = textVec(512.0f, 345.0f, -2.0f);
-static TextVec sChoice3At2 = textVec(512.0f, 385.0f, -2.0f);
-static TextVec sMarkerFrom    = textVec(-20.0f, 87.5f, 115.0f);
-static TextVec sMarkerTo      = textVec(0.5f, 87.5f, 100.0f);
+static TextVec sTitleGlyph   = textVec(0.91f, 0.91f, 0.91f);
+static TextVec sTitleBox     = textVec(394.0f, 44.0f, 0.0f);
+static TextVec sTitleAt      = textVec(44.0f, 41.0f, -2.0f);
+static TextVec sInfoGlyph    = textVec(0.81f, 0.81f, 0.81f);
+static TextVec sInfoBox      = textVec(240.0f, 60.0f, 0.0f);
+static TextVec sInfoAt       = textVec(465.0f, 186.0f, -2.0f);
+static TextVec sHeadGlyph    = textVec(0.91f, 0.91f, 0.91f);
+static TextVec sHeadBox      = textVec(132.0f, 22.0f, 0.0f);
+static TextVec sHeadAt       = textVec(465.0f, 132.0f, -2.0f);
+static TextVec sHelpGlyph    = textVec(0.91f, 0.91f, 0.91f);
+static TextVec sHelpBox      = textVec(110.0f, 22.0f, 0.0f);
+static TextVec sHelpAt       = textVec(171.0f, 316.0f, -2.0f);
+static TextVec sGbaInfoGlyph = textVec(0.81f, 0.81f, 0.81f);
+static TextVec sGbaInfoBox   = textVec(240.0f, 60.0f, 0.0f);
+static TextVec sGbaInfoAt    = textVec(464.0f, 274.0f, -2.0f);
+static TextVec sHelpLowAt    = textVec(171.0f, 339.0f, -2.0f);
+static TextVec sTabAt0       = textVec(565.0f, 38.0f, -2.0f);
+static TextVec sTabAt1       = textVec(565.0f, 75.0f, -2.0f);
+static TextVec sYesNoAt0     = textVec(512.0f, 320.0f, -2.0f);
+static TextVec sYesNoAt1     = textVec(512.0f, 373.0f, -2.0f);
+static TextVec sChoice3At0   = textVec(512.0f, 305.0f, -2.0f);
+static TextVec sChoice3At1   = textVec(512.0f, 345.0f, -2.0f);
+static TextVec sChoice3At2   = textVec(512.0f, 385.0f, -2.0f);
+static TextVec sMarkerFrom   = textVec(-20.0f, 87.5f, 115.0f);
+static TextVec sMarkerTo     = textVec(0.5f, 87.5f, 100.0f);
 static BinFile* sGbaRes[5];
 static HitVec sWorldPos[9];
 
@@ -212,7 +191,7 @@ int TModeStageMenu::init()
 
 	camDir.set(0.0f, 183.08218f, 330.56439f);
 	camPos.set(0.0f, 24.012760f, -1.5446500f);
-	mLight       = createTCamFix(0, 2, &camPos, &camDir);
+	mLight = createTCamFix(0, 2, &camPos, &camDir);
 	if (mLight != 0) {
 		((TCamera*)mLight)->setFov(0xEEE);
 	}
@@ -237,10 +216,10 @@ int TModeStageMenu::init()
 	findWorldPos(root);
 
 	mtxIdentity(mtx);
-	angle[0]  = 0;
+	angle[0] = 0;
 	pos.set(0.0f, 0.0f, 0.0f);
-	angle[1]  = 0;
-	angle[2]  = 0;
+	angle[1] = 0;
+	angle[2] = 0;
 
 	mModels[10] = createTStageSelectModel(gTL_05, &pos, angle, 10, 0x21);
 	if (mModels[10] != 0) {
@@ -349,30 +328,30 @@ int TModeStageMenu::shutdown()
 TModeStageMenu::TModeStageMenu()
 {
 	int i;
-	mTimer    = 0;
-	mMoveT    = 0.0f;
-	mLight    = 0;
-	mState    = 0;
-	mSub      = 0;
-	mWorld    = 5;
-	mStage    = 0;
-	_1C       = 0;
-	mGbaBack  = 1;
-	mGba      = 0;
-	mTitle    = 0;
-	mInfoHead = 0;
-	mInfo     = 0;
-	mBox      = 0;
-	mTab[0]   = 0;
-	mTab[1]   = 0;
-	mYes      = 0;
-	mNo       = 0;
-	mCancel   = 0;
-	mHelp     = 0;
-	mBoxKind  = 0;
-	mChoice   = 0;
-	mBoxTimer = 0;
-	mWindow   = 0;
+	mTimer      = 0;
+	mMoveT      = 0.0f;
+	mLight      = 0;
+	mState      = 0;
+	mSub        = 0;
+	mWorld      = 5;
+	mStage      = 0;
+	_1C         = 0;
+	mGbaBack    = 1;
+	mGba        = 0;
+	mTitle      = 0;
+	mInfoHead   = 0;
+	mInfo       = 0;
+	mBox        = 0;
+	mTab[0]     = 0;
+	mTab[1]     = 0;
+	mYes        = 0;
+	mNo         = 0;
+	mCancel     = 0;
+	mHelp       = 0;
+	mBoxKind    = 0;
+	mChoice     = 0;
+	mBoxTimer   = 0;
+	mWindow     = 0;
 	mMoveFrom.x = 0.0f;
 	mMoveFrom.y = 0.0f;
 	mMoveFrom.z = 0.0f;
@@ -530,9 +509,9 @@ int TModeStageMenu::repeated(u32 mask)
 }
 
 // Copies a look onto a model
-#define applyLook(model, look)                                                         \
-	(model)->mAmbient.set((look).mAmbient.x, (look).mAmbient.y, (look).mAmbient.z);   \
-	(model)->mLightColor.set((look).mColor.x, (look).mColor.y, (look).mColor.z);     \
+#define applyLook(model, look)                                                      \
+	(model)->mAmbient.set((look).mAmbient.x, (look).mAmbient.y, (look).mAmbient.z); \
+	(model)->mLightColor.set((look).mColor.x, (look).mColor.y, (look).mColor.z);    \
 	((Vec3f*)&(model)->mLightX)->set((look).mDir.x, (look).mDir.y, (look).mDir.z)
 
 // 0x80175D74
@@ -597,11 +576,11 @@ void TModeStageMenu::enterMap()
 	if (mMarker != 0) {
 		mMarker->mFlags |= 0x10;
 	}
-	mMoveT              = 1.0f;
-	mModels[11]->mPos   = sWorldPos[mWorld];
-	mTimer              = 0x3C;
-	mState              = 0;
-	mSub                = 0;
+	mMoveT            = 1.0f;
+	mModels[11]->mPos = sWorldPos[mWorld];
+	mTimer            = 0x3C;
+	mState            = 0;
+	mSub              = 0;
 }
 
 // 0x801760EC
@@ -852,7 +831,7 @@ void TModeStageMenu::updateWorlds()
 		sePlay(0x20);
 		enterQuit();
 	} else if (gStageMoveDelay == 0) {
-		int dir    = -1;
+		int dir       = -1;
 		PadState* pad = padGet(0);
 		if (pad->mLength > 0.95f) {
 			if (pad->mAngle <= 0x1000 || pad->mAngle >= 0xF000) {
@@ -1015,8 +994,7 @@ void TModeStageMenu::updateGbaIn2()
 // 0x80176F40
 void TModeStageMenu::updateGba()
 {
-	if ((padGet(0)->mRepeat & 0x100000) || (padGet(0)->mRepeat & 8) || (padGet(0)->mRepeat & 0x200000)
-	    || (padGet(0)->mRepeat & 4)) {
+	if ((padGet(0)->mRepeat & 0x100000) || (padGet(0)->mRepeat & 8) || (padGet(0)->mRepeat & 0x200000) || (padGet(0)->mRepeat & 4)) {
 		if (mGba == -1) {
 			mGbaBack = 1;
 			aeStageSelectSetGba(5);
@@ -1243,9 +1221,9 @@ void TModeStageMenu::updateStart()
 	if (t < 45 && t >= 25) {
 		Vec3f from;
 		Vec3f to;
-		from = sMarkerFrom;
-		to   = sMarkerTo;
-		Vec3f pos = menuAddBy(&from, menuScaleBy((f32)(45 - t) / 20.0f, menuSub(&to, &from)));
+		from       = sMarkerFrom;
+		to         = sMarkerTo;
+		Vec3f pos  = menuAddBy(&from, menuScaleBy((f32)(45 - t) / 20.0f, menuSub(&to, &from)));
 		mMarkerPos = pos;
 		if (mMarker != 0) {
 			mMarker->mPos = mMarkerPos;
@@ -1282,12 +1260,12 @@ void TModeStageMenu::updateQuit()
 void TModeStageMenu::moveToWorld()
 {
 	aeStageSelectSetWorld(mWorld);
-	mMoveT          = 0.0f;
-	mMoveFrom       = mModels[11]->mPos;
-	gStageMoveDelay = 10;
+	mMoveT                    = 0.0f;
+	mMoveFrom                 = mModels[11]->mPos;
+	gStageMoveDelay           = 10;
 	TStageSelectModel* marker = mMarker;
-	marker->mIndex = mWorld;
-	marker->mFrame = 0.0f;
+	marker->mIndex            = mWorld;
+	marker->mFrame            = 0.0f;
 	if (!(mFlags & 2)) {
 		aeStageSelectClose();
 		hideTitle();
@@ -1303,10 +1281,10 @@ void TModeStageMenu::moveCursor()
 	} else {
 		mMoveT = 1.0f;
 	}
-	Vec3f from = mMoveFrom;
-	Vec3f to   = sWorldPos[mWorld];
-	Vec3f diff = menuSub(&to, &from);
-	to = menuAddBy(&from, menuScale(mMoveT, &diff));
+	Vec3f from        = mMoveFrom;
+	Vec3f to          = sWorldPos[mWorld];
+	Vec3f diff        = menuSub(&to, &from);
+	to                = menuAddBy(&from, menuScale(mMoveT, &diff));
 	mModels[11]->mPos = to;
 	mModels[11]->mAngle[1] += 0x222;
 }
@@ -1340,8 +1318,8 @@ void TModeStageMenu::showStageInfo()
 	int time             = saveGetTime(stage);
 	int total            = scoreWithTime(score, time, table->mEntries[stage].mTimeLimit * 1000);
 	StageDef* defs       = table->mEntries;
-	int rank = scoreRank(total, defs[stage].mRankScores[0], defs[stage].mRankScores[1], defs[stage].mRankScores[2],
-	                      defs[stage].mRankScores[3]);
+	int rank
+	    = scoreRank(total, defs[stage].mRankScores[0], defs[stage].mRankScores[1], defs[stage].mRankScores[2], defs[stage].mRankScores[3]);
 	if (mStageClear[mWorld][mStage] == 0) {
 		rank = 5;
 	}
@@ -1390,7 +1368,7 @@ void TModeStageMenu::placeModels(NJS_OBJECT* node)
 				Vec3f pos;
 				pos.set(node->pos[0], node->pos[1], node->pos[2]);
 				if (mModels[i] != 0) {
-					mModels[i]->mPos = pos;
+					mModels[i]->mPos                 = pos;
 					*(StageAngle*)mModels[i]->mAngle = angle;
 				}
 				break;
@@ -1415,8 +1393,8 @@ void TModeStageMenu::findBurstMtx(f32* mtx, NJS_OBJECT* node, s8 world)
 			int angle[3];
 			int y;
 			int z;
-			z = node->ang[2];
-			y = node->ang[1];
+			z        = node->ang[2];
+			y        = node->ang[1];
 			angle[0] = node->ang[0];
 			angle[1] = y;
 			angle[2] = z;
@@ -1470,13 +1448,13 @@ void TModeStageMenu::hideTitle()
 // 0x80177F00
 void TModeStageMenu::createInfo()
 {
-	Vec3f box = vec3f(0.0f, 24.0f, 0.0f);
-	mInfoHead = createSimpleTextOnTask(1, -1, &sHeadAt, &sHeadBox, &sHeadGlyph, STAGE_STRING(29));
+	Vec3f box       = vec3f(0.0f, 24.0f, 0.0f);
+	mInfoHead       = createSimpleTextOnTask(1, -1, &sHeadAt, &sHeadBox, &sHeadGlyph, STAGE_STRING(29));
 	mInfoHead->mBox = box;
 	mInfoHead->_A8  = 1;
-	mInfo = createSimpleTextOnTask(1, -1, &sInfoAt, &sInfoBox, &sInfoGlyph, STAGE_STRING(37));
-	mInfo->mBox = box;
-	mInfo->_A8  = 1;
+	mInfo           = createSimpleTextOnTask(1, -1, &sInfoAt, &sInfoBox, &sInfoGlyph, STAGE_STRING(37));
+	mInfo->mBox     = box;
+	mInfo->_A8      = 1;
 }
 
 // 0x8017800C
@@ -1508,9 +1486,9 @@ void TModeStageMenu::createYesNo()
 }
 
 #define showAt(text, at, box) \
-	text->mFlags &= ~0x10; \
-	text->mAt  = at; \
-	text->mBox = box; \
+	text->mFlags &= ~0x10;    \
+	text->mAt  = at;          \
+	text->mBox = box;         \
 	text->_A8  = 1
 
 // 0x80178188
@@ -1562,7 +1540,7 @@ void TModeStageMenu::hideTabs()
 void TModeStageMenu::createHelp(int msg)
 {
 	Vec3f box = vec3f(0.0f, 22.0f, 0.0f);
-	mHelp = createSimpleTextOnTask(1, -1, &sHelpAt, &sHelpBox, &sHelpGlyph, STAGE_STRING(msg));
+	mHelp     = createSimpleTextOnTask(1, -1, &sHelpAt, &sHelpBox, &sHelpGlyph, STAGE_STRING(msg));
 	if (mHelp != 0) {
 		mHelp->mBox = box;
 		mHelp->_A8  = 1;

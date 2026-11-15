@@ -29,10 +29,10 @@ struct EnemyBrain {
 	{
 		mOwner = 0;
 		mState = 0;
-		mNext = -1;
+		mNext  = -1;
 	}
 
-	virtual int checkInterrupt() = 0;               // _08 1 if it changed state
+	virtual int checkInterrupt()               = 0; // _08 1 if it changed state
 	virtual void onPhase(int state, int phase) = 0; // _0C
 	inline virtual ~EnemyBrain();                   // _10
 	virtual void update(TEneAm01* owner);           // _14
@@ -51,9 +51,9 @@ struct EnemySeekBrain : public EnemyBrain {
 	EnemySeekBrain();
 	inline virtual ~EnemySeekBrain();
 
-	virtual int checkInterrupt();           // _08
-	virtual void onFlipDone() = 0;          // _1C
-	virtual void onDeathStart();            // _20
+	virtual int checkInterrupt();             // _08
+	virtual void onFlipDone() = 0;            // _1C
+	virtual void onDeathStart();              // _20
 	virtual void attach(TEneAm01* owner) = 0; // _24
 
 	void phaseAppear(int phase);
@@ -112,9 +112,9 @@ public:
 		ACT_STAGGER      = 2,
 		ACT_IDLE         = 3,
 		ACT_WALK         = 4,
-		ACT_CHASE        = 5,  // as walk but brakes on sharp turns and notices the player touching it
+		ACT_CHASE        = 5, // as walk but brakes on sharp turns and notices the player touching it
 		ACT_LEAP         = 6,
-		ACT_8            = 8,  // empty
+		ACT_8            = 8, // empty
 		ACT_FLIP         = 9,
 		ACT_DIE          = 10,
 		ACT_DIE_CRUSHED  = 11,
@@ -124,7 +124,7 @@ public:
 	enum {
 		// mFlags2
 		AM_ARRIVED    = 0x1,
-		AM_TOUCHED    = 0x2,  // a player touched it
+		AM_TOUCHED    = 0x2, // a player touched it
 		AM_FLIP_DONE  = 0x4,
 		AM_SPIN       = 0x20, // draws with mBody.mRot.x
 		AM_PASSED     = 0x40, // the leap has gone past its target
@@ -144,18 +144,18 @@ public:
 	inline void* operator new(u32 size) { return objHeapAlloc(gObjHeap, size); }
 	inline void operator delete(void* mem);
 
-	virtual void vfn_10();                     // _10 hides it off screen
-	virtual void render();                     // _1C draws the model
-	virtual void readEnemyDesc(SetDesc* desc); // _38
-	virtual void vfn_3C();                     // _3C prints debug text
-	virtual f32 vfn_40();                      // _40
+	virtual void vfn_10();                                            // _10 hides it off screen
+	virtual void render();                                            // _1C draws the model
+	virtual void readEnemyDesc(SetDesc* desc);                        // _38
+	virtual void vfn_3C();                                            // _3C prints debug text
+	virtual f32 vfn_40();                                             // _40
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58
-	virtual void vfn_6C();                     // _6C
-	virtual void updateBody();                 // _70
-	virtual void setPos(const Vec3f* pos);           // _74
-	virtual void syncCollider();               // _78
-	virtual void onActionPhase(int action, int phase); // _7C
-	virtual int showsHitEffect();              // _AC
+	virtual void vfn_6C();                                            // _6C
+	virtual void updateBody();                                        // _70
+	virtual void setPos(const Vec3f* pos);                            // _74
+	virtual void syncCollider();                                      // _78
+	virtual void onActionPhase(int action, int phase);                // _7C
+	virtual int showsHitEffect();                                     // _AC
 
 	void init();
 	int isAppearDone();
@@ -192,31 +192,31 @@ public:
 	void actDieCrushed(int phase);
 	void actDieThrown(int phase);
 
-	int mVariant;             // _158 0 or 1 Picks the brain
-	EnemySeekBrain* mBrain;   // _15C
-	void* mPose;              // _160
-	DrawTask* mModel;             // _164 the task from addDrawTask
-	void* mTexture;           // _168
-	u32 mFlags2;              // _16C
-	f32 mTopSpeed;            // _170
-	f32 mSpeed;               // _174
-	Vec3f mTarget;            // _178
-	Vec3f mLeapTarget;        // _184
-	Vec3f mHitPos;            // _190
-	f32 mSquash;              // _19C
-	int _1A0;                 // _1A0
-	int mLastDamage;          // _1A4 the damage of a throw
-	RockFlight* mThrow;       // _1A8 moves it through the air when thrown
-	int mSlot;                // _1AC
-	EnemyCrush mCrush;        // _1B0
-	EnemyBreak* mBreak;       // _1C0 its death arc
-	EnemyTint mTint;          // _1C4
-	ObjShadow mShadow;        // _1CC
-	EnemyEffect mEffect;      // _204
-	int mStep;                // _254
-	int mTimer;               // _258
-	int mAngle;               // _25C
-	f32 mDist;                // _260
+	int mVariant;           // _158 0 or 1 Picks the brain
+	EnemySeekBrain* mBrain; // _15C
+	void* mPose;            // _160
+	DrawTask* mModel;       // _164 the task from addDrawTask
+	void* mTexture;         // _168
+	u32 mFlags2;            // _16C
+	f32 mTopSpeed;          // _170
+	f32 mSpeed;             // _174
+	Vec3f mTarget;          // _178
+	Vec3f mLeapTarget;      // _184
+	Vec3f mHitPos;          // _190
+	f32 mSquash;            // _19C
+	int _1A0;               // _1A0
+	int mLastDamage;        // _1A4 the damage of a throw
+	RockFlight* mThrow;     // _1A8 moves it through the air when thrown
+	int mSlot;              // _1AC
+	EnemyCrush mCrush;      // _1B0
+	EnemyBreak* mBreak;     // _1C0 its death arc
+	EnemyTint mTint;        // _1C4
+	ObjShadow mShadow;      // _1CC
+	EnemyEffect mEffect;    // _204
+	int mStep;              // _254
+	int mTimer;             // _258
+	int mAngle;             // _25C
+	f32 mDist;              // _260
 };
 
 extern "C" TEneAm01* createTEneAm01WithBrain(TObject* parent, int model, EnemySeekBrain* brain);

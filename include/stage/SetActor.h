@@ -21,18 +21,18 @@ public:
 
 	inline void operator delete(void* mem);
 
-	virtual Vec3f* getPos();                 // _20
-	virtual int getRotY();                   // _28
-	virtual int getKind();                   // _2C a placed object 3
+	virtual Vec3f* getPos();                  // _20
+	virtual int getRotY();                    // _28
+	virtual int getKind();                    // _2C a placed object 3
 	virtual void initFromDesc(SetDesc* desc); // _30
-	virtual void debugPrint(void*);          // _34 empty
-	virtual void setPos(const Vec3f* pos);   // _6C
-	virtual SetLink* getLink();              // _70
+	virtual void debugPrint(void*);           // _34 empty
+	virtual void setPos(const Vec3f* pos);    // _6C
+	virtual SetLink* getLink();               // _70
 
 	Vec3f mHome;         // _30
 	Vec3f mPos;          // _3C what getPos returns
 	SetRot mRot;         // _48 getRotY returns mRot.y
-	CharaColli* mShape;        // _54
+	CharaColli* mShape;  // _54
 	SetLinkMember mLink; // _58
 };
 

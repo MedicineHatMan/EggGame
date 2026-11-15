@@ -22,7 +22,7 @@ struct CamView;
 extern "C" {
 
 // 0x802C4000
-ObjClassName gTObjBlueWaterfallName = { "TObjBlueWaterfall", 0 };
+ObjClassName gTObjBlueWaterfallName             = { "TObjBlueWaterfall", 0 };
 extern const ColliShape sBlueWaterfallShapes[1] = {
 	{ { 10.0f, -160.0f, 0.0f }, 0x0, 0, 0x0, 10.0f, 160.0f, 0.0f, 0x0, COLLISHAPE_CYLINDER, 0x0 },
 };
@@ -31,7 +31,7 @@ extern const ColliShape sBlueWaterfallShapes[1] = {
 // The view camGetView returns mAspect is the second argument of C_MTXLightPerspective
 struct WaterView {
 	u8 _00[0x44];
-	int mFov;    // _44
+	int mFov; // _44
 	u8 _48[4];
 	f32 mAspect; // _4C
 };
@@ -54,16 +54,16 @@ void TObjBlueWaterfall::setup()
 {
 	f32 zero = 0.0f;
 
-	mStopped  = 0;
-	mMatId    = 2;
-	mScroll   = zero;
-	mIndScroll = zero;
+	mStopped                   = 0;
+	mMatId                     = 2;
+	mScroll                    = zero;
+	mIndScroll                 = zero;
 	((u8*)&sWaterfallColor)[0] = 0;
 	((u8*)&sWaterfallColor)[1] = 0;
 	((u8*)&sWaterfallColor)[2] = 0;
-	mWater = getGeObjModels()[0x16];
-	mPlain = getGeObjModels()[0x15];
-	mTex   = getGeObjTextures()[0x13];
+	mWater                     = getGeObjModels()[0x16];
+	mPlain                     = getGeObjModels()[0x15];
+	mTex                       = getGeObjTextures()[0x13];
 	setLinkDone((SetLink*)&mLink);
 	mShape = NULL;
 	mShape = colliCreate(1, 1);
@@ -111,7 +111,7 @@ void TObjBlueWaterfall::initFromDesc(SetDesc* desc)
 	mIndOffset   = 0.6f + desc->getFloat(1);
 	mScrollSpeed = 0.03f + desc->getFloat(2);
 	mScrollSpeed *= 0.1f;
-	mIndSpeed    = 0.12f + desc->getFloat(3);
+	mIndSpeed = 0.12f + desc->getFloat(3);
 	mIndSpeed *= 0.1f;
 }
 
@@ -216,7 +216,7 @@ void TObjBlueWaterfall::drawWater()
 	GXLoadTexMtxImm(scrollMtx, GX_TEXMTX0, GX_MTX2x4);
 
 	WaterView* view = (WaterView*)camGetView(0);
-	f32 fov = 0.75f * (360.0f * ((f32)view->mFov / 65536.0f));
+	f32 fov         = 0.75f * (360.0f * ((f32)view->mFov / 65536.0f));
 	f32 light[12];
 	C_MTXLightPerspective((float*)light, fov, view->mAspect, 0.5f, -0.5f, 0.5f, 0.5f);
 	f32 proj[12];
@@ -295,7 +295,7 @@ static void tevCallback(int stage)
 {
 	GXSetTevColor(GX_TEVREG0, *(GXColor*)&sWaterfallColor);
 	stage &= 0xFF;
-	int next = stage + 1;
+	int next           = stage + 1;
 	sWaterfallTevStage = next;
 	GXSetTevOp(stage, GX_REPLACE);
 	GXSetTevColorIn(next, GX_CC_CPREV, GX_CC_TEXC, GX_CC_A0, GX_CC_ZERO);

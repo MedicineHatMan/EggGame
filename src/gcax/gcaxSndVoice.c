@@ -3,8 +3,8 @@
 #pragma fp_contract off
 
 #define GCAX_SEMITONE 1.0594630943592953 /* 2^(1/12) */
-#define GCAX_FINE16 1.007246412223704    /* 2^(1/96) 16 fine steps */
-#define GCAX_FINE 1.0004513695322617     /* 2^(1/1536) one fine step */
+#define GCAX_FINE16   1.007246412223704  /* 2^(1/96) 16 fine steps */
+#define GCAX_FINE     1.0004513695322617 /* 2^(1/1536) one fine step */
 
 // 0x802324C4
 void gcaxVoiceDropCallback(void* vpb)
@@ -62,8 +62,8 @@ GCAX_VOICE* gcaxVoiceGet()
 		gcax_work->voice_rover++;
 		gcax_work->voice_rover %= GCAX_VOICE_MAX;
 		voice = &gcax_work->voice[gcax_work->voice_rover];
-		if ((voice->flags & GCAX_VOICE_USED) && (voice->flags & GCAX_VOICE_DROPPED) &&
-		    (vpb = AXAcquireVoice(0x1B, gcaxVoiceDropCallback, (u32)voice)) != 0) {
+		if ((voice->flags & GCAX_VOICE_USED) && (voice->flags & GCAX_VOICE_DROPPED)
+		    && (vpb = AXAcquireVoice(0x1B, gcaxVoiceDropCallback, (u32)voice)) != 0) {
 			gcax_work->voice_count++;
 			voice->vpb = vpb;
 			voice->flags &= ~GCAX_VOICE_DROPPED;
@@ -97,10 +97,10 @@ GCAX_VOICE* gcaxVoiceAlloc(GCAX_NOTE* note, int prio, int arg)
 
 	voice = gcaxVoiceGet(prio);
 	if (voice != 0) {
-		voice->vol = 1.0f;
+		voice->vol  = 1.0f;
 		voice->note = note;
 		voice->prio = prio;
-		voice->arg = arg;
+		voice->arg  = arg;
 		voice->flags |= GCAX_VOICE_USED;
 		voice->flags &= ~GCAX_VOICE_HOLD;
 		voice->flags &= ~GCAX_VOICE_PLAYING;
@@ -134,13 +134,13 @@ int gcaxFreqToCode(int freq, int* oct, int* frac)
 	f64 base;
 	int i;
 
-	n = log10(freq / 172.265625) / log10(2.0);
-	i = n;
-	*oct = (i - 8) & 0xF;
-	base = 172.265625 / pow(2.0, -i);
-	i = 1024.0 * (freq - base) / base;
+	n     = log10(freq / 172.265625) / log10(2.0);
+	i     = n;
+	*oct  = (i - 8) & 0xF;
+	base  = 172.265625 / pow(2.0, -i);
+	i     = 1024.0 * (freq - base) / base;
 	*frac = i;
-	i = (*oct << 11) | *frac;
+	i     = (*oct << 11) | *frac;
 	return i;
 }
 
@@ -197,10 +197,10 @@ u32 gcaxBendSrcRatio(f32 ratio, int bend)
 	int fine;
 	u32 src;
 
-	r = 1.0f;
+	r   = 1.0f;
 	neg = 0;
 	if (bend < 0) {
-		neg = 1;
+		neg  = 1;
 		bend = -bend;
 	}
 	semi = bend / 0x1FFF;
@@ -247,10 +247,10 @@ f32 gcaxCentToRatio(int cent)
 	int semi;
 	int fine;
 
-	r = 1.0f;
+	r   = 1.0f;
 	neg = 0;
 	if (cent < 0) {
-		neg = 1;
+		neg  = 1;
 		cent = -cent;
 	}
 	semi = cent / 0x2000;
@@ -281,8 +281,7 @@ f32 gcaxCentToRatio(int cent)
 
 /* Sets a voice up from a region and starts it */
 // 0x80232D88
-void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mpb, GCAX_REGION* region, int key,
-                    u8* veltab, int vel)
+void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mpb, GCAX_REGION* region, int key, u8* veltab, int vel)
 {
 	GCAX_PORT* port;
 	int ch;
@@ -296,16 +295,16 @@ void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mp
 	u32 end;
 	u32 cur;
 
-	voice->bank = bank;
-	voice->layer = layer;
-	voice->mpb = mpb;
+	voice->bank   = bank;
+	voice->layer  = layer;
+	voice->mpb    = mpb;
 	voice->region = region;
-	voice->key = key;
+	voice->key    = key;
 	voice->veltab = veltab;
-	voice->vel = vel;
-	port = voice->note->port;
-	ch = voice->note->chan;
-	sample = (GCAX_SAMPLE*)((u8*)mpb + GCAX_OFFSET(mpb->samples));
+	voice->vel    = vel;
+	port          = voice->note->port;
+	ch            = voice->note->chan;
+	sample        = (GCAX_SAMPLE*)((u8*)mpb + GCAX_OFFSET(mpb->samples));
 	sample += region->sample;
 	veltab += region->velcurve << 7;
 	if (vel < region->vel_lo) {
@@ -329,30 +328,30 @@ void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mp
 		vel = 0x7F;
 	}
 	voice->velocity = vel;
-	voice->level = region->level;
-	voice->pan = gcax_pan_map[region->pan & 0x1F];
-	voice->atten = region->atten;
-	voice->vol = 1.0f;
-	voice->ratio = gcaxKeyRatio(region->root, region->fine, key);
+	voice->level    = region->level;
+	voice->pan      = gcax_pan_map[region->pan & 0x1F];
+	voice->atten    = region->atten;
+	voice->vol      = 1.0f;
+	voice->ratio    = gcaxKeyRatio(region->root, region->fine, key);
 	voice->ratio *= port->chan[ch].tune;
-	voice->bend_up = layer->bend_up;
+	voice->bend_up   = layer->bend_up;
 	voice->bend_down = layer->bend_down;
-	bend = port->chan[ch].bend;
+	bend             = port->chan[ch].bend;
 	if (bend >= 0) {
 		bend *= voice->bend_up;
 	} else {
 		bend *= voice->bend_down;
 	}
-	src = gcaxBendSrcRatio(voice->ratio, bend);
-	voice->fx_invert = region->fx_invert;
-	voice->fx_send = region->fx_send;
-	voice->src.ratioHi = src >> 16;
-	voice->src.ratioLo = src;
+	src                           = gcaxBendSrcRatio(voice->ratio, bend);
+	voice->fx_invert              = region->fx_invert;
+	voice->fx_send                = region->fx_send;
+	voice->src.ratioHi            = src >> 16;
+	voice->src.ratioLo            = src;
 	voice->src.currentAddressFrac = 0;
-	voice->src.last_samples[0] = 0;
-	voice->src.last_samples[1] = 0;
-	voice->src.last_samples[2] = 0;
-	voice->src.last_samples[3] = 0;
+	voice->src.last_samples[0]    = 0;
+	voice->src.last_samples[1]    = 0;
+	voice->src.last_samples[2]    = 0;
+	voice->src.last_samples[3]    = 0;
 
 	gcaxFreqToCode((int)(0.5f + 32000.0f * (src / 65536.0f)), &oct, &frac);
 	if (oct > 8) {
@@ -371,7 +370,7 @@ void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mp
 		i = 0x3F;
 	}
 	voice->atk_time = gcax_atk_time[i];
-	i = region->rate_bias + oct + frac + region->dec * 2;
+	i               = region->rate_bias + oct + frac + region->dec * 2;
 	if (i < 0) {
 		i = 0;
 	}
@@ -379,7 +378,7 @@ void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mp
 		i = 0x3F;
 	}
 	voice->dec_time = gcax_dec_time[i];
-	i = region->rate_bias + oct + frac + region->sus * 2;
+	i               = region->rate_bias + oct + frac + region->sus * 2;
 	if (i < 0) {
 		i = 0;
 	}
@@ -387,7 +386,7 @@ void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mp
 		i = 0x3F;
 	}
 	voice->sus_time = gcax_dec_time[i];
-	i = region->rate_bias + oct + frac + region->rel * 2;
+	i               = region->rate_bias + oct + frac + region->rel * 2;
 	if (i < 0) {
 		i = 0;
 	}
@@ -403,12 +402,12 @@ void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mp
 	}
 	voice->env_phase = 0;
 	if (voice->atk_rate >= 1.0f) {
-		voice->atk_rate = 1.0f;
-		voice->env = 1.0f;
-		voice->env_db = 0.0f;
+		voice->atk_rate  = 1.0f;
+		voice->env       = 1.0f;
+		voice->env_db    = 0.0f;
 		voice->env_phase = 1;
 	} else {
-		voice->env = 0.0f;
+		voice->env    = 0.0f;
 		voice->env_db = -96.0f;
 	}
 	voice->dec_rate = 5.0f / voice->dec_time;
@@ -425,25 +424,25 @@ void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mp
 	switch (sample->format) {
 	case 0:
 		loop = sample->loop_adr + sample->offset * 2 + gcax_work->aram_bank[bank].adr * 2;
-		end = sample->end_adr + sample->offset * 2 + gcax_work->aram_bank[bank].adr * 2;
-		cur = sample->cur_adr + sample->offset * 2 + gcax_work->aram_bank[bank].adr * 2;
+		end  = sample->end_adr + sample->offset * 2 + gcax_work->aram_bank[bank].adr * 2;
+		cur  = sample->cur_adr + sample->offset * 2 + gcax_work->aram_bank[bank].adr * 2;
 		(void)(sample->loop == 0);
-		voice->addr.loopFlag = sample->loop;
-		voice->addr.format = 0;
-		voice->addr.loopAddressHi = loop >> 16;
-		voice->addr.loopAddressLo = loop;
-		voice->addr.endAddressHi = end >> 16;
-		voice->addr.endAddressLo = end;
+		voice->addr.loopFlag         = sample->loop;
+		voice->addr.format           = 0;
+		voice->addr.loopAddressHi    = loop >> 16;
+		voice->addr.loopAddressLo    = loop;
+		voice->addr.endAddressHi     = end >> 16;
+		voice->addr.endAddressLo     = end;
 		voice->addr.currentAddressHi = cur >> 16;
 		voice->addr.currentAddressLo = cur;
 		memcpy(voice->adpcm.a, sample->coef, sizeof(sample->coef));
-		voice->adpcm.gain = sample->gain;
-		voice->adpcm.pred_scale = sample->pred_scale;
-		voice->adpcm.yn1 = sample->yn1;
-		voice->adpcm.yn2 = sample->yn2;
+		voice->adpcm.gain                 = sample->gain;
+		voice->adpcm.pred_scale           = sample->pred_scale;
+		voice->adpcm.yn1                  = sample->yn1;
+		voice->adpcm.yn2                  = sample->yn2;
 		voice->adpcm_loop.loop_pred_scale = sample->loop_pred_scale;
-		voice->adpcm_loop.loop_yn1 = sample->loop_yn1;
-		voice->adpcm_loop.loop_yn2 = sample->loop_yn2;
+		voice->adpcm_loop.loop_yn1        = sample->loop_yn1;
+		voice->adpcm_loop.loop_yn2        = sample->loop_yn2;
 		AXSetVoiceAddr(voice->vpb, &voice->addr);
 		AXSetVoiceSrcType(voice->vpb, 1);
 		AXSetVoiceSrc(voice->vpb, &voice->src);
@@ -457,20 +456,20 @@ void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mp
 		break;
 	case 10:
 		loop = sample->offset + sample->loop_adr * 2 + gcax_work->aram_bank[bank].adr;
-		end = sample->offset + sample->end_adr * 2 + gcax_work->aram_bank[bank].adr;
-		cur = sample->offset + sample->cur_adr * 2 + gcax_work->aram_bank[bank].adr;
+		end  = sample->offset + sample->end_adr * 2 + gcax_work->aram_bank[bank].adr;
+		cur  = sample->offset + sample->cur_adr * 2 + gcax_work->aram_bank[bank].adr;
 		if (sample->loop == 0) {
 			loop = gcax_work->zero_adr;
 		}
 		loop >>= 1;
 		end >>= 1;
 		cur >>= 1;
-		voice->addr.loopFlag = sample->loop;
-		voice->addr.format = 10;
-		voice->addr.loopAddressHi = loop >> 16;
-		voice->addr.loopAddressLo = loop;
-		voice->addr.endAddressHi = end >> 16;
-		voice->addr.endAddressLo = end;
+		voice->addr.loopFlag         = sample->loop;
+		voice->addr.format           = 10;
+		voice->addr.loopAddressHi    = loop >> 16;
+		voice->addr.loopAddressLo    = loop;
+		voice->addr.endAddressHi     = end >> 16;
+		voice->addr.endAddressLo     = end;
 		voice->addr.currentAddressHi = cur >> 16;
 		voice->addr.currentAddressLo = cur;
 		AXSetVoiceAddr(voice->vpb, &voice->addr);
@@ -482,17 +481,17 @@ void gcaxVoiceStart(int bank, GCAX_VOICE* voice, GCAX_LAYER* layer, GCAX_MPB* mp
 		break;
 	case 0x19:
 		loop = sample->loop_adr + sample->offset + gcax_work->aram_bank[bank].adr;
-		end = sample->end_adr + sample->offset + gcax_work->aram_bank[bank].adr;
-		cur = sample->cur_adr + sample->offset + gcax_work->aram_bank[bank].adr;
+		end  = sample->end_adr + sample->offset + gcax_work->aram_bank[bank].adr;
+		cur  = sample->cur_adr + sample->offset + gcax_work->aram_bank[bank].adr;
 		if (sample->loop == 0) {
 			loop = gcax_work->zero_adr;
 		}
-		voice->addr.loopFlag = sample->loop;
-		voice->addr.format = 0x19;
-		voice->addr.loopAddressHi = loop >> 16;
-		voice->addr.loopAddressLo = loop;
-		voice->addr.endAddressHi = end >> 16;
-		voice->addr.endAddressLo = end;
+		voice->addr.loopFlag         = sample->loop;
+		voice->addr.format           = 0x19;
+		voice->addr.loopAddressHi    = loop >> 16;
+		voice->addr.loopAddressLo    = loop;
+		voice->addr.endAddressHi     = end >> 16;
+		voice->addr.endAddressLo     = end;
 		voice->addr.currentAddressHi = cur >> 16;
 		voice->addr.currentAddressLo = cur;
 		AXSetVoiceAddr(voice->vpb, &voice->addr);
@@ -520,7 +519,7 @@ int gcaxSndCountVoices(u32 bank, u32 prog, int key)
 	int i;
 	int j;
 
-	n = 0;
+	n    = 0;
 	base = gcax_work->mpbp[bank].ptr;
 	if (base != 0) {
 		mpb = (GCAX_MPB*)base;
@@ -528,10 +527,10 @@ int gcaxSndCountVoices(u32 bank, u32 prog, int key)
 			entry = (u32*)(base + GCAX_OFFSET(mpb->progs));
 			entry += prog;
 			nlayer = GCAX_COUNT(*entry);
-			layer = (GCAX_LAYER*)(base + GCAX_OFFSET(*entry));
+			layer  = (GCAX_LAYER*)(base + GCAX_OFFSET(*entry));
 			for (i = 0; i < nlayer; i++) {
 				nregion = GCAX_COUNT(layer[i].regions);
-				region = (GCAX_REGION*)(base + GCAX_OFFSET(layer[i].regions));
+				region  = (GCAX_REGION*)(base + GCAX_OFFSET(layer[i].regions));
 				for (j = 0; j < nregion; j++) {
 					if (region[j].key_lo <= key && key <= region[j].key_hi) {
 						n++;
@@ -567,15 +566,15 @@ void gcaxSndStartVoices(GCAX_LINK** list, u32 bank, u32 prog, int key, int vel)
 		if (GCAX_COUNT(mpb->progs) > prog) {
 			entry = (u32*)(base + GCAX_OFFSET(mpb->progs));
 			entry += prog;
-			nlayer = GCAX_COUNT(*entry);
-			layer = (GCAX_LAYER*)(base + GCAX_OFFSET(*entry));
+			nlayer    = GCAX_COUNT(*entry);
+			layer     = (GCAX_LAYER*)(base + GCAX_OFFSET(*entry));
 			velcurves = base + GCAX_OFFSET(mpb->velcurves);
 			for (i = 0; i < nlayer; i++) {
 				nregion = GCAX_COUNT(layer[i].regions);
-				region = (GCAX_REGION*)(base + GCAX_OFFSET(layer[i].regions));
+				region  = (GCAX_REGION*)(base + GCAX_OFFSET(layer[i].regions));
 				for (j = 0; j < nregion; j++) {
-					if (region[j].key_lo <= key && key <= region[j].key_hi &&
-					    (link = gcaxVoiceListNext(list, link)) != 0 && link->obj != 0) {
+					if (region[j].key_lo <= key && key <= region[j].key_hi && (link = gcaxVoiceListNext(list, link)) != 0
+					    && link->obj != 0) {
 						gcaxVoiceStart(bank, link->obj, &layer[i], mpb, &region[j], key, velcurves, vel);
 					}
 				}
@@ -617,24 +616,24 @@ void gcaxVoiceSetMix(GCAX_VOICE* voice, void* handle)
 	if (!(port->flags & 0x80000000)) {
 		return;
 	}
-	ch = voice->note->chan;
-	voice->mix.vL = 0;
-	voice->mix.vR = 0;
-	voice->mix.vAuxAL = 0;
-	voice->mix.vAuxAR = 0;
-	voice->mix.vAuxBL = 0;
-	voice->mix.vAuxBR = 0;
-	voice->mix.vAuxBS = 0;
-	voice->mix.vS = 0;
-	voice->mix.vAuxAS = 0;
-	voice->mix.vDeltaL = 0;
-	voice->mix.vDeltaR = 0;
+	ch                     = voice->note->chan;
+	voice->mix.vL          = 0;
+	voice->mix.vR          = 0;
+	voice->mix.vAuxAL      = 0;
+	voice->mix.vAuxAR      = 0;
+	voice->mix.vAuxBL      = 0;
+	voice->mix.vAuxBR      = 0;
+	voice->mix.vAuxBS      = 0;
+	voice->mix.vS          = 0;
+	voice->mix.vAuxAS      = 0;
+	voice->mix.vDeltaL     = 0;
+	voice->mix.vDeltaR     = 0;
 	voice->mix.vDeltaAuxAL = 0;
 	voice->mix.vDeltaAuxAR = 0;
 	voice->mix.vDeltaAuxBL = 0;
 	voice->mix.vDeltaAuxBR = 0;
 	voice->mix.vDeltaAuxBS = 0;
-	voice->mix.vDeltaS = 0;
+	voice->mix.vDeltaS     = 0;
 	voice->mix.vDeltaAuxAS = 0;
 
 	n = (port->chan[ch].vol + 1) * (port->chan[ch].expr + 1) - 1;
@@ -646,15 +645,15 @@ void gcaxVoiceSetMix(GCAX_VOICE* voice, void* handle)
 		n = 0x7F;
 	}
 	cv = n;
-	n = (cv + 1) * voice->velocity;
+	n  = (cv + 1) * voice->velocity;
 	n *= 0x100 - voice->atten;
 	n -= 1;
 	n >>= 14;
 	n &= 0xFF;
 	vv = n;
-	n = (int)(255.0f * port->vol);
+	n  = (int)(255.0f * port->vol);
 	pv = n;
-	n = pv + vv;
+	n  = pv + vv;
 	if (n < 0) {
 		n = 0;
 	}
@@ -666,7 +665,7 @@ void gcaxVoiceSetMix(GCAX_VOICE* voice, void* handle)
 		n = 0xFF;
 	}
 	db = 0.0f;
-	i = voice->level << 2;
+	i  = voice->level << 2;
 	if (i < 0) {
 		i = 0;
 	}
@@ -711,7 +710,7 @@ void gcaxVoiceSetMix(GCAX_VOICE* voice, void* handle)
 	}
 
 	front = port->chan[ch].dpl_front;
-	n = voice->pan + port->chan[ch].pan - 0x40;
+	n     = voice->pan + port->chan[ch].pan - 0x40;
 	if (n < 0) {
 		n = 0;
 	}
@@ -719,9 +718,9 @@ void gcaxVoiceSetMix(GCAX_VOICE* voice, void* handle)
 		n = 0x7F;
 	}
 	pos = n;
-	n = gcax_pan_idx[n];
-	l = gcax_pan_gain[n];
-	r = gcax_pan_gain[n ^ 0x10];
+	n   = gcax_pan_idx[n];
+	l   = gcax_pan_gain[n];
+	r   = gcax_pan_gain[n ^ 0x10];
 	if (gcax_work->mono) {
 		t = 0.707f * (l + r);
 		if (t > 1.0f) {
@@ -736,8 +735,8 @@ void gcaxVoiceSetMix(GCAX_VOICE* voice, void* handle)
 	port->chan[ch].out_l = l;
 	port->chan[ch].out_r = r;
 	if (!gcax_work->surround) {
-		voice->mix.vL = 32768.0f * (voice->vol * port->chan[ch].out_l);
-		voice->mix.vR = 32768.0f * (voice->vol * port->chan[ch].out_r);
+		voice->mix.vL     = 32768.0f * (voice->vol * port->chan[ch].out_l);
+		voice->mix.vR     = 32768.0f * (voice->vol * port->chan[ch].out_r);
 		voice->mix.vAuxBL = 0;
 		voice->mix.vAuxBR = 0;
 	} else {
@@ -747,24 +746,24 @@ void gcaxVoiceSetMix(GCAX_VOICE* voice, void* handle)
 		} else {
 			g1 = gcax_dpl_gain[0x7F - port->chan[ch].dpl_pan];
 			g2 = gcax_dpl_gain[port->chan[ch].dpl_pan];
-			a = g1 * (voice->vol * gain);
-			b = g2 * (voice->vol * gain);
+			a  = g1 * (voice->vol * gain);
+			b  = g2 * (voice->vol * gain);
 		}
 		if (port->chan[ch].dpl_front <= 0x40) {
-			voice->mix.vL = 32768.0f * a;
-			voice->mix.vR = 32768.0f * b;
+			voice->mix.vL     = 32768.0f * a;
+			voice->mix.vR     = 32768.0f * b;
 			voice->mix.vAuxBL = 0;
 			voice->mix.vAuxBR = 0;
 		} else {
-			voice->mix.vL = 0;
-			voice->mix.vR = 0;
+			voice->mix.vL     = 0;
+			voice->mix.vR     = 0;
 			voice->mix.vAuxBL = 32768.0f * a;
 			voice->mix.vAuxBR = 32768.0f * b;
 		}
 	}
 
 	sign2 = -2.0f;
-	sign = sign2;
+	sign  = sign2;
 	if (voice->fx_invert == 0) {
 		sign = 1.0f;
 	}
@@ -805,13 +804,13 @@ void gcaxVoiceSetMix(GCAX_VOICE* voice, void* handle)
 		voice->mix.vAuxAS = 0;
 		voice->mix.vAuxBS = 0;
 	} else {
-		front2 = port->chan[ch].dpl_front;
-		al = (127.0f - front2) / 127.0f * (l * t);
-		ar = (127.0f - front2) / 127.0f * (r * t);
+		front2            = port->chan[ch].dpl_front;
+		al                = (127.0f - front2) / 127.0f * (l * t);
+		ar                = (127.0f - front2) / 127.0f * (r * t);
 		voice->mix.vAuxAL = 32768.0f * al;
 		voice->mix.vAuxAR = 32768.0f * ar;
-		sl = front2 / 127.0f * (l * t);
-		sr = front2 / 127.0f * (r * t);
+		sl                = front2 / 127.0f * (l * t);
+		sr                = front2 / 127.0f * (r * t);
 		/* Both go to vAuxAS in the DOL */
 		voice->mix.vAuxAS = 32768.0f * al;
 		voice->mix.vAuxAS = 32768.0f * ar;
@@ -880,7 +879,7 @@ void gcaxVoiceEnvelope(GCAX_VOICE* voice)
 		voice->env += voice->atk_rate;
 		voice->env_db = -(96.0f - 96.0f * voice->env);
 		if (voice->env >= 1.0f) {
-			voice->env = 1.0f;
+			voice->env    = 1.0f;
 			voice->env_db = -(96.0f - 96.0f * voice->env);
 			voice->env_phase++;
 		}
@@ -892,7 +891,7 @@ void gcaxVoiceEnvelope(GCAX_VOICE* voice)
 			voice->env -= voice->dec_rate;
 			voice->env_db = -(96.0f - 96.0f * voice->env);
 			if (voice->env <= 0.0f) {
-				voice->env = 0.0f;
+				voice->env    = 0.0f;
 				voice->env_db = -(96.0f - 96.0f * voice->env);
 			}
 			if (!(voice->env_db <= voice->sus_db)) {
@@ -907,7 +906,7 @@ void gcaxVoiceEnvelope(GCAX_VOICE* voice)
 		voice->env -= voice->sus_rate;
 		voice->env_db = -(96.0f - 96.0f * voice->env);
 		if (voice->env <= 0.0f) {
-			voice->env = 0.0f;
+			voice->env    = 0.0f;
 			voice->env_db = -(96.0f - 96.0f * voice->env);
 		}
 		break;
@@ -918,7 +917,7 @@ void gcaxVoiceEnvelope(GCAX_VOICE* voice)
 		voice->env -= voice->rel_rate;
 		voice->env_db = -(96.0f - 96.0f * voice->env);
 		if (voice->env <= 0.0f) {
-			voice->env = 0.0f;
+			voice->env    = 0.0f;
 			voice->env_db = -(96.0f - 96.0f * voice->env);
 		}
 		break;

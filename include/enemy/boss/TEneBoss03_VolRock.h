@@ -68,7 +68,7 @@ public:
 	void drawModel();
 
 	TEneBoss03_VolRock* mNext; // _30
-	VolFlight mFlight;        // _34
+	VolFlight mFlight;         // _34
 	int mState;                // _9C 0 flying 1 landed 2 waiting 3 on its fuse 4 broken
 	u32 mLandFlags;            // _A0 bit 0 has landed
 	f32 mTime;                 // _A4 frames in the air
@@ -76,8 +76,8 @@ public:
 	int mHotTime;              // _AC from landing to the start of cooling
 	int mTimer;                // _B0
 	ObjShadow mShadow;         // _B4
-	CharaColli* mColli;              // _EC
-	DrawTask* mDrawTask;           // _F0
+	CharaColli* mColli;        // _EC
+	DrawTask* mDrawTask;       // _F0
 	u8* mCarried;              // _F4
 	EnemyLight mLight;         // _F8
 	u32 mLitAlpha;             // _138
@@ -91,8 +91,8 @@ public:
 /** The rock's model _08 the whole object _0C its 14 pieces */
 struct RockModel {
 	u8 _00[8];
-	void* mObject; // _08
-	u8* mPieces[14];  // _0C Each _04 the model _08 where it sits
+	void* mObject;   // _08
+	u8* mPieces[14]; // _0C Each _04 the model _08 where it sits
 };
 
 extern "C" {

@@ -44,16 +44,16 @@ public:
 	void stateWait();
 	void shatter();
 
-	NJS_OBJECT* mModelData;    // _64
-	NJS_TEXLIST* mTexList;      // _68
-	MeshData* mColliData;    // _6C
-	DrawTask* mDrawTask; // _70 list 0x22
-	ObjModel mModel;     // _74
-	f32 mMatrix[12];     // _94
-	MeshObject* mColli;        // _C4 built from mColliData
-	Vec3f mCenter;       // _C8 the model's centre moved into the world
-	f32 mRadius;         // _D4 the model's radius
-	int mAct;            // _D8 0 = waiting for a hit 1 = burst and delete
+	NJS_OBJECT* mModelData; // _64
+	NJS_TEXLIST* mTexList;  // _68
+	MeshData* mColliData;   // _6C
+	DrawTask* mDrawTask;    // _70 list 0x22
+	ObjModel mModel;        // _74
+	f32 mMatrix[12];        // _94
+	MeshObject* mColli;     // _C4 built from mColliData
+	Vec3f mCenter;          // _C8 the model's centre moved into the world
+	f32 mRadius;            // _D4 the model's radius
+	int mAct;               // _D8 0 = waiting for a hit 1 = burst and delete
 };
 
 extern "C" {

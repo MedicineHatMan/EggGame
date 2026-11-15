@@ -43,7 +43,7 @@ TObject* createDoorG(TObject*, SetDesc*);
 /** The part of a motion tree this class walks */
 struct DoorNode {
 	u8 _00[4];
-	void* mModel;     // _04
+	void* mModel; // _04
 	u8 _08[0x24];
 	DoorNode* mChild; // _2C
 	DoorNode* mNext;  // _30
@@ -57,10 +57,10 @@ struct DoorListNode {
 		mList = 0;
 	}
 
-	DoorListNode* mNext;     // _00
-	DoorListNode* mPrev;     // _04
-	TObjMapDoor01* mObj;     // _08
-	struct DoorList* mList;  // _0C
+	DoorListNode* mNext;    // _00
+	DoorListNode* mPrev;    // _04
+	TObjMapDoor01* mObj;    // _08
+	struct DoorList* mList; // _0C
 };
 
 /** The list every door joins */
@@ -107,44 +107,44 @@ public:
 	void shakeCamera();
 	void quake();
 
-	DoorListNode mNode;  // _30
+	DoorListNode mNode;        // _30
 	NJS_OBJECT* mModel;        // _40
 	NJS_OBJECT* mFrameModel;   // _44 MODEL_MON01
-	NJS_TEXLIST* mTexList;      // _48
-	void* mFrameTexList; // _4C
-	void* mMotion;       // _50
-	MeshColli* mColli;        // _54
+	NJS_TEXLIST* mTexList;     // _48
+	void* mFrameTexList;       // _4C
+	void* mMotion;             // _50
+	MeshColli* mColli;         // _54
 	MeshObject* mFrameColli;   // _58
-	MeshData* mColliData;    // _5C
+	MeshData* mColliData;      // _5C
 	MeshData* mFrameColliData; // _60
 	TParticleGenerator* mDust; // _64
-	Vec3f mPos;          // _68
-	Vec3f mSoundPos;     // _74
-	SetRot mRot;         // _80
-	f32 mMatrix[12];     // _8C
-	SetLinkMember mLink; // _BC
-	DrawTask* mDrawTask;     // _C8
-	EnemyLight mLight;   // _CC
-	TCamera* mCamera;    // _10C
-	int mAct;            // _110 0 = shut 1 = about to open 2 = opening 3 = open 4 = closing
-	int mTimer;          // _114
-	EventCamRef mCam;    // _118
-	int mHasCamera;      // _120
-	int _124;            // _124
-	int mDoorId;         // _128
-	f32 mFrame;          // _12C
-	f32 mFrameStep;      // _130
-	int mSetCamPos;      // _134
-	Vec3f mCamPos;       // _138
-	Vec3f mCamTarget;    // _144
-	int  mLightSet;     // _150
-	int mColliNode;      // _154 the node the door's collision follows
-	int mDustId;         // _158
-	int mBurstId;        // _15C
-	int mSoundId;        // _160
-	Vec3f mBoxLow;       // _164
-	Vec3f mBoxHigh;      // _170
-	f32 mRadius;         // _17C
+	Vec3f mPos;                // _68
+	Vec3f mSoundPos;           // _74
+	SetRot mRot;               // _80
+	f32 mMatrix[12];           // _8C
+	SetLinkMember mLink;       // _BC
+	DrawTask* mDrawTask;       // _C8
+	EnemyLight mLight;         // _CC
+	TCamera* mCamera;          // _10C
+	int mAct;                  // _110 0 = shut 1 = about to open 2 = opening 3 = open 4 = closing
+	int mTimer;                // _114
+	EventCamRef mCam;          // _118
+	int mHasCamera;            // _120
+	int _124;                  // _124
+	int mDoorId;               // _128
+	f32 mFrame;                // _12C
+	f32 mFrameStep;            // _130
+	int mSetCamPos;            // _134
+	Vec3f mCamPos;             // _138
+	Vec3f mCamTarget;          // _144
+	int mLightSet;             // _150
+	int mColliNode;            // _154 the node the door's collision follows
+	int mDustId;               // _158
+	int mBurstId;              // _15C
+	int mSoundId;              // _160
+	Vec3f mBoxLow;             // _164
+	Vec3f mBoxHigh;            // _170
+	f32 mRadius;               // _17C
 };
 
 extern "C" {

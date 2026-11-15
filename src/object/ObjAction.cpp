@@ -60,7 +60,7 @@ extern "C" void resetHitInfo(HitInfo* hit)
 	hit->mDamage = 0;
 	hit->mFlags.clear();
 	hit->mPos.z = hit->mPos.y = hit->mPos.x = 0.0f;
-	hit->_14 = 0;
+	hit->_14                                = 0;
 }
 
 // ---- The id table ---------------------------------------------------------------------------------------
@@ -83,10 +83,10 @@ extern "C" void unlinkObjLink(void*, ObjLink* link)
 // Goes at the tail walking follows mNext from the head
 extern "C" void appendObjLink(ObjLink* head, ObjLink* link)
 {
-	link->mPrev = head->mPrev;
-	link->mNext = head;
+	link->mPrev        = head->mPrev;
+	link->mNext        = head;
 	head->mPrev->mNext = link;
-	head->mPrev = link;
+	head->mPrev        = link;
 }
 
 // 0x80010048
@@ -142,17 +142,17 @@ public:
 TObjIdTable::TObjIdTable()
 {
 	mBuckets = new ObjBucket[113];
-	mAll = new ObjBucket;
+	mAll     = new ObjBucket;
 	mEntries = new ObjIdEntry[1024];
 
 	for (int i = 0; i < 1023; i++) {
-		mEntries[i].mObj = 0;
-		mEntries[i].mRefs.mOwner = &mEntries[i];
-		mEntries[i].mAllLink.mEntry = &mEntries[i];
+		mEntries[i].mObj              = 0;
+		mEntries[i].mRefs.mOwner      = &mEntries[i];
+		mEntries[i].mAllLink.mEntry   = &mEntries[i];
 		mEntries[i].mBucketLink.mNext = (ObjLink*)&mEntries[i + 1];
 	}
 	mEntries[1023].mBucketLink.mNext = 0;
-	mFree = mEntries;
+	mFree                            = mEntries;
 }
 
 // 0x80010264
@@ -174,7 +174,7 @@ ObjIdEntry* TObjIdTable::add(u16 id, int* isNew)
 	int h;
 	ObjIdEntry* entry;
 	ObjIdEntry* found;
-	h = hashObjId(id) % 113;
+	h     = hashObjId(id) % 113;
 	found = findInBucket(&mBuckets[h], id);
 	if (found != 0) {
 		if (isNew != 0) {
@@ -201,8 +201,8 @@ void TObjIdTable::remove(ObjIdEntry* entry)
 {
 	entry->mBucketLink.mPrev->mNext = entry->mBucketLink.mNext;
 	entry->mBucketLink.mNext->mPrev = entry->mBucketLink.mPrev;
-	entry->mBucketLink.mNext = (ObjLink*)mFree;
-	mFree = entry;
+	entry->mBucketLink.mNext        = (ObjLink*)mFree;
+	mFree                           = entry;
 	unlinkObjLink(mAll, &entry->mAllLink);
 	mCount--;
 	entry->mRefs.clear();
@@ -330,16 +330,16 @@ const char* gTObjActionName = "TObjAction";
 
 // 0x8000FC04
 TObjAction::TObjAction(TObject* parent)
-	: TObject(parent)
+    : TObject(parent)
 {
-	_00 = (u32)gTObjActionName;
-	mSize = 0x30;
+	_00         = (u32)gTObjActionName;
+	mSize       = 0x30;
 	mPrevAction = -1;
-	mAction = -1;
-	mPlayer = -1;
-	mObjId = 0xFFFF;
-	mHolderId = 0xFFFF;
-	mIdEntry = 0;
+	mAction     = -1;
+	mPlayer     = -1;
+	mObjId      = 0xFFFF;
+	mHolderId   = 0xFFFF;
+	mIdEntry    = 0;
 }
 
 // 0x8000FC78
@@ -408,7 +408,7 @@ void TObjAction::setAction(int action)
 		exitAction(mAction);
 	}
 	mPrevAction = mAction;
-	mAction = action;
+	mAction     = action;
 	if (action != -1) {
 		enterAction(action);
 	}
@@ -417,16 +417,24 @@ void TObjAction::setAction(int action)
 // The empty and default virtuals
 
 // 0x8000FEE0
-void TObjAction::enterAction(int) { }
+void TObjAction::enterAction(int)
+{
+}
 
 // 0x8000FEE4
-void TObjAction::exitAction(int) { }
+void TObjAction::exitAction(int)
+{
+}
 
 // 0x8000FEE8
-void TObjAction::vfn_68(int) { }
+void TObjAction::vfn_68(int)
+{
+}
 
 // 0x8000FEEC
-void TObjAction::vfn_64(int) { }
+void TObjAction::vfn_64(int)
+{
+}
 
 // 0x8000FEF0
 extern "C" int objDebugEnabled(TObject* obj)
@@ -435,22 +443,36 @@ extern "C" int objDebugEnabled(TObject* obj)
 }
 
 // 0x8000FF10
-void TObjAction::initFromDesc(SetDesc*) { }
+void TObjAction::initFromDesc(SetDesc*)
+{
+}
 
 // 0x8000FF14
-void TObjAction::readEnemyDesc(SetDesc*) { }
+void TObjAction::readEnemyDesc(SetDesc*)
+{
+}
 
 // 0x8000FF18
-void TObjAction::debugPrint(void*) { }
+void TObjAction::debugPrint(void*)
+{
+}
 
 // 0x8000FF1C
-void TObjAction::vfn_3C() { }
+void TObjAction::vfn_3C()
+{
+}
 
 // 0x8001082C
-int TObjAction::getRotY() { return 0; }
+int TObjAction::getRotY()
+{
+	return 0;
+}
 
 // 0x80010834
-int TObjAction::canAct() { return 0; }
+int TObjAction::canAct()
+{
+	return 0;
+}
 
 // ---- Range test -----------------------------------------------------------------------------------------
 
@@ -458,7 +480,7 @@ int TObjAction::canAct() { return 0; }
 // Returns the old value
 extern "C" int setRangeCheck(int on)
 {
-	int old = gRangeCheck;
+	int old     = gRangeCheck;
 	gRangeCheck = on;
 	return old;
 }
@@ -488,14 +510,14 @@ extern "C" int isInRange(void*, const Vec3f* pos, f32 range)
 extern "C" ObjHeap* objHeapInit(ObjHeap* heap, u32 size, u32 align)
 {
 	heap->mAlign = align;
-	heap->mHead = (HeapBlock*)syMalloc(size);
+	heap->mHead  = (HeapBlock*)syMalloc(size);
 	if (heap->mHead != 0) {
 		memset(heap->mHead, 0, size);
-		HeapBlock* first     = heap->mHead + 1;
+		HeapBlock* first   = heap->mHead + 1;
 		heap->mHead->mNext = first;
 		heap->mHead->mSize = 0;
 		first->mNext       = 0;
-		first->mSize = size - sizeof(HeapBlock);
+		first->mSize       = size - sizeof(HeapBlock);
 	}
 	return heap;
 }
@@ -530,7 +552,7 @@ extern "C" void* objHeapAlloc(void* heapArg, u32 size)
 			if (need == block->mSize) {
 				prev->mNext = block->mNext;
 			} else {
-				rest = (HeapBlock*)((u8*)block + need);
+				rest         = (HeapBlock*)((u8*)block + need);
 				rest->mNext  = block->mNext;
 				rest->mSize  = block->mSize - need;
 				block->mSize = need;
@@ -556,8 +578,7 @@ extern "C" void objHeapFree(void* heapArg, void* mem)
 	}
 	HeapBlock* prev;
 	HeapBlock* next;
-	for (prev = heap->mHead; (next = prev->mNext) < MEM_BLOCK(mem); prev = next) {
-	}
+	for (prev = heap->mHead; (next = prev->mNext) < MEM_BLOCK(mem); prev = next) { }
 	if ((HeapBlock*)((u8*)MEM_BLOCK(mem) + MEM_BLOCK(mem)->mSize) == next) {
 		MEM_BLOCK(mem)->mNext = next->mNext;
 		MEM_BLOCK(mem)->mSize += next->mSize;
@@ -656,7 +677,9 @@ ObjRefList::ObjRefList()
 }
 
 // 0x800106A4
-ObjRefList::~ObjRefList() { }
+ObjRefList::~ObjRefList()
+{
+}
 
 // 0x80010714
 extern "C" void objRefDetach(ObjRefList* list, ObjRef* ref)
@@ -679,7 +702,9 @@ void ObjRefList::clear()
 }
 
 // 0x80010774
-ObjIdIter::ObjIdIter() { }
+ObjIdIter::ObjIdIter()
+{
+}
 
 // 0x80010778
 ObjIdIter::ObjIdIter(ObjLink* head)
@@ -827,7 +852,7 @@ extern "C" void vectorToAngles(const Vec3f* v, int* pitch, int* yaw)
 	z *= z;
 	x += z;
 	f32 r  = __fres((f32)__frsqrte(x));
-	*yaw  = (int)(ANGLE_PER_RADIAN * a);
+	*yaw   = (int)(ANGLE_PER_RADIAN * a);
 	*pitch = -(int)(ANGLE_PER_RADIAN * (f32)atan2(v->y, r));
 }
 
@@ -851,7 +876,7 @@ extern "C" f32 quadDiscriminant(f32 a, f32 b, f32 c)
 extern "C" void quadRoots(f32 a, f32 b, f32 c, f32* plus, f32* minus)
 {
 	f32 inv = __fres(a);
-	f32 d = b * b;
+	f32 d   = b * b;
 	d -= 4.0f * a * c;
 	f32 half = 0.5f * inv;
 	f32 root = __fres((f32)__frsqrte(d));
@@ -912,9 +937,9 @@ extern "C" void blendModeInvertAlpha()
 	njColorBlendingMode(1, NJ_BLEND_INV_SRC_ALPHA);
 }
 
-int sCullMode;          // 0x802C4BB0 Ninja's as last set here
-int sSavedCullMode;     // 0x802C4BB4
-int sSavedGXCull;        // 0x802C4BB8
+int sCullMode;      // 0x802C4BB0 Ninja's as last set here
+int sSavedCullMode; // 0x802C4BB4
+int sSavedGXCull;   // 0x802C4BB8
 
 // 0x80010E64
 extern "C" void getCullMode(int* mode)
@@ -1082,7 +1107,7 @@ extern "C" void debugSphere(const Vec3f* pos, GXColor* color, f32 radius)
 		red.g = sDebugRed.g;
 		red.b = sDebugRed.b;
 		red.a = sDebugRed.a;
-		color       = &red;
+		color = &red;
 	}
 	debugDrawSetup(color);
 	GXDrawSphere1(1);
@@ -1107,7 +1132,7 @@ extern "C" void debugCylinder(const Vec3f* pos, GXColor* color, f32 radius, f32 
 		green.g = sDebugGreen.g;
 		green.b = sDebugGreen.b;
 		green.a = sDebugGreen.a;
-		color         = &green;
+		color   = &green;
 	}
 	debugDrawSetup(color);
 	GXDrawCylinder(8);
@@ -1133,7 +1158,7 @@ extern "C" void debugCube(const Vec3f* pos, const Vec3f* size, GXColor* color)
 		blue.g = sDebugBlue.g;
 		blue.b = sDebugBlue.b;
 		blue.a = sDebugBlue.a;
-		color        = &blue;
+		color  = &blue;
 	}
 	debugDrawSetup(color);
 	GXDrawCube();

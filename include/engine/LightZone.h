@@ -9,23 +9,23 @@ struct BinFile;
  * @size 0x40
  */
 struct LightParam {
-	s16 mType;       // _00 0 changes the sun 1 adds a spot light
-	u16 mFlags;      // _02 LightZoneSun's
-	Vec3f mDir;      // _04 the sun's direction
-	u32 mColor;      // _10 the sun's colour
-	u32 mAmbient;    // _14
-	f32 mRefDist;    // _18 for GXInitLightDistAttn
-	f32 mRefBright;  // _1C
-	int mDistFn;     // _20 GXDistAttnFn 0 = none
-	f32 mCutoff;     // _24 for GXInitLightSpot
-	int mSpotFn;     // _28 GXSpotFn 0 = none
+	s16 mType;      // _00 0 changes the sun 1 adds a spot light
+	u16 mFlags;     // _02 LightZoneSun's
+	Vec3f mDir;     // _04 the sun's direction
+	u32 mColor;     // _10 the sun's colour
+	u32 mAmbient;   // _14
+	f32 mRefDist;   // _18 for GXInitLightDistAttn
+	f32 mRefBright; // _1C
+	int mDistFn;    // _20 GXDistAttnFn 0 = none
+	f32 mCutoff;    // _24 for GXInitLightSpot
+	int mSpotFn;    // _28 GXSpotFn 0 = none
 	u8 _2C[0x14];
 
-	int hasDistAttn();                        // 0x800A1DEC
+	int hasDistAttn();                           // 0x800A1DEC
 	void getDistAttn(f32* k0, f32* k1, f32* k2); // 0x800A1E00 1 0 0 when there is none
-	int hasSpot();                            // 0x800A1E90
+	int hasSpot();                               // 0x800A1E90
 	void getSpotAttn(f32* a0, f32* a1, f32* a2); // 0x800A1EA4 1 0 0 when there is none
-	int isPlain();                            // 0x800A1F30 neither
+	int isPlain();                               // 0x800A1F30 neither
 };
 
 /**
@@ -33,8 +33,8 @@ struct LightParam {
  * @size 0x1C
  */
 struct LightZoneSun {
-	void init();  // 0x800A1528
-	int isOn() const;   // 0x800A1548
+	void init();      // 0x800A1528
+	int isOn() const; // 0x800A1548
 
 	f32 mBlend;   // _00
 	u32 mFlags;   // _04 4 = set the ambient too
@@ -50,11 +50,11 @@ struct LightZoneSun {
 struct LightZoneSpot {
 	void init(); // 0x800A156C
 
-	Vec3f mPos;  // _00
-	Vec3f mDir;  // _0C
-	u32 mColor;  // _18
-	f32 mA[3];   // _1C
-	f32 mK[3];   // _28
+	Vec3f mPos; // _00
+	Vec3f mDir; // _0C
+	u32 mColor; // _18
+	f32 mA[3];  // _1C
+	f32 mK[3];  // _28
 };
 
 /**
@@ -68,11 +68,11 @@ struct LightZone {
 	LightZone* mPrev; // _04
 
 	// _08 = vtable
-	LightZone(); // 0x800A15B4
-	virtual int test(u16 id, int kind, f32* dist) = 0;          // _08 kind 0 = the sun 1 = the spot
-	virtual int getSun(u16 id, LightZoneSun* sun) = 0;          // _0C
-	virtual int getSpot(u16 id, LightZoneSpot* spot) = 0;       // _10
-	virtual ~LightZone() = 0; // 0x800A1604
+	LightZone();                                          // 0x800A15B4
+	virtual int test(u16 id, int kind, f32* dist)    = 0; // _08 kind 0 = the sun 1 = the spot
+	virtual int getSun(u16 id, LightZoneSun* sun)    = 0; // _0C
+	virtual int getSpot(u16 id, LightZoneSpot* spot) = 0; // _10
+	virtual ~LightZone()                             = 0; // 0x800A1604
 };
 
 /**
@@ -84,37 +84,37 @@ struct LightZoneCtrl {
 	LightZoneCtrl();  // 0x800A17B8
 	~LightZoneCtrl(); // 0x800A1838
 
-	LightZone* find(u16 id, int kind);  // 0x800A18C8 the nearest zone that takes the object
-	void begin(u16 id);                 // 0x800A1968
-	int apply(u16 id);                  // 0x800A19A0
-	void load(int force);               // 0x800A19F4
-	void applySun(u16 id);              // 0x800A1A34
-	void applySpot(u16 id);             // 0x800A1BB0
-	int restore();                      // 0x800A1C98
-	void end(u16 id);                   // 0x800A1D44
+	LightZone* find(u16 id, int kind); // 0x800A18C8 the nearest zone that takes the object
+	void begin(u16 id);                // 0x800A1968
+	int apply(u16 id);                 // 0x800A19A0
+	void load(int force);              // 0x800A19F4
+	void applySun(u16 id);             // 0x800A1A34
+	void applySpot(u16 id);            // 0x800A1BB0
+	int restore();                     // 0x800A1C98
+	void end(u16 id);                  // 0x800A1D44
 
-	LightZoneSun mSun;    // _00
-	LightZoneSpot mSpot;  // _1C
-	SpotLight mLight;     // _50
-	u32 mApplied;         // _E4 1 = the sun was changed 2 = the spot was added
-	u32 mSavedColor;      // _E8
-	Vec3f mSavedDir;      // _EC
-	u32 mSavedAmbient;    // _F8
-	u16 mId;              // _FC
+	LightZoneSun mSun;   // _00
+	LightZoneSpot mSpot; // _1C
+	SpotLight mLight;    // _50
+	u32 mApplied;        // _E4 1 = the sun was changed 2 = the spot was added
+	u32 mSavedColor;     // _E8
+	Vec3f mSavedDir;     // _EC
+	u32 mSavedAmbient;   // _F8
+	u16 mId;             // _FC
 };
 
 extern "C" {
-void lightZoneInit();                   // 0x800A168C loads set_light_param.bin
-void lightSetDefaultMain(int param);    // 0x800A16EC
-void lightSetDefaultOther(int param);   // 0x800A1714
-void lightZoneExit();                   // 0x800A173C
-LightParam* getLightParam(int param);   // 0x800A18A0 null past 128
-void lightZoneBegin(u16 id);            // 0x800A1D7C
-void lightZoneEnd(u16 id);              // 0x800A1DB0
-int lightFlagsOn(u32 flags);            // 0x800A1DE4 always 1
-void lightFarPoint(const Vec3f* pos, const Vec3f* dir, Vec3f* out); // 0x800A1F80 100000 back along dir
-void lightParamGetDefault(Vec3f* dir, u32* color, u32* ambient);   // 0x800A1FB8
-void lightParamGet(int param, Vec3f* dir, u32* color, u32* ambient); // 0x800A203C
+void lightZoneInit();                                                                // 0x800A168C loads set_light_param.bin
+void lightSetDefaultMain(int param);                                                 // 0x800A16EC
+void lightSetDefaultOther(int param);                                                // 0x800A1714
+void lightZoneExit();                                                                // 0x800A173C
+LightParam* getLightParam(int param);                                                // 0x800A18A0 null past 128
+void lightZoneBegin(u16 id);                                                         // 0x800A1D7C
+void lightZoneEnd(u16 id);                                                           // 0x800A1DB0
+int lightFlagsOn(u32 flags);                                                         // 0x800A1DE4 always 1
+void lightFarPoint(const Vec3f* pos, const Vec3f* dir, Vec3f* out);                  // 0x800A1F80 100000 back along dir
+void lightParamGetDefault(Vec3f* dir, u32* color, u32* ambient);                     // 0x800A1FB8
+void lightParamGet(int param, Vec3f* dir, u32* color, u32* ambient);                 // 0x800A203C
 void lightParamBlend(f32 t, int from, int to, Vec3f* dir, u32* color, u32* ambient); // 0x800A20B4
 }
 

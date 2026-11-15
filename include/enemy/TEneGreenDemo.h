@@ -40,19 +40,19 @@ public:
 	void placeNodes();
 	void applyMatrix();
 
-	Vec3f mPos;           // _20
-	u8 _2C[4];            // _2C
-	HitVec mNodes[5];     // _30
-	EnemyAnim mAnim;      // _6C
-	MotionPlayer mPlayer; // _78
-	void* mPose;          // _B4
-	DrawTask* mDrawTask;      // _B8
-	ObjShadow mShadow;    // _BC
-	TCamPath* mScreen;   // _F4
-	TObject* mSavedParent;  // _F8
-	int mState;           // _FC 0 waiting 1 playing 2 done
-	EnemyFxBase* mFx;     // _100
-	FxHolder mVoice;      // _104
+	Vec3f mPos;            // _20
+	u8 _2C[4];             // _2C
+	HitVec mNodes[5];      // _30
+	EnemyAnim mAnim;       // _6C
+	MotionPlayer mPlayer;  // _78
+	void* mPose;           // _B4
+	DrawTask* mDrawTask;   // _B8
+	ObjShadow mShadow;     // _BC
+	TCamPath* mScreen;     // _F4
+	TObject* mSavedParent; // _F8
+	int mState;            // _FC 0 waiting 1 playing 2 done
+	EnemyFxBase* mFx;      // _100
+	FxHolder mVoice;       // _104
 };
 
 extern "C" {

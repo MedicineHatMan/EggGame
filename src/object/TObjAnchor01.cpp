@@ -86,8 +86,8 @@ void TObjAnchor01::vfn_74()
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks(mShape, 4, 9, 0xF7, 0xF6);
 	fitShape();
-	mLeft   = mSpeed;
-	mLive   = 1;
+	mLeft    = mSpeed;
+	mLive    = 1;
 	mGroundY = 0.0f;
 	placeShadow();
 	mLight.mTimer = 0;
@@ -115,11 +115,11 @@ void TObjAnchor01::swing()
 		sePlay3D(0x20E, &mPos);
 	}
 	mPhase += mLeft;
-	mPhase = (u16)mPhase;
+	mPhase   = (u16)mPhase;
 	int slow = mStep;
 	int fast = mSpeed;
-	mLeft = (int)((f32)(fast - slow) / 2.0f * njCos(mPhase << 1) + (f32)(fast + slow) / 2.0f);
-	mLeft = (u16)mLeft;
+	mLeft    = (int)((f32)(fast - slow) / 2.0f * njCos(mPhase << 1) + (f32)(fast + slow) / 2.0f);
+	mLeft    = (u16)mLeft;
 }
 
 // 0x8002AFF4
@@ -186,7 +186,7 @@ void TObjAnchor01::fitShape()
 	ColliShape shape;
 
 	colliShapeInit(&shape);
-	shape.mType = 1;
+	shape.mType  = 1;
 	shape.mSizeX = 30.0f * mScale;
 	shape.mSizeY = 18.0f * mScale;
 	shape.mSizeZ = 6.0f * mScale;
@@ -218,7 +218,7 @@ void TObjAnchor01::placeShadow()
 	if (meshColliProbe((EggHit*)&query, (const Vec3f*)&mPos, 0xD) != 0 && (query.mMask & 1) != 0) {
 		shadowSetFromContact(&mShadow, (u8*)&query);
 		shadowSetSize(&mShadow, 60.0f * mScale, 12.0f * mScale);
-		mGroundY    = query.mHits[0].mPos.y;
+		mGroundY = query.mHits[0].mPos.y;
 		shadowEnable(&mShadow);
 	} else {
 		shadowDisable(&mShadow);

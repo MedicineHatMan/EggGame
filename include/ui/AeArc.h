@@ -13,10 +13,10 @@ struct NJS_TEXLIST;
 
 /** @size 0x10 */
 struct AeArcBlock {
-	void* mAe;      // _00
+	void* mAe;             // _00
 	NJS_TEXLIST* mTexList; // _04
-	void* mGvm;     // _08
-	u32* mPalettes; // _0C may be null
+	void* mGvm;            // _08
+	u32* mPalettes;        // _0C may be null
 };
 
 extern "C" {
@@ -28,6 +28,9 @@ void njSetPaletteBankNum(int bank, int palette);
 void GXInvalidateTexAll();
 }
 
-inline AeArcBlock* aeArcBlock(TArc* arc) { return (AeArcBlock*)arc->mData; }
+inline AeArcBlock* aeArcBlock(TArc* arc)
+{
+	return (AeArcBlock*)arc->mData;
+}
 
 #endif

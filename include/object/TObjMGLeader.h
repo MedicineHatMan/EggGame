@@ -41,13 +41,13 @@ public:
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();                       // _0C 0x80113120
-	virtual void vfn_10();                     // _10 0x801136B4
-	virtual void render();                     // _1C 0x80113764
-	virtual void initFromDesc(SetDesc* desc);  // _30 0x80112A84
-	virtual void debugPrint(void*);            // _34 0x80112AD8
-	virtual int sendToHandle(ObjMsg* msg);     // _4C 0x801134FC
-	virtual void reset();                      // _74 0x80112CE4
+	virtual void draw();                      // _0C 0x80113120
+	virtual void vfn_10();                    // _10 0x801136B4
+	virtual void render();                    // _1C 0x80113764
+	virtual void initFromDesc(SetDesc* desc); // _30 0x80112A84
+	virtual void debugPrint(void*);           // _34 0x80112AD8
+	virtual int sendToHandle(ObjMsg* msg);    // _4C 0x801134FC
+	virtual void reset();                     // _74 0x80112CE4
 
 	void makeShape();          // 0x80112DF4
 	void makeCylinder();       // 0x80112E50

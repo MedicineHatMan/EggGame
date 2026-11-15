@@ -116,8 +116,8 @@ void gjDrawActor(GjActor* actor)
 	GXLoadNrmMtxImm(_gj_matrix_, 0);
 	if (actor->object->evalflags & 0x4000) {
 		PSMTXCopy(_gj_matrix_, m);
-		m[3] = 0.0f;
-		m[7] = 0.0f;
+		m[3]  = 0.0f;
+		m[7]  = 0.0f;
 		m[11] = 0.0f;
 		GXLoadTexMtxImm(m, 0x2A, 0);
 	}
@@ -140,15 +140,15 @@ void gjDrawActor(GjActor* actor)
 void gjSetRotation(const f32* m)
 {
 	f32* cur = _gj_matrix_;
-	cur[0] = m[0];
-	cur[1] = m[1];
-	cur[2] = m[2];
-	cur[4] = m[4];
-	cur[5] = m[5];
-	cur[6] = m[6];
-	cur[8] = m[8];
-	cur[9] = m[9];
-	cur[10] = m[10];
+	cur[0]   = m[0];
+	cur[1]   = m[1];
+	cur[2]   = m[2];
+	cur[4]   = m[4];
+	cur[5]   = m[5];
+	cur[6]   = m[6];
+	cur[8]   = m[8];
+	cur[9]   = m[9];
+	cur[10]  = m[10];
 }
 
 // 0x80213444
@@ -199,14 +199,15 @@ void gjWalkTree(NJS_OBJECT* obj, s32 (*f)(GjModel*))
 // 0x802135A0
 void gjBeginCalcActor(GjActor* actor)
 {
-	gjActorVerts = actor->verts;
+	gjActorVerts     = actor->verts;
 	gjObjectEval8000 = actor->object->evalflags & 0x8000;
-	gjActorFlag1 = actor->flags & 1;
+	gjActorFlag1     = actor->flags & 1;
 	gjSetSkinGqr();
 }
 
 // 0x802135E4
 // asm hand written
+// clang-format off
 asm void gjSetSkinGqr(void)
 {
 	nofralloc
@@ -218,6 +219,7 @@ asm void gjSetSkinGqr(void)
 	mtspr GQR3, r0
 	blr
 }
+// clang-format on
 
 // 0x80213600
 void gjEndCalcActor(GjActor* actor)
@@ -295,6 +297,7 @@ s32 gjCalcActor(GjModel* model)
 
 // 0x8021387C
 // asm hand written
+// clang-format off
 asm void gjSkinPosRigid(const f32* m, u8* out, void* data, s32 count)
 {
 	nofralloc
@@ -370,9 +373,11 @@ L_80213964:
 	addi r1, r1, 0x40
 	blr
 }
+// clang-format on
 
 // 0x80213990
 // asm hand written
+// clang-format off
 asm void gjSkinPosWeight(const f32* m, u8* out, void* data, void* weight, s32 count)
 {
 	nofralloc
@@ -462,9 +467,11 @@ L_80213AAC:
 	addi r1, r1, 0x40
 	blr
 }
+// clang-format on
 
 // 0x80213ADC
 // asm hand written
+// clang-format off
 asm void gjSkinPosWeight2(const f32* m, u8* out, void* data, void* weight, s32 count)
 {
 	nofralloc
@@ -580,9 +587,11 @@ L_80213C50:
 	addi r1, r1, 0x80
 	blr
 }
+// clang-format on
 
 // 0x80213C90
 // asm hand written
+// clang-format off
 asm void gjSkinPosNrmARigid(const f32* m, u8* out, void* data, s32 count)
 {
 	nofralloc
@@ -658,9 +667,11 @@ L_80213D78:
 	addi r1, r1, 0x40
 	blr
 }
+// clang-format on
 
 // 0x80213DA4
 // asm hand written
+// clang-format off
 asm void gjSkinPosNrmAWeight(const f32* m, u8* out, void* data, void* weight, s32 count)
 {
 	nofralloc
@@ -750,9 +761,11 @@ L_80213EC0:
 	addi r1, r1, 0x40
 	blr
 }
+// clang-format on
 
 // 0x80213EF0
 // asm hand written
+// clang-format off
 asm void gjSkinPosNrmAWeight2(const f32* m, u8* out, void* data, void* weight, s32 count)
 {
 	nofralloc
@@ -868,9 +881,11 @@ L_80214064:
 	addi r1, r1, 0x80
 	blr
 }
+// clang-format on
 
 // 0x802140A4
 // asm hand written
+// clang-format off
 asm void gjSkinPosNrmBRigid(const f32* m, u8* out, void* data, s32 count)
 {
 	nofralloc
@@ -946,9 +961,11 @@ L_8021418C:
 	addi r1, r1, 0x40
 	blr
 }
+// clang-format on
 
 // 0x802141B8
 // asm hand written
+// clang-format off
 asm void gjSkinPosNrmBWeight(const f32* m, u8* out, void* data, void* weight, s32 count)
 {
 	nofralloc
@@ -1038,9 +1055,11 @@ L_802142D4:
 	addi r1, r1, 0x40
 	blr
 }
+// clang-format on
 
 // 0x80214304
 // asm hand written
+// clang-format off
 asm void gjSkinPosNrmBWeight2(const f32* m, u8* out, void* data, void* weight, s32 count)
 {
 	nofralloc
@@ -1156,9 +1175,11 @@ L_80214478:
 	addi r1, r1, 0x80
 	blr
 }
+// clang-format on
 
 // 0x802144B8
 // asm hand written
+// clang-format off
 asm void gjBlendVerts(const f32* m, u8* out, void* a, f32 t, void* b, f32 rest, s32 count)
 {
 	nofralloc
@@ -1268,6 +1289,7 @@ L_8021461C:
 	addi r1, r1, 0x40
 	blr
 }
+// clang-format on
 
 // 0x80214654
 // Shape motion blends two vertex sets into the buffer
@@ -1305,14 +1327,13 @@ u8* gjCreateActor(NJS_OBJECT* obj, u8* mem)
 	s32 n;
 
 	if ((obj->evalflags & 0x2000) == 0) {
-		for (;;) {
-		}
+		for (;;) { }
 	}
-	actor = (GjActor*)(verts = mem);
+	actor         = (GjActor*)(verts = mem);
 	actor->object = obj;
-	actor->flags = 0;
+	actor->flags  = 0;
 	verts += 0x20;
-	n = gjCountTreeVerts(obj, 0);
+	n            = gjCountTreeVerts(obj, 0);
 	actor->verts = verts;
 	if (obj->evalflags & 0x8000) {
 		actor->size = n * 0x18;
@@ -1331,14 +1352,13 @@ u8* gjCreateActorEx(NJS_OBJECT* obj, u8* mem, u32 flags)
 	s32 n;
 
 	if ((obj->evalflags & 0x2000) == 0) {
-		for (;;) {
-		}
+		for (;;) { }
 	}
-	actor = (GjActor*)(verts = mem);
+	actor         = (GjActor*)(verts = mem);
 	actor->object = obj;
-	actor->flags = flags;
+	actor->flags  = flags;
 	verts += 0x20;
-	n = gjCountTreeVerts(obj, 0);
+	n            = gjCountTreeVerts(obj, 0);
 	actor->verts = verts;
 	if (obj->evalflags & 0x8000) {
 		actor->size = n * 0x18;

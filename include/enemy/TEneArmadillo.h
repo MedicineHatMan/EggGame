@@ -41,10 +41,10 @@ struct ArmadilloBrain {
 	{
 		mOwner = 0;
 		mState = 0;
-		mNext = -1;
+		mNext  = -1;
 	}
 
-	virtual int checkInterrupt() = 0;               // _08 1 if it changed state
+	virtual int checkInterrupt()               = 0; // _08 1 if it changed state
 	virtual void onPhase(int state, int phase) = 0; // _0C
 	inline virtual ~ArmadilloBrain() { }            // _10 0x800F8C74
 	virtual void update(TEneArmadillo* owner);      // _14 0x800F7EA8
@@ -141,19 +141,19 @@ public:
 	inline void* operator new(u32 size);
 	inline void operator delete(void* mem);
 
-	virtual void vfn_10();                     // _10 hides it off screen
-	virtual void render();                     // _1C
-	virtual void readEnemyDesc(SetDesc* desc); // _38
-	virtual void vfn_3C();                     // _3C prints debug text
-	virtual f32 vfn_40();                      // _40
+	virtual void vfn_10();                                              // _10 hides it off screen
+	virtual void render();                                              // _1C
+	virtual void readEnemyDesc(SetDesc* desc);                          // _38
+	virtual void vfn_3C();                                              // _3C prints debug text
+	virtual f32 vfn_40();                                               // _40
 	virtual int onHit(const TObjAction* other, int shape, int* result); // _58
-	virtual void vfn_6C();                     // _6C
-	virtual void updateBody();                 // _70
-	virtual void setPos(const Vec3f* pos);           // _74
-	virtual void syncCollider();               // _78
-	virtual void onActionPhase(int action, int phase); // _7C
-	virtual int getDamage(EnemyHit* hit);      // _A4
-	virtual int getHitKind(const void* touch, HitInfo* info); // _A8
+	virtual void vfn_6C();                                              // _6C
+	virtual void updateBody();                                          // _70
+	virtual void setPos(const Vec3f* pos);                              // _74
+	virtual void syncCollider();                                        // _78
+	virtual void onActionPhase(int action, int phase);                  // _7C
+	virtual int getDamage(EnemyHit* hit);                               // _A4
+	virtual int getHitKind(const void* touch, HitInfo* info);           // _A8
 
 	void init(SetDesc* desc);
 	void setTarget(const Vec3f* target);
@@ -207,7 +207,7 @@ public:
 
 	ArmadilloHuntBrain* mBrain; // _158
 	void* mPose;                // _15C
-	DrawTask* mModel;               // _160 the task
+	DrawTask* mModel;           // _160 the task
 	u32 mFlags2;                // _164
 	Vec3f mKnock;               // _168 which way a hit pushes it
 	HitVec mParts[3];           // _174 posed from the bones

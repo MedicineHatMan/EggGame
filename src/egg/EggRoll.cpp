@@ -58,7 +58,7 @@ void EggRoll::startSlam(const Vec3f* vel)
 {
 	mGround.mBits &= ~3;
 	mBody->mAccel  = gVecZero;
-	mBody->mVel = *vel;
+	mBody->mVel    = *vel;
 	mBody->mAngVel = gVecZero;
 }
 
@@ -206,19 +206,19 @@ void EggRoll::pushOff(void* coll, void* first, void* end)
 	Vec3f push;
 	Vec3f vel;
 
-	pos = mBody->mPos;
-	vel = mBody->mVel;
+	pos        = mBody->mPos;
+	vel        = mBody->mVel;
 	f32 radius = mBody->mRadius;
-	push.x = 0.0f;
-	push.y = push.x;
-	push.z = push.x;
+	push.x     = 0.0f;
+	push.y     = push.x;
+	push.z     = push.x;
 	for (EggContact* it = (EggContact*)first; it != end; it = it->mNext) {
 		if ((*(u32*)((u8*)colliGetShape((CharaColli*)coll, it->mShape) + 0x24) & 0x400) != 0
 		    && (*(u32*)((u8*)colliContactShape((ColliContact*)it) + 0x24) & 0x400) != 0) {
 			vecSub(&dir, &pos, &it->mPos);
-			f32 dist = vecNormalize(&dir, &dir);
+			f32 dist          = vecNormalize(&dir, &dir);
 			ColliShape* other = (ColliShape*)(colliContactShape((ColliContact*)it));
-			f32 force = radius + other->mSizeX - dist;
+			f32 force         = radius + other->mSizeX - dist;
 			force *= 360.0f;
 			vecScale(force, &dir, &dir);
 			njAddVector(&mBody->mAccel, &dir);
@@ -237,9 +237,9 @@ void EggRoll::moveGround()
 {
 	Vec3f gravity;
 	mBody->mFriction = *(f32*)playerGetParamsTail();
-	gravity.y = *(f32*)((u8*)playerGetParamsTail() + 0x24);
-	gravity.x = 0.0f;
-	gravity.z = gravity.x;
+	gravity.y        = *(f32*)((u8*)playerGetParamsTail() + 0x24);
+	gravity.x        = 0.0f;
+	gravity.z        = gravity.x;
 	njAddVector(&mBody->mAccel, &gravity);
 	step();
 }
@@ -248,9 +248,9 @@ void EggRoll::moveRolling()
 {
 	Vec3f gravity;
 	mBody->mFriction = *(f32*)((u8*)playerGetParamsTail() + 0xC);
-	gravity.y = *(f32*)((u8*)playerGetParamsTail() + 0x24);
-	gravity.x = 0.0f;
-	gravity.z = gravity.x;
+	gravity.y        = *(f32*)((u8*)playerGetParamsTail() + 0x24);
+	gravity.x        = 0.0f;
+	gravity.z        = gravity.x;
 	njAddVector(&mBody->mAccel, &gravity);
 	step();
 }
@@ -258,15 +258,15 @@ void EggRoll::moveRolling()
 // 0x800C23E0
 void EggRoll::movePath()
 {
-	EggRot spin;
-	EggRot tmp;
-	EggRot half;
-	EggRot rot;
-	EggRot rate;
-	Vec3f axis;
-	Vec3f dir;
-	Vec3f normal;
 	Vec3f pos;
+	Vec3f normal;
+	Vec3f dir;
+	Vec3f axis;
+	EggRot rot;
+	Quat q;
+	Quat half;
+	Quat tmp;
+	Quat spin;
 
 	mPath->advance(0.016666668f * mPathSpeed);
 	mPath->getPos(&pos);
@@ -277,13 +277,16 @@ void EggRoll::movePath()
 	njOuterProduct(&dir, &normal, &axis);
 	vecScale((0.016666668f * -mPathSpeed) / mBody->mRadius, &axis, &axis);
 	rot = mBody->mRot;
-	spin.mW    = 0.0f;
-	spin.mAxis = *(EggAxis*)&axis;
+	q.w   = 0.0f;
+	q.v.x = axis.x;
+	q.v.y = axis.y;
+	q.v.z = axis.z;
+	spin  = q;
 	njMultiQuaternion((const NJS_QUATERNION*)&spin, (const NJS_QUATERNION*)&rot, (NJS_QUATERNION*)&spin);
 	tmp = spin;
-	quatScale((Quat*)&tmp, 0.5f);
+	quatScale(&tmp, 0.5f);
 	half = tmp;
-	quatAdd((Quat*)&rot, (const Quat*)&half);
+	quatAdd((Quat*)&rot, &half);
 	quatNormalize((Quat*)&rot);
 	mBody->mRot = rot;
 }
@@ -292,9 +295,9 @@ void EggRoll::moveBounce()
 {
 	Vec3f gravity;
 	mBody->mFriction = *(f32*)((u8*)playerGetParamsTail() + 0xC);
-	gravity.y = *(f32*)((u8*)playerGetParamsTail() + 0x24);
-	gravity.x = 0.0f;
-	gravity.z = gravity.x;
+	gravity.y        = *(f32*)((u8*)playerGetParamsTail() + 0x24);
+	gravity.x        = 0.0f;
+	gravity.z        = gravity.x;
 	njAddVector(&mBody->mAccel, &gravity);
 	step();
 }
@@ -303,9 +306,9 @@ void EggRoll::moveSlow()
 {
 	Vec3f gravity;
 	mBody->mFriction = *(f32*)((u8*)playerGetParamsTail() + 0xC);
-	gravity.y = *(f32*)((u8*)playerGetParamsTail() + 0x24);
-	gravity.x = 0.0f;
-	gravity.z = gravity.x;
+	gravity.y        = *(f32*)((u8*)playerGetParamsTail() + 0x24);
+	gravity.x        = 0.0f;
+	gravity.z        = gravity.x;
 	njAddVector(&mBody->mAccel, &gravity);
 	stepSlow();
 }
@@ -314,9 +317,9 @@ void EggRoll::moveSlam()
 {
 	Vec3f gravity;
 	mBody->mFriction = *(f32*)playerGetParamsTail();
-	gravity.y = *(f32*)((u8*)playerGetParamsTail() + 0x24);
-	gravity.x = 0.0f;
-	gravity.z = gravity.x;
+	gravity.y        = *(f32*)((u8*)playerGetParamsTail() + 0x24);
+	gravity.x        = 0.0f;
+	gravity.z        = gravity.x;
 	njAddVector(&mBody->mAccel, &gravity);
 	step();
 	if (mGround.mBits & 1) {
@@ -338,7 +341,7 @@ void EggRoll::checkBumps()
 		f32 mRadius;
 	} sphere;
 
-	info.mMask = 0;
+	info.mMask     = 0;
 	sphere.mPos    = mBody->mPos;
 	sphere.mRadius = mBody->mRadius;
 	groundQuerySphere((const void*)&sphere, (void*)eggCollectMask, (void*)&info, (void*)(-1));
@@ -361,7 +364,7 @@ int EggRoll::isPathDone()
 			}
 		} else {
 			f32 length = path->getLength();
-			f32 dist = mPath->getDistance();
+			f32 dist   = mPath->getDistance();
 			if (dist == length) {
 				return 1;
 			}
@@ -384,12 +387,12 @@ int EggRoll::hasLanded()
 extern "C" void eggPathFound(RailPath* path, const RailPoint* point, Vec3f* unused, void* arg, int* more)
 {
 	EggPathHit* out = (EggPathHit*)arg;
-	out->mPath  = path;
-	int segment = point->mSeg;
-	f32 at      = point->mDist;
-	out->mPoint = at;
-	out->mSegment = segment;
-	*more = 0;
+	out->mPath      = path;
+	int segment     = point->mSeg;
+	f32 at          = point->mDist;
+	out->mPoint     = at;
+	out->mSegment   = segment;
+	*more           = 0;
 }
 
 int EggRoll::findPath(void** path, void* point)
@@ -443,7 +446,7 @@ void EggRoll::step()
 	info.mCb   = mHitCb;
 	info.mArg  = mHitArg;
 	mBody->stepRoll(0.016666668f, &info, -1, NULL, (EggFaceFn)eggNoteFace);
-	mGround = info.mBits;
+	mGround  = info.mBits;
 	f32 zero = 0.0f;
 	mMask    = info.mMask;
 	_14.x    = zero;
@@ -459,7 +462,7 @@ void EggRoll::stepSlow()
 	info.mCb   = mHitCb;
 	info.mArg  = mHitArg;
 	mBody->stepSlide(0.016666668f, &info, -1, NULL, (EggFaceFn)eggNoteFace);
-	mGround = info.mBits;
+	mGround  = info.mBits;
 	f32 zero = 0.0f;
 	mMask    = info.mMask;
 	_14.x    = zero;
@@ -470,8 +473,8 @@ void EggRoll::stepSlow()
 // 0x800C2AE8
 extern "C" void eggNoteFace(EggColModel* model, u32 face, void* a3, const f32* normal, EggHitInfo* info)
 {
-	f32 y     = normal[1];
-	int kind  = 0;
+	f32 y      = normal[1];
+	int kind   = 0;
 	EggFace* f = &model->mFaces[face & 0xFFFF];
 	info->mMask |= f->mFlags;
 	if (y > 0.8660254f) {
@@ -511,7 +514,13 @@ f32 EggSurface::getBounce(MeshColli* mesh, u16 tri, void* arg)
 // 0x800C2C14
 f32 EggSurface::getFriction(MeshColli* mesh, u16 tri, void* arg)
 {
-	struct N { u32 a, b; struct { u32 m; } n; u8 p[0x1C]; };
+	struct N {
+		u32 a, b;
+		struct {
+			u32 m;
+		} n;
+		u8 p[0x1C];
+	};
 	if (((N*)mesh->mTris)[tri].n.m & 0x400) {
 		return 0.0f;
 	}

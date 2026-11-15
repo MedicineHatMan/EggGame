@@ -23,10 +23,10 @@ public:
 	virtual void draw();
 	virtual int getKind();
 
-	CharaColli* mShape;  // _30
-	Vec3f mPos;    // _34
-	f32 mRadius;   // _40
-	u16 mLife;     // _44
+	CharaColli* mShape; // _30
+	Vec3f mPos;         // _34
+	f32 mRadius;        // _40
+	u16 mLife;          // _44
 	u16 _46;
 };
 

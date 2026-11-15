@@ -7,14 +7,15 @@ struct NJS_QUATERNION;
 
 extern "C" {
 extern const u32 sAeGaugeBlinkCells[2] = {
-	0x000000FC, 0x000000F0,
+	0x000000FC,
+	0x000000F0,
 }; // the two blink cells
 
-int sNodeTrackIndex;          // 0x802C5240 the node being drawn
-const int* sNodeTrackList;    // 0x802C5244 the next node wanted
-Vec3f* sNodeTrackOut;         // 0x802C5248 where its point goes
-int sNodeTrackLast;           // 0x802C524C
-int sNodeTrackCount;          // 0x802C5250
+int sNodeTrackIndex;       // 0x802C5240 the node being drawn
+const int* sNodeTrackList; // 0x802C5244 the next node wanted
+Vec3f* sNodeTrackOut;      // 0x802C5248 where its point goes
+int sNodeTrackLast;        // 0x802C524C
+int sNodeTrackCount;       // 0x802C5250
 }
 
 // 0x800D2EE0
@@ -91,7 +92,7 @@ extern "C" void aeClipSetDigits2(TAeLayer* layer, int value, int base, u32 tens,
 	if (layer == 0) {
 		return;
 	}
-	n = value < 0 ? 0 : (value > 99 ? 99 : value);
+	n      = value < 0 ? 0 : (value > 99 ? 99 : value);
 	int hi = n / 10;
 	int lo = n % 10;
 	hi += base;
@@ -113,8 +114,8 @@ extern "C" void aeClipSetDigits3(TAeLayer* layer, int value, int base, u32 hundr
 	int o;
 	int te;
 	int h = n / 100;
-	o = n % 10;
-	te = (n - h * 100) / 10;
+	o     = n % 10;
+	te    = (n - h * 100) / 10;
 	h += base;
 	te += base;
 	o += base;

@@ -13,7 +13,11 @@ typedef char TLastLightEffect_size_check[(sizeof(TLastLightEffect) == 0x10C) ? 1
 
 // 0x801CEF50
 TLastLightEffect::TLastLightEffect(TObject* parent, void* motion, int fx, const f32* mtx, const u32* color)
-    : TObject(parent), mFx(0), mMotion(motion), mFxId(fx), mFrame(0)
+    : TObject(parent)
+    , mFx(0)
+    , mMotion(motion)
+    , mFxId(fx)
+    , mFrame(0)
 {
 	_00   = (u32)gTLastLightEffectName;
 	mSize = 0x10C;
@@ -81,10 +85,10 @@ struct DrawStateSlot;
  * @size 0xC
  */
 struct EmblemStage {
-	u8 mTexGens;    // _00
-	u8 mTevStages;  // _01
-	void* mTexGen;  // _04
-	void* mTev;     // _08
+	u8 mTexGens;   // _00
+	u8 mTevStages; // _01
+	void* mTexGen; // _04
+	void* mTev;    // _08
 };
 
 typedef char TSuperEmblem_size_check[(sizeof(TSuperEmblem) == 0x88) ? 1 : -1];
@@ -102,7 +106,10 @@ TSuperEmblem::TSuperEmblem(TObject* parent, const f32* matrix)
 }
 
 // 0x801CF254
-TSuperEmblem::~TSuperEmblem() { removeDrawTask(mTask); }
+TSuperEmblem::~TSuperEmblem()
+{
+	removeDrawTask(mTask);
+}
 
 // 0x801CF2BC
 void TSuperEmblem::draw()
@@ -165,7 +172,10 @@ extern "C" void superEmblemTevStage(u8 stage)
 }
 
 // 0x801CF528
-extern "C" void superEmblemTexGen(u8 gen) { GXSetTexCoordGen2(gen, GX_TG_MTX3X4, GX_TG_NRM, GX_TEXMTX5, GX_TRUE, GX_PTTEXMTX19); }
+extern "C" void superEmblemTexGen(u8 gen)
+{
+	GXSetTexCoordGen2(gen, GX_TG_MTX3X4, GX_TG_NRM, GX_TEXMTX5, GX_TRUE, GX_PTTEXMTX19);
+}
 
 #include "player/TPlyDemoLastSuper.h"
 #include "io/Resource.h"
@@ -245,7 +255,7 @@ void TPlyDemoLastSuper::stepOpen()
 		return;
 	}
 	sePlayFor(0x2B2, 0);
-	mText     = createSimpleTextPlain(getMessage(0));
+	mText         = createSimpleTextPlain(getMessage(0));
 	restart.mType = 0x82;
 	sendMsgById(0, &restart);
 	msg87.mType = 0x87;
@@ -291,7 +301,7 @@ void TPlyDemoLastSuper::stepBurst()
 	motions[2] = gLastSuperExports->mMotions[2];
 	motions[4] = gLastSuperExports->mMotions[3];
 	motions[3] = gLastSuperExports->mMotions[4];
-	ply     = player();
+	ply        = player();
 	ply->vfn_C8(motions, mMtx);
 	sePlayFor(0x2BE, 0);
 	mStep = &TPlyDemoLastSuper::stepPlay;
@@ -344,7 +354,10 @@ void TPlyDemoLastSuper::stepClose()
 
 LastSuperExport* gLastSuperExports; // 0x802C5C88
 
-static inline u32 superColor(u32 c) { return c; }
+static inline u32 superColor(u32 c)
+{
+	return c;
+}
 
 // The __sinit at 0x801CFB94 fills these
 u32 sLastSuperColor0 = superColor(0xFF0000FF);

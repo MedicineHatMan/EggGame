@@ -33,17 +33,16 @@ struct RestartList {
 
 extern "C" {
 const char* gTObjPlayerName = "TObjPlayer";
-
 }
 
 // The data every player shares this unit's .bss from 0x80279990 and a flag word in .sbss
-TArc* gPlayerArcs[5];     // 0x80279990 each character's archive
-Vec3f sPlayerScreenPos;          // 0x802799A4 the goal
-HitVec sPlayerStartPos[4];       // 0x802799B0
-int sPlayerStartAngle[4];        // 0x802799E0
+TArc* gPlayerArcs[5];         // 0x80279990 each character's archive
+Vec3f sPlayerScreenPos;       // 0x802799A4 the goal
+HitVec sPlayerStartPos[4];    // 0x802799B0
+int sPlayerStartAngle[4];     // 0x802799E0
 static RestartList sRestarts; // 0x802799FC
-static void* sParams[4]; // 0x80279A08
-FlagWord gPlayerFlags;    // 0x802C4BE0
+static void* sParams[4];      // 0x80279A08
+FlagWord gPlayerFlags;        // 0x802C4BE0
 
 // 0x80012C6C
 RestartList::RestartList()
@@ -87,8 +86,8 @@ void restartListCopy(RestartList* list, RestartPoint* to, const RestartPoint* fr
 // 0x80012D7C
 void restartListGrow(RestartList* list, int count)
 {
-	void* mem = ::operator new[]((count << 4) + 0x10);
-	list->mData = (RestartPoint*)__construct_new_array(mem, (void*)restartPointCtor, NULL, 0x10, count);
+	void* mem       = ::operator new[]((count << 4) + 0x10);
+	list->mData     = (RestartPoint*)__construct_new_array(mem, (void*)restartPointCtor, NULL, 0x10, count);
 	list->mCapacity = count;
 }
 
@@ -119,15 +118,15 @@ void restartListAdd(RestartList* list, const RestartPoint* point)
 		restartListReserve(list, list->mCount + list->mCount + 2);
 	}
 	RestartPoint* to = &list->mData[list->mCount];
-	to->mId  = point->mId;
-	to->mDir = point->mDir;
-	to->mPos = point->mPos;
+	to->mId          = point->mId;
+	to->mDir         = point->mDir;
+	to->mPos         = point->mPos;
 	list->mCount++;
 }
 
 // 0x80012ED0
 TObjPlayer::TObjPlayer(TObject* parent, u16 id, u8 charId)
-	: TObjAction(parent)
+    : TObjAction(parent)
 {
 	mCharId = charId;
 	_34     = 0;
@@ -150,7 +149,7 @@ void playerLoadShared()
 	sDrawViewPlayerId = 0;
 	clearFlagWord(&gPlayerFlags.mBits);
 	loadSizedResource("ge_playerparam.bin", &sPlayerParamFile);
-	sParams[0] = sPlayerParamFile->mData;
+	sParams[0]        = sPlayerParamFile->mData;
 	sPlayerParamsTail = (u8*)sPlayerParamFile->mData + 0xF8;
 	loadArc("ge_player.arc", &gPlayerArc);
 	if (gPlayerArc != NULL) {
@@ -235,7 +234,7 @@ void playerEnsureBattleArc(int no)
 // 0x80013274
 void playerFreeArc(int no)
 {
-	TArc* arc= gPlayerArcs[no];
+	TArc* arc = gPlayerArcs[no];
 	if (arc != NULL) {
 		gPlayerArcs[no] = NULL;
 		njReleaseTexture(*(NJS_TEXLIST**)findArcExport(arc, "texlists"));
@@ -264,7 +263,7 @@ void* playerCreate(TObject* parent, int no, u8 charId, int active)
 // 0x800133D0
 void playerSetStart(int no, const Vec3f* pos, int dir)
 {
-	sPlayerStartPos[no & 0xFFFF] = *pos;
+	sPlayerStartPos[no & 0xFFFF]   = *pos;
 	sPlayerStartAngle[no & 0xFFFF] = dir;
 }
 
@@ -349,8 +348,8 @@ void restartPointSet(int id, const Vec3f* pos, int dir)
 	RestartIter found = restartFind(RestartIter(sRestarts.mData), RestartIter(end), id);
 	if (found.mPtr != end) {
 		RestartPoint* it = found.mPtr;
-		it->mDir = dir;
-		it->mPos = *pos;
+		it->mDir         = dir;
+		it->mPos         = *pos;
 	} else {
 		RestartPoint point;
 		point.mId  = id;
@@ -403,82 +402,141 @@ int evTakeoffSuit()
 }
 
 // 0x80013748
-int TObjPlayer::vfn_6C() { return 0; }
+int TObjPlayer::vfn_6C()
+{
+	return 0;
+}
 
 // 0x80013750
-void TObjPlayer::vfn_70(int arg) { }
+void TObjPlayer::vfn_70(int arg)
+{
+}
 
 // 0x80013754
-void TObjPlayer::vfn_74(int arg) { }
+void TObjPlayer::vfn_74(int arg)
+{
+}
 
 // 0x80013758
-int TObjPlayer::vfn_78() { return 0; }
+int TObjPlayer::vfn_78()
+{
+	return 0;
+}
 
 // 0x80013760
-void TObjPlayer::vfn_7C() { }
+void TObjPlayer::vfn_7C()
+{
+}
 
 // 0x80013764
-void TObjPlayer::vfn_80() { }
+void TObjPlayer::vfn_80()
+{
+}
 
 // 0x80013768
-int TObjPlayer::vfn_84() { return 0; }
+int TObjPlayer::vfn_84()
+{
+	return 0;
+}
 
 // 0x80013770
-int TObjPlayer::vfn_88() { return 0; }
+int TObjPlayer::vfn_88()
+{
+	return 0;
+}
 
 // 0x80013778
-int TObjPlayer::vfn_8C() { return 0; }
+int TObjPlayer::vfn_8C()
+{
+	return 0;
+}
 
 // 0x80013780
-void TObjPlayer::vfn_90(ItemSpec* spec) { }
+void TObjPlayer::vfn_90(ItemSpec* spec)
+{
+}
 
 // 0x80013784
-void TObjPlayer::vfn_94(ItemSpec* spec) { }
+void TObjPlayer::vfn_94(ItemSpec* spec)
+{
+}
 
 // 0x80013788
-void TObjPlayer::vfn_98() { }
+void TObjPlayer::vfn_98()
+{
+}
 
 // 0x8001378C
-void TObjPlayer::vfn_9C(int arg0, int arg1) { }
+void TObjPlayer::vfn_9C(int arg0, int arg1)
+{
+}
 
 // 0x80013790
-void TObjPlayer::vfn_A8(int joint, f32* mtx) { }
+void TObjPlayer::vfn_A8(int joint, f32* mtx)
+{
+}
 
 // 0x80013794
-void TObjPlayer::vfn_AC(int joint, f32* mtx) const { }
+void TObjPlayer::vfn_AC(int joint, f32* mtx) const
+{
+}
 
 // 0x80013798
-void TObjPlayer::vfn_B0(const int* motions) { }
+void TObjPlayer::vfn_B0(const int* motions)
+{
+}
 
 // 0x8001379C
-void TObjPlayer::vfn_B4(int on) { }
+void TObjPlayer::vfn_B4(int on)
+{
+}
 
 // 0x800137A0
-void TObjPlayer::resetCamera() { }
+void TObjPlayer::resetCamera()
+{
+}
 
 // 0x800137A4
-void TObjPlayer::vfn_BC(const int* motions, f32* mtx) { }
+void TObjPlayer::vfn_BC(const int* motions, f32* mtx)
+{
+}
 
 // 0x800137A8
-void TObjPlayer::vfn_C0(const Vec3f* pos, const EggRot* rot) { }
+void TObjPlayer::vfn_C0(const Vec3f* pos, const EggRot* rot)
+{
+}
 
 // 0x800137AC
-void TObjPlayer::vfn_C4(const int* motions, f32* mtx) { }
+void TObjPlayer::vfn_C4(const int* motions, f32* mtx)
+{
+}
 
 // 0x800137B0
-void TObjPlayer::vfn_C8(const int* motions, f32* mtx) { }
+void TObjPlayer::vfn_C8(const int* motions, f32* mtx)
+{
+}
 
 // 0x800137B4
-void TObjPlayer::vfn_CC() { }
+void TObjPlayer::vfn_CC()
+{
+}
 
 // 0x800137B8
-void TObjPlayer::vfn_D0() { }
+void TObjPlayer::vfn_D0()
+{
+}
 
 // 0x800137BC
-int TObjPlayer::vfn_D4() { return 0; }
+int TObjPlayer::vfn_D4()
+{
+	return 0;
+}
 
 // 0x800137C4
-int TObjPlayer::vfn_D8() { return 0; }
+int TObjPlayer::vfn_D8()
+{
+	return 0;
+}
 
 // 0x800137CC
 int TObjPlayer::getKind()

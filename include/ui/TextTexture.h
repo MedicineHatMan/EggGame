@@ -20,14 +20,14 @@ struct TextTexture {
 	int untile(u8* dst, u8* src, u32 tilesW, u32 tilesH);
 	int tile(u8* dst, u8* src, u32 tilesW, u32 tilesH);
 
-	int mWidth;          // _00 in pixels
-	int mHeight;         // _04
-	int mTilesW;         // _08 8 pixel tiles in a row
-	NJS_TEXINFO mInfo;   // _0C
-	NJS_TEXNAME mName;   // _30
-	NJS_TEXLIST mList;   // _3C
-	u8* mImage;          // _44 the loaded texture's pixels
-	u32 mImageSize;      // _48
+	int mWidth;        // _00 in pixels
+	int mHeight;       // _04
+	int mTilesW;       // _08 8 pixel tiles in a row
+	NJS_TEXINFO mInfo; // _0C
+	NJS_TEXNAME mName; // _30
+	NJS_TEXLIST mList; // _3C
+	u8* mImage;        // _44 the loaded texture's pixels
+	u32 mImageSize;    // _48
 };
 
 extern "C" {

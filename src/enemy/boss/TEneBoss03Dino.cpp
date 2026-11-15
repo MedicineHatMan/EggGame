@@ -11,8 +11,7 @@
 
 extern "C" {
 extern const int gBoss03DinoNodes[] = {
-	0, 7, 17, 28, 39, 72, 77, 78,
-	114, 115, 119, 120, 121, -1,
+	0, 7, 17, 28, 39, 72, 77, 78, 114, 115, 119, 120, 121, -1,
 }; // the nodes to find in the model ending in -1
 }
 
@@ -247,7 +246,7 @@ void initBoss03Model()
 	sDirs           = 0;
 
 	NJS_OBJECT* root = gBoss03Models[0];
-	sNodeCount = 0;
+	sNodeCount       = 0;
 	countNodes(root, &sNodeCount);
 	sNodeMask  = new s8[sNodeCount];
 	sNodeDepth = new s8[sNodeCount];
@@ -269,8 +268,8 @@ void initBoss03Model()
 
 	gDinoNode9Rest = points[9];
 	gDinoHeadRest  = points[8];
-	away = gDinoNode9Rest;
-	head = gDinoHeadRest;
+	away           = gDinoNode9Rest;
+	head           = gDinoHeadRest;
 	njSubVector(&away, &head);
 	away.y = 0.0f;
 	if (njUnitVector(&away) < gUnitVectorMin) {
@@ -278,7 +277,7 @@ void initBoss03Model()
 	}
 	node9 = gDinoNode9Rest;
 	gjMulAddVector(90.0f, &ring, &node9, &away);
-	ring.y = 0.0f;
+	ring.y          = 0.0f;
 	gDinoRingRadius = njScalor(&ring);
 	gDinoRingAngle  = (int)(10430.38043493439 * (f32)atan2(ring.x, ring.z)) + 0x4000;
 }
@@ -335,18 +334,12 @@ struct NJS_OBJECT;
 
 extern "C" {
 MotionEntry sBoss03DinoMotions[] = {
-	{ MOTION_LOOP, 11, -1, 0, 0.0f, 30.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_LOOP, 12, -1, 0, 0.0f, 50.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 10, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 49.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 49.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 49.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 59.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 59.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 11, -1, 0, 0.0f, 30.0f, 0.25f, 0.0f, 0 }, { MOTION_LOOP, 12, -1, 0, 0.0f, 50.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 10, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 9, -1, 0, 0.0f, 49.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 8, -1, 0, 0.0f, 49.0f, 0.5f, 0.0f, 0 },   { MOTION_ONCE, 7, -1, 0, 0.0f, 49.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 4, -1, 0, 0.0f, 59.0f, 0.3f, 0.0f, 0 },   { MOTION_ONCE, 3, -1, 0, 0.0f, 59.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 0.2f, 0.0f, 0 },   { MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },   { MOTION_ONCE, 5, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
 	{ MOTION_ONCE, 6, -1, 0, 0.0f, 539.0f, 1.0f, 0.0f, 0 },
 };
 extern const ColliShape sBoss03DinoShape[] = {
@@ -364,7 +357,7 @@ TEneBoss03Dino::TEneBoss03Dino(TObject* parent, void* owner)
 	motionCtrlPlay(&mAnim, 0);
 	mOwner = owner;
 	setupCollider();
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mDrawTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	mDirs[0].x = 0.0f;
 	mDirs[0].y = 0.0f;
 	mDirs[0].z = 1.0f;
@@ -372,7 +365,7 @@ TEneBoss03Dino::TEneBoss03Dino(TObject* parent, void* owner)
 	mDirs[1].y = 1.0f;
 	mDirs[1].z = 0.0f;
 	motionHooksInit(&mPose);
-	mRingRadius = getDinoRingRadius();
+	mRingRadius  = getDinoRingRadius();
 	mLastStomp.x = 0.0f;
 	mLastStomp.y = 0.0f;
 	mLastStomp.z = 0.0f;
@@ -423,10 +416,10 @@ TEneBoss03Dino::~TEneBoss03Dino()
 // 0x8007E114
 void TEneBoss03Dino::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -533,17 +526,17 @@ int TEneBoss03Dino::onHit(const TObjAction* other, int arg, int* result)
 	int took     = 0;
 	if (isPlayerObj(other) != 0) {
 		hit->mFlags.clear();
-		took = 1;
-		hit->mPos.x = 0.0f;
-		hit->mPos.y = 0.0f;
-		hit->mPos.z = 0.0f;
+		took         = 1;
+		hit->mPos.x  = 0.0f;
+		hit->mPos.y  = 0.0f;
+		hit->mPos.z  = 0.0f;
 		hit->mDamage = 0x14;
 	} else if (isEggObj(other) != 0) {
 		took = 1;
 		hit->mFlags.clear();
-		hit->mPos.x = 0.0f;
-		hit->mPos.y = 0.0f;
-		hit->mPos.z = 0.0f;
+		hit->mPos.x  = 0.0f;
+		hit->mPos.y  = 0.0f;
+		hit->mPos.z  = 0.0f;
 		hit->mDamage = 1;
 		hit->mFlags.setBit(0xD);
 	}
@@ -560,14 +553,14 @@ void TEneBoss03Dino::getHeadPos(Vec3f* out) const
 // The head's place and the rotation that faces along mDirs[0]
 void TEneBoss03Dino::getAim(Vec3f* pos, int* rot)
 {
-	f32 x = mDirs[0].x;
-	f32 z = mDirs[0].z;
+	f32 x   = mDirs[0].x;
+	f32 z   = mDirs[0].z;
 	f32 ang = (f32)atan2(x, z);
 	x *= x;
 	z *= z;
-	z = z + x;
-	f32 flat = __fres(__frsqrte(z));
-	int yaw = (int)(10430.38043493439 * ang);
+	z         = z + x;
+	f32 flat  = __fres(__frsqrte(z));
+	int yaw   = (int)(10430.38043493439 * ang);
 	int pitch = (int)(10430.38043493439 * (f32)atan2(-mDirs[0].y, flat));
 	gjPushUnitMatrix();
 	gjRotateX(-pitch);
@@ -614,7 +607,7 @@ void TEneBoss03Dino::setMotionRate(f32 rate)
 int TEneBoss03Dino::isNeckDown()
 {
 	f32 frame = motionCtrlFrame(&mAnim);
-	u8 yes = 0;
+	u8 yes    = 0;
 	if (405.0f <= frame && frame < 460.0f) {
 		yes = 1;
 	}
@@ -944,16 +937,16 @@ void TEneBoss03Dino::actWalk(int phase)
 			mDrift = mStepSpeed;
 		} else {
 			int foot = frame < 15.0f ? 2 : 4;
-			move.x = mNodes[foot].x;
-			move.y = mNodes[foot].y;
-			move.z = mNodes[foot].z;
+			move.x   = mNodes[foot].x;
+			move.y   = mNodes[foot].y;
+			move.z   = mNodes[foot].z;
 			pose();
 			gjPushUnitMatrix();
 			applyMatrix();
 			njCalcPointEx(&mNodes[foot], &now);
 			njPopMatrixEx();
 			njSubVector(&move, &now);
-			move.y = 0.0f;
+			move.y  = 0.0f;
 			f32 len = njUnitVector(&move);
 			if (len < gUnitVectorMin) {
 				move = gVecZero;
@@ -967,8 +960,8 @@ void TEneBoss03Dino::actWalk(int phase)
 		f32 len;
 		f32 x;
 		f32 z;
-		z = mBody.mPos.z;
-		x = mBody.mPos.x;
+		z   = mBody.mPos.z;
+		x   = mBody.mPos.x;
 		len = __fres(__frsqrte(x * x + z * z));
 		if (motionCtrlIsBlending(&mAnim) == 0) {
 			f32 want  = mRingRadius;
@@ -1087,8 +1080,8 @@ void TEneBoss03Dino::actRoar(int phase)
 		pose();
 		placeNodes();
 		f32 rose;
-		f32 y    = mNodes[NODE_HIP].y;
-		rose = y - oldY;
+		f32 y = mNodes[NODE_HIP].y;
+		rose  = y - oldY;
 		switch (mStep) {
 		case 0:
 			if (y > 160.0f) {
@@ -1140,7 +1133,7 @@ void TEneBoss03Dino::actBreath(int phase)
 			if (mTimer <= 0) {
 				motionCtrlPlayBlend(0.1f, &mAnim, 8);
 				int side = angleSideways();
-				mTurn = side - getDinoRingAngle();
+				mTurn    = side - getDinoRingAngle();
 				colliderOn();
 				mStep = 1;
 			}
@@ -1187,7 +1180,7 @@ void TEneBoss03Dino::actBreathEnd(int phase)
 	switch (phase) {
 	case 0:
 		motionCtrlPlayBlend(0.1f, &mAnim, 0xA);
-		mTurn   = angleSideways();
+		mTurn     = angleSideways();
 		f32 ratio = (f32)getDinoRingAngle();
 		ratio /= 16.666666f;
 		mTurnTo = (int)(f32)__fabs(ratio);

@@ -41,12 +41,12 @@ public:
 	AdxVoice* allocVoice(int priority);
 	void freeVoice(AdxVoice* voice);
 
-	u8* mTable;        // _20 the file number of each sound
-	void* mPlayers[1]; // _24
-	void* mWork;       // _28
+	u8* mTable;         // _20 the file number of each sound
+	void* mPlayers[1];  // _24
+	void* mWork;        // _28
 	AdxVoice* mPlaying; // _2C
-	AdxVoice* mFree;   // _30
-	AdxVoice* mVoices; // _34
+	AdxVoice* mFree;    // _30
+	AdxVoice* mVoices;  // _34
 };
 
 extern "C" {

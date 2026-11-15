@@ -18,7 +18,9 @@ TGameBattery::TGameBattery(TObject* parent)
 }
 
 // 0x8013B3C0
-TGameBattery::~TGameBattery() { }
+TGameBattery::~TGameBattery()
+{
+}
 
 // 0x8013B41C
 void TGameBattery::startState()

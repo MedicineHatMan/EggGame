@@ -27,9 +27,9 @@ public:
 	void stepHold();
 	void stepEnd();
 
-	TCamPath* mEvent;                              // _20
-	int mTimer;                                   // _24
-	void (TPlyDemoLastLose::*mStep)();            // _28
+	TCamPath* mEvent;                  // _20
+	int mTimer;                        // _24
+	void (TPlyDemoLastLose::*mStep)(); // _28
 };
 
 extern "C" {

@@ -16,9 +16,9 @@ void* sComingAe;             // 0x802C5724
 NJS_TEXLIST* sComingTexList; // 0x802C5728
 
 struct ComingArcData {
-	void* mAe;       // _00
-	NJS_TEXLIST* mTexList;  // _04
-	u8* mTextures;   // _08
+	void* mAe;             // _00
+	NJS_TEXLIST* mTexList; // _04
+	u8* mTextures;         // _08
 };
 
 typedef char TAeObjComing_size_check[(sizeof(TAeObjComing) == 0x3C) ? 1 : -1];
@@ -68,7 +68,9 @@ TAeObjComing::TAeObjComing(TObject* parent, void* data, void* assets)
 }
 
 // 0x80142D6C
-TAeObjComing::~TAeObjComing() { }
+TAeObjComing::~TAeObjComing()
+{
+}
 
 // 0x80142DC8
 void TAeObjComing::draw()

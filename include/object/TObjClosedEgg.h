@@ -31,7 +31,7 @@ TObject* createTObjClosedEgg(TObject*, SetDesc*);
 class TObjClosedEgg : public TObjAction {
 public:
 	TObjClosedEgg(TObject* parent, const SetDesc* desc); // 0x801BAC24
-	virtual ~TObjClosedEgg();                      // 0x801BACEC
+	virtual ~TObjClosedEgg();                            // 0x801BACEC
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 

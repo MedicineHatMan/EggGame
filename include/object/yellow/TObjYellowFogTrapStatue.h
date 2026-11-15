@@ -42,24 +42,24 @@ public:
 	void statePlay();
 	void stateOff();
 
-	NJS_OBJECT* mModelData;     // _64
-	NJS_TEXLIST* mTexList;       // _68
-	DrawTask* mDrawTask;      // _6C
-	ObjModel mModel;      // _70
-	MotionPlayer mMotion; // _90
-	f32 mMatrix[12];      // _CC
-	u16 mSwitchId;        // _FC
-	TCamera* mEvent;      // _100 whichever of the next two is running
-	TCamPath* mFullEvent; // _104
-	TCamera* mCamera;     // _108 a TCamFix
-	Fx* mBreath;        // _10C
-	f32 mBreathMtx[12];   // _110
-	int mFrame;           // _140
-	int mStep;            // _144
-	Vec3f mCenter;        // _148
-	f32 mRadius;          // _154
-	int mFirstTime;       // _158
-	int mAct;             // _15C 0 = wait 1 and 2 = play 3 = off
+	NJS_OBJECT* mModelData; // _64
+	NJS_TEXLIST* mTexList;  // _68
+	DrawTask* mDrawTask;    // _6C
+	ObjModel mModel;        // _70
+	MotionPlayer mMotion;   // _90
+	f32 mMatrix[12];        // _CC
+	u16 mSwitchId;          // _FC
+	TCamera* mEvent;        // _100 whichever of the next two is running
+	TCamPath* mFullEvent;   // _104
+	TCamera* mCamera;       // _108 a TCamFix
+	Fx* mBreath;            // _10C
+	f32 mBreathMtx[12];     // _110
+	int mFrame;             // _140
+	int mStep;              // _144
+	Vec3f mCenter;          // _148
+	f32 mRadius;            // _154
+	int mFirstTime;         // _158
+	int mAct;               // _15C 0 = wait 1 and 2 = play 3 = off
 };
 
 extern "C" {

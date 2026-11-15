@@ -13,8 +13,8 @@ struct MenuModelSet {
 	void** mGvms;     // _14
 };
 
-extern TArc* gMenuModelArc; // 0x802C5890
-extern MenuModelSet* gMenuModelSet;   // 0x802C5894
+extern TArc* gMenuModelArc;         // 0x802C5890
+extern MenuModelSet* gMenuModelSet; // 0x802C5894
 
 void loadLandModelArc();
 void loadBattleModelArc();

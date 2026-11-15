@@ -32,9 +32,9 @@ inline void gameShowCount(const int& count)
 	aeSendMissionIcon(&msg);
 }
 
-#define SET_BATTLE_STATE(context, create) \
-	do { \
-		void* pool = (context)->mPool; \
+#define SET_BATTLE_STATE(context, create)                                                                     \
+	do {                                                                                                      \
+		void* pool = (context)->mPool;                                                                        \
 		releasePlyState(pool, changeBattleState(&(context)->mStateSlot, (context), create(pool, (context)))); \
 	} while (0)
 
@@ -371,8 +371,8 @@ public:
 	int checkEnd();             // 0x8019F284 0 one left 1 none left 2 still going
 	void rankOut(int place);    // 0x8019F3C4
 
-	u8 mStartLives;              // _98
-	SurvivalScore mScores[4];    // _9C
+	u8 mStartLives;           // _98
+	SurvivalScore mScores[4]; // _9C
 };
 
 typedef char TGameBattleSurvival_size_check[(sizeof(TGameBattleSurvival) == 0xBC) ? 1 : -1];
@@ -394,9 +394,9 @@ public:
 
 	int update(); // 0x801AB4EC 0 one winner 1 a tie 2 still going
 
-	int mTimeLeft;   // _98 milliseconds
-	int mSetting;    // _9C 0 is 1 minute 1 is 3 2 is 5
-	u8 mLastSecond;  // _A0
+	u32 mTimeLeft;  // _98 milliseconds
+	int mSetting;   // _9C 0 is 1 minute 1 is 3 2 is 5
+	u8 mLastSecond; // _A0
 };
 
 typedef char TGameBattleTime_size_check[(sizeof(TGameBattleTime) == 0xA4) ? 1 : -1];
@@ -447,8 +447,8 @@ public:
 	virtual void startState();
 	virtual void start();
 
-	void setGoal(int setting);            // 0x801CE34C
-	int checkEnd();                       // 0x801CE528 0 one winner 1 a tie 2 still going
+	void setGoal(int setting);             // 0x801CE34C
+	int checkEnd();                        // 0x801CE528 0 one winner 1 a tie 2 still going
 	void addScore(u16 player, int points); // 0x801CE680
 
 	int mGoal;      // _98

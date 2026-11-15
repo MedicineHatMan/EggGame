@@ -11,10 +11,10 @@ struct NJS_TEXLIST;
 const char* gTAeObjBossConsoleName = "TAeObjBossConsole";
 
 struct BossConsoleArcData {
-	void* mAe;       // _00
-	NJS_TEXLIST* mTexList;  // _04
-	u8* mTextures;   // _08
-	u32* mPalettes;  // _0C two
+	void* mAe;             // _00
+	NJS_TEXLIST* mTexList; // _04
+	u8* mTextures;         // _08
+	u32* mPalettes;        // _0C two
 };
 
 struct E3PaletteBuf {

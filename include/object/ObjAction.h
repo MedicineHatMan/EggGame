@@ -30,8 +30,8 @@ struct ObjRefList {
 	~ObjRefList(); // 0x800106A4
 	void clear();  // 0x80010748 empties every reference on it
 
-	ObjBucket mLink;     // _00
-	ObjIdEntry* mOwner;  // _08
+	ObjBucket mLink;    // _00
+	ObjIdEntry* mOwner; // _08
 };
 
 /**
@@ -51,8 +51,8 @@ public:
 	void link(u16 id);
 	void unlink();
 
-	ObjLink mLink;      // _00 on mList
-	ObjRefList* mList;  // _08 the target's list of references
+	ObjLink mLink;     // _00 on mList
+	ObjRefList* mList; // _08 the target's list of references
 };
 
 /** A set of numbered bits */
@@ -102,25 +102,25 @@ public:
 	TObjAction(TObject* parent);
 	virtual ~TObjAction();
 
-	virtual Vec3f* getPos();                  // _20
-	virtual void getNodeMatrix(int node, f32* mtx); // _24 where something attached to this goes
-	virtual int getRotY();                    // _28
-	virtual int getKind();                    // _2C picks the id range
-	virtual void initFromDesc(SetDesc* desc); // _30
-	virtual void debugPrint(void* arg);       // _34 a candidate eggs and TObjStageObj print debug text here
-	virtual void readEnemyDesc(SetDesc* desc); // _38 only TObjEnemy has been seen to use it
-	virtual void vfn_3C();                    // _3C
-	virtual f32 vfn_40();                     // _40
-	virtual int canAct();                     // _44
-	virtual int vfn_48(TObjAction* other);    // _48
-	virtual int sendToHandle(ObjMsg* msg);    // _4C
-	virtual int vfn_50();                     // _50
-	virtual f32 getRadiusV();                 // _54
+	virtual Vec3f* getPos();                                          // _20
+	virtual void getNodeMatrix(int node, f32* mtx);                   // _24 where something attached to this goes
+	virtual int getRotY();                                            // _28
+	virtual int getKind();                                            // _2C picks the id range
+	virtual void initFromDesc(SetDesc* desc);                         // _30
+	virtual void debugPrint(void* arg);                               // _34 a candidate eggs and TObjStageObj print debug text here
+	virtual void readEnemyDesc(SetDesc* desc);                        // _38 only TObjEnemy has been seen to use it
+	virtual void vfn_3C();                                            // _3C
+	virtual f32 vfn_40();                                             // _40
+	virtual int canAct();                                             // _44
+	virtual int vfn_48(TObjAction* other);                            // _48
+	virtual int sendToHandle(ObjMsg* msg);                            // _4C
+	virtual int vfn_50();                                             // _50
+	virtual f32 getRadiusV();                                         // _54
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58
-	virtual void enterAction(int action);     // _5C
-	virtual void exitAction(int action);      // _60
-	virtual void vfn_64(int action);          // _64
-	virtual void vfn_68(int action);          // _68
+	virtual void enterAction(int action);                             // _5C
+	virtual void exitAction(int action);                              // _60
+	virtual void vfn_64(int action);                                  // _64
+	virtual void vfn_68(int action);                                  // _68
 
 	u16 assignId(u32 reserve);
 	u16 registerId();
@@ -144,11 +144,11 @@ struct ObjIdIter {
 	ObjIdIter();              // 0x80010774
 	ObjIdIter(ObjLink* head); // 0x80010778
 
-	void begin();       // 0x80010780
-	void next();        // 0x80010790
-	BOOL atEnd();       // 0x800107A0
-	TObjAction* get();  // 0x800107B8
-	TObjEgg* getEgg();  // 0x800107C8
+	void begin();      // 0x80010780
+	void next();       // 0x80010790
+	BOOL atEnd();      // 0x800107A0
+	TObjAction* get(); // 0x800107B8
+	TObjEgg* getEgg(); // 0x800107C8
 
 	ObjLink* mHead; // _00 the id table's list of all entries
 	ObjLink* mCur;  // _04
@@ -232,7 +232,7 @@ struct HeapBlock {
 struct ObjHeap {
 	HeapBlock* mHead; // _00 a sentinel of size 0 at the start of the memory
 	u32 _04;
-	u32 mAlign;       // _08 a power of two
+	u32 mAlign; // _08 a power of two
 };
 
 /** One class's setup and teardown as SetManager and Stage list them */

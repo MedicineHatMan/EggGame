@@ -112,8 +112,8 @@ int AniDive::hitWall()
 {
 	bool hit      = false;
 	AniBody* body = mBody;
-	if (body->touching(0, 0, NULL, NULL) != 0 || body->touching(1, 0, NULL, NULL) != 0
-	    || body->touching(2, 0, NULL, NULL) != 0 || body->touching(3, 0, NULL, NULL) != 0) {
+	if (body->touching(0, 0, NULL, NULL) != 0 || body->touching(1, 0, NULL, NULL) != 0 || body->touching(2, 0, NULL, NULL) != 0
+	    || body->touching(3, 0, NULL, NULL) != 0) {
 		hit = true;
 	}
 	return hit;
@@ -212,7 +212,7 @@ void AniDive::runSwim(int phase)
 			mtxToQuat((const f32*)mtx, (f32*)&rot);
 			mBody->mQuat = rot;
 
-			vel = mBody->mVel;
+			vel       = mBody->mVel;
 			f32 speed = vecLength(&vel);
 			mtxMultVecSR(mtx, (Vec3f*)&gAxisZ, &vel);
 			vecScale(speed, &vel, &vel);

@@ -103,10 +103,19 @@ void TMusicADX::fadeTo(u16 frames, f32 volume)
 }
 
 // 0x80031EA4
-void TMusicADX::pause() { ADXT_Pause(mPlayer, 1); }
+void TMusicADX::pause()
+{
+	ADXT_Pause(mPlayer, 1);
+}
 
 // 0x80031ECC
-void TMusicADX::resume() { ADXT_Pause(mPlayer, 0); }
+void TMusicADX::resume()
+{
+	ADXT_Pause(mPlayer, 0);
+}
 
 // 0x80031EF4
-extern "C" void musicServer(int mode) { ADXT_SetDecodeSteAsMonoSw(); }
+extern "C" void musicServer(int mode)
+{
+	ADXT_SetDecodeSteAsMonoSw();
+}

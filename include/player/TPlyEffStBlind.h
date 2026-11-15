@@ -24,7 +24,7 @@ public:
 	virtual void vfn_20(); // _20
 	virtual void vfn_24(); // _24
 
-	Fx* mEffect;      // _28
+	Fx* mEffect;        // _28
 	f32 mMtx[12];       // _2C
 	f32 mMtxB[12];      // _5C
 	DrawTask* mTask;    // _8C

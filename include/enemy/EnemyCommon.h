@@ -13,22 +13,22 @@ struct GjTexMem;
 struct EnemyFrameKey;
 
 extern "C" {
-void enemyCommonLoad();                  // 0x80090C78
-void enemyCommonRelease();               // 0x80090D34
-NJS_TEXLIST* enemyEyeTextures();         // 0x80090DA8 ene_eye.gvm
-NJS_TEXLIST* enemyCommonTextures();      // 0x80090DB4 ene_common.gvm
-void enemyCommonSetTexture();            // 0x80090DC0
-void enemyCommonSetEye(int frame);       // 0x80090DE4 the common textures with that eye
-void enemyCommonEndEye();                // 0x80090E28
-NJS_TEXLIST* enemyEmotionTextures();     // 0x80090E48 ene_emotion.gvm
-NJS_OBJECT* enemyBombModel();            // 0x80090E54 model 1 TEneAntsBomb's bomb
-NJS_OBJECT* enemyShadowModel();          // 0x80090E60 model 0 ObjShadow's
-NJS_OBJECT* enemyCrowModel();            // 0x80090E6C model 2 TEneDeathCrow's
-void* enemyCommonMotion();               // 0x80090E78 TEneDeathCrow's
-int enemyFrameKey(const EnemyFrameKey* table, f32 frame); // 0x80090E80 the value of the first row past frame
+void enemyCommonLoad();                                         // 0x80090C78
+void enemyCommonRelease();                                      // 0x80090D34
+NJS_TEXLIST* enemyEyeTextures();                                // 0x80090DA8 ene_eye.gvm
+NJS_TEXLIST* enemyCommonTextures();                             // 0x80090DB4 ene_common.gvm
+void enemyCommonSetTexture();                                   // 0x80090DC0
+void enemyCommonSetEye(int frame);                              // 0x80090DE4 the common textures with that eye
+void enemyCommonEndEye();                                       // 0x80090E28
+NJS_TEXLIST* enemyEmotionTextures();                            // 0x80090E48 ene_emotion.gvm
+NJS_OBJECT* enemyBombModel();                                   // 0x80090E54 model 1 TEneAntsBomb's bomb
+NJS_OBJECT* enemyShadowModel();                                 // 0x80090E60 model 0 ObjShadow's
+NJS_OBJECT* enemyCrowModel();                                   // 0x80090E6C model 2 TEneDeathCrow's
+void* enemyCommonMotion();                                      // 0x80090E78 TEneDeathCrow's
+int enemyFrameKey(const EnemyFrameKey* table, f32 frame);       // 0x80090E80 the value of the first row past frame
 GjTexMem* enemyEyeSwap(NJS_TEXLIST* list, int slot, int frame); // 0x80090EAC gives back what was there
-void enemyEyeSet(NJS_TEXLIST* list, int slot, int frame);  // 0x80090F04 one at a time
-void enemyEyeRestore();                  // 0x80090F3C
+void enemyEyeSet(NJS_TEXLIST* list, int slot, int frame);       // 0x80090F04 one at a time
+void enemyEyeRestore();                                         // 0x80090F3C
 }
 
 #include "Ninja/ninja.h"

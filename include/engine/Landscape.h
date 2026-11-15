@@ -15,17 +15,17 @@ struct LandNode {
 	s16 _06;       // _06
 	s16 mChild;    // _08 -1 = none
 	s16 mSibling;  // _0A -1 = none
-	f32 mPosX;   // _0C
-	f32 mPosY;   // _10
-	f32 mPosZ;   // _14
-	u32 mAngX;   // _18
-	u32 mAngY;   // _1C
-	u32 mAngZ;   // _20
-	f32 mSclX;   // _24
-	f32 mSclY;   // _28
-	f32 mSclZ;   // _2C
+	f32 mPosX;     // _0C
+	f32 mPosY;     // _10
+	f32 mPosZ;     // _14
+	u32 mAngX;     // _18
+	u32 mAngY;     // _1C
+	u32 mAngZ;     // _20
+	f32 mSclX;     // _24
+	f32 mSclY;     // _28
+	f32 mSclZ;     // _2C
 	Vec3f mCenter; // _30
-	f32 mRadius; // _3C
+	f32 mRadius;   // _3C
 };
 
 /**
@@ -51,7 +51,7 @@ struct LandMaterial {
  * @size 0x8
  */
 struct LandMaterialEntry {
-	int mTexMode;           // _00 0 untextured 1 one texture 3 two textures
+	int mTexMode;            // _00 0 untextured 1 one texture 3 two textures
 	LandMaterial* mMaterial; // _04
 };
 
@@ -60,31 +60,31 @@ struct LandMaterialEntry {
  * @size 0x30
  */
 struct LandVtxSet {
-	u16 mPosType;   // _00
-	u16 _02;        // _02
-	void* mPos;     // _04
-	u16 mNrmType;   // _08
-	u16 _0A;        // _0A
-	void* mNrm;     // _0C
-	u16 mClrType;   // _10
-	u16 mClrCount;  // _12
-	u32* mClr;      // _14 RGBA8
-	u16 mClr2Type;  // _18
-	u16 _1A;        // _1A
-	void* mClr2;    // _1C
-	u16 mTexType;   // _20
-	u16 _22;        // _22
-	void* mTex;     // _24
-	u16 mTex2Type;  // _28
-	u16 _2A;        // _2A
-	void* mTex2;    // _2C
+	u16 mPosType;  // _00
+	u16 _02;       // _02
+	void* mPos;    // _04
+	u16 mNrmType;  // _08
+	u16 _0A;       // _0A
+	void* mNrm;    // _0C
+	u16 mClrType;  // _10
+	u16 mClrCount; // _12
+	u32* mClr;     // _14 RGBA8
+	u16 mClr2Type; // _18
+	u16 _1A;       // _1A
+	void* mClr2;   // _1C
+	u16 mTexType;  // _20
+	u16 _22;       // _22
+	void* mTex;    // _24
+	u16 mTex2Type; // _28
+	u16 _2A;       // _2A
+	void* mTex2;   // _2C
 };
 
 /**
  * @size 0x8
  */
 struct LandVtxEntry {
-	u32 _00;         // _00
+	u32 _00;          // _00
 	LandVtxSet* mSet; // _04
 };
 
@@ -104,7 +104,7 @@ struct LandDisplay {
  * @size 0x8
  */
 struct LandDisplayEntry {
-	u32 mType;            // _00 only 0 is drawn
+	u32 mType;             // _00 only 0 is drawn
 	LandDisplay* mDisplay; // _04
 };
 
@@ -123,8 +123,8 @@ struct LandMesh {
  * @size 0xC
  */
 struct LandMeshGroup {
-	u32 mPass;        // _00 drawn when the pass mask has one of these bits 1 and 4 opaque 2 translucent
-	int mMeshCount;   // _04
+	u32 mPass;         // _00 drawn when the pass mask has one of these bits 1 and 4 opaque 2 translucent
+	int mMeshCount;    // _04
 	LandMesh* mMeshes; // _08
 };
 
@@ -132,17 +132,17 @@ struct LandMeshGroup {
  * @size 0x2C
  */
 struct LandModel {
-	int mMaterialCount;           // _00
+	int mMaterialCount;            // _00
 	LandMaterialEntry* mMaterials; // _04
-	int mVtxSetCount;             // _08
-	LandVtxEntry* mVtxSets;       // _0C
-	int mDisplayCount;            // _10
-	LandDisplayEntry* mDisplays;  // _14
-	u32 mNodeCount;               // _18
-	LandNode* mNodes;             // _1C
-	int mMatrixCount;             // _20 1 or up to 9 matrices picked per mesh
-	int mGroupCount;              // _24
-	LandMeshGroup* mGroups;       // _28
+	int mVtxSetCount;              // _08
+	LandVtxEntry* mVtxSets;        // _0C
+	int mDisplayCount;             // _10
+	LandDisplayEntry* mDisplays;   // _14
+	u32 mNodeCount;                // _18
+	LandNode* mNodes;              // _1C
+	int mMatrixCount;              // _20 1 or up to 9 matrices picked per mesh
+	int mGroupCount;               // _24
+	LandMeshGroup* mGroups;        // _28
 };
 
 /**
@@ -160,18 +160,18 @@ struct LandMotion {
  * @size 0x30
  */
 struct LandDrawState {
-	int mMaterial;            // _00
-	int mLastMaterial;        // _04 setLandMaterial does nothing when it equals mMaterial unless mForce is set
-	u32 _08;                  // _08
-	int mMesh;                // _0C
-	int mGroup;               // _10
+	int mMaterial;             // _00
+	int mLastMaterial;         // _04 setLandMaterial does nothing when it equals mMaterial unless mForce is set
+	u32 _08;                   // _08
+	int mMesh;                 // _0C
+	int mGroup;                // _10
 	LandMaterialEntry* mEntry; // _14
-	LandModel* mModel;        // _18
-	f32* mMtx;                // _1C
-	u32 mPass;                // _20
-	u32 mFlags;               // _24
-	int mForce;               // _28 a hook sets it to have the next mesh's material set again
-	u32 _2C;                  // _2C
+	LandModel* mModel;         // _18
+	f32* mMtx;                 // _1C
+	u32 mPass;                 // _20
+	u32 mFlags;                // _24
+	int mForce;                // _28 a hook sets it to have the next mesh's material set again
+	u32 _2C;                   // _2C
 };
 
 typedef void (*LandDrawHook)(LandDrawState* state);
@@ -192,9 +192,9 @@ void setLandDrawHook(LandDrawHook hook);
  * @size 0xC
  */
 struct LandPartDef {
-	LandModel* mModel;  // _00
+	LandModel* mModel;   // _00
 	LandMotion* mMotion; // _04
-	int mId;            // _08
+	int mId;             // _08
 };
 
 /**
@@ -235,8 +235,8 @@ struct LandAnimEntry {
 
 struct LandAnimSet {
 	u8 _00[0x8];
-	u32 mNodeCount;        // _08
-	LandAnimNode* mNodes;  // _0C
+	u32 mNodeCount;       // _08
+	LandAnimNode* mNodes; // _0C
 	u8 _10[0x4];
 	LandAnimEntry* mAnims; // _14
 };
@@ -246,12 +246,12 @@ struct LandAnimSet {
  * @size 0x18
  */
 struct LandFile {
-	LandBlock* mMain;     // _00
-	int mVariantCount;    // _04 2 on world stages 1 on the battle stage checked 0 on the boss stage checked
+	LandBlock* mMain;      // _00
+	int mVariantCount;     // _04 2 on world stages 1 on the battle stage checked 0 on the boss stage checked
 	LandBlock** mVariants; // _08
-	LandAnimSet* mAnims;  // _0C
-	NJS_TEXLIST* mTexList;       // _10 a Ninja NJS_TEXLIST
-	void* mGvm;           // _14 the texture bank
+	LandAnimSet* mAnims;   // _0C
+	NJS_TEXLIST* mTexList; // _10 a Ninja NJS_TEXLIST
+	void* mGvm;            // _14 the texture bank
 };
 
 /**
@@ -259,11 +259,11 @@ struct LandFile {
  * @size 0x14
  */
 struct LandMotionState {
-	LandModel* mModel;  // _00
-	LandModel* mBuffer; // _04 the model or its copy with blended colours when there is a motion
+	LandModel* mModel;   // _00
+	LandModel* mBuffer;  // _04 the model or its copy with blended colours when there is a motion
 	LandMotion* mMotion; // _08
-	f32* mMatrices;     // _0C
-	int mAnimIndex;  // _10 -1 = none
+	f32* mMatrices;      // _0C
+	int mAnimIndex;      // _10 -1 = none
 };
 
 /**
@@ -271,14 +271,14 @@ struct LandMotionState {
  * @size 0x30
  */
 struct LandBlockState {
-	LandBlock* mBlock;      // _00
-	LandMotionState mRoot;  // _04
+	LandBlock* mBlock;       // _00
+	LandMotionState mRoot;   // _04
 	LandMotionState* mParts; // _18
-	f32* mPartMatrices;     // _1C one matrix per part
-	u32* mVisible;          // _20 one int per node
-	u32* mVisibleFar;       // _24
-	void* mMotionBuffers;   // _28
-	NJS_TEXLIST* mTexList;         // _2C
+	f32* mPartMatrices;      // _1C one matrix per part
+	u32* mVisible;           // _20 one int per node
+	u32* mVisibleFar;        // _24
+	void* mMotionBuffers;    // _28
+	NJS_TEXLIST* mTexList;   // _2C
 };
 
 /**
@@ -286,11 +286,11 @@ struct LandBlockState {
  * @size 0x14
  */
 struct LandAnimState {
-	f32 mFrame;          // _00
-	f32 mSpeed;          // _04
-	LandModel* mModel;   // _08
-	u32* mHeader;        // _0C a Ninja NJS_MOTION The frame count is at _04
-	f32* mMatrices;      // _10
+	f32 mFrame;        // _00
+	f32 mSpeed;        // _04
+	LandModel* mModel; // _08
+	u32* mHeader;      // _0C a Ninja NJS_MOTION The frame count is at _04
+	f32* mMatrices;    // _10
 };
 
 /**
@@ -305,11 +305,11 @@ struct TLandscape {
 	void updateAnims();
 	LandBlockState* getVariant(int index);
 
-	LandFile* mFile;           // _00
-	LandBlockState mMain;      // _04
-	LandBlockState* mVariants; // _34
+	LandFile* mFile;            // _00
+	LandBlockState mMain;       // _04
+	LandBlockState* mVariants;  // _34
 	LandAnimState* mAnimStates; // _38
-	f32* mAnimMatrices;        // _3C
+	f32* mAnimMatrices;         // _3C
 };
 
 /**
@@ -330,9 +330,9 @@ public:
 	void setBlend(f32 blend, int frames);
 	void applyBlend(f32 blend);
 
-	DrawTask* mDraw;   // _20 opaque pass
+	DrawTask* mDraw;  // _20 opaque pass
 	void* mDrawAlpha; // _24 translucent pass
-	f32 mBlend;    // _28 0 = first variant 1 = second variant
+	f32 mBlend;       // _28 0 = first variant 1 = second variant
 	f32 mBlendTarget; // _2C
 	int mBlendTimer;  // _30
 };

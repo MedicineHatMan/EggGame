@@ -30,6 +30,14 @@ struct Vec3f {
 		z = newZ;
 	}
 
+	// Moves it up by dy and keeps x and z
+	inline void addY(f32 dy)
+	{
+		f32 newY = y;
+		newY += dy;
+		set(x, newY, z);
+	}
+
 	f32 x, y, z;
 };
 
@@ -56,24 +64,24 @@ struct StageSpawn {
  * @size 0x90
  */
 struct StageDef {
-	const char* mName;         // _00 "blue1" "red_boss" "battle_green" "title"
-	StageResources* mRes;      // _04 null only for "practice"
-	const char* mTheme;        // _08 picks the TStage subclass
-	const char* mMission;      // _0C see sMissionTypes Null for battle stages
-	const char* mLandscape;    // _10 stg_*.lnd
-	const char* mBsp;          // _14 stg_*.bsp not read by TStage::load and not on the disc
-	const char* mCollision;    // _18 stg_*.mc2
-	const char* mSetObj;       // _1C set_obj_*.bin
-	const char* mSetEnemy;     // _20 set_ene_*.bin
-	const char* mSetCamera;    // _24 set_cam_*.bin
-	const char* mSetDesign;    // _28 set_design_*.bin
-	const char* mPath;         // _2C path_*.pth
-	const char* mEventCamArc;  // _30 ar_event_cam_*.arc
-	const char* mMessages;     // _34 mes_*_hiyoko.bin gets a language suffix when opened
-	const char* mEvent;        // _38 event_*.arc
-	StageSpawn mSpawns[4];     // _3C TModeStage uses the first battle mode all four
-	int mTimeLimit;            // _7C 0 to 1000 across stages maybe seconds
-	int mRankScores[4];        // _80 descending green1 has 7000 5500 4500 2500
+	const char* mName;        // _00 "blue1" "red_boss" "battle_green" "title"
+	StageResources* mRes;     // _04 null only for "practice"
+	const char* mTheme;       // _08 picks the TStage subclass
+	const char* mMission;     // _0C see sMissionTypes Null for battle stages
+	const char* mLandscape;   // _10 stg_*.lnd
+	const char* mBsp;         // _14 stg_*.bsp not read by TStage::load and not on the disc
+	const char* mCollision;   // _18 stg_*.mc2
+	const char* mSetObj;      // _1C set_obj_*.bin
+	const char* mSetEnemy;    // _20 set_ene_*.bin
+	const char* mSetCamera;   // _24 set_cam_*.bin
+	const char* mSetDesign;   // _28 set_design_*.bin
+	const char* mPath;        // _2C path_*.pth
+	const char* mEventCamArc; // _30 ar_event_cam_*.arc
+	const char* mMessages;    // _34 mes_*_hiyoko.bin gets a language suffix when opened
+	const char* mEvent;       // _38 event_*.arc
+	StageSpawn mSpawns[4];    // _3C TModeStage uses the first battle mode all four
+	int mTimeLimit;           // _7C 0 to 1000 across stages maybe seconds
+	int mRankScores[4];       // _80 descending green1 has 7000 5500 4500 2500
 };
 
 /** The root of ge_stagedef.bin 88 entries on USA retail */
@@ -97,8 +105,8 @@ struct LightGroup;
 /** What getSceneRecord returns. @size 0x10 */
 struct SceneRecord {
 	SceneRecord();
-	int mCamera;      // _00
-	PortalVis* mVis;  // _04
+	int mCamera;     // _00
+	PortalVis* mVis; // _04
 	void* _08;
 	LightGroup* mLights; // _0C
 };
@@ -119,9 +127,9 @@ struct SceneLights {
 };
 
 extern "C" {
-void sceneLightsSetSunDir(SceneLights* scene, const Vec3f* dir);    // 0x8004D428
-void sceneLightsSetSunColor(SceneLights* scene, u32* color);  // 0x8004D444
-void sceneLightsSetAmbient(SceneLights* scene, u32* color);   // 0x8004D450
+void sceneLightsSetSunDir(SceneLights* scene, const Vec3f* dir); // 0x8004D428
+void sceneLightsSetSunColor(SceneLights* scene, u32* color);     // 0x8004D444
+void sceneLightsSetAmbient(SceneLights* scene, u32* color);      // 0x8004D450
 }
 
 /**
@@ -140,23 +148,23 @@ public:
 	void drawEffects(int withExtras);
 	void drawObjects();
 
-	SceneRecord* _00;            // _00
-	SceneLights* mLights; // _04
+	SceneRecord* _00;      // _00
+	SceneLights* mLights;  // _04
 	u8 _08[0x4];           // _08
 	ChunkFile* mCollision; // _0C
 	void* _10;             // _10
 	ChunkFile* mPath;      // _14
-	TResource* _18;            // _18 cleared and released but nothing here sets it
+	TResource* _18;        // _18 cleared and released but nothing here sets it
 	BinFile* mMessages;    // _1C
 	PortalVis* mVis;       // _20
 	LightGroup* _24;       // _24
 	const char* mName;     // _28
 
 	// _2C = vtable
-	virtual ~TStage();         // _08
-	virtual void loadAssets(); // _0C the default is empty 0x80014DD0 in TModeTitle.cpp
-	virtual void freeAssets(); // _10 empty by default 0x80014E60
-	virtual void vfn_14();    // _14 empty by default 0x80015054
+	virtual ~TStage();           // _08
+	virtual void loadAssets();   // _0C the default is empty 0x80014DD0 in TModeTitle.cpp
+	virtual void freeAssets();   // _10 empty by default 0x80014E60
+	virtual void vfn_14();       // _14 empty by default 0x80015054
 	virtual void run(u32 flags); // _18 1 = calc 2 = draw
 };
 
@@ -183,21 +191,21 @@ public:
 	static void* operator new(unsigned long, void* mem) { return mem; }
 	static void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-u32 _00;      // _00
-	u16 mFlags;   // _04 bit 0 = delete me
-	u16 _06;      // _06
+	u32 _00;          // _00
+	u16 mFlags;       // _04 bit 0 = delete me
+	u16 _06;          // _06
 	TObject* mPrev;   // _08
 	TObject* mNext;   // _0C
 	TObject* mParent; // _10
 	TObject* mChild;  // _14
 
 	// _18 = vtable
-	virtual ~TObject();       // _08
-	virtual void draw();   // _0C
-	virtual void vfn_10(); // _10
-	virtual void vfn_14(); // _14
+	virtual ~TObject();                // _08
+	virtual void draw();               // _0C
+	virtual void vfn_10();             // _10
+	virtual void vfn_14();             // _14
 	virtual void vfn_18(TObject* obj); // _18
-	virtual void render(); // _1C
+	virtual void render();             // _1C
 
 	u16 _1C;   // _1C
 	u16 mSize; // _1E
@@ -216,8 +224,8 @@ struct GameStateSlot {
 	GameStateSlot();  // 0x80042AFC
 	~GameStateSlot(); // 0x80042B08
 
-	void update(TGameContext* context);                                 // 0x80042B44
-	TGameState* change(TGameContext* context, TGameState* next);        // 0x80042B7C returns the old state
+	void update(TGameContext* context);                          // 0x80042B44
+	TGameState* change(TGameContext* context, TGameState* next); // 0x80042B7C returns the old state
 
 	TGameState* mState; // _00
 };
@@ -252,30 +260,30 @@ public:
 class TGameContext : public TCustomGameContext {
 public:
 	TGameContext(TObject* parent); // 0x80042278
-	virtual ~TGameContext();    // 0x8004236C
+	virtual ~TGameContext();       // 0x8004236C
 
-	virtual void draw();                    // _0C 0x800426EC
-	virtual int onMessage(ObjMsg* msg);     // _20 0x800426A0 passed to the state
-	virtual int getStatus();                // _24 0x800424D4
-	virtual void startState() { }           // _28 0x80042A4C
-	virtual void start();                   // _2C 0x800423F8
-	virtual void respawn();                 // _30 0x80042438
+	virtual void draw();                // _0C 0x800426EC
+	virtual int onMessage(ObjMsg* msg); // _20 0x800426A0 passed to the state
+	virtual int getStatus();            // _24 0x800424D4
+	virtual void startState() { }       // _28 0x80042A4C
+	virtual void start();               // _2C 0x800423F8
+	virtual void respawn();             // _30 0x80042438
 
-	int isLastLife();                       // 0x80042490
-	void finish();                          // 0x800424A4
-	void setCleared();                      // 0x800424B4
-	void setWarped();                       // 0x800424C4
-	int handleMessage(ObjMsg* msg);         // 0x80042520
-	void sendLives();                       // 0x8004265C
+	int isLastLife();               // 0x80042490
+	void finish();                  // 0x800424A4
+	void setCleared();              // 0x800424B4
+	void setWarped();               // 0x800424C4
+	int handleMessage(ObjMsg* msg); // 0x80042520
+	void sendLives();               // 0x8004265C
 
-	FlagByte mEndFlags;        // _20 4 = finished 2 and 8 pick the status
-	u8 mSlot;                  // _21
-	u8 _22[0x2];               // _22
-	int mLives;                // _24
-	void* mPool;               // _28 where the states come from
-	GameStateSlot mStateSlot;  // _2C
-	u32 mTime;                 // _30 milliseconds
-	u32 mTimeLimit;            // _34 where the clock stops
+	FlagByte mEndFlags;       // _20 4 = finished 2 and 8 pick the status
+	u8 mSlot;                 // _21
+	u8 _22[0x2];              // _22
+	int mLives;               // _24
+	void* mPool;              // _28 where the states come from
+	GameStateSlot mStateSlot; // _2C
+	u32 mTime;                // _30 milliseconds
+	u32 mTimeLimit;           // _34 where the clock stops
 };
 
 class TIntro : public TObject {
@@ -301,10 +309,7 @@ public:
  * @size 0x6
  */
 struct StageTime {
-	inline u32 toMillis() const
-	{
-		return mMilli + mSecond * 1000 + mMinute * 60 * 1000 + mHour * 60 * 60 * 1000;
-	}
+	inline u32 toMillis() const { return mMilli + mSecond * 1000 + mMinute * 60 * 1000 + mHour * 60 * 60 * 1000; }
 
 	u8 mHour;   // _00
 	u8 mMinute; // _01
@@ -444,33 +449,33 @@ public:
 	void statePause(int phase);
 	void stateMenu(int phase);
 
-	s8 mState;         // _0C 8 = none
-	u8 mPlayerNo;      // _0D
-	u8 _0E;            // _0E lives to start with
-	u8 _0F;            // _0F
-	u16 mTimer;        // _10
-	u8 _12[0x2];       // _12
-	int mMissionType;  // _14
-	TStage* mStage;    // _18
-	const char* mName; // _1C
-	int mSkipDraw;     // _20 drops every other draw when the frame ran late
-	int _24;           // _24
-	f32 mStartX;       // _28
-	f32 mStartY;       // _2C
-	f32 mStartZ;       // _30
-	int mStartAngle;   // _34 Ninja angle
+	s8 mState;                // _0C 8 = none
+	u8 mPlayerNo;             // _0D
+	u8 _0E;                   // _0E lives to start with
+	u8 _0F;                   // _0F
+	u16 mTimer;               // _10
+	u8 _12[0x2];              // _12
+	int mMissionType;         // _14
+	TStage* mStage;           // _18
+	const char* mName;        // _1C
+	int mSkipDraw;            // _20 drops every other draw when the frame ran late
+	int _24;                  // _24
+	f32 mStartX;              // _28
+	f32 mStartY;              // _2C
+	f32 mStartZ;              // _30
+	int mStartAngle;          // _34 Ninja angle
 	TPauseMenu* mPauseMenu;   // _38
 	TIntro* mIntro;           // _3C
 	TResult* mResult;         // _40
-	TGameContext* mContext;       // _44
+	TGameContext* mContext;   // _44
 	StageTime mStartTime;     // _48
 	StageTime mSavedTime;     // _4E
 	StageRecord mRecord;      // _54 a plain struct the ctor resets it last with stageRecordClear
 	StageRecord mSavedRecord; // _74
 	int mStageIndex;          // _94
 	u16 _98;                  // _98
-	int _9C;           // _9C
-	int _A0;           // _A0
+	int _9C;                  // _9C
+	int _A0;                  // _A0
 };
 
 enum StatePhase {
@@ -504,13 +509,13 @@ struct PrdFile {
 	int startLoad(const char* name);
 	void* find(const char* path, u32* outSize);
 
-	BinFile* mFile;  // _00
+	BinFile* mFile;    // _00
 	ARCHandle mHandle; // _04
-	s16 mState;      // _20 0 = empty 1 = ready 2 = loading
-	s16 mRefCount;   // _22
-	char mName[32];  // _24
-	PrdFile* mPrev;  // _44
-	PrdFile* mNext;  // _48
+	s16 mState;        // _20 0 = empty 1 = ready 2 = loading
+	s16 mRefCount;     // _22
+	char mName[32];    // _24
+	PrdFile* mPrev;    // _44
+	PrdFile* mNext;    // _48
 };
 
 enum PrdPool {
@@ -553,7 +558,7 @@ void stageFreeBossConsole();
 
 struct StageCamera {
 	u8 _00[0x44];
-	int mFov;  // _44
+	int mFov; // _44
 	u8 _48[0x8];
 	f32 mNear; // _50
 	f32 mFar;  // _54

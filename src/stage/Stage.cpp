@@ -102,48 +102,86 @@ struct TCustomGameContext;
 // Not identified yet dtk's default fn_/lbl_ names
 
 extern "C" GXColor sLightClearColor; // 0x802CD2D0 .sbss2
-extern "C" void stageStub() { }
+extern "C" void stageStub()
+{
+}
 
 #include "stage/StageClassFuncs.h"
 
 // The stage modules each stage starts and stops in order runInits / runTerms
 void* sStageClassFuncs[0x48] = {
-	(void*)initDrawTasks,       (void*)termDrawTasks,
-	(void*)camCtrlInit,         (void*)camCtrlTerm,
-	(void*)viewportInit,        (void*)viewportTerm,
-	(void*)initColli,           (void*)exitColli,
-	(void*)frameTexInit,        (void*)frameTexExit,
-	(void*)frameBlurInit,       (void*)frameBlurReset,
-	(void*)genTexInit,          (void*)genTexExit,
-	(void*)shadowTexCreate,     (void*)shadowTexDestroy,
-	(void*)spritesInit,         (void*)spritesTerm,
-	(void*)fogLoad,             (void*)fogUnload,
-	(void*)lightZoneInit,       (void*)lightZoneExit,
-	(void*)lightSetCreate,      (void*)lightSetDestroy,
-	(void*)eventInit,           (void*)eventQuit,
-	(void*)eventScriptInit,     (void*)eventScriptExit,
-	(void*)eventCamArcInit,     (void*)eventCamArcExit,
-	(void*)fxSystemInit,        (void*)fxSystemShutdown,
-	(void*)initObjIds,          (void*)shutdownObjIds,
-	(void*)loadEggAssets,       (void*)unloadEggAssets,
-	(void*)gameContextInit,     (void*)gameContextExit,
-	(void*)initSetManager,      (void*)freeSetManager,
-	(void*)initSetGenerator,    (void*)exitSetGenerator,
-	(void*)stageLightsInit,     (void*)stageLightsExit,
-	(void*)drawStateInit,       (void*)drawStateExit,
-	(void*)fogBlendInit,        (void*)fogBlendExit,
-	(void*)debugEditExec,       (void*)debugEditDraw,
-	(void*)groundInit,          (void*)groundShutdown,
-	(void*)createDrawStateSlot, (void*)deleteDrawStateSlot,
-	(void*)fireListCreate,      (void*)fireListFree,
-	(void*)redFireTrapStubA,    (void*)redFireTrapStubB,
-	(void*)railMgrCreate,       (void*)railMgrDestroy,
-	(void*)shadowSystemInit,    (void*)shadowSystemExit,
-	(void*)loadSpeakIconArc,    (void*)freeSpeakIconArc,
-	(void*)ringDrawInit,        (void*)ringDrawTerm,
-	(void*)loadStageSelectText, (void*)freeStageSelectText,
-	(void*)scoreInit,           (void*)scoreExit,
-	(void*)loadEggMessages,     (void*)freeEggMessages,
+	(void*)initDrawTasks,
+	(void*)termDrawTasks,
+	(void*)camCtrlInit,
+	(void*)camCtrlTerm,
+	(void*)viewportInit,
+	(void*)viewportTerm,
+	(void*)initColli,
+	(void*)exitColli,
+	(void*)frameTexInit,
+	(void*)frameTexExit,
+	(void*)frameBlurInit,
+	(void*)frameBlurReset,
+	(void*)genTexInit,
+	(void*)genTexExit,
+	(void*)shadowTexCreate,
+	(void*)shadowTexDestroy,
+	(void*)spritesInit,
+	(void*)spritesTerm,
+	(void*)fogLoad,
+	(void*)fogUnload,
+	(void*)lightZoneInit,
+	(void*)lightZoneExit,
+	(void*)lightSetCreate,
+	(void*)lightSetDestroy,
+	(void*)eventInit,
+	(void*)eventQuit,
+	(void*)eventScriptInit,
+	(void*)eventScriptExit,
+	(void*)eventCamArcInit,
+	(void*)eventCamArcExit,
+	(void*)fxSystemInit,
+	(void*)fxSystemShutdown,
+	(void*)initObjIds,
+	(void*)shutdownObjIds,
+	(void*)loadEggAssets,
+	(void*)unloadEggAssets,
+	(void*)gameContextInit,
+	(void*)gameContextExit,
+	(void*)initSetManager,
+	(void*)freeSetManager,
+	(void*)initSetGenerator,
+	(void*)exitSetGenerator,
+	(void*)stageLightsInit,
+	(void*)stageLightsExit,
+	(void*)drawStateInit,
+	(void*)drawStateExit,
+	(void*)fogBlendInit,
+	(void*)fogBlendExit,
+	(void*)debugEditExec,
+	(void*)debugEditDraw,
+	(void*)groundInit,
+	(void*)groundShutdown,
+	(void*)createDrawStateSlot,
+	(void*)deleteDrawStateSlot,
+	(void*)fireListCreate,
+	(void*)fireListFree,
+	(void*)redFireTrapStubA,
+	(void*)redFireTrapStubB,
+	(void*)railMgrCreate,
+	(void*)railMgrDestroy,
+	(void*)shadowSystemInit,
+	(void*)shadowSystemExit,
+	(void*)loadSpeakIconArc,
+	(void*)freeSpeakIconArc,
+	(void*)ringDrawInit,
+	(void*)ringDrawTerm,
+	(void*)loadStageSelectText,
+	(void*)freeStageSelectText,
+	(void*)scoreInit,
+	(void*)scoreExit,
+	(void*)loadEggMessages,
+	(void*)freeEggMessages,
 };
 
 extern "C" {
@@ -166,7 +204,7 @@ TStage::TStage()
 	_00 = new SceneRecord;
 	setSceneRecord(_00);
 
-	mVis     = new PortalVis;
+	mVis      = new PortalVis;
 	_00->mVis = mVis;
 
 	mLights    = new SceneLights;
@@ -179,9 +217,9 @@ TStage::TStage()
 	_24->set(&mLights->mSet);
 	_00->mLights = _24;
 
-	mPath        = 0;
+	mPath              = 0;
 	sStageObjMotionArc = 0;
-	sStageFirstLoad = 1;
+	sStageFirstLoad    = 1;
 	setCurrentStage(this);
 }
 
@@ -350,7 +388,7 @@ void TStage::start(int first)
 	debugEditInit();
 
 	TSceneManager* unk = new (gObjHeap) TSceneManager(gTL_02);
-	unk->mRecord = _00;
+	unk->mRecord       = _00;
 
 	footPrinterCreate();
 	stageStub();
@@ -491,7 +529,9 @@ TStage* createDefaultStage()
 	return new TStageDefault;
 }
 
-TStageDefault::TStageDefault() { }
+TStageDefault::TStageDefault()
+{
+}
 
 void updateLight()
 {
@@ -506,4 +546,6 @@ void updateLight()
 	}
 }
 
-TStageDefault::~TStageDefault() { }
+TStageDefault::~TStageDefault()
+{
+}

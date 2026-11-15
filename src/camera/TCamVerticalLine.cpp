@@ -10,7 +10,6 @@
 struct Vec3f;
 
 extern "C" {
-
 }
 
 typedef char TCamVerticalLine_size_check[(sizeof(TCamVerticalLine) == 0x270) ? 1 : -1];
@@ -26,14 +25,14 @@ const char* gTCamVerticalLineName = "TCamVerticalLine";
 TCamVerticalLine::TCamVerticalLine(TObject* parent, int player, int look, const Vec3f* target, const void* line)
     : TCamera(parent, player, look)
 {
-	_00    = (u32)gTCamVerticalLineName;
-	mSize  = 0x270;
+	_00   = (u32)gTCamVerticalLineName;
+	mSize = 0x270;
 	camHeadStart(&mHead, 0xFFFF);
 	camCurveStart(&mCurve, target);
 	camCurveHold(&mCurve);
 	mTarget = *target;
-	mRise  = *(f32*)((u8*)line + 4);
-	mReach = vecLenXZ((const Vec3f*)line);
+	mRise   = *(f32*)((u8*)line + 4);
+	mReach  = vecLenXZ((const Vec3f*)line);
 	if (mReach < 5.0f) {
 		mReach = 5.0f;
 	}

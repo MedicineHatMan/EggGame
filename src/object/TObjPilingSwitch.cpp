@@ -73,8 +73,8 @@ void TObjPilingSwitch::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
 	NJS_OBJECT* entry = getStgObjModels()[32];
-	mCenter = *(Vec3f*)&entry->model->center;
-	mRadius = 1.5f * entry->model->r;
+	mCenter           = *(Vec3f*)&entry->model->center;
+	mRadius           = 1.5f * entry->model->r;
 	vecAdd(&mCenter, &mCenter, &mPos);
 
 	mEventId  = desc->getInt(1);
@@ -105,8 +105,8 @@ void TObjPilingSwitch::debugPrint(void*)
 TObjPilingSwitch::TObjPilingSwitch(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00   = (u32)gTObjPilingSwitchName;
-	mSize = 0x1A4;
+	_00    = (u32)gTObjPilingSwitchName;
+	mSize  = 0x1A4;
 	mShape = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks(mShape, 4, 0xFF, 0xFF, 0xF7);
@@ -140,9 +140,9 @@ static void setColliBox(void* colli, const Vec3f* center, f32 radius)
 	high.z = size.z;
 	Vec3f low;
 	Vec3f t = colliNeg(size);
-	low.x = t.x;
-	low.y = t.y;
-	low.z = t.z;
+	low.x   = t.x;
+	low.y   = t.y;
+	low.z   = t.z;
 
 	gjPushUnitMatrix();
 	njTranslateEx(center);
@@ -158,7 +158,7 @@ static void setColliBox(void* colli, const Vec3f* center, f32 radius)
 // 0x800C38E0
 void TObjPilingSwitch::vfn_74()
 {
-	mPause       = 0;
+	mPause        = 0;
 	mLight.mTimer = 0;
 	updateCylinder();
 
@@ -353,7 +353,6 @@ struct CharaColli;
 struct TObjAction;
 
 extern "C" {
-
 }
 
 typedef char TObjLastResonanceSwitch_size_check[(sizeof(TObjLastResonanceSwitch) == 0x1B0) ? 1 : -1];

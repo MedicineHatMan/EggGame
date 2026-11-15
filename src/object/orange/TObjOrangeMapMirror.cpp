@@ -28,10 +28,15 @@ struct CamView;
 extern "C" {
 
 extern const int sMapMirrorModels[] = {
-	0, 1, 2,
+	0,
+	1,
+	2,
 };
 extern const int sMapMirrorTextures[] = {
-	0, 1, 2, 0,
+	0,
+	1,
+	2,
+	0,
 };
 }
 
@@ -43,7 +48,7 @@ extern "C" TObjOrangeMapMirror* createTObjOrangeMapMirror(TObject* parent)
 {
 	TObjOrangeMapMirror* obj;
 	if (gMapMirrorObj == 0) {
-		obj = new TObjOrangeMapMirror(parent);
+		obj           = new TObjOrangeMapMirror(parent);
 		gMapMirrorObj = obj;
 		return obj;
 	}
@@ -66,12 +71,12 @@ void mapMirrorDropSphere(int index)
 TObjOrangeMapMirror::TObjOrangeMapMirror(TObject* parent)
     : TObject(parent)
 {
-	_00      = (u32)gTObjOrangeMapMirrorName;
-	mSize    = 0x28;
-	mPieces  = new MirrorPiece[3];
+	_00     = (u32)gTObjOrangeMapMirrorName;
+	mSize   = 0x28;
+	mPieces = new MirrorPiece[3];
 	for (int i = 0; i < 3; i++) {
-		mPieces[i].mModel = getGeObjModels()[sMapMirrorModels[i]];
-		mPieces[i].mTex   = getGeObjTextures()[sMapMirrorTextures[i]];
+		mPieces[i].mModel  = getGeObjModels()[sMapMirrorModels[i]];
+		mPieces[i].mTex    = getGeObjTextures()[sMapMirrorTextures[i]];
 		mPieces[i].mCenter = *(Vec3f*)&mPieces[i].mModel->model->center;
 		mPieces[i].mRadius = mPieces[i].mModel->model->r;
 	}
@@ -124,7 +129,7 @@ void TObjOrangeMapMirror::draw()
 void TObjOrangeMapMirror::vfn_10()
 {
 	Vec3f* from = (Vec3f*)camGetDrawView();
-	f32 margin = 200.0f;
+	f32 margin  = 200.0f;
 	for (int i = 0; i < 3; i++) {
 		Vec3f gap;
 		vecSub(&gap, &mPieces[i].mCenter, from);

@@ -21,10 +21,15 @@ struct NJS_OBJECT;
 struct DrawStateSlot;
 
 // 0x80064208
-EnemyLight::EnemyLight() { reset(); }
+EnemyLight::EnemyLight()
+{
+	reset();
+}
 
 // 0x80064258
-EnemyLight::~EnemyLight() {}
+EnemyLight::~EnemyLight()
+{
+}
 
 // 0x80064294
 void EnemyLight::reset()
@@ -32,8 +37,8 @@ void EnemyLight::reset()
 	int i;
 
 	for (i = 0; i < 4; i++) {
-		mFaded[i]   = 0;
-		mAlpha[i]   = 0xFF;
+		mFaded[i]  = 0;
+		mAlpha[i]  = 0xFF;
 		mView[i].x = 0.0f;
 		mView[i].y = 0.0f;
 		mView[i].z = 0.0f;
@@ -43,7 +48,10 @@ void EnemyLight::reset()
 }
 
 // 0x800642EC
-void EnemyLight::setFadeDist(f32 dist) { mFadeDist = dist; }
+void EnemyLight::setFadeDist(f32 dist)
+{
+	mFadeDist = dist;
+}
 
 // 0x800642F4
 int EnemyLight::isFaded(int* alpha)
@@ -57,7 +65,9 @@ int EnemyLight::isFaded(int* alpha)
 }
 
 // 0x8006434C
-void EnemyLight::noteView(int, int, int) {}
+void EnemyLight::noteView(int, int, int)
+{
+}
 
 // 0x80064350
 // A see-through object draws in the sorted pass back to front
@@ -83,7 +93,7 @@ static inline f32 clamp01(f32 x)
 // 0x800643DC
 void EnemyLight::setAlpha(f32 opacity, int view, int least)
 {
-	least = (u8)(int)(255.0f * clamp01(opacity)) < (u8)least ? least : (int)(255.0f * clamp01(opacity));
+	least        = (u8)(int)(255.0f * clamp01(opacity)) < (u8)least ? least : (int)(255.0f * clamp01(opacity));
 	mAlpha[view] = least;
 	if (mAlpha[view] == 0xFF) {
 		mFaded[view] = 0;
@@ -181,7 +191,7 @@ DrawState* EnemyLight::drawState(DrawState* buf) const
 		*buf = *result;
 		buf->mFlags |= 0x200;
 		buf->mAmbient = mAlpha[view];
-		result = buf;
+		result        = buf;
 	}
 	return result;
 }

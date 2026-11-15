@@ -51,24 +51,24 @@ enum BowlFlags {
 };
 
 struct BowlPathMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mHolder; // _04
 	u8 _06[2];
-	void* mPath; // _08
+	void* mPath;  // _08
 	void* mPoint; // _0C
-	f32 mSpeed;  // _10
+	f32 mSpeed;   // _10
 };
 
 struct BowlVecMsg {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
 	Vec3f mVec; // _04
 };
 
 typedef char TObjBowlEgg_size_check[(sizeof(TObjBowlEgg) == 0x24C) ? 1 : -1];
 
-static void bowlTev(u8 stage);   // 0x8009F590
+static void bowlTev(u8 stage);    // 0x8009F590
 static void bowlTexGen(u8 coord); // 0x8009F640
 static void* bowlModel();         // 0x8009F6EC
 static void* bowlTexList();       // 0x8009F710
@@ -79,11 +79,11 @@ const char* gTObjBowlEggName = "TObjBowlEgg";
 TObjBowlEgg::TObjBowlEgg(TObject* parent, const SetDesc* desc)
     : TObjAction(parent)
 {
-	_00     = (u32)gTObjBowlEggName;
-	mSize   = 0x24C;
-	mOwner  = 0xFFFF;
-	mLane   = 0xFFFF;
-	mState  = -1;
+	_00    = (u32)gTObjBowlEggName;
+	mSize  = 0x24C;
+	mOwner = 0xFFFF;
+	mLane  = 0xFFFF;
+	mState = -1;
 	setObjId(this, desc->mObjId);
 	mShape = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
@@ -91,14 +91,14 @@ TObjBowlEgg::TObjBowlEgg(TObject* parent, const SetDesc* desc)
 	colliShapeSetSphere(colliGetShape((CharaColli*)mShape, 0));
 	colliGetShape((CharaColli*)mShape, 0)->mFlags = 0x42C;
 	colliGetShape((CharaColli*)mShape, 0)->mSizeX = 7.5f;
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mBody.mBounce = 0.0f;
-	mBody.mRadius     = 7.5f;
-	EggRoll* r     = roll();
-	r->mOwner      = (TObjEgg*)this;
-	r->mPath       = &mCollide;
-	r->mBody       = &mBody;
-	mHandle.mOwner = this;
+	mDraw                                         = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mBody.mBounce                                 = 0.0f;
+	mBody.mRadius                                 = 7.5f;
+	EggRoll* r                                    = roll();
+	r->mOwner                                     = (TObjEgg*)this;
+	r->mPath                                      = &mCollide;
+	r->mBody                                      = &mBody;
+	mHandle.mOwner                                = this;
 	mLink.get()->attach((SetDesc*)desc);
 	initFromDesc((SetDesc*)desc);
 	setState(BOWL_GROUND);
@@ -121,7 +121,7 @@ extern "C" TObject* createTObjBowlEgg(TObject* parent, SetDesc* desc)
 
 /** What carryOn tells the lane 0x1C */
 struct BowlLaneMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mHolder; // _04
 	u8 _06[2];
@@ -160,10 +160,16 @@ void TObjBowlEgg::launch(Vec3f* vel)
 }
 
 // 0x8009E548
-void TObjBowlEgg::kill() { mFlags |= 1; }
+void TObjBowlEgg::kill()
+{
+	mFlags |= 1;
+}
 
 // 0x8009E558
-int TObjBowlEgg::sendToHandle(ObjMsg* msg) { return mHandle.send(msg); }
+int TObjBowlEgg::sendToHandle(ObjMsg* msg)
+{
+	return mHandle.send(msg);
+}
 
 // 0x8009E57C
 int TObjBowlEgg::handleMessage(ObjMsg* msg)
@@ -350,7 +356,10 @@ int TObjBowlEgg::getMsgFlags()
 }
 
 // 0x8009EB30
-int TObjBowlEgg::isHolder(BowlThrowMsg* msg) { return (u8)(msg->mHolder == mHolderId); }
+int TObjBowlEgg::isHolder(BowlThrowMsg* msg)
+{
+	return (u8)(msg->mHolder == mHolderId);
+}
 
 // 0x8009EB48
 int TObjBowlEgg::attachTo(BowlGrabMsg* msg)
@@ -368,7 +377,10 @@ int TObjBowlEgg::attachTo(BowlGrabMsg* msg)
 }
 
 // 0x8009EBBC
-void TObjBowlEgg::release() { mOwner = 0xFFFF; }
+void TObjBowlEgg::release()
+{
+	mOwner = 0xFFFF;
+}
 
 // 0x8009EBCC
 void TObjBowlEgg::updateMatrix()
@@ -407,8 +419,8 @@ void TObjBowlEgg::stateHeld(int phase)
 		TMobileObject* holder = (TMobileObject*)mHandle.mHolder;
 		Vec3f pos;
 		EggRot rot;
-		pos = holder->mBody.mPos;
-		rot = holder->mBody.mRot;
+		pos        = holder->mBody.mPos;
+		rot        = holder->mBody.mRot;
 		mBody.mPos = pos;
 		mBody.mRot = rot;
 		updateMatrix();
@@ -570,7 +582,10 @@ int TObjBowlEgg::onKick(ObjMsg* msg)
 }
 
 // 0x8009F2A4
-int TObjBowlEgg::onGetType() { return 0x1B; }
+int TObjBowlEgg::onGetType()
+{
+	return 0x1B;
+}
 
 // 0x8009F2AC
 int TObjBowlEgg::onGetFlags()
@@ -683,19 +698,34 @@ static void bowlTev(u8 stage)
 }
 
 // 0x8009F640
-static void bowlTexGen(u8 coord) { GXSetTexCoordGen2(coord, GX_TG_MTX3X4, GX_TG_NRM, GX_TEXMTX0, GX_TRUE, GX_PTTEXMTX19); }
+static void bowlTexGen(u8 coord)
+{
+	GXSetTexCoordGen2(coord, GX_TG_MTX3X4, GX_TG_NRM, GX_TEXMTX0, GX_TRUE, GX_PTTEXMTX19);
+}
 
 // 0x8009F678
-int TObjBowlEgg::getKind() { return 1; }
+int TObjBowlEgg::getKind()
+{
+	return 1;
+}
 
 // 0x8009F680
-Vec3f* TObjBowlEgg::getPos() { return &mPos; }
+Vec3f* TObjBowlEgg::getPos()
+{
+	return &mPos;
+}
 
 // 0x8009F688
-SetLink* TObjBowlEgg::getLink() { return (SetLink*)&mLink; }
+SetLink* TObjBowlEgg::getLink()
+{
+	return (SetLink*)&mLink;
+}
 
 // 0x8009F690
-f32 TObjBowlEgg::getRadiusV() { return mBody.mRadius; }
+f32 TObjBowlEgg::getRadiusV()
+{
+	return mBody.mRadius;
+}
 
 // 0x8009F698
 // Counts *timer down true on the frame it reaches 0
@@ -708,19 +738,35 @@ extern "C" int tickTimer32(int* timer)
 }
 
 // Not in the DOL calling the handler here before its body makes the compiler generate it in place
-static int bowlHandleMessage(BowlEggHandle* handle, ObjMsg* msg) { return handle->BowlEggHandle::onMessage(msg); }
+static int bowlHandleMessage(BowlEggHandle* handle, ObjMsg* msg)
+{
+	return handle->BowlEggHandle::onMessage(msg);
+}
 
 // 0x8009F6C0
-int BowlEggHandle::onMessage(ObjMsg* msg) { return ((TObjBowlEgg*)mOwner)->handleMessage(msg); }
+int BowlEggHandle::onMessage(ObjMsg* msg)
+{
+	return ((TObjBowlEgg*)mOwner)->handleMessage(msg);
+}
 
 // 0x8009F6E4
-extern "C" void bowlEggInit() {}
+extern "C" void bowlEggInit()
+{
+}
 
 // 0x8009F6E8
-extern "C" void bowlEggTerm() {}
+extern "C" void bowlEggTerm()
+{
+}
 
 // 0x8009F6EC
-static void* bowlModel() { return getStgObjModels()[20]; }
+static void* bowlModel()
+{
+	return getStgObjModels()[20];
+}
 
 // 0x8009F710
-static void* bowlTexList() { return getStgObjTextures()[19]; }
+static void* bowlTexList()
+{
+	return getStgObjTextures()[19];
+}

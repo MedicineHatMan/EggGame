@@ -82,7 +82,10 @@ TEneYellowBossOrange::~TEneYellowBossOrange()
 }
 
 // 0x8014FE40
-u8 TEneYellowBossOrange::isBroken() { return mOrangeFlags & 1; }
+u8 TEneYellowBossOrange::isBroken()
+{
+	return mOrangeFlags & 1;
+}
 
 // 0x8014FE4C
 int TEneYellowBossOrange::onHit(const TObjAction* other, int arg, int* result)
@@ -104,7 +107,10 @@ int TEneYellowBossOrange::onHit(const TObjAction* other, int arg, int* result)
 }
 
 // 0x8014FED8
-f32 TEneYellowBossOrange::vfn_40() { return 80.0f; }
+f32 TEneYellowBossOrange::vfn_40()
+{
+	return 80.0f;
+}
 
 // 0x8014FEE0
 void TEneYellowBossOrange::pose()
@@ -131,7 +137,10 @@ void TEneYellowBossOrange::calcPoints()
 }
 
 // 0x8014FF90
-void TEneYellowBossOrange::syncShape() { orangeBossFitCollider(mShape, mPoint); }
+void TEneYellowBossOrange::syncShape()
+{
+	orangeBossFitCollider(mShape, mPoint);
+}
 
 // 0x8014FFBC
 void TEneYellowBossOrange::bodyMatrix()
@@ -188,7 +197,7 @@ void TEneYellowBossOrange::keepOnRing()
 	vel.x = mXform.mVel.x;
 	vel.y = mXform.mVel.y;
 	vel.z = mXform.mVel.z;
-	next = (int)(10430.38043493439 * (vecLenXZ(&vel) / radius));
+	next  = (int)(10430.38043493439 * (vecLenXZ(&vel) / radius));
 	next += angle;
 	vecFromAngleXZ(radius, &mXform.mPos, next);
 	mXform.mPos.y = 50.02f;
@@ -384,7 +393,10 @@ void TEneYellowBossOrange::actDie(int phase)
 }
 
 // 0x80150748
-void TEneYellowBossOrange::vfn_10() { cull(mDraw, 3000.0f, 40.0f, &mXform.mPos, 0); }
+void TEneYellowBossOrange::vfn_10()
+{
+	cull(mDraw, 3000.0f, 40.0f, &mXform.mPos, 0);
+}
 
 // 0x8015077C
 void TEneYellowBossOrange::render()

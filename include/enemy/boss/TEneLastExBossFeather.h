@@ -22,15 +22,15 @@ struct Vec3f;
 class TEneLastExBossFeather : public TObjAction {
 public:
 	TEneLastExBossFeather(TObject* parent, const Vec3f* pos, const Vec3f* aim); // 0x8018A120
-	virtual ~TEneLastExBossFeather();                                                // 0x8018A40C
+	virtual ~TEneLastExBossFeather();                                           // 0x8018A40C
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();                                        // _0C 0x8018A86C
-	virtual void vfn_10();                                      // _10 0x8018AA2C
-	virtual void render();                                      // _1C 0x8018AA8C
-	virtual Vec3f* getPos();                                    // _20 0x8018AAE8
-	virtual int getKind();                                      // _2C 0x8018AAE0
+	virtual void draw();                                              // _0C 0x8018A86C
+	virtual void vfn_10();                                            // _10 0x8018AA2C
+	virtual void render();                                            // _1C 0x8018AA8C
+	virtual Vec3f* getPos();                                          // _20 0x8018AAE8
+	virtual int getKind();                                            // _2C 0x8018AAE0
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58 0x8018A4F0
 
 	void updateColli();  // 0x8018A588
@@ -43,17 +43,17 @@ public:
 	void placeBurst();   // 0x8018A82C
 
 	enum {
-		FEATHER_FLY   = 0, // flies to the aim trailing particles
-		FEATHER_LAND  = 1, // the burst starts
-		FEATHER_GROW  = 2, // the hit sphere swells to 15
-		FEATHER_FADE  = 3, // waits then goes
+		FEATHER_FLY  = 0, // flies to the aim trailing particles
+		FEATHER_LAND = 1, // the burst starts
+		FEATHER_GROW = 2, // the hit sphere swells to 15
+		FEATHER_FADE = 3, // waits then goes
 	};
 
 	SetTransform mXform;  // _30
 	MotionPlayer mMotion; // _74
 	EnemyAnim mClip;      // _B0
-	CharaColli* mShape;         // _BC
-	DrawTask* mDraw;          // _C0
+	CharaColli* mShape;   // _BC
+	DrawTask* mDraw;      // _C0
 	void* mAnim;          // _C4
 	ObjShadow mShadow;    // _C8
 	Vec3f mAim;           // _100 where it lands its height is the floor

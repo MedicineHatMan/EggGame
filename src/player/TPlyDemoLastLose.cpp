@@ -55,7 +55,7 @@ void TPlyDemoLastLose::stepIntro()
 	}
 	TChrPlayer* player = (TChrPlayer*)findPlayer(0);
 	Vec3f pos;
-	pos = *player->getPos();
+	pos    = *player->getPos();
 	mEvent = createCamPath(0, 2, gLastLoseExports->mCamObject, gLastLoseExports->mCamMotion, 0, 0.0f, 0.5f);
 	mEvent->attachToMtx();
 	f32 mtx[12];

@@ -49,25 +49,25 @@ public:
 	void stateOpenAtEye();
 	void stateDone();
 
-	NJS_OBJECT* mModelData;  // _64
-	NJS_TEXLIST* mTexList;    // _68
-	MeshData* mColliData;  // _6C
-	DrawTask* mDrawTask;   // _70
-	ObjDrawState mState;  // _74
-	ObjModel mModel;   // _98
-	f32 mMatrix[12];   // _B8
-	MeshObject* mColli;      // _E8
-	u16 mSwitchId;     // _EC
-	int mUseCamera;    // _F0
-	Vec3f mCenter;     // _F4
-	f32 mRadius;       // _100
-	f32 mLift;         // _104 how far along X the door has slid
-	TCamera* mFixCam;  // _108 a TCamFix
-	int mHasOffset;    // _10C
-	Vec3f mCamEye;    // _110
-	EventCamRef mCam;  // _11C
-	EnemyLight mLight; // _124
-	int mAct;          // _164 0 = wait 1 = open 2 = open with the camera at the record's eye 3 = done
+	NJS_OBJECT* mModelData; // _64
+	NJS_TEXLIST* mTexList;  // _68
+	MeshData* mColliData;   // _6C
+	DrawTask* mDrawTask;    // _70
+	ObjDrawState mState;    // _74
+	ObjModel mModel;        // _98
+	f32 mMatrix[12];        // _B8
+	MeshObject* mColli;     // _E8
+	u16 mSwitchId;          // _EC
+	int mUseCamera;         // _F0
+	Vec3f mCenter;          // _F4
+	f32 mRadius;            // _100
+	f32 mLift;              // _104 how far along X the door has slid
+	TCamera* mFixCam;       // _108 a TCamFix
+	int mHasOffset;         // _10C
+	Vec3f mCamEye;          // _110
+	EventCamRef mCam;       // _11C
+	EnemyLight mLight;      // _124
+	int mAct;               // _164 0 = wait 1 = open 2 = open with the camera at the record's eye 3 = done
 };
 
 extern "C" {

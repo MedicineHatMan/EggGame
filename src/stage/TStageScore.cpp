@@ -86,7 +86,7 @@ int TStageScore::hitsNeeded(int kind)
 // 0x801B34DC
 void TStageScore::addKind(int kind)
 {
-	if (1 <= mCombo  && mCombo <= 3) {
+	if (1 <= mCombo && mCombo <= 3) {
 		mKinds[mCombo - 1] = kind;
 	}
 	switch (kind) {
@@ -168,7 +168,7 @@ int TStageScore::newChain(int kind)
 	}
 	if (slot < 0) {
 		int oldest = mChains[0].mLastTime;
-		slot = 0;
+		slot       = 0;
 		for (int i = 1; i < 16; i++) {
 			if (mChains[i].mLastTime < oldest) {
 				slot   = i;

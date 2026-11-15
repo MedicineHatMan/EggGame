@@ -10,9 +10,9 @@ void gjShapeSetListCount(s32 count)
 {
 	s32 size = count << 2;
 	u8* base;
-	gjCurShapeState->size = size;
+	gjCurShapeState->size  = size;
 	gjCurShapeState->total = size + size;
-	base = gjCurShapeState->base;
+	base                   = gjCurShapeState->base;
 	gjCurShapeState->list0 = (void**)base;
 	gjCurShapeState->list1 = (void**)(base + gjCurShapeState->size);
 	gjCurShapeState->index = 0;
@@ -24,7 +24,7 @@ void gjShapeNextList(void)
 	u8* base = gjCurShapeState->base;
 
 	base += gjCurShapeState->total;
-	gjCurShapeState->base = base;
+	gjCurShapeState->base  = base;
 	gjCurShapeState->list0 = (void**)base;
 	gjCurShapeState->list1 = (void**)(base + gjCurShapeState->size);
 	gjCurShapeState->index = 0;
@@ -33,11 +33,11 @@ void gjShapeNextList(void)
 // 0x802181E4
 void gjShapeBegin(GjShape* shape, f32 frame)
 {
-	gjCurShapeState->base = shape->base;
-	gjCurShapeState->_18 = shape->_04;
+	gjCurShapeState->base  = shape->base;
+	gjCurShapeState->_18   = shape->_04;
 	gjCurShapeState->frame = frame;
 	gjCurShapeState->index = 0;
-	gjCurShapeState->type = shape->type;
+	gjCurShapeState->type  = shape->type;
 	gjShapeSetListCount(shape->nodes & ~0xC0);
 }
 
@@ -124,7 +124,7 @@ void gjShapeBlendKeys(void* a, void* b, void* model, f32 frame)
 
 	if (a != NULL) {
 		gjKeyBracket(a, 8, (u32)b, frame, (void**)&key0, (void**)&key1, &t);
-		rest = 1.0f - t;
+		rest  = 1.0f - t;
 		data0 = key0->data;
 		data1 = key1->data;
 	}

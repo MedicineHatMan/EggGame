@@ -26,19 +26,19 @@ public:
 	virtual void vfn_10(); // _10 empty
 	virtual void render(); // _1C
 
-	void setup();              // 0x80198960
-	void updateMatrix();       // 0x80198B00
-	void stepMotion();         // 0x80198B44
-	void play(s16 id);         // 0x80198C00
+	void setup();        // 0x80198960
+	void updateMatrix(); // 0x80198B00
+	void stepMotion();   // 0x80198B44
+	void play(s16 id);   // 0x80198C00
 
-	GjActor* mActor;        // _20
-	f32 mMtx[12];        // _24
-	Vec3f mPos;          // _54
-	BattleAngle mAngle;  // _60
-	DrawTask* mDraw;         // _6C
+	GjActor* mActor;      // _20
+	f32 mMtx[12];         // _24
+	Vec3f mPos;           // _54
+	BattleAngle mAngle;   // _60
+	DrawTask* mDraw;      // _6C
 	MotionPlayer mMotion; // _70
-	s16 mMotionId;       // _AC
-	u16 _AE;             // _AE
+	s16 mMotionId;        // _AC
+	u16 _AE;              // _AE
 };
 
 /**
@@ -61,11 +61,11 @@ public:
 	void setup();        // 0x80198DE0
 	void updateMatrix(); // 0x80198EAC
 
-	void* mBlock;   // _20
-	f32 mMtx[12];   // _24
-	Vec3f mPos;     // _54
+	void* mBlock;       // _20
+	f32 mMtx[12];       // _24
+	Vec3f mPos;         // _54
 	BattleAngle mAngle; // _60
-	f32 mScale;     // _6C
+	f32 mScale;         // _6C
 	DrawTask* mDraw;    // _70
 };
 

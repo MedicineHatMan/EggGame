@@ -189,8 +189,14 @@ extern "C" void getSetDesignCounts(int* outCount, int* outCapacity)
 	getSetCounts(SET_KIND_DESIGN, outCount, outCapacity);
 }
 
-static inline int listCount(SetList* list) { return list->mCount; }
-static inline int listCapacity(SetList* list) { return list->mCapacity; }
+static inline int listCount(SetList* list)
+{
+	return list->mCount;
+}
+static inline int listCapacity(SetList* list)
+{
+	return list->mCapacity;
+}
 
 // 0x80017188
 void SetManager::getCounts(int kind, int* outCount, int* outCapacity)
@@ -233,7 +239,7 @@ extern "C" TObject* setSetDesignParent(TObject* parent)
 TObject* SetManager::setParent(int kind, TObject* parent)
 {
 	TObject* old = 0;
-	bool valid = false;
+	bool valid   = false;
 	if (kind >= 0 && kind < SET_KIND_COUNT) {
 		valid = true;
 	}
@@ -327,7 +333,7 @@ u32 SetManager::spawnById(int kindA, int kindB, int id)
 	SetListObj* list;
 	SetSlot* slot;
 	int result;
-	int i = 0;
+	int i  = 0;
 	list   = mObjLists[kindA];
 	result = 0xFFFF;
 	count  = list->mCount;
@@ -447,7 +453,7 @@ void SetManager::attachLink(SetLink* link)
 }
 
 SetListEnemy::SetListEnemy(int kind, int capacity)
-	: SetList(kind, capacity)
+    : SetList(kind, capacity)
 {
 	mCount   = 0;
 	mRecords = 0;
@@ -481,7 +487,7 @@ SetEnemyRecord* SetListEnemy::getRecord(int index)
 }
 
 SetListObj::SetListObj(int kind, int capacity)
-	: SetList(kind, capacity)
+    : SetList(kind, capacity)
 {
 	mCount   = 0;
 	mRecords = 0;
@@ -649,7 +655,7 @@ void SetListObj::remove(int index)
 	mCount--;
 	for (int i = index; i < mCount; i++) {
 		*(SetRecordCopy*)&mRecords[i] = *(SetRecordCopy*)&mRecords[i + 1];
-		mSlots[i] = mSlots[i + 1];
+		mSlots[i]                     = mSlots[i + 1];
 		if (findObjById(mSlots[i].mObjId) != 0) {
 			mSlots[i].setLinkIndex(i);
 		}
@@ -684,7 +690,7 @@ void SetListEnemy::remove(int index)
 	mCount--;
 	for (int i = index; i < mCount; i++) {
 		*(SetEnemyRecordCopy*)&mRecords[i] = *(SetEnemyRecordCopy*)&mRecords[i + 1];
-		mSlots[i] = mSlots[i + 1];
+		mSlots[i]                          = mSlots[i + 1];
 		if (findObjById(mSlots[i].mObjId) != 0) {
 			mSlots[i].setLinkIndex(i);
 		}

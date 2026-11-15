@@ -21,7 +21,7 @@ int StepFilter::accept(int hit, f32 y, f32 groundY, f32 normalY)
 	int ok = false;
 	if (hit) {
 		f32 rise = groundY - y;
-		ok = -rise <= mStep;
+		ok       = -rise <= mStep;
 	}
 	return ok;
 }
@@ -74,9 +74,9 @@ void colliSumPush(CharaColli* colli, Vec3f* out)
 void colliFlatPush(CharaColli* colli, Vec3f* out)
 {
 	f32 zero = 0.0f;
-	out->x = zero;
-	out->y = zero;
-	out->z = zero;
+	out->x   = zero;
+	out->y   = zero;
+	out->z   = zero;
 	colliSumPush(colli, out);
 	out->y = 0.0f;
 }
@@ -84,7 +84,7 @@ void colliFlatPush(CharaColli* colli, Vec3f* out)
 // 0x801471E8
 void flatSteer(f32 scale, const Vec3f* to, Vec3f* from, Vec3f* out)
 {
-	f32 y = out->y;
+	f32 y  = out->y;
 	out->x = to->x;
 	out->y = to->y;
 	out->z = to->z;
@@ -175,7 +175,7 @@ u32 probeWall(f32 radius, Vec3f* from, Vec3f* dir, f32* dist, Vec3f* outPos, Vec
 		to.y = hitPos.y;
 		to.z = hitPos.z;
 		njSubVector(&to, from);
-		to.y = 0.0f;
+		to.y  = 0.0f;
 		*dist = njScalor(&to) - radius;
 		if (outPos != NULL) {
 			outPos->x = hitPos.x;
@@ -255,22 +255,22 @@ u32 moveBody(f32 radius, Vec3f* pos, const Vec3f* move, GroundFilter* filter, Ob
 	u32 wall;
 	f32 dy = move->y;
 
-	dir.x = move->x;
-	dir.y = move->y;
-	dir.z = move->z;
-	dir.y = 0.0f;
+	dir.x   = move->x;
+	dir.y   = move->y;
+	dir.z   = move->z;
+	dir.y   = 0.0f;
 	f32 len = njUnitVector(&dir);
 	if (len < gUnitVectorMin) {
 		dir.x = gVecZero.x;
 		dir.y = gVecZero.y;
 		dir.z = gVecZero.z;
 	}
-	dist = len;
+	dist   = len;
 	from.x = pos->x;
 	from.y = pos->y;
 	from.z = pos->z;
 	from.y += 10.0f;
-	wall   = probeWall(radius, &from, &dir, &dist, NULL, NULL);
+	wall = probeWall(radius, &from, &dir, &dist, NULL, NULL);
 	gjMulAddVector(dist, &to, &from, &dir);
 	return wall | moveOnGround(dy, pos, &to, filter, shadow);
 }

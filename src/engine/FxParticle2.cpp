@@ -20,7 +20,7 @@ union FxPipe {
 	f32 f32;
 };
 volatile FxPipe fxPipe : 0xCC008000;
-#define FX_PIPE (fxPipe.f32)
+#define FX_PIPE  (fxPipe.f32)
 #define FX_PIPE8 (fxPipe.u8)
 #define FX_ANGLE 10430.38043493439
 
@@ -36,7 +36,7 @@ struct FxSpin {
 struct FxTrail {
 	FxTrail* mNext;
 	FxTrail* mPrev;
-	u16 mLife;   // _08
+	u16 mLife; // _08
 	u16 _0A;
 	f32 mLength; // _0C to the next point
 	f32 mTotal;  // _10 along the trail from the head
@@ -50,13 +50,8 @@ u8 sFxStripIndex3[3][3] = {
 	{ 2, 8, 3 },
 };
 u8 sFxStripIndex5[5][5] = {
-	{ 0, 9, 4, 10, 1 },
-	{ 11, 12, 13, 14, 15 },
-	{ 5, 16, 6, 17, 7 },
-	{ 18, 19, 20, 21, 22 },
-	{ 2, 23, 8, 24, 3 },
+	{ 0, 9, 4, 10, 1 }, { 11, 12, 13, 14, 15 }, { 5, 16, 6, 17, 7 }, { 18, 19, 20, 21, 22 }, { 2, 23, 8, 24, 3 },
 };
-
 }
 
 static inline double fxAbsD(double x)
@@ -111,15 +106,15 @@ static inline void fxPartMove(FxParticle* part)
 		part->mVel[2] += owner->mShapeA;
 		f32 radius = fxAbsD(owner->_A0);
 		f32 slope  = fxAbsD(owner->_A4);
-		radius = part->mVel[2] * (f32)tan(slope) + radius;
+		radius     = part->mVel[2] * (f32)tan(slope) + radius;
 		radius *= part->mVel[1];
 		part->mVel[0] += owner->mGravity;
 		f32 y, x;
 		njSinCos((int)(FX_ANGLE * part->mVel[0]), &y, &x);
 		x *= radius;
 		y *= radius;
-		f32 h = part->mVel[2];
-		const f32* m = owner->mFollow != NULL ? owner->mFollow : owner->mMatrix;
+		f32 h         = part->mVel[2];
+		const f32* m  = owner->mFollow != NULL ? owner->mFollow : owner->mMatrix;
 		part->mPos[0] = m[3] + (x * c1 + h * s1);
 		part->mPos[1] = m[7] + (c1 * (h * s0) + (s1 * (-x * s0) + y * c0));
 		part->mPos[2] = m[11] + (c1 * (h * c0) + (s1 * (-x * c0) - y * s0));
@@ -160,11 +155,11 @@ static inline void fxSetFlag(FxParticle* part, u32 how, u16 bit)
 }
 
 // Moves a colour channel by up to the signed range either way kept within 0-255
-static inline void fxRandomColor(u8* color, u8* range)
+static inline void fxRandomColor(u8* color, u8*& pc)
 {
 	f32 c = fxRandom();
-	c = (f32)(*(s8*)range << 1) * c;
-	c = (f32)*color + c;
+	c     = (f32)(*(s8*)pc++ << 1) * c;
+	c     = (f32)*color + c;
 	if (c < 0.0f) {
 		c = 0.0f;
 	}
@@ -186,7 +181,7 @@ void fxPartRunScript(FxParticle* part)
 			pc++;
 			if (op == 0xFF) {
 				part->mLife = 1;
-				wait = 0;
+				wait        = 0;
 				break;
 			}
 			if (op < 0x80) {
@@ -203,7 +198,7 @@ void fxPartRunScript(FxParticle* part)
 				}
 				continue;
 			}
-			wait = 0;
+			wait     = 0;
 			u32 code = fxPartCode(op);
 			f32 value;
 			f32 extra;
@@ -227,8 +222,8 @@ void fxPartRunScript(FxParticle* part)
 				break;
 			case 0x89: {
 				int n = *pc++;
-				pc = fxRead32(pc, (u8*)&value);
-				pc = fxRead32(pc, (u8*)&extra);
+				pc    = fxRead32(pc, (u8*)&value);
+				pc    = fxRead32(pc, (u8*)&extra);
 				value = n != 0 ? value + (extra * (f32)(int)((f32)(n + 1) * fxRandom())) / (f32)n : value + extra * fxRandom();
 				part->mRotTo += value;
 				part->mRot += value;
@@ -353,10 +348,9 @@ void fxPartRunScript(FxParticle* part)
 				}
 				break;
 			case 0x8B:
-				fxRandomColor(&part->mColorTo[0], &pc[0]);
-				fxRandomColor(&part->mColorTo[1], &pc[1]);
-				fxRandomColor(&part->mColorTo[2], &pc[2]);
-				pc += 3;
+				fxRandomColor(&part->mColorTo[0], pc);
+				fxRandomColor(&part->mColorTo[1], pc);
+				fxRandomColor(&part->mColorTo[2], pc);
 				if (part->mColorFrames == 0) {
 					part->mColor[0] = part->mColorTo[0];
 					part->mColor[1] = part->mColorTo[1];
@@ -423,16 +417,16 @@ void fxCellCoords(int mode, int cell, u8* out)
 		out[3] = 3;
 		break;
 	case 1:
-		col = cell & 1;
-		row = (cell >> 1) & 1;
+		col    = cell & 1;
+		row    = (cell >> 1) & 1;
 		out[0] = ((const u8(*)[3])sFxStripIndex3)[row][col];
 		out[1] = ((const u8(*)[3])sFxStripIndex3)[row][col + 1];
 		out[2] = ((const u8(*)[3])sFxStripIndex3)[row + 1][col];
 		out[3] = ((const u8(*)[3])sFxStripIndex3)[row + 1][col + 1];
 		break;
 	case 2:
-		col = cell & 3;
-		row = (cell >> 2) & 3;
+		col    = cell & 3;
+		row    = (cell >> 2) & 3;
 		out[0] = ((const u8(*)[5])sFxStripIndex5)[row][col];
 		out[1] = ((const u8(*)[5])sFxStripIndex5)[row][col + 1];
 		out[2] = ((const u8(*)[5])sFxStripIndex5)[row + 1][col];
@@ -444,26 +438,26 @@ void fxCellCoords(int mode, int cell, u8* out)
 // The fields every emitter kind reads from its description
 static inline void fxEmitterReadDesc(FxEmitter* fx, FxEmitterDesc* desc)
 {
-	fx->mRate      = desc->mRate;
-	fx->mAccum     = 0.0f;
-	fx->mMax       = desc->mMax;
-	fx->mPartLife  = desc->mPartLife;
-	fx->mPartFlags = desc->mPartFlags;
-	fx->mTex[0]    = desc->mTex[0];
-	fx->mTex[1]    = desc->mTex[1];
-	fx->mTexGroup  = desc->mTexGroup;
-	fx->mMaterial  = desc->mMaterial;
-	fx->mDir[0] = desc->mDir[0];
-	fx->mDir[1] = desc->mDir[1];
-	fx->mDir[2] = desc->mDir[2];
-	fx->mGravity = desc->mGravity;
-	fx->mDamp    = desc->mDamp;
-	fx->mScale   = desc->mScale;
+	fx->mRate       = desc->mRate;
+	fx->mAccum      = 0.0f;
+	fx->mMax        = desc->mMax;
+	fx->mPartLife   = desc->mPartLife;
+	fx->mPartFlags  = desc->mPartFlags;
+	fx->mTex[0]     = desc->mTex[0];
+	fx->mTex[1]     = desc->mTex[1];
+	fx->mTexGroup   = desc->mTexGroup;
+	fx->mMaterial   = desc->mMaterial;
+	fx->mDir[0]     = desc->mDir[0];
+	fx->mDir[1]     = desc->mDir[1];
+	fx->mDir[2]     = desc->mDir[2];
+	fx->mGravity    = desc->mGravity;
+	fx->mDamp       = desc->mDamp;
+	fx->mScale      = desc->mScale;
 	fx->mPartScript = desc->mPartScript;
-	fx->mCount = 0;
-	fx->mKids  = NULL;
-	fx->_A0 = desc->_14;
-	fx->_A4 = desc->_18;
+	fx->mCount      = 0;
+	fx->mKids       = NULL;
+	fx->_A0         = desc->_14;
+	fx->_A4         = desc->_18;
 	fxEmitterReadShape(fx, desc);
 }
 
@@ -475,13 +469,14 @@ FxEmitter* fxQuadNew(FxBank* bank, int index)
 		return NULL;
 	}
 	FxEmitterDesc* desc = (FxEmitterDesc*)bank->mDescs[index * 2 + 1];
-	fx->mUpdate = (void (*)(Fx*))fxQuadUpdate;
-	fx->mDraw   = (void (*)(Fx*))fxQuadDraw;
-	fx->mRemove = (void (*)(Fx*))fxEmitterFree;
+	Fx* base            = fx;
+	fx->mUpdate         = (void (*)(Fx*))fxQuadUpdate;
+	fx->mDraw           = (void (*)(Fx*))fxQuadDraw;
+	fx->mRemove         = (void (*)(Fx*))fxEmitterFree;
 	fx->mFlags |= desc->mFlags;
 	fx->mKind = desc->mKind;
 	fx->mStop = desc->mLife != 0 ? desc->mLife : 0xFFFF;
-	fxEmitterReadDesc(fx, desc);
+	fxEmitterReadDesc((FxEmitter*)base, desc);
 	return fx;
 }
 
@@ -518,29 +513,29 @@ void fxQuadDrawOne(FxParticle* part, int mtx)
 	fxCellCoords(part->_05, part->_08, uv);
 	fxPartColor(part, color);
 	GXBegin(GX_QUADS, GX_VTXFMT7, 4);
-	f32 z = 0.0f;
+	f32 z    = 0.0f;
 	FX_PIPE8 = mtx;
-	FX_PIPE = -size;
-	FX_PIPE = size;
-	FX_PIPE = z;
+	FX_PIPE  = -size;
+	FX_PIPE  = size;
+	FX_PIPE  = z;
 	fxColor4u8(color[0], color[1], color[2], color[3]);
 	FX_PIPE8 = uv[0];
 	FX_PIPE8 = mtx;
-	FX_PIPE = size;
-	FX_PIPE = size;
-	FX_PIPE = z;
+	FX_PIPE  = size;
+	FX_PIPE  = size;
+	FX_PIPE  = z;
 	fxColor4u8(color[0], color[1], color[2], color[3]);
 	FX_PIPE8 = uv[1];
 	FX_PIPE8 = mtx;
-	FX_PIPE = size;
-	FX_PIPE = -size;
-	FX_PIPE = z;
+	FX_PIPE  = size;
+	FX_PIPE  = -size;
+	FX_PIPE  = z;
 	fxColor4u8(color[0], color[1], color[2], color[3]);
 	FX_PIPE8 = uv[3];
 	FX_PIPE8 = mtx;
-	FX_PIPE = -size;
-	FX_PIPE = -size;
-	FX_PIPE = z;
+	FX_PIPE  = -size;
+	FX_PIPE  = -size;
+	FX_PIPE  = z;
 	fxColor4u8(color[0], color[1], color[2], color[3]);
 	FX_PIPE8 = uv[2];
 }
@@ -559,7 +554,7 @@ void fxQuadDraw(FxEmitter* fx)
 	fxSetVtxLayout(7);
 	if (gFxRenderReady != 1) {
 		gFxRenderReady = 1;
-		int* in = (int*)(state + 0x270);
+		int* in        = (int*)(state + 0x270);
 		GXSetTevColorIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
 		in = (int*)(state + 0x290);
 		GXSetTevAlphaIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
@@ -614,6 +609,7 @@ void fxQuatFromAngles(f32* q, f32 x, f32 y, f32 z)
 
 // 0x800E5100
 // Normalises a vector by the frsqrte estimate and returns the fres estimate of its old length
+// clang-format off
 asm f32 fxNormalize(f32* out, const f32* in)
 {
 	nofralloc
@@ -633,6 +629,7 @@ asm f32 fxNormalize(f32* out, const f32* in)
 	fres f1, f0
 	blr
 }
+// clang-format on
 
 // 0x800E513C
 // A rotation around an axis
@@ -681,7 +678,7 @@ void fxQuadPartStep(FxParticle* part)
 			pc++;
 			if (op == 0xFF) {
 				part->mLife = 1;
-				wait = 0;
+				wait        = 0;
 				break;
 			}
 			if (op < 0x80) {
@@ -698,7 +695,7 @@ void fxQuadPartStep(FxParticle* part)
 				}
 				continue;
 			}
-			wait = 0;
+			wait     = 0;
 			u32 code = fxPartCode(op);
 			f32 axis[3];
 			f32 value;
@@ -817,10 +814,9 @@ void fxQuadPartStep(FxParticle* part)
 				}
 				break;
 			case 0x8B:
-				fxRandomColor(&part->mColorTo[0], &pc[0]);
-				fxRandomColor(&part->mColorTo[1], &pc[1]);
-				fxRandomColor(&part->mColorTo[2], &pc[2]);
-				pc += 3;
+				fxRandomColor(&part->mColorTo[0], pc);
+				fxRandomColor(&part->mColorTo[1], pc);
+				fxRandomColor(&part->mColorTo[2], pc);
 				if (part->mColorFrames == 0) {
 					part->mColor[0] = part->mColorTo[0];
 					part->mColor[1] = part->mColorTo[1];
@@ -898,48 +894,48 @@ FxParticle* fxQuadSpawn(u16 flags, u16 life, u8* script, FxEmitter* fx, f32 x, f
 	FxParticle* part = fxPartAllocExtra();
 	if (part != NULL) {
 		fx->mCount++;
-		part->mNext = fx->mKids;
-		fx->mKids   = part;
-		part->mLoops = 0;
-		part->_05    = 0;
-		part->_09    = 0;
-		part->_08    = 0;
-		part->mFlags = flags;
-		part->mLife  = life != 0 ? life : 0xFFFF;
-		part->mScript = script;
-		part->mWait   = script != NULL ? 1 : 0;
-		part->mPc     = 0;
+		part->mNext        = fx->mKids;
+		fx->mKids          = part;
+		part->mLoops       = 0;
+		part->_05          = 0;
+		part->_09          = 0;
+		part->_08          = 0;
+		part->mFlags       = flags;
+		part->mLife        = life != 0 ? life : 0xFFFF;
+		part->mScript      = script;
+		part->mWait        = script != NULL ? 1 : 0;
+		part->mPc          = 0;
 		part->mScaleFrames = 0;
 		part->mRotFrames   = 0;
 		part->mColorFrames = 0;
 		part->mAlphaFrames = 0;
-		part->mGravity = gravity;
-		part->mDamp    = damp;
-		part->mScaleTo = scale;
-		part->mScale   = scale;
-		part->mRotTo   = 0.0f;
-		part->mRot     = 0.0f;
-		part->mVel[0] = vx;
-		part->mVel[1] = vy;
-		part->mVel[2] = vz;
-		part->mPos[0] = x;
-		part->mPos[1] = y;
-		part->mPos[2] = z;
-		part->mColor[3] = 0xFF;
-		part->mColor[2] = 0xFF;
-		part->mColor[1] = 0xFF;
-		part->mColor[0] = 0xFF;
-		part->mStep  = NULL;
-		part->mOwner = fx;
-		FxSpin* spin = (FxSpin*)part->mExtra;
-		spin->mRot[2] = 0.0f;
-		spin->mRot[1] = 0.0f;
-		spin->mRot[0] = 0.0f;
-		spin->mRot[3] = 1.0f;
-		spin->mStep[2] = 0.0f;
-		spin->mStep[1] = 0.0f;
-		spin->mStep[0] = 0.0f;
-		spin->mStep[3] = 1.0f;
+		part->mGravity     = gravity;
+		part->mDamp        = damp;
+		part->mScaleTo     = scale;
+		part->mScale       = scale;
+		part->mRotTo       = 0.0f;
+		part->mRot         = 0.0f;
+		part->mVel[0]      = vx;
+		part->mVel[1]      = vy;
+		part->mVel[2]      = vz;
+		part->mPos[0]      = x;
+		part->mPos[1]      = y;
+		part->mPos[2]      = z;
+		part->mColor[3]    = 0xFF;
+		part->mColor[2]    = 0xFF;
+		part->mColor[1]    = 0xFF;
+		part->mColor[0]    = 0xFF;
+		part->mStep        = NULL;
+		part->mOwner       = fx;
+		FxSpin* spin       = (FxSpin*)part->mExtra;
+		spin->mRot[2]      = 0.0f;
+		spin->mRot[1]      = 0.0f;
+		spin->mRot[0]      = 0.0f;
+		spin->mRot[3]      = 1.0f;
+		spin->mStep[2]     = 0.0f;
+		spin->mStep[1]     = 0.0f;
+		spin->mStep[0]     = 0.0f;
+		spin->mStep[3]     = 1.0f;
 	}
 	return part;
 }
@@ -952,13 +948,14 @@ FxEmitter* fxTrailNew(FxBank* bank, int index)
 		return NULL;
 	}
 	FxEmitterDesc* desc = (FxEmitterDesc*)bank->mDescs[index * 2 + 1];
-	fx->mUpdate = (void (*)(Fx*))fxTrailUpdate;
-	fx->mDraw   = (void (*)(Fx*))fxTrailDraw;
-	fx->mRemove = (void (*)(Fx*))fxEmitterFree;
+	Fx* base            = fx;
+	fx->mUpdate         = (void (*)(Fx*))fxTrailUpdate;
+	fx->mDraw           = (void (*)(Fx*))fxTrailDraw;
+	fx->mRemove         = (void (*)(Fx*))fxEmitterFree;
 	fx->mFlags |= desc->mFlags;
 	fx->mKind = desc->mKind;
 	fx->mStop = desc->mLife != 0 ? desc->mLife : 0xFFFF;
-	fxEmitterReadDesc(fx, desc);
+	fxEmitterReadDesc((FxEmitter*)base, desc);
 	return fx;
 }
 
@@ -989,10 +986,10 @@ u8* fxTrailAddPoint(u8* pc, FxParticle* part)
 	if (point == NULL) {
 		head = (FxTrail*)part->mExtra;
 		if (head != NULL) {
-			point = head->mPrev;
-			point->mNext = head;
+			point               = head->mPrev;
+			point->mNext        = head;
 			point->mPrev->mNext = NULL;
-			part->mExtra = (FxExtra*)point;
+			part->mExtra        = (FxExtra*)point;
 		} else {
 			u16 unused;
 			return fxReadFrames(pc, (s16*)&unused);
@@ -1022,7 +1019,7 @@ void fxTrailRunScript(FxParticle* part)
 			pc++;
 			if (op == 0xFF) {
 				part->mLife = 1;
-				wait = 0;
+				wait        = 0;
 				break;
 			}
 			if (op < 0x80) {
@@ -1039,7 +1036,7 @@ void fxTrailRunScript(FxParticle* part)
 				}
 				continue;
 			}
-			wait = 0;
+			wait     = 0;
 			u32 code = fxPartCode(op);
 			f32 value;
 			f32 extra;
@@ -1171,10 +1168,9 @@ void fxTrailRunScript(FxParticle* part)
 				}
 				break;
 			case 0x8B:
-				fxRandomColor(&part->mColorTo[0], &pc[0]);
-				fxRandomColor(&part->mColorTo[1], &pc[1]);
-				fxRandomColor(&part->mColorTo[2], &pc[2]);
-				pc += 3;
+				fxRandomColor(&part->mColorTo[0], pc);
+				fxRandomColor(&part->mColorTo[1], pc);
+				fxRandomColor(&part->mColorTo[2], pc);
 				if (part->mColorFrames == 0) {
 					part->mColor[0] = part->mColorTo[0];
 					part->mColor[1] = part->mColorTo[1];
@@ -1235,15 +1231,15 @@ void fxTrailPartStep(FxParticle* part)
 		part->mVel[2] += owner->mShapeA;
 		f32 radius = fxAbsD(owner->_A0);
 		f32 slope  = fxAbsD(owner->_A4);
-		radius = part->mVel[2] * (f32)tan(slope) + radius;
+		radius     = part->mVel[2] * (f32)tan(slope) + radius;
 		radius *= part->mVel[1];
 		part->mVel[0] += owner->mGravity;
 		f32 y, x;
 		njSinCos((int)(FX_ANGLE * part->mVel[0]), &y, &x);
 		x *= radius;
 		y *= radius;
-		f32 h = part->mVel[2];
-		const f32* m = owner->mFollow != NULL ? owner->mFollow : owner->mMatrix;
+		f32 h         = part->mVel[2];
+		const f32* m  = owner->mFollow != NULL ? owner->mFollow : owner->mMatrix;
 		part->mPos[0] = m[3] + (x * c1 + h * s1);
 		part->mPos[1] = m[7] + (c1 * (h * s0) + (s1 * (-x * s0) + y * c0));
 		part->mPos[2] = m[11] + (c1 * (h * c0) + (s1 * (-x * c0) - y * s0));
@@ -1260,7 +1256,7 @@ void fxTrailPartStep(FxParticle* part)
 	if (point != NULL) {
 		gjSubVector((Vec3f*)d, (const Vec3f*)part->mPos, (const Vec3f*)point->mPos);
 		point->mLength = njScalor((Vec3f*)d);
-		f32 total = 0.0f;
+		f32 total      = 0.0f;
 		while (point != NULL) {
 			total += point->mLength;
 			point->mTotal = total;
@@ -1301,7 +1297,7 @@ void fxTrailDraw(FxEmitter* fx)
 		if (part->mFlags & 0x400) {
 			if (gFxRenderReady != 1) {
 				gFxRenderReady = 1;
-				int* in = (int*)(state + 0x270);
+				int* in        = (int*)(state + 0x270);
 				GXSetTevColorIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
 				in = (int*)(state + 0x290);
 				GXSetTevAlphaIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
@@ -1310,7 +1306,7 @@ void fxTrailDraw(FxEmitter* fx)
 		} else {
 			if (gFxRenderReady != 0) {
 				gFxRenderReady = 0;
-				int* in = (int*)(state + 0x260);
+				int* in        = (int*)(state + 0x260);
 				GXSetTevColorIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
 				in = (int*)(state + 0x280);
 				GXSetTevAlphaIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
@@ -1331,7 +1327,7 @@ void fxTrailDraw(FxEmitter* fx)
 			f32 s, c;
 			PSMTXMultVec((const float*)state, (const NJS_VECTOR*)point->mPos, (NJS_VECTOR*)b);
 			if (point->mTotal > length) {
-				c = (length - walked) / point->mLength;
+				c    = (length - walked) / point->mLength;
 				b[0] = c * (b[0] - a[0]) + a[0];
 				b[1] = c * (b[1] - a[1]) + a[1];
 				b[2] = c * (b[2] - a[2]) + a[2];
@@ -1378,9 +1374,9 @@ void fxTrailDraw(FxEmitter* fx)
 					FX_PIPE8 = 2;
 				}
 			}
-			a[0] = b[0];
-			a[1] = b[1];
-			a[2] = b[2];
+			a[0]   = b[0];
+			a[1]   = b[1];
+			a[2]   = b[2];
 			walked = point->mTotal;
 		}
 	}

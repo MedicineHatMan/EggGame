@@ -34,24 +34,24 @@ public:
 	void stateIn();
 	void stateDone();
 
-	MeshObject* mPileColli;  // _64
-	MeshObject* mBaseColli;  // _68
-	ObjModel mPile;    // _6C
-	ObjModel mBase;    // _8C
-	ObjDrawState mState;  // _AC
-	f32 mPileMtx[12];  // _D0
-	f32 mBaseMtx[12];  // _100
-	DrawTask* mDrawTask;   // _130
-	u16 mSwitchId;     // _134
-	u16 mEventId;      // _136
-	u16 mAct;          // _138 0 = wait 1 = driven in 2 = done
-	Vec3f mPileOffset; // _13C
-	s16 mPause;        // _148
-	EnemyLight mLight; // _14C
-	Vec3f mCenter;     // _18C
-	f32 mRadius;       // _198
-	int mInMirror;     // _19C
-	int  mLightSet;   // _1A0
+	MeshObject* mPileColli; // _64
+	MeshObject* mBaseColli; // _68
+	ObjModel mPile;         // _6C
+	ObjModel mBase;         // _8C
+	ObjDrawState mState;    // _AC
+	f32 mPileMtx[12];       // _D0
+	f32 mBaseMtx[12];       // _100
+	DrawTask* mDrawTask;    // _130
+	u16 mSwitchId;          // _134
+	u16 mEventId;           // _136
+	u16 mAct;               // _138 0 = wait 1 = driven in 2 = done
+	Vec3f mPileOffset;      // _13C
+	s16 mPause;             // _148
+	EnemyLight mLight;      // _14C
+	Vec3f mCenter;          // _18C
+	f32 mRadius;            // _198
+	int mInMirror;          // _19C
+	int mLightSet;          // _1A0
 };
 
 extern "C" {

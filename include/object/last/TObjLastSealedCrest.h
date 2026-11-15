@@ -41,22 +41,22 @@ public:
 	void stateOpening();
 	void stateOpen();
 
-	DrawTask* mDraw;   // _64
-	ModelDraw mMesh;   // _68
+	DrawTask* mDraw;     // _64
+	ModelDraw mMesh;     // _68
 	ObjDrawState mState; // _84
-	f32 mMtx[12];      // _A8
-	u16 mSwitchId;     // _D8
+	f32 mMtx[12];        // _A8
+	u16 mSwitchId;       // _D8
 	u16 _DA;
-	int mEvent;        // _DC
-	int mDarkMap;      // _E0 the id darkCtrlAddMap gave
-	u16 mTimer;        // _E4 frames from opening to the event
+	int mEvent;   // _DC
+	int mDarkMap; // _E0 the id darkCtrlAddMap gave
+	u16 mTimer;   // _E4 frames from opening to the event
 	u16 _E6;
-	void* mFx;         // _E8
-	int mLinked;       // _EC
-	PointLight mGlow;  // _F0
-	u16 mPulse;        // _16C the glow's angle
+	void* mFx;        // _E8
+	int mLinked;      // _EC
+	PointLight mGlow; // _F0
+	u16 mPulse;       // _16C the glow's angle
 	u16 _16E;
-	int mMode;         // _170 0 sealed 1 opening 2 open
+	int mMode; // _170 0 sealed 1 opening 2 open
 };
 
 #endif

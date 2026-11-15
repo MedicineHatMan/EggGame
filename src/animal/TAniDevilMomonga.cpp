@@ -25,48 +25,33 @@ struct NJS_OBJECT;
 
 extern "C" {
 MotionEntry gMomongaMotions[11] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.15f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 19.0f, 0.31f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 20.0f, 0.31f, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 29.0f, 1.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.31f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 19.0f, 0.31f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_BLEND, 6, -1, 10, 0.0f, 19.0f, 0.6f, 0.075f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.15f, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 19.0f, 0.31f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 20.0f, 0.31f, 0.0f, 0 }, { MOTION_LOOP, 3, -1, 0, 0.0f, 29.0f, 1.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },  { MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.31f, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 19.0f, 0.31f, 0.0f, 0 },
+	{ MOTION_ONCE, 7, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },  { MOTION_BLEND, 6, -1, 10, 0.0f, 19.0f, 0.6f, 0.075f, 0 },
 	{ MOTION_LOOP, 4, -1, 0, 0.0f, 29.0f, 1.3f, 0.0f, 0 },
 };
 ColliShape sMomongaShape0[1] = {
 	{ { 0.0f, 5.0f, 0.0f }, 0x0, 0, 0x0, 5.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
 MotionEntry sMomongaMotions1[11] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 19.0f, 0.7f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 19.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_BLEND, 7, -1, 10, 0.0f, 19.0f, 0.3f, 0.075f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.2f, 0.0f, 0 },  { MOTION_LOOP, 1, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 3, -1, 0, 0.0f, 19.0f, 0.7f, 0.0f, 0 },
+	{ MOTION_ONCE, 5, -1, 0, 0.0f, 19.0f, 0.25f, 0.0f, 0 }, { MOTION_ONCE, 6, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 1, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 8, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },  { MOTION_BLEND, 7, -1, 10, 0.0f, 19.0f, 0.3f, 0.075f, 0 },
 	{ MOTION_LOOP, 4, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },
 };
 ColliShape sMomongaShape1[1] = {
 	{ { 0.0f, 5.0f, 0.0f }, 0x0, 0, 0x0, 5.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
 MotionEntry sMomongaMotions2[11] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.15f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 19.0f, 1.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 56.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 29.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_BLEND, 5, -1, 10, 0.0f, 29.0f, 0.3f, 0.075f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.15f, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 1, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 3, -1, 0, 0.0f, 19.0f, 1.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 5, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 4, -1, 0, 0.0f, 56.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 },  { MOTION_ONCE, 1, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 29.0f, 0.25f, 0.0f, 0 }, { MOTION_BLEND, 5, -1, 10, 0.0f, 29.0f, 0.3f, 0.075f, 0 },
 	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 },
 };
 ColliShape sMomongaShape2[1] = {
@@ -201,7 +186,7 @@ static inline void flyVel(TAniDevilMomonga* self, Vec3f* out)
 	Vec3f v;
 	gjScaleVector(self->mSpeed, &v, &self->mDir);
 	Vec3f along = v;
-	*out = along;
+	*out        = along;
 }
 
 void TAniDevilMomonga::onPhase(int phase)
@@ -212,7 +197,7 @@ void TAniDevilMomonga::onPhase(int phase)
 		eggTypeStopAllFx(this);
 		startFollowers();
 		mImageWait = 0;
-		mAniFlags       = 0;
+		mAniFlags  = 0;
 		mStep      = 0x23;
 		if (mKind == 0xC) {
 			mtxSetTransV(mFxMatrix, &mPos);
@@ -299,11 +284,12 @@ void TAniDevilMomonga::runOut()
 	}
 	Vec3f vel;
 	flyVel(this, &vel);
-	Vec3f from  = mPos;
+	Vec3f from = mPos;
 	from.y += 10.0f;
 	Vec3f to = addedTo(&from, &vel);
 
-	if (meshColliProbeLine((EggHit*)hits.mHits, (const Vec3f*)&from, (const Vec3f*)&to, (unsigned long)0x201) != 0 || touchedTarget() != 0) {
+	if (meshColliProbeLine((EggHit*)hits.mHits, (const Vec3f*)&from, (const Vec3f*)&to, (unsigned long)0x201) != 0
+	    || touchedTarget() != 0) {
 		mAniFlags |= 0x2000;
 		if (mKind == 9) {
 			fxSpawnAt(1, mFxBank, 2, mFxMatrix);
@@ -323,7 +309,7 @@ void TAniDevilMomonga::runOut()
 	mVel = vel;
 	mTravelled += mSpeed;
 	njAddVector(&mPos, &mVel);
-	int a = vecAngleXZ(&mVel);
+	int a   = vecAngleXZ(&mVel);
 	mRot[1] = angleApproach(mRot[1], a, 0x400);
 }
 
@@ -352,7 +338,7 @@ void TAniDevilMomonga::runBack()
 
 	int before = mRot[1];
 	int target;
-	target = angleToXZ(&mPos, &goal);
+	target     = angleToXZ(&mPos, &goal);
 	int yaw    = angleApproach(before, target & 0xFFFF, mTurnRate);
 	mRot[1]    = yaw;
 	int turned = yaw - before;
@@ -401,8 +387,8 @@ void TAniDevilMomonga::turnBack(int angle)
 	}
 	Vec3f vel;
 	Vec3f goal;
-	goal = *holder->getPos();
-	int yaw    = (u16)(angleToXZ(&mPos, &goal) - angle);
+	goal    = *holder->getPos();
+	int yaw = (u16)(angleToXZ(&mPos, &goal) - angle);
 	vecFromAngleXZ(mSpeed, &vel, yaw);
 	mVel    = vel;
 	mRot[1] = yaw;
@@ -473,14 +459,14 @@ TAniBoomerangCurveBomb::TAniBoomerangCurveBomb(TObject* owner, const Vec3f* pos,
     : TObject(owner)
     , mPos(*pos)
 {
-	_00     = (u32)gTAniBoomerangCurveBombName;
-	mSize   = 0x40;
-	mRadius = 10.0f;
-	mGrowth = 0.0f;
-	mTimer  = 0x78;
+	_00              = (u32)gTAniBoomerangCurveBombName;
+	mSize            = 0x40;
+	mRadius          = 10.0f;
+	mGrowth          = 0.0f;
+	mTimer           = 0x78;
 	ColliShape shape = sBoomerangCurveBombShape;
 	shape.mSizeX     = mRadius;
-	mColli = colliCreate(1, 1);
+	mColli           = colliCreate(1, 1);
 	if (mColli != 0) {
 		colliSetOwner(mColli, (u16)ownerId);
 		colliSetMasks((CharaColli*)mColli, 0x20, 0xFF, 0xFF, 0x10);
@@ -501,8 +487,8 @@ void TAniBoomerangCurveBomb::draw()
 {
 	mGrowth += 0.15f;
 	mRadius += mGrowth;
-	f32 r = mRadius;
-	f32 size = r < 0.0f ? 0.0f : (r > 50.0f ? 50.0f : r);
+	f32 r                          = mRadius;
+	f32 size                       = r < 0.0f ? 0.0f : (r > 50.0f ? 50.0f : r);
 	colliGetShapes(mColli)->mSizeX = size;
 	if (mTimer == 0) {
 		mFlags |= 1;

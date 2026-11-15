@@ -144,7 +144,7 @@ int triLineCross(Vec3f* verts, MeshTri* tri, const Vec3f* from, const Vec3f* to,
 {
 	Vec3f rel;
 	Vec3f dir;
-	dir = difference(*to, *from);
+	dir       = difference(*to, *from);
 	f32 denom = njInnerProduct(&dir, &tri->mNormal);
 	if (denom >= -1e-06f) {
 		return 0;
@@ -152,10 +152,10 @@ int triLineCross(Vec3f* verts, MeshTri* tri, const Vec3f* from, const Vec3f* to,
 	const Vec3f* a = &verts[tri->mVerts[0]];
 	const Vec3f* b = &verts[tri->mVerts[1]];
 	const Vec3f* c = &verts[tri->mVerts[2]];
-	rel.x = from->x - a->x;
-	rel.y = from->y - a->y;
-	rel.z = from->z - a->z;
-	f32 above = njInnerProduct(&rel, &tri->mNormal);
+	rel.x          = from->x - a->x;
+	rel.y          = from->y - a->y;
+	rel.z          = from->z - a->z;
+	f32 above      = njInnerProduct(&rel, &tri->mNormal);
 	if (above <= 1e-06f) {
 		return 0;
 	}
@@ -167,7 +167,7 @@ int triLineCross(Vec3f* verts, MeshTri* tri, const Vec3f* from, const Vec3f* to,
 	if (triContainsPoint(a, b, c, &rel, &tri->mNormal) == 0) {
 		return 0;
 	}
-	*out = rel;
+	*out  = rel;
 	*dist = t * njScalor(&dir);
 	return 1;
 }
@@ -253,7 +253,7 @@ int triContainsPoint(const Vec3f* a, const Vec3f* b, const Vec3f* c, const Vec3f
 // 0x8007848C
 void boxAroundPoint(f32* box, const Vec3f* pos)
 {
-	f32 r = 0.0f;
+	f32 r  = 0.0f;
 	box[0] = pos->x - r;
 	box[1] = pos->y - r;
 	box[2] = pos->z - r;
@@ -320,7 +320,7 @@ int edgeSphereTest(f32 radius, const Vec3f* pos, const Vec3f* a, const Vec3f* b,
 	rel.z = pos->z;
 	njSubVector(&rel, a);
 	f32 len = njInnerProduct(&edge, &edge);
-	f32 t = njInnerProduct(&rel, &edge) / len;
+	f32 t   = njInnerProduct(&rel, &edge) / len;
 	if (t < 0.0f || t > 1.0f) {
 		return 0;
 	}
@@ -448,9 +448,9 @@ void riderListAppend(RiderList* list, Rider* rider)
 		list->mTail = rider;
 		list->mHead = rider;
 	} else {
-		rider->mPrev = list->mTail;
+		rider->mPrev       = list->mTail;
 		list->mTail->mNext = rider;
-		list->mTail = rider;
+		list->mTail        = rider;
 	}
 	rider->mList = list;
 	list->mCount++;
@@ -490,9 +490,9 @@ void riderListUnlinkAll(RiderList* list)
 	Rider* r = list->mHead;
 	while (r != NULL) {
 		Rider* next = r->mNext;
-		r->mList = NULL;
-		r->mNext = NULL;
-		r->mPrev = NULL;
-		r = next;
+		r->mList    = NULL;
+		r->mNext    = NULL;
+		r->mPrev    = NULL;
+		r           = next;
 	}
 }

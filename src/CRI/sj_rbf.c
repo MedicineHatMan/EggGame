@@ -16,9 +16,9 @@ typedef struct {
 	int xsize;        /* 24 */
 	struct {
 		int cnt[2];
-	} line[2];        /* 28 */
-	SJ_ERRFN errfn;   /* 38 */
-	void* errobj;     /* 3C */
+	} line[2];      /* 28 */
+	SJ_ERRFN errfn; /* 38 */
+	void* errobj;   /* 3C */
 } SJRBF_OBJ;
 
 void SJRBF_Destroy(SJ sj);
@@ -32,10 +32,12 @@ int SJRBF_IsGetChunk(SJ sj, int id, int nbyte, int* rbyte);
 void SJRBF_EntryErrFunc(SJ sj, SJ_ERRFN func, void* obj);
 
 static const char* const volatile sj_build = "\nSJ/GC Ver.6.10 Build:Mar  3 2003 16:46:58\n";
-static const UUID sjrbf_uuid = { 0x3B9A9E81, 0x0DBB, 0x11D2, { 0xA6, 0xBF, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00 } };
+static const UUID sjrbf_uuid               = { 0x3B9A9E81, 0x0DBB, 0x11D2, { 0xA6, 0xBF, 0x44, 0x45, 0x53, 0x54, 0x00, 0x00 } };
 
 static SJ_IF sjrbf_if = {
-	0, 0, 0,
+	0,
+	0,
+	0,
 	SJRBF_Destroy,
 	SJRBF_GetUuid,
 	SJRBF_Reset,
@@ -53,8 +55,7 @@ static int sjrbf_init_cnt;
 // 0x8022CEF4
 static void sjrbf_DefErrFunc(void* obj, int ecode)
 {
-	for (;;) {
-	}
+	for (;;) { }
 }
 
 // 0x8022CE94
@@ -90,19 +91,19 @@ SJ SJRBF_Create(char* buf, int bsize, int xsize)
 	if (i == SJRBF_MAX_OBJ) {
 		rbf = 0;
 	} else {
-		rbf = &sjrbf_obj[i];
-		rbf->used = 1;
-		rbf->vtbl = &sjrbf_if;
-		rbf->buf = buf;
-		rbf->bsize = bsize;
-		rbf->xsize = xsize;
-		rbf->uuid = &sjrbf_uuid;
-		rbf->errfn = sjrbf_DefErrFunc;
-		rbf->errobj = rbf;
-		rbf->num_data = 0;
-		rbf->num_free = rbf->bsize;
-		rbf->free_pos = 0;
-		rbf->data_pos = 0;
+		rbf                 = &sjrbf_obj[i];
+		rbf->used           = 1;
+		rbf->vtbl           = &sjrbf_if;
+		rbf->buf            = buf;
+		rbf->bsize          = bsize;
+		rbf->xsize          = xsize;
+		rbf->uuid           = &sjrbf_uuid;
+		rbf->errfn          = sjrbf_DefErrFunc;
+		rbf->errobj         = rbf;
+		rbf->num_data       = 0;
+		rbf->num_free       = rbf->bsize;
+		rbf->free_pos       = 0;
+		rbf->data_pos       = 0;
 		rbf->line[0].cnt[0] = 0;
 		rbf->line[0].cnt[1] = 0;
 		rbf->line[1].cnt[0] = 0;
@@ -136,7 +137,7 @@ void SJRBF_EntryErrFunc(SJ sj, SJ_ERRFN func, void* obj)
 {
 	SJRBF_OBJ* rbf = (SJRBF_OBJ*)sj;
 
-	rbf->errfn = func;
+	rbf->errfn  = func;
 	rbf->errobj = obj;
 }
 
@@ -145,10 +146,10 @@ void SJRBF_Reset(SJ sj)
 {
 	SJRBF_OBJ* rbf = (SJRBF_OBJ*)sj;
 
-	rbf->num_data = 0;
-	rbf->num_free = rbf->bsize;
-	rbf->free_pos = 0;
-	rbf->data_pos = 0;
+	rbf->num_data       = 0;
+	rbf->num_free       = rbf->bsize;
+	rbf->free_pos       = 0;
+	rbf->data_pos       = 0;
 	rbf->line[0].cnt[0] = 0;
 	rbf->line[0].cnt[1] = 0;
 	rbf->line[1].cnt[0] = 0;
@@ -180,23 +181,23 @@ void SJRBF_GetChunk(SJ sj, int id, int nbyte, SJCK* ck)
 
 	SJCRS_Lock();
 	if (id == SJ_LIN_FREE) {
-		room = rbf->xsize + (rbf->bsize - rbf->free_pos);
-		ck->len = (rbf->num_free < room) ? rbf->num_free : room;
-		ck->len = (ck->len < nbyte) ? ck->len : nbyte;
-		ck->data = rbf->buf + rbf->free_pos;
+		room          = rbf->xsize + (rbf->bsize - rbf->free_pos);
+		ck->len       = (rbf->num_free < room) ? rbf->num_free : room;
+		ck->len       = (ck->len < nbyte) ? ck->len : nbyte;
+		ck->data      = rbf->buf + rbf->free_pos;
 		rbf->free_pos = (rbf->free_pos + ck->len) % rbf->bsize;
 		rbf->num_free -= ck->len;
 		rbf->line[0].cnt[0] += ck->len;
 	} else if (id == SJ_LIN_DATA) {
-		room = rbf->xsize + (rbf->bsize - rbf->data_pos);
-		ck->len = (rbf->num_data < room) ? rbf->num_data : room;
-		ck->len = (ck->len < nbyte) ? ck->len : nbyte;
-		ck->data = rbf->buf + rbf->data_pos;
+		room          = rbf->xsize + (rbf->bsize - rbf->data_pos);
+		ck->len       = (rbf->num_data < room) ? rbf->num_data : room;
+		ck->len       = (ck->len < nbyte) ? ck->len : nbyte;
+		ck->data      = rbf->buf + rbf->data_pos;
 		rbf->data_pos = (rbf->data_pos + ck->len) % rbf->bsize;
 		rbf->num_data -= ck->len;
 		rbf->line[1].cnt[0] += ck->len;
 	} else {
-		ck->len = 0;
+		ck->len  = 0;
 		ck->data = 0;
 		if (rbf->errfn != 0) {
 			rbf->errfn(rbf->errobj, SJ_ERR_PRM);
@@ -240,7 +241,7 @@ void SJRBF_PutChunk(SJ sj, int id, SJCK* ck)
 		rbf->num_free += ck->len;
 		rbf->line[0].cnt[1] += ck->len;
 	} else {
-		ck->len = 0;
+		ck->len  = 0;
 		ck->data = 0;
 		if (rbf->errfn != 0) {
 			rbf->errfn(rbf->errobj, SJ_ERR_PRM);
@@ -278,7 +279,7 @@ void SJRBF_UngetChunk(SJ sj, int id, SJCK* ck)
 		}
 		rbf->line[1].cnt[0] -= ck->len;
 	} else {
-		ck->len = 0;
+		ck->len  = 0;
 		ck->data = 0;
 		if (rbf->errfn != 0) {
 			rbf->errfn(rbf->errobj, SJ_ERR_PRM);

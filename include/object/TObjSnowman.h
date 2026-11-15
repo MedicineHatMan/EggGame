@@ -49,17 +49,17 @@ public:
 	void stateEvent(int phase);
 	void stateComplete(int phase);
 
-	s8 mState;           // _30
-	u8 _31;              // _31
-	u16 mTimer;          // _32
-	u16 mHolder;         // _34
+	s8 mState;   // _30
+	u8 _31;      // _31
+	u16 mTimer;  // _32
+	u16 mHolder; // _34
 	u8 _36[2];
 	int mRotY;           // _38
 	f32 mHeight;         // _3C
 	Vec3f mPos;          // _40
-	CharaColli* mColli;        // _4C
+	CharaColli* mColli;  // _4C
 	SetLinkMember mLink; // _50
-	DrawTask* mDrawTask;     // _5C
+	DrawTask* mDrawTask; // _5C
 	TCamPath* mEvent;    // _60
 };
 

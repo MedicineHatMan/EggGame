@@ -293,7 +293,7 @@ void TCamZelda5::vfn_20()
 
 		mShakeVel = mShakeVel - 0.3f * mShake;
 		mShakeVel *= 0.92f;
-		mShake    = mShake + mShakeVel;
+		mShake = mShake + mShakeVel;
 		if ((f32)__fabs(mShake) < 0.1f && (f32)__fabs(mShakeVel) < 0.1f) {
 			mShaking = FALSE;
 		}
@@ -301,8 +301,8 @@ void TCamZelda5::vfn_20()
 		swing = at;
 		njSubVector(&swing, &eye);
 		yaw     = zeldaYaw(&swing);
-		f32 z = swing.z;
-		z = z * z + swing.x * swing.x;
+		f32 z   = swing.z;
+		z       = z * z + swing.x * swing.x;
 		swing.z = zeldaSqrt(z);
 		swing.x = 0.0f;
 		gjPushUnitMatrix();

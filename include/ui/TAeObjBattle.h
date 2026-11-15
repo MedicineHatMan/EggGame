@@ -21,25 +21,25 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();            // _0C
-	virtual void render();          // _1C
-	virtual int vfn_20(s16* code);  // _20 0x80100444
+	virtual void draw();           // _0C
+	virtual void render();         // _1C
+	virtual int vfn_20(s16* code); // _20 0x80100444
 
-	DrawTask* mTask;       // _34
-	TAeLayer* _38;     // _38
-	TAeLayer* _3C;     // _3C
-	TAeLayer* _40;     // _40
-	TAeLayer* _44;     // _44
-	TAeLayer* _48[4];  // _48
-	TAeLayer* _58[4];  // _58
-	u8 mRule;          // _68 1 survival 2 time 3 hatch scores shown
-	u8 _69[3];         // _69
-	int _6C;           // _6C
-	u32 _70;           // _70
-	u32 _74;           // _74
-	u32 _78;           // _78
-	int _7C[4];        // _7C scores clamped to 0..99
-	s32 _8C[4];        // _8C
+	DrawTask* mTask;  // _34
+	TAeLayer* _38;    // _38
+	TAeLayer* _3C;    // _3C
+	TAeLayer* _40;    // _40
+	TAeLayer* _44;    // _44
+	TAeLayer* _48[4]; // _48
+	TAeLayer* _58[4]; // _58
+	u8 mRule;         // _68 1 survival 2 time 3 hatch scores shown
+	u8 _69[3];        // _69
+	int _6C;          // _6C
+	u32 _70;          // _70
+	u32 _74;          // _74
+	u32 _78;          // _78
+	int _7C[4];       // _7C scores clamped to 0..99
+	s32 _8C[4];       // _8C
 };
 
 #include "stage/Stage.h"

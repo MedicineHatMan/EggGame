@@ -30,11 +30,11 @@ void ADXF_Init(void)
 		memset(adxf_ptinfo, 0, sizeof(adxf_ptinfo));
 		memset(adxf_cmd_hstry, 0xFF, sizeof(adxf_cmd_hstry));
 		memset(adxf_cmd_ncall, 0, sizeof(adxf_cmd_ncall));
-		adxf_hstry_no = 0;
-		adxf_ocbi_fg = 0;
+		adxf_hstry_no     = 0;
+		adxf_ocbi_fg      = 0;
 		adxf_ldptnw_nfile = 0;
-		adxf_afs_hndl = 0;
-		adxf_afs_ptid = -1;
+		adxf_afs_hndl     = 0;
+		adxf_afs_ptid     = -1;
 	}
 	adxf_init_cnt++;
 }
@@ -44,11 +44,11 @@ void ADXF_Finish(void)
 {
 	if (--adxf_init_cnt == 0) {
 		ADXF_CloseAll();
-		adxf_afs_ptid = -1;
-		adxf_afs_hndl = 0;
+		adxf_afs_ptid     = -1;
+		adxf_afs_hndl     = 0;
 		adxf_ldptnw_nfile = 0;
-		adxf_ocbi_fg = 0;
-		adxf_hstry_no = 0;
+		adxf_ocbi_fg      = 0;
+		adxf_hstry_no     = 0;
 		memset(adxf_cmd_ncall, 0, sizeof(adxf_cmd_ncall));
 		memset(adxf_cmd_hstry, 0xFF, sizeof(adxf_cmd_hstry));
 		memset(adxf_ptinfo, 0, sizeof(adxf_ptinfo));

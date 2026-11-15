@@ -310,7 +310,8 @@ extern "C" int gameStateToDead(TGameContext* context, ObjMsg*)
 }
 
 // Not in the DOL an unused C helper the linker stripped
-extern "C" void gameStateClearStripped(TGameStateMiss* miss, TGameStateWaitClear* wait, TGameStateSucceed* succeed, TGameContext* context, ObjMsg* msg)
+extern "C" void gameStateClearStripped(TGameStateMiss* miss, TGameStateWaitClear* wait, TGameStateSucceed* succeed, TGameContext* context,
+                                       ObjMsg* msg)
 {
 	miss->onMessage(context, msg);
 	wait->onMessage(context, msg);

@@ -11,12 +11,17 @@ struct DrawTask;
 class TObjSkull;
 
 struct SkullNode {
-	SkullNode* mNext;     // _00
-	SkullNode* mPrev;     // _04
-	TObjSkull* mObj;      // _08
+	SkullNode* mNext;        // _00
+	SkullNode* mPrev;        // _04
+	TObjSkull* mObj;         // _08
 	struct SkullList* mList; // _0C
 
-	SkullNode() : mNext(0), mPrev(0), mList(0) { }
+	SkullNode()
+	    : mNext(0)
+	    , mPrev(0)
+	    , mList(0)
+	{
+	}
 };
 
 /** The list every skull joins */
@@ -57,7 +62,7 @@ public:
 	MotionPlayer mMotion; // _74
 	ObjModel mModel;      // _B0
 	ObjPlace mPlace;      // _D0
-	DrawTask* mDrawTask;      // _12C
+	DrawTask* mDrawTask;  // _12C
 	int mAct;             // _130 0 = idle 1 = lighting the eyes 2 = opening 3 = open
 	int mMotionId;        // _134
 	u16 mSkullId;         // _138

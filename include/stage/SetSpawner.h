@@ -22,15 +22,9 @@ public:
 	virtual ~TSetGenerator();
 	virtual void draw();
 
-	inline void* operator new(unsigned long size, void* pool)
-	{
-		return objHeapAlloc(pool, size);
-	}
+	inline void* operator new(unsigned long size, void* pool) { return objHeapAlloc(pool, size); }
 
-	inline void operator delete(void* mem)
-	{
-		objHeapFree(gObjHeap, mem);
-	}
+	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
 	int mCursors[3]; // _20 where each kind's scan stopped
 	int mMode;       // _2C see SetCentreMode

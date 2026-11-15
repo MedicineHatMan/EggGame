@@ -5,7 +5,7 @@
 void PenguinBrain::update(TEnePenguin* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}
@@ -22,7 +22,9 @@ PenguinBrainBase::PenguinBrainBase()
 }
 
 // 0x800AC3AC
-PenguinBrainBase::~PenguinBrainBase() { }
+PenguinBrainBase::~PenguinBrainBase()
+{
+}
 
 // 0x800AC408
 PenguinHuntBrain* PenguinHuntBrain::create(TEnePenguin* owner)
@@ -35,11 +37,11 @@ PenguinHuntBrain::PenguinHuntBrain(TEnePenguin* owner)
 {
 	mSight.reset();
 	mMemory.reset();
-	mTimer = 0;
+	mTimer   = 0;
 	mResting = 0;
-	mOwner = owner;
-	mNext = -1;
-	mState = STATE_APPEAR;
+	mOwner   = owner;
+	mNext    = -1;
+	mState   = STATE_APPEAR;
 	onPhase(mState, 0);
 	if (mNext != -1) {
 		mOwner->setAction(mNext);
@@ -47,7 +49,9 @@ PenguinHuntBrain::PenguinHuntBrain(TEnePenguin* owner)
 }
 
 // 0x800AC508
-PenguinHuntBrain::~PenguinHuntBrain() { }
+PenguinHuntBrain::~PenguinHuntBrain()
+{
+}
 
 // 0x800AC570
 // A hard hit stuns it unless it is winding up a slide
@@ -151,8 +155,8 @@ void PenguinHuntBrain::phaseWander(int phase)
 	switch (phase) {
 	case 0:
 		pickTarget();
-		mTimer = randomInt(300.0f, 120.0f);
-		mNext = TEnePenguin::ACT_WALK;
+		mTimer   = randomInt(300.0f, 120.0f);
+		mNext    = TEnePenguin::ACT_WALK;
 		mResting = 0;
 		break;
 	case 2:
@@ -167,11 +171,11 @@ void PenguinHuntBrain::phaseWander(int phase)
 			mTimer = randomInt(300.0f, 120.0f);
 			if (mResting != 0) {
 				mResting = 0;
-				mNext = TEnePenguin::ACT_WALK;
+				mNext    = TEnePenguin::ACT_WALK;
 			}
 		} else if (mOwner->hasArrived() != 0) {
 			mResting = 1;
-			mNext = TEnePenguin::ACT_IDLE;
+			mNext    = TEnePenguin::ACT_IDLE;
 		}
 		break;
 	case 3:
@@ -187,7 +191,7 @@ void PenguinHuntBrain::phaseSlide(int phase)
 	case 0:
 		mNext = TEnePenguin::ACT_SLIDE;
 		mOwner->stopEffect();
-		mTimer = gPenguinParams->mSlideTime;
+		mTimer   = gPenguinParams->mSlideTime;
 		mResting = 0;
 		break;
 	case 2:
@@ -204,7 +208,7 @@ void PenguinHuntBrain::phaseSlide(int phase)
 			mTimer--;
 			if (mTimer < 0) {
 				mResting = 1;
-				mNext = TEnePenguin::ACT_SPIN;
+				mNext    = TEnePenguin::ACT_SPIN;
 			}
 			break;
 		case 1:
@@ -222,8 +226,8 @@ void PenguinHuntBrain::phaseRest(int phase)
 {
 	switch (phase) {
 	case 0:
-		mNext = TEnePenguin::ACT_GETUP;
-		mTimer = 180;
+		mNext    = TEnePenguin::ACT_GETUP;
+		mTimer   = 180;
 		mResting = 0;
 		break;
 	case 2:
@@ -238,7 +242,7 @@ void PenguinHuntBrain::phaseRest(int phase)
 			mTimer--;
 			if (mTimer < 0) {
 				mResting = 1;
-				mNext = TEnePenguin::ACT_REST;
+				mNext    = TEnePenguin::ACT_REST;
 			}
 			break;
 		case 1:

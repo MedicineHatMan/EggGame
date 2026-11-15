@@ -63,7 +63,7 @@ struct AniModelSlotData {
  * @size 0x28
  */
 struct AniModelSlot : AniModelSlotLink, AniModelSlotData {
-	AniModelSlot(); // 0x801B0A28
+	AniModelSlot();  // 0x801B0A28
 	~AniModelSlot(); // 0x801B09D0
 };
 
@@ -78,22 +78,22 @@ struct AniAsset {
 	AniAsset(); // 0x801B02B0
 
 	int isKept();  // 0x801B02F8
-	void keep();  // 0x801B0304
+	void keep();   // 0x801B0304
 	void unkeep(); // 0x801B0314
 
-	FlagByte mFlags;    // _00
+	FlagByte mFlags; // _00
 	u8 _01[3];
-	AniAssetLink mLink; // _04
+	AniAssetLink mLink;  // _04
 	AniModelSlot* mFile; // _14
 };
 
 extern "C" {
-const char* aniModelFile(int kind);              // 0x801B0108
-void aniModelInit();                             // 0x801B0154
-void aniModelExit();                             // 0x801B01B0
-void aniModelRequest(int kind);                  // 0x801B0204
-int aniAssetAttach(int kind, AniAsset* asset);   // 0x801B0238
-void aniAssetDetach(AniAsset* asset);            // 0x801B027C
+const char* aniModelFile(int kind);            // 0x801B0108
+void aniModelInit();                           // 0x801B0154
+void aniModelExit();                           // 0x801B01B0
+void aniModelRequest(int kind);                // 0x801B0204
+int aniAssetAttach(int kind, AniAsset* asset); // 0x801B0238
+void aniAssetDetach(AniAsset* asset);          // 0x801B027C
 }
 
 #endif

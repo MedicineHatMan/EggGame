@@ -15,16 +15,16 @@ class TStageSelectModel;
 
 /** The pages of the battle setup */
 enum BattleSetupState {
-	BSETUP_NO_PADS     = 0, // fewer than two pads a message until it is closed
-	BSETUP_ENTRY_WAIT  = 1,
-	BSETUP_CHARA       = 2, // each pad picks a fighter
-	BSETUP_CHARA_DONE  = 3,
-	BSETUP_RULE_WAIT   = 4,
-	BSETUP_RULE        = 5, // rule amount and stage
-	BSETUP_RULE_BACK   = 6,
-	BSETUP_START       = 7, // fading out to the battle
-	BSETUP_QUIT        = 8, // the yes/no box
-	BSETUP_QUIT_FADE   = 9,
+	BSETUP_NO_PADS    = 0, // fewer than two pads a message until it is closed
+	BSETUP_ENTRY_WAIT = 1,
+	BSETUP_CHARA      = 2, // each pad picks a fighter
+	BSETUP_CHARA_DONE = 3,
+	BSETUP_RULE_WAIT  = 4,
+	BSETUP_RULE       = 5, // rule amount and stage
+	BSETUP_RULE_BACK  = 6,
+	BSETUP_START      = 7, // fading out to the battle
+	BSETUP_QUIT       = 8, // the yes/no box
+	BSETUP_QUIT_FADE  = 9,
 };
 
 /**
@@ -45,62 +45,62 @@ public:
 	virtual int shutdown();
 	virtual void update();
 
-	const char* getStageName();    // 0x80193D5C
-	void openStages(u8 worlds);    // 0x8019609C one bit a world
+	const char* getStageName(); // 0x80193D5C
+	void openStages(u8 worlds); // 0x8019609C one bit a world
 
-	void start();             // 0x80193EAC
-	void updateNoPads();      // 0x80193F60
-	void enterEntry();        // 0x80193FA0
-	void updateEntryWait();   // 0x80194038
-	void enterChara();        // 0x80194070
-	void updateChara();       // 0x80194198
-	void enterCharaDone();    // 0x8019459C
-	void updateCharaDone();   // 0x801945F0
-	void enterRuleWait();     // 0x8019467C
-	void updateRuleWait();    // 0x80194708
-	void enterRule();         // 0x80194740
-	void updateRule();        // 0x80194814
-	void enterRuleBack();     // 0x801949C4
-	void updateRuleBack();    // 0x80194A1C
-	void updateRuleKind();    // 0x80194A54
-	void updateRuleAmount();  // 0x80194B78
-	void updateRuleStage();   // 0x80194CD4
-	void enterStart();        // 0x80194F98
-	void updateStart();       // 0x80194FD4
-	void enterQuit();         // 0x80195010
-	void updateQuit();        // 0x80195068
-	void updateQuitFade();    // 0x801950E8
+	void start();            // 0x80193EAC
+	void updateNoPads();     // 0x80193F60
+	void enterEntry();       // 0x80193FA0
+	void updateEntryWait();  // 0x80194038
+	void enterChara();       // 0x80194070
+	void updateChara();      // 0x80194198
+	void enterCharaDone();   // 0x8019459C
+	void updateCharaDone();  // 0x801945F0
+	void enterRuleWait();    // 0x8019467C
+	void updateRuleWait();   // 0x80194708
+	void enterRule();        // 0x80194740
+	void updateRule();       // 0x80194814
+	void enterRuleBack();    // 0x801949C4
+	void updateRuleBack();   // 0x80194A1C
+	void updateRuleKind();   // 0x80194A54
+	void updateRuleAmount(); // 0x80194B78
+	void updateRuleStage();  // 0x80194CD4
+	void enterStart();       // 0x80194F98
+	void updateStart();      // 0x80194FD4
+	void enterQuit();        // 0x80195010
+	void updateQuit();       // 0x80195068
+	void updateQuitFade();   // 0x801950E8
 
-	int padDecide(int pad);             // 0x80195124
-	int padCancel(int pad);             // 0x80195150
-	int padRepeat(int pad, u32 mask);   // 0x8019517C a stick direction also counts as its d-pad one
-	void closeBox();                    // 0x80195220
-	void closeWindow();                 // 0x80195264
-	void openYesNo(void* text);         // 0x801952B4
-	void openMessage(void* text);       // 0x8019536C
-	int runBox();                       // 0x801953D8 non-zero once the box is answered
-	int boxYes();                        // 0x8019554C
-	void freeFade();                    // 0x80195560
-	void startFade();                   // 0x8019558C
-	int fadeDone();                     // 0x801955E8
+	int padDecide(int pad);           // 0x80195124
+	int padCancel(int pad);           // 0x80195150
+	int padRepeat(int pad, u32 mask); // 0x8019517C a stick direction also counts as its d-pad one
+	void closeBox();                  // 0x80195220
+	void closeWindow();               // 0x80195264
+	void openYesNo(void* text);       // 0x801952B4
+	void openMessage(void* text);     // 0x8019536C
+	int runBox();                     // 0x801953D8 non-zero once the box is answered
+	int boxYes();                     // 0x8019554C
+	void freeFade();                  // 0x80195560
+	void startFade();                 // 0x8019558C
+	int fadeDone();                   // 0x801955E8
 
-	void buildText();                   // 0x8019560C
-	void hideAll();                     // 0x80195908
-	void showTitle(int page);           // 0x80195964
-	void hideTitle();                   // 0x801959B8
-	void showTabs();                    // 0x801959D4
-	void hideTabs();                    // 0x80195A08
-	void showRuleHeads(int page);       // 0x80195A3C
-	void hideRuleHeads();               // 0x80195AC0
-	void showRuleKind();                // 0x80195B0C
-	void hideRuleKind();                // 0x80195BE8
-	void showRuleAmount();              // 0x80195C04
-	void hideRuleAmount();              // 0x80195DDC
-	void showRuleHelp();                // 0x80195DF8
-	void hideRuleHelp();                // 0x80195F94
-	void showYesNo();                   // 0x80195FB0
-	void hideYesNo();                   // 0x80196068
-	void showStageIcons();              // 0x80196138
+	void buildText();             // 0x8019560C
+	void hideAll();               // 0x80195908
+	void showTitle(int page);     // 0x80195964
+	void hideTitle();             // 0x801959B8
+	void showTabs();              // 0x801959D4
+	void hideTabs();              // 0x80195A08
+	void showRuleHeads(int page); // 0x80195A3C
+	void hideRuleHeads();         // 0x80195AC0
+	void showRuleKind();          // 0x80195B0C
+	void hideRuleKind();          // 0x80195BE8
+	void showRuleAmount();        // 0x80195C04
+	void hideRuleAmount();        // 0x80195DDC
+	void showRuleHelp();          // 0x80195DF8
+	void hideRuleHelp();          // 0x80195F94
+	void showYesNo();             // 0x80195FB0
+	void hideYesNo();             // 0x80196068
+	void showStageIcons();        // 0x80196138
 
 	int mState;                     // _0C a BattleSetupState
 	TWhiteFadeInOut* mFade;         // _10

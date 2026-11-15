@@ -31,7 +31,7 @@ void fxUpdateModelShape(FxShape*);
 void fxMtxTranslate(const f32*, f32*, f32, f32, f32);
 void fxMtxScale(const f32*, f32*, f32, f32, f32);
 void fxDrawBentBlades(FxShape*);
-void fxDrawBlades(FxShape*);
+void fxDrawBlades(Fx*);
 void fxDrawCone(FxShape*);
 void fxDrawCylinder(FxShape*);
 void fxDrawDome(FxShape*);

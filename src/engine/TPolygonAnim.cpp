@@ -19,15 +19,15 @@ const char* gTPolygonAnimName = "TPolygonAnim";
 TPolygonAnim::TPolygonAnim(TObject* parent)
     : TObject(parent)
 {
-	_00   = (u32)gTPolygonAnimName;
-	mSize = 0x44;
-	mTask[0] = addDrawTask(this, (void (*)(void*))task0, 0x21, 0);
-	mTask[1] = addDrawTask(this, (void (*)(void*))task1, 0x22, 0);
+	_00                = (u32)gTPolygonAnimName;
+	mSize              = 0x44;
+	mTask[0]           = addDrawTask(this, (void (*)(void*))task0, 0x21, 0);
+	mTask[1]           = addDrawTask(this, (void (*)(void*))task1, 0x22, 0);
 	mTask[1]->mSortKey = 0xffff;
-	mTask[2] = addDrawTask(this, (void (*)(void*))task2, 0x2A, 0);
-	mTask[3] = addDrawTask(this, (void (*)(void*))task3, 0x2B, 0);
-	mTask[4] = addDrawTask(this, (void (*)(void*))task4, 0x3A, 0);
-	_40 = 0;
+	mTask[2]           = addDrawTask(this, (void (*)(void*))task2, 0x2A, 0);
+	mTask[3]           = addDrawTask(this, (void (*)(void*))task3, 0x2B, 0);
+	mTask[4]           = addDrawTask(this, (void (*)(void*))task4, 0x3A, 0);
+	_40                = 0;
 }
 
 // 0x800DA1E0
@@ -65,19 +65,34 @@ static void drawKind(int kind)
 }
 
 // 0x800DA30C
-static void task0(void*) { drawKind(0); }
+static void task0(void*)
+{
+	drawKind(0);
+}
 
 // 0x800DA330
-static void task1(void*) { drawKind(1); }
+static void task1(void*)
+{
+	drawKind(1);
+}
 
 // 0x800DA354
-static void task2(void*) { drawKind(2); }
+static void task2(void*)
+{
+	drawKind(2);
+}
 
 // 0x800DA378
-static void task3(void*) { drawKind(3); }
+static void task3(void*)
+{
+	drawKind(3);
+}
 
 // 0x800DA39C
-static void task4(void*) { drawKind(4); }
+static void task4(void*)
+{
+	drawKind(4);
+}
 
 // 0x800DA3C0
 void TPolygonAnim::addAt(void* dst) const

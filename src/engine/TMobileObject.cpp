@@ -50,7 +50,7 @@ struct MobileMsg {
 // A task from particleGenById Its flags have bit 1 to end it and bit 4 to hide it and its position is at _24
 // msgAttach's message the object and the part of it to hold on to
 struct MobileMsgAttach {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mObjId; // _04
 	u16 mPart;  // _06
@@ -74,16 +74,16 @@ struct MobileWallResult {
 };
 
 struct MobileRailResult {
-	int mFound;     // _00
-	Vec3f mPos;     // _04
+	int mFound; // _00
+	Vec3f mPos; // _04
 };
 
 // What checkRail's search fills in
 struct MobileRailInfo {
 	TMobileObject* mThis; // _00
 	u8 _04[0x18];
-	RailPath* mRail;      // _1C
-	RailPoint mPoint;     // _20
+	RailPath* mRail;  // _1C
+	RailPoint mPoint; // _20
 	u8 _28[4];
 };
 
@@ -109,7 +109,9 @@ inline void TMobileObject::operator delete(void* mem)
 	objHeapFree(gObjHeap, mem);
 }
 
-inline EggSurface::~EggSurface() { }
+inline EggSurface::~EggSurface()
+{
+}
 
 /*
  * --INFO--
@@ -126,7 +128,7 @@ MobileSpark::MobileSpark(TObject* parent, u16 player, Vec3f* pos, f32 scale)
 		colliSetOwner((CharaColli*)mEmitter, player);
 		colliSetMasks((CharaColli*)mEmitter, 1, 0, 0, 0x10);
 		ColliShape* shape = (ColliShape*)colliGetShape((CharaColli*)mEmitter, 0);
-		shape->mTag = 1;
+		shape->mTag       = 1;
 		colliShapeSetSphere(colliGetShape((CharaColli*)mEmitter, 0));
 		colliShapeSetPos(colliGetShape((CharaColli*)mEmitter, 0), pos);
 		colliShapeSetRadius(colliGetShape((CharaColli*)mEmitter, 0), scale);
@@ -218,7 +220,7 @@ TMobileObject::TMobileObject(TObject* parent)
     , mDust(this)
     , mWake(this)
 {
-	_00        = (u32)gTMobileObjectName;
+	_00         = (u32)gTMobileObjectName;
 	mSize       = 0x34C;
 	mState      = MOBILE_DETACHED;
 	mComboTimer = 0;
@@ -269,7 +271,7 @@ void TMobileObject::setHandle(EggHandleBase* handle)
 		}
 		if (handle == 0) {
 			ObjMsg msg;
-			mState   = MOBILE_DETACHED;
+			mState    = MOBILE_DETACHED;
 			msg.mType = 0x27;
 			sendMsgByIdU16(mTarget.getId(), (ObjMsg*)&msg);
 		} else {
@@ -288,13 +290,13 @@ void TMobileObject::setHandle(EggHandleBase* handle)
 // 0x8008B4C0
 void TMobileObject::reset(f32 radius, const Vec3f* pos, const EggRot* rot)
 {
-	mBody.mPos       = *pos;
-	mBody.mRot       = *rot;
-	mBody.mRadius    = radius;
+	mBody.mPos    = *pos;
+	mBody.mRot    = *rot;
+	mBody.mRadius = radius;
 	mBody.makeMatrix(mMatrix);
-	mState       = MOBILE_DETACHED;
-	mBody.mVel   = gVecZero;
-	mBody.mAccel = gVecZero;
+	mState        = MOBILE_DETACHED;
+	mBody.mVel    = gVecZero;
+	mBody.mAccel  = gVecZero;
 	mBody.mAngVel = gVecZero;
 }
 
@@ -388,7 +390,7 @@ void TMobileObject::draw()
 	dir = mBody.mVel;
 	if (vecNormalize(&dir, &dir) > gUnitVectorMin) {
 		Vec3f pos;
-		pos = mBody.mPos;
+		pos       = mBody.mPos;
 		f32 scale = mBody.mRadius / 5.0f;
 		mtxSetTransV(mTrailMatrix, &pos);
 		mtxRotateY(mTrailMatrix, mTrailMatrix, vecAngleXZ(&dir));
@@ -477,7 +479,7 @@ void TMobileObject::startDrive()
 void TMobileObject::applyDrag(f32 amount)
 {
 	Vec3f dir;
-	dir = mBody.mVel;
+	dir       = mBody.mVel;
 	f32 speed = njUnitVector(&dir);
 	if (speed < gUnitVectorMin) {
 		dir = gVecZero;
@@ -554,7 +556,7 @@ int TMobileObject::sendHang(f32 unused0, int unused1)
 void TMobileObject::addLift()
 {
 	MobileParams* params = mParams;
-	u16 frames = mFrames;
+	u16 frames           = mFrames;
 	if (frames >= params->mLiftFrom && frames <= params->mLiftTo) {
 		Vec3f lift;
 		lift.y = params->mLift;
@@ -582,7 +584,7 @@ void TMobileObject::steer(f32 amount, int angle)
 void TMobileObject::updateDustMatrix()
 {
 	Vec3f pos;
-	pos = mBody.mPos;
+	pos       = mBody.mPos;
 	f32 scale = mBody.mRadius / 5.0f;
 	mtxSetTransV(mDustMatrix, &pos);
 	mtxScale(scale, scale, scale, mDustMatrix, mDustMatrix);
@@ -709,7 +711,7 @@ int TMobileObject::startSlam()
 int TMobileObject::tryUp()
 {
 	MobileMsg msg;
-	msg.mType = 0x40;
+	msg.mType        = 0x40;
 	*(u16*)&msg.mPtr = 0xFFFF;
 	TObjAction* held = getHeld();
 	if (held->sendToHandle((ObjMsg*)&msg) & 0x20) {
@@ -832,7 +834,7 @@ int TMobileObject::longJump()
 		vel = mBody.mVel;
 		if (njScalor(&vel) > 1.0f) {
 			vecNormalize(&vel, &vel);
-			mAim = vel;
+			mAim      = vel;
 			f32 speed = mParams->mJumpSpeed;
 			vel.x *= speed;
 			vel.y = mParams->mJumpHeight;
@@ -886,7 +888,7 @@ int TMobileObject::checkRail()
 {
 	MobileRailInfo info;
 	Vec3f pos;
-	pos = mBody.mPos;
+	pos        = mBody.mPos;
 	info.mThis = this;
 	info.mRail = 0;
 	if (railSearch(mBody.mRadius, &pos, mobileRailContact, &info) == 0) {
@@ -902,7 +904,7 @@ int TMobileObject::checkRail()
 	Vec3f tangent;
 	MobileMsg msg;
 	msg.mType = 0x52;
-	vel = mBody.mVel;
+	vel       = mBody.mVel;
 	info.mRail->getDir(&info.mPoint, &tangent);
 	msg.mPtr   = info.mRail;
 	msg.mPtr2  = &info.mPoint;
@@ -947,9 +949,9 @@ int TMobileObject::bounceOffWall()
 	vecFromAngleXZ(10.0f, &vel, 0);
 	Vec3f up;
 	vel.y = 1.0f;
-	up.x = 0.0f;
-	up.y = -1.0f;
-	up.z = 0.0f;
+	up.x  = 0.0f;
+	up.y  = -1.0f;
+	up.z  = 0.0f;
 	njOuterProduct(&vel, &up, &up);
 	vecScale(1.0f / mBody.mRadius, &up, &up);
 	mBody.mAngVel = up;
@@ -999,7 +1001,7 @@ void TMobileObject::slideOnGround()
 		Vec3f normal;
 		meshTriNormal(mGround.mMesh, mFace, &normal);
 		Vec3f vel;
-		vel = mBody.mVel;
+		vel     = mBody.mVel;
 		f32 dot = njInnerProduct(&vel, &normal);
 		vecScaleAdd(-dot, &vel, &normal, &vel);
 		mBody.mVel = vel;
@@ -1021,8 +1023,8 @@ void TMobileObject::spawnShockWave(f32 power)
 	pos.y = mBody.mPos.y - mBody.mRadius;
 	power *= mBody.mRadius;
 	power *= 0.5f;
-	eggSpawnShockWave(power, (u16)((TObjAction*)mHandle->mOwner)->mObjId,
-	                  ((TObjAction*)mOwner)->mObjId, &pos, mHandle->mDamage, (void*)mPower);
+	eggSpawnShockWave(power, (u16)((TObjAction*)mHandle->mOwner)->mObjId, ((TObjAction*)mOwner)->mObjId, &pos, mHandle->mDamage,
+	                  (void*)mPower);
 	pos.y += 5.0f;
 	particleOnceById(gTL_PARTICLE, &pos, 0, 9);
 }
@@ -1032,7 +1034,9 @@ void TMobileObject::spawnShockWave(f32 power)
  * Address:	8008C8E4
  * Size:	000004
  */
-void TMobileObject::checkBumps() { }
+void TMobileObject::checkBumps()
+{
+}
 
 /*
  * --INFO--
@@ -1043,7 +1047,7 @@ void TMobileObject::checkBumps() { }
 void TMobileObject::moveGround(f32 cap)
 {
 	mBody.mFriction = mBodyParams->mFriction;
-	mBody.mBounce = 0.0f;
+	mBody.mBounce   = 0.0f;
 	njAddVector(&mBody.mAccel, &mGravity);
 	capSpeed(cap);
 	stepBody();
@@ -1090,8 +1094,8 @@ void TMobileObject::moveRail()
 	EggRot rot;
 	rot = mBody.mRot;
 	Quat spin;
-	spin.w = 0.0f;
-	spin.v = axis;
+	spin.w    = 0.0f;
+	spin.v    = axis;
 	Quat step = scaledQuat(multipliedQuat(spin, &rot), 0.5f);
 	quatAdd((Quat*)&rot, &step);
 	quatNormalize((Quat*)&rot);
@@ -1112,7 +1116,7 @@ void TMobileObject::moveSettle()
 	f32 rot[4];
 
 	mBody.mFriction = mBodyParams->mFriction;
-	mBody.mBounce = 0.0f;
+	mBody.mBounce   = 0.0f;
 	mBody.mAngVel   = gVecZero;
 	njAddVector(&mBody.mAccel, &mGravity);
 	capSpeedHigh();
@@ -1125,8 +1129,8 @@ void TMobileObject::moveSettle()
 	rot[0]             = mBody.mRot.mW;
 	*(EggAxis*)&rot[1] = mBody.mRot.mAxis;
 	njInterpolateQuaternion((const NJS_QUATERNION*)rot, (const NJS_QUATERNION*)mFacing, (NJS_QUATERNION*)rot, mFacingBlend);
-	mBody.mRot.mW      = rot[0];
-	mBody.mRot.mAxis   = *(EggAxis*)&rot[1];
+	mBody.mRot.mW    = rot[0];
+	mBody.mRot.mAxis = *(EggAxis*)&rot[1];
 }
 
 /*
@@ -1161,7 +1165,7 @@ void TMobileObject::moveDefaultNoGravity()
 	f32 rot[4];
 
 	mBody.mFriction = mBodyParams->mFriction;
-	mBody.mBounce = 0.0f;
+	mBody.mBounce   = 0.0f;
 	mBody.mAngVel   = gVecZero;
 	capSpeedHigh();
 	stepBody();
@@ -1171,8 +1175,8 @@ void TMobileObject::moveDefaultNoGravity()
 	rot[0]             = mBody.mRot.mW;
 	*(EggAxis*)&rot[1] = mBody.mRot.mAxis;
 	njInterpolateQuaternion((const NJS_QUATERNION*)rot, (const NJS_QUATERNION*)mFacing, (NJS_QUATERNION*)rot, mFacingBlend);
-	mBody.mRot.mW      = rot[0];
-	mBody.mRot.mAxis   = *(EggAxis*)&rot[1];
+	mBody.mRot.mW    = rot[0];
+	mBody.mRot.mAxis = *(EggAxis*)&rot[1];
 }
 
 /*
@@ -1186,7 +1190,7 @@ void TMobileObject::moveAscent()
 	Vec3f force;
 
 	mBody.mFriction = mBodyParams->mFriction;
-	mBody.mBounce = 0.0f;
+	mBody.mBounce   = 0.0f;
 	force.set(0.0f, mParams->mLobAscent, 0.0f);
 	njAddVector(&mBody.mAccel, &force);
 	capSpeedHigh();
@@ -1209,7 +1213,7 @@ void TMobileObject::moveDefault()
 	f32 rot[4];
 
 	mBody.mFriction = mBodyParams->mFriction;
-	mBody.mBounce = 0.0f;
+	mBody.mBounce   = 0.0f;
 	mBody.mAngVel   = gVecZero;
 	njAddVector(&mBody.mAccel, &mGravity);
 	capSpeedHigh();
@@ -1219,8 +1223,8 @@ void TMobileObject::moveDefault()
 	rot[0]             = mBody.mRot.mW;
 	*(EggAxis*)&rot[1] = mBody.mRot.mAxis;
 	njInterpolateQuaternion((const NJS_QUATERNION*)rot, (const NJS_QUATERNION*)mFacing, (NJS_QUATERNION*)rot, mFacingBlend);
-	mBody.mRot.mW      = rot[0];
-	mBody.mRot.mAxis   = *(EggAxis*)&rot[1];
+	mBody.mRot.mW    = rot[0];
+	mBody.mRot.mAxis = *(EggAxis*)&rot[1];
 }
 
 /*
@@ -1232,7 +1236,7 @@ void TMobileObject::moveDefault()
 void TMobileObject::moveDown()
 {
 	mBody.mFriction = mBodyParams->mFriction;
-	mBody.mBounce = 0.0f;
+	mBody.mBounce   = 0.0f;
 	mBody.mAngVel   = gVecZero;
 	njAddVector(&mBody.mAccel, &mGravity);
 	capSpeedHigh();
@@ -1264,9 +1268,9 @@ void TMobileObject::moveAirSpin()
 	Vec3f spin;
 
 	mBody.mFriction = mBodyParams->mFriction;
-	mBody.mBounce = 0.0f;
+	mBody.mBounce   = 0.0f;
 	njAddVector(&mBody.mAccel, &mGravity);
-	spin    = mBody.mVel;
+	spin       = mBody.mVel;
 	Vec3f down = negated(gVecUp);
 	njOuterProduct(&spin, &down, &spin);
 	vecScale(1.0f / mBody.mRadius, &spin, &spin);
@@ -1286,7 +1290,7 @@ void TMobileObject::moveThrown()
 	Vec3f vec;
 
 	mBody.mFriction = mBodyParams->mFriction;
-	mBody.mBounce = 0.0f;
+	mBody.mBounce   = 0.0f;
 	vec.set(0.0f, mParams->mThrownAscent, 0.0f);
 	njAddVector(&mBody.mAccel, &vec);
 	capSpeedHigh();
@@ -1311,7 +1315,7 @@ void TMobileObject::moveThrown()
 void TMobileObject::moveRollCap(f32 cap)
 {
 	mBody.mFriction = mBodyParams->mFriction;
-	mBody.mBounce = 0.0f;
+	mBody.mBounce   = 0.0f;
 	njAddVector(&mBody.mAccel, &mGravity);
 	capSpeed(cap);
 	stepBody();
@@ -1329,10 +1333,10 @@ void TMobileObject::moveRollCap(f32 cap)
 void TMobileObject::stepBody()
 {
 	struct {
-		void* mModel;  // _00
-		u16 mFace;     // _04
-		Vec3f mDir;    // _08
-		u32 mHit;      // _14
+		void* mModel;   // _00
+		u16 mFace;      // _04
+		Vec3f mDir;     // _08
+		u32 mHit;       // _14
 		f32 mMinNormal; // _18
 	} result;
 
@@ -1680,10 +1684,10 @@ void TMobileObject::stateRoll(int phase)
 				mWake.stop();
 				mDust.stop();
 			} else {
-				here = mBody.mPos;
+				here   = mBody.mPos;
 				motion = mBody.mVel;
 				push.x = push.z = 0.0f;
-				push.y = 720.0f * (mBody.mRadius - wallDist) - 3.0f * motion.y;
+				push.y          = 720.0f * (mBody.mRadius - wallDist) - 3.0f * motion.y;
 				if (push.y > 0.0f) {
 					njAddVector(&mBody.mAccel, &push);
 				}
@@ -1814,19 +1818,19 @@ void TMobileObject::stateHop(int phase)
 		Vec3f pos;
 		mFlags.mBits &= ~1;
 		mFrames = 0;
-		pos.x = mBody.mPos.x;
-		pos.y = mBody.mPos.y;
-		pos.z = mBody.mPos.z;
+		pos.x   = mBody.mPos.x;
+		pos.y   = mBody.mPos.y;
+		pos.z   = mBody.mPos.z;
 		pos.y += mBody.mRadius;
-		mTrail = particleOnceById(this, &pos, 0, 0x38);
-		*(f32**)((u8*)mTrail + 0x58) = mMatrix;
-		mTrail2 = particleOnceById(this, &pos, 0, 0x39);
+		mTrail                        = particleOnceById(this, &pos, 0, 0x38);
+		*(f32**)((u8*)mTrail + 0x58)  = mMatrix;
+		mTrail2                       = particleOnceById(this, &pos, 0, 0x39);
 		*(f32**)((u8*)mTrail2 + 0x58) = mMatrix;
 	} else if (phase == MOBILE_CHECK) {
 		if (checkRail() == 0 && bounceOffWall() == 0 && (mFlags.mBits & 1) != 0) {
 			f32 mtx[12];
 			Vec3f pos;
-			pos = mBody.mPos;
+			pos       = mBody.mPos;
 			f32 unit  = mBody.mRadius / 5.0f;
 			f32 scale = 1.2f * unit;
 			mtxSetTrans((float*)mtx, pos.x, 1.0f + (pos.y - mBody.mRadius), pos.z);
@@ -2263,7 +2267,9 @@ void TMobileObject::stateRail(int phase)
  * Address:	8008F108
  * Size:	000004
  */
-void TMobileObject::stateNone(int phase) { }
+void TMobileObject::stateNone(int phase)
+{
+}
 
 /*
  * --INFO--
@@ -2333,7 +2339,7 @@ void TMobileObject::setLaunchVel(f32 amount, int angle)
 {
 	Vec3f vel;
 	vecFromAngleXZ(amount * mParams->mLaunchSpeed, &vel, angle);
-	vel.y = mParams->mLaunchHeight;
+	vel.y      = mParams->mLaunchHeight;
 	mBody.mVel = vel;
 }
 
@@ -2453,10 +2459,10 @@ int TMobileObject::msgLaunch(ObjMsg* msg)
 	ObjMsg ask;
 	ask.mType = 0x4E;
 	if (mOwner->sendToHandle(&ask) != 0) {
-		Vec3f* dir = &((ObjVecMsg*)msg)->mVec;
-		mAim       = *dir;
+		Vec3f* dir   = &((ObjVecMsg*)msg)->mVec;
+		mAim         = *dir;
 		mBody.mAccel = gVecZero;
-		mBody.mVel = *dir;
+		mBody.mVel   = *dir;
 		mFlags.mBits &= ~0x20;
 		mFlags.mBits &= ~1;
 		mTarget.setId(0xFFFF);
@@ -2479,10 +2485,10 @@ int TMobileObject::msgFling(ObjMsg* msg)
 	ObjMsg ask;
 	ask.mType = 0x50;
 	if (mOwner->sendToHandle(&ask) != 0) {
-		Vec3f* dir = &((ObjVecMsg*)msg)->mVec;
-		mAim       = *dir;
+		Vec3f* dir   = &((ObjVecMsg*)msg)->mVec;
+		mAim         = *dir;
 		mBody.mAccel = gVecZero;
-		mBody.mVel = *dir;
+		mBody.mVel   = *dir;
 		mTarget.setId(0xFFFF);
 		setState(MOBILE_FLUNG);
 		return 1;
@@ -2634,12 +2640,12 @@ int TMobileObject::findContact(u32* flags, Vec3f* pos, Vec3f* normal, f32* dist)
 	MobileWallResult result;
 	Vec3f from;
 	f32 radius = mBody.mRadius;
-	from.x = mBody.mPos.x;
-	from.y = mBody.mPos.y;
-	from.z = mBody.mPos.z;
+	from.x     = mBody.mPos.x;
+	from.y     = mBody.mPos.y;
+	from.z     = mBody.mPos.z;
 	from.y += radius;
 	result.mModel = 0;
-	result.mDist = 2.0f * radius;
+	result.mDist  = 2.0f * radius;
 	if (groundQueryDown((const void*)&from, (void*)0xC, (void*)mobileWallContact, (void*)&result) == 0) {
 		return 0;
 	}

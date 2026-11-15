@@ -54,17 +54,17 @@ extern "C" TStageSelectModelE3* createTStageSelectModelE3(TObject* parent, const
 TStageSelectModelE3::TStageSelectModelE3(TObject* parent, const Vec3f* pos, int angle, int index)
     : TObject(parent)
 {
-	_70   = 0;
-	_90   = 0;
-	_00   = (u32)gTStageSelectModelE3Name;
-	mSize = 0x98;
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mPos  = *pos;
+	_70       = 0;
+	_90       = 0;
+	_00       = (u32)gTStageSelectModelE3Name;
+	mSize     = 0x98;
+	mDraw     = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mPos      = *pos;
 	mAngle[0] = 0;
 	mAngle[1] = 0;
 	mAngle[2] = 0;
 	mAngle[1] = angle;
-	mIndex = index;
+	mIndex    = index;
 	resetFrame();
 }
 
@@ -94,7 +94,9 @@ void TStageSelectModelE3::draw()
 }
 
 // 0x801563C0
-void TStageSelectModelE3::vfn_10() { }
+void TStageSelectModelE3::vfn_10()
+{
+}
 
 // 0x801563C4
 void TStageSelectModelE3::render()

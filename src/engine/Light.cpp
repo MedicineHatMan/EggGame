@@ -33,7 +33,7 @@ LightBase::LightBase()
 
 // 0x80042D98
 LightSet::LightSet()
-	: mLights(0x10)
+    : mLights(0x10)
 {
 }
 
@@ -130,10 +130,10 @@ void LightGroup::clear()
 void lightGroupLoad(LightGroup* group)
 {
 	LightLink* node;
-	int count = 0;
-	u32 diffuse = 0;
-	u32 specular = 0;
-	u32 alpha = 0;
+	int count     = 0;
+	u32 diffuse   = 0;
+	u32 specular  = 0;
+	u32 alpha     = 0;
 	u32 alphaSpec = 0;
 	PSMTXCopy(_gj_matrix_, group->mMatrix);
 	for (node = group->mList.mFirst; node != NULL && count < 4; node = node->mNext) {
@@ -145,8 +145,8 @@ void lightGroupLoad(LightGroup* group)
 			light->init(NULL, group->mMatrix);
 			continue;
 		}
-		u32 id = lightGxId(count);
-		u32 flags = light->mFlags;
+		u32 id       = lightGxId(count);
+		u32 flags    = light->mFlags;
 		light->mGxId = id;
 		if (flags & 2) {
 			diffuse |= id;
@@ -268,7 +268,9 @@ static void spotLightKill(SpotLight* light)
 }
 
 // 0x800435DC
-inline SpotLight::~SpotLight() { }
+inline SpotLight::~SpotLight()
+{
+}
 
 // 0x80043638
 LightList::LightList()
@@ -291,9 +293,9 @@ void LightList::append(LightLink* link)
 		mLast  = link;
 		mFirst = link;
 	} else {
-		link->mPrev   = mLast;
-		mLast->mNext  = link;
-		mLast         = link;
+		link->mPrev  = mLast;
+		mLast->mNext = link;
+		mLast        = link;
 	}
 	link->mList = this;
 	mCount++;

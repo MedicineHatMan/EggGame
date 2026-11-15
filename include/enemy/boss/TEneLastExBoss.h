@@ -137,16 +137,16 @@ public:
 class TEneLastExBoss : public TObjEnemy {
 public:
 	enum {
-		EX_SUIT     = 0x1,
-		EX_OPEN     = 0x2,   // hits count
-		EX_NOTOUCH  = 0x4,
-		EX_FADING   = 0x8,   // drawn with mAlpha
-		EX_CORE     = 0x10,  // the body is gone and the core runs alone
-		EX_FOG      = 0x20,
-		EX_ATTACK   = 0x40,
-		EX_GLOW     = 0x80,  // mGlow follows the camera
-		EX_HIDDEN   = 0x100,
-		EX_STOMPED  = 0x20000,
+		EX_SUIT    = 0x1,
+		EX_OPEN    = 0x2, // hits count
+		EX_NOTOUCH = 0x4,
+		EX_FADING  = 0x8,  // drawn with mAlpha
+		EX_CORE    = 0x10, // the body is gone and the core runs alone
+		EX_FOG     = 0x20,
+		EX_ATTACK  = 0x40,
+		EX_GLOW    = 0x80, // mGlow follows the camera
+		EX_HIDDEN  = 0x100,
+		EX_STOMPED = 0x20000,
 	};
 
 	enum { COLLI_BODY = 0, COLLI_CORE = 1, COLLI_RUSH = 2 };
@@ -251,50 +251,50 @@ public:
 	void actRebuild(int phase);
 	void actDie(int phase);
 
-	EnemyMotion mMotionData; // _158
-	LastExBossAi* mAi;    // _194
-	GjActor* mPose;          // _198
-	DrawTask* mDrawTask;      // _19C
-	void* mPose2;         // _1A0
-	CharaColli* mHurt;          // _1A4
-	int mVertCount;       // _1A8
-	s16* mVertOrder;      // _1AC
-	HitVec* mVertPos;     // _1B0
-	HitVec* mVertVel;     // _1B4
-	u8* mVertAge;         // _1B8 0 attached 20 gone
-	int mFxCount;         // _1BC
-	int mFxCursor;        // _1C0
-	TParticleGenerator** mFx; // _1C4
-	int mFxSet;           // _1C8
-	u32 mBossFlags;       // _1CC
-	int mColliMode;       // _1D0
-	Vec3f mHitDir;        // _1D4
-	HitVec mPoint[18];     // _1E0
-	Vec3f mMoveTo;        // _2B8
-	Vec3f mAim;           // _2C4
-	int mAimRot;          // _2D0
-	Vec3f mAnchor;        // _2D4
-	int mMaxHealth;       // _2E0
-	ObjShadow mShadow;    // _2E4
-	EnemyLight mLight;    // _31C
-	EnemyTint mTint;      // _35C
-	BossSuit mSuit;       // _364
-	int mFeatherCount;    // _39C
-	Vec3f mBlastAt;       // _3A0
-	int mAlpha;           // _3AC
+	EnemyMotion mMotionData;   // _158
+	LastExBossAi* mAi;         // _194
+	GjActor* mPose;            // _198
+	DrawTask* mDrawTask;       // _19C
+	void* mPose2;              // _1A0
+	CharaColli* mHurt;         // _1A4
+	int mVertCount;            // _1A8
+	s16* mVertOrder;           // _1AC
+	HitVec* mVertPos;          // _1B0
+	HitVec* mVertVel;          // _1B4
+	u8* mVertAge;              // _1B8 0 attached 20 gone
+	int mFxCount;              // _1BC
+	int mFxCursor;             // _1C0
+	TParticleGenerator** mFx;  // _1C4
+	int mFxSet;                // _1C8
+	u32 mBossFlags;            // _1CC
+	int mColliMode;            // _1D0
+	Vec3f mHitDir;             // _1D4
+	HitVec mPoint[18];         // _1E0
+	Vec3f mMoveTo;             // _2B8
+	Vec3f mAim;                // _2C4
+	int mAimRot;               // _2D0
+	Vec3f mAnchor;             // _2D4
+	int mMaxHealth;            // _2E0
+	ObjShadow mShadow;         // _2E4
+	EnemyLight mLight;         // _31C
+	EnemyTint mTint;           // _35C
+	BossSuit mSuit;            // _364
+	int mFeatherCount;         // _39C
+	Vec3f mBlastAt;            // _3A0
+	int mAlpha;                // _3AC
 	TEneLastExBossCore* mCore; // _3B0
-	Vec3f mCorePos;       // _3B4
-	TCamPath* mDemo;      // _3C0
-	SeCue mSe;               // _3C4
-	int mFogState;        // _3C8
-	int mFogTimer;        // _3CC
-	TObject* mExtra;      // _3D0
-	FxHolder mGlow;       // _3D4
-	int mStep;            // _408
-	int mCount;           // _40C
-	int mTurnTo;          // _410
-	int _414;             // _414
-	f32 mTime;            // _418
+	Vec3f mCorePos;            // _3B4
+	TCamPath* mDemo;           // _3C0
+	SeCue mSe;                 // _3C4
+	int mFogState;             // _3C8
+	int mFogTimer;             // _3CC
+	TObject* mExtra;           // _3D0
+	FxHolder mGlow;            // _3D4
+	int mStep;                 // _408
+	int mCount;                // _40C
+	int mTurnTo;               // _410
+	int _414;                  // _414
+	f32 mTime;                 // _418
 };
 
 #include "io/ResBank.h"

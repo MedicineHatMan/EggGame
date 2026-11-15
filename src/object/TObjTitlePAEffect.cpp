@@ -15,10 +15,14 @@ typedef char TObjTitlePAEffect_size_check[(sizeof(TObjTitlePAEffect) == 0x9C) ? 
 
 // 0x801AE33C
 // The set init pair both empty
-extern "C" void initTObjTitlePAEffect() { }
+extern "C" void initTObjTitlePAEffect()
+{
+}
 
 // 0x801AE340
-extern "C" void termTObjTitlePAEffect() { }
+extern "C" void termTObjTitlePAEffect()
+{
+}
 
 // 0x801AE344
 extern "C" TObject* createTObjTitlePAEffect(TObject* parent, SetDesc* desc)

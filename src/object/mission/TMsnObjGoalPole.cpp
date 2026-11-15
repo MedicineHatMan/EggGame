@@ -80,10 +80,10 @@ static const char* sClassName = "TMsnObjGoalPole";
 typedef char TMsnObjGoalPole_size_check[(sizeof(TMsnObjGoalPole) == 0x1C8) ? 1 : -1];
 
 enum {
-	POLE_WAIT = 0,   // for the race
-	POLE_RACE = 1,
+	POLE_WAIT   = 0, // for the race
+	POLE_RACE   = 1,
 	POLE_SECOND = 2, // the player is in waiting for the racer
-	POLE_DONE = 3,
+	POLE_DONE   = 3,
 };
 
 // 0x801061E8
@@ -107,19 +107,19 @@ void TMsnObjGoalPole::initFromDesc(SetDesc* desc)
 	if (sGoalModel != 0) {
 		mModel.setModel(sGoalModel);
 		mModel.mTexList = sGoalTexList;
-		mModel.mState = getDefaultDrawState();
-		mModel.mPlace = &mPlace;
-		GjModel* model = sGoalModel->model;
-		mCenter.x = model->center.x;
-		mCenter.y = model->center.y;
-		mCenter.z = model->center.z;
-		mRadius = 30.0f + sGoalModel->model->r;
+		mModel.mState   = getDefaultDrawState();
+		mModel.mPlace   = &mPlace;
+		GjModel* model  = sGoalModel->model;
+		mCenter.x       = model->center.x;
+		mCenter.y       = model->center.y;
+		mCenter.z       = model->center.z;
+		mRadius         = 30.0f + sGoalModel->model->r;
 		vecAdd(&mCenter, &mCenter, &mPos);
 	} else {
 		mCenter.x = 0.0f;
 		mCenter.y = 0.0f;
 		mCenter.z = 0.0f;
-		mRadius = 1.0f;
+		mRadius   = 1.0f;
 	}
 }
 
@@ -175,7 +175,7 @@ extern "C" void goalPoleBuild(TMsnObjGoalPole* self)
 TMsnObjGoalPole::TMsnObjGoalPole(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0x1C8;
 	initFromDesc(desc);
 	setLinkDone((SetLink*)&mLink);
@@ -258,7 +258,7 @@ void TMsnObjGoalPole::draw()
 			turn = 0x1FFF;
 		}
 		mWindTarget = turn - 0x1000;
-		sTick = 0;
+		sTick       = 0;
 	}
 	mWindAngle = angleApproach(mWindAngle, mWindTarget, 0x40);
 	sGoalModel->child->ang[1] += mWindAngle;
@@ -307,8 +307,8 @@ void TMsnObjGoalPole::drawCloth()
 		return;
 	}
 	SpringPoint* points = mCloth->mPoints;
-	u16 cols = mCloth->mCols;
-	u16 rows = mCloth->mRows;
+	u16 cols            = mCloth->mCols;
+	u16 rows            = mCloth->mRows;
 
 	GXSetZCompLoc(GX_FALSE);
 	gjSetZBufferMode(1);
@@ -334,7 +334,7 @@ void TMsnObjGoalPole::drawCloth()
 	GXSetChanCtrl(GX_COLOR0A0, GX_ENABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT0, GX_DF_CLAMP, GX_AF_NONE);
 	GXSetChanCtrl(GX_ALPHA0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
 	GXSetChanCtrl(GX_COLOR1A1, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
-	GXColor white = {0xFF, 0xFF, 0xFF, 0xFF};
+	GXColor white = { 0xFF, 0xFF, 0xFF, 0xFF };
 	GXSetChanMatColor(GX_COLOR0, white);
 	GXSetNumTexGens(1);
 	GXSetNumTevStages(1);
@@ -346,29 +346,29 @@ void TMsnObjGoalPole::drawCloth()
 	f32 dv = 1.0f / (f32)(rows - 1);
 	for (u16 y = 0; (int)y < rows - 1; y++) {
 		GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT0, cols * 2);
-		f32 v = 1.0f - dv * (f32)y;
+		f32 v     = 1.0f - dv * (f32)y;
 		f32 vNext = v - dv;
 		for (u16 x = 0; x < cols; x++) {
-			int i = x + y * cols;
-			f32 u = du * (f32)x;
+			int i              = x + y * cols;
+			f32 u              = du * (f32)x;
 			SpringPoint* below = &points[i + cols];
-			WGPIPE_F32 = below->mPos.x;
-			WGPIPE_F32 = below->mPos.y;
-			WGPIPE_F32 = below->mPos.z;
-			WGPIPE_F32 = mNormals[y + 1][x].x;
-			WGPIPE_F32 = mNormals[y + 1][x].y;
-			WGPIPE_F32 = mNormals[y + 1][x].z;
-			WGPIPE_F32 = u;
-			WGPIPE_F32 = vNext;
-			SpringPoint* here = &points[i];
-			WGPIPE_F32 = here->mPos.x;
-			WGPIPE_F32 = here->mPos.y;
-			WGPIPE_F32 = here->mPos.z;
-			WGPIPE_F32 = mNormals[y][x].x;
-			WGPIPE_F32 = mNormals[y][x].y;
-			WGPIPE_F32 = mNormals[y][x].z;
-			WGPIPE_F32 = u;
-			WGPIPE_F32 = v;
+			WGPIPE_F32         = below->mPos.x;
+			WGPIPE_F32         = below->mPos.y;
+			WGPIPE_F32         = below->mPos.z;
+			WGPIPE_F32         = mNormals[y + 1][x].x;
+			WGPIPE_F32         = mNormals[y + 1][x].y;
+			WGPIPE_F32         = mNormals[y + 1][x].z;
+			WGPIPE_F32         = u;
+			WGPIPE_F32         = vNext;
+			SpringPoint* here  = &points[i];
+			WGPIPE_F32         = here->mPos.x;
+			WGPIPE_F32         = here->mPos.y;
+			WGPIPE_F32         = here->mPos.z;
+			WGPIPE_F32         = mNormals[y][x].x;
+			WGPIPE_F32         = mNormals[y][x].y;
+			WGPIPE_F32         = mNormals[y][x].z;
+			WGPIPE_F32         = u;
+			WGPIPE_F32         = v;
 		}
 	}
 	njPopMatrixEx();
@@ -380,17 +380,17 @@ void TMsnObjGoalPole::calcNormals()
 {
 	static HitVec sFaces[3][6];
 	SpringPoint* points = mCloth->mPoints;
-	u16 cols = mCloth->mCols;
-	u16 rows = mCloth->mRows;
+	u16 cols            = mCloth->mCols;
+	u16 rows            = mCloth->mRows;
 
 	for (u16 y = 0; y < 3; y++) {
 		HitVec* row = sFaces[y];
 		for (u16 x = 0; x < 3; x++) {
 			u16 i = x + y * cols;
 			Vec3f a;
-			a.x = points[i].mPos.x;
-			a.y = points[i].mPos.y;
-			a.z = points[i].mPos.z;
+			a.x     = points[i].mPos.x;
+			a.y     = points[i].mPos.y;
+			a.z     = points[i].mPos.z;
 			Vec3f b = points[i + cols + 1].mPos;
 			Vec3f c = points[i + cols].mPos;
 			Vec3f e1;
@@ -412,13 +412,13 @@ void TMsnObjGoalPole::calcNormals()
 	int lastX = cols - 1;
 	int lastY = rows - 1;
 	for (u16 y = 0; y < rows; y++) {
-		HitVec* cur = sFaces[y];
+		HitVec* cur  = sFaces[y];
 		HitVec* prev = sFaces[y - 1];
 		for (u16 x = 0; x < cols; x++) {
 			Vec3f n;
-			n.x = 0.0f;
-			n.y = 0.0f;
-			n.z = 0.0f;
+			n.x      = 0.0f;
+			n.y      = 0.0f;
+			n.z      = 0.0f;
 			int face = x * 2;
 			if ((int)x < lastX && (int)y < lastY) {
 				vecAdd(&n, &n, &cur[face]);

@@ -14,10 +14,11 @@ const char* gTSoundEffect3DCtrlName = "TSoundEffect3DCtrl";
 
 // 0x80122C98
 TSoundEffect3DCtrl::TSoundEffect3DCtrl(TObject* parent)
-    : TObject(parent), mMono(0)
+    : TObject(parent)
+    , mMono(0)
 {
-	_00   = (u32)gTSoundEffect3DCtrlName;
-	mSize = 0x48;
+	_00    = (u32)gTSoundEffect3DCtrlName;
+	mSize  = 0x48;
 	mPos.x = 0.0f;
 	mPos.y = 0.0f;
 	mPos.z = 0.0f;
@@ -25,10 +26,15 @@ TSoundEffect3DCtrl::TSoundEffect3DCtrl(TObject* parent)
 }
 
 // 0x80122D24
-TSoundEffect3DCtrl::~TSoundEffect3DCtrl() { }
+TSoundEffect3DCtrl::~TSoundEffect3DCtrl()
+{
+}
 
 // 0x80122D90
-void TSoundEffect3DCtrl::setMono(int mono) { mMono = mono; }
+void TSoundEffect3DCtrl::setMono(int mono)
+{
+	mMono = mono;
+}
 
 // 0x80122D98
 void TSoundEffect3DCtrl::setListener(const Vec3f* pos, const Vec3f* dir)
@@ -94,8 +100,8 @@ void TSoundEffect3DCtrl::calc(f32 range, const Vec3f* pos, int near, int far, u8
 }
 
 // 0x80123014
-int TSoundEffect3DCtrl::play(SoundHandle* handle, int id, int group, int mode, const Vec3f* pos, int near, int far, u16 extra,
-                             f32 range, f32 unused)
+int TSoundEffect3DCtrl::play(SoundHandle* handle, int id, int group, int mode, const Vec3f* pos, int near, int far, u16 extra, f32 range,
+                             f32 unused)
 {
 	if (handle != 0 && handle->mList != 0) {
 		return handle->mVoice;
@@ -158,7 +164,10 @@ Sound3DList::Sound3DList()
 }
 
 // 0x801231FC
-Sound3DList::~Sound3DList() { clear(); }
+Sound3DList::~Sound3DList()
+{
+	clear();
+}
 
 // 0x80123244
 void Sound3DList::append(SoundHandle* handle)
@@ -200,9 +209,9 @@ void Sound3DList::clear()
 	SoundHandle* node = mHead;
 	while (node != 0) {
 		SoundHandle* next = node->mNext;
-		node->mList = 0;
-		node->mNext = 0;
-		node->mPrev = 0;
-		node        = next;
+		node->mList       = 0;
+		node->mNext       = 0;
+		node->mPrev       = 0;
+		node              = next;
 	}
 }

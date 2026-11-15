@@ -39,21 +39,21 @@ struct CamView { // size 0x98
 	void resetFov();      // 0x80007CF0
 	void apply();         // 0x80007D28 sets the projection and the camera matrix
 
-	Vec3f mPos;     // _00 the eye
-	Vec3f mTarget;  // _0C
-	Vec3f mFront;   // _18 the view's axes in world space
-	Vec3f mSide;    // _24
-	Vec3f mUp;      // _30
-	int mRoll;      // _3C
-	int mBaseFov;   // _40 what resetFov goes back to
-	int mFov;       // _44
-	f32 mSlopeX;    // _48 the view's horizontal slope
-	f32 mAspect;    // _4C brings a vertical offset onto the same scale
-	f32 mNear;      // _50
-	f32 mFar;       // _54
-	Vec3f mFlat;    // _58 mFront along the ground
-	int mYaw;       // _64 the angle of mFlat
-	f32 mMtx[12];   // _68 the camera matrix
+	Vec3f mPos;    // _00 the eye
+	Vec3f mTarget; // _0C
+	Vec3f mFront;  // _18 the view's axes in world space
+	Vec3f mSide;   // _24
+	Vec3f mUp;     // _30
+	int mRoll;     // _3C
+	int mBaseFov;  // _40 what resetFov goes back to
+	int mFov;      // _44
+	f32 mSlopeX;   // _48 the view's horizontal slope
+	f32 mAspect;   // _4C brings a vertical offset onto the same scale
+	f32 mNear;     // _50
+	f32 mFar;      // _54
+	Vec3f mFlat;   // _58 mFront along the ground
+	int mYaw;      // _64 the angle of mFlat
+	f32 mMtx[12];  // _68 the camera matrix
 };
 
 /**
@@ -69,23 +69,23 @@ struct CamAim {
 };
 
 extern "C" {
-void camLinkInit(CamLink* link, int look);                 // 0x8008A0C4
+void camLinkInit(CamLink* link, int look);                     // 0x8008A0C4
 int camLinkIsAbove(const CamLink* link, const CamLink* other); // 0x8008A0DC
-int camLinkIsPicked(const CamLink* link);                  // 0x8008A0FC
-int camLinkIsEntered(const CamLink* link);                 // 0x8008A108
-void camLinkSetCut(CamLink* link);                         // 0x8008A114
-int camLinkIsCut(const CamLink* link);                     // 0x8008A124
-CamLink* camLinkPickBest(CamLink* head);                   // 0x8008A130
-void camAimClear(CamAim* aim);                             // 0x8008A1BC
-void camAimAdd(CamAim* aim, CamLink* link);                // 0x8008A1D0
-void camAimRemove(CamAim* aim, CamLink* link);             // 0x8008A220
-void camAimUpdate(CamAim* aim);                            // 0x8008A2CC once a frame
+int camLinkIsPicked(const CamLink* link);                      // 0x8008A0FC
+int camLinkIsEntered(const CamLink* link);                     // 0x8008A108
+void camLinkSetCut(CamLink* link);                             // 0x8008A114
+int camLinkIsCut(const CamLink* link);                         // 0x8008A124
+CamLink* camLinkPickBest(CamLink* head);                       // 0x8008A130
+void camAimClear(CamAim* aim);                                 // 0x8008A1BC
+void camAimAdd(CamAim* aim, CamLink* link);                    // 0x8008A1D0
+void camAimRemove(CamAim* aim, CamLink* link);                 // 0x8008A220
+void camAimUpdate(CamAim* aim);                                // 0x8008A2CC once a frame
 }
 
 struct CamHead {
-	Vec3f mPos;     // _00
-	TObject* mObj;  // _0C the object with mId or 0
-	u16 mId;        // _10 0xFFFF = none
+	Vec3f mPos;    // _00
+	TObject* mObj; // _0C the object with mId or 0
+	u16 mId;       // _10 0xFFFF = none
 	u8 _12[2];
 	u32 _14;        // _14
 	Vec3f mLastPos; // _18
@@ -102,10 +102,10 @@ struct CamHead {
  */
 struct CamCurve {
 	u8 _00[4];
-	f32 _04;      // _04
-	f32 _08;      // _08
+	f32 _04; // _04
+	f32 _08; // _08
 	u8 _0C[0x34];
-	f32 _40[5];   // _40
+	f32 _40[5]; // _40
 	u8 _54[0x10];
 };
 
@@ -113,15 +113,15 @@ class TCamera : public TObject {
 public:
 	TCamera(TObject* parent, int player, int look);
 	virtual ~TCamera();
-	virtual void draw();            // _0C 0x80005850 moves the view blending from where it was
-	virtual void vfn_20();          // _20 the update while its link is the picked one
-	virtual void vfn_24();          // _24 0x80005B6C while it is not
-	virtual int vfn_28();           // _28 0x80005C40 whether the view needs redoing
-	virtual void setTarget(u16 id); // _2C 0x80005C90 writes mKind the id of the object it follows
+	virtual void draw();                   // _0C 0x80005850 moves the view blending from where it was
+	virtual void vfn_20();                 // _20 the update while its link is the picked one
+	virtual void vfn_24();                 // _24 0x80005B6C while it is not
+	virtual int vfn_28();                  // _28 0x80005C40 whether the view needs redoing
+	virtual void setTarget(u16 id);        // _2C 0x80005C90 writes mKind the id of the object it follows
 	virtual void vfn_30();                 // _30 0x80005DE0
-	virtual void setEye(const Vec3f* eye);  // _34 0x80005DE4 writes the view's eye
-	virtual void getEye(Vec3f* out);        // _38 0x80005E04
-	virtual void setAt(const Vec3f* at);    // _3C 0x80005E24 writes the point the view looks at
+	virtual void setEye(const Vec3f* eye); // _34 0x80005DE4 writes the view's eye
+	virtual void getEye(Vec3f* out);       // _38 0x80005E04
+	virtual void setAt(const Vec3f* at);   // _3C 0x80005E24 writes the point the view looks at
 	virtual void getAt(Vec3f* out);        // _40 0x80005E44
 	virtual int getYaw();                  // _44 0x80005E6C the view's mYaw 0 without one
 	virtual void vfn_48();                 // _48 0x80005E64
@@ -131,20 +131,20 @@ public:
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	BOOL isPicked();                // 0x80005B70
-	void release();                 // 0x80005B94
-	void setBlendStep(f32 step);    // 0x80005BC0
-	int canBlend() const;                 // 0x80005BF0
-	void setCut();                  // 0x80005C64
-	BOOL getTargetPos(Vec3f* out);  // 0x80005D54 raised by mLift
-	void setLift(f32 lift);         // 0x80005DAC
-	void setFov(int fov);           // 0x80005DB4
-	u16 getTarget(); // 0x80005C88 mKind
-	void readFov(); // 0x80005DBC
+	BOOL isPicked();               // 0x80005B70
+	void release();                // 0x80005B94
+	void setBlendStep(f32 step);   // 0x80005BC0
+	int canBlend() const;          // 0x80005BF0
+	void setCut();                 // 0x80005C64
+	BOOL getTargetPos(Vec3f* out); // 0x80005D54 raised by mLift
+	void setLift(f32 lift);        // 0x80005DAC
+	void setFov(int fov);          // 0x80005DB4
+	u16 getTarget();               // 0x80005C88 mKind
+	void readFov();                // 0x80005DBC
 
-	void* mView;    // _20
-	u8 _24[4];      // _24
-	u16 mKind;      // _28
+	void* mView; // _20
+	u8 _24[4];   // _24
+	u16 mKind;   // _28
 	u16 _2A;
 	int mPlayer;    // _2C whose view this drives
 	CamLink mLook;  // _30
@@ -173,25 +173,25 @@ public:
 	virtual void vfn_24(); // _24 0x800641E4 a step without the view
 
 	void setStart(const CamPathStart* start); // 0x80063F30
-	void startFromView();               // 0x80063F7C
+	void startFromView();                     // 0x80063F7C
 
-	virtual void vfn_30();  // _30 0x80063F04 back to frame 0
-	void setAutoDelete();   // 0x80063F10 deletes itself on the last frame
-	void clearAutoDelete(); // 0x80063F20
-	void attachToMtx();     // 0x80063FE0 the path rides mMtx
-	f32* getMtx();          // 0x80063FF0
-	f32 getFrame();         // 0x80063FF8
+	virtual void vfn_30();    // _30 0x80063F04 back to frame 0
+	void setAutoDelete();     // 0x80063F10 deletes itself on the last frame
+	void clearAutoDelete();   // 0x80063F20
+	void attachToMtx();       // 0x80063FE0 the path rides mMtx
+	f32* getMtx();            // 0x80063FF0
+	f32 getFrame();           // 0x80063FF8
 	void setFrame(f32 frame); // 0x80064000
-	int isDone();           // 0x80064008 on the last frame
-	void advance();         // 0x80064024 one step of mSpeed held on the last frame
+	int isDone();             // 0x80064008 on the last frame
+	void advance();           // 0x80064024 one step of mSpeed held on the last frame
 
-	void* mMotion;      // _50 the camera motion
+	void* mMotion;       // _50 the camera motion
 	CamPathStart mStart; // _54 what the motion is played against
-	f32 mFrame;        // _74
-	f32 mSpeed;        // _78 frames a step
-	f32 mLastFrame;    // _7C one less than the motion's frame count
-	u32 mPathFlags;    // _80 2 = delete on the last frame 4 = ride mMtx
-	f32 mMtx[12];      // _84
+	f32 mFrame;          // _74
+	f32 mSpeed;          // _78 frames a step
+	f32 mLastFrame;      // _7C one less than the motion's frame count
+	u32 mPathFlags;      // _80 2 = delete on the last frame 4 = ride mMtx
+	f32 mMtx[12];        // _84
 };
 
 // 0x80063D14
@@ -205,7 +205,7 @@ public:
 	virtual ~TCamConversation();
 
 	void setFocus(const Vec3f* focus); // 0x8008AC74
-	void vfn_20();                      // 0x8008AC90
+	void vfn_20();                     // 0x8008AC90
 
 	Vec3f mFocus; // _50
 	u32 _5C;
@@ -225,7 +225,7 @@ public:
 
 	virtual void setAt(const Vec3f* at);   // _3C 0x8008A560
 	virtual void setEye(const Vec3f* eye); // _34 0x8008A57C
-	void vfn_20();                  // 0x8008A598
+	void vfn_20();                         // 0x8008A598
 
 	Vec3f mAt;  // _50
 	Vec3f mEye; // _5C

@@ -37,10 +37,10 @@ public:
 
 	void start(int frames, f32 alpha);
 
-	DrawTask* mTask;  // _20
-	f32 mAlpha;   // _24
-	int mFrames;  // _28
-	int mCaptured; // _2C
+	DrawTask* mTask; // _20
+	f32 mAlpha;      // _24
+	int mFrames;     // _28
+	int mCaptured;   // _2C
 };
 
 extern "C" {

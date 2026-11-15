@@ -30,19 +30,11 @@
 struct ResBank;
 
 static const char* sZakoArcs[] = {
-	"ar_ene_zako_cat.arc",
-	"ar_ene_zako_snake.arc",
-	"ar_ene_zako_fugu.arc",
-	"ar_ene_zako_ant.arc",
-	"ar_ene_zako_bat.arc",
+	"ar_ene_zako_cat.arc", "ar_ene_zako_snake.arc", "ar_ene_zako_fugu.arc", "ar_ene_zako_ant.arc", "ar_ene_zako_bat.arc",
 };
 
 static const char* sZakoModels[] = {
-	"ene_zako_cat.gvm",
-	"ene_zako_snake.gvm",
-	"ene_zako_fugu.gvm",
-	"ene_zako_ant.gvm",
-	"ene_zako_bat.gvm",
+	"ene_zako_cat.gvm", "ene_zako_snake.gvm", "ene_zako_fugu.gvm", "ene_zako_ant.gvm", "ene_zako_bat.gvm",
 };
 
 #include "enemy/TEneAm01.h"
@@ -77,30 +69,26 @@ static const char* sClassName = "TEneAm01";
 
 extern "C" {
 MotionEntry sAm01Motions[] = {
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 1.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_LOOP, 0, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 0.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 }, { MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 0.8f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 1.4f, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },
+	{ MOTION_LOOP, 0, -1, 0, 0.0f, 10.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 2, -1, 0, 0.0f, 0.0f, 1.0f, 0.0f, 0 },
 };
 extern const ColliShape sAm01Shape[] = {
 	{ { 0.0f, 7.0f, 0.0f }, 0x0, 0, 0x0, 7.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
-
 }
 
 // 0x8001D038
 // Five empty archive slots plus the shared motion archive
 extern "C" void initZakoMotions()
 {
-	sEnemyArcSlots = new ResBank[5];
+	sEnemyArcSlots   = new ResBank[5];
 	gEnemyModelSlots = new NJS_OBJECT*[5];
-	gEnemyTexSlots = new NJS_TEXLIST*[5];
+	gEnemyTexSlots   = new NJS_TEXLIST*[5];
 	for (int i = 0; i < 5; i++) {
 		resBankCtor(&sEnemyArcSlots[i]);
 		gEnemyModelSlots[i] = 0;
-		gEnemyTexSlots[i] = 0;
+		gEnemyTexSlots[i]   = 0;
 	}
 	resBankLoad(&sEnemyBank, "ar_ene_zako_mtn.arc");
 	gEnemyMotion = resBankGetMotion(&sEnemyBank, 0);
@@ -115,7 +103,7 @@ extern "C" void shutdownZakoMotions()
 			resBankRelease(&sEnemyArcSlots[i]);
 		}
 		gEnemyModelSlots[i] = 0;
-		gEnemyTexSlots[i] = 0;
+		gEnemyTexSlots[i]   = 0;
 	}
 	if (sEnemyArcSlots != 0) {
 		delete[] sEnemyArcSlots;
@@ -152,21 +140,36 @@ extern "C" int zakoSlot(int index)
 // 0x8001D230
 extern "C" void loadZako(int index)
 {
-	index = index < 0 ? 0 : (index > 4 ? 4 : index);
+	index         = index < 0 ? 0 : (index > 4 ? 4 : index);
 	ResBank* slot = &sEnemyArcSlots[index];
 	resBankLoad(slot, sZakoArcs[index]);
 	resBankAddTextures(slot, 0, sZakoModels[index]);
 	gEnemyModelSlots[index] = resBankGetModels(slot)[0];
-	gEnemyTexSlots[index] = resBankGetTextures(slot)[0];
+	gEnemyTexSlots[index]   = resBankGetTextures(slot)[0];
 }
 
 // 0x8001D2D8
 // cat 0x8001D2FC snake 0x8001D320 fugu 0x8001D344 ant 0x8001D368 bat
-extern "C" void loadZakoCat() { loadZako(0); }
-extern "C" void loadZakoSnake() { loadZako(1); }
-extern "C" void loadZakoFugu() { loadZako(2); }
-extern "C" void loadZakoAnt() { loadZako(3); }
-extern "C" void loadZakoBat() { loadZako(4); }
+extern "C" void loadZakoCat()
+{
+	loadZako(0);
+}
+extern "C" void loadZakoSnake()
+{
+	loadZako(1);
+}
+extern "C" void loadZakoFugu()
+{
+	loadZako(2);
+}
+extern "C" void loadZakoAnt()
+{
+	loadZako(3);
+}
+extern "C" void loadZakoBat()
+{
+	loadZako(4);
+}
 
 // 0x8001D38C
 // Object size 0x264 The constructor at 0x8001D43C stores "TEneAm01"
@@ -223,10 +226,10 @@ static inline f32 randomRange(f32 range, f32 base)
 static inline f32 fastSqrt(f32 x)
 {
 	if (x > 0.0f) {
-		f64 g = __frsqrte(x);
-		g = (0.5 * g) * (3.0 - x * (g * g));
-		g = (0.5 * g) * (3.0 - x * (g * g));
-		g = (0.5 * g) * (3.0 - x * (g * g));
+		f64 g          = __frsqrte(x);
+		g              = (0.5 * g) * (3.0 - x * (g * g));
+		g              = (0.5 * g) * (3.0 - x * (g * g));
+		g              = (0.5 * g) * (3.0 - x * (g * g));
 		volatile f32 y = (f32)(x * g);
 		return y;
 	}
@@ -246,13 +249,14 @@ extern "C" TEneAm01* createTEneAm01WithBrain(TObject* parent, int model, EnemySe
 }
 
 // 0x8001D43C
-TEneAm01::TEneAm01(TObject* parent, SetDesc* desc) : TObjEnemy(parent, desc)
+TEneAm01::TEneAm01(TObject* parent, SetDesc* desc)
+    : TObjEnemy(parent, desc)
 {
-	_00 = (u32)sClassName;
-	mSize = 0x264;
+	_00      = (u32)sClassName;
+	mSize    = 0x264;
 	mVariant = 0;
-	mBrain = 0;
-	mPose = 0;
+	mBrain   = 0;
+	mPose    = 0;
 	mTexture = 0;
 	readEnemyDesc(desc);
 	updateArea();
@@ -261,13 +265,14 @@ TEneAm01::TEneAm01(TObject* parent, SetDesc* desc) : TObjEnemy(parent, desc)
 }
 
 // 0x8001D4E8
-TEneAm01::TEneAm01(TObject* parent, int model, EnemySeekBrain* brain) : TObjEnemy(parent)
+TEneAm01::TEneAm01(TObject* parent, int model, EnemySeekBrain* brain)
+    : TObjEnemy(parent)
 {
-	_00 = (u32)sClassName;
-	mSize = 0x264;
+	_00      = (u32)sClassName;
+	mSize    = 0x264;
 	mVariant = 0;
-	mBrain = brain;
-	mPose = 0;
+	mBrain   = brain;
+	mPose    = 0;
 	setModel(model);
 	init();
 	mBrain = brain;
@@ -285,24 +290,24 @@ void TEneAm01::init()
 	colliCopyShapes(mCollider, (const ColliShape*)sAm01Shape);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 1, 0, 0);
-	mModel = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mFlags2 = 0;
-	mTopSpeed = 0.0f;
-	mSpeed = 0.0f;
-	mTarget.x = 0.0f;
-	mTarget.y = 0.0f;
-	mTarget.z = 0.0f;
+	mModel        = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mFlags2       = 0;
+	mTopSpeed     = 0.0f;
+	mSpeed        = 0.0f;
+	mTarget.x     = 0.0f;
+	mTarget.y     = 0.0f;
+	mTarget.z     = 0.0f;
 	mLeapTarget.x = 0.0f;
 	mLeapTarget.y = 0.0f;
 	mLeapTarget.z = 0.0f;
-	mHitPos.x = 0.0f;
-	mHitPos.y = 0.0f;
-	mHitPos.z = 0.0f;
-	mSquash = 1.0f;
-	mFrameKey = 0;
-	_1A0 = 0;
-	mLastDamage = 0;
-	mThrow = 0;
+	mHitPos.x     = 0.0f;
+	mHitPos.y     = 0.0f;
+	mHitPos.z     = 0.0f;
+	mSquash       = 1.0f;
+	mFrameKey     = 0;
+	_1A0          = 0;
+	mLastDamage   = 0;
+	mThrow        = 0;
 	mCrush.clear();
 	mBreak = 0;
 	mTint.reset();
@@ -312,10 +317,10 @@ void TEneAm01::init()
 	shadowEnable(&mShadow);
 	enemyEffectSetSmall(16.0f, &mEffect, &mBody.mPos);
 	resetCollider();
-	mStep = 0;
+	mStep  = 0;
 	mTimer = 0;
 	mAngle = 0;
-	mDist = 0.0f;
+	mDist  = 0.0f;
 }
 
 // 0x8001D700
@@ -343,10 +348,10 @@ TEneAm01::~TEneAm01()
 // Slot _74
 void TEneAm01::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -372,7 +377,7 @@ int TEneAm01::onHit(const TObjAction* other, int, int* result)
 	} else if (isPlayerOrKind4(other) != 0) {
 		HitInfo* info = (HitInfo*)result;
 		info->mDamage = 10;
-		hit = 1;
+		hit           = 1;
 		info->mFlags.clear();
 	}
 	return hit;
@@ -390,13 +395,13 @@ void TEneAm01::syncCollider()
 void TEneAm01::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
-	mVariant = pickVariant(desc);
+	mVariant   = pickVariant(desc);
 	int health = desc->getInt(1);
-	int value = 10;
+	int value  = 10;
 	if (health > 0) {
 		value = health;
 	}
-	mHealth = value;
+	mHealth   = value;
 	int model = desc->getInt(2);
 	setModel(model);
 }
@@ -591,7 +596,9 @@ void TEneAm01::resetCollider()
 }
 
 // 0x8001DF84
-void TEneAm01::noOp() { }
+void TEneAm01::noOp()
+{
+}
 
 // 0x8001DF88
 void TEneAm01::beginDeath()
@@ -620,9 +627,9 @@ void TEneAm01::setModel(int index)
 // 0x8001E078
 void TEneAm01::setVelocity(const Vec3f* vel)
 {
-	f32 x = vel->x;
-	f32 y = vel->y;
-	f32 z = vel->z;
+	f32 x        = vel->x;
+	f32 y        = vel->y;
+	f32 z        = vel->z;
 	mBody.mVel.x = x;
 	mBody.mVel.y = y;
 	mBody.mVel.z = z;
@@ -714,7 +721,7 @@ void TEneAm01::actAppearAimed(int phase)
 		motionCtrlPlay(&mAnim, 0);
 		f32 sin, cos;
 		njSinCos((int)(65536.0f * (3.0517578e-5f * rand())), &sin, &cos);
-		f32 speed = randomRange(1.5f, 0.5f);
+		f32 speed    = randomRange(1.5f, 0.5f);
 		mBody.mVel.x = sin * speed;
 		mBody.mVel.y = randomRange(1.0f, 0.0f);
 		mBody.mVel.z = cos * speed;
@@ -804,9 +811,9 @@ void TEneAm01::actWalk(int phase)
 	case 1: {
 		motionCtrlUpdate(&mAnim);
 		Vec3f toTarget;
-				toTarget.x = mTarget.x;
-				toTarget.y = mTarget.y;
-				toTarget.z = mTarget.z;
+		toTarget.x = mTarget.x;
+		toTarget.y = mTarget.y;
+		toTarget.z = mTarget.z;
 		njSubVector(&toTarget, &mBody.mPos);
 		int angle = toAngle(toTarget.x, toTarget.z);
 		if (angle != mBody.mRot.y) {
@@ -878,9 +885,9 @@ void TEneAm01::actLeap(int phase)
 		} else {
 			mStep = 1;
 		}
-		mTimer = 0;
+		mTimer  = 0;
 		mSquash = 1.0f;
-		mAngle = mBody.mRot.y;
+		mAngle  = mBody.mRot.y;
 		njSinCos(mAngle, &mBody.mVel.x, &mBody.mVel.z);
 		break;
 	case 1:
@@ -914,14 +921,14 @@ void TEneAm01::actLeap(int phase)
 				mTimer++;
 				if (mTimer >= 8) {
 					mTimer = 0;
-					mStep = 1;
+					mStep  = 1;
 					mFlags2 &= ~AM_SQUASH;
 					seStartAt(0xE4, &mBody.mPos);
 					motionCtrlPlay(&mAnim, 3);
 					motionCtrlUpdate(&mAnim);
 					mLeapTarget = mTarget;
-					toTarget.y = 0.0f;
-					mDist = njScalor2(&toTarget);
+					toTarget.y  = 0.0f;
+					mDist       = njScalor2(&toTarget);
 					mFlags2 &= ~AM_PASSED;
 					njSinCos(mAngle, &mBody.mVel.x, &mBody.mVel.z);
 					mBody.mVel.y += 2.5f;
@@ -954,7 +961,7 @@ void TEneAm01::actLeap(int phase)
 				Vec3f toTarget;
 				copyVec(&toTarget, subVec(&mLeapTarget, &mBody.mPos));
 				toTarget.y = 0.0f;
-				f32 dist = njScalor2(&toTarget);
+				f32 dist   = njScalor2(&toTarget);
 				if (dist > mDist) {
 					mFlags2 |= AM_PASSED;
 				}
@@ -963,7 +970,7 @@ void TEneAm01::actLeap(int phase)
 			break;
 		}
 
-		int cur = mBody.mRot.y;
+		int cur  = mBody.mRot.y;
 		int want = mAngle;
 		if (want != cur) {
 			mBody.mRot.y = angleApproach(cur, want, 0x400);
@@ -971,7 +978,7 @@ void TEneAm01::actLeap(int phase)
 		moveStep(mBody.mVel.x, mBody.mVel.z);
 
 		if ((mStep == 2 || mStep == 1) && isAirborne() == 0) {
-			mStep = 0;
+			mStep  = 0;
 			mTimer = 0;
 			if ((mFlags2 & AM_PASSED) != 0) {
 				mFlags2 |= AM_ARRIVED;
@@ -996,7 +1003,9 @@ void TEneAm01::actLeap(int phase)
 }
 
 // 0x8001ED40
-void TEneAm01::act8(int) { }
+void TEneAm01::act8(int)
+{
+}
 
 // 0x8001ED44
 // Thrown back from the hit spinning then 30 frames lying down
@@ -1008,14 +1017,14 @@ void TEneAm01::actFlip(int phase)
 		mEnemyFlags |= ENEMY_FLIPPING;
 		mFlags2 &= ~AM_FLIP_DONE;
 		mFlags2 |= AM_SIMPLE_HIT | AM_SPIN;
-		mStep = 0;
-		int angle = toAngle(mHitPos.x, mHitPos.z);
+		mStep        = 0;
+		int angle    = toAngle(mHitPos.x, mHitPos.z);
 		mBody.mVel.y = 3.0f;
 		mBody.mRot.y = angle + 0x8000;
 		mBody.mRot.x = 0;
 		njSinCos(angle, &mBody.mVel.x, &mBody.mVel.z);
 		mTopSpeed = 1.0f;
-		mSpeed = mTopSpeed;
+		mSpeed    = mTopSpeed;
 		enemyFxBurst4E(&mContact.mSurface);
 		mTint.start();
 		break;
@@ -1174,9 +1183,9 @@ void TEneAm01::actDieThrown(int phase)
 // Slot _3C
 void TEneAm01::vfn_3C()
 {
-	int x = kEnemyInfoX << 16;
+	int x    = kEnemyInfoX << 16;
 	int line = kEnemyInfoLine;
-	int pos = x | line;
+	int pos  = x | line;
 	if (mVariant == 0) {
 		njPrintC(pos, ":TYPE A");
 	} else if (mVariant == 1) {
@@ -1240,7 +1249,7 @@ void TEneAm01::render()
 inline void EnemyBrain::update(TEneAm01* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}

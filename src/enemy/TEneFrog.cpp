@@ -32,16 +32,11 @@ struct ObjShadow;
 extern "C" {
 
 MotionEntry sFrogMotions[] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 22.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 22.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 39.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_BLEND, 7, -1, 7, 0.0f, 9.0f, 0.5f, 0.2f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 14.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 13.0f, 29.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 8, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 22.0f, 0.3f, 0.0f, 0 },  { MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 3, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 4, -1, 0, 0.0f, 22.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 5, -1, 0, 0.0f, 39.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_BLEND, 7, -1, 7, 0.0f, 9.0f, 0.5f, 0.2f, 0 },  { MOTION_ONCE, 6, -1, 0, 0.0f, 14.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 7, -1, 0, 13.0f, 29.0f, 0.5f, 0.0f, 0 }, { MOTION_LOOP, 8, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
 };
 MotionEntry sFrogTongueMotions[] = {
 	{ MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 1.5f, 0.0f, 0 },
@@ -52,17 +47,16 @@ extern const int sFrogBones[] = {
 	1, 8, 19, 44, 46, -1,
 }; // the bones mParts follow
 extern const int sFrogTongueBones[] = {
-	4, 6, 8, 10, 12, 14, 16, 18,
-	-1,
+	4, 6, 8, 10, 12, 14, 16, 18, -1,
 }; // the bones mTongue follows
-const char* gTEneFrogName = "TEneFrog";
+const char* gTEneFrogName                   = "TEneFrog";
 extern const EnemyFrameKey sFrogFrameKey0[] = { { 8.0f, 0 }, { -1.0f, 4 } };
 extern const EnemyFrameKey sFrogFrameKey1[] = { { 10.0f, 4 }, { -1.0f, 3 } };
 extern const EnemyFrameKey sFrogFrameKey2[] = { { 1.0f, 3 }, { 11.0f, 0 }, { 25.0f, 4 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sFrogFrameKey3[] = { { 1.0f, 0 }, { 5.0f, 3 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sFrogFrameKey4[] = { { 1.0f, 0 }, { 6.0f, 3 }, { -1.0f, 2 } };
-const EnemyFrameKey* sFrogFrameKeys[5] = { sFrogFrameKey0, sFrogFrameKey1, sFrogFrameKey2, sFrogFrameKey3, sFrogFrameKey4 };
-extern const ColliShape sFrogShape[] = {
+const EnemyFrameKey* sFrogFrameKeys[5]      = { sFrogFrameKey0, sFrogFrameKey1, sFrogFrameKey2, sFrogFrameKey3, sFrogFrameKey4 };
+extern const ColliShape sFrogShape[]        = {
 	{ { 0.0f, 0.0f, 0.0f }, 0x0, 0, 0x0, 12.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
 }
@@ -83,11 +77,11 @@ extern "C" void initTEneFrog()
 {
 	resBankLoad(&sFrogBank, "ar_ene_frog.arc");
 	resBankAddTextures(&sFrogBank, 0, "ene_frog.gvm");
-	sFrogModels = resBankGetModels(&sFrogBank);
-	sFrogTextures = resBankGetTextures(&sFrogBank);
-	sFrogMotion = resBankGetMotion(&sFrogBank, 0);
+	sFrogModels       = resBankGetModels(&sFrogBank);
+	sFrogTextures     = resBankGetTextures(&sFrogBank);
+	sFrogMotion       = resBankGetMotion(&sFrogBank, 0);
 	sFrogTongueMotion = resBankGetMotion(&sFrogBank, 1);
-	gFrogParams = (int*)enemyParamGet(10);
+	gFrogParams       = (int*)enemyParamGet(10);
 }
 
 // 0x800EEDF0
@@ -96,9 +90,9 @@ extern "C" void shutdownTEneFrog()
 	gFrogParams = 0;
 	resBankRemoveTextures(&sFrogBank, 0);
 	resBankRelease(&sFrogBank);
-	sFrogModels = 0;
-	sFrogTextures = 0;
-	sFrogMotion = 0;
+	sFrogModels       = 0;
+	sFrogTextures     = 0;
+	sFrogMotion       = 0;
 	sFrogTongueMotion = 0;
 }
 
@@ -112,7 +106,7 @@ extern "C" TObject* createTEneFrog(TObject* parent, SetDesc* desc)
 TEneFrog::TEneFrog(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)gTEneFrogName;
+	_00   = (u32)gTEneFrogName;
 	mSize = 0x38C;
 	init(desc);
 }
@@ -124,7 +118,7 @@ void TEneFrog::init(SetDesc* desc)
 	motionCtrlInit(&mAnim, sFrogMotions, sFrogMotion);
 	motionCtrlPlay(&mAnim, 9);
 	mBody.mRot.x = 0;
-	mCollider = colliCreate(1, 1);
+	mCollider    = colliCreate(1, 1);
 	colliCopyShapes(mCollider, sFrogShape);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 0x14, 0, 0x10);
@@ -137,21 +131,21 @@ void TEneFrog::init(SetDesc* desc)
 	colliShapeSetBit8(mTongueCollider, 0);
 	mBrain = 0;
 	readEnemyDesc(desc);
-	mPose = (GjActor*)(allocPose(*(void**)sFrogModels));
-	mModel = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mFlags2 = 0;
-	mKnock.x = 0.0f;
-	mKnock.y = 0.0f;
-	mKnock.z = 0.0f;
+	mPose     = (GjActor*)(allocPose(*(void**)sFrogModels));
+	mModel    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mFlags2   = 0;
+	mKnock.x  = 0.0f;
+	mKnock.y  = 0.0f;
+	mKnock.z  = 0.0f;
 	mFrameKey = 0;
 	for (int i = 0; i < 5; i++) {
 		mParts[i].x = 0.0f;
 		mParts[i].y = 0.0f;
 		mParts[i].z = 0.0f;
 	}
-	mAim.x = 0.0f;
-	mAim.y = 0.0f;
-	mAim.z = 0.0f;
+	mAim.x    = 0.0f;
+	mAim.y    = 0.0f;
+	mAim.z    = 0.0f;
 	mAimAngle = 0;
 	shadowSetGround(&mShadow, &mBody.mPos, 0);
 	mShadow._30 = 24.0f;
@@ -169,17 +163,17 @@ void TEneFrog::init(SetDesc* desc)
 	motionCtrlSetPlayer(&mTongueAnim, &mTongueMotion);
 	motionCtrlInit(&mTongueAnim, sFrogTongueMotions, sFrogTongueMotion);
 	motionCtrlPlay(&mTongueAnim, 0);
-	mTonguePose = (GjActor*)(allocPose(sFrogModels[1]));
+	mTonguePose  = (GjActor*)(allocPose(sFrogModels[1]));
 	mTonguePitch = 0;
-	mTongueYaw = 0;
+	mTongueYaw   = 0;
 	for (int i = 0; i < 8; i++) {
 		mTongue[i].x = 0.0f;
 		mTongue[i].y = 0.0f;
 		mTongue[i].z = 0.0f;
 		mTongueFx[i] = 0;
 	}
-	mStep = 0;
-	mSubStep = 0;
+	mStep     = 0;
+	mSubStep  = 0;
 	mHopAngle = 0;
 	mBestDist = 0.0f;
 	createBrain();
@@ -209,10 +203,10 @@ TEneFrog::~TEneFrog()
 // 0x800EF388
 void TEneFrog::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -229,7 +223,7 @@ f32 TEneFrog::vfn_40()
 void TEneFrog::syncCollider()
 {
 	Vec3f* body = (Vec3f*)colliGetShapes(mCollider);
-	*body = mParts[0];
+	*body       = mParts[0];
 	if ((mFlags2 & FROG_TONGUE_HURT) != 0) {
 		colliEnable(mTongueCollider);
 		ColliShape* box = colliGetShapes(mTongueCollider);
@@ -243,9 +237,9 @@ void TEneFrog::syncCollider()
 		tip.z = mTongue[7].z;
 		Vec3f mid;
 		f32 half = 0.5f * (root.y - mBody.mPos.y);
-		mid.x = root.x;
-		mid.y = root.y;
-		mid.z = root.z;
+		mid.x    = root.x;
+		mid.y    = root.y;
+		mid.z    = root.z;
 		njAddVector(&mid, &tip);
 		gjScaleVector(0.5f, &mid, &mid);
 		mid.y = mBody.mPos.y + half;
@@ -268,7 +262,7 @@ void TEneFrog::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
 	int health = desc->getInt(0);
-	mHealth = health <= 0 ? 200 : health;
+	mHealth    = health <= 0 ? 200 : health;
 }
 
 // 0x800EF5B8
@@ -276,13 +270,13 @@ void TEneFrog::readEnemyDesc(SetDesc* desc)
 int TEneFrog::onHit(const TObjAction* other, int shape, int* result)
 {
 	HitInfo* info = (HitInfo*)result;
-	int hit = 0;
+	int hit       = 0;
 	if ((mFlags2 & FROG_TONGUE_HURT) != 0 && shape == 1) {
 		if (isPlayerOrKind4(other) != 0) {
 			f32 s;
 			f32 c;
 			info->mDamage = 20;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			njSinCos(mTongueYaw, &s, &c);
 			info->mFlags.setBit(0xC);
@@ -298,7 +292,7 @@ int TEneFrog::onHit(const TObjAction* other, int shape, int* result)
 			gjScaleVector(60.0f, &info->mPos, &info->mPos);
 		} else if (isEggObj(other) != 0) {
 			info->mDamage = 1;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			info->mFlags.setBit(0xD);
 		}
@@ -315,7 +309,7 @@ void TEneFrog::setTarget(const Vec3f* target)
 // 0x800EF704
 void TEneFrog::setAim(const Vec3f* pos, int angle)
 {
-	mAim = *pos;
+	mAim      = *pos;
 	mAimAngle = angle;
 }
 
@@ -672,7 +666,7 @@ void TEneFrog::actHop(int phase)
 		motionCtrlPlayBlend(0.05f, &mAnim, 6);
 		mFlags2 &= ~(FROG_ARRIVED | FROG_OVERSHOT);
 		clearFrameKey();
-		mStep = 0;
+		mStep     = 0;
 		mHopAngle = 0;
 		mBestDist = 100000.0f;
 		break;
@@ -696,7 +690,7 @@ void TEneFrog::actHop(int phase)
 				mBody.mVel.x *= 1.3f;
 				mBody.mVel.z *= 1.3f;
 				mBody.mVel.y += 2.2f;
-				mStep = 2;
+				mStep     = 2;
 				mHopAngle = angle;
 				move(&mBody.mVel);
 				seStartAt(0x108, &mBody.mPos);
@@ -763,7 +757,7 @@ void TEneFrog::actLick(int phase)
 		motionCtrlPlayBlend(0.1f, &mAnim, 0);
 		motionCtrlPlay(&mTongueAnim, 1);
 		mFlags2 &= ~(FROG_TONGUE_SHOW | FROG_TONGUE_HURT | FROG_TONGUE_FX);
-		mStep = 0;
+		mStep    = 0;
 		mSubStep = 0;
 		break;
 	case 1:
@@ -820,7 +814,7 @@ void TEneFrog::actRetract(int phase)
 		motionCtrlPlayBlend(0.1f, &mAnim, 2);
 		motionCtrlPlay(&mTongueAnim, 1);
 		mFlags2 |= FROG_TONGUE_SHOW | FROG_TONGUE_HURT | FROG_TONGUE_FX;
-		mStep = 0;
+		mStep     = 0;
 		mBestDist = 1.0f;
 		break;
 	case 1:
@@ -927,9 +921,9 @@ void TEneFrog::actDie(int phase)
 		mBar->hide();
 		killed(1);
 		noteDie();
-		mFrameKey = 3;
-		mSubStep = 0;
-		mStep = 0;
+		mFrameKey    = 3;
+		mSubStep     = 0;
+		mStep        = 0;
 		mBody.mVel.y = 0.0f;
 		break;
 	case 1:
@@ -938,18 +932,18 @@ void TEneFrog::actDie(int phase)
 		case 0:
 			if (motionCtrlFrame(&mAnim) >= 2.0f) {
 				mSubStep = 1;
-				mStep = 240;
+				mStep    = 240;
 			}
 			break;
 		case 1:
-			pos = mParts[0];
+			pos   = mParts[0];
 			pos.y = 10.0f + mBody.mPos.y;
 			mBody.mVel.y += -0.12f;
 			mBody.mPos.y += mBody.mVel.y;
 			if (probeGround(&pos, &ground, 0) != 0) {
 				if (ground.y - mBody.mPos.y >= 0.0f) {
-					mSubStep = 2;
-					mStep = 60;
+					mSubStep     = 2;
+					mStep        = 60;
 					mBody.mPos.y = ground.y;
 				} else if (motionCtrlFrame(&mAnim) > 4.0f) {
 					motionCtrlSetFrame(4.0f, &mAnim);
@@ -964,14 +958,14 @@ void TEneFrog::actDie(int phase)
 			break;
 		case 2:
 			if (motionCtrlPassed(5.0f, &mAnim) != 0) {
-				pos = mParts[0];
+				pos   = mParts[0];
 				pos.y = mBody.mPos.y;
 				particleOnceByIdDefault(&pos, 0, 0x46);
 				seEnemyPuff(&pos);
 			}
 			break;
 		}
-		pos = mParts[0];
+		pos   = mParts[0];
 		pos.y = mBody.mPos.y;
 		shadowSetGround(&mShadow, &pos, 0);
 		updatePose();
@@ -998,7 +992,7 @@ void TEneFrog::actDie(int phase)
 // 0x800F0CEC
 void TEneFrog::vfn_3C()
 {
-	int x = kEnemyInfoX << 16;
+	int x    = kEnemyInfoX << 16;
 	int line = kEnemyInfoLine;
 	njPrint(x | line, ":HP %4d", mHealth);
 }

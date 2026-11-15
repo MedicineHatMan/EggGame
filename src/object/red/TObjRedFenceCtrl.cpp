@@ -73,8 +73,8 @@ const char* gTObjRedFenceCtrlName = "TObjRedFenceCtrl";
 TObjRedFenceCtrl::TObjRedFenceCtrl(TObject* parent, const SetDesc* desc)
     : TObjAction(parent)
 {
-	_00       = (u32)gTObjRedFenceCtrlName;
-	mSize     = 0xB0;
+	_00   = (u32)gTObjRedFenceCtrlName;
+	mSize = 0xB0;
 	setObjId(this, desc->mObjId);
 	initFromDesc((SetDesc*)desc);
 	mLink.get()->attach((SetDesc*)desc);
@@ -97,12 +97,12 @@ TObjRedFenceCtrl::~TObjRedFenceCtrl()
 // 0x800CE668
 void TObjRedFenceCtrl::build()
 {
-	mState            = 0;
+	mState = 0;
 	mTrans.mGravity.set(0.0f, -0.16333334f, 0.0f);
-	mExtra            = -1.0f;
-	mAngle            = 0;
-	mSwing            = 0x800;
-	mRate             = 0;
+	mExtra = -1.0f;
+	mAngle = 0;
+	mSwing = 0x800;
+	mRate  = 0;
 	setLinkDone((SetLink*)&mLink);
 	for (int i = 0; i < 4; i++) {
 		new TObjRedFence(this);
@@ -160,7 +160,7 @@ void TObjRedFenceCtrl::fall()
 	if (meshColliProbe(hits.mHits, (const Vec3f*)&at, (unsigned long)((-1))) != 0) {
 		f32 drop = hits.mHits[0].mPos.y - mTrans.mPos.y;
 		if (!(drop < mTrans.mVel.y)) {
-			mTrans.mVel.y        = drop;
+			mTrans.mVel.y       = drop;
 			TObjRedFence* fence = (TObjRedFence*)mChild;
 			for (u16 i = 0; i < 4; i++) {
 				fence->startFx();
@@ -228,13 +228,13 @@ void TObjRedFenceCtrl::swing()
 void TObjRedFenceCtrl::open()
 {
 	Vec3f off;
-	off.x = 0.0f;
-	off.y = 0.0f;
-	off.z = 0.0f;
+	off.x     = 0.0f;
+	off.y     = 0.0f;
+	off.z     = 0.0f;
 	int angle = mAngle;
 	if (angle < 0x4000) {
 		mAngle += mRate;
-		mRate         *= 1.1f;
+		mRate *= 1.1f;
 		mTrans.mRot.x = -mAngle;
 	} else if (angle > 0x4000) {
 		mFlags |= 1;

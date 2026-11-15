@@ -286,7 +286,7 @@ void AniModelManager::onLoaded(int size, int id)
 		slot = slot->mNext;
 	}
 	if (slot != 0) {
-		TArc* arc = new TArc(slot->mBlock);
+		TArc* arc             = new TArc(slot->mBlock);
 		AniModelExport* model = (AniModelExport*)findArcExport(arc, "AniModel");
 		if (*model->mTexList != 0) {
 			numberTextures(*model->mTexList);
@@ -370,15 +370,19 @@ void AniModelSlotPool::init(int count)
 		mSlots[i].mNext = &mSlots[i + 1];
 	}
 	mSlots[count - 1].mNext = 0;
-	mFree  = mSlots;
-	mCount = count;
+	mFree                   = mSlots;
+	mCount                  = count;
 }
 
 // 0x801B09D0
-AniModelSlot::~AniModelSlot() { }
+AniModelSlot::~AniModelSlot()
+{
+}
 
 // 0x801B0A28
-AniModelSlot::AniModelSlot() { }
+AniModelSlot::AniModelSlot()
+{
+}
 
 // 0x801B0A5C
 AniModelSlotPool::~AniModelSlotPool()
@@ -437,10 +441,10 @@ void AniAssetList::unlinkAll()
 	AniAssetLink* link = mHead;
 	while (link != 0) {
 		AniAssetLink* next = link->mNext;
-		link->mList = 0;
-		link->mNext = 0;
-		link->mPrev = 0;
-		link        = next;
+		link->mList        = 0;
+		link->mNext        = 0;
+		link->mPrev        = 0;
+		link               = next;
 	}
 }
 

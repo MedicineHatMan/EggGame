@@ -247,8 +247,8 @@ VibNode* vibTakeLowest(VibChannel* channel, u8 priority)
 	VibNode* node = channel->mHead;
 
 	if (node->mPriority < (u8)priority) {
-		channel->mHead      = node->mNext;
-		node->mPrev->mNext  = 0;
+		channel->mHead     = node->mNext;
+		node->mPrev->mNext = 0;
 		if (node->mNext != 0) {
 			node->mNext->mPrev = node->mPrev;
 		}
@@ -303,8 +303,8 @@ void* vibPlayEx(u8 chan, void* owner, void* arg, u8 priority, u32 table, u32 id)
 	node->mWait     = script->mCode != 0 ? 1 : 0;
 	node->mPc       = 0;
 	node->mCode     = script->mCode;
-	head = channel->mHead;
-	it   = head;
+	head            = channel->mHead;
+	it              = head;
 	if (head != 0) {
 		while (it != 0 && it->mPriority <= priority) {
 			it = it->mNext;

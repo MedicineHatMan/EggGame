@@ -21,15 +21,15 @@ public:
 
 	void touch(int on); // 0x80190FB4
 
-	TSetActor* mOwner;   // _20
-	MotionTrack mTrack;  // _24
-	CharaColli* mShape;        // _40
-	Vec3f mPos;          // _44
-	Vec3f mTarget;       // _50 where it is flying
-	f32 mScale;          // _5C
-	int mYaw;            // _60
-	f32 mMtx[12];        // _64
-	f32 mSpeed;          // _94
+	TSetActor* mOwner;  // _20
+	MotionTrack mTrack; // _24
+	CharaColli* mShape; // _40
+	Vec3f mPos;         // _44
+	Vec3f mTarget;      // _50 where it is flying
+	f32 mScale;         // _5C
+	int mYaw;           // _60
+	f32 mMtx[12];       // _64
+	f32 mSpeed;         // _94
 };
 
 #endif

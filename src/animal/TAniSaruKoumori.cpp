@@ -29,16 +29,11 @@ struct CharaColli;
 extern "C" {
 // 0x8025EB70
 MotionEntry gSaruKoumoriMotions[10] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 15.0f, gSaruRate20, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, gSaruRate30, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, gSaruRate55, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 15.0f, gSaruRate80, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 30.0f, gSaruRate55, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, gSaruRate55, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 30.0f, gSaruRate30, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 30.0f, gSaruRate55, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, gSaruRate40, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 15.0f, gSaruRate20, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, gSaruRate30, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, gSaruRate55, 0.0f, 0 }, { MOTION_LOOP, 3, -1, 0, 0.0f, 15.0f, gSaruRate80, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 30.0f, gSaruRate55, 0.0f, 0 }, { MOTION_ONCE, 4, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, gSaruRate55, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 30.0f, gSaruRate30, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 30.0f, gSaruRate55, 0.0f, 0 }, { MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, gSaruRate40, 0.0f, 0 },
 };
 ColliShape sSaruKoumoriFirstShape[] = {
 	{ { 0.0f, 5.0f, 0.0f }, 0x0, 0, 0x0, 5.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
@@ -46,7 +41,6 @@ ColliShape sSaruKoumoriFirstShape[] = {
 ColliShape sSaruAttackEndShape[] = {
 	{ { 0.0f, 5.0f, 0.0f }, 0x0, 0, 0x0, 20.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
-
 }
 
 typedef char TAniSaruKoumori_size_check[(sizeof(TAniSaruKoumori) == 0x3C0) ? 1 : -1];
@@ -89,18 +83,18 @@ TAniSaruKoumori::TAniSaruKoumori(TObject* parent, int player, int kind, const Ve
 	}
 	m270 = sSaruKoumoriCallbacks;
 
-	mStart.x    = 0.0f;
-	mStart.y    = 0.0f;
-	mStart.z    = 0.0f;
-	mSwing      = 0.0f;
-	mSwingSpeed = 0.0f;
-	mStartRot[0] = 0;
-	mStartRot[1] = 0;
-	mStartRot[2] = 0;
-	mSpeed     = 0.0f;
-	mTravelled = 0.0f;
-	_3AC       = 0.0f;
-	mElectric  = 0;
+	mStart.x       = 0.0f;
+	mStart.y       = 0.0f;
+	mStart.z       = 0.0f;
+	mSwing         = 0.0f;
+	mSwingSpeed    = 0.0f;
+	mStartRot[0]   = 0;
+	mStartRot[1]   = 0;
+	mStartRot[2]   = 0;
+	mSpeed         = 0.0f;
+	mTravelled     = 0.0f;
+	_3AC           = 0.0f;
+	mElectric      = 0;
 	mElectricPos.x = 0.0f;
 	mElectricPos.y = 0.0f;
 	mElectricPos.z = 0.0f;
@@ -194,9 +188,9 @@ void TAniSaruKoumori::onPhase(int phase)
 		playMotion(3, 1, 0.075f);
 		eggTypeStopAllFx(this);
 		startFollowers();
-		mTimer = 90;
+		mTimer                     = 90;
 		*(int*)((u8*)this + 0x380) = 0;
-		mStep  = 0x11;
+		mStep                      = 0x11;
 
 		f32* values = mParams->mValues;
 		u8 shape[0x30];
@@ -209,10 +203,10 @@ void TAniSaruKoumori::onPhase(int phase)
 		colliShapeSetBit8(mColli, 0);
 		colliSetMasks(mColli, 0x20, 0xFF, 0xFF, 0x10);
 
-		mElectricPos = mPos;
+		mElectricPos           = mPos;
 		TAniElectric* electric = new TAniElectric(this);
-		mElectric = electric;
-		mElectric->mPosRef = &mElectricPos;
+		mElectric              = electric;
+		mElectric->mPosRef     = &mElectricPos;
 
 		mtxSetTransV(mFxMatrix, &mPos);
 		if (mKind == 0x14) {
@@ -222,18 +216,18 @@ void TAniSaruKoumori::onPhase(int phase)
 		}
 		sePlay3D(0x1B7, &mPos);
 
-		mStart      = mPos;
-		mSwing      = 0.0f;
-		mSwingSpeed = mParams->mValues[8];
-		mRot[0]     = 0;
-		mRot[1]     = 0;
-		mRot[2]     = 0;
-		mRot[1]     = vecAngleXZ(&mDir);
+		mStart                     = mPos;
+		mSwing                     = 0.0f;
+		mSwingSpeed                = mParams->mValues[8];
+		mRot[0]                    = 0;
+		mRot[1]                    = 0;
+		mRot[2]                    = 0;
+		mRot[1]                    = vecAngleXZ(&mDir);
 		*(SaruRotBlock*)&mStartRot = *(SaruRotBlock*)&mRot;
-		mSpeed     = mParams->mValues[7];
-		mTravelled = 0.0f;
-		_3AC       = 0.0f;
-		mSubMode   = 5;
+		mSpeed                     = mParams->mValues[7];
+		mTravelled                 = 0.0f;
+		_3AC                       = 0.0f;
+		mSubMode                   = 5;
 	} else if (phase == 2) {
 		switch (mStep) {
 		case 0x11:
@@ -321,7 +315,8 @@ void TAniSaruKoumori::runAttack()
 
 	EggHits hits;
 	EggProbe probe;
-	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&mPos, (const Vec3f*)&next, (unsigned long)((-1))) != 0 || touchedTarget() != 0 || mTravelled >= mParams->mValues[3]) {
+	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&mPos, (const Vec3f*)&next, (unsigned long)((-1))) != 0 || touchedTarget() != 0
+	    || mTravelled >= mParams->mValues[3]) {
 		sePlay3D(0x1B8, &mPos);
 		fxRemove(mFx);
 		mtxSetTransV(mFxMatrix, &mPos);
@@ -337,7 +332,7 @@ void TAniSaruKoumori::runAttack()
 		mStep = 0x12;
 		killElectric();
 	} else {
-		mPos = next;
+		mPos    = next;
 		mRot[1] = (mRot[1] + 0x1000) & 0xFFFF;
 		mtxSetTransV(mtx, &mPos);
 		mtxRotateY(mtx, mtx, mRot[1]);
@@ -345,7 +340,7 @@ void TAniSaruKoumori::runAttack()
 		mtxGetPos(mtx, &mElectricPos);
 		mTravelled += mSpeed;
 
-		next = mElectricPos;
+		next         = mElectricPos;
 		Vec3f ground = mElectric->mGround;
 		f32 height   = next.y - ground.y;
 		colliShapeSetPos(colliGetShapes(mColli), &next);

@@ -15,9 +15,9 @@ TAniSharkShockWave::TAniSharkShockWave(TObject* parent, u16 ownerId, const Vec3f
     , mRadius(radius)
     , mFinalRadius(finalRadius)
 {
-	_00          = (u32)gTAniSharkShockWaveName;
-	mSize        = 0x40;
-	mColli       = (CharaColli*)colliCreate(1, 1);
+	_00    = (u32)gTAniSharkShockWaveName;
+	mSize  = 0x40;
+	mColli = (CharaColli*)colliCreate(1, 1);
 	if (mColli != 0) {
 		colliSetOwner(mColli, ownerId);
 		colliSetMasks(mColli, 0x20, 0, 0xFF, 0x10);

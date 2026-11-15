@@ -18,7 +18,9 @@ TGameLastBoss::TGameLastBoss(TObject* parent)
 }
 
 // 0x801AFEA0
-TGameLastBoss::~TGameLastBoss() { }
+TGameLastBoss::~TGameLastBoss()
+{
+}
 
 // 0x801AFEFC
 void TGameLastBoss::startState()

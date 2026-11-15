@@ -32,18 +32,12 @@ extern "C" {
 // The looping sound in mSound start with an id move it stop it
 
 MotionEntry gArmadilloMotionTable[] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 19.0f, 0.45f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 10.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 9.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 19.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 29.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 9.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_LOOP, 8, -1, 0, 0.0f, 10.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 10, -1, 0, 0.0f, 20.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_ONCE, 11, -1, 0, 0.0f, 59.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 12, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 19.0f, 0.45f, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 10.0f, 0.8f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 },  { MOTION_ONCE, 3, -1, 0, 0.0f, 9.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 4, -1, 0, 0.0f, 19.0f, 0.35f, 0.0f, 0 }, { MOTION_ONCE, 5, -1, 0, 0.0f, 29.0f, 0.35f, 0.0f, 0 },
+	{ MOTION_ONCE, 7, -1, 0, 0.0f, 9.0f, 0.2f, 0.0f, 0 },   { MOTION_LOOP, 8, -1, 0, 0.0f, 10.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 9, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 10, -1, 0, 0.0f, 20.0f, 0.35f, 0.0f, 0 },
+	{ MOTION_ONCE, 11, -1, 0, 0.0f, 59.0f, 0.4f, 0.0f, 0 }, { MOTION_LOOP, 12, -1, 0, 0.0f, 30.0f, 0.4f, 0.0f, 0 },
 	{ MOTION_ONCE, 6, -1, 0, 0.0f, 29.0f, 0.25f, 0.0f, 0 },
 };
 extern const ColliShape sArmadilloShape[] = {
@@ -72,10 +66,10 @@ extern "C" void initTEneArmadillo()
 {
 	resBankLoad(&gArmadilloBank, "ar_ene_armadillo.arc");
 	resBankAddTextures(&gArmadilloBank, 0, "ene_armadillo.gvm");
-	sArmadilloModels = resBankGetModels(&gArmadilloBank);
+	sArmadilloModels   = resBankGetModels(&gArmadilloBank);
 	sArmadilloTextures = resBankGetTextures(&gArmadilloBank);
-	sArmadilloMotions = resBankGetMotion(&gArmadilloBank, 0);
-	sArmadilloParams = (int*)enemyParamGet(11);
+	sArmadilloMotions  = resBankGetMotion(&gArmadilloBank, 0);
+	sArmadilloParams   = (int*)enemyParamGet(11);
 }
 
 // 0x800F5F1C
@@ -84,9 +78,9 @@ extern "C" void shutdownTEneArmadillo()
 	sArmadilloParams = 0;
 	resBankRemoveTextures(&gArmadilloBank, 0);
 	resBankRelease(&gArmadilloBank);
-	sArmadilloModels = 0;
+	sArmadilloModels   = 0;
 	sArmadilloTextures = 0;
-	sArmadilloMotions = 0;
+	sArmadilloMotions  = 0;
 }
 
 // 0x800F5F6C
@@ -99,7 +93,7 @@ extern "C" TObject* createTEneArmadillo(TObject* parent, SetDesc* desc)
 TEneArmadillo::TEneArmadillo(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)sArmadilloClassName;
+	_00   = (u32)sArmadilloClassName;
 	mSize = 0x300;
 	init(desc);
 }
@@ -110,28 +104,28 @@ void TEneArmadillo::init(SetDesc* desc)
 	motionCtrlInit(&mAnim, gArmadilloMotionTable, sArmadilloMotions);
 	motionCtrlPlay(&mAnim, 9);
 	mBody.mRot.x = 0;
-	mCollider = colliCreate(1, 1);
+	mCollider    = colliCreate(1, 1);
 	colliCopyShapes(mCollider, sArmadilloShape);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 0x14, 0, 0x10);
 	colliShapeSetTag(mCollider, 0, 0);
 	mBrain = 0;
 	readEnemyDesc(desc);
-	mPose = allocPose(*(void**)sArmadilloModels);
-	mModel = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mFlags2 = 0;
-	mKnock.x = 0.0f;
-	mKnock.y = 0.0f;
-	mKnock.z = 0.0f;
+	mPose     = allocPose(*(void**)sArmadilloModels);
+	mModel    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mFlags2   = 0;
+	mKnock.x  = 0.0f;
+	mKnock.y  = 0.0f;
+	mKnock.z  = 0.0f;
 	mFrameKey = 0;
 	for (int i = 0; i < 3; i++) {
 		mParts[i].x = 0.0f;
 		mParts[i].y = 0.0f;
 		mParts[i].z = 0.0f;
 	}
-	mAim.x = 0.0f;
-	mAim.y = 0.0f;
-	mAim.z = 0.0f;
+	mAim.x    = 0.0f;
+	mAim.y    = 0.0f;
+	mAim.z    = 0.0f;
 	mAimAngle = 0;
 	shadowSetGround(&mShadow, &mBody.mPos, 0);
 	mShadow._30 = 28.0f;
@@ -149,10 +143,10 @@ void TEneArmadillo::init(SetDesc* desc)
 	for (int i = 0; i < 2; i++) {
 		mDust[i] = 0;
 	}
-	mStep = 0;
+	mStep  = 0;
 	mTimer = 0;
-	mSpin = 0;
-	_2FC = 0.0f;
+	mSpin  = 0;
+	_2FC   = 0.0f;
 	createBrain();
 }
 
@@ -177,10 +171,10 @@ TEneArmadillo::~TEneArmadillo()
 // 0x800F63B8
 void TEneArmadillo::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -197,7 +191,7 @@ f32 TEneArmadillo::vfn_40()
 void TEneArmadillo::syncCollider()
 {
 	Vec3f* shape = (Vec3f*)colliGetShapes(mCollider);
-	*shape = mBody.mPos;
+	*shape       = mBody.mPos;
 	shape->y += 15.0f;
 }
 
@@ -207,7 +201,7 @@ void TEneArmadillo::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
 	int health = desc->getInt(0);
-	mHealth = health <= 0 ? 200 : health;
+	mHealth    = health <= 0 ? 200 : health;
 }
 
 // 0x800F64B8
@@ -215,11 +209,11 @@ void TEneArmadillo::readEnemyDesc(SetDesc* desc)
 int TEneArmadillo::onHit(const TObjAction* other, int shape, int* result)
 {
 	HitInfo* info = (HitInfo*)result;
-	int hit = 0;
+	int hit       = 0;
 	if ((mFlags2 & ARM_ARMED) != 0) {
 		if (isPlayerOrKind4(other) != 0) {
 			info->mDamage = 20;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			info->mFlags.setBit(0xC);
 			Vec3f dir;
@@ -240,7 +234,7 @@ int TEneArmadillo::onHit(const TObjAction* other, int shape, int* result)
 			gjScaleVector(60.0f, &info->mPos, &info->mPos);
 		} else if (isEggObj(other) != 0) {
 			info->mDamage = 1;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			info->mFlags.setBit(0xD);
 		}
@@ -257,7 +251,7 @@ void TEneArmadillo::setTarget(const Vec3f* target)
 // 0x800F6640
 void TEneArmadillo::setAim(const Vec3f* pos, int angle)
 {
-	mAim = *pos;
+	mAim      = *pos;
 	mAimAngle = angle;
 }
 
@@ -715,8 +709,8 @@ void TEneArmadillo::actRoll(int phase)
 		stopDust();
 		fxHolderStop(&mFx);
 		mBody.mRot.x = 0;
-		mStep = 0;
-		mSpin = 0;
+		mStep        = 0;
+		mSpin        = 0;
 		break;
 	case 1:
 		motionCtrlUpdate(&mAnim);
@@ -726,7 +720,7 @@ void TEneArmadillo::actRoll(int phase)
 			if (motionCtrlIsDone(&mAnim) != 0) {
 				motionCtrlPlayBlend(0.3f, &mAnim, 1);
 				clearFrameKey();
-				mStep = 1;
+				mStep  = 1;
 				mTimer = 600;
 				arm();
 				guard();
@@ -747,11 +741,11 @@ void TEneArmadillo::actRoll(int phase)
 			}
 			mSpin += 0x80;
 			if (mSpin >= 0x1800) {
-				mSpin = 0x1800;
+				mSpin    = 0x1800;
 				int diff = turnToAim(0x240);
 				mTimer--;
 				if (diff <= 0x240 || mTimer <= 0) {
-					mStep = 3;
+					mStep  = 3;
 					mTimer = 10000;
 					seLoopStop(&mSound);
 					seStartAt(0x101, &mBody.mPos);
@@ -787,7 +781,7 @@ void TEneArmadillo::actRoll(int phase)
 				fxHolderStop(&mFx);
 			}
 			if (diff >= 0x5000 || (mFlags2 & ARM_STOP) != 0) {
-				mStep = 4;
+				mStep  = 4;
 				mTimer = 90;
 				mFlags2 |= ARM_20;
 				fxHolderStop(&mFx);
@@ -943,7 +937,7 @@ void TEneArmadillo::actKnock(int phase)
 	case 0:
 		motionCtrlPlay(&mAnim, 4);
 		mFrameKey = 3;
-		mSpin = startKnock();
+		mSpin     = startKnock();
 		break;
 	case 1:
 		tumble(mSpin);
@@ -964,7 +958,7 @@ void TEneArmadillo::actFlip(int phase)
 	case 0:
 		motionCtrlPlay(&mAnim, 5);
 		mFrameKey = 3;
-		mSpin = startKnock() + 0x8000;
+		mSpin     = startKnock() + 0x8000;
 		break;
 	case 1:
 		tumble(mSpin);
@@ -990,7 +984,7 @@ void TEneArmadillo::actDie(int phase)
 		killed(1);
 		noteDie();
 		mFrameKey = 3;
-		mStep = 60;
+		mStep     = 60;
 		break;
 	case 1:
 		motionCtrlUpdate(&mAnim);
@@ -1015,7 +1009,7 @@ void TEneArmadillo::actDie(int phase)
 // 0x800F7D5C
 void TEneArmadillo::vfn_3C()
 {
-	int x = kEnemyInfoX << 16;
+	int x    = kEnemyInfoX << 16;
 	int line = kEnemyInfoLine;
 	njPrint(x | line, ":HP %4d", mHealth);
 }
@@ -1050,7 +1044,7 @@ void TEneArmadillo::render()
 void ArmadilloBrain::update(TEneArmadillo* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}
@@ -1067,7 +1061,9 @@ ArmadilloBrainBase::ArmadilloBrainBase()
 }
 
 // 0x800F7F74
-ArmadilloBrainBase::~ArmadilloBrainBase() { }
+ArmadilloBrainBase::~ArmadilloBrainBase()
+{
+}
 
 // 0x800F7FD0
 ArmadilloHuntBrain* ArmadilloHuntBrain::create(TEneArmadillo* owner)
@@ -1081,12 +1077,12 @@ ArmadilloHuntBrain::ArmadilloHuntBrain(TEneArmadillo* owner)
 	mSight.reset();
 	mMemory.reset();
 	mCharging = 0;
-	mCharge = *sArmadilloParams;
-	mTimer = 0;
-	mResting = 0;
-	mOwner = owner;
-	mNext = -1;
-	mState = STATE_APPEAR;
+	mCharge   = *sArmadilloParams;
+	mTimer    = 0;
+	mResting  = 0;
+	mOwner    = owner;
+	mNext     = -1;
+	mState    = STATE_APPEAR;
 	onPhase(mState, 0);
 	if (mNext != -1) {
 		mOwner->setAction(mNext);
@@ -1094,7 +1090,9 @@ ArmadilloHuntBrain::ArmadilloHuntBrain(TEneArmadillo* owner)
 }
 
 // 0x800F80E0
-ArmadilloHuntBrain::~ArmadilloHuntBrain() { }
+ArmadilloHuntBrain::~ArmadilloHuntBrain()
+{
+}
 
 // 0x800F8148
 // A hard hit hurts it and it goes after who hit it
@@ -1161,7 +1159,7 @@ void ArmadilloHuntBrain::aim()
 void ArmadilloHuntBrain::resetCharge()
 {
 	mCharging = 0;
-	mCharge = 0;
+	mCharge   = 0;
 }
 
 // 0x800F8464
@@ -1171,7 +1169,7 @@ void ArmadilloHuntBrain::startCharge()
 		return;
 	}
 	mCharging = 1;
-	mCharge = *sArmadilloParams;
+	mCharge   = *sArmadilloParams;
 }
 
 // 0x800F8488
@@ -1243,8 +1241,8 @@ void ArmadilloHuntBrain::phaseWander(int phase)
 	switch (phase) {
 	case 0:
 		pickTarget();
-		mNext = TEneArmadillo::ACT_WALK;
-		mTimer = randomInt(300.0f, 120.0f);
+		mNext    = TEneArmadillo::ACT_WALK;
+		mTimer   = randomInt(300.0f, 120.0f);
 		mResting = 0;
 		break;
 	case 2:
@@ -1262,11 +1260,11 @@ void ArmadilloHuntBrain::phaseWander(int phase)
 			mTimer = randomInt(300.0f, 120.0f);
 			if (mResting != 0) {
 				mResting = 0;
-				mNext = TEneArmadillo::ACT_WALK;
+				mNext    = TEneArmadillo::ACT_WALK;
 			}
 		} else if (mOwner->hasArrived() != 0) {
 			mResting = 1;
-			mNext = TEneArmadillo::ACT_IDLE;
+			mNext    = TEneArmadillo::ACT_IDLE;
 		}
 		break;
 	case 3:
@@ -1333,7 +1331,7 @@ void ArmadilloHuntBrain::phaseHold(int phase)
 {
 	switch (phase) {
 	case 0:
-		mNext = TEneArmadillo::ACT_HOLD;
+		mNext  = TEneArmadillo::ACT_HOLD;
 		mTimer = 180;
 		break;
 	case 2:

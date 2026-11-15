@@ -89,42 +89,42 @@ class PlySlots {
 public:
 	u8 _00[0x18];
 	// _18 = vtable
-	virtual void s08(); // _08
-	virtual void s0C(); // _0C
-	virtual void s10(); // _10
-	virtual void s14(); // _14
-	virtual void s18(); // _18
-	virtual void s1C(); // _1C
-	virtual void s20(); // _20
-	virtual void s24(); // _24
-	virtual void s28(); // _28
-	virtual void s2C(); // _2C
-	virtual void s30(); // _30
-	virtual void s34(); // _34
-	virtual void s38(); // _38
-	virtual void s3C(); // _3C
-	virtual void s40(); // _40
-	virtual void s44(); // _44
-	virtual void s48(); // _48
-	virtual void s4C(); // _4C
-	virtual void s50(); // _50
-	virtual void s54(); // _54
-	virtual void s58(); // _58
-	virtual void s5C(); // _5C
-	virtual void s60(); // _60
-	virtual void s64(); // _64
-	virtual void s68(); // _68
-	virtual int s6C(); // _6C
-	virtual void s70(int); // _70
-	virtual void s74(int); // _74
-	virtual void s78(); // _78
-	virtual void s7C(); // _7C
-	virtual void s80(u8*); // _80
-	virtual void s84(); // _84
-	virtual void s88(); // _88
-	virtual void s8C(); // _8C
+	virtual void s08();                // _08
+	virtual void s0C();                // _0C
+	virtual void s10();                // _10
+	virtual void s14();                // _14
+	virtual void s18();                // _18
+	virtual void s1C();                // _1C
+	virtual void s20();                // _20
+	virtual void s24();                // _24
+	virtual void s28();                // _28
+	virtual void s2C();                // _2C
+	virtual void s30();                // _30
+	virtual void s34();                // _34
+	virtual void s38();                // _38
+	virtual void s3C();                // _3C
+	virtual void s40();                // _40
+	virtual void s44();                // _44
+	virtual void s48();                // _48
+	virtual void s4C();                // _4C
+	virtual void s50();                // _50
+	virtual void s54();                // _54
+	virtual void s58();                // _58
+	virtual void s5C();                // _5C
+	virtual void s60();                // _60
+	virtual void s64();                // _64
+	virtual void s68();                // _68
+	virtual int s6C();                 // _6C
+	virtual void s70(int);             // _70
+	virtual void s74(int);             // _74
+	virtual void s78();                // _78
+	virtual void s7C();                // _7C
+	virtual void s80(u8*);             // _80
+	virtual void s84();                // _84
+	virtual void s88();                // _88
+	virtual void s8C();                // _8C
 	virtual void s90(const ItemSpec*); // _90
-	virtual void s94(f32*); // _94
+	virtual void s94(f32*);            // _94
 };
 
 // The same for items and effects
@@ -132,67 +132,75 @@ class PlyItemSlots {
 public:
 	u8 _00[0x18];
 	// _18 = vtable
-	virtual void s08(); // _08
-	virtual void s0C(); // _0C
-	virtual void s10(); // _10
-	virtual void s14(); // _14
-	virtual void s18(); // _18
-	virtual void s1C(); // _1C
-	virtual void s20(); // _20
-	virtual void s24(); // _24
-	virtual void s28(); // _28
-	virtual void s2C(); // _2C
-	virtual void s30(); // _30
-	virtual void s34(); // _34
-	virtual void s38(); // _38
-	virtual void s3C(); // _3C
-	virtual void s40(); // _40
-	virtual void s44(); // _44
-	virtual void s48(); // _48
-	virtual void s4C(); // _4C
-	virtual void s50(); // _50
-	virtual void s54(); // _54
-	virtual void s58(); // _58
-	virtual void s5C(); // _5C
-	virtual void s60(); // _60
-	virtual void s64(); // _64
-	virtual void s68(); // _68
-	virtual void s6C(); // _6C
-	virtual void s70(); // _70
-	virtual void s74(); // _74
+	virtual void s08();       // _08
+	virtual void s0C();       // _0C
+	virtual void s10();       // _10
+	virtual void s14();       // _14
+	virtual void s18();       // _18
+	virtual void s1C();       // _1C
+	virtual void s20();       // _20
+	virtual void s24();       // _24
+	virtual void s28();       // _28
+	virtual void s2C();       // _2C
+	virtual void s30();       // _30
+	virtual void s34();       // _34
+	virtual void s38();       // _38
+	virtual void s3C();       // _3C
+	virtual void s40();       // _40
+	virtual void s44();       // _44
+	virtual void s48();       // _48
+	virtual void s4C();       // _4C
+	virtual void s50();       // _50
+	virtual void s54();       // _54
+	virtual void s58();       // _58
+	virtual void s5C();       // _5C
+	virtual void s60();       // _60
+	virtual void s64();       // _64
+	virtual void s68();       // _68
+	virtual void s6C();       // _6C
+	virtual void s70();       // _70
+	virtual void s74();       // _74
 	virtual void s78(Vec3f*); // _78
-	virtual void s7C(); // _7C
-	virtual void s80(); // _80
-	virtual void s84(); // _84
-	virtual void s88(); // _88
-	virtual void s8C(); // _8C
-	virtual void s90(); // _90
-	virtual void s94(); // _94
+	virtual void s7C();       // _7C
+	virtual void s80();       // _80
+	virtual void s84();       // _84
+	virtual void s88();       // _88
+	virtual void s8C();       // _8C
+	virtual void s90();       // _90
+	virtual void s94();       // _94
 };
 
-#define PLY_CHANGE(player, create)                                                       \
-	do {                                                                                 \
-		void* pool = (player)->mStates;                                                  \
+#define PLY_CHANGE(player, create)                                                                  \
+	do {                                                                                            \
+		void* pool = (player)->mStates;                                                             \
 		releasePlyState(pool, changePlyState(&(player)->mState, (player), create(pool, (player)))); \
 	} while (0)
-#define PLY_ENDSTATE(player)                     \
-	do {                                         \
-		if ((player)->mState != 0) {             \
+#define PLY_ENDSTATE(player)                                \
+	do {                                                    \
+		if ((player)->mState != 0) {                        \
 			((TPlyState*)(player)->mState)->vfn_20(player); \
-		}                                        \
+		}                                                   \
 	} while (0)
 
 struct PlyMsgVec : public PlyMsg {
-	inline PlyMsgVec(u16 type) : PlyMsg(type) { mTo = 0xFFFF; }
+	inline PlyMsgVec(u16 type)
+	    : PlyMsg(type)
+	{
+		mTo = 0xFFFF;
+	}
 
 	Vec3f mVec; // _08
 };
 
 // A direction with no target the constructor leaves mTo alone
 struct PlyMsgDir {
-	inline PlyMsgDir(u16 type) { mFrom = 0xFFFF; mType = type; }
+	inline PlyMsgDir(u16 type)
+	{
+		mFrom = 0xFFFF;
+		mType = type;
+	}
 
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mFrom;  // _04
 	u16 mTo;    // _06
@@ -207,7 +215,11 @@ struct PlyMsgRaw {
 
 // Messages 0x6A and 0x6D ask an egg to be picked up
 struct PlyMsgPick : public PlyMsg {
-	inline PlyMsgPick(u16 type = 0x6A) : PlyMsg(type) { mHandle = 0; }
+	inline PlyMsgPick(u16 type = 0x6A)
+	    : PlyMsg(type)
+	{
+		mHandle = 0;
+	}
 
 	EggHandleBase* mHandle; // _08
 	Vec3f mPos;             // _0C
@@ -228,18 +240,18 @@ struct PlyVec : public Vec3f {
 
 // What plyReportToGame sends to the game and asks of the egg
 struct PlyReportMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u16 _02;
 	u16 mPlayer; // _04
 	u16 _06;
-	int mValue;  // _08
+	int mValue; // _08
 };
 struct PlyReportFloat {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u16 _02;
 	u16 mPlayer; // _04
 	u16 _06;
-	f32 mValue;  // _08
+	f32 mValue; // _08
 };
 struct PlyAskEgg {
 	u16 mType;  // _00
@@ -247,21 +259,21 @@ struct PlyAskEgg {
 	u8 mKind;   // _08
 };
 struct PlyReportEgg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u16 _02;
 	u16 mPlayer; // _04
 	u16 _06;
-	f32 mValue;  // _08
-	u8 mKind;    // _0C
+	f32 mValue; // _08
+	u8 mKind;   // _0C
 };
 
 // What the ground ray callbacks keep
 struct PlyRayHit {
-	void* mMesh;  // _00
-	u32 mTri;     // _04
-	Vec3f mPos;   // _08
-	u32 mFlags;   // _14
-	f32 mDist;    // _18
+	void* mMesh; // _00
+	u32 mTri;    // _04
+	Vec3f mPos;  // _08
+	u32 mFlags;  // _14
+	f32 mDist;   // _18
 };
 
 // The context of the searches through a collider's contacts
@@ -276,13 +288,13 @@ struct PlyGrabSearch {
 
 struct PlyGroundHit {
 	MeshColli* mMesh; // _00 the nearest walkable triangle
-	u16 mTri;      // _04
-	Vec3f mAnyPos; // _08 the nearest of anything
-	f32 mAnyDist;  // _14
-	u32 mAnyFlags; // _18 every flag hit
-	Vec3f mPos;    // _1C
-	f32 mDist;     // _28
-	u32 mFlags;    // _2C
+	u16 mTri;         // _04
+	Vec3f mAnyPos;    // _08 the nearest of anything
+	f32 mAnyDist;     // _14
+	u32 mAnyFlags;    // _18 every flag hit
+	Vec3f mPos;       // _1C
+	f32 mDist;        // _28
+	u32 mFlags;       // _2C
 };
 
 struct PlyArray;
@@ -333,7 +345,9 @@ extern "C" int plyGlobalsInit()
 }
 
 // 0x800340D8
-extern "C" void plyGlobalsEmpty() { }
+extern "C" void plyGlobalsEmpty()
+{
+}
 
 // 0x800340DC
 extern "C" int* plyGlobalsClear()
@@ -364,21 +378,21 @@ void TPlyState::onMessage(TChrPlayer* player, ObjMsg* msg)
 // 0x80034188
 extern "C" void plyLoadShared()
 {
-	gPlyParams = (PlyParams*)playerGetParams(0);
-	sPlayerMotions = (NJS_MOTION**)findArcExport(gPlayerArc, "motions");
+	gPlyParams      = (PlyParams*)playerGetParams(0);
+	sPlayerMotions  = (NJS_MOTION**)findArcExport(gPlayerArc, "motions");
 	sPlayerTexLists = (NJS_TEXLIST**)findArcExport(gPlayerArc, "texlists");
 }
 
 // 0x800341D4
 extern "C" void plyUnloadShared()
 {
-	sPlayerMotions = 0;
+	sPlayerMotions  = 0;
 	sPlayerTexLists = 0;
 }
 
 // 0x800341E4
 TChrPlayer::TChrPlayer(TObject* parent, int playerNo, u8 charId, int active)
-	: TObjPlayer(parent, playerNo, charId)
+    : TObjPlayer(parent, playerNo, charId)
 {
 	plyClearWord((u32*)_3C);
 	_D5 = 0;
@@ -554,15 +568,15 @@ void TChrPlayer::reset()
 	mPlayFlags |= 0x1000;
 	mPlayFlags |= 0x2000;
 	mHealth.mMin = 0;
-	mHealth.mMax  = 100;
-	mHealth.mNow  = 100;
-	mTimerD6    = 0;
-	mMoveAmount = 0.0f;
-	mMoveAngle  = 0;
-	_184        = 0;
-	_340        = gVecZero;
-	mTimerF8    = 0;
-	mTargetId   = -1;
+	mHealth.mMax = 100;
+	mHealth.mNow = 100;
+	mTimerD6     = 0;
+	mMoveAmount  = 0.0f;
+	mMoveAngle   = 0;
+	_184         = 0;
+	_340         = gVecZero;
+	mTimerF8     = 0;
+	mTargetId    = -1;
 	colliEnable(mEmitter0);
 	_2F8.x = 0.0f;
 	_2F8.y = 0.0f;
@@ -961,9 +975,9 @@ extern "C" void plyHangOnLedge(TChrPlayer* player)
 		mtxConcatQuat((f32*)player->mMatrix, (const f32*)player->mMatrix, (const f32*)&player->mRot);
 		plyApplyScale(player, player->mMatrix);
 		player->updateJoints();
-		from   = player->mPos;
+		from = player->mPos;
 		from.y += 8.0f;
-		to     = player->mPos;
+		to = player->mPos;
 		plyCheckDeathRay(player, &from, &to);
 	}
 }
@@ -1021,12 +1035,12 @@ extern "C" void plyStandOnMobile(TChrPlayer* player)
 static inline f32 plySqrt(f32 x)
 {
 	if (x > 0.0f) {
-		f64 guess = __frsqrte(x);
-		guess     = 0.5 * guess * (3.0 - guess * guess * x);
-		guess     = 0.5 * guess * (3.0 - guess * guess * x);
-		guess     = 0.5 * guess * (3.0 - guess * guess * x);
+		f64 guess         = __frsqrte(x);
+		guess             = 0.5 * guess * (3.0 - guess * guess * x);
+		guess             = 0.5 * guess * (3.0 - guess * guess * x);
+		guess             = 0.5 * guess * (3.0 - guess * guess * x);
 		volatile f32 root = x * guess;
-		x = root;
+		x                 = root;
 	}
 	return x;
 }
@@ -1055,14 +1069,14 @@ extern "C" void plyMountMobile(TChrPlayer* player)
 	vecNormalize(&dir, &dir);
 	f32 radius;
 	radius = player->mMobile->mBody.mRadius;
-	yaw = (int)(10430.38043493439 * (f32)atan2(dir.x, dir.z));
+	yaw    = (int)(10430.38043493439 * (f32)atan2(dir.x, dir.z));
 	njSinCos(yaw, &sin, &cos);
 	if (radius >= 15.0f) {
 		f32 side;
-		side = radius - 5.0f;
-		f32 dot  = dir.x * sin + dir.z * cos;
+		side    = radius - 5.0f;
+		f32 dot = dir.x * sin + dir.z * cos;
 		dot *= plySqrt(radius * radius - side * side);
-		pitch    = (int)(10430.38043493439 * (f32)atan2(dot, side));
+		pitch = (int)(10430.38043493439 * (f32)atan2(dot, side));
 	} else {
 		pitch = 0;
 	}
@@ -1095,7 +1109,8 @@ extern "C" void plyCheckDeathRay(TChrPlayer* player, Vec3f* from, Vec3f* to)
 	hit.mMesh  = 0;
 	hit.mDist  = 100000.0f;
 	hit.mFlags = 0;
-	if (groundQueryLine((const void*)from, (const void*)to, (void*)0x810C, (void*)plyDeathRayHit, (void*)&hit) != 0 && (hit.mFlags & 0x810C) != 0) {
+	if (groundQueryLine((const void*)from, (const void*)to, (void*)0x810C, (void*)plyDeathRayHit, (void*)&hit) != 0
+	    && (hit.mFlags & 0x810C) != 0) {
 		player->mStartPos = hit.mPos;
 		player->mPlayFlags |= 0x80000000;
 		if (hit.mFlags & 4) {
@@ -1161,9 +1176,9 @@ extern "C" void plyFootstepFx(TChrPlayer* player)
 	} else {
 		return;
 	}
-	hit.mMesh     = 0;
-	hit.mAnyDist  = 100000.0f;
-	foot.y        += 1.5f;
+	hit.mMesh    = 0;
+	hit.mAnyDist = 100000.0f;
+	foot.y += 1.5f;
 	hit.mAnyFlags = 0;
 	hit.mDist     = 100000.0f;
 	if (groundQueryDown((const void*)&foot, (void*)0x81, (void*)plyAnyRayHit, (void*)&hit) != 0) {
@@ -1196,7 +1211,7 @@ extern "C" void drawPlayerMotion(void* buffer, MotionPlayer* player)
 	if (player->isBlending() != 0) {
 		gjMotionLinkActor((GjActor*)buffer, (void*)player->getBlend(), player->mBlendTime);
 	} else {
-		int cur = player->mCurrent;
+		int cur   = player->mCurrent;
 		f32 frame = player->mFrame;
 		gjMotionActor(frame, (GjActor*)buffer, player->getMotion(cur));
 	}
@@ -1239,12 +1254,12 @@ void TChrPlayer::updateJoints()
 {
 	int poseOffset;
 	int jointOffset;
-	int i = 0;
-	poseOffset = 0;
+	int i       = 0;
+	poseOffset  = 0;
 	jointOffset = 0;
 	while (mJointCount > i) {
 		mtxConcat((f32*)(jointOffset + mJoints), (const f32*)mMatrix, (const f32*)((u8*)mPose + poseOffset + 0x38));
-		i = i + 1;
+		i          = i + 1;
 		poseOffset = 0x68 + poseOffset;
 		jointOffset += 0x30;
 	}
@@ -1289,10 +1304,10 @@ Vec3f* TChrPlayer::getPos()
 // Slot _DC
 void TChrPlayer::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x  = pos->x;
+	f32 y  = pos->y;
 	mPos.x = x;
-	f32 z = pos->z;
+	f32 z  = pos->z;
 	mPos.y = y;
 	mPos.z = z;
 }
@@ -1490,7 +1505,7 @@ void TChrPlayer::vfn_10()
 
 	u16 id = mObjId;
 	if ((u16)playerGetDrawView() == id) {
-		sPlayerScreenPos = screen;
+		sPlayerScreenPos   = screen;
 		gPlayerGoalVisible = visible;
 	}
 }
@@ -1524,9 +1539,9 @@ extern "C" int plyAttachEgg(TChrPlayer* player, TObjAction* egg)
 	PlyMsgPick msg;
 	msg.mFrom = player->mObjId;
 	if (egg->sendToHandle((ObjMsg*)&msg) != 0) {
-	player->mMobile->setHandle(msg.mHandle);
-	player->mMobile->reset(msg.mRadius, &msg.mPos, &msg.mRot);
-	return 1;
+		player->mMobile->setHandle(msg.mHandle);
+		player->mMobile->reset(msg.mRadius, &msg.mPos, &msg.mRot);
+		return 1;
 	}
 	return 0;
 }
@@ -1675,7 +1690,7 @@ extern "C" void plyBrakeMove(TChrPlayer* player)
 	PlyVec centre(player->mMobile->mBody.mPos);
 	Vec3f to;
 	int angle;
-	int facing   = angleToXZ(&player->mPos, &centre);
+	int facing = angleToXZ(&player->mPos, &centre);
 
 	if (plyGetMove(player, &amount, &angle) != 0) {
 		int diff = angleDist(angle, facing);
@@ -1843,8 +1858,8 @@ extern "C" void plyDrawTaskFlat(void* obj)
 {
 	TChrPlayer* player = (TChrPlayer*)obj;
 	ObjDrawState state;
-	state.mFlags = 0x400;
-	DrawStateSlot* slot   = getDrawStateSlot();
+	state.mFlags        = 0x400;
+	DrawStateSlot* slot = getDrawStateSlot();
 	njPushMatrixEx();
 	njMultiMatrix(0, player->mMatrix);
 	beginDrawState(slot, (const DrawState*)&state);
@@ -1867,8 +1882,8 @@ extern "C" void plyDrawTaskShadow(void* obj)
 		alpha = (int)(128.0f * ((f32)player->mFade / 10.0f));
 	}
 	setColorRed(&state.mMaterial, alpha);
-	state.mFlags = 0x800;
-	DrawStateSlot* slot   = getDrawStateSlot();
+	state.mFlags        = 0x800;
+	DrawStateSlot* slot = getDrawStateSlot();
 	beginDrawState(slot, (const DrawState*)&state);
 	njPushMatrixEx();
 	njTranslateEx(&player->mPos);
@@ -1910,7 +1925,7 @@ extern "C" void plyDrawParts(TChrPlayer* player)
 // Turns the two eyelid nodes to how far open they are
 extern "C" void plySetEyelidNodes(f32 open, PlyPose* upper, PlyPose* lower)
 {
-	int angle = (int)(182.04445f * (40.0f * open));
+	int angle      = (int)(182.04445f * (40.0f * open));
 	upper->mAng[0] = angle;
 	if (upper->mRotMode != 2) {
 		goto skipUpper;
@@ -1948,8 +1963,8 @@ extern "C" void plyReadMotion(NJS_OBJECT* node, MotionPlayer* player, void* pose
 	if (player->isBlending() != 0) {
 		plyReadMotionLink(node, player->getBlend(), pose, test, player->mBlendTime);
 	} else {
-		int cur      = player->mCurrent;
-		f32 frame    = player->mFrame;
+		int cur            = player->mCurrent;
+		f32 frame          = player->mFrame;
 		NJS_MOTION* motion = player->getMotion(cur);
 		plyReadMotionPlain(node, motion, pose, test, frame);
 	}
@@ -1975,7 +1990,7 @@ extern "C" int plyReadNodes(NJS_OBJECT* tree, void* pose, int index, void* test)
 {
 	do {
 		if (((int (*)(int))test)(index) != 0) {
-			PlyPose* out = (PlyPose*)pose + index;
+			PlyPose* out  = (PlyPose*)pose + index;
 			out->mRotMode = njGetMotionNodeData(tree, (f32*)&out->mPos, out->mAng, (f32*)&out->mScale, (NJS_QUATERNION*)out->mQuat);
 		} else {
 			njSetNextMotionNodeEx();
@@ -1994,7 +2009,7 @@ extern "C" int plyReadLinkNodes(NJS_OBJECT* tree, void* pose, int index, void* t
 {
 	do {
 		if (((int (*)(int))test)(index) != 0) {
-			PlyPose* out = (PlyPose*)pose + index;
+			PlyPose* out  = (PlyPose*)pose + index;
 			out->mRotMode = njGetMotionLinkNodeData(tree, (f32*)&out->mPos, out->mAng, (f32*)&out->mScale, (NJS_QUATERNION*)out->mQuat);
 		} else {
 			njSetNextMotionLinkNode();
@@ -2057,9 +2072,9 @@ extern "C" int plyAttachEgg2(TChrPlayer* player, TObjAction* egg)
 	PlyMsgPick msg;
 	msg.mFrom = player->mObjId;
 	if (egg->sendToHandle((ObjMsg*)&msg) != 0) {
-	player->mMobile->setHandle(msg.mHandle);
-	player->mMobile->reset(msg.mRadius, &msg.mPos, &msg.mRot);
-	return 1;
+		player->mMobile->setHandle(msg.mHandle);
+		player->mMobile->reset(msg.mRadius, &msg.mPos, &msg.mRot);
+		return 1;
 	}
 	return 0;
 }
@@ -2069,11 +2084,11 @@ extern "C" int plyAttachEgg2(TChrPlayer* player, TObjAction* egg)
 extern "C" int plyPickUpEgg(TChrPlayer* player, TObjAction* egg)
 {
 	if (plyAttachEgg2(player, egg) != 0) {
-	plyHoldEgg(player, egg);
-	PlyMsg msg(0x66);
-	msg.mFrom = player->mObjId;
-	egg->sendToHandle((ObjMsg*)&msg);
-	return 1;
+		plyHoldEgg(player, egg);
+		PlyMsg msg(0x66);
+		msg.mFrom = player->mObjId;
+		egg->sendToHandle((ObjMsg*)&msg);
+		return 1;
 	}
 	return 0;
 }
@@ -2270,14 +2285,12 @@ extern "C" void plyCollectPushes(TChrPlayer* player)
 	CharaColli* colli = player->mEmitter0;
 	if (colli->mContactCount != 0) {
 		for (ColliContact* contact = colli->mContacts; contact != 0; contact = contact->mNext) {
-			if (contact->mShape == 0
-			    && (colliContactShape(contact)->mFlags & 0x10) == 0) {
-				int egg = (u16)player->mEggRef.getId();
+			if (contact->mShape == 0 && (colliContactShape(contact)->mFlags & 0x10) == 0) {
+				int egg   = (u16)player->mEggRef.getId();
 				int owner = (u16)colliContactOwner(contact);
 				if (owner != egg) {
 					vecScaleAdd(0.5f, &player->_23C, &contact->mPush, &player->_23C);
-					if (vecLength(&contact->mPush) > 0.0f
-					    && vecLenXZ(&contact->mPush) < 0.0001f) {
+					if (vecLength(&contact->mPush) > 0.0f && vecLenXZ(&contact->mPush) < 0.0001f) {
 						player->_23C.z += 1.0f;
 					}
 				}
@@ -2838,14 +2851,14 @@ extern "C" bool plyTryPickUpBehind(TChrPlayer* player)
 // Where a ray crosses a segment on the ground plane
 extern "C" int plyRayCrossSegment(Vec3f* from, Vec3f* dir, Vec3f* a, Vec3f* b, Vec3f* onRay, Vec3f* onEdge)
 {
-	f32 ax = a->x;
-	f32 az = a->z;
-	f32 bx = b->x;
-	f32 bz = b->z;
-	f32 fx = from->x;
-	f32 fz = from->z;
-	f32 dx = dir->x;
-	f32 dz = dir->z;
+	f32 ax    = a->x;
+	f32 az    = a->z;
+	f32 bx    = b->x;
+	f32 bz    = b->z;
+	f32 fx    = from->x;
+	f32 fz    = from->z;
+	f32 dx    = dir->x;
+	f32 dz    = dir->z;
 	f32 edgeX = bx - ax;
 	f32 edgeZ = bz - az;
 	f32 denom = edgeX * dz - edgeZ * dx;
@@ -3100,31 +3113,31 @@ extern "C" int plyJumpOffEgg(TChrPlayer* player)
 {
 	Vec3f vel;
 	if ((int)player->mEggRef.getId() != 0xFFFF) {
-	plyPlayVoice(player, 0xA0, 0);
-	plyRumble(player, 9);
-	player->_198 = gPlyParams->_0E;
-	vel.x = 0.0f;
-	vel.y = 150.0f;
-	vel.z = -100.0f;
-	vecRotateY(&vel, &player->mVel, player->mAngle);
-	plyReleaseEgg(player, plyGetEgg(player));
-	return 1;
+		plyPlayVoice(player, 0xA0, 0);
+		plyRumble(player, 9);
+		player->_198 = gPlyParams->_0E;
+		vel.x        = 0.0f;
+		vel.y        = 150.0f;
+		vel.z        = -100.0f;
+		vecRotateY(&vel, &player->mVel, player->mAngle);
+		plyReleaseEgg(player, plyGetEgg(player));
+		return 1;
 	}
 	return 0;
 }
 
 struct PlyEdgeSearch {
 	MeshColli* mMesh; // _00
-	u16 mTri;      // _04
-	Vec3f mFrom;   // _08
-	Vec3f mDir;    // _14
-	Vec3f mHit;    // _20
-	Vec3f mNormal; // _2C
-	Vec3f mA;      // _38
-	Vec3f mB;      // _44
-	f32 mDist;     // _50
-	f32 mLow;      // _54
-	f32 mHigh;     // _58
+	u16 mTri;         // _04
+	Vec3f mFrom;      // _08
+	Vec3f mDir;       // _14
+	Vec3f mHit;       // _20
+	Vec3f mNormal;    // _2C
+	Vec3f mA;         // _38
+	Vec3f mB;         // _44
+	f32 mDist;        // _50
+	f32 mLow;         // _54
+	f32 mHigh;        // _58
 };
 
 // 0x8003A1A0
@@ -3603,12 +3616,12 @@ extern "C" int plyTrySpinDash(TChrPlayer* player, f32 amount, int angle)
 	Vec3f dir;
 	TMobileObject* mobile = plyGetMobile(player);
 	if (mobile != 0) {
-	if (amount == 0.0f) {
-		vecFromAngleXZ(1.0f, &dir, player->getRotY());
-	} else {
-		vecFromAngleXZ(1.0f, &dir, angle);
-	}
-	return mobile->startThrown(&dir);
+		if (amount == 0.0f) {
+			vecFromAngleXZ(1.0f, &dir, player->getRotY());
+		} else {
+			vecFromAngleXZ(1.0f, &dir, angle);
+		}
+		return mobile->startThrown(&dir);
 	}
 	return 0;
 }
@@ -3616,7 +3629,7 @@ extern "C" int plyTrySpinDash(TChrPlayer* player, f32 amount, int angle)
 // 0x8003B378
 extern "C" int plyTryHop(TChrPlayer* player)
 {
-	int landed = 0;
+	int landed            = 0;
 	TMobileObject* mobile = plyGetMobile(player);
 	if (mobile != 0) {
 		landed = mobile->tryLand();
@@ -3789,14 +3802,14 @@ extern "C" void plyUpdateSpeakCursor(TChrPlayer* player)
 }
 
 struct PlySlamSearch {
-	PlyMsgRaw mAsk;  // _00
+	PlyMsgRaw mAsk; // _00
 	u8 _06[2];
-	u16 mFront;      // _08
+	u16 mFront; // _08
 	u8 _0A[2];
-	Vec3f mDir;      // _0C
-	u16 mFound;      // _18
+	Vec3f mDir; // _0C
+	u16 mFound; // _18
 	u8 _1A[2];
-	int mAngle;      // _1C
+	int mAngle; // _1C
 };
 
 // 0x8003B8D8
@@ -3806,8 +3819,7 @@ extern "C" void plySlamSearchHit(ColliContact* contact, PlySlamSearch* search, i
 	if ((colliContactShape(contact)->mFlags & 0x20) != 0 && contact->mShape == 2) {
 		int owner = colliContactOwner(contact);
 		if (sendMsgById(owner, (ObjMsg*)&search->mAsk) & 2) {
-			if (sendMsgById(owner, (ObjMsg*)&search->mFront) != 0
-			    && angleDist(vecAngleXZ(&search->mDir), search->mAngle) >= 0x6000) {
+			if (sendMsgById(owner, (ObjMsg*)&search->mFront) != 0 && angleDist(vecAngleXZ(&search->mDir), search->mAngle) >= 0x6000) {
 				search->mFound = owner;
 				*stop          = 1;
 			}
@@ -3908,16 +3920,16 @@ extern "C" void plySlideOnEgg(TChrPlayer* player)
 	if (mesh == 0) {
 		return;
 	}
-	MeshTri* face  = &mesh->mTris[tri];
-	gravity.y = gPlyParams->_7C;
-	gravity.x = 0.0f;
-	gravity.z = 0.0f;
+	MeshTri* face = &mesh->mTris[tri];
+	gravity.y     = gPlyParams->_7C;
+	gravity.x     = 0.0f;
+	gravity.z     = 0.0f;
 	plyProjectOnPlane(&player->_2F8, &normal, &gravity);
-	int heading = vecAngleXZ(&player->mVel);
+	int heading    = vecAngleXZ(&player->mVel);
 	player->mAngle = (int)plyApproachAngle(2.0f, player->mAngle, heading);
-	angles.x = 0;
-	angles.y = player->mAngle;
-	angles.z = 0;
+	angles.x       = 0;
+	angles.y       = player->mAngle;
+	angles.z       = 0;
 	plyProjectOnPlane(&along, &normal, &player->mVel);
 	f32 friction;
 	if (plyGetMove(player, &amount, &stick) != 0) {
@@ -4155,14 +4167,14 @@ extern "C" void plyMoveAndStep(TChrPlayer* player)
 }
 
 struct PlyMoveHit {
-	void* mMesh;   // _00
-	u16 mTri;      // _04
-	Vec3f mPos;    // _08
-	u32 mFlags;    // _14
-	f32 mDist;     // _18
-	Vec3f mPos2;   // _1C
-	u32 mFlags2;   // _28
-	f32 mDist2;    // _2C
+	void* mMesh; // _00
+	u16 mTri;    // _04
+	Vec3f mPos;  // _08
+	u32 mFlags;  // _14
+	f32 mDist;   // _18
+	Vec3f mPos2; // _1C
+	u32 mFlags2; // _28
+	f32 mDist2;  // _2C
 };
 
 // 0x8003C648
@@ -4173,13 +4185,13 @@ extern "C" int plyMoveRayHit(f32 dist, MeshColli* mesh, u16 tri, const Vec3f* po
 	if (((face->mMask & 1) != 0) && (hit->mDist > dist)) {
 		hit->mMesh  = mesh;
 		hit->mTri   = tri;
-	hit->mPos = *pos;
+		hit->mPos   = *pos;
 		hit->mFlags = face->mMask;
 		hit->mDist  = dist;
 	}
 	if (hit->mDist2 > dist) {
 		hit->mDist2  = dist;
-	hit->mPos2 = *pos;
+		hit->mPos2   = *pos;
 		hit->mFlags2 = face->mMask;
 	}
 	return 1;
@@ -4202,10 +4214,10 @@ extern "C" void plyMoveByVel(TChrPlayer* player)
 	vecScaleAdd(1.0f / 60.0f, &to, &vel, &from);
 	vecAdd(&to, &player->_23C, &to);
 	vecAdd(&to, &player->_248, &to);
-	hit.mMesh    = 0;
-	hit.mDist2   = 100000.0f;
-	hit.mDist    = 100000.0f;
-	hit.mFlags2  = 0;
+	hit.mMesh   = 0;
+	hit.mDist2  = 100000.0f;
+	hit.mDist   = 100000.0f;
+	hit.mFlags2 = 0;
 	if (groundQueryLine((const void*)&from, (const void*)&to, (void*)0x810D, (void*)plyMoveRayHit, (void*)&hit) != 0) {
 		if (hit.mMesh != 0) {
 			vecSub(&dir, &to, &from);
@@ -4327,7 +4339,7 @@ static inline void plyStandOn(TChrPlayer* player, PlyGroundHit& hit)
 	riderSetMesh((Rider*)&player->mRiders[5], (RiderList*)hit.mMesh);
 	player->mRiders[5].mTri = hit.mTri;
 	player->mRiders[5].mPos = hit.mPos;
-	player->mPos.y = hit.mPos.y;
+	player->mPos.y          = hit.mPos.y;
 	if (hit.mMesh->mFlags & 2) {
 		mtxMultVec(hit.mMesh->mInverse, &hit.mPos, &player->_494);
 		mtxCopy((f32*)(player->_1EC + 0x20), hit.mMesh->mMatrix);
@@ -4408,11 +4420,11 @@ extern "C" int plyFindLanding(TChrPlayer* player)
 	Vec3f from;
 	PlyGroundHit hit;
 
-	f32 up = 10.0f;
+	f32 up  = 10.0f;
 	f32 eps = 0.0001f;
-	from.x = player->mPos.x;
-	from.y = eps + (player->mPos.y + up);
-	from.z = player->mPos.z;
+	from.x  = player->mPos.x;
+	from.y  = eps + (player->mPos.y + up);
+	from.z  = player->mPos.z;
 	plyClearProbe(player, 5);
 	plyClearProbe(player, 6);
 	hit.mMesh     = 0;
@@ -4472,7 +4484,7 @@ extern "C" void* plyGetProbe(const TChrPlayer* player, int probe, u16* tri, Vec3
 {
 	MeshColli* mesh;
 	const PlyRider* rider = &player->mRiders[probe];
-	mesh = rider->mMesh;
+	mesh                  = rider->mMesh;
 	if (mesh != 0) {
 		if (tri != 0) {
 			*tri = rider->mTri;
@@ -4568,7 +4580,7 @@ extern "C" void plySetMoveFromInput(TChrPlayer* player, PlyInput* input)
 extern "C" void plySetHeldEffect(TChrPlayer* player, const ItemSpec* spec)
 {
 	player->_D0    = 1;
-	int kind = spec->mFlags & 0xF;
+	int kind       = spec->mFlags & 0xF;
 	player->_D2[0] = kind;
 	if (kind == 2) {
 		player->_D2[1] = spec->mParam;
@@ -4652,8 +4664,8 @@ extern "C" void plyAddStatus(TChrPlayer* player, int id, u16 time)
 // Slot _78 The ids of what is worn and held
 extern "C" int plyGetItemIds(TChrPlayer* player, int* worn, int* held)
 {
-	*worn = 0xFFFF;
-	*held = -1;
+	*worn   = 0xFFFF;
+	*held   = -1;
 	int has = ((ItemHolder*)player->_4F0)->mNode.mList != 0;
 	if (has == 0 && player->_520 == 0) {
 		return 0;
@@ -4702,11 +4714,10 @@ struct PlyStatusEntry {
 };
 
 PlyStatusEntry gPlayerStatusEntries[10] = {
-	{ 2, &TChrPlayer::statusFlag2 },     { 3, &TChrPlayer::statusInvincible },
-	{ 4, &TChrPlayer::statusLowHealth },  { 5, &TChrPlayer::statusSleep },
-	{ 6, &TChrPlayer::statusStop },       { 0xA, &TChrPlayer::statusBlind },
-	{ 0xB, &TChrPlayer::statusDrain },    { 0xC, &TChrPlayer::statusStrength },
-	{ 0xD, &TChrPlayer::statusSuper },    { 0xE, &TChrPlayer::statusDoze },
+	{ 2, &TChrPlayer::statusFlag2 },   { 3, &TChrPlayer::statusInvincible }, { 4, &TChrPlayer::statusLowHealth },
+	{ 5, &TChrPlayer::statusSleep },   { 6, &TChrPlayer::statusStop },       { 0xA, &TChrPlayer::statusBlind },
+	{ 0xB, &TChrPlayer::statusDrain }, { 0xC, &TChrPlayer::statusStrength }, { 0xD, &TChrPlayer::statusSuper },
+	{ 0xE, &TChrPlayer::statusDoze },
 };
 
 // 0x8003D7EC
@@ -4778,8 +4789,7 @@ extern "C" void plyUpdateStatus(TChrPlayer* player)
 	flagWordOr(&player->mBitsDC, &player->mBitsE4);
 
 	if ((int)player->mBitsDC != 0) {
-		if ((flagTest(&player->mBitsDC, 8) != 0 || flagTest(&player->mBitsDC, 0xE) != 0)
-		    && player->mAge % 300 == 0) {
+		if ((flagTest(&player->mBitsDC, 8) != 0 || flagTest(&player->mBitsDC, 0xE) != 0) && player->mAge % 300 == 0) {
 			plyPlaySe(player, 0x49);
 			((PlySlots*)player)->s74(5);
 			plyTintFadeA((PlyTint*)player->_1A8);
@@ -4798,7 +4808,9 @@ extern "C" void plyUpdateStatus(TChrPlayer* player)
 
 // 0x8003DB30
 // Status 2 has nothing to start or end
-void TChrPlayer::statusFlag2(int on) { }
+void TChrPlayer::statusFlag2(int on)
+{
+}
 
 // 0x8003DB34
 void TChrPlayer::statusInvincible(int on)
@@ -5051,7 +5063,7 @@ void TChrPlayer::vfn_C8(const int* motions, f32* mtx)
 extern "C" void plyPoseAtFrame(TChrPlayer* player, f32 frame)
 {
 	u32* motion = (u32*)player->_320;
-	f32 last = motion[1] - 2;
+	f32 last    = motion[1] - 2;
 	if (frame > last) {
 		frame = last;
 	}
@@ -5089,11 +5101,11 @@ extern "C" int plyGroundRayHit(f32 dist, MeshColli* mesh, u16 tri, const Vec3f* 
 		hit->mFlags = face->mMask;
 	}
 	if (hit->mAnyDist > dist) {
-		hit->mAnyDist = dist;
-	f32 x = pos->x;
-	f32 y = pos->y;
+		hit->mAnyDist  = dist;
+		f32 x          = pos->x;
+		f32 y          = pos->y;
 		hit->mAnyPos.x = x;
-	f32 z = pos->z;
+		f32 z          = pos->z;
 		hit->mAnyPos.y = y;
 		hit->mAnyPos.z = z;
 		hit->mAnyFlags |= face->mMask;
@@ -5190,7 +5202,7 @@ extern "C" void plyPlaceOnMount(TChrPlayer* player)
 
 // Message 0x48 asks whether this is a mount, and the first that answers is kept
 struct PlyMountMsg {
-	u16 mType;          // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mFrom;          // _04
 	TObjAction* mFound; // _08
@@ -5204,7 +5216,7 @@ extern "C" void plyMountSearchHit(ColliContact* contact, u8* msg, int* stop)
 		TObjAction* obj = findObjById(colliContactOwner(contact));
 		if (obj != 0 && obj->sendToHandle((ObjMsg*)msg) != 0) {
 			((PlyMountMsg*)msg)->mFound = obj;
-			*stop = 1;
+			*stop                       = 1;
 		}
 	}
 }
@@ -5322,19 +5334,29 @@ extern "C" void plyHide(TChrPlayer* player)
 }
 
 // 0x8003EC48
-void TItem::vfn_6C() { }
+void TItem::vfn_6C()
+{
+}
 
 // 0x8003EC4C
-void TItem::vfn_70() { }
+void TItem::vfn_70()
+{
+}
 
 // 0x8003EC50
-void TItem::vfn_74() { }
+void TItem::vfn_74()
+{
+}
 
 // 0x8003EC54
-void TItem::place(const Vec3f* pos) { }
+void TItem::place(const Vec3f* pos)
+{
+}
 
 // 0x8003EC58
-void TPlyState::check(TChrPlayer* player) { }
+void TPlyState::check(TChrPlayer* player)
+{
+}
 
 // 0x8003EC5C
 int TPlyState::handleInput(TChrPlayer* player, PlyInput* input)
@@ -5350,7 +5372,9 @@ int TChrPlayer::getHealth()
 }
 
 // 0x8003EC6C
-void TPlyState::vfn_20(TChrPlayer* player) { }
+void TPlyState::vfn_20(TChrPlayer* player)
+{
+}
 
 // 0x8003EC70
 // Slot _B0 Keeps the event's motions
@@ -5418,7 +5442,9 @@ f32 TChrPlayer::vfn_40()
 }
 
 // 0x8003ED70
-void TPlyState::update(TChrPlayer* player) { }
+void TPlyState::update(TChrPlayer* player)
+{
+}
 
 // 0x8003ED74
 void TPlyState::run(TChrPlayer* player)
@@ -5443,10 +5469,14 @@ int TEggCreature::sendToHandle(ObjMsg* msg)
 }
 
 // 0x8003EE18
-void TEggCreature::vfn_94(f32* out) { }
+void TEggCreature::vfn_94(f32* out)
+{
+}
 
 // 0x8003EE1C
-extern "C" void plyEmpty7() { }
+extern "C" void plyEmpty7()
+{
+}
 
 // 0x8003EE88
 // The timed effects a list of ten nodes kept with a free list
@@ -5459,11 +5489,13 @@ PlyEffectList::PlyEffectList()
 		mNodes[i].mNext = &mNodes[i + 1];
 	}
 	mNodes[9].mNext = 0;
-	mFree = mNodes;
+	mFree           = mNodes;
 }
 
 // 0x8003EEDC
-PlyEffectList::~PlyEffectList() { }
+PlyEffectList::~PlyEffectList()
+{
+}
 
 // 0x8003EF18
 extern "C" PlyEffect* effectListAdd(PlyEffectList* list)
@@ -5491,10 +5523,10 @@ extern "C" void effectListClear(PlyEffectList* list)
 		list->mNodes[i].mNext = &list->mNodes[i + 1];
 	}
 	list->mNodes[9].mNext = 0;
-	list->mFree  = list->mNodes;
-	list->mTail  = 0;
-	list->mHead  = 0;
-	list->mCount = 0;
+	list->mFree           = list->mNodes;
+	list->mTail           = 0;
+	list->mHead           = 0;
+	list->mCount          = 0;
 }
 
 // 0x8003EFE0
@@ -5740,113 +5772,64 @@ extern "C" void jointArrayCopy(PlyArray* array, PlyJoint* to, PlyJoint* from, in
 }
 
 MotionEntry gPlayerBodyMotions[66] = {
-	{ MOTION_LOOP, 0, -1, 0, 0.0f, 31.0f, 0.5f, 0.0f, 4 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 5 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 3 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 18.99f, 1.0f, 0.0f, 2 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 19.0f, 1.0f, 0.0f, 2 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 19.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_LOOP, 26, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 2 },
-	{ MOTION_LOOP, 27, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 3 },
-	{ MOTION_LOOP, 28, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 3 },
-	{ MOTION_CHAIN, 35, -1, 11, 0.0f, 4.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 35, -1, 0, 0.0f, 6.0f, 1.0f, 0.0f, 8 },
-	{ MOTION_ONCE, 35, -1, 0, 6.0f, 39.0f, 1.0f, 0.0f, 8 },
-	{ MOTION_ONCE, 11, -1, 0, 0.0f, 14.0f, 1.0f, 0.0f, 8 },
-	{ MOTION_LOOP, 8, -1, 0, 0.0f, 20.0f, 1.0f, 0.0f, 2 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 23, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 24, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 13, -1, 0, 0.0f, 89.0f, 0.5f, 0.0f, 2 },
-	{ MOTION_ONCE, 14, -1, 0, 0.0f, 82.0f, 0.5f, 0.0f, 2 },
-	{ MOTION_CHAIN, 10, -1, 0, 0.0f, 9.0f, 0.5f, 0.0f, 4 },
-	{ MOTION_ONCE, 12, -1, 0, 0.0f, 59.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 17, -1, 0, 0.0f, 9.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 17, -1, 0, 9.0f, 16.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_CHAIN, 17, -1, 0, 16.0f, 29.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 33, -1, 0, 0.0f, 59.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 25, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_BLEND, 15, -1, 6, 3.0f, 8.99f, 0.5f, 0.2f, 0 },
-	{ MOTION_LOOP, 34, -1, 0, 0.0f, 28.99f, 0.4f, 0.0f, 0 },
-	{ MOTION_CHAIN, 19, -1, 29, 0.0f, 29.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 20, -1, 0, 0.0f, 28.99f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 21, -1, 0, 0.0f, 53.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 21, -1, 0, 0.0f, 53.0f, 2.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 21, -1, 0, 50.0f, 0.0f, -1.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 22, -1, 0, 0.0f, 9.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_LOOP, 30, -1, 0, 0.0f, 28.99f, 0.3f, 0.0f, 2 },
-	{ MOTION_LOOP, 18, -1, 0, 0.0f, 28.99f, 0.7f, 0.0f, 0 },
-	{ MOTION_ONCE, 16, -1, 0, 0.0f, 29.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 36, -1, 0, 0.0f, 19.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_CHAIN, 31, -1, 39, 0.0f, 5.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 30, -1, 0, 0.0f, 1.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 32, -1, 0, 0.0f, 34.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 29, -1, 0, 0.0f, 14.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 28.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 37, -1, 0, 0.0f, 53.0f, 1.0f, 0.0f, 8 },
-	{ MOTION_ONCE, 38, -1, 0, 0.0f, 243.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 39, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 41, -1, 0, 0.0f, 196.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 40, -1, 0, 0.0f, 113.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 42, -1, 0, 0.0f, 115.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 43, -1, 0, 0.0f, 17.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 44, -1, 0, 0.0f, 13.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 45, -1, 0, 0.0f, 16.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_LOOP, 46, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 47, -1, 0, 0.0f, 60.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 48, -1, 0, 0.0f, 18.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_LOOP, 49, -1, 0, 0.0f, 25.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 50, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 51, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 52, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 53, -1, 0, 0.0f, 63.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 54, -1, 0, 0.0f, 47.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 55, -1, 0, 0.0f, 53.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 56, -1, 0, 0.0f, 59.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_CHAIN, 58, -1, 15, 0.0f, 37.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 57, -1, 0, 0.0f, 141.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 59, -1, 0, 0.0f, 237.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 0, -1, 0, 0.0f, 31.0f, 0.5f, 0.0f, 4 },    { MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 5 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 3 },    { MOTION_ONCE, 7, -1, 0, 0.0f, 18.99f, 1.0f, 0.0f, 2 },
+	{ MOTION_ONCE, 8, -1, 0, 0.0f, 19.0f, 1.0f, 0.0f, 2 },    { MOTION_ONCE, 9, -1, 0, 0.0f, 19.0f, 0.35f, 0.0f, 0 },
+	{ MOTION_LOOP, 26, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 2 },   { MOTION_LOOP, 27, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 3 },
+	{ MOTION_LOOP, 28, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 3 },   { MOTION_CHAIN, 35, -1, 11, 0.0f, 4.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 35, -1, 0, 0.0f, 6.0f, 1.0f, 0.0f, 8 },    { MOTION_ONCE, 35, -1, 0, 6.0f, 39.0f, 1.0f, 0.0f, 8 },
+	{ MOTION_ONCE, 11, -1, 0, 0.0f, 14.0f, 1.0f, 0.0f, 8 },   { MOTION_LOOP, 8, -1, 0, 0.0f, 20.0f, 1.0f, 0.0f, 2 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },     { MOTION_LOOP, 23, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_LOOP, 24, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },   { MOTION_LOOP, 13, -1, 0, 0.0f, 89.0f, 0.5f, 0.0f, 2 },
+	{ MOTION_ONCE, 14, -1, 0, 0.0f, 82.0f, 0.5f, 0.0f, 2 },   { MOTION_CHAIN, 10, -1, 0, 0.0f, 9.0f, 0.5f, 0.0f, 4 },
+	{ MOTION_ONCE, 12, -1, 0, 0.0f, 59.0f, 0.5f, 0.0f, 0 },   { MOTION_ONCE, 17, -1, 0, 0.0f, 9.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 17, -1, 0, 9.0f, 16.0f, 0.5f, 0.0f, 0 },   { MOTION_CHAIN, 17, -1, 0, 16.0f, 29.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 33, -1, 0, 0.0f, 59.0f, 1.0f, 0.0f, 0 },   { MOTION_ONCE, 25, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },
+	{ MOTION_BLEND, 15, -1, 6, 3.0f, 8.99f, 0.5f, 0.2f, 0 },  { MOTION_LOOP, 34, -1, 0, 0.0f, 28.99f, 0.4f, 0.0f, 0 },
+	{ MOTION_CHAIN, 19, -1, 29, 0.0f, 29.0f, 0.5f, 0.0f, 0 }, { MOTION_LOOP, 20, -1, 0, 0.0f, 28.99f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 21, -1, 0, 0.0f, 53.0f, 1.0f, 0.0f, 0 },   { MOTION_ONCE, 21, -1, 0, 0.0f, 53.0f, 2.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 21, -1, 0, 50.0f, 0.0f, -1.5f, 0.0f, 0 },  { MOTION_ONCE, 22, -1, 0, 0.0f, 9.0f, 0.8f, 0.0f, 0 },
+	{ MOTION_LOOP, 30, -1, 0, 0.0f, 28.99f, 0.3f, 0.0f, 2 },  { MOTION_LOOP, 18, -1, 0, 0.0f, 28.99f, 0.7f, 0.0f, 0 },
+	{ MOTION_ONCE, 16, -1, 0, 0.0f, 29.0f, 1.0f, 0.0f, 0 },   { MOTION_LOOP, 36, -1, 0, 0.0f, 19.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_CHAIN, 31, -1, 39, 0.0f, 5.0f, 0.5f, 0.0f, 0 },  { MOTION_ONCE, 30, -1, 0, 0.0f, 1.0f, 0.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 32, -1, 0, 0.0f, 34.0f, 1.0f, 0.0f, 0 },   { MOTION_ONCE, 29, -1, 0, 0.0f, 14.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 28.0f, 0.5f, 0.0f, 0 },    { MOTION_LOOP, 37, -1, 0, 0.0f, 53.0f, 1.0f, 0.0f, 8 },
+	{ MOTION_ONCE, 38, -1, 0, 0.0f, 243.0f, 1.0f, 0.0f, 0 },  { MOTION_ONCE, 39, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 41, -1, 0, 0.0f, 196.0f, 1.0f, 0.0f, 0 },  { MOTION_ONCE, 40, -1, 0, 0.0f, 113.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 42, -1, 0, 0.0f, 115.0f, 1.0f, 0.0f, 0 },  { MOTION_ONCE, 43, -1, 0, 0.0f, 17.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 44, -1, 0, 0.0f, 13.0f, 1.0f, 0.0f, 0 },   { MOTION_LOOP, 45, -1, 0, 0.0f, 16.0f, 0.8f, 0.0f, 0 },
+	{ MOTION_LOOP, 46, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },   { MOTION_LOOP, 47, -1, 0, 0.0f, 60.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 48, -1, 0, 0.0f, 18.0f, 0.8f, 0.0f, 0 },   { MOTION_LOOP, 49, -1, 0, 0.0f, 25.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 50, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },   { MOTION_LOOP, 51, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 52, -1, 0, 0.0f, 30.0f, 1.0f, 0.0f, 0 },   { MOTION_ONCE, 53, -1, 0, 0.0f, 63.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 54, -1, 0, 0.0f, 47.0f, 1.0f, 0.0f, 0 },   { MOTION_ONCE, 55, -1, 0, 0.0f, 53.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 56, -1, 0, 0.0f, 59.0f, 1.0f, 0.0f, 0 },   { MOTION_CHAIN, 58, -1, 15, 0.0f, 37.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 57, -1, 0, 0.0f, 141.0f, 1.0f, 0.0f, 0 },  { MOTION_ONCE, 59, -1, 0, 0.0f, 237.0f, 1.0f, 0.0f, 0 },
 };
 
 MotionEntry sPlayerFaceMotions[8] = {
-	{ MOTION_ONCE, 0, 0, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, 1, 0, 0.0f, 244.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, 2, 0, 0.0f, 196.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, 3, 0, 0.0f, 9.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, 3, 0, 9.0f, 16.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, 3, 0, 16.0f, 29.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, 4, 0, 0.0f, 113.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, 5, 0, 0.0f, 115.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, 0, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 1, 1, 0, 0.0f, 244.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, 2, 0, 0.0f, 196.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 3, 3, 0, 0.0f, 9.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 3, 3, 0, 9.0f, 16.0f, 0.5f, 0.0f, 0 },  { MOTION_ONCE, 3, 3, 0, 16.0f, 29.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 4, 4, 0, 0.0f, 113.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 5, 5, 0, 0.0f, 115.0f, 1.0f, 0.0f, 0 },
 };
 
 MotionEntry sPlayerLeftHandMotions[13] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 244.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 196.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 9.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 9.0f, 16.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 16.0f, 29.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 113.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 115.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 244.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 196.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 3, -1, 0, 0.0f, 9.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 3, -1, 0, 9.0f, 16.0f, 0.5f, 0.0f, 0 },  { MOTION_ONCE, 3, -1, 0, 16.0f, 29.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 4, -1, 0, 0.0f, 113.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 5, -1, 0, 0.0f, 115.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },   { MOTION_ONCE, 7, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 8, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },   { MOTION_ONCE, 9, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 	{ MOTION_ONCE, 10, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 };
 
 MotionEntry sPlayerRightHandMotions[13] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 244.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 196.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 9.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 9.0f, 16.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 16.0f, 29.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 113.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 115.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 244.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 196.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 3, -1, 0, 0.0f, 9.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 3, -1, 0, 9.0f, 16.0f, 0.5f, 0.0f, 0 },  { MOTION_ONCE, 3, -1, 0, 16.0f, 29.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 4, -1, 0, 0.0f, 113.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 5, -1, 0, 0.0f, 115.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },   { MOTION_ONCE, 7, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 8, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },   { MOTION_ONCE, 9, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 	{ MOTION_ONCE, 10, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 };

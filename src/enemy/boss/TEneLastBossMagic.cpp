@@ -17,14 +17,17 @@ typedef char TEneLastBossMagic_size_check[(sizeof(TEneLastBossMagic) == 0x4C) ? 
 const char* gTEneLastBossMagicName = "TEneLastBossMagic";
 
 // 0x8015EA14
-f32 lastBossMagicGrowFrames() { return 35.0f; }
+f32 lastBossMagicGrowFrames()
+{
+	return 35.0f;
+}
 
 // 0x8015EA1C
 TEneLastBossMagic::TEneLastBossMagic(TObject* parent, const Vec3f* pos, f32 life)
     : TObjAction(parent)
 {
-	_00    = (u32)gTEneLastBossMagicName;
-	mSize  = 0x4C;
+	_00   = (u32)gTEneLastBossMagicName;
+	mSize = 0x4C;
 	setObjId(this, 0xFFFF);
 	mPos   = *pos;
 	mLife  = life;
@@ -96,7 +99,13 @@ void TEneLastBossMagic::draw()
 }
 
 // 0x8015ED44
-int TEneLastBossMagic::getKind() { return 2; }
+int TEneLastBossMagic::getKind()
+{
+	return 2;
+}
 
 // 0x8015ED4C
-Vec3f* TEneLastBossMagic::getPos() { return &mPos; }
+Vec3f* TEneLastBossMagic::getPos()
+{
+	return &mPos;
+}

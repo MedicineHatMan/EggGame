@@ -21,7 +21,7 @@ s32 DVDGetDriveStatus(void);
 #define PAD_BUTTON_DOWN  0x0004
 #define PAD_BUTTON_UP    0x0008
 #define PAD_BUTTON_A     0x0100
-#define PAD_BUTTON_B 0x0200
+#define PAD_BUTTON_B     0x0200
 
 void PADControlAllMotors(const u32* commands);
 

@@ -39,17 +39,17 @@ public:
 	void freeShape();
 	void buildNormals();
 
-	NJS_TEXLIST* mTexList;     // _64 geobj texture 15
-	DrawTask* mDraw;           // _68
-	int mAnchor;               // _6C set int 0 -1 until the first init
-	s16 mTex;                  // _70 set int 1 clamped to the list
+	NJS_TEXLIST* mTexList; // _64 geobj texture 15
+	DrawTask* mDraw;       // _68
+	int mAnchor;           // _6C set int 0 -1 until the first init
+	s16 mTex;              // _70 set int 1 clamped to the list
 	u8 _72[2];
-	FlagCloth* mCloth;         // _74
+	FlagCloth* mCloth; // _74
 	u8 _78[4];
-	f32 mRef;                  // _7C set float 0 plus 0.5
-	HitVec mTouch[2];          // _80 where the egg is and where it was
-	int mWasClear;             // _98 1 after a frame with no contact so the next one sounds
-	HitVec mNormal[13][16];    // _9C one per cloth point
+	f32 mRef;               // _7C set float 0 plus 0.5
+	HitVec mTouch[2];       // _80 where the egg is and where it was
+	int mWasClear;          // _98 1 after a frame with no contact so the next one sounds
+	HitVec mNormal[13][16]; // _9C one per cloth point
 };
 
 extern "C" {

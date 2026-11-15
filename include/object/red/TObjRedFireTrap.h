@@ -31,13 +31,13 @@ public:
 	TObjRedFireTrap(TObject* parent, SetDesc* desc);
 	virtual ~TObjRedFireTrap();
 
-	virtual void draw();                          // _0C
-	virtual void vfn_10();                        // _10
-	virtual void render();                        // _1C
-	virtual void initFromDesc(SetDesc* desc);     // _30
-	virtual void debugPrint(void*);               // _34
+	virtual void draw();                                            // _0C
+	virtual void vfn_10();                                          // _10
+	virtual void render();                                          // _1C
+	virtual void initFromDesc(SetDesc* desc);                       // _30
+	virtual void debugPrint(void*);                                 // _34
 	virtual int onHit(const TObjAction* other, int arg, int* info); // _58
-	virtual void vfn_74();                        // _74
+	virtual void vfn_74();                                          // _74
 
 	void makeShapes();
 	void updateMatrix();
@@ -47,20 +47,20 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	ObjModel mModel;      // _64
-	DrawTask* mDraw;      // _84
-	MotionPlayer mMotion; // _88
+	ObjModel mModel;            // _64
+	DrawTask* mDraw;            // _84
+	MotionPlayer mMotion;       // _88
 	CharaColli* mJetColli;      // _C4 seven spheres along the flame
-	f32 mMatrix[12];      // _C8
-	int mAct;             // _F8 0 ignite 1 on 2 off 3 eternal
-	int mEternal;         // _FC
-	int mPower;           // _100 dealt to a kind-0 hit
-	int _104;             // _104 nothing in this class reads it
-	int mOnTime;          // _108
-	int mOffTime;         // _10C
-	int mTimer;           // _110
+	f32 mMatrix[12];            // _C8
+	int mAct;                   // _F8 0 ignite 1 on 2 off 3 eternal
+	int mEternal;               // _FC
+	int mPower;                 // _100 dealt to a kind-0 hit
+	int _104;                   // _104 nothing in this class reads it
+	int mOnTime;                // _108
+	int mOffTime;               // _10C
+	int mTimer;                 // _110
 	TParticleGenerator* mTrail; // _114
-	SoundHandle mSound;   // _118
+	SoundHandle mSound;         // _118
 };
 
 extern "C" {

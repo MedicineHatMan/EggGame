@@ -48,8 +48,8 @@ struct SoundVoice {
 struct SoundNode {
 	SoundNode& operator=(const SoundNode& other);
 
-	SoundNode* mNext; // _00
-	SoundNode* mPrev; // _04
+	SoundNode* mNext;  // _00
+	SoundNode* mPrev;  // _04
 	SoundVoice mVoice; // _08
 };
 
@@ -112,13 +112,13 @@ public:
 	int isWaiting(int bank, int program);
 	void stopVoice(SoundVoice* voice);
 
-	u32 mPorts[2];    // _20
-	u8* mTable;       // _28
-	SoundPool mPool;  // _2C
+	u32 mPorts[2];      // _20
+	u8* mTable;         // _28
+	SoundPool mPool;    // _2C
 	SoundList mWaiting; // _38
 	SoundList mPlaying; // _44
-	int mFrame;       // _50
-	int mSerial;      // _54
+	int mFrame;         // _50
+	int mSerial;        // _54
 };
 
 extern "C" {

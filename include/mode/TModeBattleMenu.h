@@ -15,10 +15,10 @@ public:
 	virtual int init();
 	virtual void update();
 
-	u8 mPage;                     // _0C 0 the rule 1 the stage
-	u8 mRule;                     // _0D
-	u8 mStage;                    // _0E
-	TArray<const char*> mStages;  // _10
+	u8 mPage;                    // _0C 0 the rule 1 the stage
+	u8 mRule;                    // _0D
+	u8 mStage;                   // _0E
+	TArray<const char*> mStages; // _10
 };
 
 #endif

@@ -29,7 +29,7 @@ public:
 	void stateHeld();
 
 	CharaColli* mRing; // _1A4 the touch ring
-	u16 mTimer;  // _1A8 frames left in the lit state
+	u16 mTimer;        // _1A8 frames left in the lit state
 	s16 _1AA;
 	int mMode; // _1AC 0 = idle 1 = lit 2 = held
 };

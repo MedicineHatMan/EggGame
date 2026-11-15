@@ -18,8 +18,7 @@ f32 planeHeight(const Vec3f* point, const Vec3f* onPlane, const Vec3f* normal)
 // The same written out
 f32 planeHeightInline(const Vec3f* point, const Vec3f* onPlane, const Vec3f* normal)
 {
-	return normal->x * (point->x - onPlane->x) + normal->y * (point->y - onPlane->y)
-	     + normal->z * (point->z - onPlane->z);
+	return normal->x * (point->x - onPlane->x) + normal->y * (point->y - onPlane->y) + normal->z * (point->z - onPlane->z);
 }
 
 // 0x80100610

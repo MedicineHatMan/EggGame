@@ -76,33 +76,33 @@ public:
 };
 
 extern "C" {
-int fontLookup(u32 code, u16* outBlock, u16* outIndex);  // 0x8006878C
-int fontFind(u32 code, u16* outBlock, u16* outIndex);    // 0x800688D0 falls back to a default glyph
-u8* fontCellAddr(u8* tex, int x, int y);                 // 0x80068930
-u8* fontBitmap(u16 block, u16 index);                    // 0x8006894C
-void fontExpand(u8* src, int n);                         // 0x80068970
-void fontDrawCell(u8* src, u32* dst);                    // 0x800689FC
-int fontFindSlot(u16 block, u16 index, int hint);        // 0x80068ABC
+int fontLookup(u32 code, u16* outBlock, u16* outIndex);            // 0x8006878C
+int fontFind(u32 code, u16* outBlock, u16* outIndex);              // 0x800688D0 falls back to a default glyph
+u8* fontCellAddr(u8* tex, int x, int y);                           // 0x80068930
+u8* fontBitmap(u16 block, u16 index);                              // 0x8006894C
+void fontExpand(u8* src, int n);                                   // 0x80068970
+void fontDrawCell(u8* src, u32* dst);                              // 0x800689FC
+int fontFindSlot(u16 block, u16 index, int hint);                  // 0x80068ABC
 void fontFillGlyph(int slot, FontCacheEntry* e, FontGlyph* glyph); // 0x80068C08
-void fontLoadGlyph(u16 block, u16 index, FontGlyph* glyph); // 0x80068CF8
-void fontInit();                                         // 0x80068DC0
-void fontCreateTask();                                   // 0x80068F70
-void fontClearCache();                                   // 0x80068FBC
-void fontClearTexture();                                 // 0x8006900C
-void fontReset();                                        // 0x8006907C
-int fontIsLead(int c);                                   // 0x800690A0 nonzero if c starts a two byte character
-void fontGetGlyph(u32 code, FontGlyph* glyph);           // 0x800690D8
-void fontReleaseGlyph(FontGlyph* glyph);                 // 0x8006911C
-void fontSetTexture();                                   // 0x800691A0
-void fontFlush();                                        // 0x800691C4
+void fontLoadGlyph(u16 block, u16 index, FontGlyph* glyph);        // 0x80068CF8
+void fontInit();                                                   // 0x80068DC0
+void fontCreateTask();                                             // 0x80068F70
+void fontClearCache();                                             // 0x80068FBC
+void fontClearTexture();                                           // 0x8006900C
+void fontReset();                                                  // 0x8006907C
+int fontIsLead(int c);                                             // 0x800690A0 nonzero if c starts a two byte character
+void fontGetGlyph(u32 code, FontGlyph* glyph);                     // 0x800690D8
+void fontReleaseGlyph(FontGlyph* glyph);                           // 0x8006911C
+void fontSetTexture();                                             // 0x800691A0
+void fontFlush();                                                  // 0x800691C4
 
-void textDrawBegin(int mode);                            // 0x80069448
-void textDrawSet(f32 depth, u32 color);                  // 0x800694D8
-void textSetDepth(f32 depth);                            // 0x8006950C
-void textSetColor(u32 color);                            // 0x80069514
+void textDrawBegin(int mode);                                                  // 0x80069448
+void textDrawSet(f32 depth, u32 color);                                        // 0x800694D8
+void textSetDepth(f32 depth);                                                  // 0x8006950C
+void textSetColor(u32 color);                                                  // 0x80069514
 void textDrawQuad(s16 u0, s16 v0, s16 u1, s16 v1, f32 x, f32 y, f32 w, f32 h); // 0x8006951C
-void textDrawEnd();                                      // 0x80069634
-void tlutInit();                                         // 0x80069648
+void textDrawEnd();                                                            // 0x80069634
+void tlutInit();                                                               // 0x80069648
 }
 
 #endif

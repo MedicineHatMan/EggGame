@@ -12,10 +12,12 @@ TItemEquipment::TItemEquipment(TObject* parent, const ItemSpec* spec)
     , mOn(0)
     , mHolder()
 {
-	struct SpecWords { u32 a, b; };
+	struct SpecWords {
+		u32 a, b;
+	};
 	*(SpecWords*)&mSpec = *(const SpecWords*)spec;
-	_00   = (u32)gTItemEquipmentName;
-	mSize = 0x5C;
+	_00                 = (u32)gTItemEquipmentName;
+	mSize               = 0x5C;
 	itemHolderAttach(spec->mKind, &mHolder);
 }
 
@@ -34,7 +36,7 @@ void TItemEquipment::draw()
 // 0x801AF52C
 void TItemEquipment::vfn_70()
 {
-	mOn = 1;
+	mOn               = 1;
 	TChrPlayer* owner = (TChrPlayer*)getOwner();
 
 	owner->vfn_90(&mSpec);
@@ -44,7 +46,7 @@ void TItemEquipment::vfn_70()
 // 0x801AF588
 void TItemEquipment::vfn_74()
 {
-	mOn = 0;
+	mOn               = 0;
 	TChrPlayer* owner = (TChrPlayer*)getOwner();
 
 	owner->vfn_94(&mSpec);
@@ -52,10 +54,16 @@ void TItemEquipment::vfn_74()
 }
 
 // 0x801AF5E4
-void TItemEquipment::vfn_84() { }
+void TItemEquipment::vfn_84()
+{
+}
 
 // 0x801AF5E8
-void TItemEquipment::vfn_7C() { }
+void TItemEquipment::vfn_7C()
+{
+}
 
 // 0x801AF5EC
-void TItemEquipment::vfn_80() { }
+void TItemEquipment::vfn_80()
+{
+}

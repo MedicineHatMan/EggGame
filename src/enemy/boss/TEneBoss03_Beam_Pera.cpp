@@ -62,16 +62,16 @@ static inline void ringPoint(Vec3f* p, const f32* c, const f32* s, f32 one, f32 
 
 void buildCaptainRing(const CaptainRing* desc)
 {
-	gBeamPeraGround = (BeamArena*)new CaptainRing;
-	int count = 0;
+	gBeamPeraGround                = (BeamArena*)new CaptainRing;
+	int count                      = 0;
 	*(CaptainRing*)gBeamPeraGround = *desc;
-	CaptainRing* ring = (CaptainRing*)gBeamPeraGround;
+	CaptainRing* ring              = (CaptainRing*)gBeamPeraGround;
 
 	f32 radius;
-	f32 x = (15.0f + ring->mX) - ring->mX;
-	f32 z = 25.0f + ring->mZ;
-	radius = 12.0f;
-	f32 len = __fres((f32)__frsqrte(x * x + z * z));
+	f32 x       = (15.0f + ring->mX) - ring->mX;
+	f32 z       = 25.0f + ring->mZ;
+	radius      = 12.0f;
+	f32 len     = __fres((f32)__frsqrte(x * x + z * z));
 	sCaptainLen = len;
 
 	while (radius < len) {
@@ -82,10 +82,10 @@ void buildCaptainRing(const CaptainRing* desc)
 
 	int angle;
 	HitVec* pts = new HitVec[count];
-	gHitPoints = pts;
+	gHitPoints  = pts;
 
 	radius = 12.0f;
-	angle = 0;
+	angle  = 0;
 	for (int i = 0; i < gHitPointCount; i++) {
 		f32 sin;
 		f32 cos;
@@ -93,7 +93,7 @@ void buildCaptainRing(const CaptainRing* desc)
 		sin *= radius;
 		cos *= radius;
 		ringPoint(pts, &cos, &sin, 1.0f, 0.0f);
-		f32 t = 24.0f / (6.283184f * radius);
+		f32 t    = 24.0f / (6.283184f * radius);
 		int step = (int)(65536.0f * t);
 		radius += 24.0f * t;
 		pts++;
@@ -109,7 +109,7 @@ void freeCaptainRing()
 		gHitPoints = 0;
 	}
 	gHitPointCount = 0;
-	sCaptainLen = 0.0f;
+	sCaptainLen    = 0.0f;
 	if (gBeamPeraGround != 0) {
 		delete (CaptainRing*)gBeamPeraGround;
 		gBeamPeraGround = 0;
@@ -137,8 +137,8 @@ TEneBoss03_Beam_Pera::TEneBoss03_Beam_Pera(TObject* parent, const Vec3f* pos)
     : TObjAction(parent)
 {
 	setObjId(this, 0xFFFF);
-	_00   = (u32)gTEneBoss03_Beam_PeraName;
-	mSize = 0xA8;
+	_00    = (u32)gTEneBoss03_Beam_PeraName;
+	mSize  = 0xA8;
 	mPos.x = pos->x;
 	mPos.y = pos->y;
 	mPos.z = pos->z;
@@ -149,17 +149,17 @@ TEneBoss03_Beam_Pera::TEneBoss03_Beam_Pera(TObject* parent, const Vec3f* pos)
 	if (njUnitVector(&flat) < gUnitVectorMin) {
 		flat = gVecZero;
 	}
-	mYaw = (int)(10430.38043493439 * (f32)atan2(flat.x, flat.z));
-	mDir.x = gBeamPeraGround->mCentreX - pos->x;
-	mDir.y = 0.0f;
-	mDir.z = gBeamPeraGround->mCentreZ - pos->z;
+	mYaw    = (int)(10430.38043493439 * (f32)atan2(flat.x, flat.z));
+	mDir.x  = gBeamPeraGround->mCentreX - pos->x;
+	mDir.y  = 0.0f;
+	mDir.z  = gBeamPeraGround->mCentreZ - pos->z;
 	f32 len = njUnitVector(&mDir);
 	if (len < gUnitVectorMin) {
 		mDir = gVecZero;
 	}
-	f32 time = (0.3f * len) / 16.0f;
-	mLife = (f32)(int)((50.0f + (len + gBeamPeraGround->mRadius)) / 16.0f);
-	mDir.y = ((15.0f + gBeamPeraGround->mFloorY) - pos->y) / time;
+	f32 time    = (0.3f * len) / 16.0f;
+	mLife       = (f32)(int)((50.0f + (len + gBeamPeraGround->mRadius)) / 16.0f);
+	mDir.y      = ((15.0f + gBeamPeraGround->mFloorY) - pos->y) / time;
 	mPoints     = new HitVec[gHitPointCount];
 	mPointFlags = new u32[gHitPointCount];
 	mSprites    = new BeamSprite[gHitPointCount * 3];
@@ -178,7 +178,7 @@ TEneBoss03_Beam_Pera::TEneBoss03_Beam_Pera(TObject* parent, const Vec3f* pos)
 		mPointFlags[i] = 0;
 	}
 	for (int i = 0; i < gHitPointCount * 3; i++) {
-		mSprites[i] = proto;
+		mSprites[i]        = proto;
 		mSprites[i].mFrame = i & 0xF;
 	}
 	int roll = (int)(65536.0f * (3.0517578125e-05f * (f32)rand()));
@@ -227,7 +227,7 @@ int TEneBoss03_Beam_Pera::onHit(const TObjAction* other, int arg, int* result)
 		hit->mPos.y = 0.0f;
 		hit->mPos.z = 0.0f;
 		if (isPlayerObj(other) != 0) {
-			took = 1;
+			took         = 1;
 			hit->mDamage = 0xA;
 		} else {
 			isEggObj(other);
@@ -248,13 +248,13 @@ void TEneBoss03_Beam_Pera::placeSprites()
 	HitVec* point;
 	BeamSprite* sprite;
 	f32 scale = getScale();
-	sprite = mSprites;
-	point = mPoints;
+	sprite    = mSprites;
+	point     = mPoints;
 	for (int i = 0; i < gHitPointCount; i++) {
 		gjMulAddVector(mGrow, sprite->pos(), &mPos, point);
 		sprite->mScaleX = scale;
 		sprite->mScaleY = scale;
-		f32 y = sprite->mY;
+		f32 y           = sprite->mY;
 		if (y > 150.0f + gBeamPeraGround->mFloorY) {
 			mPointFlags[i] &= ~1;
 		} else {
@@ -291,7 +291,8 @@ void TEneBoss03_Beam_Pera::setupCollider(void* colli, int mask, int group)
 	ColliShape* shape = (ColliShape*)colliGetShape((CharaColli*)colli, 0);
 	if (shape != 0) {
 		BeamArena* arena = gBeamPeraGround;
-		colliShapeMakeBox(shape, &mPos, mYaw, 25.0f + arena->mRadius, 0.5f * ((150.0f + arena->mFloorY) - (arena->mCeilingY - 5.0f)), 16.0f, 0);
+		colliShapeMakeBox(shape, &mPos, mYaw, 25.0f + arena->mRadius, 0.5f * ((150.0f + arena->mFloorY) - (arena->mCeilingY - 5.0f)), 16.0f,
+		                  0);
 		shape->mTag = group;
 	}
 	colliSetOwner((CharaColli*)colli, (u16)mObjId);
@@ -357,9 +358,9 @@ void TEneBoss03_Beam_Pera::checkHits()
 		if (colliContactInGroup8(it) != 0 && colliContactNoBit10(it) != 0) {
 			TObjAction* obj = findObjById(colliContactOwner(it));
 			if (obj != 0) {
-				at.x = it->mPos.x;
-				at.y = it->mPos.y;
-				at.z = it->mPos.z;
+				at.x       = it->mPos.x;
+				at.y       = it->mPos.y;
+				at.z       = it->mPos.z;
 				f32 radius = obj->getRadiusV();
 				radius += 5.0f;
 				Vec3f test = at;
@@ -371,12 +372,14 @@ void TEneBoss03_Beam_Pera::checkHits()
 						njSinCos(mYaw, &s, &c);
 						at.x -= s * radius;
 						at.z -= c * radius;
-						particleGenTimedByIdRotDefault((const Vec3f*)&at, (int)((int)gBeamPeraGround->mFxSet), (int)((int)gBeamPeraGround->mFxFlat), 0, mYaw, 0, 0xA, 0);
-						TParticleGenerator* fx = particleGenTimedByIdRotDefault((const Vec3f*)&at, (int)gBeamPeraGround->mFxSet, (int)gBeamPeraGround->mFxRound, 0x4000, mYaw, 0, 5, 0);
+						particleGenTimedByIdRotDefault((const Vec3f*)&at, (int)((int)gBeamPeraGround->mFxSet),
+						                               (int)((int)gBeamPeraGround->mFxFlat), 0, mYaw, 0, 0xA, 0);
+						TParticleGenerator* fx = particleGenTimedByIdRotDefault((const Vec3f*)&at, (int)gBeamPeraGround->mFxSet,
+						                                                        (int)gBeamPeraGround->mFxRound, 0x4000, mYaw, 0, 5, 0);
 						if (fx != 0) {
 							fx->makeOwnDesc();
 							ParticleDesc* desc = fx->getOwnDesc();
-							desc->mSpeed = (4.0f * radius) / 10.0f;
+							desc->mSpeed       = (4.0f * radius) / 10.0f;
 						}
 					}
 				}
@@ -387,9 +390,9 @@ void TEneBoss03_Beam_Pera::checkHits()
 		if (colliContactInGroup1(it) != 0 && colliContactNoBit10(it) != 0) {
 			TObjAction* obj = findObjById(colliContactOwner(it));
 			if (obj != 0) {
-				at.x = it->mPos.x;
-				at.y = it->mPos.y;
-				at.z = it->mPos.z;
+				at.x       = it->mPos.x;
+				at.y       = it->mPos.y;
+				at.z       = it->mPos.z;
 				Vec3f test = at;
 				if (testRing(&test, 1, 5.0f) != 0) {
 					addHit(obj->mObjId);
@@ -411,9 +414,9 @@ static inline f32 distSq(f32 x, f32 z)
 void TEneBoss03_Beam_Pera::updateCollider()
 {
 	BeamArena* arena = gBeamPeraGround;
-	f32 dz    = mPos.z - arena->mCentreZ;
-	f32 dx    = mPos.x - arena->mCentreX;
-	f32 range = 25.0f + arena->mRadius;
+	f32 dz           = mPos.z - arena->mCentreZ;
+	f32 dx           = mPos.x - arena->mCentreX;
+	f32 range        = 25.0f + arena->mRadius;
 	if (distSq(dx, dz) > range * range) {
 		colliDisable(mColli);
 	} else {
@@ -481,13 +484,13 @@ void TEneBoss03_Beam_Pera::draw()
 	f32 backZ;
 	f32 backX;
 	BeamSprite* trail = &mSprites[gHitPointCount];
-	f32 scale = getScale();
+	f32 scale         = getScale();
 	for (int layer = 0; layer < 2; layer++) {
-		f32 back  = 30.0f * (f32)(layer + 1);
+		f32 back = 30.0f * (f32)(layer + 1);
 		scale *= 0.8f;
 		backX = mDir.x * back;
 		backZ = mDir.z * back;
-		lead = mSprites;
+		lead  = mSprites;
 		for (int i = 0; i < gHitPointCount; i++) {
 			if ((mPointFlags[i] & 5) == 0) {
 				f32 x = lead->mX;

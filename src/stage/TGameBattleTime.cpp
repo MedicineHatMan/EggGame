@@ -22,7 +22,7 @@ struct GameClock {
 	u8 mHours;   // _00
 	u8 mMinutes; // _01
 	u8 mSeconds; // _02
-	int mMillis; // _04
+	u16 mMillis; // _04
 };
 
 const char* gTGameBattleTimeName = "TGameBattleTime";
@@ -64,12 +64,15 @@ void TGameBattleTime::startState()
 }
 
 // 0x801AB3B4
-void TGameBattleTime::start() { SET_BATTLE_STATE(this, createGameStateTime); }
+void TGameBattleTime::start()
+{
+	SET_BATTLE_STATE(this, createGameStateTime);
+}
 
 // 0x801AB408
 extern "C" int timeRankBehind(TimeRank* a, TimeRank* b)
 {
-	u8 behind = 0;
+	u8 behind  = 0;
 	int points = a->mPoints;
 	if (points < b->mPoints || (points == b->mPoints && a->mLost > b->mLost)) {
 		behind = 1;
@@ -83,10 +86,10 @@ extern "C" void timeRankSort(TimeRank* ranks, int count)
 	for (int i = 0; i < count; i++) {
 		for (int j = 0; j < count - 1; j++) {
 			if (timeRankBehind(&ranks[j], &ranks[j + 1])) {
-				int player = ranks[j].mPlayer;
-				int points = ranks[j].mPoints;
-				int lost   = ranks[j].mLost;
-				ranks[j] = ranks[j + 1];
+				int player           = ranks[j].mPlayer;
+				int points           = ranks[j].mPoints;
+				int lost             = ranks[j].mLost;
+				ranks[j]             = ranks[j + 1];
 				ranks[j + 1].mPlayer = player;
 				ranks[j + 1].mPoints = points;
 				ranks[j + 1].mLost   = lost;
@@ -95,9 +98,26 @@ extern "C" void timeRankSort(TimeRank* ranks, int count)
 	}
 }
 
+static inline int timeCount(TGameBattleTime* game)
+{
+	return game->mPlayerCount;
+}
+
 // 0x801AB4EC
 int TGameBattleTime::update()
 {
+	s8* slot;
+	TimeRank* rank;
+	int i;
+	int winners;
+	int place;
+	int leaders;
+	TimeRank ranks[4];
+	struct {
+		s16 mKind;
+		int mMinutes;
+		int mSeconds;
+	} left;
 	GameClock clock;
 	clock.mHours   = 0;
 	clock.mMinutes = 0;
@@ -113,7 +133,7 @@ int TGameBattleTime::update()
 	stageTimeAdd((StageTime*)&shown, (const StageTime*)&clock);
 
 	if (mTimeLeft == 0) {
-		int winners = 0;
+		winners = 0;
 		for (int i = 0; i < mPlayerCount; i++) {
 			if (mPlayers[i].mPlace == 1) {
 				winners++;
@@ -122,26 +142,27 @@ int TGameBattleTime::update()
 		sePlay(0x38);
 		sePlay(0x35);
 		aeBattleTimeUp();
-		return winners != 1;
+		return winners == 1 ? 0 : 1;
 	}
 
 	if (eventIsBusy() == 0) {
-		stageTimerTick((u32*)&mTimeLeft);
+		stageTimerTick(&mTimeLeft);
 	}
 
-	int count = mPlayerCount;
-	TimeRank ranks[4];
-	for (int i = 0; i < count; i++) {
-		ranks[i].mPlayer = i;
-		ranks[i].mPoints = mPlayers[i].mPoints;
-		ranks[i].mLost   = mPlayers[i].mLost;
+	int count = timeCount(this);
+	for (i = 0; i < count; i++) {
+		slot          = &mPlayers[i].mPlace;
+		rank          = &ranks[i];
+		rank->mPlayer = i;
+		rank->mPoints = *(int*)((u8*)slot + 4);
+		rank->mLost   = *(int*)((u8*)slot + 8);
 	}
 	timeRankSort(ranks, count);
 
-	int leaders = 1;
-	int place   = 1;
-	mPlayers[ranks[0].mPlayer].mPlace = 1;
-	for (int i = 1; i < count; i++) {
+	place                                           = 1;
+	leaders                                         = 1;
+	*((u8*)this + (ranks[0].mPlayer * 0x18 + 0x38)) = 1;
+	for (i = 1; i < count; i++) {
 		if (timeRankBehind(&ranks[i], &ranks[i - 1])) {
 			place = i + 1;
 		}
@@ -155,18 +176,15 @@ int TGameBattleTime::update()
 		if (leaders == 1 && ((clock.mMinutes != 0 && clock.mSeconds == 0) || clock.mSeconds == 0x1E)) {
 			struct {
 				s16 mKind;
+				u16 _02;
 				u16 mPlayer;
+				u16 _06;
 			} leader;
 			leader.mKind   = 0xC5;
 			leader.mPlayer = mPlayers[ranks[0].mPlayer].mId;
 			aeSendMessage(&leader);
 		}
 		if (shown.mMinutes != 0 || shown.mSeconds >= 4) {
-			struct {
-				s16 mKind;
-				int mMinutes;
-				int mSeconds;
-			} left;
 			left.mKind    = 0xC4;
 			left.mMinutes = shown.mMinutes;
 			left.mSeconds = shown.mSeconds;

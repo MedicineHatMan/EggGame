@@ -14,11 +14,11 @@
 
 struct ItemFx {
 	u8 _00[6];
-	u16 mSlot;    // _06 a slot of ItemNodes
+	u16 mSlot; // _06 a slot of ItemNodes
 	u8 _08[4];
 	ItemFx* mNext; // _0C
 	u8 _10[0x14];
-	Vec3f mPos;   // _24
+	Vec3f mPos; // _24
 };
 
 /** What the node walks hand the callback */
@@ -96,8 +96,8 @@ void ItemGlow::calc(ItemHolder* holder, f32* mtx)
 				if (mMotion.isBlending() != 0) {
 					calcActorLink(mActor, (void*)mMotion.getBlend(), (NodeCallback)glowNode, mMotion.mBlendTime, (void*)&walk);
 				} else {
-					int cur = mMotion.mCurrent;
-					f32 frame = mMotion.mFrame;
+					int cur            = mMotion.mCurrent;
+					f32 frame          = mMotion.mFrame;
 					NJS_MOTION* motion = mMotion.getMotion(cur);
 					calcActorMotion(mActor, motion, (NodeCallback)glowNode, frame, (void*)&walk);
 				}
@@ -142,8 +142,8 @@ void ItemGlow::draw(ItemHolder* holder, const f32* mtx)
 				njPopMatrixEx();
 			} else if (rec->mMotions != NULL) {
 				njPushMatrix(mtx);
-				int cur = mMotion.mCurrent;
-				f32 frame = mMotion.mFrame;
+				int cur            = mMotion.mCurrent;
+				f32 frame          = mMotion.mFrame;
 				NJS_MOTION* motion = mMotion.getMotion(cur);
 				gjDrawMotion(*(NJS_OBJECT**)rec->root, motion, frame);
 				njPopMatrixEx();
@@ -183,8 +183,8 @@ void ItemGlow::setup(ItemHolder* holder)
 				if (rec->mTable == NULL) {
 					calcActorPose(mActor, glowNode, &walk);
 				} else {
-					int cur = mMotion.mCurrent;
-					f32 frame = mMotion.mFrame;
+					int cur            = mMotion.mCurrent;
+					f32 frame          = mMotion.mFrame;
 					NJS_MOTION* motion = mMotion.getMotion(cur);
 					calcActorMotion(mActor, motion, (NodeCallback)glowNode, frame, (void*)&walk);
 				}

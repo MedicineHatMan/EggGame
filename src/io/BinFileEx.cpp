@@ -40,7 +40,7 @@ static u8 prsReadBit()
 // 1 = a literal byte
 extern "C" int prsDecode(u8* dst, u8* src, u32 size)
 {
-	int n   = 0;
+	int n = 0;
 	int offset;
 	u32 len;
 	u8* out = dst;

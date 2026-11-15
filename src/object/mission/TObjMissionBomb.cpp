@@ -71,7 +71,7 @@ enum BombFlags {
 class TObjMissionBomb;
 
 struct BombNotice {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u32 mLimit; // _04
 	u32 mLeft;  // _08
@@ -216,7 +216,7 @@ TObjMissionBomb::TObjMissionBomb(TObject* parent, u16 id)
 	colliShapeSetSphere(colliGetShape((CharaColli*)mColli, 0));
 	colliGetShape((CharaColli*)mColli, 0)->mFlags = 0x42C;
 	colliGetShape((CharaColli*)mColli, 0)->mSizeX = 7.5f;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
+	mDrawTask                                     = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
 
 	mBody.mBounce  = 0.0f;
 	mBody.mRadius  = 7.5f;
@@ -332,7 +332,7 @@ void TObjMissionBomb::updateRope(f32 groundY)
 	}
 
 	for (i = 1; i < 8; i++) {
-		Vec3f* pos = &mRope.mNodes[i].mPos;
+		Vec3f* pos  = &mRope.mNodes[i].mPos;
 		Vec3f* prev = &mRope.mNodes[i].mPrev;
 		vecSub(&mRope.mNodes[i].mVel, pos, prev);
 		*prev = *pos;
@@ -438,7 +438,7 @@ void TObjMissionBomb::draw()
 	sendGameMsg((ObjMsg*)&notice);
 
 	if (mTimeLeft < 10000) {
-		f32 t = mTimeLeft / 10000.0f;
+		f32 t     = mTimeLeft / 10000.0f;
 		mRopeSeg  = (int)(7.0f * t);
 		mRopeFrac = (21.0f * t - 3.0f * mRopeSeg) / 3.0f;
 	}
@@ -477,7 +477,7 @@ void TObjMissionBomb::render()
 	setup.mTexCoord = 1;
 	setup.mTexGen   = (void (*)(u8))bombTexGen;
 	setup.mTev      = bombTev;
-	state.mExtra = &setup;
+	state.mExtra    = &setup;
 
 	f32 tex[12];
 	PSMTXCopy(_gj_matrix_, tex);
@@ -505,13 +505,13 @@ void TObjMissionBomb::render()
 	GXEnableTexOffsets(GX_TEXCOORD0, GX_ENABLE, GX_ENABLE);
 	GXBegin(GX_LINESTRIP, GX_VTXFMT4, mRopeSeg + 2);
 
-	f32 uv = 0.0f;
+	f32 uv             = 0.0f;
 	BombRopeNode* node = mRope.mNodes;
 	for (int i = 0; i <= mRopeSeg; i++) {
 		f32 x, y, z;
-		z = node->mPos.z;
-		y = node->mPos.y;
-		x = node->mPos.x;
+		z           = node->mPos.z;
+		y           = node->mPos.y;
+		x           = node->mPos.x;
 		GX_FIFO_F32 = x;
 		GX_FIFO_F32 = y;
 		GX_FIFO_F32 = z;
@@ -648,21 +648,21 @@ void TObjMissionBomb::stateHeld(int phase)
 	} else if (phase == BOMB_UPDATE) {
 		eggPushHeld((void*)mColli, (EggContact*)mColli->mContacts, 0, mHandle.mHolder);
 		TMobileObject* holder = (TMobileObject*)mHandle.mHolder;
-		f32 x = holder->mBody.mPos.x;
-		f32 y = holder->mBody.mPos.y;
-		f32 z = holder->mBody.mPos.z;
-		HeldQuat* from = (HeldQuat*)&holder->mBody.mRot;
-		f32 w = from->w;
-		NJS_QUATERNION* to = (NJS_QUATERNION*)&mBody.mRot;
+		f32 x                 = holder->mBody.mPos.x;
+		f32 y                 = holder->mBody.mPos.y;
+		f32 z                 = holder->mBody.mPos.z;
+		HeldQuat* from        = (HeldQuat*)&holder->mBody.mRot;
+		f32 w                 = from->w;
+		NJS_QUATERNION* to    = (NJS_QUATERNION*)&mBody.mRot;
 		NJS_QUATERNION q;
-		*(HeldVec*)q.im = *(HeldVec*)&from->v;
-		mPos.x = x;
-		mPos.y = y;
-		mPos.z = z;
-		mBody.mPos.x = x;
-		mBody.mPos.y = y;
-		mBody.mPos.z = z;
-		to->re = w;
+		*(HeldVec*)q.im   = *(HeldVec*)&from->v;
+		mPos.x            = x;
+		mPos.y            = y;
+		mPos.z            = z;
+		mBody.mPos.x      = x;
+		mBody.mPos.y      = y;
+		mBody.mPos.z      = z;
+		to->re            = w;
 		*(HeldVec*)to->im = *(HeldVec*)q.im;
 		updateMatrix();
 		roll()->checkBumps();
@@ -773,7 +773,7 @@ int TObjMissionBomb::onGetFlags()
 	int flags = getMsgFlags();
 	switch ((u8)mState) {
 	case BOMB_ROLLING:
-			flags |= 0x200;
+		flags |= 0x200;
 		break;
 	}
 	return flags;

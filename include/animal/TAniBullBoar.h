@@ -29,8 +29,8 @@ public:
 
 	f32 mSpeed;         // _384
 	f32 mTopSpeed;      // _388
-	Fx* mFx2;         // _38C
-	Fx* mFx3;         // _390
+	Fx* mFx2;           // _38C
+	Fx* mFx3;           // _390
 	f32 mFx2Matrix[12]; // _394
 	f32 mFx3Matrix[12]; // _3C4
 };

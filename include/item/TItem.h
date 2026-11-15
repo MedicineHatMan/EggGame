@@ -15,7 +15,7 @@ class TItem : public TObjAction {
 public:
 	TItem(TObject* parent);
 	virtual ~TItem();
-	virtual int getKind() { return 3; } // _2C
+	virtual int getKind() { return 3; }   // _2C
 	virtual void vfn_6C();                // _6C
 	virtual void vfn_70();                // _70
 	virtual void vfn_74();                // _74

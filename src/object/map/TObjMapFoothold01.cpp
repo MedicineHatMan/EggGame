@@ -35,7 +35,6 @@ const f32 gMapFoothold01SetRange = 800.0f;
 
 // 0x802C3D08
 ObjClassName gTObjMapFoothold01Name = { "TObjMapFoothold01", 0 };
-
 }
 
 enum FootholdType {
@@ -65,7 +64,7 @@ void TObjMapFoothold01::initFromDesc(SetDesc* desc)
 	mRange  = 0.0f;
 	mOffset = 0.0f;
 
-	mType = desc->getInt(0);
+	mType    = desc->getInt(0);
 	int type = mType;
 	if (type < 0) {
 		type = 0;
@@ -153,7 +152,7 @@ void TObjMapFoothold01::setup()
 	mVisible = 1;
 
 	MeshData* data = (MeshData*)gStgObjCommon->mSet.mMeshes[1];
-	mColli = (MeshObject*)meshColliCreate();
+	mColli         = (MeshObject*)meshColliCreate();
 	meshColliSetData(mColli, data);
 	meshColliSetMatrix(mColli, mPlace.mMatrix);
 	updateColliBox();
@@ -388,7 +387,7 @@ void TObjMapFoothold01::draw()
 	case FOOTHOLD_ROT_Y2:
 		mRot.y = mPhase;
 		placeOffCentre();
-		moved  = 1;
+		moved = 1;
 		break;
 	case FOOTHOLD_IN_OUT:
 		switch (mStep) {

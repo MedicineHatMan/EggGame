@@ -73,7 +73,7 @@ u32 meshListQuerySphereEx(const MeshList*, const MeshSphere*, void*, void*, void
 struct MeshList {
 	MeshEntry* mData; // _00
 	int _04;
-	u16 mCount;       // _08
+	u16 mCount; // _08
 };
 
 extern "C" {

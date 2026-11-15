@@ -22,7 +22,7 @@ int loadTimeUp()
 
 	aeLoadArc((const char*)("ae_timeup.arc"), (TArc**)&sAeTimeUpArc);
 	if (sAeTimeUpArc != 0) {
-		header       = *(u32**)(sAeTimeUpArc + 0x4C);
+		header = *(u32**)(sAeTimeUpArc + 0x4C);
 		relocateAe((void*)(sAeTimeUpData = header[0]));
 		sAeTimeUpTex = header[1];
 		bindGvmTextures((u8*)header[2], (NJS_TEXLIST*)sAeTimeUpTex);
@@ -38,7 +38,7 @@ void aeTimeUpFree()
 		releaseTextures((NJS_TEXLIST*)sAeTimeUpTex);
 		sAeTimeUpTex = 0;
 		aeFreeArc((TArc**)&sAeTimeUpArc);
-		sAeTimeUpArc = 0;
+		sAeTimeUpArc  = 0;
 		sAeTimeUpData = 0;
 	}
 }

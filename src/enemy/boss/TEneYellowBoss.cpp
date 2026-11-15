@@ -56,38 +56,26 @@ struct CharaColli;
 
 extern "C" {
 MotionEntry sYellowBossMotions[] = {
-	{ MOTION_LOOP, 24, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 4, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 14, -1, 0, 0.0f, 49.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 15, -1, 0, 0.0f, 9.0f, 0.45f, 0.0f, 0 },
-	{ MOTION_LOOP, 16, -1, 0, 0.0f, 10.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 17, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 21, -1, 0, 0.0f, 9.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_LOOP, 22, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 23, -1, 0, 0.0f, 20.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_ONCE, 18, -1, 0, 0.0f, 24.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 19, -1, 0, 0.0f, 10.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_ONCE, 20, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 11, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 12, -1, 0, 0.0f, 10.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 7, -1, 0, 0.0f, 10.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 0.45f, 0.0f, 0 },
-	{ MOTION_BLEND, 8, -1, 18, 0.0f, 9.0f, 0.4f, 0.2f, 0 },
-	{ MOTION_LOOP, 9, -1, 0, 0.0f, 20.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 10, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 5, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 13, -1, 0, 0.0f, 599.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 24, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 4, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 14, -1, 0, 0.0f, 49.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 15, -1, 0, 0.0f, 9.0f, 0.45f, 0.0f, 0 },
+	{ MOTION_LOOP, 16, -1, 0, 0.0f, 10.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 17, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 21, -1, 0, 0.0f, 9.0f, 0.2f, 0.0f, 0 },   { MOTION_LOOP, 22, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 23, -1, 0, 0.0f, 20.0f, 0.35f, 0.0f, 0 }, { MOTION_ONCE, 18, -1, 0, 0.0f, 24.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 19, -1, 0, 0.0f, 10.0f, 0.6f, 0.0f, 0 },  { MOTION_ONCE, 20, -1, 0, 0.0f, 19.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 11, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },   { MOTION_LOOP, 12, -1, 0, 0.0f, 10.0f, 0.35f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },    { MOTION_LOOP, 7, -1, 0, 0.0f, 10.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 0.45f, 0.0f, 0 },  { MOTION_BLEND, 8, -1, 18, 0.0f, 9.0f, 0.4f, 0.2f, 0 },
+	{ MOTION_LOOP, 9, -1, 0, 0.0f, 20.0f, 0.25f, 0.0f, 0 },  { MOTION_ONCE, 10, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 5, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },   { MOTION_ONCE, 1, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },   { MOTION_ONCE, 13, -1, 0, 0.0f, 599.0f, 1.0f, 0.0f, 0 },
 	{ MOTION_ONCE, 3, -1, 0, 0.0f, 519.0f, 1.0f, 0.0f, 0 },
 };
-extern const int sYellowBossNodes[] = { 4, 39, 46, 61, 67, -1 };
-const char* gTEneYellowBossName = "TEneYellowBoss";
+extern const int sYellowBossNodes[]               = { 4, 39, 46, 61, 67, -1 };
+const char* gTEneYellowBossName                   = "TEneYellowBoss";
 extern const EnemyFrameKey sYellowBossFrameKey0[] = { { 6.0f, 0 }, { 10.0f, 2 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sYellowBossFrameKey1[] = { { 5.0f, 2 }, { 18.0f, 0 }, { 22.0f, 4 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sYellowBossFrameKey2[] = { { 11.0f, 0 }, { 16.0f, 4 }, { -1.0f, 0 } };
-const EnemyFrameKey* sYellowBossFrameKeys[3] = { sYellowBossFrameKey0, sYellowBossFrameKey1, sYellowBossFrameKey2 };
+const EnemyFrameKey* sYellowBossFrameKeys[3]      = { sYellowBossFrameKey0, sYellowBossFrameKey1, sYellowBossFrameKey2 };
 }
 
 class TEneYellowBoss;
@@ -137,10 +125,10 @@ extern "C" void initTEneYellowBoss()
 	resBankLoad(&sYellowBossBank, "ar_ene_yellow_boss.arc");
 	resBankAddTextures(&sYellowBossBank, 0, "ene_yellow_boss.gvm");
 	resBankAddTextures(&sYellowBossBank, 1, "ene_yellow_boss_onpara.gvm");
-	sYellowBossModels = resBankGetModels(&sYellowBossBank);
+	sYellowBossModels   = resBankGetModels(&sYellowBossBank);
 	sYellowBossTextures = resBankGetTextures(&sYellowBossBank);
-	sYellowBossMotion = resBankGetMotion(&sYellowBossBank, 1);
-	sYellowBossParams = (int*)enemyParamGet(6);
+	sYellowBossMotion   = resBankGetMotion(&sYellowBossBank, 1);
+	sYellowBossParams   = (int*)enemyParamGet(6);
 	fxBankLoadDefault(&sYellowBossFx, "pa_yellowboss.pad");
 	yellowBossRingInit();
 	loadYellowBossGreen();
@@ -156,9 +144,9 @@ extern "C" void shutdownTEneYellowBoss()
 	resBankRemoveTextures(&sYellowBossBank, 1);
 	resBankRemoveTextures(&sYellowBossBank, 0);
 	resBankRelease(&sYellowBossBank);
-	sYellowBossModels = 0;
+	sYellowBossModels   = 0;
 	sYellowBossTextures = 0;
-	sYellowBossMotion = 0;
+	sYellowBossMotion   = 0;
 }
 
 // 0x80149044
@@ -350,10 +338,10 @@ TEneYellowBoss::~TEneYellowBoss()
 // 0x80149794
 void TEneYellowBoss::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -371,7 +359,7 @@ void TEneYellowBoss::syncCollider()
 	Vec3f spot;
 	ColliShape* shapes = colliGetShapes(mCollider);
 
-	shapes[0].mPos          = mPoint[0];
+	shapes[0].mPos = mPoint[0];
 	shapes[1].mPos = mPoint[2];
 	colliRefreshBounds(mCollider);
 	colliBoundsOn(mCollider);
@@ -813,7 +801,7 @@ extern "C" void yellowBossStepAt8(TEneYellowBoss* boss)
 // 0x8014A4D0
 void TEneYellowBoss::playDemo(int model, int motion)
 {
-	void* actor = resBankGetObjects(&sYellowBossBank)[model];
+	void* actor        = resBankGetObjects(&sYellowBossBank)[model];
 	NJS_MOTION** table = resBankGetMotion(&sYellowBossBank, 2);
 
 	mFx = createCamPath(0, 3, actor, table[motion], 0, 1.0f, 1.0f);
@@ -925,7 +913,7 @@ void TEneYellowBoss::planDash()
 	}
 	gjMulAddVector(0.5f * len, &mMoveTo, &mFrom, &dir);
 	gjMulAddVector(0.4f * len, &mMoveTo, &mMoveTo, &side);
-	mMoveTo.y = 50.02f;
+	mMoveTo.y  = 50.02f;
 	mBody.mVel = mMoveTo;
 	njSubVector(&mBody.mVel, &mFrom);
 	gjScaleVector(0.2f, &mBody.mVel, &mBody.mVel);
@@ -963,27 +951,69 @@ void TEneYellowBoss::stepSound(f32 frame)
 void TEneYellowBoss::onActionPhase(int action, int phase)
 {
 	switch (action) {
-	case 0: actAppear(phase); break;
-	case 1: actHover(phase); break;
-	case 2: actBreath(phase); break;
-	case 3: actSummon(phase); break;
-	case 4: actStun(phase); break;
-	case 5: actStagger(phase); break;
-	case 6: actRise(phase); break;
-	case 7: actLand(phase); break;
-	case 8: actTurn(phase); break;
-	case 9: actTeleport(phase); break;
-	case 10: actFade(phase); break;
-	case 11: actTurnStep(phase); break;
-	case 12: actDash(phase); break;
-	case 13: actDashTurn(phase); break;
-	case 14: actSwipe(phase); break;
-	case 15: actRecoil(phase); break;
-	case 16: actTaunt(phase); break;
-	case 17: actIdle(phase); break;
-	case 18: actDieA(phase); break;
-	case 19: actDieB(phase); break;
-	case 20: actDie(phase); break;
+	case 0:
+		actAppear(phase);
+		break;
+	case 1:
+		actHover(phase);
+		break;
+	case 2:
+		actBreath(phase);
+		break;
+	case 3:
+		actSummon(phase);
+		break;
+	case 4:
+		actStun(phase);
+		break;
+	case 5:
+		actStagger(phase);
+		break;
+	case 6:
+		actRise(phase);
+		break;
+	case 7:
+		actLand(phase);
+		break;
+	case 8:
+		actTurn(phase);
+		break;
+	case 9:
+		actTeleport(phase);
+		break;
+	case 10:
+		actFade(phase);
+		break;
+	case 11:
+		actTurnStep(phase);
+		break;
+	case 12:
+		actDash(phase);
+		break;
+	case 13:
+		actDashTurn(phase);
+		break;
+	case 14:
+		actSwipe(phase);
+		break;
+	case 15:
+		actRecoil(phase);
+		break;
+	case 16:
+		actTaunt(phase);
+		break;
+	case 17:
+		actIdle(phase);
+		break;
+	case 18:
+		actDieA(phase);
+		break;
+	case 19:
+		actDieB(phase);
+		break;
+	case 20:
+		actDie(phase);
+		break;
 	}
 }
 
@@ -1849,9 +1879,9 @@ void TEneYellowBoss::render()
 		DrawStateSlot* slot;
 
 		state.mFlags = 0;
-		state._20 = 0;
-		slot       = getDrawStateSlot();
-		state      = *(DrawState*)getDefaultDrawState();
+		state._20    = 0;
+		slot         = getDrawStateSlot();
+		state        = *(DrawState*)getDefaultDrawState();
 		setDrawAmbient(&mLight, &state);
 		if (mBossFlags & BOSS_FADING) {
 			state.mFlags |= 0x200;
@@ -1872,4 +1902,7 @@ void TEneYellowBoss::render()
 
 // 0x8014C8F4
 // A crystal's virtual _74 its next action is the death
-void TEneYellowBossCrystal::kill() { mCrystalFlags |= 4; }
+void TEneYellowBossCrystal::kill()
+{
+	mCrystalFlags |= 4;
+}

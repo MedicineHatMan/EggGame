@@ -10,13 +10,18 @@
 
 extern "C" {
 
-void colliAddContact(CharaColli* colli, CharaColli* other, int otherShape, int shape, Vec3f* push,
-                     Vec3f* pos);
+void colliAddContact(CharaColli* colli, CharaColli* other, int otherShape, int shape, Vec3f* push, Vec3f* pos);
 }
 
-static inline f32 colliSqrt(f32 x) { return __fres((f32)__frsqrte(x)); }
+static inline f32 colliSqrt(f32 x)
+{
+	return __fres((f32)__frsqrte(x));
+}
 
-static inline f32 colliAbs(f32 x) { return (f32)__fabs(x); }
+static inline f32 colliAbs(f32 x)
+{
+	return (f32)__fabs(x);
+}
 
 static inline f32 colliSqrtFull(f32 x)
 {
@@ -35,17 +40,17 @@ static inline f32 colliSqrtFull(f32 x)
 }
 
 static CharaColli* sColliLists[4]; // 0x80279780
-static Vec3f sColliPush;          // 0x80279790 how far the last shape test pushes the first shape out
-static Vec3f sColliPushA;         // 0x8027979C the first collider's push summed over its shapes
-static Vec3f sColliPushB;         // 0x802797A8 the second collider's
+static Vec3f sColliPush;           // 0x80279790 how far the last shape test pushes the first shape out
+static Vec3f sColliPushA;          // 0x8027979C the first collider's push summed over its shapes
+static Vec3f sColliPushB;          // 0x802797A8 the second collider's
 
 extern "C" {
-CharaColli* gColliPool;      // 0x802C4B48
-CharaColli* gColliFree;      // 0x802C4B4C
-CharaColli* gColliRetired;   // 0x802C4B50
-int gColliContactCount;      // 0x802C4B54
+CharaColli* gColliPool;       // 0x802C4B48
+CharaColli* gColliFree;       // 0x802C4B4C
+CharaColli* gColliRetired;    // 0x802C4B50
+int gColliContactCount;       // 0x802C4B54
 ColliContact* gColliContacts; // 0x802C4B58
-u32 gColliDebug;             // 0x802C4B5C
+u32 gColliDebug;              // 0x802C4B5C
 
 // 0x80007F80
 void colliShapeInit(ColliShape* shape)
@@ -106,13 +111,22 @@ void colliShapeMakeBox(ColliShape* shape, const Vec3f* pos, int ang, f32 x, f32 
 }
 
 // 0x800081A0
-void colliShapeSetSphere(ColliShape* shape) { shape->mType = COLLISHAPE_SPHERE; }
+void colliShapeSetSphere(ColliShape* shape)
+{
+	shape->mType = COLLISHAPE_SPHERE;
+}
 
 // 0x800081AC
-void colliShapeSetCylinder(ColliShape* shape) { shape->mType = COLLISHAPE_CYLINDER; }
+void colliShapeSetCylinder(ColliShape* shape)
+{
+	shape->mType = COLLISHAPE_CYLINDER;
+}
 
 // 0x800081B8
-void colliShapeSetBox(ColliShape* shape) { shape->mType = COLLISHAPE_BOX; }
+void colliShapeSetBox(ColliShape* shape)
+{
+	shape->mType = COLLISHAPE_BOX;
+}
 
 // 0x800081C4
 void colliShapeSetPos(ColliShape* shape, const Vec3f* pos)
@@ -123,25 +137,46 @@ void colliShapeSetPos(ColliShape* shape, const Vec3f* pos)
 }
 
 // 0x800081E0
-void colliShapeSetRadius(ColliShape* shape, f32 radius) { shape->mSizeX = radius; }
+void colliShapeSetRadius(ColliShape* shape, f32 radius)
+{
+	shape->mSizeX = radius;
+}
 
 // 0x800081E8
-void colliShapeSetCylRadius(ColliShape* shape, f32 radius) { shape->mSizeX = radius; }
+void colliShapeSetCylRadius(ColliShape* shape, f32 radius)
+{
+	shape->mSizeX = radius;
+}
 
 // 0x800081F0
-void colliShapeSetCylHeight(ColliShape* shape, f32 height) { shape->mSizeY = height; }
+void colliShapeSetCylHeight(ColliShape* shape, f32 height)
+{
+	shape->mSizeY = height;
+}
 
 // 0x800081F8
-void colliShapeSetBoxX(ColliShape* shape, f32 x) { shape->mSizeX = x; }
+void colliShapeSetBoxX(ColliShape* shape, f32 x)
+{
+	shape->mSizeX = x;
+}
 
 // 0x80008200
-void colliShapeSetBoxY(ColliShape* shape, f32 y) { shape->mSizeY = y; }
+void colliShapeSetBoxY(ColliShape* shape, f32 y)
+{
+	shape->mSizeY = y;
+}
 
 // 0x80008208
-void colliShapeSetBoxZ(ColliShape* shape, f32 z) { shape->mSizeZ = z; }
+void colliShapeSetBoxZ(ColliShape* shape, f32 z)
+{
+	shape->mSizeZ = z;
+}
 
 // 0x80008210
-void colliShapeSetBoxRot(ColliShape* shape, int ang) { shape->mRotY = ang; }
+void colliShapeSetBoxRot(ColliShape* shape, int ang)
+{
+	shape->mRotY = ang;
+}
 
 // 0x80008218
 void colliShapeDebugDraw(ColliShape* shape, ColliColor* color)
@@ -190,29 +225,53 @@ ColliShape* colliContactShape(const ColliContact* contact)
 }
 
 // 0x8000833C
-int colliContactHasBit8(ColliContact* contact) { return colliContactShape(contact)->mFlags & 8; }
+int colliContactHasBit8(ColliContact* contact)
+{
+	return colliContactShape(contact)->mFlags & 8;
+}
 
 // 0x80008364
-int colliContactInGroup1(const ColliContact* contact) { return colliInGroup(contact->mOther, 1); }
+int colliContactInGroup1(const ColliContact* contact)
+{
+	return colliInGroup(contact->mOther, 1);
+}
 
 // 0x8000838C
-int colliContactInGroup8(const ColliContact* contact) { return colliInGroup(contact->mOther, 8); }
+int colliContactInGroup8(const ColliContact* contact)
+{
+	return colliInGroup(contact->mOther, 8);
+}
 
 // 0x800083B4
-int colliContactHasBit40(ColliContact* contact) { return colliContactShape(contact)->mFlags & 0x40; }
+int colliContactHasBit40(ColliContact* contact)
+{
+	return colliContactShape(contact)->mFlags & 0x40;
+}
 
 // 0x800083DC
-int colliContactInGroup2(const ColliContact* contact) { return colliInGroup(contact->mOther, 2); }
+int colliContactInGroup2(const ColliContact* contact)
+{
+	return colliInGroup(contact->mOther, 2);
+}
 
 // 0x80008404
-int colliContactNoBit10(ColliContact* contact) { return !(colliContactShape(contact)->mFlags & 0x10); }
+int colliContactNoBit10(ColliContact* contact)
+{
+	return !(colliContactShape(contact)->mFlags & 0x10);
+}
 
 // 0x80008434
 // The id of the object that owns the other side of a touch
-u32 colliContactOwner(const ColliContact* contact) { return (u16)colliGetOwner(contact->mOther); }
+u32 colliContactOwner(const ColliContact* contact)
+{
+	return (u16)colliGetOwner(contact->mOther);
+}
 
 // 0x8000845C
-int colliContactTag(ColliContact* contact) { return colliContactShape(contact)->mTag; }
+int colliContactTag(ColliContact* contact)
+{
+	return colliContactShape(contact)->mTag;
+}
 
 // 0x80008480
 void colliInitPush()
@@ -223,7 +282,9 @@ void colliInitPush()
 }
 
 // 0x800084C0
-void colliExitPush() { }
+void colliExitPush()
+{
+}
 }
 
 // 0x800084C4
@@ -235,7 +296,9 @@ CharaColli::CharaColli()
 }
 
 // 0x80008500
-CharaColli::~CharaColli() { }
+CharaColli::~CharaColli()
+{
+}
 
 extern "C" {
 // 0x8000853C
@@ -297,7 +360,10 @@ int colliHasShape(CharaColli* colli, int shape)
 }
 
 // 0x800086B0
-int colliGetContactCount(CharaColli* colli) { return colli->mContactCount; }
+int colliGetContactCount(CharaColli* colli)
+{
+	return colli->mContactCount;
+}
 
 // 0x800086B8
 ColliContact* colliGetContact(CharaColli* colli, int index)
@@ -316,13 +382,22 @@ ColliContact* colliGetContact(CharaColli* colli, int index)
 }
 
 // 0x80008700
-int colliGetShapeCount(CharaColli* colli) { return colli->mShapeCount; }
+int colliGetShapeCount(CharaColli* colli)
+{
+	return colli->mShapeCount;
+}
 
 // 0x80008708
-ColliShape* colliGetShapes(CharaColli* colli) { return colli->mShapes; }
+ColliShape* colliGetShapes(CharaColli* colli)
+{
+	return colli->mShapes;
+}
 
 // 0x80008710
-ColliShape* colliGetShape(CharaColli* colli, int shape) { return &colli->mShapes[shape]; }
+ColliShape* colliGetShape(CharaColli* colli, int shape)
+{
+	return &colli->mShapes[shape];
+}
 
 // 0x80008720
 
@@ -344,7 +419,7 @@ void colliCopyShapesTagged(CharaColli* colli, const ColliShape* src, u32 tag)
 	}
 	for (int i = 0; i < colli->mShapeCount; i++) {
 		*(ColliShapeCopy*)&colli->mShapes[i] = *(const ColliShapeCopy*)&src[i];
-		colli->mShapes[i].mTag = tag;
+		colli->mShapes[i].mTag               = tag;
 	}
 }
 
@@ -447,9 +522,9 @@ void colliCalcBounds(ColliShape* out, ColliShape* shapes, int count)
 	f32 radius;
 	for (i = 0; i < count; i++) {
 		ColliShape* shape = &shapes[i];
-		d.x = shape->mPos.x;
-		d.y = shape->mPos.y;
-		d.z = shape->mPos.z;
+		d.x               = shape->mPos.x;
+		d.y               = shape->mPos.y;
+		d.z               = shape->mPos.z;
 		njSubVector(&d, &center);
 		radius = njScalor(&d);
 		switch (shape->mType) {
@@ -467,10 +542,10 @@ void colliCalcBounds(ColliShape* out, ColliShape* shapes, int count)
 	if (radius > maxRadius) {
 		maxRadius = radius;
 	}
-	out->mPos.x  = center.x;
-	out->mPos.y  = center.y;
-	out->mPos.z  = center.z;
-	out->mSizeX  = 3.0f + maxRadius;
+	out->mPos.x = center.x;
+	out->mPos.y = center.y;
+	out->mPos.z = center.z;
+	out->mSizeX = 3.0f + maxRadius;
 }
 
 // 0x80008D0C
@@ -514,40 +589,76 @@ void colliClearMasks(CharaColli* colli, int firm, int sensor, int ignore)
 }
 
 // 0x80008E1C
-int colliInGroup(CharaColli* colli, int group) { return colli->mGroup & (u8)group; }
+int colliInGroup(CharaColli* colli, int group)
+{
+	return colli->mGroup & (u8)group;
+}
 
 // 0x80008E2C
-int colliIsFirm(CharaColli* colli, int group) { return colli->mFirmMask & (u8)group; }
+int colliIsFirm(CharaColli* colli, int group)
+{
+	return colli->mFirmMask & (u8)group;
+}
 
 // 0x80008E3C
-int colliIsSensor(CharaColli* colli, int group) { return colli->mSensorMask & (u8)group; }
+int colliIsSensor(CharaColli* colli, int group)
+{
+	return colli->mSensorMask & (u8)group;
+}
 
 // 0x80008E4C
-u8 colliGetGroup(CharaColli* colli) { return colli->mGroup; }
+u8 colliGetGroup(CharaColli* colli)
+{
+	return colli->mGroup;
+}
 
 // 0x80008E54
-void colliSetOwner(CharaColli* colli, u32 id) { colli->mOwner = id; }
+void colliSetOwner(CharaColli* colli, u32 id)
+{
+	colli->mOwner = id;
+}
 
 // 0x80008E5C
-u32 colliGetOwner(CharaColli* colli) { return colli->mOwner; }
+u32 colliGetOwner(CharaColli* colli)
+{
+	return colli->mOwner;
+}
 
 // 0x80008E64
-void colliEnable(CharaColli* colli) { colli->mState &= ~1; }
+void colliEnable(CharaColli* colli)
+{
+	colli->mState &= ~1;
+}
 
 // 0x80008E74
-void colliDisable(CharaColli* colli) { colli->mState |= 1; }
+void colliDisable(CharaColli* colli)
+{
+	colli->mState |= 1;
+}
 
 // 0x80008E84
-int colliIsDisabled(CharaColli* colli) { return colli->mState & 1; }
+int colliIsDisabled(CharaColli* colli)
+{
+	return colli->mState & 1;
+}
 
 // 0x80008E90
-void colliBoundsOn(CharaColli* colli) { colli->mState |= 2; }
+void colliBoundsOn(CharaColli* colli)
+{
+	colli->mState |= 2;
+}
 
 // 0x80008EA0
-void colliBoundsOff(CharaColli* colli) { colli->mState &= ~2; }
+void colliBoundsOff(CharaColli* colli)
+{
+	colli->mState &= ~2;
+}
 
 // 0x80008EB0
-int colliHasBounds(CharaColli* colli) { return colli->mState & 2; }
+int colliHasBounds(CharaColli* colli)
+{
+	return colli->mState & 2;
+}
 
 // 0x80008EBC
 void colliShapeSetBit8(CharaColli* colli, int shape)
@@ -929,9 +1040,9 @@ int colliSphereBox(ColliShape* sphere, ColliShape* box, int test)
 int colliCylinderCylinder(ColliShape* a, ColliShape* b, int test)
 {
 	f32 over;
-	f32 dy = a->mPos.y - b->mPos.y;
+	f32 dy   = a->mPos.y - b->mPos.y;
 	f64 absY = __fabs(dy);
-	over   = absY;
+	over     = absY;
 	over -= a->mSizeY + b->mSizeY;
 	if (over >= 0.0f) {
 		return 0;
@@ -969,8 +1080,8 @@ int colliCylinderBox(ColliShape* cyl, ColliShape* box, int test)
 {
 	f32 dy;
 	f32 outY;
-	dy = cyl->mPos.y - box->mPos.y;
-	outY   = colliAbs(dy);
+	dy   = cyl->mPos.y - box->mPos.y;
+	outY = colliAbs(dy);
 	outY -= cyl->mSizeY + box->mSizeY;
 	if (outY >= 0.0f) {
 		return 0;
@@ -1067,7 +1178,10 @@ int colliCylinderBox(ColliShape* cyl, ColliShape* box, int test)
 }
 
 // 0x80009F7C
-void colliFree(CharaColli* colli) { colliRetire(colli); }
+void colliFree(CharaColli* colli)
+{
+	colliRetire(colli);
+}
 
 // 0x80009F9C
 void colliClearContacts(CharaColli* colli)
@@ -1110,13 +1224,13 @@ int colliTestPair(CharaColli* a, CharaColli* b)
 	}
 	near = 1;
 	if (colliHasBounds(a) != 0 || colliHasBounds(b) != 0) {
-		boundsA = colliGetBounds(a);
+		boundsA             = colliGetBounds(a);
 		ColliShape* boundsB = colliGetBounds(b);
 		near                = colliSphereSphere(boundsA, boundsB, 1);
 	}
 	result = 0;
 	if (near != 0) {
-		countB     = colliGetShapeCount(b);
+		countB = colliGetShapeCount(b);
 		groupB = colliGetGroup(b);
 		if (colliIsSensor(b, a->mGroup) != 0 || colliIsSensor(a, groupB) != 0) {
 			mode = 0;
@@ -1185,8 +1299,7 @@ void colliTestLists(CharaColli* listA, CharaColli* listB)
 }
 
 // 0x8000A32C
-void colliAddContact(CharaColli* colli, CharaColli* other, int otherShape, int shape, Vec3f* push,
-                     Vec3f* pos)
+void colliAddContact(CharaColli* colli, CharaColli* other, int otherShape, int shape, Vec3f* push, Vec3f* pos)
 {
 	ColliContact* contact = colliAllocContact();
 	if (contact != 0) {
@@ -1241,7 +1354,10 @@ void colliLink(CharaColli* colli, CharaColli* list)
 }
 
 // 0x8000A480
-CharaColli* colliNext(CharaColli* colli) { return colli->mNext; }
+CharaColli* colliNext(CharaColli* colli)
+{
+	return colli->mNext;
+}
 
 // 0x8000A488
 // Draws each shape with colliShapeDebugDraw
@@ -1305,7 +1421,10 @@ void initColli()
 }
 
 // 0x8000A6CC
-TCharaColliCtrl* createTCharaColliCtrl() { return new TCharaColliCtrl(gTL_01); }
+TCharaColliCtrl* createTCharaColliCtrl()
+{
+	return new TCharaColliCtrl(gTL_01);
+}
 
 // 0x8000A70C
 void exitColli()
@@ -1398,5 +1517,8 @@ ColliContact* colliAllocContact()
 }
 
 // 0x8000A994
-void colliClearDebug() { gColliDebug &= ~1; }
+void colliClearDebug()
+{
+	gColliDebug &= ~1;
+}
 }

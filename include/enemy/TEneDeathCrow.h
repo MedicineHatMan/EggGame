@@ -40,12 +40,12 @@ public:
 	virtual void vfn_10();
 	virtual void render();
 
-	Vec3f mPos;      // _20
-	Vec3f mVel;      // _2C
-	int mRotY;       // _38
-	f32 mFrame;      // _3C loops at 20
+	Vec3f mPos;          // _20
+	Vec3f mVel;          // _2C
+	int mRotY;           // _38
+	f32 mFrame;          // _3C loops at 20
 	DrawTask* mDrawTask; // _40
-	int mLife;       // _44
+	int mLife;           // _44
 };
 
 extern "C" {

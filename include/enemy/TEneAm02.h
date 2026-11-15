@@ -53,7 +53,7 @@ public:
 		AM_ARRIVED     = 0x1,
 		AM_FLIP_DONE   = 0x2,
 		AM_DYING       = 0x4,
-		AM_HIDDEN      = 0x8,  // tested by slot _10 never set here
+		AM_HIDDEN      = 0x8, // tested by slot _10 never set here
 		AM_ATTACK_DONE = 0x10,
 		AM_WEAK        = 0x20, // from the set data Only the debug text reads it here
 		AM_STUN_DONE   = 0x40,
@@ -67,19 +67,19 @@ public:
 	inline void* operator new(u32 size);
 	inline void operator delete(void* mem);
 
-	virtual void vfn_10();                     // _10 hides it off screen
-	virtual void render();                     // _1C draws the model
-	virtual void readEnemyDesc(SetDesc* desc); // _38
-	virtual void vfn_3C();                     // _3C prints debug text
-	virtual f32 vfn_40();                      // _40
+	virtual void vfn_10();                                              // _10 hides it off screen
+	virtual void render();                                              // _1C draws the model
+	virtual void readEnemyDesc(SetDesc* desc);                          // _38
+	virtual void vfn_3C();                                              // _3C prints debug text
+	virtual f32 vfn_40();                                               // _40
 	virtual int onHit(const TObjAction* other, int shape, int* result); // _58
-	virtual void vfn_6C();                     // _6C
-	virtual void updateBody();                 // _70
-	virtual void setPos(const Vec3f* pos);           // _74
-	virtual void syncCollider();               // _78
-	virtual void onActionPhase(int action, int phase); // _7C
-	virtual int getDamage(EnemyHit* hit);      // _A4
-	virtual int getHitKind(const void* other, HitInfo* info); // _A8
+	virtual void vfn_6C();                                              // _6C
+	virtual void updateBody();                                          // _70
+	virtual void setPos(const Vec3f* pos);                              // _74
+	virtual void syncCollider();                                        // _78
+	virtual void onActionPhase(int action, int phase);                  // _7C
+	virtual int getDamage(EnemyHit* hit);                               // _A4
+	virtual int getHitKind(const void* other, HitInfo* info);           // _A8
 
 	void init(SetDesc* desc);
 	int isAppearDone();
@@ -123,30 +123,30 @@ public:
 	void actDie(int phase);
 	void actDieThrown(int phase);
 
-	int mVariant;         // _158 0 or 1 Picks the brain
+	int mVariant;          // _158 0 or 1 Picks the brain
 	Am02SeekBrain* mBrain; // _15C
-	void* mPose;          // _160
-	CharaColli* mSwing;         // _164 the collider for its swing
-	DrawTask* mModelTask;     // _168
-	u32 mFlags2;          // _16C
-	Vec3f mTarget;        // _170
-	Vec3f mHitPos;        // _17C
-	ObjShadow mShadow;    // _188
-	TEneAm02_Rock* mRock; // _1C0 created while the throw is held
-	EnemyFx* mTrailA;     // _1C4
-	EnemyFx* mTrailB;     // _1C8
-	int mHealthStep;      // _1CC a fifth of the health
-	int mLastDamage;      // _1D0 the damage of a throw
-	RockFlight* mThrow;   // _1D4 moves it through the air when thrown
-	TEnemyLifeBar* mBar;  // _1D8
-	EnemyLight mLight;    // _1DC
-	EnemyTint mTint;      // _21C
-	HitVec mParts[5];     // _224 0 and 1 are the feet 2 centres the collider 3 and 4 trail in a swing
-	EnemyEffect mEffect;  // _260
-	int mStep;            // _2B0
-	int mTimer;           // _2B4
-	int mAngle;           // _2B8
-	f32 mSpeed;           // _2BC
+	void* mPose;           // _160
+	CharaColli* mSwing;    // _164 the collider for its swing
+	DrawTask* mModelTask;  // _168
+	u32 mFlags2;           // _16C
+	Vec3f mTarget;         // _170
+	Vec3f mHitPos;         // _17C
+	ObjShadow mShadow;     // _188
+	TEneAm02_Rock* mRock;  // _1C0 created while the throw is held
+	EnemyFx* mTrailA;      // _1C4
+	EnemyFx* mTrailB;      // _1C8
+	int mHealthStep;       // _1CC a fifth of the health
+	int mLastDamage;       // _1D0 the damage of a throw
+	RockFlight* mThrow;    // _1D4 moves it through the air when thrown
+	TEnemyLifeBar* mBar;   // _1D8
+	EnemyLight mLight;     // _1DC
+	EnemyTint mTint;       // _21C
+	HitVec mParts[5];      // _224 0 and 1 are the feet 2 centres the collider 3 and 4 trail in a swing
+	EnemyEffect mEffect;   // _260
+	int mStep;             // _2B0
+	int mTimer;            // _2B4
+	int mAngle;            // _2B8
+	f32 mSpeed;            // _2BC
 };
 
 /** The same state machine as EnemyBrain in TEneAm01.h built separately */
@@ -169,10 +169,10 @@ struct Am02Brain {
 	{
 		mOwner = 0;
 		mState = 0;
-		mNext = -1;
+		mNext  = -1;
 	}
 
-	virtual int checkInterrupt() = 0;               // _08 1 if it changed state
+	virtual int checkInterrupt()               = 0; // _08 1 if it changed state
 	virtual void onPhase(int state, int phase) = 0; // _0C
 	inline virtual ~Am02Brain() { }                 // _10 0x80021E34
 	inline virtual void update(TEneAm02* owner);    // _14 0x80021D9C
@@ -188,7 +188,7 @@ struct Am02Brain {
 	inline void start(TEneAm02* owner)
 	{
 		mOwner = owner;
-		mNext = -1;
+		mNext  = -1;
 		mState = STATE_APPEAR;
 		onPhase(mState, 0);
 		if (mNext != -1) {
@@ -204,8 +204,8 @@ struct Am02SeekBrain : public Am02Brain {
 
 	virtual int checkInterrupt();    // _08
 	virtual void onAppearDone() = 0; // _18
-	virtual void onStunDone() = 0;   // _1C
-	virtual void onFlipDone() = 0;   // _20
+	virtual void onStunDone()   = 0; // _1C
+	virtual void onFlipDone()   = 0; // _20
 
 	void pickTarget(f32 radius);
 	void phaseAppear(int phase);

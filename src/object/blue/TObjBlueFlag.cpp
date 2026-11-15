@@ -29,16 +29,24 @@ struct CharaColli;
 struct NJS_TEXLIST;
 
 // 0x800EB13C
-extern "C" void initBlueFlag() { }
+extern "C" void initBlueFlag()
+{
+}
 
 // 0x800EB140
-extern "C" void termBlueFlag() { }
+extern "C" void termBlueFlag()
+{
+}
 
 // 0x800EB144
-extern "C" void initBlueFlagSet() { }
+extern "C" void initBlueFlagSet()
+{
+}
 
 // 0x800EB148
-extern "C" void termBlueFlagSet() { }
+extern "C" void termBlueFlagSet()
+{
+}
 
 // 0x800EB14C
 extern "C" TObject* createTObjBlueFlag(TObject* parent, SetDesc* desc)
@@ -74,7 +82,7 @@ TObjBlueFlag::TObjBlueFlag(TObject* parent, SetDesc* desc)
 	ClothMatrix matrix;
 	mtxSetTransV(matrix.m, &mPos);
 	mtxRotateZYX(matrix.m, matrix.m, &mRot.x);
-	mCloth = new FlagCloth(matrix, 15, 12, 100.0f, 80.0f, 0.3f, 0.99f, 0.0f);
+	mCloth  = new FlagCloth(matrix, 15, 12, 100.0f, 80.0f, 0.3f, 0.99f, 0.0f);
 	mAnchor = -1;
 	initFromDesc(desc);
 	vfn_74();
@@ -102,8 +110,8 @@ void TObjBlueFlag::initFromDesc(SetDesc* desc)
 		mCloth->rebuild(&matrix);
 
 		mCloth->mPinCount = 0;
-		f32 cols = mCloth->mCols;
-		f32 rows = mCloth->mRows;
+		f32 cols          = mCloth->mCols;
+		f32 rows          = mCloth->mRows;
 		switch (mAnchor) {
 		case 0:
 			mCloth->pin(0, 0);
@@ -155,7 +163,7 @@ void TObjBlueFlag::initFromDesc(SetDesc* desc)
 	wind.set(0.0f, 0.0f, 1.0f);
 	int yaw = (int)(182.04445f * (f32)desc->getInt(2));
 	vecRotateY(&wind, &wind, yaw);
-	mRef = 0.5f + desc->getFloat(0);
+	mRef  = 0.5f + desc->getFloat(0);
 	fluct = (s16)desc->getInt(3);
 	mCloth->setWind(&wind, fluct, desc->getFloat(1));
 	mCloth->mSpring = 0.3f + desc->getFloat(2);
@@ -193,9 +201,9 @@ void TObjBlueFlag::draw()
 		return;
 	}
 
-	FlagCloth* cloth = mCloth;
-	cloth->mHit      = 0;
-	ColliContact* hit        = (ColliContact*)mShape->mContacts;
+	FlagCloth* cloth  = mCloth;
+	cloth->mHit       = 0;
+	ColliContact* hit = (ColliContact*)mShape->mContacts;
 	TObjAction* other = 0;
 	if (hit == 0) {
 		mWasClear = 1;
@@ -213,7 +221,7 @@ void TObjBlueFlag::draw()
 			if (radius < 15.0f) {
 				radius = 15.0f;
 			}
-			Vec3f* pos = other->getPos();
+			Vec3f* pos  = other->getPos();
 			mTouch[0].x = pos->x;
 			mTouch[0].y = pos->y;
 			mTouch[0].z = pos->z;
@@ -238,8 +246,8 @@ void TObjBlueFlag::draw()
 		other->sendToHandle((ObjMsg*)&got);
 
 		VelMsg push;
-		push.mType = 1;
-		f32 scale  = 60.0f * mRef;
+		push.mType  = 1;
+		f32 scale   = 60.0f * mRef;
 		push.mVel.x = -got.mVel.x * scale;
 		push.mVel.z = -got.mVel.z * scale;
 		other->sendToHandle((ObjMsg*)&push);
@@ -278,8 +286,8 @@ void TObjBlueFlag::freeShape()
 // 0x800EBD8C
 void TObjBlueFlag::vfn_10()
 {
-	ColliShape* shape  = colliGetShape(mShape, 0);
-	f32 radius   = shape->mSizeX;
+	ColliShape* shape = colliGetShape(mShape, 0);
+	f32 radius        = shape->mSizeX;
 	if (cameraIsVisible(1000.0f, radius, &mPos, 0) != 0) {
 		mDraw->mFlags &= ~1;
 	} else {
@@ -314,15 +322,15 @@ void TObjBlueFlag::buildNormals()
 		for (u16 x = 0; x < 15; x++) {
 			u16 face = x * 2;
 			u16 i    = x + rowStart;
-			cur.x   = pts[i].mPos.x;
-			cur.y   = pts[i].mPos.y;
-			cur.z   = pts[i].mPos.z;
-			diag.x  = pts[i + cols + 1].mPos.x;
-			diag.y  = pts[i + cols + 1].mPos.y;
-			diag.z  = pts[i + cols + 1].mPos.z;
-			other.x = pts[i + cols].mPos.x;
-			other.y = pts[i + cols].mPos.y;
-			other.z = pts[i + cols].mPos.z;
+			cur.x    = pts[i].mPos.x;
+			cur.y    = pts[i].mPos.y;
+			cur.z    = pts[i].mPos.z;
+			diag.x   = pts[i + cols + 1].mPos.x;
+			diag.y   = pts[i + cols + 1].mPos.y;
+			diag.z   = pts[i + cols + 1].mPos.z;
+			other.x  = pts[i + cols].mPos.x;
+			other.y  = pts[i + cols].mPos.y;
+			other.z  = pts[i + cols].mPos.z;
 			vecSub(&toDiag, &diag, &cur);
 			vecSub(&toBelow, &other, &cur);
 			njOuterProduct(&toBelow, &toDiag, &row[face]);
@@ -370,7 +378,7 @@ void TObjBlueFlag::render()
 	u16 cols;
 	SpringPoint* pts;
 	u16 rows;
-	pts = mCloth->mPoints;
+	pts  = mCloth->mPoints;
 	cols = mCloth->mCols;
 	rows = mCloth->mRows;
 	lightSetSelect(0);

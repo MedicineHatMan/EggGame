@@ -40,14 +40,14 @@ public:
 	virtual int onHit(const TObjAction* other, int arg, int* result);
 	virtual void onLand(); // _6C
 
-	Vec3f mPos;      // _30
-	Vec3f mTarget;   // _3C
-	Vec3f mVel;      // _48
-	int mTime;       // _54
-	CharaColli* mColli;    // _58
-	DrawTask* mDrawTask; // _5C
+	Vec3f mPos;                           // _30
+	Vec3f mTarget;                        // _3C
+	Vec3f mVel;                           // _48
+	int mTime;                            // _54
+	CharaColli* mColli;                   // _58
+	DrawTask* mDrawTask;                  // _5C
 	TEneBoss02_WaterShot_Visual* mVisual; // _60
-	int mState;      // _64 0 flying 1 landed
+	int mState;                           // _64 0 flying 1 landed
 };
 
 typedef char TEneBoss02_WaterShot_size_check[(sizeof(TEneBoss02_WaterShot) == 0x68) ? 1 : -1];
@@ -68,8 +68,8 @@ public:
 typedef char TEneBoss02_WaterShot_Gate_size_check[(sizeof(TEneBoss02_WaterShot_Gate) == 0x6C) ? 1 : -1];
 
 const char* gTEneBoss02_WaterShot_VisualName = "TEneBoss02_WaterShot_Visual";
-const char* gTEneBoss02_WaterShotName = "TEneBoss02_WaterShot";
-const char* gTEneBoss02_WaterShot_GateName = "TEneBoss02_WaterShot_Gate";
+const char* gTEneBoss02_WaterShotName        = "TEneBoss02_WaterShot";
+const char* gTEneBoss02_WaterShot_GateName   = "TEneBoss02_WaterShot_Gate";
 
 // After the names their strings come first in .rodata
 extern "C" {
@@ -82,12 +82,12 @@ extern const ColliShape sBoss02_PoolShape[] = {
 TEneBoss02_WaterShot_Visual::TEneBoss02_WaterShot_Visual(TObject* parent, const Vec3f* pos)
     : TObject(parent)
 {
-	_00   = (u32)gTEneBoss02_WaterShot_VisualName;
-	mSize = 0x38;
-	mPos  = *pos;
+	_00       = (u32)gTEneBoss02_WaterShot_VisualName;
+	mSize     = 0x38;
+	mPos      = *pos;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
-	mFx  = 0;
-	mFx2 = 0;
+	mFx       = 0;
+	mFx2      = 0;
 }
 
 // 0x80060890
@@ -140,14 +140,14 @@ void TEneBoss02_WaterShot_Visual::render()
 // 0x80060A4C
 extern "C" void setWaterShotAssets(NJS_OBJECT* model, NJS_TEXLIST* textures)
 {
-	sBoss02ShotModel = model;
+	sBoss02ShotModel    = model;
 	sBoss02ShotTextures = textures;
 }
 
 // 0x80060A58
 extern "C" void clearWaterShotAssets()
 {
-	sBoss02ShotModel = 0;
+	sBoss02ShotModel    = 0;
 	sBoss02ShotTextures = 0;
 }
 
@@ -164,13 +164,13 @@ TEneBoss02_WaterShot::TEneBoss02_WaterShot(TObject* parent, const Vec3f* pos, co
 	_00   = (u32)gTEneBoss02_WaterShotName;
 	mSize = 0x68;
 	setObjId(this, 0xFFFF);
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
+	mDrawTask                           = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
 	TEneBoss02_WaterShot_Visual* visual = new TEneBoss02_WaterShot_Visual(this, pos);
-	mVisual = visual;
-	mState  = 0;
-	mPos    = *pos;
-	mTarget = *target;
-	mTime   = 0;
+	mVisual                             = visual;
+	mState                              = 0;
+	mPos                                = *pos;
+	mTarget                             = *target;
+	mTime                               = 0;
 	aimWaterShot(pos, target, &mVel, 0.1f, 1.5f);
 	mVel.y += 0.1f;
 	njSubVector(&mPos, &mVel);
@@ -202,32 +202,32 @@ extern "C" void aimWaterShot(const Vec3f* from, const Vec3f* to, Vec3f* out, f32
 	delta = *to;
 	njSubVector(&delta, from);
 	f32 frames = ceil(quadRoot(gravity, gravity - 2.0f * rise, 2.0f * delta.y));
-	delta.y = 0.0f;
-	f32 dist = njUnitVector(&delta);
+	delta.y    = 0.0f;
+	f32 dist   = njUnitVector(&delta);
 	if (dist < gUnitVectorMin) {
 		delta = gVecZero;
 	}
 	f32 speed = dist / frames;
-	out->x = delta.x * speed;
-	out->y = rise;
-	out->z = delta.z * speed;
+	out->x    = delta.x * speed;
+	out->y    = rise;
+	out->z    = delta.z * speed;
 }
 
 // 0x80060DC8
 int TEneBoss02_WaterShot::onHit(const TObjAction* other, int arg, int* result)
 {
-	int hurt = 0;
+	int hurt     = 0;
 	HitInfo* hit = (HitInfo*)result;
 	if (isPlayerObj(other) != 0) {
 		hit->mDamage = 0xA;
-		hurt = 1;
+		hurt         = 1;
 		hit->mFlags.clear();
 		hit->mPos.x = 0.0f;
 		hit->mPos.y = 0.0f;
 		hit->mPos.z = 0.0f;
 	} else if (isEggObj(other) != 0) {
 		hit->mDamage = 1;
-		hurt = 1;
+		hurt         = 1;
 		hit->mFlags.clear();
 		hit->mFlags.setBit(0xD);
 		hit->mPos.x = 0.0f;

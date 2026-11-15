@@ -20,24 +20,24 @@ struct PadSystem;
 #endif
 
 struct PadState {
-	u32 mHold;     // _00
-	u32 mHoldInv;  // _04
-	u32 mPressed;  // _08
-	u32 mReleased; // _0C
-	u32 mPrev;     // _10
-	u32 mRepeat;   // _14
-	u16 mTriggerR; // _18
-	u16 mTriggerL; // _1A
-	s16 mStickX;   // _1C
-	s16 mStickY;   // _1E
-	s16 mSubX;     // _20
-	s16 mSubY;     // _22
-	int mAngle;    // _24
-	f32 mLength;   // _28
-	int mSubAngle; // _2C
+	u32 mHold;      // _00
+	u32 mHoldInv;   // _04
+	u32 mPressed;   // _08
+	u32 mReleased;  // _0C
+	u32 mPrev;      // _10
+	u32 mRepeat;    // _14
+	u16 mTriggerR;  // _18
+	u16 mTriggerL;  // _1A
+	s16 mStickX;    // _1C
+	s16 mStickY;    // _1E
+	s16 mSubX;      // _20
+	s16 mSubY;      // _22
+	int mAngle;     // _24
+	f32 mLength;    // _28
+	int mSubAngle;  // _2C
 	f32 mSubLength; // _30
-	s16 mStatus;   // _34
-	s16 mLastErr;  // _36
+	s16 mStatus;    // _34
+	s16 mLastErr;   // _36
 };
 
 extern "C" PadState* padGet(u8 no); // 0x80012B6C a blank state for a bad pad number
@@ -67,14 +67,14 @@ struct PadEntry {
 };
 
 struct PadSystem {
-	int mRepeatDelay;    // _00
-	int mRepeatRate;     // _04
-	PadEntry mPads[4];   // _08
-	PadState mNone;      // _108 What padGet returns for a bad pad number
+	int mRepeatDelay;  // _00
+	int mRepeatRate;   // _04
+	PadEntry mPads[4]; // _08
+	PadState mNone;    // _108 What padGet returns for a bad pad number
 	u8 _140[0x30];
-	int mResetTimer;     // _170
-	int mResetInterval;  // _174
-	void* mVibWork;      // _178
+	int mResetTimer;    // _170
+	int mResetInterval; // _174
+	void* mVibWork;     // _178
 };
 
 extern "C" {

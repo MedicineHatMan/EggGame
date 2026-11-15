@@ -82,9 +82,9 @@ const MotionEntry sRedDinoHeadMotions[] = {
 TObjRedDinoHead::TObjRedDinoHead(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00             = (u32)gTObjRedDinoHeadName;
-	mSize             = 0x194;
-	mLink.mOwner      = this;
+	_00          = (u32)gTObjRedDinoHeadName;
+	mSize        = 0x194;
+	mLink.mOwner = this;
 	linkHead(&gRedHeadList, &mLink);
 	mGeo      = getGeObjModels()[8];
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
@@ -142,9 +142,9 @@ void TObjRedDinoHead::setup()
 	mOpenCount = 0;
 	colliDisable(mShape);
 	mModel.setModel(mGeo);
-	mModel.mState  = &mDrawState;
+	mModel.mState   = &mDrawState;
 	mModel.mTexList = getGeObjTextures()[8];
-	mModel.mMotion = &mMotion;
+	mModel.mMotion  = &mMotion;
 
 	Vec3f scaled = scaledCentre(mGeo, mScale);
 	mTint.reset();
@@ -257,9 +257,9 @@ void TObjRedDinoHead::stateAlive()
 		}
 	}
 	pose();
-	Vec3f* left = &mPartL->mPos;
-	Vec3f at = sDinoPoints[2];
-	*left = at;
+	Vec3f* left  = &mPartL->mPos;
+	Vec3f at     = sDinoPoints[2];
+	*left        = at;
 	mPartR->mPos = at;
 }
 
@@ -280,7 +280,10 @@ void TObjRedDinoHead::stateDead()
 
 // 0x800C5F80
 // Read through a getter comparing the field directly swaps the cmpw operands
-static inline s16 areaGroup(void* area) { return ((TObjRedDHeadInvokeArea*)area)->mGroupId; }
+static inline s16 areaGroup(void* area)
+{
+	return ((TObjRedDHeadInvokeArea*)area)->mGroupId;
+}
 void TObjRedDinoHead::notifyAreas()
 {
 	for (RedAreaLink* link = gRedAreaList.mTail; link != 0; link = link->mNext) {
@@ -318,7 +321,7 @@ void TObjRedDinoHead::open()
 // 0x800C60AC
 void TObjRedDinoHead::close()
 {
-	int count = mOpenCount - 1;
+	int count  = mOpenCount - 1;
 	mOpenCount = count < 0 ? 0 : count;
 	if (mOpenCount != 0) {
 		return;
@@ -350,8 +353,8 @@ void TObjRedDinoHead::pose()
 		njStartMotionLink((const NJS_MOTION_LINK*)mMotion.getBlend(), mMotion.mBlendTime);
 		drawNodes(mGeo, 0);
 	} else {
-		int cur = mMotion.mCurrent;
-		f32 frame = mMotion.mFrame;
+		int cur         = mMotion.mCurrent;
+		f32 frame       = mMotion.mFrame;
 		NJS_MOTION* mot = mMotion.getMotion(cur);
 		njStartMotionObj(mot, frame);
 		drawNodes(mGeo, 0);
@@ -390,7 +393,7 @@ void TObjRedDinoHead::setupShape()
 	GjModel* model = firstGeoNode(mGeo);
 	ColliShape shape;
 	colliShapeInit(&shape);
-	shape.mType = COLLISHAPE_SPHERE;
+	shape.mType  = COLLISHAPE_SPHERE;
 	shape.mSizeX = model->r * mScale;
 	shape.mFlags |= 0x10;
 	colliCopyShapes(mShape, &shape);

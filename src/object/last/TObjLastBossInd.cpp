@@ -45,7 +45,7 @@ void TObjLastBossInd::initFromDesc(SetDesc* desc)
 	} else if (kind > gLastBossIndCount - 1) {
 		kind = gLastBossIndCount - 1;
 	}
-	mModel   = lastBossGetModel((int)gLastBossIndModels[kind]);
+	mModel = lastBossGetModel((int)gLastBossIndModels[kind]);
 	GjModel* model;
 	if (mModel != 0 && (model = mModel->model) != 0) {
 		mRadius = gLastBossIndMargin + model->r;
@@ -145,12 +145,12 @@ extern "C" void lastBossEggBreak()
 	local.y = piece->pos[1];
 	local.z = piece->pos[2];
 	njCalcPointEx(&local, &world);
-	gap.x = world.x;
-	gap.y = world.y;
-	gap.z = world.z;
-	gap.x = gap.x - gLastBossEggPos.x;
-	gap.y = gap.y - gLastBossEggPos.y;
-	gap.z = gap.z - gLastBossEggPos.z;
+	gap.x     = world.x;
+	gap.y     = world.y;
+	gap.z     = world.z;
+	gap.x     = gap.x - gLastBossEggPos.x;
+	gap.y     = gap.y - gLastBossEggPos.y;
+	gap.z     = gap.z - gLastBossEggPos.z;
 	Vec3f out = gap;
 	spawnTObjLastBossEgg_FragShell(piece, &world, &out, gLastBossEggYaw);
 	njTranslateEx((Vec3f*)piece->pos);
@@ -159,12 +159,12 @@ extern "C" void lastBossEggBreak()
 		local.y = piece->pos[1];
 		local.z = piece->pos[2];
 		njCalcPointEx(&local, &world);
-		gap.x = world.x;
-		gap.y = world.y;
-		gap.z = world.z;
-		gap.x = gap.x - gLastBossEggPos.x;
-		gap.y = gap.y - gLastBossEggPos.y;
-		gap.z = gap.z - gLastBossEggPos.z;
+		gap.x      = world.x;
+		gap.y      = world.y;
+		gap.z      = world.z;
+		gap.x      = gap.x - gLastBossEggPos.x;
+		gap.y      = gap.y - gLastBossEggPos.y;
+		gap.z      = gap.z - gLastBossEggPos.z;
 		Vec3f away = gap;
 		spawnTObjLastBossEgg_Frag(piece, &world, &away, gLastBossEggYaw);
 	}

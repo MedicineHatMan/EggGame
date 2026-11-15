@@ -183,7 +183,7 @@ void TEneLastExBossCore::render()
 	gjRotateZ(mXform.mRot.z);
 	ObjDrawState state;
 	DrawStateSlot* slot = getDrawStateSlot();
-	state = *getDefaultDrawState();
+	state               = *getDefaultDrawState();
 	if (mAlpha < 255) {
 		state.mFlags |= 0x200;
 		state.mAmbient = (u8)mAlpha;

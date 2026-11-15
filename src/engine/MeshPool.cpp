@@ -18,15 +18,15 @@ MeshVector<MeshTreeNode>* meshNodeVecDtor(MeshVector<MeshTreeNode>*, s16);
 // 0x8007A160
 MeshObject::MeshObject()
 {
-	mLink.mNext = NULL;
-	mLink.mPrev = NULL;
-	mLink.mList = NULL;
-	mData       = NULL;
-	mPool       = NULL;
-	mTreeSlot   = 0xFFFF;
+	mLink.mNext  = NULL;
+	mLink.mPrev  = NULL;
+	mLink.mList  = NULL;
+	mData        = NULL;
+	mPool        = NULL;
+	mTreeSlot    = 0xFFFF;
 	mLink.mOwner = this;
-	mFlags = 1;
-	mState = 0;
+	mFlags       = 1;
+	mState       = 0;
 }
 
 // 0x8007A1D0
@@ -144,7 +144,7 @@ int MeshObject::queryDown(const MeshEntry* entry, const Vec3f* pos, u32 mask, Me
 {
 	u32 i;
 	u32 count;
-	int found = 0;
+	int found    = 0;
 	MeshTri* tri = mTris;
 	Vec3f local;
 	mtxMultVec(mInverse, pos, &local);
@@ -252,7 +252,8 @@ int MeshObject::querySphere(const MeshEntry* entry, const MeshSphere* sphere, u3
 
 // 0x8007A8C4
 // A separate callback for the face the corners and the edges
-int MeshObject::querySphereEx(const MeshEntry* entry, const MeshSphere* sphere, u32 mask, void* faceFn, void* cornerFn, void* edgeFn, void* arg)
+int MeshObject::querySphereEx(const MeshEntry* entry, const MeshSphere* sphere, u32 mask, void* faceFn, void* cornerFn, void* edgeFn,
+                              void* arg)
 {
 	typedef int (*Face)(MeshObject*, int, void*, const Vec3f*, f32);
 	typedef int (*Corner)(MeshObject*, int, void*, u16, f32);
@@ -268,7 +269,7 @@ int MeshObject::querySphereEx(const MeshEntry* entry, const MeshSphere* sphere, 
 			continue;
 		}
 		const Vec3f* a = &verts[tri->mVerts[0]];
-		f32 height = njInnerProduct(&tri->mNormal, &local);
+		f32 height     = njInnerProduct(&tri->mNormal, &local);
 		height -= njInnerProduct(&tri->mNormal, a);
 		if ((f32)__fabs(height) > sphere->mRadius) {
 			continue;
@@ -383,8 +384,8 @@ void meshPoolQuery(MeshPool* pool, const f32* box, MeshPoolFn fn, void* arg)
 void meshTreeQuery(MeshPool* pool, const f32* box, MeshPoolFn fn, void* arg, u32 index)
 {
 	MeshTreeNode* node = &pool->mNodes.mData[index & 0xFFFF];
-	if (box[3] < node->mMin[0] || box[0] > node->mMax[0] || box[4] < node->mMin[1] || box[1] > node->mMax[1]
-	    || box[5] < node->mMin[2] || box[2] > node->mMax[2]) {
+	if (box[3] < node->mMin[0] || box[0] > node->mMax[0] || box[4] < node->mMin[1] || box[1] > node->mMax[1] || box[5] < node->mMin[2]
+	    || box[2] > node->mMax[2]) {
 		return;
 	}
 	if (node->mIsLeaf == 1) {
@@ -473,7 +474,7 @@ void meshTreeRebuild(MeshPool* pool)
 		if (mesh->mState & 0x400) {
 			mesh->mTreeSlot = 0xFFFF;
 		} else {
-			mesh->mTreeSlot = count;
+			mesh->mTreeSlot           = count;
 			pool->mOrder.mData[count] = count;
 			pool->mSlots.mData[count] = mesh;
 			count++;
@@ -493,12 +494,12 @@ void meshTreeRebuild(MeshPool* pool)
 u32 meshTreeBuild(MeshPool* pool, const f32* box, u16* order, u32 count, u32 index)
 {
 	MeshTreeNode* node = &pool->mNodes.mData[index & 0xFFFF];
-	node->mMin[0] = box[0];
-	node->mMin[1] = box[1];
-	node->mMin[2] = box[2];
-	node->mMax[0] = box[3];
-	node->mMax[1] = box[4];
-	node->mMax[2] = box[5];
+	node->mMin[0]      = box[0];
+	node->mMin[1]      = box[1];
+	node->mMin[2]      = box[2];
+	node->mMax[0]      = box[3];
+	node->mMax[1]      = box[4];
+	node->mMax[2]      = box[5];
 	if (count == 1) {
 		node->mIsLeaf = 1;
 		node->mSlot   = *order;
@@ -519,7 +520,7 @@ u32 meshTreeBuild(MeshPool* pool, const f32* box, u16* order, u32 count, u32 ind
 	f32 leftBox[6];
 	f32 rightBox[6];
 	meshPoolBox(pool, leftBox, order, left & 0xFFFF);
-	right = count - left;
+	right      = count - left;
 	rightOrder = order + left;
 	meshPoolBox(pool, rightBox, rightOrder, right & 0xFFFF);
 	node->mLeft  = pool->mNodeCount++;
@@ -569,14 +570,14 @@ int meshTreeSplitX(MeshPool* pool, const f32* box, u16* order, u32 count)
 	if (count == 2) {
 		return 1;
 	}
-	f32 mid = 0.5f * (box[0] + box[3]);
+	f32 mid  = 0.5f * (box[0] + box[3]);
 	u32 left = 0;
 	u16 id;
-	u32 bytes = count << 1;
-	int n = count;
+	u32 bytes  = count << 1;
+	int n      = count;
 	u16* front = pool->mScratch.mData;
-	u16* tail = (u16*)((u8*)front + bytes);
-	u16* src = order;
+	u16* tail  = (u16*)((u8*)front + bytes);
+	u16* src   = order;
 	for (int i = 0; i < n; i++) {
 		id = *src;
 		if (pool->mSlots.mData[id]->mCenter.x < mid) {
@@ -602,14 +603,14 @@ int meshTreeSplitY(MeshPool* pool, const f32* box, u16* order, u32 count)
 	if (count == 2) {
 		return 1;
 	}
-	f32 mid = 0.5f * (box[1] + box[4]);
+	f32 mid  = 0.5f * (box[1] + box[4]);
 	u32 left = 0;
 	u16 id;
-	u32 bytes = count << 1;
-	int n = count;
+	u32 bytes  = count << 1;
+	int n      = count;
 	u16* front = pool->mScratch.mData;
-	u16* tail = (u16*)((u8*)front + bytes);
-	u16* src = order;
+	u16* tail  = (u16*)((u8*)front + bytes);
+	u16* src   = order;
 	for (int i = 0; i < n; i++) {
 		id = *src;
 		if (pool->mSlots.mData[id]->mCenter.y < mid) {
@@ -635,14 +636,14 @@ int meshTreeSplitZ(MeshPool* pool, const f32* box, u16* order, u32 count)
 	if (count == 2) {
 		return 1;
 	}
-	f32 mid = 0.5f * (box[2] + box[5]);
+	f32 mid  = 0.5f * (box[2] + box[5]);
 	u32 left = 0;
 	u16 id;
-	u32 bytes = count << 1;
-	int n = count;
+	u32 bytes  = count << 1;
+	int n      = count;
 	u16* front = pool->mScratch.mData;
-	u16* tail = (u16*)((u8*)front + bytes);
-	u16* src = order;
+	u16* tail  = (u16*)((u8*)front + bytes);
+	u16* src   = order;
 	for (int i = 0; i < n; i++) {
 		id = *src;
 		if (pool->mSlots.mData[id]->mCenter.z < mid) {
@@ -899,9 +900,9 @@ void meshLinkListAppend(MeshList2* list, MeshLink* link)
 		list->mTail = link;
 		list->mHead = link;
 	} else {
-		link->mPrev = list->mTail;
+		link->mPrev        = list->mTail;
 		list->mTail->mNext = link;
-		list->mTail = link;
+		list->mTail        = link;
 	}
 	link->mList = list;
 	list->mCount++;
@@ -932,9 +933,9 @@ void meshLinkListUnlinkAll(MeshList2* list)
 	MeshLink* link = list->mHead;
 	while (link != NULL) {
 		MeshLink* next = link->mNext;
-		link->mList = NULL;
-		link->mNext = NULL;
-		link->mPrev = NULL;
-		link = next;
+		link->mList    = NULL;
+		link->mNext    = NULL;
+		link->mPrev    = NULL;
+		link           = next;
 	}
 }

@@ -3,13 +3,12 @@
 #define ADXB_SWAP32(v) (((v) << 24) | (((v) & 0xFF00) << 8) | (((v) >> 8) & 0xFF00) | ((v) >> 24))
 #define ADXB_SWAP16(v) ((unsigned short)(((v) >> 8) | ((v) << 8)))
 
-char* adxb_wav_fmt_id = "fmt ";
+char* adxb_wav_fmt_id  = "fmt ";
 char* adxb_wav_data_id = "data";
 
 // 0x8021BB00
-static int adxb_DecodeInfoWav(unsigned char* hdr, int len, short* hdlen, signed char* type, signed char* bps,
-                              signed char* blk_len, signed char* nch, unsigned int* sfreq, int* nsmpl, int* blk_smpl,
-                              short* pcm_type)
+static int adxb_DecodeInfoWav(unsigned char* hdr, int len, short* hdlen, signed char* type, signed char* bps, signed char* blk_len,
+                              signed char* nch, unsigned int* sfreq, int* nsmpl, int* blk_smpl, short* pcm_type)
 {
 	unsigned char* fmt;
 	unsigned int size;
@@ -41,26 +40,26 @@ static int adxb_DecodeInfoWav(unsigned char* hdr, int len, short* hdlen, signed 
 	if (j == len) {
 		return -1;
 	}
-	size = *(unsigned int*)(hdr + j + 4);
-	*hdlen = j + 8;
-	*type = (signed char)0xFF;
-	dsize = ADXB_SWAP32(size);
-	v = *(unsigned int*)(fmt + 0xC);
-	*sfreq = ADXB_SWAP32(v);
-	*nch = *(unsigned short*)(fmt + 0xA) >> 8;
-	*bps = *(unsigned short*)(fmt + 0x16) >> 8;
-	*blk_len = *(unsigned short*)(fmt + 0x14) >> 8;
-	*nsmpl = (int)dsize / *blk_len;
+	size      = *(unsigned int*)(hdr + j + 4);
+	*hdlen    = j + 8;
+	*type     = (signed char)0xFF;
+	dsize     = ADXB_SWAP32(size);
+	v         = *(unsigned int*)(fmt + 0xC);
+	*sfreq    = ADXB_SWAP32(v);
+	*nch      = *(unsigned short*)(fmt + 0xA) >> 8;
+	*bps      = *(unsigned short*)(fmt + 0x16) >> 8;
+	*blk_len  = *(unsigned short*)(fmt + 0x14) >> 8;
+	*nsmpl    = (int)dsize / *blk_len;
 	*blk_smpl = 1;
 	if (*bps == 16) {
 		*pcm_type = 0;
 	} else if (*bps == 8) {
 		*pcm_type = 1;
 	} else if (*bps == 4) {
-		*blk_len = *nch << 1;
+		*blk_len  = *nch << 1;
 		*blk_smpl = 4;
-		*nsmpl = ((int)dsize / 2) / *nch;
-		*bps = 16;
+		*nsmpl    = ((int)dsize / 2) / *nch;
+		*bps      = 16;
 		*pcm_type = 2;
 	}
 	if (*bps == 0) {
@@ -81,8 +80,9 @@ int ADXB_DecodeHeaderWav(ADXB adxb, void* hdr, int len)
 	short hdlen;
 
 	adxb->hdr_ok = 1;
-	if (adxb_DecodeInfoWav(hdr, len, &hdlen, &adxb->type, &adxb->bps, &adxb->blk_len, &adxb->nch,
-	                       (unsigned int*)&adxb->sfreq, &adxb->total_smpl, &adxb->blk_smpl, &adxb->pcm_type) < 0) {
+	if (adxb_DecodeInfoWav(hdr, len, &hdlen, &adxb->type, &adxb->bps, &adxb->blk_len, &adxb->nch, (unsigned int*)&adxb->sfreq,
+	                       &adxb->total_smpl, &adxb->blk_smpl, &adxb->pcm_type)
+	    < 0) {
 		return 0;
 	}
 	ADXB_SET_PCM_PRM(adxb);
@@ -123,7 +123,7 @@ static void adxb_ExecOneWav16(ADXB adxb)
 		}
 		adxb->dec_nsmpl = n;
 		adxb->dec_dtlen = adxb->nch * (n * 2);
-		adxb->stat = ADXB_STAT_DECODE;
+		adxb->stat      = ADXB_STAT_DECODE;
 	}
 	if (adxb->stat == ADXB_STAT_DECODE) {
 		adxb->add_wr(adxb->add_wr_obj, adxb->dec_dtlen, adxb->dec_nsmpl);
@@ -164,7 +164,7 @@ static void adxb_ExecOneWav8(ADXB adxb)
 		}
 		adxb->dec_nsmpl = n;
 		adxb->dec_dtlen = n * adxb->nch;
-		adxb->stat = ADXB_STAT_DECODE;
+		adxb->stat      = ADXB_STAT_DECODE;
 	}
 	if (adxb->stat == ADXB_STAT_DECODE) {
 		adxb->add_wr(adxb->add_wr_obj, adxb->dec_dtlen, adxb->dec_nsmpl);
@@ -205,7 +205,7 @@ static void adxb_ExecOneWav4(ADXB adxb)
 		}
 		adxb->dec_nsmpl = n;
 		adxb->dec_dtlen = adxb->nch * (n * 2);
-		adxb->stat = ADXB_STAT_DECODE;
+		adxb->stat      = ADXB_STAT_DECODE;
 	}
 	if (adxb->stat == ADXB_STAT_DECODE) {
 		adxb->add_wr(adxb->add_wr_obj, adxb->dec_dtlen, adxb->dec_nsmpl);

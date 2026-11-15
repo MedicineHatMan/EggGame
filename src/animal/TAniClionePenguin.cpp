@@ -23,29 +23,20 @@ struct CharaColli;
 
 extern "C" {
 MotionEntry gClioneMotions[8] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 15.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 14.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 0.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 30.0f, 0.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.0f, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, 0.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 0.0f, 0.0f, 0 }, { MOTION_LOOP, 3, -1, 0, 0.0f, 15.0f, 0.0f, 0.0f, 0 },
+	{ MOTION_ONCE, 4, -1, 0, 0.0f, 14.0f, 0.0f, 0.0f, 0 }, { MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 30.0f, 0.0f, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 30.0f, 0.0f, 0.0f, 0 },
 };
 ColliShape sClioneShape0[1] = {
 	{ { 0.0f, 5.0f, 0.0f }, 0x0, 0, 0x0, 5.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
 MotionEntry sClioneMotions1[11] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_BLEND, 9, -1, 2, 0.0f, 19.0f, 0.35f, 0.075f, 0 },
-	{ MOTION_BLEND, 8, -1, 10, 0.0f, 19.0f, 0.3f, 0.075f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 0.2f, 0.0f, 0 },     { MOTION_LOOP, 1, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },     { MOTION_LOOP, 3, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 8, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },     { MOTION_ONCE, 5, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },     { MOTION_ONCE, 1, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_BLEND, 9, -1, 2, 0.0f, 19.0f, 0.35f, 0.075f, 0 }, { MOTION_BLEND, 8, -1, 10, 0.0f, 19.0f, 0.3f, 0.075f, 0 },
 	{ MOTION_LOOP, 4, -1, 0, 0.0f, 9.0f, 0.3f, 0.0f, 0 },
 };
 ColliShape sClioneShape1[1] = {
@@ -55,8 +46,8 @@ ColliShape sClioneShape1[1] = {
 
 // What the bubble's sweep finds
 struct BubbleSweep {
-	int mHitWall; // _00
-	f32 mDist;    // _04
+	int mHitWall;  // _00
+	f32 mDist;     // _04
 	Vec3f mNormal; // _08
 };
 
@@ -70,10 +61,10 @@ typedef char TAniClionePenguin_size_check[(sizeof(TAniClionePenguin) == 0x3BC) ?
 inline f32 inlineSqrt(f32 x)
 {
 	if (x > 0.0f) {
-		f64 guess = __frsqrte(x);
-		guess     = 0.5 * guess * (3.0 - x * (guess * guess));
-		guess     = 0.5 * guess * (3.0 - x * (guess * guess));
-		guess     = 0.5 * guess * (3.0 - x * (guess * guess));
+		f64 guess           = __frsqrte(x);
+		guess               = 0.5 * guess * (3.0 - x * (guess * guess));
+		guess               = 0.5 * guess * (3.0 - x * (guess * guess));
+		guess               = 0.5 * guess * (3.0 - x * (guess * guess));
 		volatile f32 result = x * guess;
 		return result;
 	}
@@ -105,15 +96,15 @@ TAniClionePenguin::TAniClionePenguin(TObject* parent, int player, int kind, cons
 		m270   = sClionePenguinCallbacks;
 	}
 	initColli();
-	mEnd.x = 0.0f;
-	mEnd.y = 0.0f;
-	mEnd.z = 0.0f;
-	_390.x = 0.0f;
-	_390.y = 0.0f;
-	_390.z = 0.0f;
-	_39C.x = 0.0f;
-	_39C.y = 0.0f;
-	_39C.z = 0.0f;
+	mEnd.x      = 0.0f;
+	mEnd.y      = 0.0f;
+	mEnd.z      = 0.0f;
+	_390.x      = 0.0f;
+	_390.y      = 0.0f;
+	_390.z      = 0.0f;
+	_39C.x      = 0.0f;
+	_39C.y      = 0.0f;
+	_39C.z      = 0.0f;
 	_3A8        = 0;
 	_3AC        = 0;
 	_3B0        = 0;
@@ -190,9 +181,9 @@ void TAniClionePenguin::onPhase(int phase)
 		playMotion(3, 1, 0.075f);
 		eggTypeStopAllFx(this);
 		startFollowers();
-		mTimer = 0x3C;
-		mAniFlags   = 0;
-		mStep  = 0xA;
+		mTimer    = 0x3C;
+		mAniFlags = 0;
+		mStep     = 0xA;
 
 		u8 shape[0x30];
 		if ((int)mParams->mValues[4] == 0) {
@@ -205,10 +196,10 @@ void TAniClionePenguin::onPhase(int phase)
 		colliSetMasks(mColli, 0x20, 0xFF, 0xFF, 0x10);
 
 		TAniBubble* bubble = new TAniBubble(this);
-		mBubble           = bubble;
-		mBubble->mPosRef  = &mPos;
-		mBubble->mRotRef  = mRot;
-		mBubble->mSizeRef = &mBubbleSize;
+		mBubble            = bubble;
+		mBubble->mPosRef   = &mPos;
+		mBubble->mRotRef   = mRot;
+		mBubble->mSizeRef  = &mBubbleSize;
 		sePlay3D(0x1B5, &mPos);
 
 		f32 rise  = mParams->mValues[7];
@@ -229,16 +220,16 @@ void TAniClionePenguin::onPhase(int phase)
 			gjScaleVector(speed, &mDir, &mDir);
 			mDir.y = rise;
 		}
-		mVel   = mDir;
-		mEnd.x = 0.0f;
-		mEnd.y = 0.0f;
-		mEnd.z = 0.0f;
-		_390.x = 0.0f;
-		_390.y = 0.0f;
-		_390.z = 0.0f;
-		_39C.x = 0.0f;
-		_39C.y = 0.0f;
-		_39C.z = 0.0f;
+		mVel        = mDir;
+		mEnd.x      = 0.0f;
+		mEnd.y      = 0.0f;
+		mEnd.z      = 0.0f;
+		_390.x      = 0.0f;
+		_390.y      = 0.0f;
+		_390.z      = 0.0f;
+		_39C.x      = 0.0f;
+		_39C.y      = 0.0f;
+		_39C.z      = 0.0f;
 		_3A8        = 0;
 		_3AC        = 0;
 		_3B0        = 0;
@@ -299,7 +290,7 @@ void TAniClionePenguin::runRise()
 	} else {
 		mBubbleSize = most;
 	}
-	size = mBubbleSize;
+	size                           = mBubbleSize;
 	colliGetShapes(mColli)->mSizeX = size;
 
 	mVel.y += -0.0522667f;
@@ -312,10 +303,10 @@ void TAniClionePenguin::runRise()
 	sweep.mNormal.x = 0.0f;
 	sweep.mNormal.y = 0.0f;
 	sweep.mNormal.z = 0.0f;
-	int landed = 0;
+	int landed      = 0;
 	if (groundQuerySphere((const void*)&sphere, (void*)onSweepFace, (void*)&sweep, (void*)(-1)) != 0) {
-		Vec3f dir    = mVel;
-		f32 length   = njUnitVector(&dir);
+		Vec3f dir  = mVel;
+		f32 length = njUnitVector(&dir);
 		if (length < 1e-6f) {
 			dir = gVecZero;
 		}
@@ -438,13 +429,13 @@ extern "C" void initClionePenguinNodes()
 	f32 c;
 	f32 b;
 	gClioneMotions[0].mRate = a;
-	b = sClionePenguinRate1;
-	c = sClionePenguinRate2;
+	b                       = sClionePenguinRate1;
+	c                       = sClionePenguinRate2;
 	f32 e;
 	gClioneMotions[1].mRate = b;
 	gClioneMotions[2].mRate = c;
 	gClioneMotions[3].mRate = sClionePenguinRate3;
-	e = sClionePenguinRate4;
+	e                       = sClionePenguinRate4;
 	gClioneMotions[4].mRate = e;
 	gClioneMotions[6].mRate = c;
 	gClioneMotions[7].mRate = b;

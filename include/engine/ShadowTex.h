@@ -17,18 +17,18 @@ struct ShadowTex {
 	ShadowTex();  // 0x80041ECC
 	~ShadowTex(); // 0x80041F24
 
-	void begin(Vec3f* at);  // 0x80041F70
-	void end();             // 0x80042030
-	void load(int map);     // 0x80042070
-	void loadMtx(int id);   // 0x800420B4
+	void begin(Vec3f* at); // 0x80041F70
+	void end();            // 0x80042030
+	void load(int map);    // 0x80042070
+	void loadMtx(int id);  // 0x800420B4
 
 	f32 mView[12]; // _00 the shadow camera's view
 };
 
 extern "C" {
-ShadowTex* shadowTexGet();  // 0x80041E48
-void shadowTexCreate();     // 0x80041E50
-void shadowTexDestroy();    // 0x80041E94
+ShadowTex* shadowTexGet(); // 0x80041E48
+void shadowTexCreate();    // 0x80041E50
+void shadowTexDestroy();   // 0x80041E94
 }
 
 /**
@@ -42,12 +42,12 @@ struct FrameTicker {
 
 	void update();
 
-	int _00;   // _00
-	int _04;   // _04
-	int _08;   // _08 1
-	int _0C;   // _0C
-	f32 _10;   // _10 240
-	f32 _14;   // _14
+	int _00; // _00
+	int _04; // _04
+	int _08; // _08 1
+	int _0C; // _0C
+	f32 _10; // _10 240
+	f32 _14; // _14
 
 	// _18 = vtable
 	virtual ~FrameTicker(); // _08

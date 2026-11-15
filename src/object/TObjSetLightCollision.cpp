@@ -43,7 +43,9 @@ ObjLightZone::ObjLightZone()
 }
 
 // 0x800A222C
-ObjLightZone::~ObjLightZone() { }
+ObjLightZone::~ObjLightZone()
+{
+}
 
 // 0x800A2284
 void ObjLightZone::setOwner(TObject* owner)
@@ -92,7 +94,7 @@ extern "C" TObject* createTObjSetLightCollision(TObject* parent, SetDesc* desc)
 extern "C" void prepareTObjSetLightCollision(SetDesc* desc)
 {
 	SetDescObj* objDesc = (SetDescObj*)desc;
-	int kind = objDesc->get3E();
+	int kind            = objDesc->get3E();
 	if (kind <= 0) {
 		return;
 	}
@@ -110,7 +112,7 @@ const char* gTObjSetLightCollisionName = "TObjSetLightCollision";
 TObjSetLightCollision::TObjSetLightCollision(TObject* parent, const SetDesc* desc)
     : TObjAction(parent)
 {
-	_00 = (u32)gTObjSetLightCollisionName;
+	_00   = (u32)gTObjSetLightCollisionName;
 	mSize = 0xCC;
 	setObjId(this, desc->mObjId);
 	mLink.get()->attach((SetDesc*)desc);
@@ -144,25 +146,25 @@ void TObjSetLightCollision::initFromDesc(SetDesc* desc)
 
 	desc->getPos(&mPos);
 	desc->getRot(&rot);
-	mRotY = rot.y;
-	mRotX = rot.x;
-	mRotZ = rot.z;
-	mParam = desc->getInt(0);
-	mRecord = ((SetDescObj*)desc)->get3E();
-	mTune[0] = (f32)desc->getInt(1) * 0.1f;
-	mTune[1] = (f32)desc->getInt(2) * 0.1f;
-	mTune[2] = (f32)desc->getInt(3) * 0.1f;
+	mRotY      = rot.y;
+	mRotX      = rot.x;
+	mRotZ      = rot.z;
+	mParam     = desc->getInt(0);
+	mRecord    = ((SetDescObj*)desc)->get3E();
+	mTune[0]   = (f32)desc->getInt(1) * 0.1f;
+	mTune[1]   = (f32)desc->getInt(2) * 0.1f;
+	mTune[2]   = (f32)desc->getInt(3) * 0.1f;
 	mKind      = (int)desc->getFloat(0);
 	mExtent[0] = desc->getFloat(1);
 	mExtent[1] = desc->getFloat(2);
 	mExtent[2] = desc->getFloat(3);
-	int kind = mKind;
+	int kind   = mKind;
 	if (kind < 0) {
 		kind = 0;
 	} else if (kind > 2) {
 		kind = 2;
 	}
-	mKind = kind;
+	mKind      = kind;
 	mExtent[0] = mExtent[0] < 2.0f ? 2.0f : mExtent[0];
 	mExtent[1] = mExtent[1] < 2.0f ? 2.0f : mExtent[1];
 	mExtent[2] = mExtent[2] < 2.0f ? 2.0f : mExtent[2];
@@ -304,10 +306,10 @@ int TObjSetLightCollision::getSun(u16 id, LightZoneSun* sun)
 				blend = lightZoneFade(njScalor(&d), mExtent[0]);
 				break;
 			case 1:
-				d.y = 0.7f * mExtent[1] + d.y;
+				d.y   = 0.7f * mExtent[1] + d.y;
 				blend = lightZoneFade(vecLenXZ(&d), mExtent[0]);
-				a = __fabs(d.y);
-				f = lightZoneFade(a, mExtent[1]);
+				a     = __fabs(d.y);
+				f     = lightZoneFade(a, mExtent[1]);
 				if (blend > f) {
 					blend = f;
 				}
@@ -317,10 +319,10 @@ int TObjSetLightCollision::getSun(u16 id, LightZoneSun* sun)
 				if (mRotY != 0) {
 					vecRotateY(&d, &d, -mRotY);
 				}
-				a = __fabs(d.x);
+				a     = __fabs(d.x);
 				blend = lightZoneFade(a, mExtent[0]);
-				a = __fabs(d.y);
-				f = lightZoneFade(a, mExtent[1]);
+				a     = __fabs(d.y);
+				f     = lightZoneFade(a, mExtent[1]);
 				if (blend > f) {
 					blend = f;
 				}
@@ -444,7 +446,11 @@ Vec3f* TObjSetLightCollision::getPos()
 
 // 0x800A30F0
 // The class's set-up and tear-down both empty
-extern "C" void lightCollisionInit() { }
+extern "C" void lightCollisionInit()
+{
+}
 
 // 0x800A30F4
-extern "C" void lightCollisionExit() { }
+extern "C" void lightCollisionExit()
+{
+}

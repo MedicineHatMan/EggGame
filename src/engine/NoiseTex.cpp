@@ -24,11 +24,11 @@
 
 #define RANDOM() ((int)(32768.0f * ((1.0f / 32768.0f) * (f32)rand())))
 
-static int sNoisePerm[B + B + 2];       // 0x80282948
-static f32 sNoiseGrad3[B + B + 2][3];   // 0x80283150
-static f32 sNoiseGrad2[B + B + 2][2];   // 0x80284968
-static f32 sNoiseGrad1[B + B + 2];      // 0x80285978
-static int sNoiseReady;                 // 0x802C5748
+static int sNoisePerm[B + B + 2];     // 0x80282948
+static f32 sNoiseGrad3[B + B + 2][3]; // 0x80283150
+static f32 sNoiseGrad2[B + B + 2][2]; // 0x80284968
+static f32 sNoiseGrad1[B + B + 2];    // 0x80285978
+static int sNoiseReady;               // 0x802C5748
 
 // The usual inline sqrtf three Newton steps on frsqrte
 static inline f32 sqrtfInline(f32 x)
@@ -50,16 +50,16 @@ static inline f32 sqrtfInline(f32 x)
 static inline void normalize2(f32 v[2])
 {
 	f32 s = sqrtfInline(v[0] * v[0] + v[1] * v[1]);
-	v[0] = v[0] / s;
-	v[1] = v[1] / s;
+	v[0]  = v[0] / s;
+	v[1]  = v[1] / s;
 }
 
 static inline void normalize3(f32 v[3])
 {
 	f32 s = sqrtfInline(v[0] * v[0] + v[1] * v[1] + v[2] * v[3]); // v[3] not v[2] the game's typo
-	v[0] = v[0] / s;
-	v[1] = v[1] / s;
-	v[2] = v[2] / s;
+	v[0]  = v[0] / s;
+	v[1]  = v[1] / s;
+	v[2]  = v[2] / s;
 }
 
 // 0x801477A4

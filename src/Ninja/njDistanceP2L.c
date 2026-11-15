@@ -19,14 +19,15 @@ f32 njDistanceP2L(const NJS_POINT3* p, const NJS_LINE* l, NJS_POINT3* out)
 	f32 x;
 	f32 pz;
 	f32 z;
-	f32 t = (vz * ((z = p->z) - (pz = l->pz)) + (vx * ((x = p->x) - (px = l->px)) + vy * ((y = p->y) - (py = l->py)))) / (vz * vz + (vx * vx + vy * vy));
+	f32 t = (vz * ((z = p->z) - (pz = l->pz)) + (vx * ((x = p->x) - (px = l->px)) + vy * ((y = p->y) - (py = l->py))))
+	      / (vz * vz + (vx * vx + vy * vy));
 	f32 d;
 
 	if (out != NULL) {
 		out->x = px + vx * t;
 		out->y = py + vy * t;
 		out->z = pz + vz * t;
-		d = (z - out->z) * (z - out->z) + ((x - out->x) * (x - out->x) + (y - out->y) * (y - out->y));
+		d      = (z - out->z) * (z - out->z) + ((x - out->x) * (x - out->x) + (y - out->y) * (y - out->y));
 	} else {
 		f32 dz;
 		f32 dx;

@@ -17,18 +17,18 @@ class TChrPlayer;
 // The names are readings of what each state does and who enters it
 enum MobileState {
 	MOBILE_IDLE      = 0,
-	MOBILE_SETTLE    = 1,    // no gravity scale and tells the owner when it lands
-	MOBILE_ATTACHED  = 2,    // follows another object's part from message 0x16
-	MOBILE_BRAKE     = 3,    // eases its facing round while it stops
-	MOBILE_FLUNG     = 4,    // from message 0x23
+	MOBILE_SETTLE    = 1, // no gravity scale and tells the owner when it lands
+	MOBILE_ATTACHED  = 2, // follows another object's part from message 0x16
+	MOBILE_BRAKE     = 3, // eases its facing round while it stops
+	MOBILE_FLUNG     = 4, // from message 0x23
 	MOBILE_ROLL      = 6,
 	MOBILE_LOB       = 7,
 	MOBILE_AIR       = 8,
 	MOBILE_HOP       = 9,
 	MOBILE_DASH      = 10,
-	MOBILE_SLAM      = 11,   // hits the ground with a shock wave then becomes MOBILE_SLAM_LAND
+	MOBILE_SLAM      = 11, // hits the ground with a shock wave then becomes MOBILE_SLAM_LAND
 	MOBILE_SLAM_LAND = 12,
-	MOBILE_UP        = 13,   // goes straight up and needs ability 0x20
+	MOBILE_UP        = 13, // goes straight up and needs ability 0x20
 	MOBILE_DOWN      = 14,
 	MOBILE_LAUNCH    = 15,
 	MOBILE_DRIVE     = 16,
@@ -50,15 +50,15 @@ enum MobilePhase {
 /** Tuning read from playerGetParams(0) Only the fields this class reads are named */
 struct MobileParams {
 	u8 _00[0xC];
-	u16 mLiftFrom;     // _0C
-	u16 mLiftTo;       // _0E
+	u16 mLiftFrom; // _0C
+	u16 mLiftTo;   // _0E
 	u8 _10[8];
-	u16 mRollTime;     // _18 how long a thrown ball rolls at full speed
-	u16 mSlowTime;     // _1A and how long it then slows
-	u16 mDashTime;     // _1C
-	u16 mDriveTime;    // _1E
+	u16 mRollTime;  // _18 how long a thrown ball rolls at full speed
+	u16 mSlowTime;  // _1A and how long it then slows
+	u16 mDashTime;  // _1C
+	u16 mDriveTime; // _1E
 	u8 _20[0x14];
-	int mTurn;         // _34
+	int mTurn; // _34
 	u8 _38[0x34];
 	f32 mLaunchSpeed;  // _6C
 	f32 mLaunchHeight; // _70
@@ -81,12 +81,12 @@ struct MobileParams {
 
 /** Tuning read from playerGetParamsTail */
 struct MobileBodyParams {
-	f32 mFriction;  // _00
-	f32 mAirCap;    // _04
+	f32 mFriction; // _00
+	f32 mAirCap;   // _04
 	u8 _08[0x14];
-	f32 mRollCap;   // _1C
+	f32 mRollCap; // _1C
 	u8 _20[4];
-	f32 mGravity;   // _24
+	f32 mGravity; // _24
 };
 
 // Holds the collision model being stood on
@@ -124,9 +124,9 @@ struct MobileDust {
 	MobileDust(TMobileObject* owner); // 0x801D1628
 	~MobileDust();                    // 0x801D1640
 
-	void start();  // 0x801D168C
-	void stop();   // 0x801D1744
-	void update(); // 0x801D17BC
+	void start();               // 0x801D168C
+	void stop();                // 0x801D1744
+	void update();              // 0x801D17BC
 	u16 pickEffect(Vec3f* vel); // 0x801D1920
 
 	TMobileObject* mOwner; // _00
@@ -143,9 +143,9 @@ struct MobileWake {
 	MobileWake(TMobileObject* owner); // 0x801D195C
 	~MobileWake();                    // 0x801D1974
 
-	void start();  // 0x801D19C0
-	void stop();   // 0x801D1A78
-	void update(); // 0x801D1AF0
+	void start();               // 0x801D19C0
+	void stop();                // 0x801D1A78
+	void update();              // 0x801D1AF0
 	u16 pickEffect(Vec3f* vel); // 0x801D1C64
 
 	TMobileObject* mOwner; // _00
@@ -292,50 +292,50 @@ public:
 
 	inline void operator delete(void* mem);
 
-	s8 mState;                  // _20
+	s8 mState; // _20
 	u8 _21[3];
-	u16 mFrames;                // _24 counted by the states that use it
+	u16 mFrames; // _24 counted by the states that use it
 	u8 _26[2];
-	u16 mRollFrames;            // _28
-	u16 mTimer;                 // _2A
-	u16 mTargetPart;            // _2C the part of mTarget to follow
-	u16 mFace;                  // _2E the face of the ground model
-	u16 mCombo;                 // _30
-	u16 mComboTimer;            // _32
-	ObjRef mTarget;             // _34
-	FlagWord mFlags;            // _40 1 = on the ground 2 4 and 8 ask for a hazard check 0x20 = landed once
-	EggSurface mBody;           // _44
+	u16 mRollFrames;  // _28
+	u16 mTimer;       // _2A
+	u16 mTargetPart;  // _2C the part of mTarget to follow
+	u16 mFace;        // _2E the face of the ground model
+	u16 mCombo;       // _30
+	u16 mComboTimer;  // _32
+	ObjRef mTarget;   // _34
+	FlagWord mFlags;  // _40 1 = on the ground 2 4 and 8 ask for a hazard check 0x20 = landed once
+	EggSurface mBody; // _44
 	u8 _15C[0xC];
-	f32 mAttachRot[4];          // _168
-	EggHandleBase* mHandle;     // _178 plyGetMobile gives 0 while this is 0
-	TChrPlayer* mOwner;         // _17C
-	f32 mMatrix[12];            // _180
-	f32 mTrailMatrix[12];       // _1B0
-	f32 mDustMatrix[12];        // _1E0
-	MobileParams* mParams;      // _210
+	f32 mAttachRot[4];             // _168
+	EggHandleBase* mHandle;        // _178 plyGetMobile gives 0 while this is 0
+	TChrPlayer* mOwner;            // _17C
+	f32 mMatrix[12];               // _180
+	f32 mTrailMatrix[12];          // _1B0
+	f32 mDustMatrix[12];           // _1E0
+	MobileParams* mParams;         // _210
 	MobileBodyParams* mBodyParams; // _214
-	Vec3f mGravity;             // _218
-	Rider mGround;              // _224 on the ground model it stands on
-	f32 mMoveAmount;            // _238
-	int mMoveAngle;             // _23C
-	f32 mFacingBlend;           // _240
-	f32 mFacing[4];             // _244
-	EggCollide mRail;           // _254
-	EggCollide mRailNext;       // _270
-	f32 mRailSpeed;             // _28C
+	Vec3f mGravity;                // _218
+	Rider mGround;                 // _224 on the ground model it stands on
+	f32 mMoveAmount;               // _238
+	int mMoveAngle;                // _23C
+	f32 mFacingBlend;              // _240
+	f32 mFacing[4];                // _244
+	EggCollide mRail;              // _254
+	EggCollide mRailNext;          // _270
+	f32 mRailSpeed;                // _28C
 	u8 _290[8];
-	Vec3f mAim;                 // _298
-	void* mTrail;               // _2A4
-	void* mTrail2;              // _2A8
+	Vec3f mAim;    // _298
+	void* mTrail;  // _2A4
+	void* mTrail2; // _2A8
 	u8 _2AC[0xC];
-	Fx* mEffect;              // _2B8
-	Fx* mEffect2;             // _2BC
-	MobileLoopEffect mLoop;     // _2C0
-	MobileSound mSound;         // _2EC
-	int mPower;                 // _324
-	int mSpecial;               // _328
-	MobileDust mDust;           // _32C
-	MobileWake mWake;           // _33C
+	Fx* mEffect;            // _2B8
+	Fx* mEffect2;           // _2BC
+	MobileLoopEffect mLoop; // _2C0
+	MobileSound mSound;     // _2EC
+	int mPower;             // _324
+	int mSpecial;           // _328
+	MobileDust mDust;       // _32C
+	MobileWake mWake;       // _33C
 };
 
 // The handle eggs give their holder with the virtual that takes what the holder doesn't

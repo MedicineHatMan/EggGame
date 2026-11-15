@@ -235,9 +235,9 @@ void CMain::run()
  */
 int CMain::checkReset()
 {
-	int button            = OSGetResetButtonState();
-	int buttonReleased  = (mPrevResetButton != 0 && button == 0);
-	mPrevResetButton    = button;
+	int button         = OSGetResetButtonState();
+	int buttonReleased = (mPrevResetButton != 0 && button == 0);
+	mPrevResetButton   = button;
 
 	PadState* pad = padGet(0);
 	int padReset  = 0;

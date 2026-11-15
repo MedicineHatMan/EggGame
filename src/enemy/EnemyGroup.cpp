@@ -4,8 +4,8 @@
 extern "C" int enemyGroupGetSet(SetEnemyRecord** record, SetSlot** slot)
 {
 	*record = getSetEnemyRecord(0);
-	*slot = getSetEnemySlot(0);
-	u8 ok = 0;
+	*slot   = getSetEnemySlot(0);
+	u8 ok   = 0;
 	if (*record != 0 && *slot != 0) {
 		ok = 1;
 	}
@@ -184,10 +184,10 @@ extern "C" int* enemyGroupCollect(s16 group, s16 step, int* outCount, int take)
 	SetEnemyRecord* records;
 	SetSlot* slots;
 	if (enemyGroupGetSet(&records, &slots) != 0) {
-		int first = -1;
-		int last = -1;
+		int first              = -1;
+		int last               = -1;
 		SetEnemyRecord* record = records;
-		SetSlot* slot = slots;
+		SetSlot* slot          = slots;
 		int shown;
 		int found;
 		found = 0;
@@ -206,7 +206,7 @@ extern "C" int* enemyGroupCollect(s16 group, s16 step, int* outCount, int take)
 			}
 			if (match) {
 				first = i;
-				last = i;
+				last  = i;
 				break;
 			}
 			record++;
@@ -236,10 +236,10 @@ extern "C" int* enemyGroupCollect(s16 group, s16 step, int* outCount, int take)
 		if (shown == 0) {
 			if (take != 0) {
 				SetEnemyRecord* rec = records + first;
-				SetSlot* sl = slots + first;
-				*outCount = found;
-				list = new int[found];
-				int n = 0;
+				SetSlot* sl         = slots + first;
+				*outCount           = found;
+				list                = new int[found];
+				int n               = 0;
 				for (i = first; i <= last; i++) {
 					if (enemyGroupIs(rec, group, step) != 0) {
 						sl->takeAny();
@@ -254,10 +254,10 @@ extern "C" int* enemyGroupCollect(s16 group, s16 step, int* outCount, int take)
 			}
 		} else {
 			SetEnemyRecord* rec = records + first;
-			SetSlot* sl = slots + first;
-			*outCount = shown;
-			list = new int[shown];
-			int n = 0;
+			SetSlot* sl         = slots + first;
+			*outCount           = shown;
+			list                = new int[shown];
+			int n               = 0;
 			for (i = first; i <= last; i++) {
 				if (enemyGroupIs(rec, group, step) != 0 && sl->checkHidden() == 0) {
 					list[n++] = i;

@@ -58,19 +58,19 @@ void aeDrawSprite(AeFrame* frame, const u32* banks)
 	}
 
 	NJS_QUAD_TEXTURE_EX quad = sAeZeroQuad;
-	quad.x   = dst[0].x;
-	quad.y   = dst[0].y;
-	quad.z   = dst[0].z;
-	quad.vx1 = dst[1].x - dst[0].x;
-	quad.vy1 = dst[1].y - dst[0].y;
-	quad.vx2 = dst[2].x - dst[0].x;
-	quad.vy2 = dst[2].y - dst[0].y;
-	quad.u   = u0;
-	quad.v   = v0;
-	quad.vu1 = u0 - u0;
-	quad.vv1 = v1 - v0;
-	quad.vu2 = u1 - u0;
-	quad.vv2 = v0 - v0;
+	quad.x                   = dst[0].x;
+	quad.y                   = dst[0].y;
+	quad.z                   = dst[0].z;
+	quad.vx1                 = dst[1].x - dst[0].x;
+	quad.vy1                 = dst[1].y - dst[0].y;
+	quad.vx2                 = dst[2].x - dst[0].x;
+	quad.vy2                 = dst[2].y - dst[0].y;
+	quad.u                   = u0;
+	quad.v                   = v0;
+	quad.vu1                 = u0 - u0;
+	quad.vv1                 = v1 - v0;
+	quad.vu2                 = u1 - u0;
+	quad.vv2                 = v0 - v0;
 
 	GXTexObj obj;
 	if (tlut != -1) {

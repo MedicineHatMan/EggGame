@@ -54,12 +54,12 @@ public:
 
 	WindmillNode* mModel; // _64
 	void* mCollData;      // _68
-	DrawTask* mDrawTask;      // _6C
+	DrawTask* mDrawTask;  // _6C
 	ModelDraw mDraw;      // _70
 	MotionTrack mTrack;   // _8C
 	f32 mMatrix[12];      // _A8
 	f32 mFanMatrix[12];   // _D8 node 0's matrix which the collision follows
-	MeshColli* mColli;         // _108
+	MeshColli* mColli;    // _108
 	f32 mSpeed;           // _10C
 	u16 mKey;             // _110
 	SoundHandle mSound;   // _114

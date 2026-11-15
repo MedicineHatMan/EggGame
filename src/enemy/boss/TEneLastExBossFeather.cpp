@@ -36,7 +36,7 @@ struct CharaColli;
 
 extern "C" {
 // The feather's model motions and textures loaded with the boss
-NJS_OBJECT* gLastExBossFeatherObject;  // 0x802C5978
+NJS_OBJECT* gLastExBossFeatherObject;   // 0x802C5978
 NJS_MOTION** gLastExBossFeatherMotion;  // 0x802C597C
 NJS_TEXLIST* gLastExBossFeatherTexList; // 0x802C5980
 MotionEntry gLastExBossFeatherMotionTable[] = {
@@ -55,12 +55,12 @@ TEneLastExBossFeather::TEneLastExBossFeather(TObject* parent, const Vec3f* pos, 
 {
 	int i;
 
-	_00    = (u32)gTEneLastExBossFeatherName;
-	mSize  = 0x1FC;
+	_00   = (u32)gTEneLastExBossFeatherName;
+	mSize = 0x1FC;
 	setObjId(this, 0xFFFF);
-	mAim          = *aim;
-	mXform.mPos   = *pos;
-	mXform.mVel   = mAim;
+	mAim        = *aim;
+	mXform.mPos = *pos;
+	mXform.mVel = mAim;
 	njSubVector(&mXform.mVel, &mXform.mPos);
 	if (njUnitVector(&mXform.mVel) < gUnitVectorMin) {
 		mXform.mVel = gVecZero;
@@ -84,7 +84,7 @@ TEneLastExBossFeather::TEneLastExBossFeather(TObject* parent, const Vec3f* pos, 
 	mShadow._30 = 9.0f;
 	mShadow._34 = 9.0f;
 	shadowEnable(&mShadow);
-	mTrailKind = 0x46;
+	mTrailKind  = 0x46;
 	mTrailPhase = 0;
 	mGlowKind   = 0x31;
 	for (i = 0; i < 8; i++) {
@@ -138,7 +138,10 @@ int TEneLastExBossFeather::onHit(const TObjAction* other, int, int* result)
 }
 
 // 0x8018A588
-void TEneLastExBossFeather::updateColli() { colliShapeSetPos(colliGetShapes(mShape), &mXform.mPos); }
+void TEneLastExBossFeather::updateColli()
+{
+	colliShapeSetPos(colliGetShapes(mShape), &mXform.mPos);
+}
 
 // 0x8018A5C0
 // The shadow falls on the arena floor

@@ -20,8 +20,8 @@
 struct GjActor;
 
 extern "C" {
-const char* gTEneYellowBossRedName = "TEneYellowBossRed";
-const int gYellowBossRedNodes[2] = { 2, -1 };
+const char* gTEneYellowBossRedName      = "TEneYellowBossRed";
+const int gYellowBossRedNodes[2]        = { 2, -1 };
 MotionEntry gYellowBossRedMotionTable[] = {
 	{ MOTION_ONCE, 0, -1, 0, 0.0f, 44.0f, 0.6f, 0.0f, 0 },
 	{ MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.3f, 0.0f, 0 },
@@ -79,16 +79,16 @@ TEneYellowBossRed::TEneYellowBossRed(TObject* parent, const Vec3f* pos)
 	mPoint[0].x = 0.0f;
 	mPoint[0].y = 0.0f;
 	mPoint[0].z = 0.0f;
-	mDraw     = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mRedFlags = 0;
-	mShots    = 0;
-	mHeading  = 0;
-	mGoal.x   = 0.0f;
-	mGoal.y   = 0.0f;
-	mGoal.z   = 0.0f;
-	mStep     = 0;
-	mTimer    = 0;
-	mTime     = 0.0f;
+	mDraw       = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mRedFlags   = 0;
+	mShots      = 0;
+	mHeading    = 0;
+	mGoal.x     = 0.0f;
+	mGoal.y     = 0.0f;
+	mGoal.z     = 0.0f;
+	mStep       = 0;
+	mTimer      = 0;
+	mTime       = 0.0f;
 	startAction(0);
 }
 
@@ -102,7 +102,10 @@ TEneYellowBossRed::~TEneYellowBossRed()
 }
 
 // 0x8016DBD8
-u8 TEneYellowBossRed::isBroken() { return mRedFlags & 1; }
+u8 TEneYellowBossRed::isBroken()
+{
+	return mRedFlags & 1;
+}
 
 // 0x8016DBE4
 int TEneYellowBossRed::onHit(const TObjAction* other, int arg, int* result)
@@ -124,7 +127,10 @@ int TEneYellowBossRed::onHit(const TObjAction* other, int arg, int* result)
 }
 
 // 0x8016DC70
-f32 TEneYellowBossRed::vfn_40() { return 150.0f; }
+f32 TEneYellowBossRed::vfn_40()
+{
+	return 150.0f;
+}
 
 // 0x8016DC78
 void TEneYellowBossRed::pose()
@@ -391,7 +397,10 @@ void TEneYellowBossRed::actDie(int phase)
 }
 
 // 0x8016E43C
-void TEneYellowBossRed::vfn_10() { cull(mDraw, 3000.0f, 100.0f, &mXform.mPos, 0); }
+void TEneYellowBossRed::vfn_10()
+{
+	cull(mDraw, 3000.0f, 100.0f, &mXform.mPos, 0);
+}
 
 // 0x8016E470
 void TEneYellowBossRed::render()

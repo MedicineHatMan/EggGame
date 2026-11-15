@@ -10,7 +10,7 @@ inline void TSetObj::operator delete(void* mem)
 
 // 0x80018704
 TSetObj::TSetObj(TObject* parent, SetDesc* desc)
-	: TObjAction(parent)
+    : TObjAction(parent)
 {
 	setObjId(this, desc->mObjId);
 	mLink.get()->attach(desc);
@@ -69,7 +69,9 @@ SetLink* TSetObj::getLink()
 	return mLink.get();
 }
 
-void TSetObj::vfn_78(SetDesc*) { }
+void TSetObj::vfn_78(SetDesc*)
+{
+}
 
 void TSetObj::debugPrint(void* arg)
 {

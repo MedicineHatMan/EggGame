@@ -77,34 +77,34 @@ public:
 	void runHurt(int phase);
 	void runDead(int phase);
 
-	s8 mStep;          // _9C
-	FlagByte mFlags2;        // _9D a FlagByte 1 = its death is on the way
-	s16 mTimer;        // _9E
-	s16 mBreathTime;   // _A0
-	s16 mFxBank;       // _A2
-	Vec3f mPos;        // _A4
-	int mRotY;         // _B0
-	f32 mMatrix[12];   // _B4
-	MotionPlayer mMotion; // _E4
+	s8 mStep;              // _9C
+	FlagByte mFlags2;      // _9D a FlagByte 1 = its death is on the way
+	s16 mTimer;            // _9E
+	s16 mBreathTime;       // _A0
+	s16 mFxBank;           // _A2
+	Vec3f mPos;            // _A4
+	int mRotY;             // _B0
+	f32 mMatrix[12];       // _B4
+	MotionPlayer mMotion;  // _E4
 	DrawTask* mDrawTask;   // _120
-	AniHits mHits;     // _124 0x18
+	AniHits mHits;         // _124 0x18
 	AniBodyHit mBodyHit;   // _13C
 	AniReachHit mReachHit; // _174
-	AniBody mBody;     // _1B0
-	AniModel mModel; // _350
-	AniMotions mMotions; // _36C
-	AniLife mLife;     // _37C
-	AniBlink mBlink;   // _388
-	ObjShadow mShadow; // _3A0
-	AniMove* mMove;       // _3D8
-	AniWalk mWalk; // _3DC
-	AniJump mJump; // _410
-	AniDash mDash; // _43C
-	AniBlast mBlast; // _460
-	Fx* mBreathFx;   // _488
+	AniBody mBody;         // _1B0
+	AniModel mModel;       // _350
+	AniMotions mMotions;   // _36C
+	AniLife mLife;         // _37C
+	AniBlink mBlink;       // _388
+	ObjShadow mShadow;     // _3A0
+	AniMove* mMove;        // _3D8
+	AniWalk mWalk;         // _3DC
+	AniJump mJump;         // _410
+	AniDash mDash;         // _43C
+	AniBlast mBlast;       // _460
+	Fx* mBreathFx;         // _488
 	SoundHandle mSound[1]; // _48C
-	TAniBirth* mBirth; // _4B8
-	int mHitValue;     // _4BC
+	TAniBirth* mBirth;     // _4B8
+	int mHitValue;         // _4BC
 };
 
 extern "C" {

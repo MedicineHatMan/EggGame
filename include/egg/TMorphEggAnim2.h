@@ -20,16 +20,16 @@ public:
 
 	virtual void draw(); // _0C
 
-	int mState;      // _20 0 fade in 1 shrink 2 grow 3 fade out 4 resting
-	int mHatched;    // _24 set when the shrink or the fade-out finishes
-	int mOpened;     // _28 set when the fade-in finishes
-	int mFinished;   // _2C set when the grow finishes
+	int mState;         // _20 0 fade in 1 shrink 2 grow 3 fade out 4 resting
+	int mHatched;       // _24 set when the shrink or the fade-out finishes
+	int mOpened;        // _28 set when the fade-in finishes
+	int mFinished;      // _2C set when the grow finishes
 	ObjDrawState mDraw; // _30 flags 0x1000 _20 points at mBasis
-	TObject* mChild; // _54 flagged for delete Nothing in this file creates it
-	f32 mBasis[6];   // _58 two rows sine and cosine scaled
-	f32 mScale;      // _70
-	int mAngle;      // _74 0..0xFFFF
-	int mSpin;       // _78 added to mAngle each draw
+	TObject* mChild;    // _54 flagged for delete Nothing in this file creates it
+	f32 mBasis[6];      // _58 two rows sine and cosine scaled
+	f32 mScale;         // _70
+	int mAngle;         // _74 0..0xFFFF
+	int mSpin;          // _78 added to mAngle each draw
 };
 
 class TObject;

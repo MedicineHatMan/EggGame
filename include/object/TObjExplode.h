@@ -24,9 +24,9 @@ public:
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();                                        // _0C
-	virtual Vec3f* getPos();                                    // _20
-	virtual int getKind();                                      // _2C
+	virtual void draw();                                              // _0C
+	virtual Vec3f* getPos();                                          // _20
+	virtual int getKind();                                            // _2C
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58
 
 	u16 mLife;    // _30

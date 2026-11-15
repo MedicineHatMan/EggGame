@@ -8,7 +8,6 @@
 #include "core/TMainTask.h"
 
 extern "C" {
-
 }
 
 typedef char TCamPointLook_size_check[(sizeof(TCamPointLook) == 0x26C) ? 1 : -1];
@@ -78,7 +77,7 @@ void TCamPointLook::vfn_20()
 	camCurveUpdate(&mCurve, &mHead);
 	camCurveGetPos(&mCurve, &at);
 	((Vec3f*)mView)[1] = at;
-	dir = at;
+	dir                = at;
 	njSubVector(&dir, &mTarget);
 	if (njUnitVector(&dir) < gUnitVectorMin) {
 		dir = gVecZero;

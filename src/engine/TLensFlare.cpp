@@ -30,7 +30,10 @@ static inline f32 flareSqrt(f32 x)
 }
 
 // 0x800D3468
-extern "C" TLensFlare* lensFlareCreate(void*, const Vec3f* pos) { return new TLensFlare(gTL_02, pos); }
+extern "C" TLensFlare* lensFlareCreate(void*, const Vec3f* pos)
+{
+	return new TLensFlare(gTL_02, pos);
+}
 
 const char* gTLensFlareName = "TLensFlare";
 
@@ -49,7 +52,10 @@ TLensFlare::TLensFlare(TObject* parent, const Vec3f* pos)
 }
 
 // 0x800D3560
-TLensFlare::~TLensFlare() { removeDrawTask(mTask); }
+TLensFlare::~TLensFlare()
+{
+	removeDrawTask(mTask);
+}
 
 // 0x800D35C8
 void TLensFlare::draw()
@@ -104,7 +110,7 @@ void TLensFlare::render()
 	u32 depth = 0;
 	if (sLensFlareInit == 0) {
 		sLensFlareFrame = 0;
-		sLensFlareInit = 1;
+		sLensFlareInit  = 1;
 	}
 	sLensFlareFrame++;
 	GXSetDrawSync(sLensFlareFrame);

@@ -50,23 +50,23 @@ void gcaxSndSetAux(int bus, int type)
 		return;
 	case 0:
 		callback = 0;
-		context = 0;
+		context  = 0;
 		break;
 	case 1:
 		callback = (void (*)(void*, void*))AXFXReverbStdCallback;
-		context = &gcax_work->rev_std;
+		context  = &gcax_work->rev_std;
 		break;
 	case 2:
 		callback = (void (*)(void*, void*))AXFXReverbHiCallback;
-		context = &gcax_work->rev_hi;
+		context  = &gcax_work->rev_hi;
 		break;
 	case 3:
 		callback = (void (*)(void*, void*))AXFXChorusCallback;
-		context = &gcax_work->chorus;
+		context  = &gcax_work->chorus;
 		break;
 	case 4:
 		callback = (void (*)(void*, void*))AXFXDelayCallback;
-		context = &gcax_work->delay;
+		context  = &gcax_work->delay;
 		break;
 	}
 	switch (bus) {
@@ -96,14 +96,13 @@ void gcaxSndAllocWork(void* buf, u32 size)
 	}
 	if (work == 0) {
 		OSReport("AX SDLIB: Panic: cannot allocate memory (%d)\n", size);
-		for (;;) {
-		}
+		for (;;) { }
 	}
 	OSReport("AX SDLIB: allocated (%d)\n", size);
-	gcax_buffer = work;
-	gcax_work = (GCAX_WORK*)(((u32)work + 0x1F) & ~0x1F);
+	gcax_buffer            = work;
+	gcax_work              = (GCAX_WORK*)(((u32)work + 0x1F) & ~0x1F);
 	gcax_work->initialized = 0;
-	gcax_work->nested = 0;
+	gcax_work->nested      = 0;
 	OSRestoreInterrupts(level);
 	memset(gcax_work, 0, sizeof(GCAX_WORK));
 	heap = ((u32)gcax_work + sizeof(GCAX_WORK) + 0x1F) & ~0x1F;
@@ -111,33 +110,33 @@ void gcaxSndAllocWork(void* buf, u32 size)
 	gcaxSndHeapInit((void*)heap, rest);
 
 	gcax_work->rev_std.tempDisableFX = 0;
-	gcax_work->rev_std.time = 3.0f;
-	gcax_work->rev_std.preDelay = 0.1f;
-	gcax_work->rev_std.damping = 0.5f;
-	gcax_work->rev_std.coloration = 0.5f;
-	gcax_work->rev_std.mix = 0.5f;
+	gcax_work->rev_std.time          = 3.0f;
+	gcax_work->rev_std.preDelay      = 0.1f;
+	gcax_work->rev_std.damping       = 0.5f;
+	gcax_work->rev_std.coloration    = 0.5f;
+	gcax_work->rev_std.mix           = 0.5f;
 
 	gcax_work->rev_hi.tempDisableFX = 0;
-	gcax_work->rev_hi.time = 3.0f;
-	gcax_work->rev_hi.preDelay = 0.1f;
-	gcax_work->rev_hi.damping = 0.5f;
-	gcax_work->rev_hi.coloration = 0.5f;
-	gcax_work->rev_hi.crosstalk = 0.3f;
-	gcax_work->rev_hi.mix = 0.5f;
+	gcax_work->rev_hi.time          = 3.0f;
+	gcax_work->rev_hi.preDelay      = 0.1f;
+	gcax_work->rev_hi.damping       = 0.5f;
+	gcax_work->rev_hi.coloration    = 0.5f;
+	gcax_work->rev_hi.crosstalk     = 0.3f;
+	gcax_work->rev_hi.mix           = 0.5f;
 
 	gcax_work->chorus.baseDelay = 15;
 	gcax_work->chorus.variation = 0;
-	gcax_work->chorus.period = 500;
+	gcax_work->chorus.period    = 500;
 
-	gcax_work->delay.delay[0] = 500;
-	gcax_work->delay.delay[1] = 500;
-	gcax_work->delay.delay[2] = 500;
+	gcax_work->delay.delay[0]    = 500;
+	gcax_work->delay.delay[1]    = 500;
+	gcax_work->delay.delay[2]    = 500;
 	gcax_work->delay.feedback[0] = 50;
 	gcax_work->delay.feedback[1] = 50;
 	gcax_work->delay.feedback[2] = 50;
-	gcax_work->delay.output[0] = 100;
-	gcax_work->delay.output[1] = 100;
-	gcax_work->delay.output[2] = 100;
+	gcax_work->delay.output[0]   = 100;
+	gcax_work->delay.output[1]   = 100;
+	gcax_work->delay.output[2]   = 100;
 }
 
 // 0x80235B3C
@@ -165,16 +164,16 @@ void gcaxSndInitAram(void)
 {
 	int i;
 
-	gcax_work->bank_size[0] = 0x7D000;
-	gcax_work->bank_size[1] = 460000;
-	gcax_work->bank_size[2] = 360000;
-	gcax_work->bank_size[3] = 400000;
-	gcax_work->bank_size[4] = 360000;
-	gcax_work->bank_size[5] = 360000;
-	gcax_work->bank_size[6] = 140000;
-	gcax_work->bank_size[7] = 100000;
-	gcax_work->bank_size[8] = 0x29820;
-	gcax_work->bank_size[9] = 200000;
+	gcax_work->bank_size[0]  = 0x7D000;
+	gcax_work->bank_size[1]  = 460000;
+	gcax_work->bank_size[2]  = 360000;
+	gcax_work->bank_size[3]  = 400000;
+	gcax_work->bank_size[4]  = 360000;
+	gcax_work->bank_size[5]  = 360000;
+	gcax_work->bank_size[6]  = 140000;
+	gcax_work->bank_size[7]  = 100000;
+	gcax_work->bank_size[8]  = 0x29820;
+	gcax_work->bank_size[9]  = 200000;
 	gcax_work->bank_size[10] = 240000;
 	gcax_work->bank_size[11] = 24000;
 	gcax_work->bank_size[12] = 400000;

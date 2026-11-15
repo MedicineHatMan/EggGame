@@ -22,23 +22,23 @@ struct TArc;
 
 /** What ae_result.arc holds */
 struct ResultBlock {
-	void* mAe;        // _00 the AE file
-	void* mTexlist;   // _04
-	void* mGvm;       // _08
-	u32* mPalettes;   // _0C three or NULL
+	void* mAe;      // _00 the AE file
+	void* mTexlist; // _04
+	void* mGvm;     // _08
+	u32* mPalettes; // _0C three or NULL
 };
 
-ArcFile* sResultArc;   // ae_result.arc
-void* sResultAe;       // its AE file
-NJS_TEXLIST* sResultTexlist;  // its textures
-BinFile* sResultMes;      // mes_result.bin
-int sResultMesCount;   // the number of messages in it
-void** sResultMessages; // and the messages
+ArcFile* sResultArc;         // ae_result.arc
+void* sResultAe;             // its AE file
+NJS_TEXLIST* sResultTexlist; // its textures
+BinFile* sResultMes;         // mes_result.bin
+int sResultMesCount;         // the number of messages in it
+void** sResultMessages;      // and the messages
 
-static const u32 sBanks[3]      = { 0x1A, 0x1B, 0x1C };              // the palette banks
-static const u32 sScoreSlots[5] = { 0x141, 0x147, 0x14D, 0x153, 0x161 }; // the first digit of each score then the total
-static const u32 sRankIn[5]     = { 0xFD, 0xF3, 0xE8, 0xD9, 0x10D };  // each rank's letter coming in
-static const u32 sRankLoop[5]   = { 0xF9, 0xEE, 0xE2, 0xD0, 0x102 };  // and staying
+static const u32 sBanks[3]       = { 0x1A, 0x1B, 0x1C };                  // the palette banks
+static const u32 sScoreSlots[5]  = { 0x141, 0x147, 0x14D, 0x153, 0x161 }; // the first digit of each score then the total
+static const u32 sRankIn[5]      = { 0xFD, 0xF3, 0xE8, 0xD9, 0x10D };     // each rank's letter coming in
+static const u32 sRankLoop[5]    = { 0xF9, 0xEE, 0xE2, 0xD0, 0x102 };     // and staying
 static const u32 sDigitAnims[10] = { 0x21, 0x24, 0x27, 0x2A, 0x2D, 0x30, 0x33, 0x36, 0x39, 0x3C };
 
 typedef char TResult_size_check[(sizeof(TResult) == 0xE8) ? 1 : -1];
@@ -61,12 +61,12 @@ static TextVec sResultBox        = resultVec(264.0f, 22.0f, 0.0f);
 
 // Where each text goes 0x80286CA8 just after the layout
 static TextVec sResultTextAt[13] = {
-	resultVec(82.0f, 93.0f, -2.0f), // [0]
-	resultVec(82.0f, 151.0f, -2.0f), // [1]
-	resultVec(82.0f, 209.0f, -2.0f), // [2]
-	resultVec(82.0f, 267.0f, -2.0f), // [3]
-	resultVec(34.0f, 369.0f, -2.0f), // [4]
-	resultVec(34.0f, 411.0f, -2.0f), // [5]
+	resultVec(82.0f, 93.0f, -2.0f),   // [0]
+	resultVec(82.0f, 151.0f, -2.0f),  // [1]
+	resultVec(82.0f, 209.0f, -2.0f),  // [2]
+	resultVec(82.0f, 267.0f, -2.0f),  // [3]
+	resultVec(34.0f, 369.0f, -2.0f),  // [4]
+	resultVec(34.0f, 411.0f, -2.0f),  // [5]
 	resultVec(461.0f, 107.0f, -2.0f), // [6]
 	resultVec(461.0f, 134.0f, -2.0f), // [7]
 	resultVec(461.0f, 203.0f, -2.0f), // [8]
@@ -92,7 +92,7 @@ void loadResultText()
 	data = (u32*)sResultMes->mData;
 	text = *data;
 	text += (u32)data++;
-	u32 size = *data++;
+	u32 size        = *data++;
 	sResultMessages = (void**)data;
 	sResultMesCount = size >> 2;
 	for (i = 0; i < sResultMesCount; i++) {
@@ -288,7 +288,6 @@ int TResult::messageDone()
 			mMsgWait--;
 		}
 		break;
-
 	}
 	return done;
 }
@@ -1055,7 +1054,7 @@ void TResult::styleSmallText(int index)
 {
 	if (mTexts[index] != NULL) {
 		mTexts[index]->mBox.set(0.0f, 24.0f, 0.0f);
-		mTexts[index]->_A8    = 1;
+		mTexts[index]->_A8 = 1;
 	}
 }
 
@@ -1093,12 +1092,12 @@ void TResult::showNumber(u32 slot, int value)
 		int started;
 		int div;
 		started = 0;
-		n = value < 0 ? 0 : (value > 999999 ? 999999 : value);
-		div = 100000;
-		count = 6;
+		n       = value < 0 ? 0 : (value > 999999 ? 999999 : value);
+		div     = 100000;
+		count   = 6;
 		for (i = 5; i >= 0; i--) {
 			int* d = &digits[i];
-			*d = n / div;
+			*d     = n / div;
 			n -= div * *d;
 			div /= 10;
 			if (!started) {
@@ -1139,8 +1138,8 @@ void TResult::showEmblems()
 	}
 	int slots[2] = { 0x66, 0x65 };
 	int digits[2];
-	digits[1]    = count / 10;
-	digits[0]    = count % 10;
+	digits[1] = count / 10;
+	digits[0] = count % 10;
 	for (int i = 0; i < 2; i++) {
 		if (mDigits[i] != NULL) {
 			mDigits[i]->reset(sDigitAnims[digits[i]], 0x10);

@@ -25,8 +25,8 @@ extern "C" void createTEggEffBreak(f32 radius, const Vec3f* pos, const EggRot* r
 
 struct BreakNode {
 	u8 _00[4];
-	void* mModel;      // _04
-	Vec3f mPos;        // _08
+	void* mModel; // _04
+	Vec3f mPos;   // _08
 	u8 _14[0x18];
 	BreakNode* mChild; // _2C
 	BreakNode* mNext;  // _30
@@ -64,11 +64,11 @@ TEggEffBreak::TEggEffBreak(f32 radius, TObject* parent, const Vec3f* pos, const 
 	} else {
 		mAltTex = mgr->getImage(id);
 	}
-	exp     = (void**)findArcExport(gEggArc, "models");
-	mModel  = exp[2];
-	exp     = (void**)findArcExport(gEggArc, "texlists");
+	exp      = (void**)findArcExport(gEggArc, "models");
+	mModel   = exp[2];
+	exp      = (void**)findArcExport(gEggArc, "texlists");
 	mTexList = (NJS_TEXLIST*)exp[2];
-	count   = 0;
+	count    = 0;
 	if (mModel != 0) {
 		node = ((BreakNode*)mModel)->mChild;
 		while (node != 0) {
@@ -106,7 +106,9 @@ TEggEffBreak::TEggEffBreak(f32 radius, TObject* parent, const Vec3f* pos, const 
 }
 
 // 0x800404E0
-EggBreakPiece::EggBreakPiece() { }
+EggBreakPiece::EggBreakPiece()
+{
+}
 
 // 0x800404E4
 TEggEffBreak::~TEggEffBreak()
@@ -153,11 +155,11 @@ void TEggEffBreak::draw()
 			vecScaleAdd(0.016666668f, &piece->mPos, &piece->mVel, &piece->mPos);
 			vecScale(0.016666668f, &step, &piece->mSpin);
 			EggRot made;
-			made.mW    = 0.0f;
+			made.mW         = 0.0f;
 			made.mAxis.v[0] = step.x;
 			made.mAxis.v[1] = step.y;
 			made.mAxis.v[2] = step.z;
-			EggRot half = eggRotScale(eggRotMul(made, &piece->mRot), 0.5f);
+			EggRot half     = eggRotScale(eggRotMul(made, &piece->mRot), 0.5f);
 			quatAdd((Quat*)&piece->mRot, (const Quat*)&half);
 			quatNormalize((Quat*)&piece->mRot);
 			vecScale(0.97f, &piece->mVel, &piece->mVel);

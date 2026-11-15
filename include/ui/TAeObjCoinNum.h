@@ -21,7 +21,7 @@ public:
 	void show(u32 count);
 	void hide();
 
-	DrawTask* mTask;      // _34
+	DrawTask* mTask;  // _34
 	TAeLayer* mLayer; // _38 made by show
 	int mTimer;       // _3C name is ours
 };

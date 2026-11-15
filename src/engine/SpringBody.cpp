@@ -23,27 +23,27 @@ SpringBody::SpringBody(u16 count, u16 pins, int flags, f32 spring, f32 loss, f32
 // 0x800A8FE0
 void SpringBody::init(u16 count, u16 pins, int flags, f32 spring, f32 loss, f32 param)
 {
-	mCapacity    = count;
-	mPoints      = allocPoints(mCapacity);
-	mPinCapacity = pins;
-	mPins        = allocPins(mPinCapacity);
-	mCount       = 0;
-	mPinCount    = 0;
-	mWind.x      = 0.0f;
-	mWind.y      = 0.0f;
-	mWind.z      = 0.0f;
-	mReact       = 0;
-	mSpherePos.x = 0.0f;
-	mSpherePos.y = 0.0f;
-	mSpherePos.z = 0.0f;
+	mCapacity     = count;
+	mPoints       = allocPoints(mCapacity);
+	mPinCapacity  = pins;
+	mPins         = allocPins(mPinCapacity);
+	mCount        = 0;
+	mPinCount     = 0;
+	mWind.x       = 0.0f;
+	mWind.y       = 0.0f;
+	mWind.z       = 0.0f;
+	mReact        = 0;
+	mSpherePos.x  = 0.0f;
+	mSpherePos.y  = 0.0f;
+	mSpherePos.z  = 0.0f;
 	mSphereRadius = 0.0f;
-	mSphereVel.x = 0.0f;
-	mSphereVel.y = 0.0f;
-	mSphereVel.z = 0.0f;
-	mSpring      = spring;
-	mLoss        = loss;
-	mParam       = param;
-	mHit         = flags;
+	mSphereVel.x  = 0.0f;
+	mSphereVel.y  = 0.0f;
+	mSphereVel.z  = 0.0f;
+	mSpring       = spring;
+	mLoss         = loss;
+	mParam        = param;
+	mHit          = flags;
 }
 
 // 0x800A90B8
@@ -90,10 +90,10 @@ void SpringBody::addSprings()
 	u16 i;
 	SpringPoint* point;
 	for (i = 0; i < mCount; i++) {
-		point = &mPoints[i];
-		point->mForce.x    = 0.0f;
-		point->mForce.y    = 0.0f;
-		point->mForce.z    = 0.0f;
+		point           = &mPoints[i];
+		point->mForce.x = 0.0f;
+		point->mForce.y = 0.0f;
+		point->mForce.z = 0.0f;
 		for (j = 0; j < point->mLinkCount; j++) {
 			f32 spring = mSpring;
 			f32 rest   = point->mRest[j];
@@ -291,33 +291,33 @@ void FlagCloth::build(const ClothMatrix* base, u16 cols, u16 rows, f32 width, f3
 	u32 x;
 	u32 i;
 
-	mBase      = *base;
-	mWidth     = width;
-	mHeight    = height;
-	mCols      = cols + 1;
-	mRows      = rows + 1;
-	across     = width / cols;
-	down       = height / rows;
-	mCount     = mCols * mRows;
-	diag       = across * across + down * down;
+	mBase   = *base;
+	mWidth  = width;
+	mHeight = height;
+	mCols   = cols + 1;
+	mRows   = rows + 1;
+	across  = width / cols;
+	down    = height / rows;
+	mCount  = mCols * mRows;
+	diag    = across * across + down * down;
 	if (diag > 0.0f) {
-		f64 guess = __frsqrte((f64)diag);
-		guess     = .5 * guess * (3.0 - guess * guess * diag);
-		guess     = .5 * guess * (3.0 - guess * guess * diag);
-		guess     = .5 * guess * (3.0 - guess * guess * diag);
+		f64 guess         = __frsqrte((f64)diag);
+		guess             = .5 * guess * (3.0 - guess * guess * diag);
+		guess             = .5 * guess * (3.0 - guess * guess * diag);
+		guess             = .5 * guess * (3.0 - guess * guess * diag);
 		volatile f32 root = (f32)(diag * guess);
-		diag      = root;
+		diag              = root;
 	}
 
 	for (i = 0; i < mCount; i++) {
 		SpringPoint* point;
-		u32 n              = mCols;
-		y                  = i / n;
-		x                  = i - y * n;
-		point              = &mPoints[i];
-		point->mPos.x      = across * x;
-		point->mPos.y      = down * y;
-		point->mPos.z      = 0.0f;
+		u32 n         = mCols;
+		y             = i / n;
+		x             = i - y * n;
+		point         = &mPoints[i];
+		point->mPos.x = across * x;
+		point->mPos.y = down * y;
+		point->mPos.z = 0.0f;
 		mtxMultVec(base->m, &mPoints[i].mPos, &mPoints[i].mPos);
 
 		int left;
@@ -325,9 +325,9 @@ void FlagCloth::build(const ClothMatrix* base, u16 cols, u16 rows, f32 width, f3
 		int right;
 		int bottom;
 		bottom = 0;
-		right = 0;
-		top = 0;
-		left = 0;
+		right  = 0;
+		top    = 0;
+		left   = 0;
 		if (x != 0) {
 			addLink(i, i - 1, across);
 			left = 1;
@@ -410,7 +410,7 @@ void FlagCloth::pin(u16 x, u16 y)
 // 0x800AA0F4
 void FlagCloth::setWind(const Vec3f* dir, s16 speed, f32 strength)
 {
-	mWindDir  = scaled(scaled(scaled(*dir, strength), 1.0f / 60.0f), 10.0f);
+	mWindDir   = scaled(scaled(scaled(*dir, strength), 1.0f / 60.0f), 10.0f);
 	mSwaySpeed = mSwayStep = speed;
 }
 

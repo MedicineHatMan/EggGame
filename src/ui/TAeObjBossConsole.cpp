@@ -39,8 +39,8 @@ static inline void park(TAeLayer* layer, int hold)
 TAeObjBossConsole::TAeObjBossConsole(TObject* parent, void* data, void* assets)
     : TAeObject(parent, data, assets)
 {
-	_00     = (u32)gTAeObjBossConsoleName;
-	mSize   = 0x48;
+	_00   = (u32)gTAeObjBossConsoleName;
+	mSize = 0x48;
 	mBar  = createLayer(0xB7, 0);
 	park(mBar, 0);
 	mBarBack = createLayer(0xBA, 0);
@@ -52,8 +52,8 @@ TAeObjBossConsole::TAeObjBossConsole(TObject* parent, void* data, void* assets)
 	if (mBar != 0 && mFace != 0) {
 		mBar->bind(0xB5, static_cast<TAeClip*>(mFace));
 	}
-	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3C, 0);
-	mClosing   = 0;
+	mTask    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3C, 0);
+	mClosing = 0;
 }
 
 // 0x800F2810
@@ -72,7 +72,7 @@ void TAeObjBossConsole::draw()
 		return;
 	}
 	TAeClip& clip = *mBar;
-	f32 end = clip.mEnd - clip._68 * gAeFrameTime;
+	f32 end       = clip.mEnd - clip._68 * gAeFrameTime;
 	if (end == clip.mTime) {
 		clip.hide();
 		mBarBack->hide();
@@ -127,7 +127,7 @@ int TAeObjBossConsole::setLife(BossConsoleMsg* msg)
 	if (mBar == 0 && mBarBack == 0) {
 		return 0;
 	}
-	f32 time = (1.0f - msg->mLife) * mBar->mEnd;
+	f32 time      = (1.0f - msg->mLife) * mBar->mEnd;
 	mBar->_A8     = time;
 	mBarBack->_A8 = time;
 	return 1;
@@ -191,10 +191,10 @@ static inline f32 ringSqrt(f32 x)
 	return x;
 }
 
-static HitVec** sRingPos;     // 0x802C53F0 [segment][side]
-static HitVec** sRingNormal;  // 0x802C53F4
-static HitVec** sRingShadow;  // 0x802C53F8 [segment][4]
-static HitVec* sRingCenters;  // 0x802C53FC each segment's direction from the middle
+static HitVec** sRingPos;    // 0x802C53F0 [segment][side]
+static HitVec** sRingNormal; // 0x802C53F4
+static HitVec** sRingShadow; // 0x802C53F8 [segment][4]
+static HitVec* sRingCenters; // 0x802C53FC each segment's direction from the middle
 
 static void ringBuild();
 static void ringFree();
@@ -304,8 +304,8 @@ static void freeRing(HitVec** rows, u32 count)
 // Builds the hoop the tube's points and normals its middle directions and the shadow's points
 static void ringBuild()
 {
-	static RingVec sOut(0.0f, 0.0f, 3.0f);     // the tube's middle from the hoop's
-	static RingVec sTube(0.0f, 0.0f, 2.0f);    // the tube's radius
+	static RingVec sOut(0.0f, 0.0f, 3.0f);                     // the tube's middle from the hoop's
+	static RingVec sTube(0.0f, 0.0f, 2.0f);                    // the tube's radius
 	static RingVec sShadow(0.0f, 0.0f, 2.0f * ringSqrt(2.0f)); // to the corners of a square round the tube
 	static RingVec sForward(0.0f, 0.0f, 1.0f);
 	f32 rot[12];
@@ -359,7 +359,9 @@ RingDraw::RingDraw()
 }
 
 // 0x800F324C
-RingDraw::~RingDraw() { }
+RingDraw::~RingDraw()
+{
+}
 
 // 0x800F3288
 f32 RingDraw::getWidth()
@@ -445,11 +447,11 @@ void RingDraw::drawHoop()
 	GXLoadNrmMtxImm(m, id);
 	slot = segStep;
 	for (seg = 0; seg < 16; seg += (u8)segStep) {
-		int next      = (seg + (u8)segStep) % 16;
-		HitVec* pos0  = sRingPos[seg];
-		HitVec* nrm0  = sRingNormal[seg];
-		HitVec* pos1  = sRingPos[next];
-		HitVec* nrm1  = sRingNormal[next];
+		int next     = (seg + (u8)segStep) % 16;
+		HitVec* pos0 = sRingPos[seg];
+		HitVec* nrm0 = sRingNormal[seg];
+		HitVec* pos1 = sRingPos[next];
+		HitVec* nrm1 = sRingNormal[next];
 		loadSegment(m, view, &sRingCenters[next], mRadius);
 		prevId = id;
 		id     = sRingMtxIds[slot & 7];

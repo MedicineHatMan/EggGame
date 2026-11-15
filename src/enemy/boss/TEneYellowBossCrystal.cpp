@@ -41,10 +41,10 @@ TEneYellowBossCrystal::TEneYellowBossCrystal(TObject* parent)
 	shadowDisable(&mShadow);
 	mSight.reset();
 	mSight.mHeightLimit = 1000.0f;
-	mLookPos.x = 0.0f;
-	mLookPos.y = 0.0f;
-	mLookPos.z = 0.0f;
-	mLookAngle = 0;
+	mLookPos.x          = 0.0f;
+	mLookPos.y          = 0.0f;
+	mLookPos.z          = 0.0f;
+	mLookAngle          = 0;
 	touchListInit(&mTouch);
 	mCrystalFlags = 0;
 	mAction       = -1;
@@ -52,7 +52,10 @@ TEneYellowBossCrystal::TEneYellowBossCrystal(TObject* parent)
 }
 
 // 0x8014F33C
-TEneYellowBossCrystal::~TEneYellowBossCrystal() { releaseObjId(this); }
+TEneYellowBossCrystal::~TEneYellowBossCrystal()
+{
+	releaseObjId(this);
+}
 
 // 0x8014F3F8
 void TEneYellowBossCrystal::look()
@@ -74,13 +77,22 @@ void TEneYellowBossCrystal::startAction(int action)
 }
 
 // 0x8014F4A4
-void TEneYellowBossCrystal::setNext(int action) { mNextAction = action; }
+void TEneYellowBossCrystal::setNext(int action)
+{
+	mNextAction = action;
+}
 
 // 0x8014F4AC
-void TEneYellowBossCrystal::clearNext() { mNextAction = -1; }
+void TEneYellowBossCrystal::clearNext()
+{
+	mNextAction = -1;
+}
 
 // 0x8014F4B8
-void TEneYellowBossCrystal::checkAction() { runAction(mAction, 1); }
+void TEneYellowBossCrystal::checkAction()
+{
+	runAction(mAction, 1);
+}
 
 // 0x8014F4EC
 void TEneYellowBossCrystal::switchAction()
@@ -93,7 +105,10 @@ void TEneYellowBossCrystal::switchAction()
 }
 
 // 0x8014F55C
-void TEneYellowBossCrystal::stepAction() { runAction(mAction, 2); }
+void TEneYellowBossCrystal::stepAction()
+{
+	runAction(mAction, 2);
+}
 
 // 0x8014F590
 // Tells what newly touches colli that it did with a spark and a sound at the touch
@@ -189,10 +204,16 @@ f32 TEneYellowBossCrystal::startSink(f32 from, f32 to, f32 extra)
 }
 
 // 0x8014F910
-void TEneYellowBossCrystal::endSink() { mCrystalFlags &= ~1; }
+void TEneYellowBossCrystal::endSink()
+{
+	mCrystalFlags &= ~1;
+}
 
 // 0x8014F920
-int TEneYellowBossCrystal::isSinking() { return mCrystalFlags & 1; }
+int TEneYellowBossCrystal::isSinking()
+{
+	return mCrystalFlags & 1;
+}
 
 // 0x8014F92C
 void TEneYellowBossCrystal::cull(DrawTask* task, f32 far, f32 radius, Vec3f* pos, int arg)
@@ -210,10 +231,15 @@ void TEneYellowBossCrystal::cull(DrawTask* task, f32 far, f32 radius, Vec3f* pos
 }
 
 // 0x8014F9B8
-static void crystalNoTexture() { }
+static void crystalNoTexture()
+{
+}
 
 // 0x8014F9BC
-static void crystalTexGen() { GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX3X4, GX_TG_POS, GX_TEXMTX0, GX_FALSE, GX_PTTEXMTX0); }
+static void crystalTexGen()
+{
+	GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX3X4, GX_TG_POS, GX_TEXMTX0, GX_FALSE, GX_PTTEXMTX0);
+}
 
 // 0x8014F9F4
 static void crystalTevOrder(int stage)
@@ -249,7 +275,10 @@ void crystalBeginDraw()
 }
 
 // 0x8014FB2C
-void crystalSetTex(int angle) { crystalTexScreen(); }
+void crystalSetTex(int angle)
+{
+	crystalTexScreen();
+}
 
 // 0x8014FB4C
 void crystalEndDraw()

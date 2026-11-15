@@ -36,10 +36,12 @@ struct Fx;
 // Each move is a TPlyState made from the player's pool
 extern "C" {
 u16 sPlyAnimalCheers[2] = {
-	180, 181,
+	180,
+	181,
 }; // the two cheers for an animal
 u16 sRollThrowVoices[2] = {
-	191, 192,
+	191,
+	192,
 }; // the two throw shouts
 }
 
@@ -49,9 +51,9 @@ static inline void plySetState(TChrPlayer* player, void* pool, void* state)
 	releasePlyState(pool, changePlyState(&player->mState, player, state));
 }
 
-#define SET_STATE(player, create) \
-	do { \
-		void* pool = (player)->mStates; \
+#define SET_STATE(player, create)                            \
+	do {                                                     \
+		void* pool = (player)->mStates;                      \
 		plySetState((player), pool, create(pool, (player))); \
 	} while (0)
 
@@ -59,11 +61,15 @@ static inline void plySetState(TChrPlayer* player, void* pool, void* state)
 // 0x800B1E0C
 // Message 0x71 the throw the lifted object flies off along mDir
 struct PlyThrowMsg {
-	inline PlyThrowMsg(u16 type) { mFrom = 0xFFFF; mType = type; }
+	inline PlyThrowMsg(u16 type)
+	{
+		mFrom = 0xFFFF;
+		mType = type;
+	}
 
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
-	u16 mFrom;  // _04
+	u16 mFrom; // _04
 	u16 _06;
 	Vec3f mDir; // _08
 };
@@ -1310,8 +1316,9 @@ void TPlyStateGlide::check(TChrPlayer* player)
 		return;
 	}
 	// Bits 0 1 3 2 and 4 of the byte at _31C
-	if (flagByteTest((FlagByte*)player->_31C, 0) != 0 || flagByteTest((FlagByte*)player->_31C, 1) != 0 || flagByteTest((FlagByte*)player->_31C, 3) != 0
-	    || flagByteTest((FlagByte*)player->_31C, 2) != 0 || flagByteTest((FlagByte*)player->_31C, 4) != 0) {
+	if (flagByteTest((FlagByte*)player->_31C, 0) != 0 || flagByteTest((FlagByte*)player->_31C, 1) != 0
+	    || flagByteTest((FlagByte*)player->_31C, 3) != 0 || flagByteTest((FlagByte*)player->_31C, 2) != 0
+	    || flagByteTest((FlagByte*)player->_31C, 4) != 0) {
 		plyStartFall(player);
 	}
 }
@@ -1479,7 +1486,7 @@ void TPlyStateHoldObj::enter(TChrPlayer* player)
 {
 	mTimer = 30;
 	plySetShadow(player, 1);
-	Vec3f* zero = &gVecZero;
+	Vec3f* zero    = &gVecZero;
 	player->mVel.x = zero->x;
 	player->mVel.y = zero->y;
 	player->mVel.z = zero->z;
@@ -1561,7 +1568,9 @@ TPlyStateInTheMirror::TPlyStateInTheMirror()
 }
 
 // 0x800B0FF0
-void TPlyStateInTheMirror::enter(TChrPlayer* player) { }
+void TPlyStateInTheMirror::enter(TChrPlayer* player)
+{
+}
 
 // Only damage can end it
 void TPlyStateInTheMirror::check(TChrPlayer* player)
@@ -1701,7 +1710,9 @@ void TPlyStateJump2nd::update(TChrPlayer* player)
 }
 
 // 0x800B1860
-void TPlyStateJump2nd::vfn_20(TChrPlayer* player) { }
+void TPlyStateJump2nd::vfn_20(TChrPlayer* player)
+{
+}
 
 TPlyStateLaunch::TPlyStateLaunch()
 {
@@ -2191,7 +2202,9 @@ void TPlyStateRideLaunch::check(TChrPlayer* player)
 	}
 }
 
-void TPlyStateRideLaunch::update(TChrPlayer* player) { }
+void TPlyStateRideLaunch::update(TChrPlayer* player)
+{
+}
 
 // 0x800B2B40
 int TPlyStateRideLaunch::onIgnore(TChrPlayer* player, ObjMsg* msg)
@@ -2383,7 +2396,7 @@ void TPlyStateRoll::check(TChrPlayer* player)
 void TPlyStateRoll::update(TChrPlayer* player)
 {
 	Vec3f vel;
-	vel = player->mVel;
+	vel       = player->mVel;
 	f32 speed = njScalor(&vel);
 	if (plyIsAiming(player) == 0) {
 		if (speed < 1.0f) {
@@ -2744,8 +2757,8 @@ void TPlyStateRollDrive::enter(TChrPlayer* player)
 {
 	player->playMotion(0x24);
 	player->mVel = gVecZero;
-	mStep  = 0;
-	mTimer = 0x1E;
+	mStep        = 0;
+	mTimer       = 0x1E;
 }
 
 // 0x800B42E0
@@ -2888,7 +2901,7 @@ TPlyStateRollJumpThrow::TPlyStateRollJumpThrow()
 
 void TPlyStateRollJumpThrow::enter(TChrPlayer* player)
 {
-	mStep = 0;
+	mStep        = 0;
 	player->mVel = gVecZero;
 }
 
@@ -2906,15 +2919,15 @@ void TPlyStateRollJumpThrow::check(TChrPlayer* player)
 	}
 	switch (mStep) {
 	case 0:
-			if (plyCheckMobileLost(player) != 0) {
-				return;
-			}
-			break;
+		if (plyCheckMobileLost(player) != 0) {
+			return;
+		}
+		break;
 	case 1:
-			if (player->mBody.isDone() != 0) {
+		if (player->mBody.isDone() != 0) {
 			plyStartFall(player);
 			break;
-	}
+		}
 	}
 }
 
@@ -2924,19 +2937,19 @@ void TPlyStateRollJumpThrow::update(TChrPlayer* player)
 {
 	switch (mStep) {
 	case 0:
-			if (player->mBody.mFrame >= 15.0f) {
+		if (player->mBody.mFrame >= 15.0f) {
 			plyFaceEgg(player);
 			plyRumble(player, 0xC);
 			plySlamEgg(player);
 			mStep = 1;
-			} else {
+		} else {
 			plyJumpMove(player);
-			}
-			player->updatePose();
-			break;
+		}
+		player->updatePose();
+		break;
 	case 1:
-			player->updatePose();
-			break;
+		player->updatePose();
+		break;
 	}
 }
 
@@ -3918,7 +3931,7 @@ void TPlyStateWalk::update(TChrPlayer* player)
 			player->mBody.set(player->mBodyCopy.mCurrent);
 			player->mBody.mFrame = player->mBodyCopy.mFrame;
 			player->mBody.mSpeed = motionSpeed;
-			mPhase = 2;
+			mPhase               = 2;
 		}
 		break;
 	}
@@ -3977,7 +3990,7 @@ extern "C" int plyMsgKnockBack(TChrPlayer* player, ObjMsg* msg)
 	Vec3f dir;
 	int angle = player->mAngle;
 	vecFromAngleXZ(-30.0f, &dir, angle);
-	dir.y = 100.0f;
+	dir.y          = 100.0f;
 	player->mVel.x = dir.x;
 	player->mVel.y = dir.y;
 	player->mVel.z = dir.z;
@@ -4100,7 +4113,7 @@ extern "C" int plyMsgMountSpinLaunch(TChrPlayer* player, ObjMsg* msg)
 // Puts the egg on a rail
 extern "C" int plyMsgRail(TChrPlayer* player, ObjMsg* msg)
 {
-	PlyRailMsg* rail = (PlyRailMsg*)msg;
+	PlyRailMsg* rail      = (PlyRailMsg*)msg;
 	TMobileObject* mobile = plyGetMobile(player);
 	mobile->startRail(rail->mPath, rail->mPoint, rail->mSpeed);
 	SET_STATE(player, createPlyStateSpinOnLane);
@@ -4110,7 +4123,10 @@ extern "C" int plyMsgRail(TChrPlayer* player, ObjMsg* msg)
 // 0x800B78F8
 // Kicked passes the kick on to the held egg at a speed of at least 60 either way and lets go
 struct PlyKickMsg : public PlyMsg {
-	inline PlyKickMsg(u16 type) : PlyMsg(type) { }
+	inline PlyKickMsg(u16 type)
+	    : PlyMsg(type)
+	{
+	}
 	void* mPath;  // _08
 	void* mPoint; // _0C
 	f32 mSpeed;   // _10
@@ -4118,7 +4134,7 @@ struct PlyKickMsg : public PlyMsg {
 
 extern "C" int plyMsgKicked(TChrPlayer* player, ObjMsg* msg)
 {
-	PlyRailMsg* in = (PlyRailMsg*)msg;
+	PlyRailMsg* in  = (PlyRailMsg*)msg;
 	TObjAction* egg = plyGetEgg(player);
 	if (egg == NULL) {
 		return 0;
@@ -4127,8 +4143,8 @@ extern "C" int plyMsgKicked(TChrPlayer* player, ObjMsg* msg)
 	kick.mFrom  = player->mObjId;
 	kick.mPath  = in->mPath;
 	kick.mPoint = in->mPoint;
-	f32 least = 60.0f;
-	f32 speed = in->mSpeed;
+	f32 least   = 60.0f;
+	f32 speed   = in->mSpeed;
 	if ((f32)__fabs(speed) < least) {
 		if (speed < 0.0f) {
 			least = -60.0f;
@@ -4234,7 +4250,7 @@ extern "C" void plyFaceEgg(TChrPlayer* player)
 		eggPos.x = at->x;
 		eggPos.y = at->y;
 		eggPos.z = at->z;
-		at = player->getPos();
+		at       = player->getPos();
 		Vec3f pos;
 		pos.x = at->x;
 		pos.y = at->y;

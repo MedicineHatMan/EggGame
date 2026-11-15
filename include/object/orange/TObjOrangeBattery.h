@@ -25,13 +25,13 @@ public:
 	void reset();
 	void draw();
 
-	f32 mMatrix[12];    // _00
-	Vec3f mFrom;        // _30
-	Vec3f mTo;          // _3C
-	f32 mSpread;        // _48
-	f32 mWidth;         // _4C shrinks as the bolt gets further from the camera
-	u32 mColor;         // _50
-	Vec3f mPoints[16];  // _54
+	f32 mMatrix[12];   // _00
+	Vec3f mFrom;       // _30
+	Vec3f mTo;         // _3C
+	f32 mSpread;       // _48
+	f32 mWidth;        // _4C shrinks as the bolt gets further from the camera
+	u32 mColor;        // _50
+	Vec3f mPoints[16]; // _54
 };
 
 /**
@@ -61,22 +61,22 @@ public:
 	void stateDone();
 
 	NJS_OBJECT* mModelData; // _64 MODEL_BATTERY
-	NJS_OBJECT mNodes[3];  // _68 three copied model nodes siblings cleared
-	void* mTex;           // _110 TLS_MODEL_BATTERY
-	void* mMotion;        // _114 MOTION_BATTERY
-	DrawTask* mDrawTask;  // _118
-	ObjModel mModel;      // _11C
-	f32 mMatrix[12];      // _13C
-	u16 mSwitch;          // _16C
+	NJS_OBJECT mNodes[3];   // _68 three copied model nodes siblings cleared
+	void* mTex;             // _110 TLS_MODEL_BATTERY
+	void* mMotion;          // _114 MOTION_BATTERY
+	DrawTask* mDrawTask;    // _118
+	ObjModel mModel;        // _11C
+	f32 mMatrix[12];        // _13C
+	u16 mSwitch;            // _16C
 	u16 _16E;
-	HitVec mEnds[2];      // _170 where the bolts rest once the motion finishes
-	f32 mFrame;           // _188
-	f32 mAnim[12];        // _18C the motion node for this frame
-	Vec3f mCenter;        // _1BC
-	f32 mRadius;          // _1C8
+	HitVec mEnds[2];       // _170 where the bolts rest once the motion finishes
+	f32 mFrame;            // _188
+	f32 mAnim[12];         // _18C the motion node for this frame
+	Vec3f mCenter;         // _1BC
+	f32 mRadius;           // _1C8
 	BatteryBolt mBolts[2]; // _1CC
-	void* mMesh;          // _3F4
-	int mAct;             // _3F8 0 waiting 1 charging 2 open
+	void* mMesh;           // _3F4
+	int mAct;              // _3F8 0 waiting 1 charging 2 open
 };
 
 extern "C" {

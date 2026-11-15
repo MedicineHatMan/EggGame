@@ -18,7 +18,7 @@ public:
 
 	virtual void draw();
 
-	void* mFx;       // _20
+	void* mFx; // _20
 	u8 _24[4];
 	f32 mMatrix[12]; // _28
 };

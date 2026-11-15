@@ -25,9 +25,9 @@ public:
 
 	virtual void draw(); // _0C
 
-	int mMode;    // _20 1 = stop
-	int _24;      // _24
-	int mWait;    // _28 frames until the next piece
+	int mMode;      // _20 1 = stop
+	int _24;        // _24
+	int mWait;      // _28 frames until the next piece
 	FxHolder mGlow; // _2C
 };
 

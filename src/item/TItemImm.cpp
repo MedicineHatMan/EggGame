@@ -9,14 +9,18 @@ const char* gTItemImmName = "TItemImm";
 TItemImm::TItemImm(TObject* parent, const ItemSpec* spec)
     : TItem(parent)
 {
-	struct SpecWords { u32 a, b; };
+	struct SpecWords {
+		u32 a, b;
+	};
 	*(SpecWords*)&mSpec = *(const SpecWords*)spec;
-	_00   = (u32)gTItemImmName;
-	mSize = 0x40;
+	_00                 = (u32)gTItemImmName;
+	mSize               = 0x40;
 }
 
 // 0x801BDF2C
-TItemImm::~TItemImm() { }
+TItemImm::~TItemImm()
+{
+}
 
 // 0x801BDF88
 void TItemImm::vfn_6C()

@@ -27,7 +27,7 @@ public:
 	f32 mMatrix[12]; // _20
 	f32 mBase[12];   // _50
 	int mTime;       // _80
-	DrawTask* mTask;     // _84
+	DrawTask* mTask; // _84
 };
 
 extern "C" {

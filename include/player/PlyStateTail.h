@@ -3,9 +3,13 @@
 
 #include "player/PlyState.h"
 
-inline TPlyStateVictory::~TPlyStateVictory() { }
+inline TPlyStateVictory::~TPlyStateVictory()
+{
+}
 
-inline TPlyStateTransform::~TPlyStateTransform() { }
+inline TPlyStateTransform::~TPlyStateTransform()
+{
+}
 
 // 0x800BC6D8
 // for FlagByte The animals use it too

@@ -56,7 +56,7 @@ public:
 	TObject* mHide1;     // _100 guess
 	u16 mSwitch;         // _104 set int 2
 	u16 _106;            // _106
-	EventCamRef mCam;        // _108
+	EventCamRef mCam;    // _108
 	TCamPath* mEvent;    // _110 from eventCamArcPlay
 	SoundHandle mSound;  // _114
 	Vec3f mCentre;       // _140

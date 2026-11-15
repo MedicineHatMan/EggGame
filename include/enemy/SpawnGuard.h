@@ -15,8 +15,8 @@ struct SpawnGuard {
 	SpawnGuard();  // 0x800707A0 a radius of 21
 	~SpawnGuard(); // 0x80070804
 
-	void setPos(const Vec3f* pos);         // 0x800708AC
-	void setRadius(f32 radius);      // 0x800708C8 stored squared and 20 wider
+	void setPos(const Vec3f* pos);    // 0x800708AC
+	void setRadius(f32 radius);       // 0x800708C8 stored squared and 20 wider
 	void set(Vec3f* pos, f32 radius); // 0x800708E4
 
 	SpawnGuard* mNext;     // _00

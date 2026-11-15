@@ -12,17 +12,17 @@ struct LandCull {
 	int _04;       // _04
 };
 
-static u8 sTevStages;        // 0x802C56D0 only reset
-static u8 sNumTexGens;       // 0x802C56D1
-static int sVtxSet;          // 0x802C56D4
-static u32 sMatFlags;        // 0x802C56D8
-static u32 sVtxDesc;         // 0x802C56DC
-static u8 sZCompLoc;         // 0x802C56E0
-static u8 sZEnable;          // 0x802C56E1
-static int sZFunc;           // 0x802C56E4
-static u8 sZUpdate;          // 0x802C56E8
-static LandCull sCullDefault; // 0x802C56EC
-static LandCull sCull;        // 0x802C56F4
+static u8 sTevStages;          // 0x802C56D0 only reset
+static u8 sNumTexGens;         // 0x802C56D1
+static int sVtxSet;            // 0x802C56D4
+static u32 sMatFlags;          // 0x802C56D8
+static u32 sVtxDesc;           // 0x802C56DC
+static u8 sZCompLoc;           // 0x802C56E0
+static u8 sZEnable;            // 0x802C56E1
+static int sZFunc;             // 0x802C56E4
+static u8 sZUpdate;            // 0x802C56E8
+static LandCull sCullDefault;  // 0x802C56EC
+static LandCull sCull;         // 0x802C56F4
 static LandDrawHook sDrawHook; // 0x802C56FC
 
 static LandDrawState sDrawState; // 0x80282908
@@ -31,7 +31,7 @@ static LandDrawState sDrawState; // 0x80282908
 // out = from + to - from * t per channel in 16.16 fixed point
 static void lerpLandColors(u32* to, u32* from, u32* out, int count, f32 t)
 {
-	int k   = 65536.0f * t;
+	int k    = 65536.0f * t;
 	u32* dst = out;
 	for (int i = 0; i < count; i++) {
 		u32 b  = *from++;
@@ -439,9 +439,9 @@ static void drawLandGroup(LandModel* model, LandMeshGroup* group, f32* mtx, u32*
 			u32 skip;
 			LandVtxEntry* vtx;
 			LandMaterialEntry* entry;
-			skip = hidden != 0 ? hidden[mesh->mNode] : 0;
+			skip  = hidden != 0 ? hidden[mesh->mNode] : 0;
 			entry = &model->mMaterials[mesh->mMaterial];
-			vtx = &model->mVtxSets[mesh->mVtxSet];
+			vtx   = &model->mVtxSets[mesh->mVtxSet];
 			if (isLandMeshHidden(skip, entry->mMaterial->mFlags) == 0) {
 				if (sVtxSet != mesh->mVtxSet) {
 					sVtxSet = mesh->mVtxSet;
@@ -470,7 +470,7 @@ static void drawLandGroup(LandModel* model, LandMeshGroup* group, f32* mtx, u32*
 
 		LandMesh* mesh = group->mMeshes;
 		for (int i = 0; i < group->mMeshCount; i++, mesh++) {
-			u32 skip = hidden != 0 ? hidden[mesh->mNode] : 0;
+			u32 skip                 = hidden != 0 ? hidden[mesh->mNode] : 0;
 			LandMaterialEntry* entry = &model->mMaterials[mesh->mMaterial];
 			LandVtxEntry* vtx        = &model->mVtxSets[mesh->mVtxSet];
 			if (isLandMeshHidden(skip, entry->mMaterial->mFlags) == 0) {

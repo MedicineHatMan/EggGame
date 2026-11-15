@@ -86,7 +86,7 @@ int AniBlink::tint(DrawState* state) const
 int AniBlink::isHidden()
 {
 	bool hidden = false;
-	s16 blink = mBlink;
+	s16 blink   = mBlink;
 	if (blink != 0 && (blink & 1) == 0 && mFlash == 0) {
 		hidden = true;
 	}

@@ -3,9 +3,9 @@
 
 #pragma auto_inline off
 
-#define ADXENC_MAX_OBJ 8
-#define ADXENC_MAX_CH 16
-#define ADXENC_MAX_NCH 2
+#define ADXENC_MAX_OBJ  8
+#define ADXENC_MAX_CH   16
+#define ADXENC_MAX_NCH  2
 #define ADXENC_BLK_SMPL 32
 
 #define ADXENC_CLIP(x, lo, hi) ((((x) < (lo)) ? (lo) : (x)) > (hi) ? (hi) : (((x) < (lo)) ? (lo) : (x)))
@@ -21,72 +21,72 @@ typedef struct {
 
 /* One channel of analysis */
 typedef struct {
-	signed char used;              /* 00 */
-	char pad1[3];                  /* 01 */
-	short c1;                      /* 04 */
-	short c2;                      /* 06 */
-	short h1;                      /* 08 */
-	short h2;                      /* 0A */
-	int unkC;                      /* 0C */
-	int unk10;                     /* 10 */
-	int nsmpl;                     /* 14 */
-	short resid[ADXENC_BLK_SMPL];  /* 18 */
+	signed char used;                 /* 00 */
+	char pad1[3];                     /* 01 */
+	short c1;                         /* 04 */
+	short c2;                         /* 06 */
+	short h1;                         /* 08 */
+	short h2;                         /* 0A */
+	int unkC;                         /* 0C */
+	int unk10;                        /* 10 */
+	int nsmpl;                        /* 14 */
+	short resid[ADXENC_BLK_SMPL];     /* 18 */
 	signed char nib[ADXENC_BLK_SMPL]; /* 58 */
-	int maxabs;                    /* 78 */
-	short scale;                   /* 7C */
-	short pad7E;                   /* 7E */
-	double inv;                    /* 80 */
-	ADXENC_DEC* dec;               /* 88 */
-	int pad8C;                     /* 8C */
+	int maxabs;                       /* 78 */
+	short scale;                      /* 7C */
+	short pad7E;                      /* 7E */
+	double inv;                       /* 80 */
+	ADXENC_DEC* dec;                  /* 88 */
+	int pad8C;                        /* 8C */
 } ADXENC_CH;
 
 typedef struct {
-	signed char used;                          /* 000 */
-	signed char stat;                          /* 001 */
-	signed char nch;                           /* 002 */
-	signed char end_flg;                       /* 003 */
-	SJ sji[ADXENC_MAX_NCH];                    /* 004 */
-	SJ sjo;                                    /* 00C */
-	int unk10[6];                              /* 010 */
-	int unk28;                                 /* 028 */
-	int out_len;                               /* 02C */
-	int enc_nsmpl;                             /* 030 */
-	int max_nsmpl;                             /* 034 */
-	int unk38;                                 /* 038 */
-	int req_nsmpl;                             /* 03C */
-	int buf_nsmpl;                             /* 040 */
-	int blk_smpl;                              /* 044 */
-	int hdr_len;                               /* 048 */
-	int type;                                  /* 04C */
-	int blk_len;                               /* 050 */
-	int bps;                                   /* 054 */
-	int nch_prm;                               /* 058 */
-	int sfreq;                                 /* 05C */
-	int total_smpl;                            /* 060 */
-	int cof;                                   /* 064 */
-	int lp_ins_nsmpl;                          /* 068 */
-	int nloop;                                 /* 06C */
-	int lp_spos;                               /* 070 */
-	int lp_sofst;                              /* 074 */
-	int lp_epos;                               /* 078 */
-	int lp_eofst;                              /* 07C */
-	ADXENC_CH* ch[ADXENC_MAX_NCH];             /* 080 */
-	short dly0[ADXENC_MAX_NCH];                /* 088 */
-	short dly1[ADXENC_MAX_NCH];                /* 08C */
-	short in[ADXENC_MAX_NCH][ADXENC_BLK_SMPL]; /* 090 */
+	signed char used;                             /* 000 */
+	signed char stat;                             /* 001 */
+	signed char nch;                              /* 002 */
+	signed char end_flg;                          /* 003 */
+	SJ sji[ADXENC_MAX_NCH];                       /* 004 */
+	SJ sjo;                                       /* 00C */
+	int unk10[6];                                 /* 010 */
+	int unk28;                                    /* 028 */
+	int out_len;                                  /* 02C */
+	int enc_nsmpl;                                /* 030 */
+	int max_nsmpl;                                /* 034 */
+	int unk38;                                    /* 038 */
+	int req_nsmpl;                                /* 03C */
+	int buf_nsmpl;                                /* 040 */
+	int blk_smpl;                                 /* 044 */
+	int hdr_len;                                  /* 048 */
+	int type;                                     /* 04C */
+	int blk_len;                                  /* 050 */
+	int bps;                                      /* 054 */
+	int nch_prm;                                  /* 058 */
+	int sfreq;                                    /* 05C */
+	int total_smpl;                               /* 060 */
+	int cof;                                      /* 064 */
+	int lp_ins_nsmpl;                             /* 068 */
+	int nloop;                                    /* 06C */
+	int lp_spos;                                  /* 070 */
+	int lp_sofst;                                 /* 074 */
+	int lp_epos;                                  /* 078 */
+	int lp_eofst;                                 /* 07C */
+	ADXENC_CH* ch[ADXENC_MAX_NCH];                /* 080 */
+	short dly0[ADXENC_MAX_NCH];                   /* 088 */
+	short dly1[ADXENC_MAX_NCH];                   /* 08C */
+	short in[ADXENC_MAX_NCH][ADXENC_BLK_SMPL];    /* 090 */
 	short w_res[ADXENC_MAX_NCH][ADXENC_BLK_SMPL]; /* 110 */
 	short w_scl[ADXENC_MAX_NCH][ADXENC_BLK_SMPL]; /* 190 */
 	short w_deq[ADXENC_MAX_NCH][ADXENC_BLK_SMPL]; /* 210 */
-	short scale[ADXENC_MAX_NCH];               /* 290 */
-	int pad294;                                /* 294 */
-	double inv[ADXENC_MAX_NCH];                /* 298 */
-	unsigned char blk[ADXENC_MAX_NCH][0x10];   /* 2A8 */
-	short dly0_init[ADXENC_MAX_NCH];           /* 2C8 */
-	short dly1_init[ADXENC_MAX_NCH];           /* 2CC */
-	unsigned short key_x;                      /* 2D0 */
-	short key_m;                               /* 2D2 */
-	short key_a;                               /* 2D4 */
-	short pad2D6;                              /* 2D6 */
+	short scale[ADXENC_MAX_NCH];                  /* 290 */
+	int pad294;                                   /* 294 */
+	double inv[ADXENC_MAX_NCH];                   /* 298 */
+	unsigned char blk[ADXENC_MAX_NCH][0x10];      /* 2A8 */
+	short dly0_init[ADXENC_MAX_NCH];              /* 2C8 */
+	short dly1_init[ADXENC_MAX_NCH];              /* 2CC */
+	unsigned short key_x;                         /* 2D0 */
+	short key_m;                                  /* 2D2 */
+	short key_a;                                  /* 2D4 */
+	short pad2D6;                                 /* 2D6 */
 } ADXENC_OBJ;
 
 typedef ADXENC_OBJ* ADXENC;
@@ -97,7 +97,7 @@ typedef struct {
 	SJ sj; /* 14 */
 } ADXENC_DST;
 
-int adxenc_max_scale = 0x1000;
+int adxenc_max_scale   = 0x1000;
 char* adxenc_copyright = "(c)CRI";
 
 char adxenc_test_sjmem[2][0x20];
@@ -170,9 +170,9 @@ static inline void adxenc_CalcResid(ADXENC_CH* ch, int i, short s)
 		ch->maxabs = 0;
 	}
 	if (ch != 0) {
-		e = s - ((ch->c1 * ch->h1) >> 12) - ((ch->c2 * ch->h2) >> 12);
+		e            = s - ((ch->c1 * ch->h1) >> 12) - ((ch->c2 * ch->h2) >> 12);
 		ch->resid[i] = ADXENC_CLIP(e, -0x8000, 0x7FFF);
-		a = ch->resid[i];
+		a            = ch->resid[i];
 		if (a < 0) {
 			a = -a;
 		}
@@ -210,9 +210,9 @@ int adxenc_EncodeCh(ADXENC enc, int c)
 	int d;
 	int v;
 
-	in = enc->in[c];
-	ch = enc->ch[c];
-	dec = ch->dec;
+	in     = enc->in[c];
+	ch     = enc->ch[c];
+	dec    = ch->dec;
 	ch->h1 = enc->dly0[c];
 	ch->h2 = enc->dly1[c];
 	for (i = 0; i < enc->blk_smpl; i++) {
@@ -242,15 +242,15 @@ int adxenc_EncodeCh(ADXENC enc, int c)
 		} else {
 			r = ch->resid[i];
 		}
-		q = (int)((double)r * ch->inv);
-		q = (short)ADXENC_CLIP(q, -0x8000, 0x7FFF);
-		nib = adxenc_Quantize(q);
+		q          = (int)((double)r * ch->inv);
+		q          = (short)ADXENC_CLIP(q, -0x8000, 0x7FFF);
+		nib        = adxenc_Quantize(q);
 		ch->nib[i] = nib;
-		d = nib * ch->scale;
-		d = ADXENC_CLIP(d, -0x8000, 0x7FFF);
+		d          = nib * ch->scale;
+		d          = ADXENC_CLIP(d, -0x8000, 0x7FFF);
 		if (ch->dec != 0) {
-			dec = ch->dec;
-			v = (short)d + ((dec->c1 * dec->h1 + dec->c2 * dec->h2) >> 12);
+			dec     = ch->dec;
+			v       = (short)d + ((dec->c1 * dec->h1 + dec->c2 * dec->h2) >> 12);
 			dec->h2 = dec->h1;
 			dec->h1 = ADXENC_CLIP(v, -0x8000, 0x7FFF);
 		}
@@ -272,19 +272,19 @@ void adxenc_EndBlock(ADXENC enc, int c)
 	int shift;
 	int pos;
 
-	k = 0;
+	k   = 0;
 	per = 8 / enc->bps;
-	ch = enc->ch[c];
-	p = enc->blk[c] - 1;
+	ch  = enc->ch[c];
+	p   = enc->blk[c] - 1;
 	for (i = 0; i < enc->blk_smpl; i++) {
 		enc->w_res[c][i] = (ch == 0) ? 0 : ch->resid[i];
-		q = (int)(ch->inv * (double)enc->w_res[c][i]);
+		q                = (int)(ch->inv * (double)enc->w_res[c][i]);
 		enc->w_scl[c][i] = ADXENC_CLIP(q, -0x8000, 0x7FFF);
-		nib = adxenc_Quantize(enc->w_scl[c][i]);
-		d = (int)(ch->inv * (double)(nib * ch->scale));
+		nib              = adxenc_Quantize(enc->w_scl[c][i]);
+		d                = (int)(ch->inv * (double)(nib * ch->scale));
 		enc->w_deq[c][i] = ADXENC_CLIP(d, -0x8000, 0x7FFF);
 		if (i == (i / per) * per) {
-			k = 1;
+			k    = 1;
 			*++p = 0;
 		}
 		pos = per - k;
@@ -303,10 +303,10 @@ int adxenc_PutBlocks(ADXENC enc)
 	unsigned short v;
 	int* w;
 
-	n = 0;
+	n  = 0;
 	sj = enc->sjo;
 	for (c = 0; c < enc->nch_prm; c++) {
-		v = (enc->scale[c] - 1) ^ enc->key_x;
+		v          = (enc->scale[c] - 1) ^ enc->key_x;
 		enc->key_x = enc->key_a + enc->key_x * enc->key_m;
 		enc->key_x &= 0x7FFF;
 		w = (int*)enc->blk[c];
@@ -333,12 +333,12 @@ int adxenc_EncodeFrames(ADXENC enc)
 	SJCK ck;
 
 	written = 0;
-	sj = enc->sjo;
+	sj      = enc->sjo;
 	do {
 		if ((SJ_GetNumData(sj, SJ_LIN_FREE) / 0x12) / enc->nch_prm < 1) {
 			return written;
 		}
-		n = enc->req_nsmpl - enc->enc_nsmpl;
+		n       = enc->req_nsmpl - enc->enc_nsmpl;
 		bufs[0] = enc->in[0];
 		bufs[1] = enc->in[1];
 		if (n > enc->blk_smpl) {
@@ -374,9 +374,9 @@ int adxenc_EncodeFrames(ADXENC enc)
 			for (c = 0; c < enc->nch_prm; c++) {
 				adxenc_EncodeCh(enc, c);
 				enc->scale[c] = enc->ch[c]->scale;
-				enc->inv[c] = enc->ch[c]->inv;
-				enc->dly0[c] = enc->ch[c]->dec->h1;
-				enc->dly1[c] = enc->ch[c]->dec->h2;
+				enc->inv[c]   = enc->ch[c]->inv;
+				enc->dly0[c]  = enc->ch[c]->dec->h1;
+				enc->dly1[c]  = enc->ch[c]->dec->h2;
 				adxenc_EndBlock(enc, c);
 			}
 			n = enc->blk_smpl;
@@ -550,9 +550,9 @@ static inline ADXENC_CH* adxenc_CreateCh(int blk_smpl)
 			break;
 		}
 	}
-	ch = &adxenc_ch_obj[i];
+	ch        = &adxenc_ch_obj[i];
 	ch->nsmpl = blk_smpl;
-	ch->dec = dec;
+	ch->dec   = dec;
 	if (i < ADXENC_MAX_CH) {
 		ch->used = 1;
 	} else {
@@ -575,42 +575,42 @@ ADXENC ADXENC_Create(int nch, SJ* sji, SJ sjo)
 	if (i == ADXENC_MAX_OBJ) {
 		return 0;
 	}
-	enc = &adxenc_obj[i];
+	enc      = &adxenc_obj[i];
 	enc->nch = nch;
 	for (i = 0; i < nch; i++) {
 		enc->sji[i] = sji[i];
 	}
-	enc->sjo = sjo;
-	enc->stat = 0;
-	enc->unk28 = 0;
-	enc->out_len = 0;
-	enc->enc_nsmpl = 0;
-	enc->max_nsmpl = 0x7FFF0000;
-	enc->hdr_len = ADX_CalcHdrInfoLen(0, 0, 4, 4);
-	enc->type = 3;
-	enc->nch_prm = nch;
-	enc->sfreq = 44100;
-	enc->bps = 4;
-	enc->blk_len = 0x12;
-	enc->blk_smpl = ((enc->blk_len - 2) * 8) / enc->bps;
-	enc->total_smpl = 0x7FFF0000;
-	enc->cof = 500;
+	enc->sjo          = sjo;
+	enc->stat         = 0;
+	enc->unk28        = 0;
+	enc->out_len      = 0;
+	enc->enc_nsmpl    = 0;
+	enc->max_nsmpl    = 0x7FFF0000;
+	enc->hdr_len      = ADX_CalcHdrInfoLen(0, 0, 4, 4);
+	enc->type         = 3;
+	enc->nch_prm      = nch;
+	enc->sfreq        = 44100;
+	enc->bps          = 4;
+	enc->blk_len      = 0x12;
+	enc->blk_smpl     = ((enc->blk_len - 2) * 8) / enc->bps;
+	enc->total_smpl   = 0x7FFF0000;
+	enc->cof          = 500;
 	enc->lp_ins_nsmpl = 0;
-	enc->nloop = 0;
-	enc->lp_spos = 0;
-	enc->lp_sofst = 0;
-	enc->lp_epos = 0;
-	enc->lp_eofst = 0;
-	enc->unk38 = 0;
-	enc->req_nsmpl = 0;
-	enc->buf_nsmpl = enc->blk_smpl * ((enc->total_smpl - 1) / enc->blk_smpl + 1);
-	enc->ch[0] = adxenc_CreateCh(enc->blk_smpl);
-	enc->ch[1] = adxenc_CreateCh(enc->blk_smpl);
+	enc->nloop        = 0;
+	enc->lp_spos      = 0;
+	enc->lp_sofst     = 0;
+	enc->lp_epos      = 0;
+	enc->lp_eofst     = 0;
+	enc->unk38        = 0;
+	enc->req_nsmpl    = 0;
+	enc->buf_nsmpl    = enc->blk_smpl * ((enc->total_smpl - 1) / enc->blk_smpl + 1);
+	enc->ch[0]        = adxenc_CreateCh(enc->blk_smpl);
+	enc->ch[1]        = adxenc_CreateCh(enc->blk_smpl);
 	enc->dly1_init[0] = 0;
 	enc->dly0_init[0] = 0;
 	enc->dly1_init[1] = 0;
 	enc->dly0_init[1] = 0;
-	enc->used = 1;
+	enc->used         = 1;
 	return enc;
 }
 
@@ -648,17 +648,16 @@ void ADXENC_Start(ADXENC enc)
 		SJ_GetChunk(enc->sji[c], SJ_LIN_FREE, len, &ck);
 		if (ck.len != len) {
 			SJ_UngetChunk(enc->sji[c], SJ_LIN_FREE, &ck);
-			for (;;) {
-			}
+			for (;;) { }
 		}
 		memset(ck.data, 0, ck.len);
 		SJ_PutChunk(enc->sji[c], SJ_LIN_DATA, &ck);
 	}
-	enc->unk28 = 0;
-	enc->out_len = 0;
+	enc->unk28     = 0;
+	enc->out_len   = 0;
 	enc->enc_nsmpl = 0;
-	enc->end_flg = 0;
-	enc->stat = 1;
+	enc->end_flg   = 0;
+	enc->stat      = 1;
 }
 
 // 0x802202E4
@@ -670,11 +669,11 @@ void ADXENC_Terminate(ADXENC enc)
 // 0x802202C8
 void ADXENC_SetPrm(ADXENC enc, int nch, int sfreq, int nsmpl)
 {
-	enc->nch_prm = nch;
-	enc->sfreq = sfreq;
-	enc->req_nsmpl = nsmpl;
+	enc->nch_prm    = nch;
+	enc->sfreq      = sfreq;
+	enc->req_nsmpl  = nsmpl;
 	enc->total_smpl = nsmpl;
-	enc->hdr_len = 0x11C;
+	enc->hdr_len    = 0x11C;
 }
 
 // 0x8022023C
@@ -737,8 +736,8 @@ void adxenc_ExecHn(ADXENC enc)
 					ch->c2 = c2;
 					{
 						ADXENC_DEC* dec = ch->dec;
-						dec->c1 = c1;
-						dec->c2 = c2;
+						dec->c1         = c1;
+						dec->c2         = c2;
 					}
 				}
 				enc->stat = 2;
@@ -786,23 +785,21 @@ void adxenc_EncodeToBuf(ADXENC_DST* dst, int nch, int sfreq, int nsmpl)
 	SJCK cko;
 
 	ADXENC_Init();
-	rbf = SJRBF_Create(adxenc_test_sjrbf, sizeof(adxenc_test_sjrbf), 0);
+	rbf    = SJRBF_Create(adxenc_test_sjrbf, sizeof(adxenc_test_sjrbf), 0);
 	sji[0] = SJMEM_Create(adxenc_test_sjmem[0], sizeof(adxenc_test_sjmem[0]));
 	sji[1] = SJMEM_Create(adxenc_test_sjmem[1], sizeof(adxenc_test_sjmem[1]));
-	osj = dst->sj;
-	enc = ADXENC_Create(2, sji, rbf);
+	osj    = dst->sj;
+	enc    = ADXENC_Create(2, sji, rbf);
 	ADXENC_SetPrm(enc, nch, sfreq, nsmpl);
 	ADXENC_Start(enc);
 	ADXENC_ExecServer();
 	SJ_GetChunk(rbf, SJ_LIN_DATA, 0x400, &cki);
 	if (cki.len == 0) {
-		for (;;) {
-		}
+		for (;;) { }
 	}
 	SJ_GetChunk(osj, SJ_LIN_FREE, cki.len, &cko);
 	if (cko.len < cki.len) {
-		for (;;) {
-		}
+		for (;;) { }
 	}
 	memcpy(cko.data, cki.data, cki.len);
 	SJ_PutChunk(rbf, SJ_LIN_FREE, &cki);

@@ -104,7 +104,10 @@ int TObjLastBossShot::handleMessage(ObjMsg* msg)
 }
 
 // 0x8018DBB4
-int TObjLastBossShot::sendToHandle(ObjMsg* msg) { return mHandle.send(msg); }
+int TObjLastBossShot::sendToHandle(ObjMsg* msg)
+{
+	return mHandle.send(msg);
+}
 
 // 0x8018DBD8
 void TObjLastBossShot::draw()
@@ -127,7 +130,9 @@ void TObjLastBossShot::draw()
 }
 
 // 0x8018DCA8
-void TObjLastBossShot::vfn_10() {}
+void TObjLastBossShot::vfn_10()
+{
+}
 
 // 0x8018DCAC
 // Model 1 before it is hit 4 after
@@ -232,7 +237,10 @@ void TObjLastBossShot::setState(int state)
 }
 
 // 0x8018DFA4
-int TObjLastBossShot::isHolder(ShotThrowMsg* msg) { return (u8)(msg->mHolder == mHolderId); }
+int TObjLastBossShot::isHolder(ShotThrowMsg* msg)
+{
+	return (u8)(msg->mHolder == mHolderId);
+}
 
 // 0x8018DFBC
 int TObjLastBossShot::attachTo(ShotGrabMsg* msg)
@@ -250,7 +258,10 @@ int TObjLastBossShot::attachTo(ShotGrabMsg* msg)
 }
 
 // 0x8018E068
-void TObjLastBossShot::release() { mOwner = 0xFFFF; }
+void TObjLastBossShot::release()
+{
+	mOwner = 0xFFFF;
+}
 
 // 0x8018E078
 void TObjLastBossShot::updateMatrix()
@@ -294,8 +305,8 @@ void TObjLastBossShot::stateHeld(int phase)
 		TMobileObject* holder = (TMobileObject*)mHandle.mHolder;
 		Vec3f pos;
 		EggRot rot;
-		pos = holder->mBody.mPos;
-		rot = holder->mBody.mRot;
+		pos        = holder->mBody.mPos;
+		rot        = holder->mBody.mRot;
 		mBody.mPos = pos;
 		mBody.mRot = rot;
 		updateMatrix();
@@ -380,7 +391,7 @@ void TObjLastBossShot::stateAim(int phase)
 		target = findObjById(0);
 		if (target != 0) {
 			Vec3f* tp = target->getPos();
-			mPos.y = approach(6.0f, mPos.y, 15.0f + tp->y);
+			mPos.y    = approach(6.0f, mPos.y, 15.0f + tp->y);
 		}
 		mtxSetTransV(mMatrix, &mPos);
 		if (mTimer != 0) {
@@ -493,7 +504,10 @@ int TObjLastBossShot::onKick(ObjMsg* msg)
 }
 
 // 0x8018E8E0
-int TObjLastBossShot::onGetType() { return 0x3B; }
+int TObjLastBossShot::onGetType()
+{
+	return 0x3B;
+}
 
 // 0x8018E8E8
 int TObjLastBossShot::onGetFlags()
@@ -630,16 +644,31 @@ f32 TObjLastBossShot::approach(f32 rate, f32 from, f32 to)
 }
 
 // 0x8018ED1C
-int TObjLastBossShot::getKind() { return 1; }
+int TObjLastBossShot::getKind()
+{
+	return 1;
+}
 
 // 0x8018ED24
-Vec3f* TObjLastBossShot::getPos() { return &mPos; }
+Vec3f* TObjLastBossShot::getPos()
+{
+	return &mPos;
+}
 
 // 0x8018ED2C
-f32 TObjLastBossShot::getRadiusV() { return mBody.mRadius; }
+f32 TObjLastBossShot::getRadiusV()
+{
+	return mBody.mRadius;
+}
 
 // Not in the DOL calling the handler here before its body makes the compiler generate it in place
-static int shotHandleMessage(ShotHandle* handle, ObjMsg* msg) { return handle->ShotHandle::onMessage(msg); }
+static int shotHandleMessage(ShotHandle* handle, ObjMsg* msg)
+{
+	return handle->ShotHandle::onMessage(msg);
+}
 
 // 0x8018ED34
-int ShotHandle::onMessage(ObjMsg* msg) { return ((TObjLastBossShot*)mOwner)->handleMessage(msg); }
+int ShotHandle::onMessage(ObjMsg* msg)
+{
+	return ((TObjLastBossShot*)mOwner)->handleMessage(msg);
+}

@@ -32,15 +32,15 @@ public:
 	void resetFrame();   // 0x801562EC
 	void updateMatrix(); // 0x80156440
 
-	int mIndex;    // _20 which model and motion
-	f32 mMtx[12];  // _24
-	Vec3f mPos;    // _54
-	int mAngle[3]; // _60 Ninja angles draw() spins [1]
-	DrawTask* mDraw;   // _6C
-	u32 _70;       // _70
-	u8 _74[0x1C];  // _74
-	u32 _90;       // _90
-	f32 mFrame;    // _94
+	int mIndex;      // _20 which model and motion
+	f32 mMtx[12];    // _24
+	Vec3f mPos;      // _54
+	int mAngle[3];   // _60 Ninja angles draw() spins [1]
+	DrawTask* mDraw; // _6C
+	u32 _70;         // _70
+	u8 _74[0x1C];    // _74
+	u32 _90;         // _90
+	f32 mFrame;      // _94
 };
 
 class TObject;
@@ -62,11 +62,11 @@ struct E3Palette {
 
 // Bank inside the arc at file+0x4C
 struct E3Assets {
-	void* _00;        // _00
-	void** mModels;   // _04
-	void** mMotions;  // _08 each motion's length is a u32 at +0x04
-	void** mTex;      // _0C
-	void* mGvm;       // _10
+	void* _00;       // _00
+	void** mModels;  // _04
+	void** mMotions; // _08 each motion's length is a u32 at +0x04
+	void** mTex;     // _0C
+	void* mGvm;      // _10
 };
 
 extern "C" {

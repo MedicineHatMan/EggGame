@@ -78,7 +78,7 @@ void TObjPurpleIceGearL::initFromDesc(SetDesc* desc)
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 	mtxRotateX(mSpin, mMatrix, mAngle);
 
-	mCentre        = ((GearNode*)mGeo)->mMesh->mCentre;
+	mCentre = ((GearNode*)mGeo)->mMesh->mCentre;
 	mtxMultVec(mSpin, &mCentre, &mCentre);
 	mRadius = ((GearNode*)mGeo)->mMesh->mRadius * mScale;
 }

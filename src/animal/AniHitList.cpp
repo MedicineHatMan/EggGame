@@ -14,7 +14,12 @@ struct AniZeroVec : public Vec3f {
 AniZeroVec sHitOffset; // 0x80286D48
 
 // 0x801CC3EC
-AniHitPart::AniHitPart() : mHits(NULL), mKind(0), mOwnerId(0xFFFF), mOffset(sHitOffset), mRadius(10.0f)
+AniHitPart::AniHitPart()
+    : mHits(NULL)
+    , mKind(0)
+    , mOwnerId(0xFFFF)
+    , mOffset(sHitOffset)
+    , mRadius(10.0f)
 {
 	mLink.mPart = this;
 }
@@ -155,13 +160,21 @@ void AniHitLinks::clear()
 }
 
 // 0x801CC814
-inline void AniHitPart::attach() { }
+inline void AniHitPart::attach()
+{
+}
 
 // 0x801CC818
-inline void AniHitPart::update(AniBody* body) { }
+inline void AniHitPart::update(AniBody* body)
+{
+}
 
 // 0x801CC81C
-inline void AniHitPart::detach() { }
+inline void AniHitPart::detach()
+{
+}
 
 // 0x801CC820
-inline void AniHitPart::hit(AniLife* life) { }
+inline void AniHitPart::hit(AniLife* life)
+{
+}

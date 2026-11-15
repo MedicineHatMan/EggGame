@@ -19,7 +19,7 @@ extern "C" void loadSpeakIconArc()
 	loadArc("ar_icon3d.arc", &gIcon3dArc);
 	if (gIcon3dArc != 0) {
 		sSpeakCursorTexLists = (NJS_TEXLIST**)findArcExport(gIcon3dArc, "texlists");
-		void** textures = (void**)findArcExport(gIcon3dArc, "textures");
+		void** textures      = (void**)findArcExport(gIcon3dArc, "textures");
 		bindGvmTextures((u8*)*textures, sSpeakCursorTexLists[0]);
 	}
 }

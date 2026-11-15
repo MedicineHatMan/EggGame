@@ -28,13 +28,13 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();                          // _0C
-	virtual void vfn_10();                        // _10
-	virtual void render();                        // _1C
-	virtual void initFromDesc(SetDesc* desc);     // _30
-	virtual void debugPrint(void*);               // _34
+	virtual void draw();                                        // _0C
+	virtual void vfn_10();                                      // _10
+	virtual void render();                                      // _1C
+	virtual void initFromDesc(SetDesc* desc);                   // _30
+	virtual void debugPrint(void*);                             // _34
 	virtual int onHit(const TObjAction* other, int, int* info); // _58
-	virtual void vfn_74();                        // _74
+	virtual void vfn_74();                                      // _74
 
 	void makeShape();
 	void updateShape();
@@ -46,19 +46,19 @@ public:
 	void stateWait();
 	void stateDone();
 
-	NJS_OBJECT* mModelData;  // _64
-	NJS_TEXLIST* mTexList;    // _68
-	MeshData* mColliData;  // _6C
-	DrawTask* mDrawTask;   // _70
-	ObjModel mModel;   // _74
-	ObjDrawState mState;  // _94
-	f32 mMatrix[12];   // _B8
+	NJS_OBJECT* mModelData; // _64
+	NJS_TEXLIST* mTexList;  // _68
+	MeshData* mColliData;   // _6C
+	DrawTask* mDrawTask;    // _70
+	ObjModel mModel;        // _74
+	ObjDrawState mState;    // _94
+	f32 mMatrix[12];        // _B8
 	MeshColli* mColli;      // _E8 built from mColliData
-	int mPower;        // _EC the record's first int what onHit reports
-	Vec3f mCenter;     // _F0 the model's centre moved into the world
-	f32 mRadius;       // _FC the model's radius
-	EnemyLight mLight; // _100
-	int mAct;          // _140 0 = stay 1 = finish the link and delete
+	int mPower;             // _EC the record's first int what onHit reports
+	Vec3f mCenter;          // _F0 the model's centre moved into the world
+	f32 mRadius;            // _FC the model's radius
+	EnemyLight mLight;      // _100
+	int mAct;               // _140 0 = stay 1 = finish the link and delete
 };
 
 extern "C" {

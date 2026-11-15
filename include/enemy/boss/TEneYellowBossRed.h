@@ -21,13 +21,13 @@ class TEneYellowBossRed : public TEneYellowBossCrystal {
 public:
 	TEneYellowBossRed(TObject* parent, const Vec3f* pos);
 	virtual ~TEneYellowBossRed();
-	virtual void draw();                                        // _0C 0x8016DE0C
-	virtual void vfn_10();                                      // _10 0x8016E43C
-	virtual void render();                                      // _1C 0x8016E470
-	virtual f32 vfn_40();                                       // _40 0x8016DC70
+	virtual void draw();                                              // _0C 0x8016DE0C
+	virtual void vfn_10();                                            // _10 0x8016E43C
+	virtual void render();                                            // _1C 0x8016E470
+	virtual f32 vfn_40();                                             // _40 0x8016DC70
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58 0x8016DBE4
-	virtual void runAction(int action, int phase);              // _6C 0x8016DE8C
-	virtual u8 isBroken();                                      // _70 0x8016DBD8
+	virtual void runAction(int action, int phase);                    // _6C 0x8016DE8C
+	virtual u8 isBroken();                                            // _70 0x8016DBD8
 
 	void pose();              // 0x8016DC78
 	void calcPoint();         // 0x8016DCC4
@@ -40,10 +40,10 @@ public:
 	void actEnd(int phase);   // 0x8016E2F8 action 3
 	void actDie(int phase);   // 0x8016E38C action 4
 
-	NJS_OBJECT* mModel;       // _1C4
+	NJS_OBJECT* mModel; // _1C4
 	void* mMotions;     // _1C8
 	CharaColli* mShape; // _1CC
-	GjActor* mAnim;        // _1D0
+	GjActor* mAnim;     // _1D0
 	DrawTask* mDraw;    // _1D4
 	int mShots;         // _1D8
 	int mHeading;       // _1DC where on the ring it goes next

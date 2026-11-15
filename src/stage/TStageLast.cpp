@@ -12,16 +12,16 @@ extern "C" TStage* createLastStage()
 	return new TStageLast;
 }
 
-TStageLast::TStageLast() { }
+TStageLast::TStageLast()
+{
+}
 
 void TStageLast::loadAssets()
 {
-
 }
 
 void TStageLast::freeAssets()
 {
-
 }
 
 void TStageLast::vfn_14()
@@ -33,4 +33,6 @@ void TStageLast::vfn_14()
 	createTObjHelios(gTL_02, &pos);
 }
 
-TStageLast::~TStageLast() { }
+TStageLast::~TStageLast()
+{
+}

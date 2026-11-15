@@ -32,14 +32,10 @@ extern "C" {
 // The looping sound in mSound start with an id move it stop it
 
 MotionEntry sPenguinMotions[] = {
-	{ MOTION_LOOP, 5, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 7, -1, 0, 0.0f, 30.0f, 0.7f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 19.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_LOOP, 4, -1, 0, 0.0f, 10.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 8, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 19.0f, 0.2f, 0.0f, 0 },
+	{ MOTION_LOOP, 5, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },  { MOTION_LOOP, 7, -1, 0, 0.0f, 30.0f, 0.7f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 19.0f, 0.35f, 0.0f, 0 }, { MOTION_LOOP, 4, -1, 0, 0.0f, 10.0f, 0.8f, 0.0f, 0 },
+	{ MOTION_ONCE, 3, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },  { MOTION_LOOP, 8, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 0, -1, 0, 0.0f, 19.0f, 0.2f, 0.0f, 0 },
 	{ MOTION_ONCE, 1, -1, 0, 0.0f, 29.0f, 0.2f, 0.0f, 0 },
 };
 }
@@ -100,10 +96,10 @@ extern "C" void initTEnePenguin()
 {
 	resBankLoad(&sPenguinBank, "ar_ene_penguin.arc");
 	resBankAddTextures(&sPenguinBank, 0, "ene_penguin.gvm");
-	sPenguinModels = resBankGetModels(&sPenguinBank);
+	sPenguinModels   = resBankGetModels(&sPenguinBank);
 	sPenguinTextures = resBankGetTextures(&sPenguinBank);
-	sPenguinMotion = resBankGetMotion(&sPenguinBank, 0);
-	gPenguinParams = (PenguinParams*)enemyParamGet(9);
+	sPenguinMotion   = resBankGetMotion(&sPenguinBank, 0);
+	gPenguinParams   = (PenguinParams*)enemyParamGet(9);
 }
 
 // 0x800AA25C
@@ -112,9 +108,9 @@ extern "C" void shutdownTEnePenguin()
 	gPenguinParams = 0;
 	resBankRemoveTextures(&sPenguinBank, 0);
 	resBankRelease(&sPenguinBank);
-	sPenguinModels = 0;
+	sPenguinModels   = 0;
 	sPenguinTextures = 0;
-	sPenguinMotion = 0;
+	sPenguinMotion   = 0;
 }
 
 // 0x800AA2AC
@@ -127,7 +123,7 @@ extern "C" TObject* createTEnePenguin(TObject* parent, SetDesc* desc)
 TEnePenguin::TEnePenguin(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)gTEnePenguinName;
+	_00   = (u32)gTEnePenguinName;
 	mSize = 0x314;
 	init(desc);
 }
@@ -138,7 +134,7 @@ void TEnePenguin::init(SetDesc* desc)
 	motionCtrlInit(&mAnim, sPenguinMotions, sPenguinMotion);
 	motionCtrlPlay(&mAnim, 0);
 	mBody.mRot.x = 0;
-	mCollider = colliCreate(2, 1);
+	mCollider    = colliCreate(2, 1);
 	colliCopyShapes(mCollider, sPenguinShape);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 0x14, 0, 0x10);
@@ -149,12 +145,12 @@ void TEnePenguin::init(SetDesc* desc)
 	}
 	mBrain = 0;
 	readEnemyDesc(desc);
-	mPose = allocPose(*(void**)sPenguinModels);
-	mModel = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mFlags2 = 0;
-	mKnock.x = 0.0f;
-	mKnock.y = 0.0f;
-	mKnock.z = 0.0f;
+	mPose     = allocPose(*(void**)sPenguinModels);
+	mModel    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mFlags2   = 0;
+	mKnock.x  = 0.0f;
+	mKnock.y  = 0.0f;
+	mKnock.z  = 0.0f;
 	mFrameKey = 0;
 	for (int i = 0; i < 7; i++) {
 		mParts[i].x = 0.0f;
@@ -167,7 +163,7 @@ void TEnePenguin::init(SetDesc* desc)
 	mDir.x = 0.0f;
 	mDir.y = 0.0f;
 	mDir.z = 0.0f;
-	mSpin = 0;
+	mSpin  = 0;
 	shadowSetGround(&mShadow, &mBody.mPos, 0);
 	mShadow._30 = 16.0f;
 	mShadow._34 = 16.0f;
@@ -186,8 +182,8 @@ void TEnePenguin::init(SetDesc* desc)
 	for (int i = 0; i < 4; i++) {
 		mFx[i] = 0;
 	}
-	mStep = 0;
-	mAngle = 0;
+	mStep   = 0;
+	mAngle  = 0;
 	mUnk310 = 0.0f;
 	createBrain();
 }
@@ -219,10 +215,10 @@ TEnePenguin::~TEnePenguin()
 // 0x800AA748
 void TEnePenguin::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -239,8 +235,8 @@ f32 TEnePenguin::vfn_40()
 void TEnePenguin::syncCollider()
 {
 	Vec3f* part = (Vec3f*)colliGetShapes(mCollider);
-	part[0] = mParts[0];
-	part[4] = mParts[1];
+	part[0]     = mParts[0];
+	part[4]     = mParts[1];
 	colliRefreshBounds(mCollider);
 	colliBoundsOn(mCollider);
 }
@@ -251,7 +247,7 @@ void TEnePenguin::readEnemyDesc(SetDesc* desc)
 {
 	TObjEnemy::readEnemyDesc(desc);
 	int health = desc->getInt(0);
-	mHealth = health <= 0 ? 200 : health;
+	mHealth    = health <= 0 ? 200 : health;
 }
 
 // 0x800AA860
@@ -259,15 +255,15 @@ void TEnePenguin::readEnemyDesc(SetDesc* desc)
 int TEnePenguin::onHit(const TObjAction* other, int shape, int* result)
 {
 	HitInfo* info = (HitInfo*)result;
-	int hit = 0;
+	int hit       = 0;
 	if ((mFlags2 & PEN_ARMED) != 0 && shape == 0) {
 		if (isPlayerOrKind4(other) != 0) {
 			info->mDamage = 20;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 		} else if (isEggObj(other) != 0) {
 			info->mDamage = 1;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			info->mFlags.setBit(0xD);
 		}
@@ -750,15 +746,15 @@ void TEnePenguin::actSlide(int phase)
 	switch (phase) {
 	case 0:
 		motionCtrlPlayBlend(0.1f, &mAnim, 2);
-		mStep = 0;
+		mStep  = 0;
 		mAngle = 0;
-		mSpin = 0;
+		mSpin  = 0;
 		disarm();
 		mFlags2 &= ~PEN_TILTED;
 		mFlags2 |= PEN_SLIDING;
-		mDir.x = 0.0f;
-		mDir.y = 0.0f;
-		mDir.z = 0.0f;
+		mDir.x       = 0.0f;
+		mDir.y       = 0.0f;
+		mDir.z       = 0.0f;
 		mBody.mRot.z = 0;
 		mBody.mRot.x = 0;
 		setFx(FX_NONE);
@@ -771,7 +767,7 @@ void TEnePenguin::actSlide(int phase)
 			setFrameKey(sPenguinFrameKeys[0]);
 			if (motionCtrlFrame(&mAnim) >= 13.0f) {
 				mAngle = toAngle(mParts[2].x, mParts[2].z);
-				mStep = 1;
+				mStep  = 1;
 				setFx(FX_SLIDE);
 			}
 			break;
@@ -781,7 +777,7 @@ void TEnePenguin::actSlide(int phase)
 				startSlideSound();
 			}
 			int angle = toAngle(mParts[2].x, mParts[2].z);
-			int turn = angleDist(angle, mAngle);
+			int turn  = angleDist(angle, mAngle);
 			if (turn < mSpin) {
 				mBody.mRot.y += mSpin - turn;
 			} else {
@@ -813,7 +809,7 @@ void TEnePenguin::actSlide(int phase)
 				speed = njScalor(&mDir);
 			} else {
 				gjMulAddVector(0.04f, &mDir, &mDir, &to);
-				dir = mDir;
+				dir   = mDir;
 				speed = njUnitVector(&dir);
 				if (speed < gUnitVectorMin) {
 					dir = gVecZero;
@@ -834,7 +830,7 @@ void TEnePenguin::actSlide(int phase)
 				along += gPenguinParams->mSpinPush;
 			}
 			gjMulAddVector(along, &dir, &side, &to);
-			dir.y = 0.0f;
+			dir.y   = 0.0f;
 			f32 len = njUnitVector(&dir);
 			if (len < gUnitVectorMin) {
 				dir = gVecZero;
@@ -1010,13 +1006,13 @@ void TEnePenguin::actDie(int phase)
 		killed(1);
 		noteDie();
 		mFrameKey = 3;
-		mStep = 60;
+		mStep     = 60;
 		break;
 	case 1:
 		motionCtrlUpdate(&mAnim);
 		if (motionCtrlPassed(5.0f, &mAnim) != 0) {
 			Vec3f pos;
-			pos = mParts[0];
+			pos   = mParts[0];
 			pos.y = mBody.mPos.y;
 			particleOnceByIdDefault(&pos, 0, 0x46);
 		}
@@ -1041,7 +1037,7 @@ void TEnePenguin::actDie(int phase)
 // 0x800AC194
 void TEnePenguin::vfn_3C()
 {
-	int x = kEnemyInfoX << 16;
+	int x    = kEnemyInfoX << 16;
 	int line = kEnemyInfoLine;
 	njPrint(x | line, ":HP %4d", mHealth);
 }

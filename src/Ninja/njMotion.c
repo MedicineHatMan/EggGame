@@ -19,10 +19,10 @@ typedef struct GjCameraOut {
 void njGetCameraMotion(const GjCameraBase* base, void* motion, const GjCameraOut* out, f32 frame)
 {
 	u32 type;
-	f32* pos = out->pos;
-	f32* vec = out->vec;
+	f32* pos  = out->pos;
+	f32* vec  = out->vec;
 	s16* roll = out->roll;
-	s16* ang = out->ang;
+	s16* ang  = out->ang;
 
 	gjMotionSelectState(0);
 	gjMotionBegin(motion, frame);
@@ -90,7 +90,7 @@ void njGetCameraMotion(const GjCameraBase* base, void* motion, const GjCameraOut
 s32 gjMotionGetVec(f32* out)
 {
 	GjMotionState* s = gjCurMotionState;
-	void* keys = s->list0[s->index];
+	void* keys       = s->list0[s->index];
 	if (keys != NULL) {
 		s->readVec(keys, s->list1[s->index], s->frame, out);
 		gjCurMotionState->index++;
@@ -105,7 +105,7 @@ s32 gjMotionGetVec(f32* out)
 s32 gjMotionGetAngS1(s16* out)
 {
 	GjMotionState* s = gjCurMotionState;
-	void* keys = s->list0[s->index];
+	void* keys       = s->list0[s->index];
 	if (keys != NULL) {
 		gjInterpAngS1(keys, s->list1[s->index], s->frame, out);
 		gjCurMotionState->index++;
@@ -120,7 +120,7 @@ s32 gjMotionGetAngS1(s16* out)
 s32 gjMotionGetAng(s32* out)
 {
 	GjMotionState* s = gjCurMotionState;
-	void* keys = s->list0[s->index];
+	void* keys       = s->list0[s->index];
 	if (keys != NULL) {
 		s->readAng(keys, s->list1[s->index], s->frame, out);
 		gjCurMotionState->index++;
@@ -135,7 +135,7 @@ s32 gjMotionGetAng(s32* out)
 s32 gjMotionGetAngS(s16* out)
 {
 	GjMotionState* s = gjCurMotionState;
-	void* keys = s->list0[s->index];
+	void* keys       = s->list0[s->index];
 	if (keys != NULL) {
 		s->readAngS(keys, s->list1[s->index], s->frame, out);
 		gjCurMotionState->index++;
@@ -150,7 +150,7 @@ s32 gjMotionGetAngS(s16* out)
 s32 gjMotionGetQuat(NJS_QUATERNION* out)
 {
 	GjMotionState* s = gjCurMotionState;
-	void* keys = s->list0[s->index];
+	void* keys       = s->list0[s->index];
 	if (keys != NULL) {
 		gjInterpQuat(keys, s->list1[s->index], s->frame, out);
 		gjCurMotionState->index++;
@@ -246,7 +246,7 @@ void gjInterpAngS1(GjKeyAngS1* keys, u32 n, f32 frame, s16* out)
 void gjInterpVecSpline(GjKeyVec* keys, u32 n, f32 frame, f32* out)
 {
 	f32 d[2] = { 1.0f, 1.0f };
-	u32 i = gjKeyFind(keys, 0x10, n, frame);
+	u32 i    = gjKeyFind(keys, 0x10, n, frame);
 	s32 dt;
 	u32 start;
 	GjKeyVec* k0;
@@ -254,21 +254,21 @@ void gjInterpVecSpline(GjKeyVec* keys, u32 n, f32 frame, f32* out)
 	GjKeyVec* k2;
 	GjKeyVec* k3;
 	f32 tt, t2, t3, t, c0, c1;
-	k0 = &keys[(i + n - 1) % n];
-	k1 = &keys[i];
-	k2 = &keys[(i + 1) % n];
-	k3 = &keys[(i + 2) % n];
+	k0    = &keys[(i + n - 1) % n];
+	k1    = &keys[i];
+	k2    = &keys[(i + 1) % n];
+	k3    = &keys[(i + 2) % n];
 	start = k1->frame;
-	dt = k2->frame - start;
+	dt    = k2->frame - start;
 
-	d[1] = (u32)dt;
-	t = (frame - start) / d[dt > 0];
-	t2 = t * t;
-	t3 = t2 * t;
-	c0 = 0.5f * (-t3 + (tt = 2.0f * t2) - t);
-	c1 = 1.0f + (1.5f * t3 - 2.5f * t2);
-	t = 0.5f * t + (-1.5f * t3 + tt);
-	t2 = 0.5f * (t3 - t2);
+	d[1]   = (u32)dt;
+	t      = (frame - start) / d[dt > 0];
+	t2     = t * t;
+	t3     = t2 * t;
+	c0     = 0.5f * (-t3 + (tt = 2.0f * t2) - t);
+	c1     = 1.0f + (1.5f * t3 - 2.5f * t2);
+	t      = 0.5f * t + (-1.5f * t3 + tt);
+	t2     = 0.5f * (t3 - t2);
 	out[0] = c0 * k0->v[0] + c1 * k1->v[0] + t * k2->v[0] + t2 * k3->v[0];
 	out[1] = c0 * k0->v[1] + c1 * k1->v[1] + t * k2->v[1] + t2 * k3->v[1];
 	out[2] = c0 * k0->v[2] + c1 * k1->v[2] + t * k2->v[2] + t2 * k3->v[2];

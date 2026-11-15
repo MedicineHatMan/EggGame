@@ -12,11 +12,13 @@ typedef char PadState_size_check[(sizeof(PadState) == 0x38) ? 1 : -1];
 
 extern "C" {
 u32 sPadChanBits[4] = {
-	0x80000000, 0x40000000, 0x20000000, 0x10000000,
+	0x80000000,
+	0x40000000,
+	0x20000000,
+	0x10000000,
 }; // One bit per controller
 
 struct VibNode;
-
 }
 
 // 0x8001248C
@@ -45,12 +47,12 @@ f32 padStickLength(f32 x, f32 y)
 {
 	f32 sq = x * x + y * y;
 	if (sq > 0.0f) {
-		f64 guess = __frsqrte(sq);
-		guess     = 0.5 * guess * (3.0 - guess * guess * sq);
-		guess     = 0.5 * guess * (3.0 - guess * guess * sq);
-		guess     = 0.5 * guess * (3.0 - guess * guess * sq);
+		f64 guess         = __frsqrte(sq);
+		guess             = 0.5 * guess * (3.0 - guess * guess * sq);
+		guess             = 0.5 * guess * (3.0 - guess * guess * sq);
+		guess             = 0.5 * guess * (3.0 - guess * guess * sq);
 		volatile f32 root = (f32)(sq * guess);
-		sq = root;
+		sq                = root;
 	}
 	f32 len = sq;
 	if (len != 0.0f) {
@@ -72,15 +74,15 @@ int padStickAngle(f32 x, f32 y)
 // 0x800125F4
 void padInit()
 {
-	PadSystem* pad = &sPadSys;
-	pad->mRepeatDelay = 30;
-	pad->mRepeatRate  = 10;
-	pad->mNone        = sPadNoState;
+	PadSystem* pad      = &sPadSys;
+	pad->mRepeatDelay   = 30;
+	pad->mRepeatRate    = 10;
+	pad->mNone          = sPadNoState;
 	pad->mResetInterval = 1;
 	pad->mResetTimer    = 1;
 	for (int i = 0; i < 4; i++) {
 		pad->mPads[i].mRepeatTimer = 0;
-		pad->mPads[i].mState = sPadNoState;
+		pad->mPads[i].mState       = sPadNoState;
 	}
 	pad->mVibWork = memAlloc(0x800);
 	vibInit((VibNode*)pad->mVibWork, 0x40);
@@ -124,17 +126,17 @@ void padUpdate()
 	PADStatus* in;
 	int i;
 	for (i = 0; i < 4; i++) {
-		PadEntry* ent  = &sys->mPads[i];
-		PadState* pad  = &sys->mPads[i].mState;
-		in  = &st[i];
-		pad->mPrev = pad->mHold;
+		PadEntry* ent = &sys->mPads[i];
+		PadState* pad = &sys->mPads[i].mState;
+		in            = &st[i];
+		pad->mPrev    = pad->mHold;
 		if (in->err == 0) {
-			pad->mHold    = in->button;
-			pad->mHoldInv = ~in->button;
-			pad->mStickX  = padScaleStick(in->stickX);
-			pad->mStickY  = padScaleStick(in->stickY);
-			pad->mSubX    = in->substickX;
-			pad->mSubY    = in->substickY;
+			pad->mHold     = in->button;
+			pad->mHoldInv  = ~in->button;
+			pad->mStickX   = padScaleStick(in->stickX);
+			pad->mStickY   = padScaleStick(in->stickY);
+			pad->mSubX     = in->substickX;
+			pad->mSubY     = in->substickY;
 			pad->mTriggerL = in->triggerLeft;
 			pad->mTriggerR = in->triggerRight;
 			padClampStick(&pad->mStickX, &pad->mStickY);
@@ -168,12 +170,12 @@ void padUpdate()
 			pad->mLastErr = in->err;
 		}
 		if ((pad->mPrev ^ pad->mHold) != 0) {
-			pad->mRepeat = pad->mPressed;
+			pad->mRepeat      = pad->mPressed;
 			ent->mRepeatTimer = sys->mRepeatDelay;
 		} else if (--ent->mRepeatTimer != 0) {
 			pad->mRepeat = 0;
 		} else {
-			pad->mRepeat = pad->mHold;
+			pad->mRepeat      = pad->mHold;
 			ent->mRepeatTimer = sys->mRepeatRate;
 		}
 		pad->mLength    = padStickLength(pad->mStickX, pad->mStickY);
@@ -183,7 +185,7 @@ void padUpdate()
 	}
 	if (sys->mResetTimer != 0 && --sys->mResetTimer == 0) {
 		sys->mResetTimer = sys->mResetInterval;
-		u32 mask = 0;
+		u32 mask         = 0;
 		for (int i = 0; i < 4; i++) {
 			if (st[i].err == -1) {
 				mask |= sPadChanBits[i];

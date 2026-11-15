@@ -11,13 +11,15 @@ extern "C" void* createGameBoss(TObject* parent)
 TGameBoss::TGameBoss(TObject* parent)
     : TGameContext(parent)
 {
-	_00   = (u32)gTGameBossName;
-	mSize = 0x3C;
+	_00     = (u32)gTGameBossName;
+	mSize   = 0x3C;
 	mBeaten = 0;
 }
 
 // 0x80113EE8
-TGameBoss::~TGameBoss() { }
+TGameBoss::~TGameBoss()
+{
+}
 
 // 0x80113F44
 void TGameBoss::startState()

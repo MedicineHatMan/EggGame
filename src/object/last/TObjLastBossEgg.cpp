@@ -19,7 +19,7 @@ struct DrawTask;
 #include "animal/RacerMover.h"
 
 extern "C" {
-const char* gTObjLastBossEggName = "TObjLastBossEgg";
+const char* gTObjLastBossEggName      = "TObjLastBossEgg";
 const char* gTObjLastBossEgg_FragName = "TObjLastBossEgg_Frag";
 int gLastBossEggOpen;
 int gLastBossEggYaw;
@@ -40,12 +40,12 @@ extern "C" TObject* createTObjLastBossEgg(TObject* parent, SetDesc* desc)
 TObjLastBossEgg::TObjLastBossEgg(TObject* parent, SetDesc* desc)
     : TSetObj(parent, desc)
 {
-	_00      = (u32)gTObjLastBossEggName;
-	mSize    = 0xF4;
-	mDraw    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
+	_00   = (u32)gTObjLastBossEggName;
+	mSize = 0xF4;
+	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
 	mSurface.reset();
-	mModel   = lastBossGetModel(3);
-	mRadius  = lastBossModelRadius(mModel);
+	mModel        = lastBossGetModel(3);
+	mRadius       = lastBossModelRadius(mModel);
 	mTrans.mRot.y = 0;
 	initFromDesc(desc);
 	fxHolderStop(&mGlow);
@@ -70,8 +70,8 @@ void TObjLastBossEgg::initFromDesc(SetDesc* desc)
 	mSurface.readDesc(desc);
 	mSurface.bindModel(mModel->model, &mTrans);
 
-	f32 sx    = -mTrans.mPos.x;
-	f32 sz    = -mTrans.mPos.z;
+	f32 sx = -mTrans.mPos.x;
+	f32 sz = -mTrans.mPos.z;
 	f32* mtx;
 	int angle = (int)(10430.38043493439 * (f32)atan2(sx, sz));
 	njSinCos(angle, &sx, &sz);
@@ -186,23 +186,23 @@ extern "C" void spawnTObjLastBossEgg_FragShell(void* model, const Vec3f* pos, co
 TObjLastBossEgg_Frag::TObjLastBossEgg_Frag(TObject* parent, int kind, void* model, const Vec3f* pos, Vec3f dir, int angle)
     : TObject(parent)
 {
-	_00            = (u32)gTObjLastBossEgg_FragName;
-	mSize          = 0x80;
-	mXform.mPos    = *pos;
-	mXform.mVel    = dir;
+	_00         = (u32)gTObjLastBossEgg_FragName;
+	mSize       = 0x80;
+	mXform.mPos = *pos;
+	mXform.mVel = dir;
 	if (njUnitVector(&mXform.mVel) < gUnitVectorMin) {
 		mXform.mVel = gVecZero;
 	}
 	gjScaleVector(8.0f, &mXform.mVel, &mXform.mVel);
 	mXform.mRot.y = angle;
 	mXform.mForce = *pos;
-	mSpinX  = (int)(1200.0f * (3.0517578125e-05f * (f32)rand()) + -600.0f);
-	mSpinY  = (int)(400.0f * (3.0517578125e-05f * (f32)rand()) + -200.0f);
-	mModel  = (NJS_OBJECT*)model;
-	mRadius = lastBossModelRadius(mModel);
-	mKind   = kind;
-	mLife   = 300;
-	mDraw   = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
+	mSpinX        = (int)(1200.0f * (3.0517578125e-05f * (f32)rand()) + -600.0f);
+	mSpinY        = (int)(400.0f * (3.0517578125e-05f * (f32)rand()) + -200.0f);
+	mModel        = (NJS_OBJECT*)model;
+	mRadius       = lastBossModelRadius(mModel);
+	mKind         = kind;
+	mLife         = 300;
+	mDraw         = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
 }
 
 // 0x8016D70C

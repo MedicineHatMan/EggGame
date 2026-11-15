@@ -5,13 +5,13 @@
 #include "player/Player.h"
 
 struct PlyPad {
-	u32 mHold;      // _00
+	u32 mHold; // _00
 	u8 _04[4];
-	u32 mTrigger;   // _08
-	u32 mRelease;   // _0C
+	u32 mTrigger; // _08
+	u32 mRelease; // _0C
 	u8 _10[0x14];
 	int mStickAngle; // _24
-	f32 mStickMag;  // _28
+	f32 mStickMag;   // _28
 };
 
 struct PlyButtonMap {
@@ -20,13 +20,8 @@ struct PlyButtonMap {
 };
 
 extern "C" const PlyButtonMap sPlyButtonMap[7] = {
-	{ PAD_BUTTON_A, PLY_BTN_A },
-	{ PAD_BUTTON_B, PLY_BTN_B },
-	{ PAD_TRIGGER_R, PLY_BTN_R },
-	{ PAD_TRIGGER_R, PLY_BTN_R2 },
-	{ PAD_BUTTON_X, PLY_BTN_X },
-	{ PAD_BUTTON_B, PLY_BTN_B2 },
-	{ PAD_BUTTON_Y, PLY_BTN_Y },
+	{ PAD_BUTTON_A, PLY_BTN_A }, { PAD_BUTTON_B, PLY_BTN_B },  { PAD_TRIGGER_R, PLY_BTN_R }, { PAD_TRIGGER_R, PLY_BTN_R2 },
+	{ PAD_BUTTON_X, PLY_BTN_X }, { PAD_BUTTON_B, PLY_BTN_B2 }, { PAD_BUTTON_Y, PLY_BTN_Y },
 };
 
 PlyInput::PlyInput()
@@ -51,8 +46,8 @@ void PlyInput::read(int pad, f32* camera)
 	Vec3f forward;
 
 	PlyPad* state = (PlyPad*)padGet((u8)pad);
-	f32 stick = state->mStickMag;
-	stick     = stick * stick * stick;
+	f32 stick     = state->mStickMag;
+	stick         = stick * stick * stick;
 	if (stick < 0.1f) {
 		stick = 0.0f;
 	}
@@ -60,7 +55,7 @@ void PlyInput::read(int pad, f32* camera)
 
 	mtxMultVecSR(camera, &gAxisZ, &forward);
 	int angle = state->mStickAngle + vecAngleXZ(&forward);
-	mAngle = angle - 0x4000;
+	mAngle    = angle - 0x4000;
 
 	mPressed  = 0;
 	mReleased = 0;

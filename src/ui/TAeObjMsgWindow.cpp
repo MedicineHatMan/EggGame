@@ -39,7 +39,7 @@ extern "C" void loadMsgWindow()
 	loadArc("ae_msg_window.arc", &sMsgWindowArc);
 	if (sMsgWindowArc != 0) {
 		AeArcBlock* block = aeArcBlock(sMsgWindowArc);
-		sMsgWindowAe = block->mAe;
+		sMsgWindowAe      = block->mAe;
 		relocateAe(sMsgWindowAe);
 		sMsgWindowTexList = block->mTexList;
 		bindGvmTextures((u8*)block->mGvm, sMsgWindowTexList);
@@ -66,7 +66,7 @@ extern "C" void freeMsgWindow()
 		sMsgWindowTexList = 0;
 		releaseResource(sMsgWindowArc);
 		sMsgWindowArc = 0;
-		sMsgWindowAe = 0;
+		sMsgWindowAe  = 0;
 	}
 }
 
@@ -83,28 +83,31 @@ extern "C" TAeObjMsgWindow* createMsgWindow(TObject* parent, u32 kind)
 TAeObjMsgWindow::TAeObjMsgWindow(TObject* parent, void* data, void* assets, u32 kind)
     : TAeObject(parent, data, assets)
 {
-	mKind  = kind;
-	_00    = (u32)gTAeObjMsgWindowName;
-	mSize  = 0x74;
-	mTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3E, 0);
-	mWindow = 0;
-	mArrow    = 0;
+	mKind       = kind;
+	_00         = (u32)gTAeObjMsgWindowName;
+	mSize       = 0x74;
+	mTask       = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3E, 0);
+	mWindow     = 0;
+	mArrow      = 0;
 	mChoices    = 0;
-	mPanelA    = 0;
-	mPanelB    = 0;
-	mCursorRow    = 0;
-	mRow    = 0;
-	mMark    = 0;
-	mIcon    = 0;
-	mDieOnClose    = 0;
-	mArrowState    = 2;
-	mPulse    = 0.0f;
-	mPulseAngle    = 0;
+	mPanelA     = 0;
+	mPanelB     = 0;
+	mCursorRow  = 0;
+	mRow        = 0;
+	mMark       = 0;
+	mIcon       = 0;
+	mDieOnClose = 0;
+	mArrowState = 2;
+	mPulse      = 0.0f;
+	mPulseAngle = 0;
 	build();
 }
 
 // 0x800E9F5C
-TAeObjMsgWindow::~TAeObjMsgWindow() { removeDrawTask(mTask); }
+TAeObjMsgWindow::~TAeObjMsgWindow()
+{
+	removeDrawTask(mTask);
+}
 
 // The window's slot for the choice panel by the prompt picked with setPrompt
 // The choice panel's slot for each row of a three-way choice
@@ -119,13 +122,13 @@ static inline void make(TAeObjMsgWindow* self, TAeLayer*& slot, int id, u32 flag
 }
 
 // A macro over the caller's colour buffer every tint in a function uses the same one
-#define tint(buf, layer, color)                                                                                \
-	if ((layer) != 0) {                                                                                     \
-		buf[0] = (color).v[0];                                                                            \
-		buf[1] = (color).v[1];                                                                            \
-		buf[2] = (color).v[2];                                                                            \
-		buf[3] = (color).v[3];                                                                            \
-		(layer)->setColor(buf);                                                                           \
+#define tint(buf, layer, color) \
+	if ((layer) != 0) {         \
+		buf[0] = (color).v[0];  \
+		buf[1] = (color).v[1];  \
+		buf[2] = (color).v[2];  \
+		buf[3] = (color).v[3];  \
+		(layer)->setColor(buf); \
 	}
 
 // 0x800E9FC4
@@ -187,7 +190,7 @@ void TAeObjMsgWindow::makeTalk()
 {
 	make(this, mWindow, 0x57, 0x10);
 	make(this, mArrow, 0x42, 0);
-	mState  = MSGWIN_OPENING;
+	mState = MSGWIN_OPENING;
 }
 
 // 0x800EA1B0
@@ -196,7 +199,7 @@ void TAeObjMsgWindow::makeNotice()
 	sePlay(0x1E);
 	make(this, mWindow, 0x4E, 0x10);
 	make(this, mArrow, 0xB, 0);
-	mState  = MSGWIN_OPENING;
+	mState = MSGWIN_OPENING;
 }
 
 // 0x800EA240
@@ -332,11 +335,11 @@ void TAeObjMsgWindow::setMark(int row)
 }
 
 // A macro close() reads the member again for each step
-#define playOut(layer)                                                                                         \
-	if ((layer) != 0) {                                                                                     \
-		(layer)->setMode(0x20);                                                                           \
-		(layer)->mPlayFlags &= ~0x500;                                                                    \
-		(layer)->wake();                                                                                  \
+#define playOut(layer)                 \
+	if ((layer) != 0) {                \
+		(layer)->setMode(0x20);        \
+		(layer)->mPlayFlags &= ~0x500; \
+		(layer)->wake();               \
 	}
 
 // 0x800EAB38
@@ -473,7 +476,9 @@ void TAeObjMsgWindow::draw()
 }
 
 // 0x800EB0B8
-void TAeObjMsgWindow::vfn_10() { }
+void TAeObjMsgWindow::vfn_10()
+{
+}
 
 // 0x800EB0BC
 void TAeObjMsgWindow::render()

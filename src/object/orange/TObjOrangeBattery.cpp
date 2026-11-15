@@ -62,21 +62,21 @@ TObjOrangeBattery::TObjOrangeBattery(TObject* parent, SetDesc* desc)
 	colliSetMasks((CharaColli*)mShape, 4, 0xFF, 0xFF, 0xD6);
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
 	initFromDesc(desc);
-	mMesh = meshColliCreate();
+	mMesh         = meshColliCreate();
 	void** meshes = gGeObjCommon->mSet.mMeshes;
 	meshColliSetData((MeshObject*)mMesh, (MeshData*)meshes[2]);
 	meshColliSetMatrix((MeshColli*)mMesh, (const f32*)mMatrix);
 	if (sBatteryOffsetAGuard == 0) {
-		sBatteryOffsetA.x = 0.0f;
-		sBatteryOffsetA.y = 22.814571f;
-		sBatteryOffsetA.z = -4.935901f;
-		sBatteryOffsetAGuard   = 1;
+		sBatteryOffsetA.x    = 0.0f;
+		sBatteryOffsetA.y    = 22.814571f;
+		sBatteryOffsetA.z    = -4.935901f;
+		sBatteryOffsetAGuard = 1;
 	}
 	if (sBatteryOffsetBGuard == 0) {
-		sBatteryOffsetB.x = 56.215065f;
-		sBatteryOffsetB.y = 56.215065f;
-		sBatteryOffsetB.z = 56.215065f;
-		sBatteryOffsetBGuard   = 1;
+		sBatteryOffsetB.x    = 56.215065f;
+		sBatteryOffsetB.y    = 56.215065f;
+		sBatteryOffsetB.z    = 56.215065f;
+		sBatteryOffsetBGuard = 1;
 	}
 	Vec3f boxMax;
 	Vec3f boxMin;
@@ -105,9 +105,9 @@ void TObjOrangeBattery::initFromDesc(SetDesc* desc)
 	mtxSetTransV(mMatrix, &mPos);
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 	GjModel* model = mNodes[0].model;
-	mCenter.x  = model->center.x;
-	mCenter.y  = model->center.y;
-	mCenter.z  = model->center.z;
+	mCenter.x      = model->center.x;
+	mCenter.y      = model->center.y;
+	mCenter.z      = model->center.z;
 	mtxMultVec(mMatrix, &mCenter, &mCenter);
 	mRadius = mNodes[0].model->r;
 	u8 shape[0x30];
@@ -156,20 +156,20 @@ void TObjOrangeBattery::vfn_74()
 // Three nodes of MODEL_BATTERY then the two rest positions from the sibling chain
 void TObjOrangeBattery::copyNodes(NJS_OBJECT* model)
 {
-	NJS_OBJECT* body = model->child;
-	NJS_OBJECT* node = body->child;
-	mNodes[0]        = *node;
-	node             = node->sibling;
-	mNodes[1]        = *node;
-	node             = node->sibling;
-	mNodes[2]        = *node;
+	NJS_OBJECT* body  = model->child;
+	NJS_OBJECT* node  = body->child;
+	mNodes[0]         = *node;
+	node              = node->sibling;
+	mNodes[1]         = *node;
+	node              = node->sibling;
+	mNodes[2]         = *node;
 	mNodes[2].sibling = 0;
 	mNodes[1].sibling = 0;
 	mNodes[0].sibling = 0;
 
 	NJS_OBJECT* end = body->sibling->child;
 	mEnds[0].set(end->pos[0], end->pos[1], end->pos[2]);
-	end             = end->sibling;
+	end = end->sibling;
 	mEnds[1].set(end->pos[0], end->pos[1], end->pos[2]);
 }
 
@@ -225,7 +225,10 @@ void TObjOrangeBattery::stateWait()
 // 0x80120E88
 #define BATTERY_RAND() (3.0517578e-05f * (f32)rand())
 
-static inline f32 batterySigned() { return 2.0f * (BATTERY_RAND() - 0.5f); }
+static inline f32 batterySigned()
+{
+	return 2.0f * (BATTERY_RAND() - 0.5f);
+}
 
 void TObjOrangeBattery::stateCharge()
 {
@@ -286,8 +289,8 @@ void TObjOrangeBattery::vfn_10()
 		if (fade < 0.5f) {
 			fade = 0.5f;
 		}
-		mBolts[0].mWidth = fade;
-		mBolts[1].mWidth = fade;
+		mBolts[0].mWidth    = fade;
+		mBolts[1].mWidth    = fade;
 		mDrawTask->mSortKey = drawTaskDepthKey(screen.z);
 		mDrawTask->mFlags &= 0xFFFE;
 	} else {
@@ -333,12 +336,12 @@ struct BoltVecBlock {
 BatteryBolt::BatteryBolt()
 {
 	*(BoltVecBlock*)&mFrom = *(BoltVecBlock*)&gVecZero;
-	mTo.x   = 1.0f;
-	mTo.y   = 0.0f;
-	mTo.z   = 0.0f;
-	mSpread = 0.4f;
-	mWidth  = 1.0f;
-	mColor  = 0xFFFFFFFF;
+	mTo.x                  = 1.0f;
+	mTo.y                  = 0.0f;
+	mTo.z                  = 0.0f;
+	mSpread                = 0.4f;
+	mWidth                 = 1.0f;
+	mColor                 = 0xFFFFFFFF;
 	mtxIdentity(mMatrix);
 	reset();
 }
@@ -371,8 +374,8 @@ void BatteryBolt::reset()
 {
 	f32 z;
 	f32 step;
-	mPoints[0].x  = 0.0f;
-	step = z = 0.06666667f;
+	mPoints[0].x = 0.0f;
+	step = z      = 0.06666667f;
 	mPoints[0].y  = 0.0f;
 	mPoints[0].z  = 0.0f;
 	mPoints[15].x = 0.0f;

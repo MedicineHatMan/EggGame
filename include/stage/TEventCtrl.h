@@ -55,13 +55,13 @@ public:
 	int isBusy();
 	int canStart();
 
-	u8 mState;        // _20
-	FlagByte mFlag;   // _21 mBits 1 requested 2 end 4 from the queue 8 blocked
-	int _24;          // _24
-	int mCamera;      // _28
-	TObject* mObjParent;// _2C
-	int _30;          // _30
-	TObject* mDesignParent;// _34
+	u8 mState;              // _20
+	FlagByte mFlag;         // _21 mBits 1 requested 2 end 4 from the queue 8 blocked
+	int _24;                // _24
+	int mCamera;            // _28
+	TObject* mObjParent;    // _2C
+	int _30;                // _30
+	TObject* mDesignParent; // _34
 };
 
 struct EventRequest {

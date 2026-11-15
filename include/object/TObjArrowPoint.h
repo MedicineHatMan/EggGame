@@ -36,7 +36,7 @@ public:
 	void launchFrom(TObjAction* from); // 0x80054424
 	void raiseMarker();                // 0x800546C4
 	inline void makeMarker();
-	void aimAtSkull();                 // 0x80054784
+	void aimAtSkull(); // 0x80054784
 
 	ObjRef mFrom;    // _64 the skull
 	ObjRef mTrack;   // _70 the ball a TObjLauncher
@@ -45,9 +45,9 @@ public:
 	u16 mSkull;      // _8C
 	u16 mKey;        // _8E
 	u8 _90[4];
-	int mAct;        // _94 an ArrowPointState
-	f32 mScale;      // _98
-	f32 mAnim;       // _9C
+	int mAct;   // _94 an ArrowPointState
+	f32 mScale; // _98
+	f32 mAnim;  // _9C
 };
 
 #endif

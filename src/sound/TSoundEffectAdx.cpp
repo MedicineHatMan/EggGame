@@ -119,7 +119,7 @@ void TSoundEffectAdx::draw()
 		if (status == -1 || (u32)(status - 4) <= 2 || status == 0xB) {
 			voice = mPlaying;
 			while (voice != 0) {
-				next = voice->mNext;
+				next   = voice->mNext;
 				player = mPlayers[voice->mSlot];
 				ADXT_Stop(player);
 				ADXT_ClearErrCode(player);
@@ -138,8 +138,8 @@ void TSoundEffectAdx::draw()
 		if (voice->mFlags & 0x40) {
 			voice->mFlags &= ~0x40;
 		}
-		player = mPlayers[voice->mSlot];
-		int stat     = ADXT_GetStat(player);
+		player   = mPlayers[voice->mSlot];
+		int stat = ADXT_GetStat(player);
 		if (stat == 5 || stat == 0) {
 			freeVoice(voice);
 		} else if (stat == 6) {

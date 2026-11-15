@@ -13,7 +13,7 @@ extern "C" void initBlueBoss()
 {
 	resBankLoad(&sBoss02FenceBank, "ar_obj_blue_boss.arc");
 	resBankAddTextures(&sBoss02FenceBank, 0, "obj_blue_boss.gvm");
-	sBoss02FenceModels = resBankGetModels(&sBoss02FenceBank);
+	sBoss02FenceModels   = resBankGetModels(&sBoss02FenceBank);
 	sBoss02FenceTextures = resBankGetTextures(&sBoss02FenceBank);
 }
 
@@ -22,7 +22,7 @@ extern "C" void termBlueBoss()
 {
 	resBankRemoveTextures(&sBoss02FenceBank, 0);
 	resBankRelease(&sBoss02FenceBank);
-	sBoss02FenceModels = 0;
+	sBoss02FenceModels   = 0;
 	sBoss02FenceTextures = 0;
 }
 
@@ -82,7 +82,7 @@ void TObjBoss02Fence::vfn_10()
 // 0x80068694
 void TObjBoss02Fence::render()
 {
-	NJS_OBJECT** models   = boss02GetFenceModels();
+	NJS_OBJECT** models    = boss02GetFenceModels();
 	NJS_TEXLIST** textures = boss02GetFenceTextures();
 
 	njSetTexture(textures[0]);

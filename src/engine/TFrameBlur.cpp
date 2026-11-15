@@ -35,11 +35,14 @@ extern "C" void frameBlurInit()
 extern "C" void frameBlurReset()
 {
 	sFrameBlurObj = 0;
-	sFrameBlurOn = 0;
+	sFrameBlurOn  = 0;
 }
 
 // 0x8002E79C
-extern "C" void frameBlurCreate() { sFrameBlurObj = new TFrameBlur(gTL_07); }
+extern "C" void frameBlurCreate()
+{
+	sFrameBlurObj = new TFrameBlur(gTL_07);
+}
 
 // 0x8002E7DC
 extern "C" void frameBlurStart(int frames, f32 alpha)
@@ -64,7 +67,10 @@ TFrameBlur::TFrameBlur(TObject* parent)
 }
 
 // 0x8002E88C
-TFrameBlur::~TFrameBlur() { removeDrawTask(mTask); }
+TFrameBlur::~TFrameBlur()
+{
+	removeDrawTask(mTask);
+}
 
 // 0x8002E8F4
 void TFrameBlur::start(int frames, f32 alpha)
@@ -91,11 +97,11 @@ void TFrameBlur::render()
 		return;
 	}
 	if (mCaptured != 0) {
-		u32 flags = _nj_current_ctx_->blend;
+		u32 flags               = _nj_current_ctx_->blend;
 		_nj_current_ctx_->blend = flags | 0x10000 | 0x8000;
 		frameTexSet(1);
 		njSetTextureNum(0);
-		u32 color = ((u32)(255.0f * mAlpha) << 24) | 0xFF0000 | 0xFFFF;
+		u32 color             = ((u32)(255.0f * mAlpha) << 24) | 0xFF0000 | 0xFFFF;
 		sFrameBlurQuad[0].col = color;
 		sFrameBlurQuad[1].col = color;
 		sFrameBlurQuad[2].col = color;

@@ -48,7 +48,7 @@ void shadowDrawVolumes()
 		ObjShadow* s;
 		shadowVolumeBegin();
 		NJS_OBJECT* model = (NJS_OBJECT*)shadowGetModel();
-		s = sShadowList;
+		s                 = sShadowList;
 		while (s != NULL) {
 			if (shadowIsEnabled(s)) {
 				njPushMatrixEx();
@@ -101,8 +101,8 @@ ObjShadow::ObjShadow()
 	if (sShadowList == NULL) {
 		sShadowList = this;
 	} else {
-		mNext = sShadowList->mNext;
-		mPrev = sShadowList;
+		mNext              = sShadowList->mNext;
+		mPrev              = sShadowList;
 		sShadowList->mNext = this;
 		if (mNext != NULL) {
 			mNext->mPrev = this;
@@ -152,8 +152,8 @@ void shadowSetGround(ObjShadow* shadow, const Vec3f* pos, const Vec3f* normal)
 	if (normal != NULL) {
 		if (shadow->mNormal.x != normal->x || shadow->mNormal.y != normal->y || shadow->mNormal.z != normal->z) {
 			shadow->mNormal = *normal;
-			shadow->mTiltY = (int)(10430.38043493439 * (f32)atan2(shadow->mNormal.x, shadow->mNormal.z));
-			shadow->mTiltX = (int)(10430.38043493439 * (f32)acos(shadow->mNormal.y));
+			shadow->mTiltY  = (int)(10430.38043493439 * (f32)atan2(shadow->mNormal.x, shadow->mNormal.z));
+			shadow->mTiltX  = (int)(10430.38043493439 * (f32)acos(shadow->mNormal.y));
 		}
 	}
 }

@@ -24,8 +24,8 @@ void* footPrinterCreate();
  * @size 0x38
  */
 struct FootPrint {
-	u16 mLife;       // _00
-	u16 mKind;       // _02
+	u16 mLife;        // _00
+	u16 mKind;        // _02
 	Vec3f mCorner[4]; // _04
 	FootPrint* mNext; // _34
 };
@@ -47,10 +47,10 @@ public:
 	void add(const Vec3f* pos, const Vec3f* dir, int rotY, int kind);
 	void initRing();
 
-	NJS_TEXLIST* mTexList;      // _20
-	DrawTask* mTask;     // _24
+	NJS_TEXLIST* mTexList;    // _20
+	DrawTask* mTask;          // _24
 	FootPrint mPrints[0x100]; // _28
-	FootPrint* mNext;    // _3828
+	FootPrint* mNext;         // _3828
 };
 
 /**
@@ -59,9 +59,9 @@ public:
  * @size 0x18
  */
 struct FootCorner {
-	Vec3f mPos; // _00
-	f32 mU;     // _0C
-	f32 mV;     // _10
+	Vec3f mPos;  // _00
+	f32 mU;      // _0C
+	f32 mV;      // _10
 	u32 mColour; // _14
 };
 

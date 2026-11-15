@@ -3,10 +3,10 @@ struct NJS_TEXLIST;
 struct NJS_OBJECT;
 #include "io/ResBank.h"
 
-static const int sLastExBossIndModels[1] = { 2 };       // 0x802CB0E8
+static const int sLastExBossIndModels[1] = { 2 }; // 0x802CB0E8
 
-static ResBank sLastBossBank; // 0x80286220
-static NJS_OBJECT** sLastBossModels;   // 0x802C5838
+static ResBank sLastBossBank;           // 0x80286220
+static NJS_OBJECT** sLastBossModels;    // 0x802C5838
 static NJS_TEXLIST** sLastBossTexLists; // 0x802C583C
 
 int* gLastBossIndModels;

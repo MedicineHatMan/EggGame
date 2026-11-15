@@ -45,7 +45,7 @@ public:
 	u16 mLife;         // _20
 	u16 mTime;         // _22
 	u16 mCount;        // _24
-	DrawTask* mTask;       // _28
+	DrawTask* mTask;   // _28
 	f32 mRadius;       // _2C
 	f32 mFloor;        // _30
 	EggShard* mShards; // _34

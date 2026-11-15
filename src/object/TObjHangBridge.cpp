@@ -153,7 +153,7 @@ void TObjHangBridge::setup()
 		mRope->mWind.x = 0.0f;
 		mRope->mWind.y = -0.0032666668f;
 		mRope->mWind.z = 0.0f;
-		mRope->mForces    = mForces;
+		mRope->mForces = mForces;
 	}
 
 	// The two ends are the posts
@@ -313,7 +313,9 @@ void TObjHangBridge::draw()
 }
 
 // 0x800D5E34
-void TObjHangBridge::vfn_10() {}
+void TObjHangBridge::vfn_10()
+{
+}
 
 // 0x800D5E38
 // The two posts the far one mirrored
@@ -381,8 +383,8 @@ void TObjHangBridge::updateDeck()
 	}
 	plank = (TObjBridgeIta*)mChild;
 	for (i = 0; i < mCount; i++) {
-		v    = mCount + 1 + i;
-		at   = plank->mPos;
+		v  = mCount + 1 + i;
+		at = plank->mPos;
 		at.y += 0.5f * (mVerts[v].y + mVerts[v + 1].y);
 		plank->setPos(&at);
 		a = mVerts[v];
@@ -422,7 +424,7 @@ int TObjHangBridge::pitchOf(Vec3f* dir)
 // The normals and bounds of the deck's triangles after the points moved
 void TObjHangBridge::refreshTris()
 {
-	Vec3f* verts = mMeshData.mVerts;
+	Vec3f* verts  = mMeshData.mVerts;
 	MeshTri* tris = mMeshData.mTris;
 	MeshTri* tri;
 	Vec3f a;
@@ -619,7 +621,7 @@ void TObjHangBridge::fitBox()
 	Vec3f lo;
 	Vec3f hi;
 	Vec3f pad;
-	u32 count = mCount;
+	u32 count           = mCount;
 	SpringPoint* points = mRope->mPoints;
 
 	lo.set(-0.5f * gBridgeWidth, points[count / 2].mPos.y - points[0].mPos.y, -0.5f * gBridgePlankLength * (f32)count);

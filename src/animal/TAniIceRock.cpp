@@ -25,15 +25,16 @@ const char* gTAniIceRockName = "TAniIceRock";
 
 // 0x8013BE9C
 TAniIceRock::TAniIceRock(TObject* parent, const Vec3f* pos, u16 ownerId)
-    : TObject(parent), mPos(*pos)
+    : TObject(parent)
+    , mPos(*pos)
 {
-	_00               = (u32)gTAniIceRockName;
-	mSize             = 0xCC;
-	mDrawTask         = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
+	_00       = (u32)gTAniIceRockName;
+	mSize     = 0xCC;
+	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
 	if (aniAssetAttach(2, &mArc) != 0) {
 		TArc* arc = mArc.mFile->mArc;
 		if (arc != 0) {
-			mAssets = (void**)findArcExport(arc, "AniModel");
+			mAssets  = (void**)findArcExport(arc, "AniModel");
 			int pick = (int)(10.0f * (3.0517578e-5f * rand())) % 3;
 			mObject  = (NJS_OBJECT*)(((void***)mAssets)[0][2 + pick]);
 			mTexList = (NJS_TEXLIST*)((void**)mAssets[5])[0];
@@ -138,8 +139,8 @@ void TAniIceRock::runRise()
 	} else {
 		Vec3f at = mPos;
 		at.y += mRise;
-		colliGetShapes(mColli)->mPos = at;
-		f32 size = mShapeData.mSizeX * mScale;
+		colliGetShapes(mColli)->mPos   = at;
+		f32 size                       = mShapeData.mSizeX * mScale;
 		colliGetShapes(mColli)->mSizeX = size;
 	}
 }
@@ -156,15 +157,15 @@ void TAniIceRock::runGone()
 void TAniIceRock::burst(const Vec3f* size, const IceBurst* pieces)
 {
 	Vec3f centre;
-	centre = mPos;
-	f32 lowX  = -size->x;
-	f32 lowZ  = -size->z;
-	f32 lowY  = 0.5f * size->y;
-	f32 widthX = size->x - lowX;
-	f32 widthY = 2.0f * size->y - lowY;
-	f32 widthZ = size->z - lowZ;
-	f32 rate   = centre.y - 100.0f;
-	f32 extra  = pieces->mSpeed - 1.0f;
+	centre       = mPos;
+	f32 lowX     = -size->x;
+	f32 lowZ     = -size->z;
+	f32 lowY     = 0.5f * size->y;
+	f32 widthX   = size->x - lowX;
+	f32 widthY   = 2.0f * size->y - lowY;
+	f32 widthZ   = size->z - lowZ;
+	f32 rate     = centre.y - 100.0f;
+	f32 extra    = pieces->mSpeed - 1.0f;
 	int variants = pieces->mVariants;
 	int count    = pieces->mCount;
 	for (int i = 0; i < count; i++) {

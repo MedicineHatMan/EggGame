@@ -26,12 +26,12 @@ struct RippleSource { // size 0x1C
 	int isIdle();
 	void step();
 
-	NJS_POINT2 mPos;  // _00
-	f32 mRadius;      // _08
-	f32 mPrevRadius;  // _0C the radius last frame
-	f32 mMaxRadius;   // _10
-	f32 mSpeed;       // _14
-	int mActive;      // _18
+	NJS_POINT2 mPos; // _00
+	f32 mRadius;     // _08
+	f32 mPrevRadius; // _0C the radius last frame
+	f32 mMaxRadius;  // _10
+	f32 mSpeed;      // _14
+	int mActive;     // _18
 };
 
 /** The glass of a mirror that ripples when something touches it */
@@ -48,9 +48,9 @@ struct MirrorRipple { // size 0x2858
 	int settle();
 	void update();
 
-	RippleSource mSources[3];   // _00
-	int mBusy;                  // _54
-	RippleVert mVerts[16][16];  // _58 row 0 at the top
+	RippleSource mSources[3];  // _00
+	int mBusy;                 // _54
+	RippleVert mVerts[16][16]; // _58 row 0 at the top
 };
 
 #endif

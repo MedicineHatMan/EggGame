@@ -34,11 +34,11 @@ struct EggTexSlots {
 	void push(EggTexSlot* slot);
 	void* freeSelf(s16 flag);
 
-	EggTexSlot* mHead;       // _00
-	EggTexSlot* mTail;       // _04
-	int mCount;              // _08
-	EggTexSlot mSlots[12];   // _0C
-	EggTexSlot* mFree;       // _12C
+	EggTexSlot* mHead;     // _00
+	EggTexSlot* mTail;     // _04
+	int mCount;            // _08
+	EggTexSlot mSlots[12]; // _0C
+	EggTexSlot* mFree;     // _12C
 };
 
 /**
@@ -63,11 +63,11 @@ struct EggTexHolds {
 	void push(EggTexHold* hold);
 	void* freeSelf(s16 flag);
 
-	EggTexHold* mHead;      // _00
-	EggTexHold* mTail;      // _04
-	int mCount;             // _08
-	EggTexHold mHolds[16];  // _0C
-	EggTexHold* mFree;      // _10C
+	EggTexHold* mHead;     // _00
+	EggTexHold* mTail;     // _04
+	int mCount;            // _08
+	EggTexHold mHolds[16]; // _0C
+	EggTexHold* mFree;     // _10C
 };
 
 /**
@@ -76,9 +76,9 @@ struct EggTexHolds {
  * @size 0xC
  */
 struct EggTexName {
-	u32 _00;       // _00
-	u32 _04;       // _04
-	void* mImage;  // _08
+	u32 _00;      // _00
+	u32 _04;      // _04
+	void* mImage; // _08
 };
 
 /**
@@ -101,17 +101,17 @@ public:
 	EggTexHold* findHold(int key);
 	EggTexSlot* findSlot(int id);
 
-	EggTexSlots mSlots;      // _20
-	EggTexHolds mHolds;      // _150
-	void* mSlotBuf;          // _260 mTexBytes * 12
-	u32 _264;                // _264 first word of the file header
-	u32 mFileCount;          // _268
-	u32 _26C;                // _26C
-	u32 mFileSize;           // _270
-	void* mTable;            // _274 file body each row 0x10
-	u32 mTexBytes;           // _278
-	EggTexName* mNames;      // _27C points at mNameData
-	int mNameCount;          // _280 12
+	EggTexSlots mSlots;       // _20
+	EggTexHolds mHolds;       // _150
+	void* mSlotBuf;           // _260 mTexBytes * 12
+	u32 _264;                 // _264 first word of the file header
+	u32 mFileCount;           // _268
+	u32 _26C;                 // _26C
+	u32 mFileSize;            // _270
+	void* mTable;             // _274 file body each row 0x10
+	u32 mTexBytes;            // _278
+	EggTexName* mNames;       // _27C points at mNameData
+	int mNameCount;           // _280 12
 	EggTexName mNameData[12]; // _284
 };
 

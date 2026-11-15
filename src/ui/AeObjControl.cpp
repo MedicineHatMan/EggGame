@@ -28,17 +28,17 @@ struct BattleTimeMsg;
 struct BattlePlayerMsg;
 
 extern "C" {
-s8 sAeSlots[4];               // 0x802C5468 each player's console number -1 when out
-s8 sAePlayerCount;            // 0x802C546C
-BlockPool* sAeArcPool;        // 0x802C5470
-void* sAeArcBlock;            // 0x802C5474
-TAeConsoleSet* sConsoleSet;   // 0x802C5478
-TAeObjPlayRest* sPlayRest;    // 0x802C547C
-TAeObjCoinNum* sCoinNum;      // 0x802C5480
+s8 sAeSlots[4];                  // 0x802C5468 each player's console number -1 when out
+s8 sAePlayerCount;               // 0x802C546C
+BlockPool* sAeArcPool;           // 0x802C5470
+void* sAeArcBlock;               // 0x802C5474
+TAeConsoleSet* sConsoleSet;      // 0x802C5478
+TAeObjPlayRest* sPlayRest;       // 0x802C547C
+TAeObjCoinNum* sCoinNum;         // 0x802C5480
 TAeObjMissionIcon* sMissionIcon; // 0x802C5484
-TAeObjCombo* sCombo;          // 0x802C5488
-TAeObjBattle* sBattle;        // 0x802C548C
-int sAePlayers[4];            // 0x80282550 nonzero for each player in the battle
+TAeObjCombo* sCombo;             // 0x802C5488
+TAeObjBattle* sBattle;           // 0x802C548C
+int sAePlayers[4];               // 0x80282550 nonzero for each player in the battle
 }
 
 // 0x800FF0A4
@@ -177,7 +177,7 @@ extern "C" void aeSetupBattle(int p1, int p2, int p3, int p4)
 	sAePlayers[1] = p2;
 	sAePlayers[2] = p3;
 	sAePlayers[3] = p4;
-	count = 0;
+	count         = 0;
 	for (i = 0; i < 4; i++) {
 		if (sAePlayers[i] != 0) {
 			count++;
@@ -185,9 +185,9 @@ extern "C" void aeSetupBattle(int p1, int p2, int p3, int p4)
 	}
 	// The console numbers handed out in order for two three or four players
 	sAePlayerCount = count;
-	int two[2]   = { 0, 1 };
-	int three[3] = { 0, 4, 5 };
-	int four[4]  = { 2, 3, 4, 5 };
+	int two[2]     = { 0, 1 };
+	int three[3]   = { 0, 4, 5 };
+	int four[4]    = { 2, 3, 4, 5 };
 	if (count == 2) {
 		slot = two;
 	} else if (count == 3) {

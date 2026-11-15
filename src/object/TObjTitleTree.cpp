@@ -8,17 +8,21 @@ struct NJS_TEXLIST;
 
 typedef char TObjTitleTree_size_check[(sizeof(TObjTitleTree) == 0xC8) ? 1 : -1];
 
-const char* gTObjTitleTreeName = "TObjTitleTree";
+const char* gTObjTitleTreeName        = "TObjTitleTree";
 const MotionEntry sTitleTreeMotions[] = {
 	{ 0, 2, -1, 0, 0.0f, 40.0f, 0.1f, 0.0f, 0 },
 };
 
 // 0x801ADEC0
 // The set init pair both empty
-extern "C" void initTObjTitleTree() { }
+extern "C" void initTObjTitleTree()
+{
+}
 
 // 0x801ADEC4
-extern "C" void termTObjTitleTree() { }
+extern "C" void termTObjTitleTree()
+{
+}
 
 // 0x801ADEC8
 extern "C" TObject* createTObjTitleTree(TObject* parent, SetDesc* desc)
@@ -35,12 +39,12 @@ TObjTitleTree::TObjTitleTree(TObject* parent, SetDesc* desc)
 	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	mMotion.init(sTitleTreeMotions, getTitleObjMotion(1));
 	mMotion.play(0);
-	NJS_OBJECT** models    = getTitleObjModels();
+	NJS_OBJECT** models = getTitleObjModels();
 	mModel.setModel(models[4]);
-	void** textures  = (void**)getTitleObjTexLists();
-	mModel.mTexList  = (NJS_TEXLIST*)textures[0];
-	mModel.mState    = getDefaultDrawState();
-	mModel.mMotion   = &mMotion;
+	void** textures = (void**)getTitleObjTexLists();
+	mModel.mTexList = (NJS_TEXLIST*)textures[0];
+	mModel.mState   = getDefaultDrawState();
+	mModel.mMotion  = &mMotion;
 	initFromDesc(desc);
 }
 
@@ -56,7 +60,7 @@ void TObjTitleTree::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
 	f32 value = desc->getFloat(0) < -1.0f ? -1.0f : (desc->getFloat(0) > 10.0f ? 10.0f : desc->getFloat(0));
-	mScale = 1.0f + value;
+	mScale    = 1.0f + value;
 }
 
 // 0x801AE12C

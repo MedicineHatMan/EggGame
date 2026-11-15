@@ -29,13 +29,13 @@ struct NJS_QUATERNION;
 
 extern "C" {
 extern const int sIceBallArmourModels[] = {
-	3, 4, 5, 6, 7, 8, 9, 10,
-	11, 12, 13, 14, 15, 16, 17, 18,
-	19, 20, 21, 22, 23, 24, 25, 26,
-	27, 28,
+	3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28,
 }; // the armour's models
 extern const int sIceBallPieceModels[] = {
-	0, 1, 2, 0,
+	0,
+	1,
+	2,
+	0,
 }; // a ball's piece models
 extern const ColliShape sPurpleBoss_IceBallShape[] = {
 	{ { 0.0f, 0.0f, 0.0f }, 0x0, 0, 0x0, 7.5f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
@@ -58,13 +58,13 @@ public:
 	virtual void vfn_10();
 	virtual void render();
 
-	int mWait;        // _20
-	u32 mColor;       // _24
-	int mCount;       // _28
-	HitVec mPos[12];  // _2C
-	HitVec mVel[12];  // _BC
+	int mWait;               // _20
+	u32 mColor;              // _24
+	int mCount;              // _28
+	HitVec mPos[12];         // _2C
+	HitVec mVel[12];         // _BC
 	NJS_OBJECT* mModels[12]; // _14C
-	DrawTask* mDrawTask;  // _17C
+	DrawTask* mDrawTask;     // _17C
 };
 
 typedef char IceBallFragments_size_check[(sizeof(IceBallFragments) == 0x180) ? 1 : -1];
@@ -76,7 +76,10 @@ static inline f32 randUnit()
 	return 3.0517578125e-05f * (f32)rand();
 }
 
-static inline f32 randSpan(f32 span, f32 base) { return span * randUnit() + base; }
+static inline f32 randSpan(f32 span, f32 base)
+{
+	return span * randUnit() + base;
+}
 
 #define RAND_SIGNED() (2.0f * (3.0517578125e-05f * (f32)rand() - 0.5f))
 
@@ -104,9 +107,9 @@ TEnePurpleBoss_BigIceFragment::TEnePurpleBoss_BigIceFragment(TObject* parent, co
 	njTranslateEx(&at);
 	njQuaternionEx((const NJS_QUATERNION*)mRot);
 	f32 scale = offset * __frsqrte(pos->x * pos->x + pos->z * pos->z);
-	at.y = 50.0f;
-	at.x = at.x + pos->x * scale;
-	at.z = at.z + pos->z * scale;
+	at.y      = 50.0f;
+	at.x      = at.x + pos->x * scale;
+	at.z      = at.z + pos->z * scale;
 	for (int i = 0; i < 26; i++) {
 		IceChunk* chunk = &mChunks[i];
 		njCalcPointEx((const Vec3f*)mModels[i]->pos, (const Vec3f*)&chunk->mPos);
@@ -118,18 +121,18 @@ TEnePurpleBoss_BigIceFragment::TEnePurpleBoss_BigIceFragment(TObject* parent, co
 			chunk->mVel = gVecZero;
 		}
 		gjScaleVector(3.0f * randUnit() + 2.0f, &chunk->mVel, &chunk->mVel);
-		chunk->mRotX = 0;
-		chunk->mRotY = 0;
+		chunk->mRotX  = 0;
+		chunk->mRotY  = 0;
 		chunk->mSpinX = (int)(1000.0f * RAND_SIGNED());
 		chunk->mSpinY = (int)(500.0f * RAND_SIGNED());
 	}
 	njPopMatrixEx();
-	mWait  = 0x2A;
-	mColor = 0xFFFFFFFF;
+	mWait     = 0x2A;
+	mColor    = 0xFFFFFFFF;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
-	at.x = pos->x;
-	at.z = pos->z;
-	at.y = pos->y + offset;
+	at.x      = pos->x;
+	at.z      = pos->z;
+	at.y      = pos->y + offset;
 	particleOnceByIdDefault(&at, 1, 0x42);
 	particleOnceByIdDefault(&at, 1, 0x43);
 }
@@ -223,18 +226,18 @@ IceBallFragments::IceBallFragments(TObject* parent, const Vec3f* pos, const Vec3
     : TObject(parent)
 {
 	Vec3f dir;
-	dir.x = vel->x;
-	dir.y = vel->y;
-	dir.z = vel->z;
-	dir.y = 0.0f;
+	dir.x     = vel->x;
+	dir.y     = vel->y;
+	dir.z     = vel->z;
+	dir.y     = 0.0f;
 	f32 speed = njUnitVector(&dir);
 	if (speed < 1e-06f) {
 		dir = gVecZero;
 	}
 	f32 sideX = dir.z;
 	f32 sideZ = -dir.x;
-	mCount = 0;
-	int left = 0xC;
+	mCount    = 0;
+	int left  = 0xC;
 	while (left > 0) {
 		int take = (int)(3.0f * randUnit() + 0.0f) + 1;
 		if (take > left) {
@@ -242,22 +245,22 @@ IceBallFragments::IceBallFragments(TObject* parent, const Vec3f* pos, const Vec3
 		}
 		left -= take;
 		mModels[mCount] = modelAtTEnePurpleBoss(sIceBallPieceModels[take - 1]);
-		mPos[mCount].x = pos->x;
-		mPos[mCount].y = pos->y;
-		mPos[mCount].z = pos->z;
-		f32 across = speed * (0.5f * (2.0f * (randUnit() - 0.5f)));
-		f32 vx = sideX * across;
-		f32 vz = sideZ * across;
-		f32 ahead = speed - __fabs(across);
-		vx = dir.x * ahead + vx;
-		vz = dir.z * ahead + vz;
-		mVel[mCount].x = vx;
-		mVel[mCount].y = 1.0f * randUnit() + 1.0f;
-		mVel[mCount].z = vz;
+		mPos[mCount].x  = pos->x;
+		mPos[mCount].y  = pos->y;
+		mPos[mCount].z  = pos->z;
+		f32 across      = speed * (0.5f * (2.0f * (randUnit() - 0.5f)));
+		f32 vx          = sideX * across;
+		f32 vz          = sideZ * across;
+		f32 ahead       = speed - __fabs(across);
+		vx              = dir.x * ahead + vx;
+		vz              = dir.z * ahead + vz;
+		mVel[mCount].x  = vx;
+		mVel[mCount].y  = 1.0f * randUnit() + 1.0f;
+		mVel[mCount].z  = vz;
 		mCount++;
 	}
-	mWait  = 0x2A;
-	mColor = 0xFFFFFFFF;
+	mWait     = 0x2A;
+	mColor    = 0xFFFFFFFF;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
 }
 
@@ -308,7 +311,7 @@ void IceBallFragments::render()
 // 0x800D20D4
 extern "C" void iceBallLoad()
 {
-	sIceBallHead = 0;
+	sIceBallHead  = 0;
 	sIceBallLimit = 5;
 }
 
@@ -342,7 +345,7 @@ extern "C" void throwIceBalls(TObject* parent, const Vec3f* pos, const f32* spee
 {
 	int angle = (int)(10430.38043493439 * (f32)atan2(-pos->x, -pos->z));
 	angle -= 0x2800;
-	int step  = 0x5000 / count;
+	int step = 0x5000 / count;
 	for (int i = 0; i < count; i++) {
 		Vec3f vel;
 		njSinCos(angle, &vel.x, &vel.z);
@@ -368,14 +371,14 @@ TEnePurpleBoss_IceBall::TEnePurpleBoss_IceBall(TObject* parent, const Vec3f* pos
 	_00   = (u32)gTEnePurpleBoss_IceBallName;
 	mSize = 0x78;
 	setObjId(this, 0xFFFF);
-	mPrev = 0;
-	mNext = 0;
-	mPos.x = pos->x;
-	mPos.y = pos->y;
-	mPos.z = pos->z;
-	mVel.x = vel->x;
-	mVel.y = vel->y;
-	mVel.z = vel->z;
+	mPrev   = 0;
+	mNext   = 0;
+	mPos.x  = pos->x;
+	mPos.y  = pos->y;
+	mPos.z  = pos->z;
+	mVel.x  = vel->x;
+	mVel.y  = vel->y;
+	mVel.z  = vel->z;
 	mSpeed  = vecLenXZ(&mVel);
 	mRadius = radius;
 	njCreateQuaternion(0, 0.0f, 0.0f, 1.0f, (NJS_QUATERNION*)mRot);
@@ -407,7 +410,7 @@ TEnePurpleBoss_IceBall::~TEnePurpleBoss_IceBall()
 extern "C" void enforceIceBallLimit()
 {
 	TEnePurpleBoss_IceBall* ball = sIceBallHead;
-	int i = 0;
+	int i                        = 0;
 	while (ball != 0 && i < sIceBallLimit) {
 		ball = ball->mNext;
 		i++;
@@ -465,7 +468,7 @@ int TEnePurpleBoss_IceBall::onHit(const TObjAction* other, int arg, int* result)
 	int took     = 0;
 	if (isPlayerObj(other) != 0) {
 		hit->mDamage = 0xA;
-		took = 1;
+		took         = 1;
 		hit->mFlags.clear();
 		hit->mPos.x = 0.0f;
 		hit->mPos.y = 0.0f;
@@ -510,7 +513,7 @@ void TEnePurpleBoss_IceBall::roll()
 			}
 		}
 		if (pushed != 0) {
-			push.y = 0.0f;
+			push.y  = 0.0f;
 			f32 len = njUnitVector(&push);
 			if (len < 1e-06f) {
 				push = gVecZero;
@@ -528,10 +531,10 @@ void TEnePurpleBoss_IceBall::roll()
 		}
 	}
 	Vec3f dir;
-	dir.x = mVel.x;
-	dir.y = mVel.y;
-	dir.z = mVel.z;
-	dir.y = 0.0f;
+	dir.x     = mVel.x;
+	dir.y     = mVel.y;
+	dir.z     = mVel.z;
+	dir.y     = 0.0f;
 	f32 speed = njUnitVector(&dir);
 	if (speed < 1e-06f) {
 		dir = gVecZero;
@@ -549,10 +552,10 @@ void TEnePurpleBoss_IceBall::roll()
 			dir = gVecZero;
 		}
 		gjMulAddVector(mRadius, &next, &wall, &dir);
-		dir.x = mVel.x;
-		dir.y = mVel.y;
-		dir.z = mVel.z;
-		dir.y = 0.0f;
+		dir.x    = mVel.x;
+		dir.y    = mVel.y;
+		dir.z    = mVel.z;
+		dir.y    = 0.0f;
 		f32 flat = njUnitVector(&dir);
 		if (flat < 1e-06f) {
 			dir = gVecZero;
@@ -576,9 +579,9 @@ void TEnePurpleBoss_IceBall::roll()
 	} else {
 		next.y = 50.0f + mRadius;
 		mVel.y = 0.0f;
-		dir.x = next.x;
-		dir.y = 50.0f + mRadius;
-		dir.z = next.z;
+		dir.x  = next.x;
+		dir.y  = 50.0f + mRadius;
+		dir.z  = next.z;
 		njSubVector(&dir, &from);
 		dir.y = 0.0f;
 		rollQuat(&dir, (Quat*)mRot, mRadius);

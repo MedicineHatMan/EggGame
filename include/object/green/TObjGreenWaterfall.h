@@ -21,15 +21,15 @@ TObject* createTObjGreenWaterfall(TObject*, SetDesc*);
 
 struct WaterfallNode {
 	u8 _00[8];
-	Vec3f mPos;             // _08
+	Vec3f mPos; // _08
 	u8 _14[4];
-	int mRotY;              // _18
+	int mRotY; // _18
 	u8 _1C[4];
-	f32 mSizeX;             // _20
-	f32 mSizeY;             // _24
-	f32 mSizeZ;             // _28
-	WaterfallNode* mChild;  // _2C
-	WaterfallNode* mNext;   // _30
+	f32 mSizeX;            // _20
+	f32 mSizeY;            // _24
+	f32 mSizeZ;            // _28
+	WaterfallNode* mChild; // _2C
+	WaterfallNode* mNext;  // _30
 };
 
 class TObjGreenWaterfall : public TSetActor {
@@ -52,15 +52,15 @@ public:
 	void updateBroken();
 
 	WaterfallNode* mModel; // _64
-	NJS_TEXLIST* mTexList;        // _68
+	NJS_TEXLIST* mTexList; // _68
 	void* mBreakModel;     // _6C
 	void* mBreakTexList;   // _70
-	DrawTask* mDrawTask;       // _74
+	DrawTask* mDrawTask;   // _74
 	WaterSurface mWater;   // _78
 	SoundHandle mSound;    // _108
 	FlagByte mDrawFlags;   // _134 1 = draw the water
 	u8 _135[3];
-	int mAct;              // _138 0 flowing 1 broken
+	int mAct; // _138 0 flowing 1 broken
 };
 
 extern "C" {

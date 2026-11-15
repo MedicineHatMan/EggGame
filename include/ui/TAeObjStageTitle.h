@@ -29,13 +29,13 @@ public:
 	void finish(); // 0x800E9408
 
 	TSimpleText* mMissionText; // _34 the mission's name under the banner
-	TAeLayer* mLayer; // _38
-	DrawTask* mTask;     // _3C
-	int mWait;       // _40 starts at 1
-	s32 mEvent;      // _44 what eventStartById returned 0 before
-	TCamPath* mHintCam; // _48 "cam_hint" from the stage's event cameras
-	s32 mHintTried;  // _4C the hint camera only gets one try
-	s32 mDone;       // _50 set by finish() nothing more is drawn
+	TAeLayer* mLayer;          // _38
+	DrawTask* mTask;           // _3C
+	int mWait;                 // _40 starts at 1
+	s32 mEvent;                // _44 what eventStartById returned 0 before
+	TCamPath* mHintCam;        // _48 "cam_hint" from the stage's event cameras
+	s32 mHintTried;            // _4C the hint camera only gets one try
+	s32 mDone;                 // _50 set by finish() nothing more is drawn
 };
 
 extern "C" {

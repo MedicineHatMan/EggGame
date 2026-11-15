@@ -15,11 +15,11 @@ struct QuatTransform : public SetTransformBase {
 /** @size 0x68 */
 struct RigidBody : public QuatTransform {
 	RigidBody();
-	inline virtual ~RigidBody() { } // _08
-	virtual void vfn_0C();          // _0C
+	inline virtual ~RigidBody() { }                              // _08
+	virtual void vfn_0C();                                       // _0C
 	virtual void vfn_10(const Vec3f* point, const Vec3f* force); // _10
-	virtual void vfn_14();          // _14
-	virtual void vfn_18();          // _18
+	virtual void vfn_14();                                       // _14
+	virtual void vfn_18();                                       // _18
 
 	Vec3f mSpin;   // _48
 	f32 mSize;     // _54

@@ -26,22 +26,22 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();    // _0C
-	virtual void vfn_10();  // _10
-	virtual void render();  // _1C
+	virtual void draw();   // _0C
+	virtual void vfn_10(); // _10
+	virtual void render(); // _1C
 
 	void take();
 	void stateWait();
 	void stateHeld();
 
 	// _80 is TSetObj's word reused as the collision
-	DrawTask* mDrawTask;       // _90
+	DrawTask* mDrawTask;    // _90
 	TMorphEggAnim* mEffect; // _94
-	DrawState* mDrawState; // _98 the default state until take() then mEffect's
-	u8 mRecord3E;          // _9C SetRecord::_3E Nothing in this class reads it
-	u8 _9D;                // _9D
-	u16 mHitId;            // _9E id from the contact
-	int mAct;              // _A0 0 = waiting 1 = taken
+	DrawState* mDrawState;  // _98 the default state until take() then mEffect's
+	u8 mRecord3E;           // _9C SetRecord::_3E Nothing in this class reads it
+	u8 _9D;                 // _9D
+	u16 mHitId;             // _9E id from the contact
+	int mAct;               // _A0 0 = waiting 1 = taken
 };
 
 extern "C" {

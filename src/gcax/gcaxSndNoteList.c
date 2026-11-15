@@ -62,7 +62,7 @@ int gcaxNoteCountVoices(GCAX_NOTE* note)
 	void* obj;
 
 	link = 0;
-	n = 0;
+	n    = 0;
 	if (note != 0) {
 		link = 0;
 		while ((link = (GCAX_LINK*)gcaxListNext((GCAX_NODE**)&note->voices, (GCAX_NODE*)link)) != 0) {
@@ -86,19 +86,19 @@ void gcaxNoteListUpdate(GCAX_LINK** list)
 	GCAX_VOICE* voice;
 
 restart:
-	link = 0;
+	link  = 0;
 	vlink = 0;
 	while ((link = (GCAX_LINK*)gcaxListNext((GCAX_NODE**)list, (GCAX_NODE*)link)) != 0) {
 		note = link->obj;
-		n = 0;
+		n    = 0;
 		if (note != 0) {
 			vlink = 0;
 			while ((vlink = (GCAX_LINK*)gcaxListNext((GCAX_NODE**)&note->voices, (GCAX_NODE*)vlink)) != 0) {
 				voice = vlink->obj;
 				if (voice != 0) {
 					n++;
-					if ((voice->flags & 0x80000003) == 0x80000002 &&
-						    (voice->vpb->pb.state == 0 || (voice->env_phase == 5 && voice->env < 0.2f))) {
+					if ((voice->flags & 0x80000003) == 0x80000002
+					    && (voice->vpb->pb.state == 0 || (voice->env_phase == 5 && voice->env < 0.2f))) {
 						n--;
 					}
 				}

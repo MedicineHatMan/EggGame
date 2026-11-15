@@ -32,8 +32,8 @@ struct GjActor;
 
 class TArc;
 
-NJS_OBJECT** sEggYolkModels;         // 0x802C5490
-NJS_MOTION** sEggYolkMotions;         // 0x802C5494
+NJS_OBJECT** sEggYolkModels;    // 0x802C5490
+NJS_MOTION** sEggYolkMotions;   // 0x802C5494
 NJS_TEXLIST** sEggYolkTexLists; // 0x802C5498
 
 // 0x8025CC30
@@ -150,7 +150,7 @@ void TObjEggYolk::draw()
 	}
 	njPushMatrixEx();
 	njUnitMatrix(0);
-	int cur = mMotion.mCurrent;
+	int cur   = mMotion.mCurrent;
 	f32 frame = mMotion.mFrame;
 	gjMotionActor(frame, mNode, mMotion.getMotion(cur));
 	njPopMatrixEx();

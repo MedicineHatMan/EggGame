@@ -34,20 +34,13 @@ extern "C" void* createCamelOstrich(TObject* parent)
 }
 
 const MotionEntry sCamelOstrichMotions[] = {
-	{ 1, 0, -1, 0, 0.0f, 29.0f, 0.45f, 0.0f, 0 },
-	{ 0, 4, -1, 0, 0.0f, 20.0f, 0.62f, 0.0f, 0 },
-	{ 0, 4, -1, 0, 0.0f, 20.0f, 0.72f, 0.0f, 0 },
-	{ 0, 9, -1, 0, 0.0f, 30.0f, 0.18f, 0.0f, 0 },
-	{ 0, 10, -1, 0, 0.0f, 32.0f, 0.45f, 0.0f, 1 },
-	{ 0, 8, -1, 0, 0.0f, 32.0f, 0.65f, 0.0f, 1 },
-	{ 1, 3, -1, 0, 6.0f, 22.0f, 0.65f, 0.0f, 0 },
-	{ 1, 5, -1, 0, 0.0f, 19.0f, 0.65f, 0.0f, 0 },
-	{ 3, 5, -1, 3, 19.0f, 22.0f, 0.65f, 0.1f, 0 },
-	{ 1, 1, -1, 0, 0.0f, 4.0f, 0.3f, 0.0f, 0 },
-	{ 1, 7, -1, 0, 0.0f, 14.0f, 1.5f, 0.0f, 0 },
-	{ 1, 6, -1, 0, 0.0f, 14.0f, 0.5f, 0.0f, 0 },
-	{ 1, 2, -1, 0, 0.0f, 29.0f, 0.42f, 0.0f, 0 },
-	{ 1, 11, -1, 0, 0.0f, 14.0f, 0.5f, 0.0f, 0 },
+	{ 1, 0, -1, 0, 0.0f, 29.0f, 0.45f, 0.0f, 0 },  { 0, 4, -1, 0, 0.0f, 20.0f, 0.62f, 0.0f, 0 },
+	{ 0, 4, -1, 0, 0.0f, 20.0f, 0.72f, 0.0f, 0 },  { 0, 9, -1, 0, 0.0f, 30.0f, 0.18f, 0.0f, 0 },
+	{ 0, 10, -1, 0, 0.0f, 32.0f, 0.45f, 0.0f, 1 }, { 0, 8, -1, 0, 0.0f, 32.0f, 0.65f, 0.0f, 1 },
+	{ 1, 3, -1, 0, 6.0f, 22.0f, 0.65f, 0.0f, 0 },  { 1, 5, -1, 0, 0.0f, 19.0f, 0.65f, 0.0f, 0 },
+	{ 3, 5, -1, 3, 19.0f, 22.0f, 0.65f, 0.1f, 0 }, { 1, 1, -1, 0, 0.0f, 4.0f, 0.3f, 0.0f, 0 },
+	{ 1, 7, -1, 0, 0.0f, 14.0f, 1.5f, 0.0f, 0 },   { 1, 6, -1, 0, 0.0f, 14.0f, 0.5f, 0.0f, 0 },
+	{ 1, 2, -1, 0, 0.0f, 29.0f, 0.42f, 0.0f, 0 },  { 1, 11, -1, 0, 0.0f, 14.0f, 0.5f, 0.0f, 0 },
 	{ 1, 0, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 };
 
@@ -57,30 +50,31 @@ const char* gTAniCamelOstrichName = "TAniCamelOstrich";
 
 // 0x801BEC58
 TAniCamelOstrich::TAniCamelOstrich(TObject* parent)
-    : TAniMount(parent, 0x17), mMove(0)
+    : TAniMount(parent, 0x17)
+    , mMove(0)
 {
 	mBirth = 0;
 	_00    = (u32)gTAniCamelOstrichName;
 	mSize  = 0x4C0;
 
-	mBodyHit.mOwnerId = mObjId;
-	mBodyHit.mRadius  = 10.0f;
-	mBodyHit.mOffset  = sCamelBodyOffset;
+	mBodyHit.mOwnerId  = mObjId;
+	mBodyHit.mRadius   = 10.0f;
+	mBodyHit.mOffset   = sCamelBodyOffset;
 	mReachHit.mOwnerId = mObjId;
 	mReachHit.mActive  = 0;
 	mReachHit.mRadius  = 20.0f;
-	mReachHit.mKind      = 1;
-	mReachHit.mNode      = 2;
+	mReachHit.mKind    = 1;
+	mReachHit.mNode    = 2;
 	mHits.mList.mBody  = &mBody;
 	mHits.mList.mModel = &mModel;
 	mHits.mList.mLife  = &mLife;
 	mHits.mList.add(&mBodyHit);
 	// The original stores mHp twice and leaves mMax alone
-	mLife.mHp = 100;
-	mLife.mHp = 100;
+	mLife.mHp    = 100;
+	mLife.mHp    = 100;
 	mBlink.mLife = &mLife;
 	mBlink.mBody = &mBody;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawTask, 0x21, 0);
+	mDrawTask    = addDrawTask(this, (void (*)(void*))drawTask, 0x21, 0);
 	mModel.setNodes(sCamelOstrichModelNodes, 3);
 	mModel.update(&mAsset);
 	mMotions.set(&mMotion, sCamelOstrichMotions);
@@ -90,15 +84,15 @@ TAniCamelOstrich::TAniCamelOstrich(TObject* parent)
 	mMotion.play(3);
 
 	mWalk.setBody(&mBody);
-	mWalk.mRunSpeed = 150.0f;
-	mWalk.mRunFrom = 70.0f;
+	mWalk.mRunSpeed  = 150.0f;
+	mWalk.mRunFrom   = 70.0f;
 	mWalk.mWalkSpeed = 70.0f;
-	mWalk.mAccel = 0.2f;
-	mWalk.mDecel = 1.0f;
+	mWalk.mAccel     = 0.2f;
+	mWalk.mDecel     = 1.0f;
 	mJump.setBody(&mBody);
-	mJump.mGravity = -400.0f;
+	mJump.mGravity   = -400.0f;
 	mJump.mJumpSpeed = 170.0f;
-	mJump.mAirSpeed = 60.0f;
+	mJump.mAirSpeed  = 60.0f;
 	mDash.setBody(&mBody);
 	mDash.mSpeed = 120.0f;
 	mDash.mBrake = -10.0f;
@@ -117,8 +111,8 @@ TAniCamelOstrich::~TAniCamelOstrich()
 // 0x801BF1F8
 void TAniCamelOstrich::onLoaded()
 {
-	mPos = mStartPos;
-	mRotY = mStartRot;
+	mPos       = mStartPos;
+	mRotY      = mStartRot;
 	mBody.mPos = mPos;
 	updateMatrix();
 	updateShadow();
@@ -186,7 +180,7 @@ void TAniCamelOstrich::drawTask(TAniCamelOstrich* self)
 		f32 matrix[12];
 		DrawState state;
 		state.mFlags = 0;
-		state._20 = 0;
+		state._20    = 0;
 		if (self->mBirth != 0) {
 			self->mBirth->getDrawState(&state);
 		} else {
@@ -370,17 +364,17 @@ void TAniCamelOstrich::runBirth(int phase)
 	if (phase == 0) {
 		mMotion.play(0xE);
 		TAniBirth* birth = new TAniBirth(this, this, (ItemHolder*)&mAsset, &mBody);
-		mBirth = birth;
-		mBirth->mFxBank    = 0x23;
+		mBirth           = birth;
+		mBirth->mFxBank  = 0x23;
 		mBirth->mOffset.set(0.0f, 10.0f, 0.0f);
-		mBirth->mTextId    = 0x1D;
-		TAniBirth* at = mBirth;
-		at->mTextAtA.x = 0.0f;
-		at->mTextAtA.y = 20.0f;
-		at->mTextAtA.z = 0.0f;
-		at->mTextAtB.x = 60.0f;
-		at->mTextAtB.y = 25.0f;
-		at->mTextAtB.z = 20.0f;
+		mBirth->mTextId = 0x1D;
+		TAniBirth* at   = mBirth;
+		at->mTextAtA.x  = 0.0f;
+		at->mTextAtA.y  = 20.0f;
+		at->mTextAtA.z  = 0.0f;
+		at->mTextAtB.x  = 60.0f;
+		at->mTextAtB.y  = 25.0f;
+		at->mTextAtB.z  = 20.0f;
 	} else if (phase == 1) {
 		mBirth->mFlags |= 1;
 		mBirth = 0;

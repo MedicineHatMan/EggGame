@@ -36,11 +36,11 @@ public:
 	virtual void debugPrint(void*);
 	virtual void vfn_74();
 
-	void* mModel;       // _64
-	NJS_TEXLIST* mTexList;     // _68
-	DrawTask* mDrawTask;    // _6C
-	WaterSurface mWater; // _70
-	int mIndex;         // _100 0 to 3 though the tables hold three
+	void* mModel;          // _64
+	NJS_TEXLIST* mTexList; // _68
+	DrawTask* mDrawTask;   // _6C
+	WaterSurface mWater;   // _70
+	int mIndex;            // _100 0 to 3 though the tables hold three
 	u8 _104[0x10];
 };
 

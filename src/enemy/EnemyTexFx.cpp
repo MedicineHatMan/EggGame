@@ -10,17 +10,17 @@
 #include "enemy/EnemyTexFx.h"
 
 extern "C" {
-const int texFxTexMaps[8] = { 0, 1, 2, 3, 4, 5, 6, 7 };
-const int texFxTexMtxs[10] = { 30, 33, 36, 39, 42, 45, 48, 51, 54, 57 };
+const int texFxTexMaps[8]      = { 0, 1, 2, 3, 4, 5, 6, 7 };
+const int texFxTexMtxs[10]     = { 30, 33, 36, 39, 42, 45, 48, 51, 54, 57 };
 const int texFxPostTexMtxs[20] = { 64, 67, 70, 73, 76, 79, 82, 85, 88, 91, 94, 97, 100, 103, 106, 109, 112, 115, 118, 121 };
-const int texFxTexCoords[8] = { 0, 1, 2, 3, 4, 5, 6, 7 };
-const int texFxTevStages[16] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
-const int texFxKColors[4] = { 0, 1, 2, 3 };
-const int texFxKColorSels[4] = { 12, 13, 14, 15 };
-const int texFxTevRegs[4] = { 1, 2, 3, 0 };
+const int texFxTexCoords[8]    = { 0, 1, 2, 3, 4, 5, 6, 7 };
+const int texFxTevStages[16]   = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+const int texFxKColors[4]      = { 0, 1, 2, 3 };
+const int texFxKColorSels[4]   = { 12, 13, 14, 15 };
+const int texFxTevRegs[4]      = { 1, 2, 3, 0 };
 const int texFxTevRegInputs[4] = { 2, 4, 6, 0 };
-const int texFxIndStages[4] = { 0, 1, 2, 3 };
-const int texFxIndMtxs[4] = { 1, 2, 3, 0 };
+const int texFxIndStages[4]    = { 0, 1, 2, 3 };
+const int texFxIndMtxs[4]      = { 1, 2, 3, 0 };
 }
 
 // The warp's choices
@@ -59,11 +59,11 @@ extern "C" void texFxScreenMtx(f32* out)
 	PSMTXIdentity(m);
 	f32 half = 0.5f;
 	f32 down = -0.5f;
-	m[0] = ((f32*)&gProjection)[0] * half;
-	m[2] = -half;
-	m[5] = ((f32*)&gProjection)[5] * down;
-	m[6] = -half;
-	m[10] = -1.0f;
+	m[0]     = ((f32*)&gProjection)[0] * half;
+	m[2]     = -half;
+	m[5]     = ((f32*)&gProjection)[5] * down;
+	m[6]     = -half;
+	m[10]    = -1.0f;
 	PSMTXConcat(m, _gj_matrix_, out);
 }
 
@@ -71,7 +71,7 @@ extern "C" void texFxScreenMtx(f32* out)
 // Two coordinates the screen from the position the offsets from the normal
 static void warpTexGen(u8 base)
 {
-	sWarpCoord = texFxTexCoords[base];
+	sWarpCoord    = texFxTexCoords[base];
 	sWarpIndCoord = texFxTexCoords[base + 1];
 	GXSetTexCoordGen2(sWarpCoord, GX_TG_MTX3X4, GX_TG_POS, sWarpTexMtx, GX_FALSE, GX_PTIDENTITY);
 	GXSetTexCoordGen2(sWarpIndCoord, GX_TG_MTX3X4, GX_TG_NRM, sWarpIndTexMtx, GX_TRUE, sWarpPostMtx);
@@ -100,28 +100,28 @@ extern "C" void texFxWarpLoadMtx(int mtx, int post)
 {
 	f32 m[12];
 	f32 screen[12];
-	sWarpTexMtx = texFxTexMtxs[mtx];
+	sWarpTexMtx    = texFxTexMtxs[mtx];
 	sWarpIndTexMtx = texFxTexMtxs[mtx + 1];
-	sWarpPostMtx = texFxPostTexMtxs[post];
+	sWarpPostMtx   = texFxPostTexMtxs[post];
 	texFxScreenMtx(screen);
 	GXLoadTexMtxImm(screen, sWarpTexMtx, GX_MTX3x4);
 	PSMTXIdentity(m);
 	PSMTXCopy(_gj_matrix_, m);
-	m[3] = 0.0f;
-	m[7] = 0.0f;
+	m[3]  = 0.0f;
+	m[7]  = 0.0f;
 	m[11] = 0.0f;
 	GXLoadTexMtxImm(m, sWarpIndTexMtx, GX_MTX3x4);
 	PSMTXIdentity(m);
-	m[0] = 0.5f;
-	m[1] = 0.0f;
-	m[2] = 0.0f;
-	m[3] = 0.5f;
-	m[4] = 0.0f;
-	m[5] = -0.5f;
-	m[6] = 0.0f;
-	m[7] = -0.5f;
-	m[8] = 0.0f;
-	m[9] = 0.0f;
+	m[0]  = 0.5f;
+	m[1]  = 0.0f;
+	m[2]  = 0.0f;
+	m[3]  = 0.5f;
+	m[4]  = 0.0f;
+	m[5]  = -0.5f;
+	m[6]  = 0.0f;
+	m[7]  = -0.5f;
+	m[8]  = 0.0f;
+	m[9]  = 0.0f;
 	m[10] = 0.0f;
 	m[11] = 1.0f;
 	GXLoadTexMtxImm(m, sWarpPostMtx, GX_MTX3x4);
@@ -164,9 +164,9 @@ extern "C" void texFxWarpBegin(f32 level, int kcolor, int reg, int indStage, int
 	f32 blue = (u8)(80.0f * level);
 	color[2] = blue;
 	GXSetTevColor(texFxTevRegs[reg], *(GXColor*)color);
-	sWarpRegIn = texFxTevRegInputs[reg];
+	sWarpRegIn    = texFxTevRegInputs[reg];
 	sWarpIndStage = texFxIndStages[indStage];
-	sWarpIndMtx = texFxIndMtxs[indMtx];
+	sWarpIndMtx   = texFxIndMtxs[indMtx];
 
 	f32 m[6];
 	m[0] = 0.5f;
@@ -224,19 +224,19 @@ extern "C" void texFxSuitScroll(f32 top, f32 bottom, int mtx)
 	f32 m[12];
 	sSuitTexMtx = texFxTexMtxs[mtx];
 	PSMTXIdentity(m);
-	m[0] = 0.0f;
-	m[1] = -1.0f;
+	m[0]      = 0.0f;
+	m[1]      = -1.0f;
 	f32 scale = 1.0f / (top - bottom);
-	m[2] = 0.0f;
-	m[3] = 1.0f;
-	m[4] = 1.0f;
-	m[5] = 0.0f;
-	m[6] = 0.0f;
-	m[7] = 0.0f;
-	m[8] = 0.0f;
-	m[9] = 0.0f;
-	m[10] = 0.0f;
-	m[11] = 1.0f;
+	m[2]      = 0.0f;
+	m[3]      = 1.0f;
+	m[4]      = 1.0f;
+	m[5]      = 0.0f;
+	m[6]      = 0.0f;
+	m[7]      = 0.0f;
+	m[8]      = 0.0f;
+	m[9]      = 0.0f;
+	m[10]     = 0.0f;
+	m[11]     = 1.0f;
 	mtxScale(scale, scale, 1.0f, m, m);
 	mtxRotateY(m, m, -camGetDrawYaw());
 	mtxTranslate(m, m, 0.0f, -bottom, 0.0f);
@@ -316,16 +316,16 @@ extern "C" void texFxTintSetMtx(int mtx, const Vec3f* pos, int angle)
 	f32 m[12];
 	sTintTexMtx = texFxTexMtxs[mtx];
 	PSMTXIdentity(m);
-	m[0] = 0.0f;
-	m[1] = 0.0f;
-	m[2] = 1.0f;
-	m[3] = 0.0f;
-	m[4] = 1.0f;
-	m[5] = 0.0f;
-	m[6] = 0.0f;
-	m[7] = 0.0f;
-	m[8] = 0.0f;
-	m[9] = 0.0f;
+	m[0]  = 0.0f;
+	m[1]  = 0.0f;
+	m[2]  = 1.0f;
+	m[3]  = 0.0f;
+	m[4]  = 1.0f;
+	m[5]  = 0.0f;
+	m[6]  = 0.0f;
+	m[7]  = 0.0f;
+	m[8]  = 0.0f;
+	m[9]  = 0.0f;
 	m[10] = 0.0f;
 	m[11] = 1.0f;
 	mtxRotateY(m, m, -angle);

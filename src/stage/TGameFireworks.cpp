@@ -17,7 +17,9 @@ TGameFireworks::TGameFireworks(TObject* parent)
 }
 
 // 0x8013B790
-TGameFireworks::~TGameFireworks() { }
+TGameFireworks::~TGameFireworks()
+{
+}
 
 // 0x8013B7EC
 void TGameFireworks::startState()

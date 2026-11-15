@@ -39,25 +39,19 @@ void freeCaptainRing();                         // 0x800BDC60
 
 class TObjBlueCaptain : public TSetActor {
 public:
-	enum State {
-		STATE_WAIT  = 0,
-		STATE_START = 1,
-		STATE_ON    = 2,
-		STATE_STOP  = 3,
-		STATE_OFF   = 4
-	};
+	enum State { STATE_WAIT = 0, STATE_START = 1, STATE_ON = 2, STATE_STOP = 3, STATE_OFF = 4 };
 
 	TObjBlueCaptain(TObject* parent, SetDesc* desc);
 	virtual ~TObjBlueCaptain();
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();            // _0C
-	virtual void vfn_10();          // _10
-	virtual void render();          // _1C
+	virtual void draw();                      // _0C
+	virtual void vfn_10();                    // _10
+	virtual void render();                    // _1C
 	virtual void initFromDesc(SetDesc* desc); // _30
-	virtual void debugPrint(void*); // _34
-	virtual void vfn_74();          // _74 loads the models and picks the starting motion
+	virtual void debugPrint(void*);           // _34
+	virtual void vfn_74();                    // _74 loads the models and picks the starting motion
 
 	void buildMatrix();
 	void play(int id);
@@ -68,19 +62,19 @@ public:
 	void stateStop();
 	void stateOff();
 
-	DrawTask* mDraw;           // _64
-	ObjModel mModel0;          // _68
-	ObjModel mModel1;          // _88
-	ObjModel mModel2;          // _A8
-	MotionPlayer mMotion0;     // _C8
+	DrawTask* mDraw;       // _64
+	ObjModel mModel0;      // _68
+	ObjModel mModel1;      // _88
+	ObjModel mModel2;      // _A8
+	MotionPlayer mMotion0; // _C8
 	MotionPlayer mMotion1;
 	MotionPlayer mMotion2;
-	int mOnSwitch;             // _17C
-	int mOffSwitch;            // _180
-	f32 mMatrix[12];           // _184
-	s16 mState;                // _1B4
+	int mOnSwitch;   // _17C
+	int mOffSwitch;  // _180
+	f32 mMatrix[12]; // _184
+	s16 mState;      // _1B4
 	u8 _1B6[2];
-	TCamPath* mEventCam;       // _1B8 the event camera the on-switch plays
+	TCamPath* mEventCam; // _1B8 the event camera the on-switch plays
 };
 
 extern "C" void objHeapFree(void*, void*);

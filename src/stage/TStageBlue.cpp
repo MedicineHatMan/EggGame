@@ -13,7 +13,9 @@ extern "C" TStage* createBlueStage()
 }
 
 // 0x8006BE08
-TStageBlue::TStageBlue() { }
+TStageBlue::TStageBlue()
+{
+}
 
 // 0x8006BE44
 void TStageBlue::loadAssets()
@@ -36,4 +38,6 @@ void TStageBlue::vfn_14()
 }
 
 // 0x8006BEAC
-TStageBlue::~TStageBlue() { }
+TStageBlue::~TStageBlue()
+{
+}

@@ -26,16 +26,16 @@ public:
 
 	virtual void draw(); // _0C
 
-	s8 mState;          // _20 0 until the light and the particle are started
-	u8 _21;             // _21
-	u16 mId;            // _22
-	u16 mLife;          // _24 counts down from 0x32
-	u8 _26[2];          // _26
-	f32 mMtx[12];       // _28
-	void* mColli;       // _58
+	s8 mState;         // _20 0 until the light and the particle are started
+	u8 _21;            // _21
+	u16 mId;           // _22
+	u16 mLife;         // _24 counts down from 0x32
+	u8 _26[2];         // _26
+	f32 mMtx[12];      // _28
+	void* mColli;      // _58
 	PointLight mLight; // _5C
-	u16 mPulse;         // _D8
-	u16 mLit;           // _DA counts down from 0x14 then the light is removed
+	u16 mPulse;        // _D8
+	u16 mLit;          // _DA counts down from 0x14 then the light is removed
 };
 
 extern "C" {

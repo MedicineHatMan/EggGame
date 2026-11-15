@@ -70,7 +70,7 @@ extern "C" void prepareTObjFogCollision(SetDesc* desc)
 TObjFogCollision::TObjFogCollision(TObject* parent, const SetDesc* desc, f32 value)
     : TObjAction(parent)
 {
-	_00 = (u32)gTObjFogCollisionName;
+	_00   = (u32)gTObjFogCollisionName;
 	mSize = 0xB0;
 	setObjId(this, desc->mObjId);
 	mLink.get()->attach((SetDesc*)desc);
@@ -94,10 +94,10 @@ void TObjFogCollision::initFromDesc(SetDesc* desc)
 {
 	desc->getPos(&mXform.mPos);
 	desc->getRot(&mXform.mRot);
-	mDefault = fogCollisionGetDefault(desc);
-	mFogId   = desc->getInt(0);
-	mRate    = desc->getFloat(0);
-	mOrder   = desc->getInt(3);
+	mDefault   = fogCollisionGetDefault(desc);
+	mFogId     = desc->getInt(0);
+	mRate      = desc->getFloat(0);
+	mOrder     = desc->getInt(3);
 	int shape  = desc->getInt(1);
 	f32 width  = desc->getFloat(1);
 	f32 height = desc->getFloat(2);
@@ -133,7 +133,7 @@ void TObjFogCollision::setShape(int shape, f32 width, f32 height, f32 depth)
 	if (height < 20.0f) {
 		height = 20.0f;
 	}
-	f32 d = depth < 20.0f ? 20.0f : depth;
+	f32 d  = depth < 20.0f ? 20.0f : depth;
 	mShape = kind;
 	height *= 0.5f;
 	mCenter = mXform.mPos;

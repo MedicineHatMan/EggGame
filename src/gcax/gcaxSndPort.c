@@ -6,18 +6,18 @@ void gcaxChanReset(GCAX_PORT* port, int ch)
 {
 	BOOL level;
 
-	level = OSDisableInterrupts();
-	port->chan[ch].flags = 0;
-	port->chan[ch].vol = 100;
-	port->chan[ch].pan = 0x40;
-	port->chan[ch].bend_raw = 0x2000;
-	port->chan[ch].expr = 0x7F;
+	level                    = OSDisableInterrupts();
+	port->chan[ch].flags     = 0;
+	port->chan[ch].vol       = 100;
+	port->chan[ch].pan       = 0x40;
+	port->chan[ch].bend_raw  = 0x2000;
+	port->chan[ch].expr      = 0x7F;
 	port->chan[ch].dpl_front = 0;
-	port->chan[ch]._28 = 0;
-	port->chan[ch].dpl_pan = -1;
-	port->chan[ch]._40 = 0x88888888;
-	port->chan[ch]._44 = 2290649300.0f;
-	port->chan[ch]._48 = 2290649300.0f;
+	port->chan[ch]._28       = 0;
+	port->chan[ch].dpl_pan   = -1;
+	port->chan[ch]._40       = 0x88888888;
+	port->chan[ch]._44       = 2290649300.0f;
+	port->chan[ch]._48       = 2290649300.0f;
 	OSRestoreInterrupts(level);
 }
 
@@ -40,12 +40,12 @@ found:
 	port = &gcax_work->port[i];
 	memset(port, 0, sizeof(GCAX_PORT));
 	port->flags |= GCAX_PORT_USED;
-	port->vol = 0.0f;
-	port->_0C = 0.0f;
-	port->pitch = 1.0f;
-	port->_28 = 0.0f;
-	port->_10 = 1.0f;
-	port->vol_rest = -1.0f;
+	port->vol        = 0.0f;
+	port->_0C        = 0.0f;
+	port->pitch      = 1.0f;
+	port->_28        = 0.0f;
+	port->_10        = 1.0f;
+	port->vol_rest   = -1.0f;
 	port->pitch_rest = -1.0f;
 	for (i = 0; i < GCAX_CHAN_MAX; i++) {
 		port->chan[i].index = i;
@@ -104,10 +104,10 @@ void gcaxPortProcess(GCAX_PORT* port)
 		port->msg_head %= GCAX_MSG_MAX;
 		OSRestoreInterrupts(level);
 		status = (msg >> 24) & 0xF0;
-		ch = (msg >> 24) & 0xF;
-		d1 = (msg >> 16) & 0xFF;
-		d2 = (msg >> 8) & 0xFF;
-		vel = (s8)(u8)msg;
+		ch     = (msg >> 24) & 0xF;
+		d1     = (msg >> 16) & 0xFF;
+		d2     = (msg >> 8) & 0xFF;
+		vel    = (s8)(u8)msg;
 		switch (status) {
 		case 0x80:
 			if (!(port->chan[ch].flags & GCAX_CHAN_SUSTAIN)) {
@@ -174,9 +174,9 @@ void gcaxPortNoteOn(GCAX_PORT* port, u8 ch, u8 key, u8 vel, int prio)
 	GCAX_LINK* link;
 	GCAX_NOTE* note;
 
-	port->chan[ch].tune = 1.0f;
+	port->chan[ch].tune     = 1.0f;
 	port->chan[ch].vel_bias = 0;
-	link = gcaxNoteListAdd(&port->notes, 0);
+	link                    = gcaxNoteListAdd(&port->notes, 0);
 	if (link != 0) {
 		gcaxChanRandomize(port, ch, key, vel, prio);
 		note = gcaxNoteOn(port, ch, key, vel, prio);
@@ -184,9 +184,9 @@ void gcaxPortNoteOn(GCAX_PORT* port, u8 ch, u8 key, u8 vel, int prio)
 			gcaxNoteListDelete(&port->notes, link);
 		} else {
 			note->port = port;
-			note->key = key;
+			note->key  = key;
 			note->chan = ch;
-			link->obj = note;
+			link->obj  = note;
 		}
 	}
 }
@@ -209,7 +209,7 @@ void gcaxPortControl(GCAX_PORT* port, u8 ch, u8 cc, u8 val)
 		gcaxChanUpdate(port, ch);
 		break;
 	case 0x0A:
-		port->chan[ch].pan = val;
+		port->chan[ch].pan     = val;
 		port->chan[ch].dpl_pan = -1;
 		gcaxChanUpdate(port, ch);
 		break;
@@ -228,14 +228,14 @@ void gcaxPortControl(GCAX_PORT* port, u8 ch, u8 cc, u8 val)
 			if (dpl > 0x7F) {
 				dpl = 0x7F;
 			}
-			pan = dpl;
+			pan   = dpl;
 			front = 0;
 		} else {
-			dpl = (0x7F - val) << 1;
-			pan = dpl;
+			dpl   = (0x7F - val) << 1;
+			pan   = dpl;
 			front = 0x7F;
 		}
-		port->chan[ch].dpl_pan = dpl;
+		port->chan[ch].dpl_pan   = dpl;
 		port->chan[ch].dpl_front = front;
 		if (!gcax_work->surround) {
 			port->chan[ch].pan = pan;
@@ -303,7 +303,7 @@ void gcaxPortUpdateVoices(GCAX_PORT* port)
 	if (port->flags & GCAX_PORT_USED) {
 		link = 0;
 		while ((link = gcaxNoteListNext(&port->notes, link)) != 0) {
-			ch = ((GCAX_NOTE*)link->obj)->chan;
+			ch    = ((GCAX_NOTE*)link->obj)->chan;
 			vlink = 0;
 			while ((vlink = gcaxVoiceListNext(&((GCAX_NOTE*)link->obj)->voices, vlink)) != 0) {
 				gcaxVoiceEnvelope(vlink->obj);
@@ -334,7 +334,7 @@ void gcaxSndUpdateChans(void)
 void gcaxPortVolFadeSet(GCAX_PORT* port)
 {
 	if (port->vol_rest <= 0.0f) {
-		port->vol = port->vol_target;
+		port->vol      = port->vol_target;
 		port->vol_time = 0.0f;
 		port->vol_rest = -1.0f;
 	} else {
@@ -355,12 +355,11 @@ void gcaxPortVolFade(GCAX_PORT* port)
 void gcaxPortPitchFadeSet(GCAX_PORT* port)
 {
 	if (port->pitch_rest <= 0.0f) {
-		port->pitch = port->pitch_target;
+		port->pitch      = port->pitch_target;
 		port->pitch_time = 0.0f;
 		port->pitch_rest = -1.0f;
 	} else {
-		port->pitch = port->pitch_start +
-		              (port->pitch_target - port->pitch_start) * (1.0f - port->pitch_rest / port->pitch_time);
+		port->pitch = port->pitch_start + (port->pitch_target - port->pitch_start) * (1.0f - port->pitch_rest / port->pitch_time);
 	}
 }
 
@@ -418,9 +417,9 @@ void gcaxSndFrame(void)
 		gcax_work->busy--;
 		OSRestoreInterrupts(level2);
 	} else {
-		gcax_work->prev_time = gcax_work->time;
-		gcax_work->time = OSGetTime();
-		gcax_work->notes_used = gcaxNoteCount();
+		gcax_work->prev_time   = gcax_work->time;
+		gcax_work->time        = OSGetTime();
+		gcax_work->notes_used  = gcaxNoteCount();
 		gcax_work->voices_used = gcaxVoiceCountUsed();
 		for (i = 0; i < GCAX_PORT_MAX; i++) {
 			if (gcax_work->port[i].flags & GCAX_PORT_USED) {
@@ -433,9 +432,9 @@ void gcaxSndFrame(void)
 			gcaxPortUpdateVoices(&gcax_work->port[i]);
 			gcaxNoteListUpdate(&gcax_work->port[i].notes);
 		}
-		gcax_work->notes_used = gcaxNoteCount();
+		gcax_work->notes_used  = gcaxNoteCount();
 		gcax_work->voices_used = gcaxVoiceCountUsed();
-		level3 = OSDisableInterrupts();
+		level3                 = OSDisableInterrupts();
 		gcax_work->busy--;
 		OSRestoreInterrupts(level3);
 	}

@@ -43,14 +43,14 @@ static inline f32 texSqrt(f32 x)
 // 0x8002BE58
 void genTexInit()
 {
-	u8* sphere = makeSphereTex();
-	u8* wave   = makeWaveTex();
-	u8* noise  = makeNoiseTex();
-	u8* dome   = makeDomeTex();
-	u8* ring   = makeRingTex();
-	u8* ramp   = makeRampTex();
-	u8* fold   = makeFoldTex();
-	u8* grid   = makeGridTex();
+	u8* sphere         = makeSphereTex();
+	u8* wave           = makeWaveTex();
+	u8* noise          = makeNoiseTex();
+	u8* dome           = makeDomeTex();
+	u8* ring           = makeRingTex();
+	u8* ramp           = makeRampTex();
+	u8* fold           = makeFoldTex();
+	u8* grid           = makeGridTex();
 	sTexList.textures  = sTexName;
 	sTexList.nbTexture = 8;
 	njLoadTexture(&sTexList);
@@ -219,8 +219,8 @@ static u8* makeNoiseTex()
 static void makeNoiseMip()
 {
 	u8* p = sNoiseMip = new u8[GXGetTexBufferSize(64, 64, 3, GX_TRUE, 100)];
-	f32 amp   = 255.0f;
-	int size  = 64;
+	f32 amp           = 255.0f;
+	int size          = 64;
 	for (int ty = 0; ty < 64; ty += 4) {
 		for (int tx = 0; tx < 64; tx += 4) {
 			for (int y = 0; y < 4; y++) {
@@ -234,8 +234,7 @@ static void makeNoiseMip()
 			}
 		}
 	}
-	for (amp *= 0.8f, size >>= 1, p = (u8*)(((u32)p + 31) & ~31); size > 0;
-	     amp *= 0.8f, size >>= 1, p = (u8*)(((u32)p + 31) & ~31)) {
+	for (amp *= 0.8f, size >>= 1, p = (u8*)(((u32)p + 31) & ~31); size > 0; amp *= 0.8f, size >>= 1, p = (u8*)(((u32)p + 31) & ~31)) {
 		for (int ty = 0; ty < size; ty += 4) {
 			for (int tx = 0; tx < size; tx += 4) {
 				for (int y = 0; y < 4; y++) {

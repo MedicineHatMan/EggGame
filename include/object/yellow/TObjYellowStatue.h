@@ -23,12 +23,17 @@ TObject* createTObjYellowStatue(TObject*, SetDesc*);
 
 /** One entry on the list of statues */
 struct StatueNode {
-	StatueNode* mNext;       // _00
-	StatueNode* mPrev;       // _04
-	TObjYellowStatue* mObj;  // _08
+	StatueNode* mNext;        // _00
+	StatueNode* mPrev;        // _04
+	TObjYellowStatue* mObj;   // _08
 	struct StatueList* mList; // _0C
 
-	StatueNode() : mNext(0), mPrev(0), mList(0) { }
+	StatueNode()
+	    : mNext(0)
+	    , mPrev(0)
+	    , mList(0)
+	{
+	}
 };
 
 /** The list every statue joins */
@@ -66,23 +71,23 @@ public:
 	void stateCheck();
 	void stateDone();
 
-	StatueNode mNode;     // _64
-	NJS_OBJECT* mModelData;     // _74
-	NJS_TEXLIST* mTexList;       // _78
-	DrawTask* mDrawTask;      // _7C
-	ObjModel mModel;      // _80
-	MotionPlayer mMotion; // _A0
-	f32 mMatrix[12];      // _DC
-	u16 mAngle;           // _10C
-	s16 mMirror;          // _10E the first int 0 = type A otherwise type B
-	u16 mSwitchTurn;      // _110
-	u16 mSwitchOff;       // _112
-	u16 mCheckId;         // _114
-	u16 mTimer;           // _116
-	TCamPath* mEvent;     // _118
-	Vec3f mCenter;        // _11C
-	f32 mRadius;          // _128
-	int mAct;             // _12C
+	StatueNode mNode;       // _64
+	NJS_OBJECT* mModelData; // _74
+	NJS_TEXLIST* mTexList;  // _78
+	DrawTask* mDrawTask;    // _7C
+	ObjModel mModel;        // _80
+	MotionPlayer mMotion;   // _A0
+	f32 mMatrix[12];        // _DC
+	u16 mAngle;             // _10C
+	s16 mMirror;            // _10E the first int 0 = type A otherwise type B
+	u16 mSwitchTurn;        // _110
+	u16 mSwitchOff;         // _112
+	u16 mCheckId;           // _114
+	u16 mTimer;             // _116
+	TCamPath* mEvent;       // _118
+	Vec3f mCenter;          // _11C
+	f32 mRadius;            // _128
+	int mAct;               // _12C
 };
 
 #endif

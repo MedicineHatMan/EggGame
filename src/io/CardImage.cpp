@@ -3,8 +3,8 @@
 #include "stl/string.h"
 #include "core/SdkCalls.h"
 
-extern "C" CardImage* createCardImage(int bannerKind, int iconKind, int iconCount, int anim, int speed, u8* images,
-                                      const char* title, const char* comment)
+extern "C" CardImage* createCardImage(int bannerKind, int iconKind, int iconCount, int anim, int speed, u8* images, const char* title,
+                                      const char* comment)
 {
 	u8* banner;
 	u8* bannerTlut;
@@ -35,15 +35,15 @@ extern "C" CardImage* createCardImage(int bannerKind, int iconKind, int iconCoun
 }
 
 // 0x801A272C
-extern "C" CardImage* newCardImage(void* banner, void* bannerTlut, void* icons, void* iconTlut, int iconCount, int anim,
-                                   int speed, const char* title, const char* comment)
+extern "C" CardImage* newCardImage(void* banner, void* bannerTlut, void* icons, void* iconTlut, int iconCount, int anim, int speed,
+                                   const char* title, const char* comment)
 {
 	return new CardImage(banner, bannerTlut, icons, iconTlut, iconCount, anim, speed, title, comment);
 }
 
 // 0x801A27B4
-CardImage::CardImage(void* banner, void* bannerTlut, void* icons, void* iconTlut, int iconCount, int anim, int speed,
-                     const char* title, const char* comment)
+CardImage::CardImage(void* banner, void* bannerTlut, void* icons, void* iconTlut, int iconCount, int anim, int speed, const char* title,
+                     const char* comment)
 {
 	mBanner     = banner;
 	mBannerTlut = bannerTlut;

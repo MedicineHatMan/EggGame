@@ -17,7 +17,9 @@ TGameFreePlay::TGameFreePlay(TObject* parent)
 }
 
 // 0x800CD888
-TGameFreePlay::~TGameFreePlay() { }
+TGameFreePlay::~TGameFreePlay()
+{
+}
 
 // 0x800CD8E4
 void TGameFreePlay::startState()

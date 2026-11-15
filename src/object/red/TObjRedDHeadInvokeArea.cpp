@@ -93,7 +93,10 @@ void TObjRedDHeadInvokeArea::debugPrint(void*)
 }
 
 // 0x800C69EC
-static inline s16 headGroup(void* head) { return ((TObjRedDinoHead*)head)->mGroupId; }
+static inline s16 headGroup(void* head)
+{
+	return ((TObjRedDinoHead*)head)->mGroupId;
+}
 
 void TObjRedDHeadInvokeArea::setup()
 {
@@ -165,15 +168,15 @@ void TObjRedDHeadInvokeArea::drop()
 	spawn.mPos.y += 200.0f;
 	spawn.mPos.x += mRadius * (2.0f * (3.0517578e-05f * (f32)rand() - 0.5f));
 	spawn.mPos.z += mRadius * (2.0f * (3.0517578e-05f * (f32)rand() - 0.5f));
-	spawn.mRadius = 4.0f;
-	spawn.mDamage = 2;
+	spawn.mRadius       = 4.0f;
+	spawn.mDamage       = 2;
 	spawn.mParticleBank = 1;
 	spawn.mParticleId   = 0;
 	spawn.mPieceModels  = (NJS_OBJECT**)getGeObjModels();
 	spawn.mPieceFirst   = 10;
 	spawn.mPieceCount   = 9;
 	spawn.mPieceTexList = getGeObjTextures()[9];
-	spawn.mLandSe = 0x220;
+	spawn.mLandSe       = 0x220;
 	spawnFallThing(this, &spawn);
 }
 
@@ -198,8 +201,8 @@ void TObjRedDHeadInvokeArea::makeShape()
 	ColliShape shape;
 
 	colliShapeInit(&shape);
-	shape.mPos  = mPos;
-	shape.mType = (mColType != 0) ? COLLISHAPE_SPHERE : COLLISHAPE_CYLINDER;
+	shape.mPos   = mPos;
+	shape.mType  = (mColType != 0) ? COLLISHAPE_SPHERE : COLLISHAPE_CYLINDER;
 	shape.mSizeX = mRadius;
 	if (shape.mType == COLLISHAPE_CYLINDER) {
 		shape.mSizeY = 0.5f * mHeight;
@@ -273,4 +276,3 @@ static void unlinkArea(AreaList* list, RedAreaLink* link)
 	link->mList = 0;
 	list->mCount -= 1;
 }
-

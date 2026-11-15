@@ -36,15 +36,15 @@ public:
 	void setup();    // ours
 	void facePath(); // ours
 
-	DrawTask* mDraw;       // _64
-	ObjModel mModel;       // _68
-	MotionPlayer mMotion;  // _88
-	EggCollide mPath;      // _C4 path 0
-	f32 mMatrix[12];       // _E0
-	ObjShadow mShadow;     // _110
-	int mYaw;              // _148 the path heading
-	int mCrow;             // _14C 1 while gTitleScene is 3
-	f32 mScale[2];         // _150 by mCrow set float 0 plus 1 set float 1 plus 1
+	DrawTask* mDraw;      // _64
+	ObjModel mModel;      // _68
+	MotionPlayer mMotion; // _88
+	EggCollide mPath;     // _C4 path 0
+	f32 mMatrix[12];      // _E0
+	ObjShadow mShadow;    // _110
+	int mYaw;             // _148 the path heading
+	int mCrow;            // _14C 1 while gTitleScene is 3
+	f32 mScale[2];        // _150 by mCrow set float 0 plus 1 set float 1 plus 1
 };
 
 extern "C" {

@@ -47,11 +47,11 @@ public:
 	void update();
 	void draw(f32 x, f32 y, f32 gap, const Vec3f* scale);
 
-	int mMax;             // _00
-	int mCount;           // _04
-	TextGlyph** mGlyphs;  // _08
-	int mWidth;           // _0C
-	int mMaxWidth;        // _10
+	int mMax;            // _00
+	int mCount;          // _04
+	TextGlyph** mGlyphs; // _08
+	int mWidth;          // _0C
+	int mMaxWidth;       // _10
 };
 
 /**
@@ -68,10 +68,10 @@ struct TextReader {
 	int readChar(u8 c, u16* code);
 	int next(u16* code);
 
-	u32 mColor;        // _00 RGBA
-	int mWait;         // _04 frames a character
-	u32 mPos;          // _08
-	const u8* mText;   // _0C
+	u32 mColor;      // _00 RGBA
+	int mWait;       // _04 frames a character
+	u32 mPos;        // _08
+	const u8* mText; // _0C
 };
 
 /**
@@ -92,49 +92,49 @@ public:
 	virtual void vfn_10(); // _10 0x80110048
 	virtual void render(); // _1C 0x8011007C
 
-	void buildLines(); // 0x8010FE50
-	void waitReady();  // 0x80110390
-	void readInput();  // 0x801103AC
-	void finishLine(); // 0x8011061C
-	void retire();     // 0x80110690
-	int bit0();        // 0x801106A0 mBits bit 0
-	int bit1();        // 0x801106AC mBits bit 1
-	int rowFull();     // 0x801106B8
-	void clearCount(); // 0x801106DC
-	void scrollLine(); // 0x801106E8
-	void applyPage();  // 0x8011078C
-	int advancePage(); // 0x801107E8
-	int hasMoreText();       // 0x80110B20
+	void buildLines();                // 0x8010FE50
+	void waitReady();                 // 0x80110390
+	void readInput();                 // 0x801103AC
+	void finishLine();                // 0x8011061C
+	void retire();                    // 0x80110690
+	int bit0();                       // 0x801106A0 mBits bit 0
+	int bit1();                       // 0x801106AC mBits bit 1
+	int rowFull();                    // 0x801106B8
+	void clearCount();                // 0x801106DC
+	void scrollLine();                // 0x801106E8
+	void applyPage();                 // 0x8011078C
+	int advancePage();                // 0x801107E8
+	int hasMoreText();                // 0x80110B20
 	void resetPage(const void* text); // 0x80110B2C Restarts on text
-	void closeText();  // 0x80110B78
+	void closeText();                 // 0x80110B78
 
-	DrawTask* mDraw;     // _20
-	int mState;      // _24 0 wait 1 reading 2 closing 4 retire
+	DrawTask* mDraw;                // _20
+	int mState;                     // _24 0 wait 1 reading 2 closing 4 retire
 	class TAeObjMsgWindow* mWindow; // _28 null when mId is -1
-	Vec3f mAt;       // _2C
-	Vec3f mBox;      // _38 x and y size the lines
-	int mId;         // _44
-	Vec3f mGlyph;    // _48 glyph size
-	int mTimer;      // _54
-	int mHold;       // _58 non-zero keeps state 4 instead of 3
-	TextLine** mLines; // _5C
-	int mKind;       // _60
-	int mRows;       // _64
-	int _68;         // _68
-	int _6C;         // _6C
-	u8 _70[8];       // _70
-	u32 mBits;       // _78 bit 0 set for kind 1 and 2 bit 1 from the pad
-	u32 _7C;         // _7C
-	u32 _80;         // _80
-	TextReader mBlock; // _84
-	int _94;         // _94
-	u32 _98;         // _98
-	u32 _9C;         // _9C
-	TextGlyph* mExtra; // _A0 a glyph that did not fit for the next line
-	u32 _A4;         // _A4
-	u8 _A8;          // _A8
-	u8 _A9;          // _A9
-	u8 _AA[2];       // _AA
+	Vec3f mAt;                      // _2C
+	Vec3f mBox;                     // _38 x and y size the lines
+	int mId;                        // _44
+	Vec3f mGlyph;                   // _48 glyph size
+	int mTimer;                     // _54
+	int mHold;                      // _58 non-zero keeps state 4 instead of 3
+	TextLine** mLines;              // _5C
+	int mKind;                      // _60
+	int mRows;                      // _64
+	int _68;                        // _68
+	int _6C;                        // _6C
+	u8 _70[8];                      // _70
+	u32 mBits;                      // _78 bit 0 set for kind 1 and 2 bit 1 from the pad
+	u32 _7C;                        // _7C
+	u32 _80;                        // _80
+	TextReader mBlock;              // _84
+	int _94;                        // _94
+	u32 _98;                        // _98
+	u32 _9C;                        // _9C
+	TextGlyph* mExtra;              // _A0 a glyph that did not fit for the next line
+	u32 _A4;                        // _A4
+	u8 _A8;                         // _A8
+	u8 _A9;                         // _A9
+	u8 _AA[2];                      // _AA
 };
 
 extern "C" TSimpleText* createSimpleTextTimed(void* desc, int timer); // 0x8010FA90 held for timer frames

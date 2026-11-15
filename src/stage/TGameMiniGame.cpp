@@ -19,26 +19,28 @@ extern "C" void* createGameMiniGame(TObject* parent)
 TGameMiniGame::TGameMiniGame(TObject* parent)
     : TGameContext(parent)
 {
-	mClock = 0;
-	mBonus = 0;
-	mScore = 0;
+	mClock     = 0;
+	mBonus     = 0;
+	mScore     = 0;
 	mBestCombo = 0;
-	mScript = 0;
-	mSwitch = 0;
-	mDone = 0;
+	mScript    = 0;
+	mSwitch    = 0;
+	mDone      = 0;
 }
 
 // 0x8010DF98
-TGameMiniGame::~TGameMiniGame() { }
+TGameMiniGame::~TGameMiniGame()
+{
+}
 
 // 0x8010DFF4
 void TGameMiniGame::startState()
 {
 	if (mDone == 0) {
-		mBonus = 0;
-		mScore = 0;
+		mBonus     = 0;
+		mScore     = 0;
 		mBestCombo = 0;
-		mCombo = 0;
+		mCombo     = 0;
 		mComboTime = 0;
 		SET_GAME_STATE(this, createGameStateMiniGameWait);
 	} else {
@@ -52,7 +54,7 @@ void TGameMiniGame::readRules(MiniGameRulesMsg* msg)
 	mScript = msg->mScript;
 	mSwitch = msg->mSwitch;
 	mNeeded = msg->mNeeded;
-	mClock = msg->mSeconds * 1000 + msg->mMinutes * 60000;
+	mClock  = msg->mSeconds * 1000 + msg->mMinutes * 60000;
 	sePlay(0x38);
 }
 
@@ -71,17 +73,17 @@ int TGameMiniGame::tickClock()
 	stageTimerTick(&mClock);
 
 	StageTime now;
-	now.mHour = 0;
+	now.mHour   = 0;
 	now.mMinute = 0;
 	now.mSecond = 0;
-	now.mMilli = 0;
+	now.mMilli  = 0;
 	stageTimeSet(&now, mClock);
 
 	HudTimeMsg time;
-	time.mType = 0xBF;
+	time.mType   = 0xBF;
 	time.mMinute = now.mMinute;
 	time.mSecond = now.mSecond;
-	time.mMilli = now.mMilli;
+	time.mMilli  = now.mMilli;
 	aeSendMissionIcon(&time);
 	return 0;
 }
@@ -98,15 +100,15 @@ void TGameMiniGame::addPoints(int points)
 		mBonus = 1;
 
 		StageTime now;
-		now.mHour = 0;
+		now.mHour   = 0;
 		now.mMinute = 0;
 		now.mSecond = 0;
-		now.mMilli = 0;
+		now.mMilli  = 0;
 		StageTime add;
-		add.mHour = 0;
+		add.mHour   = 0;
 		add.mMinute = 0;
 		add.mSecond = 0;
-		add.mMilli = 0;
+		add.mMilli  = 0;
 		stageTimeSet(&now, mClock);
 		add.mSecond = mBonus;
 		stageTimeAdd(&now, &add);
@@ -114,12 +116,12 @@ void TGameMiniGame::addPoints(int points)
 		sePlay(0x2B);
 
 		HudMsg bonus;
-		bonus.mType = 0xC0;
+		bonus.mType  = 0xC0;
 		bonus.mValue = mBonus;
 		aeSendMissionIcon(&bonus);
 	} else {
-		mCombo = 0;
-		mBonus = 0;
+		mCombo     = 0;
+		mBonus     = 0;
 		mComboTime = 60;
 	}
 	mScore += points;
@@ -150,8 +152,8 @@ extern "C" void* createGameStateMiniGameWait(void* pool, TGameContext*)
 // 0x8010E398
 TGameStateMiniGameWait::TGameStateMiniGameWait()
 {
-	mName = gTGameStateMiniGameWaitName; // "TGameStateMiniGameWait"
-	mSize = 0x18;
+	mName  = gTGameStateMiniGameWaitName; // "TGameStateMiniGameWait"
+	mSize  = 0x18;
 	mReady = 0;
 }
 
@@ -162,14 +164,14 @@ void TGameStateMiniGameWait::update(TGameContext* context)
 		aeCreateMissionIcon6();
 
 		HudTimeMsg time;
-		time.mType = 0xBF;
+		time.mType   = 0xBF;
 		time.mMinute = 0;
 		time.mSecond = 0;
-		time.mMilli = 0;
+		time.mMilli  = 0;
 		aeSendMissionIcon(&time);
 
 		HudMsg hud;
-		hud.mType = 0xBE;
+		hud.mType  = 0xBE;
 		hud.mValue = 0;
 		aeSendMissionIcon(&hud);
 

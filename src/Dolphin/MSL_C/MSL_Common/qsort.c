@@ -2,19 +2,19 @@
 
 typedef int (*_compare_function)(const void*, const void*);
 
-#define table_ptr(i) (((char*)table_base) + (member_size * ((i)-1)))
+#define table_ptr(i) (((char*)table_base) + (member_size * ((i) - 1)))
 
-#define swap(dst, src, cnt)                                             \
-	do {                                                                \
-		char* p;                                                        \
-		char* q;                                                        \
-		size_t n = cnt;                                                 \
-		unsigned long tmp;                                              \
-		for (p = (char*)(src)-1, q = (char*)(dst)-1, n++; --n;) {       \
-			tmp  = *++q;                                                \
-			*q   = *++p;                                                \
-			*p   = tmp;                                                 \
-		}                                                               \
+#define swap(dst, src, cnt)                                           \
+	do {                                                              \
+		char* p;                                                      \
+		char* q;                                                      \
+		size_t n = cnt;                                               \
+		unsigned long tmp;                                            \
+		for (p = (char*)(src) - 1, q = (char*)(dst) - 1, n++; --n;) { \
+			tmp = *++q;                                               \
+			*q  = *++p;                                               \
+			*p  = tmp;                                                \
+		}                                                             \
 	} while (0)
 
 /**

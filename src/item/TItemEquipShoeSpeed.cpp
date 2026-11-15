@@ -17,7 +17,9 @@ TItemEquipShoeSpeed::TItemEquipShoeSpeed(TObject* parent, const ItemSpec* spec)
 }
 
 // 0x801D14B8
-void TItemEquipShoeSpeed::vfn_7C() { }
+void TItemEquipShoeSpeed::vfn_7C()
+{
+}
 
 // 0x801D14BC
 void TItemEquipShoeSpeed::vfn_80()
@@ -50,4 +52,6 @@ void TItemEquipShoeSpeed::vfn_84()
 }
 
 // 0x801D15CC
-TItemEquipShoeSpeed::~TItemEquipShoeSpeed() { }
+TItemEquipShoeSpeed::~TItemEquipShoeSpeed()
+{
+}

@@ -20,8 +20,8 @@ static const int kEffect[2] = { 67, 68 };
 TEneLastBossDemo_Darkness::TEneLastBossDemo_Darkness(TObject* parent)
     : TObject(parent)
 {
-	_00    = (u32)gTEneLastBossDemo_DarknessName;
-	mSize  = 0x68;
+	_00   = (u32)gTEneLastBossDemo_DarknessName;
+	mSize = 0x68;
 	motionObjInit(&mBank);
 	mTable = *motionTEneLastBoss(2);
 	mTime  = 0.0f;

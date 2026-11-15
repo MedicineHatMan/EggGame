@@ -90,8 +90,8 @@ const char* gTObjYellowSandfallName = "TObjYellowSandfall";
 TObjYellowSandfall::TObjYellowSandfall(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00   = (u32)gTObjYellowSandfallName;
-	mSize = 0x150;
+	_00        = (u32)gTObjYellowSandfallName;
+	mSize      = 0x150;
 	mNode.mObj = this;
 	sSandfalls.add(&mNode);
 
@@ -153,8 +153,8 @@ void TObjYellowSandfall::debugPrint(void*)
 void TObjYellowSandfall::vfn_74()
 {
 	mState.mAmbient = 0xFF;
-	mScrollV = 0.0f;
-	mScrollU = 0.0f;
+	mScrollV        = 0.0f;
+	mScrollU        = 0.0f;
 	updateMatrix();
 	updateEffect();
 	mModel.setModel(mModelData);
@@ -170,7 +170,7 @@ void TObjYellowSandfall::updateMatrix()
 	mtxSetTransV(mMatrix, &mPos);
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 	GjModel* model = mModelData->model;
-	mCenter  = *(Vec3f*)&model->center;
+	mCenter        = *(Vec3f*)&model->center;
 	mtxMultVec(mMatrix, &mCenter, &mCenter);
 	mRadius = mModelData->model->r;
 }

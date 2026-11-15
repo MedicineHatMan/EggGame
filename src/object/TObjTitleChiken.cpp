@@ -67,8 +67,8 @@ void TObjTitleChiken::vfn_74()
 // 0x801ACB60
 void TObjTitleChiken::setup()
 {
-	mYaw        = 0;
-	RailPath* path  = railFind(0);
+	mYaw           = 0;
+	RailPath* path = railFind(0);
 	if (path != 0) {
 		Vec3f dir;
 		mPath.setPath(path);
@@ -95,10 +95,10 @@ void TObjTitleChiken::setup()
 		mShadow._30 = 10.0f;
 		mShadow._34 = 10.0f;
 	}
-	void** textures  = (void**)getTitleObjTexLists();
-	mModel.mTexList  = (NJS_TEXLIST*)textures[0];
-	mModel.mState    = getDefaultDrawState();
-	mModel.mMotion   = &mMotion;
+	void** textures = (void**)getTitleObjTexLists();
+	mModel.mTexList = (NJS_TEXLIST*)textures[0];
+	mModel.mState   = getDefaultDrawState();
+	mModel.mMotion  = &mMotion;
 }
 
 // 0x801ACCA0

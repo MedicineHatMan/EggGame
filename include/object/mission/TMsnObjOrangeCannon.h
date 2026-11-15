@@ -39,7 +39,7 @@ int prepareOrangeCannonAssets();
 }
 
 /** A model node as the cannon's archives hold it */
-struct CannonNode { // size 0x38
+struct CannonNode {       // size 0x38
 	u32 mFlags;           // _00
 	void* mModel;         // _04
 	Vec3f mPos;           // _08
@@ -57,7 +57,7 @@ public:
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-virtual void draw();
+	virtual void draw();
 	virtual void vfn_10();
 	virtual void render();
 	virtual void initFromDesc(SetDesc* desc);
@@ -75,28 +75,28 @@ virtual void draw();
 	void stepWait();
 	void stepEnd();
 
-	DrawTask* mDrawTask;  // _64
-	ObjModel mModel;      // _68
-	ObjDrawState mState;  // _88
-	MotionPlayer mMotion; // _AC
-	f32 mMatrix[12];      // _E8
-	ObjShadow mShadow;    // _118
-	EnemyLight mLight;    // _150
-	Vec3f mLightPos;      // _190
-	f32 mLightRadius;     // _19C
-	HitVec mMuzzle[2];    // _1A0 the two barrel nodes' places in the world
-	FxVec mMuzzleRot[3];  // _1B8 their angles
-	CannonNode mBurst;    // _1DC the burst model without its children
-	ModelDraw mDraw;      // _214
-	MotionTrack mTrack;   // _230
-	TCamPath* mEvent;     // _24C
+	DrawTask* mDrawTask;             // _64
+	ObjModel mModel;                 // _68
+	ObjDrawState mState;             // _88
+	MotionPlayer mMotion;            // _AC
+	f32 mMatrix[12];                 // _E8
+	ObjShadow mShadow;               // _118
+	EnemyLight mLight;               // _150
+	Vec3f mLightPos;                 // _190
+	f32 mLightRadius;                // _19C
+	HitVec mMuzzle[2];               // _1A0 the two barrel nodes' places in the world
+	FxVec mMuzzleRot[3];             // _1B8 their angles
+	CannonNode mBurst;               // _1DC the burst model without its children
+	ModelDraw mDraw;                 // _214
+	MotionTrack mTrack;              // _230
+	TCamPath* mEvent;                // _24C
 	TObjOrangeFireworks* mFireworks; // _250
-	u16 mTimer;           // _254
-	Fx* mFx;            // _258
-	f32 mFxMtx[12];       // _25C the burst node's matrix
-	ObjRef mPlayer;       // _28C who pushed the ball in
-	int mAct;             // _298 0 waiting for a ball 1 starting the event 2 firing 3 done
-	int mStep;            // _29C the firing step
+	u16 mTimer;                      // _254
+	Fx* mFx;                         // _258
+	f32 mFxMtx[12];                  // _25C the burst node's matrix
+	ObjRef mPlayer;                  // _28C who pushed the ball in
+	int mAct;                        // _298 0 waiting for a ball 1 starting the event 2 firing 3 done
+	int mStep;                       // _29C the firing step
 };
 
 #include "Ninja/njtypes.h"

@@ -15,7 +15,7 @@ typedef struct GjDrawList {
 
 GjDrawEntry gjDrawEntries[10];
 u8 gjDrawMatrices[0x1E0];
-GjDrawList gjDrawList = { 0, 0, gjDrawEntries, (f32(*)[3][4])gjDrawMatrices };
+GjDrawList gjDrawList = { 0, 0, gjDrawEntries, (f32 (*)[3][4])gjDrawMatrices };
 
 void gjDrawListDraw(u32 count);
 
@@ -23,7 +23,7 @@ void gjDrawListDraw(u32 count);
 void gjDrawListBegin(s32 (*f)(GjModel*))
 {
 	gjDrawList.count = 0;
-	gjDrawList.draw = (void (*)(void*))f;
+	gjDrawList.draw  = (void (*)(void*))f;
 }
 
 // 0x80211B1C
@@ -31,15 +31,15 @@ void gjDrawListBegin(s32 (*f)(GjModel*))
 void gjDrawListAdd(NJS_OBJECT* obj, const f32* m)
 {
 	GjDrawList* list = &gjDrawList;
-	u16 i = list->count;
+	u16 i            = list->count;
 
 	GXLoadPosMtxImm(m, i * 3);
 	GXLoadNrmMtxImm(m, i * 3);
 	if (obj->evalflags & 0x4000) {
 		PSMTXCopy(m, (f32*)list->mtx[i]);
-		list->mtx[i][0][3] = 0.0f;
-		list->mtx[i][1][3] = 0.0f;
-		list->mtx[i][2][3] = 0.0f;
+		list->mtx[i][0][3]   = 0.0f;
+		list->mtx[i][1][3]   = 0.0f;
+		list->mtx[i][2][3]   = 0.0f;
 		list->entries[i].env = 1;
 	} else {
 		list->entries[i].env = 0;
@@ -68,9 +68,9 @@ void gjDrawListDraw(u32 count)
 	u32 id;
 
 	list = &gjDrawList;
-	e = list->entries;
-	id = 0;
-	m = (u8*)list->mtx;
+	e    = list->entries;
+	id   = 0;
+	m    = (u8*)list->mtx;
 
 	while (count != 0) {
 		GXSetCurrentMtx(id);

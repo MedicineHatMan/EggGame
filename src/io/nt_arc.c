@@ -145,8 +145,7 @@ s32 ARCConvertPathToEntrynum(ARCHandle* handle, const char* pathPtr)
 
 		ptr = pathPtr;
 
-		for (i = dirLookAt + 1; i < nextDir(FSTEntries, dirLookAt);
-		     i = entryIsDir(FSTEntries, i) ? nextDir(FSTEntries, i) : (i + 1)) {
+		for (i = dirLookAt + 1; i < nextDir(FSTEntries, dirLookAt); i = entryIsDir(FSTEntries, i) ? nextDir(FSTEntries, i) : (i + 1)) {
 			if ((entryIsDir(FSTEntries, i) == FALSE) && (isDir == TRUE)) {
 				continue;
 			}

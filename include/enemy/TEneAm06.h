@@ -20,7 +20,7 @@ class TEneAm06;
 
 /** One object the head has touched and where it was */
 struct Am06Spot { // size 0x10
-	u16 mId; // _00 -1 = empty
+	u16 mId;      // _00 -1 = empty
 	u16 _02;
 	Vec3f mPos; // _04
 
@@ -28,8 +28,8 @@ struct Am06Spot { // size 0x10
 };
 
 /** Up to four of those */
-struct Am06Seen { // size 0x44
-	int mCount; // _00
+struct Am06Seen {      // size 0x44
+	int mCount;        // _00
 	Am06Spot mSpot[4]; // _04
 
 	Am06Seen();
@@ -64,12 +64,12 @@ struct Am06Brain {
 	{
 		mOwner = 0;
 		mState = 0;
-		mNext = -1;
+		mNext  = -1;
 	}
 
-	virtual int checkInterrupt() = 0;               // _08 1 if it changed state or a hit should skip the check
+	virtual int checkInterrupt()               = 0; // _08 1 if it changed state or a hit should skip the check
 	virtual void onPhase(int state, int phase) = 0; // _0C
-	virtual ~Am06Brain() { }                           // _10 0x80049DBC
+	virtual ~Am06Brain() { }                        // _10 0x80049DBC
 	virtual void update(TEneAm06* owner);           // _14 0x800489BC
 
 	inline void changeState(int state)
@@ -126,8 +126,8 @@ struct Am06SnakeBrain : public Am06BrainBase {
 	int mSide;         // _FC which list is filled this frame
 	u16 mTarget;       // _100 0xFFFF = nobody
 	u16 _102;
-	int mStun;         // _104 copied from the owner when a stagger ends
-	int mAgain;        // _108 a finished flip during the spit asks for the spit again
+	int mStun;  // _104 copied from the owner when a stagger ends
+	int mAgain; // _108 a finished flip during the spit asks for the spit again
 	int _10C;
 };
 
@@ -157,14 +157,14 @@ public:
 
 	enum {
 		// mFlags2
-		AM_REARED  = 0x1,   // the rear motion has finished
+		AM_REARED  = 0x1, // the rear motion has finished
 		AM_COILED  = 0x2,
 		AM_SWAY    = 0x4,
-		AM_BITTEN  = 0x8,   // the bite motion has finished
+		AM_BITTEN  = 0x8, // the bite motion has finished
 		AM_STRUCK  = 0x10,
-		AM_HURTING = 0x20,  // onHit deals damage and only on shape 3
-		AM_BITE    = 0x40,  // the bite shape is live
-		AM_HEAD    = 0x80,  // the head shape is live
+		AM_HURTING = 0x20, // onHit deals damage and only on shape 3
+		AM_BITE    = 0x40, // the bite shape is live
+		AM_HEAD    = 0x80, // the head shape is live
 		AM_GRABBED = 0x100,
 		AM_GLOW    = 0x200, // an effect is attached and one body point is posed
 		AM_AIMED   = 0x400,
@@ -176,19 +176,19 @@ public:
 	inline void* operator new(u32 size);
 	inline void operator delete(void* mem);
 
-	virtual void vfn_10();                     // _10
-	virtual void render();                     // _1C
-	virtual void readEnemyDesc(SetDesc* desc); // _38
-	virtual void vfn_3C();                     // _3C
-	virtual f32 vfn_40();                      // _40
+	virtual void vfn_10();                                              // _10
+	virtual void render();                                              // _1C
+	virtual void readEnemyDesc(SetDesc* desc);                          // _38
+	virtual void vfn_3C();                                              // _3C
+	virtual f32 vfn_40();                                               // _40
 	virtual int onHit(const TObjAction* other, int shape, int* result); // _58
-	virtual void vfn_6C();                     // _6C
-	virtual void updateBody();                 // _70
-	virtual void setPos(const Vec3f* pos);           // _74
-	virtual void syncCollider();               // _78
-	virtual void onActionPhase(int action, int phase); // _7C
-	virtual int getDamage(EnemyHit* hit);      // _A4
-	virtual int getHitKind(const void* touch, HitInfo* info); // _A8
+	virtual void vfn_6C();                                              // _6C
+	virtual void updateBody();                                          // _70
+	virtual void setPos(const Vec3f* pos);                              // _74
+	virtual void syncCollider();                                        // _78
+	virtual void onActionPhase(int action, int phase);                  // _7C
+	virtual int getDamage(EnemyHit* hit);                               // _A4
+	virtual int getHitKind(const void* touch, HitInfo* info);           // _A8
 
 	void init(SetDesc* desc);
 
@@ -254,36 +254,36 @@ public:
 	void actDie(int phase);
 	void actDown(int phase);
 
-	int mVariant;            // _158 always 0
-	Am06Brain* mBrain;       // _15C
-	void* mPose;             // _160
-	DrawTask* mModel;            // _164 the task
-	CharaColli* mHead;             // _168
-	CharaColli* mBite;             // _16C
-	u32 mFlags2;             // _170
-	Vec3f mTarget;           // _174
-	HitVec mSeg[7];          // _180
-	int mYaw;                // _1D4
-	int mTurn;               // _1D8 added into mYaw then consumed by stepYaw
-	int mTurnMode;           // _1DC
-	int mAim;                // _1E0
-	int mHold;               // _1E4
-	int mHealthStep;         // _1E8
-	TEnemyLifeBar* mBar;     // _1EC
-	ObjShadow mShadow;       // _1F0
-	u16 mGrabId;             // _228 0xFFFF = nobody
-	u8 _22A[2];              // _22A
-	int mGrab;               // _22C 0 none 1 accepted 2 refused
-	int mStunFrames;         // _230
-	EnemyFx* mFx;            // _234
-	EnemyLight mLight;       // _238
-	EnemyTint mTint;         // _278
-	EnemyEffect mEffect;     // _280
-	int mStep;               // _2D0
-	int mWindup;             // _2D4
-	int mBitten;             // _2D8
-	int _2DC;                // _2DC
-	f32 _2E0;                // _2E0
+	int mVariant;        // _158 always 0
+	Am06Brain* mBrain;   // _15C
+	void* mPose;         // _160
+	DrawTask* mModel;    // _164 the task
+	CharaColli* mHead;   // _168
+	CharaColli* mBite;   // _16C
+	u32 mFlags2;         // _170
+	Vec3f mTarget;       // _174
+	HitVec mSeg[7];      // _180
+	int mYaw;            // _1D4
+	int mTurn;           // _1D8 added into mYaw then consumed by stepYaw
+	int mTurnMode;       // _1DC
+	int mAim;            // _1E0
+	int mHold;           // _1E4
+	int mHealthStep;     // _1E8
+	TEnemyLifeBar* mBar; // _1EC
+	ObjShadow mShadow;   // _1F0
+	u16 mGrabId;         // _228 0xFFFF = nobody
+	u8 _22A[2];          // _22A
+	int mGrab;           // _22C 0 none 1 accepted 2 refused
+	int mStunFrames;     // _230
+	EnemyFx* mFx;        // _234
+	EnemyLight mLight;   // _238
+	EnemyTint mTint;     // _278
+	EnemyEffect mEffect; // _280
+	int mStep;           // _2D0
+	int mWindup;         // _2D4
+	int mBitten;         // _2D8
+	int _2DC;            // _2DC
+	f32 _2E0;            // _2E0
 };
 
 extern "C" {

@@ -53,26 +53,26 @@ public:
 	void stateFire();
 	void stateRecover();
 
-	NJS_OBJECT** mModels;     // _64 stgobj_common's 3 the barrel 4 the base
-	NJS_TEXLIST** mTextures;  // _68
-	NJS_MOTION* mOpenMotion;  // _6C the barrel opening to fire
-	DrawTask* mDraw;          // _70
-	CharaColli* mScopeColli;  // _74 the scope's cylinder
-	ObjRef mTarget;           // _78 what is in the scope
-	int mAct;                 // _84
-	int mPhase;               // _88
-	f32 mScale;               // _8C
-	f32 mPower;               // _90 the shot's speed along mDir
-	Vec3f mDir;               // _94 the set aim
-	f32 mOpen;                // _A0 the open motion's frame
-	f32 mOpenStep;            // _A4
-	int mPitch;               // _A8 the barrel's
-	Vec3f mMouth;             // _AC where shots leave
-	Vec3f mShotVel;           // _B8 the next shot's velocity
-	Vec3f mScope;             // _C4 the scope's middle where the set aim lands
-	Vec3f mFoot;              // _D0 the model's middle for the view test
-	f32 mHeight;              // _DC the model's radius
-	EnemyLight mLight;        // _E0
+	NJS_OBJECT** mModels;    // _64 stgobj_common's 3 the barrel 4 the base
+	NJS_TEXLIST** mTextures; // _68
+	NJS_MOTION* mOpenMotion; // _6C the barrel opening to fire
+	DrawTask* mDraw;         // _70
+	CharaColli* mScopeColli; // _74 the scope's cylinder
+	ObjRef mTarget;          // _78 what is in the scope
+	int mAct;                // _84
+	int mPhase;              // _88
+	f32 mScale;              // _8C
+	f32 mPower;              // _90 the shot's speed along mDir
+	Vec3f mDir;              // _94 the set aim
+	f32 mOpen;               // _A0 the open motion's frame
+	f32 mOpenStep;           // _A4
+	int mPitch;              // _A8 the barrel's
+	Vec3f mMouth;            // _AC where shots leave
+	Vec3f mShotVel;          // _B8 the next shot's velocity
+	Vec3f mScope;            // _C4 the scope's middle where the set aim lands
+	Vec3f mFoot;             // _D0 the model's middle for the view test
+	f32 mHeight;             // _DC the model's radius
+	EnemyLight mLight;       // _E0
 };
 
 /** What a shot falls by each frame for the cannon and its balls */

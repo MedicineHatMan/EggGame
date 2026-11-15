@@ -36,7 +36,9 @@ SeHolder::SeHolder()
 }
 
 // 0x801239EC
-SeHolder::~SeHolder() { }
+SeHolder::~SeHolder()
+{
+}
 
 // 0x80123A28
 void SeHolder::setRange(f32 range)

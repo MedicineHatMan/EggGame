@@ -35,7 +35,9 @@ EnemySightBase::EnemySightBase()
 }
 
 // 0x80090FC0
-EnemySightBase::~EnemySightBase() { }
+EnemySightBase::~EnemySightBase()
+{
+}
 
 // 0x80091008
 // Slot _0C
@@ -45,9 +47,9 @@ void EnemySightBase::reset()
 	mTarget.x = 0.0f;
 	mTarget.y = 0.0f;
 	mTarget.z = 0.0f;
-	mDelta.x = 0.0f;
-	mDelta.y = 0.0f;
-	mDelta.z = 0.0f;
+	mDelta.x  = 0.0f;
+	mDelta.y  = 0.0f;
+	mDelta.z  = 0.0f;
 }
 
 // 0x80091034
@@ -66,7 +68,9 @@ EnemySight::EnemySight()
 }
 
 // 0x800910C4
-EnemySight::~EnemySight() { }
+EnemySight::~EnemySight()
+{
+}
 
 // 0x8009111C
 // Slot _0C
@@ -74,9 +78,9 @@ void EnemySight::reset()
 {
 	EnemySightBase::reset();
 	mHeightLimit = 100.0f;
-	mDistSq = 0.0f;
-	mAngle = 0;
-	mAngleDiff = 0;
+	mDistSq      = 0.0f;
+	mAngle       = 0;
+	mAngleDiff   = 0;
 }
 
 // 0x80091164
@@ -100,7 +104,7 @@ int EnemySight::findInRange(f32 rangeSq, Vec3f* pos)
 			Vec3f target;
 			Vec3f delta;
 			copyVec(target, player->getPos());
-			delta = vecDiff(&target, pos);
+			delta  = vecDiff(&target, pos);
 			f64 dy = __fabs(delta.y);
 			if ((f32)dy < mHeightLimit) {
 				f32 dist = flatLengthSq(&delta);
@@ -133,7 +137,7 @@ int EnemySight::findInCone(f32 rangeSq, Vec3f* pos, int rotY, int angle)
 			Vec3f delta;
 			Vec3f target;
 			copyVec(target, player->getPos());
-			delta = vecDiff(&target, pos);
+			delta  = vecDiff(&target, pos);
 			f64 dy = __fabs(delta.y);
 			if ((f32)dy < mHeightLimit) {
 				f32 dist = flatLengthSq(&delta);
@@ -176,7 +180,7 @@ int EnemySight::search(f32 farSq, f32 nearSq, Vec3f* pos, int rotY, int farAngle
 			Vec3f delta;
 			Vec3f target;
 			copyVec(target, player->getPos());
-			delta = vecDiff(&target, pos);
+			delta  = vecDiff(&target, pos);
 			f64 dy = __fabs(delta.y);
 			if ((f32)dy < mHeightLimit) {
 				f32 dist = flatLengthSq(&delta);
@@ -228,7 +232,7 @@ int EnemySight::findInBox(Vec3f* pos, int rotY, f32 halfWidth, f32 depth)
 			Vec3f delta;
 			Vec3f target;
 			copyVec(target, player->getPos());
-			delta = vecDiff(&target, pos);
+			delta  = vecDiff(&target, pos);
 			f64 dy = __fabs(delta.y);
 			if ((f32)dy < mHeightLimit) {
 				f32 dist = flatLengthSq(&delta);
@@ -273,15 +277,15 @@ int EnemySight::track(u16 id, Vec3f* pos, int rotY)
 			Vec3f delta;
 			Vec3f target;
 			copyVec(target, player->getPos());
-			delta = sightSub(&target, pos);
-			f32 dist = flatLengthSq(&delta);
-			int to = toAngle(delta.x, delta.z);
-			int diff = angleDist(rotY, to);
+			delta     = sightSub(&target, pos);
+			f32 dist  = flatLengthSq(&delta);
+			int to    = toAngle(delta.x, delta.z);
+			int diff  = angleDist(rotY, to);
 			mPlayerId = id;
 			copyVec(mTarget, &target);
 			copyVec(mDelta, &delta);
-			mDistSq = dist;
-			mAngle = to;
+			mDistSq    = dist;
+			mAngle     = to;
 			mAngleDiff = diff;
 			return 1;
 		}
@@ -299,8 +303,8 @@ EnemyMemory::EnemyMemory()
 void EnemyMemory::reset()
 {
 	mCooldown = 0;
-	mChase = 0;
-	mPlayer = 0xFFFF;
+	mChase    = 0;
+	mPlayer   = 0xFFFF;
 }
 
 // 0x80091AE8
@@ -338,14 +342,14 @@ void EnemyMemory::startCooldown()
 // 0x80091B68
 void EnemyMemory::setChase(u16 player)
 {
-	mChase = gEnemyParams->mChase;
+	mChase  = gEnemyParams->mChase;
 	mPlayer = player;
 }
 
 // 0x80091B7C
 void EnemyMemory::clearChase()
 {
-	mChase = 0;
+	mChase  = 0;
 	mPlayer = 0xFFFF;
 }
 

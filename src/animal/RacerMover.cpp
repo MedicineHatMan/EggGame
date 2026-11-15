@@ -7,8 +7,10 @@
 #include "engine/GroundQuery.h"
 
 extern "C" {
-static inline f32 moverAbs(f32 x) { return (f32)__fabs(x); }
-
+static inline f32 moverAbs(f32 x)
+{
+	return (f32)__fabs(x);
+}
 }
 
 static inline Vec3f vsub(const Vec3f& a, const Vec3f& b)
@@ -87,10 +89,10 @@ void walkMover(RacerMover* mover)
 
 	Vec3f dir;
 	f32 speed;
-	dir = vsub(mover->mTarget, mover->mPos);
-	speed = vecLenXZ(&mover->mVel) + mover->mF0C;
-	dir.y       = 0.0f;
-	f32 cap     = mover->mAccel * vecLenXZ(&dir);
+	dir     = vsub(mover->mTarget, mover->mPos);
+	speed   = vecLenXZ(&mover->mVel) + mover->mF0C;
+	dir.y   = 0.0f;
+	f32 cap = mover->mAccel * vecLenXZ(&dir);
 	if (speed > cap) {
 		speed = cap;
 	}
@@ -102,8 +104,8 @@ void walkMover(RacerMover* mover)
 		mover->mRot[1] = angleApproach(mover->mRot[1], (int)(10430.38043493439 * (f32)atan2(dir.x, dir.z)), mover->mTurn);
 	} else {
 		const Vec3f& ref1 = vsub(mover->mTarget, mover->mPos);
-		dir = ref1;
-		mover->mRot[1] = angleApproach(mover->mRot[1], (int)(10430.38043493439 * (f32)atan2(dir.x, dir.z)), mover->mTurn);
+		dir               = ref1;
+		mover->mRot[1]    = angleApproach(mover->mRot[1], (int)(10430.38043493439 * (f32)atan2(dir.x, dir.z)), mover->mTurn);
 	}
 
 	if (fall < 0.0f) {
@@ -175,7 +177,7 @@ void flyMover(RacerMover* mover)
 	Vec3f dir = vsub(mover->mTarget, mover->mPos);
 	f32 speed = njScalor(&mover->mVel);
 	speed += mover->mF0C;
-	f32 cap   = mover->mAccel * njScalor(&dir);
+	f32 cap = mover->mAccel * njScalor(&dir);
 	if (speed > cap) {
 		speed = cap;
 	}
@@ -225,10 +227,10 @@ void flyMover(RacerMover* mover)
 // The velocity that carries from to to under mGravity taking 65 units a frame clamped to mMinFrames..mMaxFrames
 void launchMover(RacerMover* mover, Vec3f* out, const Vec3f* from, const Vec3f* to)
 {
-	*out       = vsub(*to, *from);
-	f64 absY   = __fabs(out->y);
-	f32 rise   = absY;
-	f32 run    = vecNormalizeXZ(out, out);
+	*out     = vsub(*to, *from);
+	f64 absY = __fabs(out->y);
+	f32 rise = absY;
+	f32 run  = vecNormalizeXZ(out, out);
 	u32 frames;
 	if (rise > run) {
 		frames = rise / 65.0f * mover->mMinFrames;

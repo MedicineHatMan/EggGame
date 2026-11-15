@@ -29,14 +29,14 @@ public:
 
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	DrawTask* mDraw;       // _20
+	DrawTask* mDraw;     // _20
 	SetTransform mXform; // _24 mVel is the flight mRot spins
-	int mSpinX;        // _68
-	int mSpinY;        // _6C
-	NJS_OBJECT* mModel; // _70
-	f32 mRadius;       // _74
-	int mKind;         // _78 1 stays put
-	int mLife;         // _7C
+	int mSpinX;          // _68
+	int mSpinY;          // _6C
+	NJS_OBJECT* mModel;  // _70
+	f32 mRadius;         // _74
+	int mKind;           // _78 1 stays put
+	int mLife;           // _7C
 };
 
 #endif

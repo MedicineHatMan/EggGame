@@ -37,19 +37,20 @@ void __OSResetSWInterruptHandler(__OSInterrupt interrupt, OSContext* context)
  * @TODO: Documentation
  * @note UNUSED Size: 000074
  */
-OSResetCallback OSSetResetCallback(OSResetCallback cb) {
-  BOOL enabled = OSDisableInterrupts();
-  OSResetCallback oldCB = ResetCallback;
-  ResetCallback = cb;
-  if (cb) {
-    __PIRegs[PI_INTRPT_SRC] = PI_INTRPT_RSW;
-    __OSUnmaskInterrupts(0x200);
-  } else {
-    __OSMaskInterrupts(0x200);
-  }
-  OSRestoreInterrupts(enabled);
+OSResetCallback OSSetResetCallback(OSResetCallback cb)
+{
+	BOOL enabled          = OSDisableInterrupts();
+	OSResetCallback oldCB = ResetCallback;
+	ResetCallback         = cb;
+	if (cb) {
+		__PIRegs[PI_INTRPT_SRC] = PI_INTRPT_RSW;
+		__OSUnmaskInterrupts(0x200);
+	} else {
+		__OSMaskInterrupts(0x200);
+	}
+	OSRestoreInterrupts(enabled);
 
-  return oldCB;
+	return oldCB;
 }
 
 #if OS_BUILD_VERSION >= 20011002L

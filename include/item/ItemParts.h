@@ -70,10 +70,10 @@ struct ItemGlow {
 	void tick(const ItemHolder* holder);
 	void play(const ItemHolder* holder, int id);
 
-	s8 mState;           // _00 0 until the archive is in then 1
-	GjActor* mActor;     // _04 for a skinned model
+	s8 mState;            // _00 0 until the archive is in then 1
+	GjActor* mActor;      // _04 for a skinned model
 	MotionPlayer mMotion; // _08
-	ItemNodes mNodes;    // _44
+	ItemNodes mNodes;     // _44
 };
 
 class MeshColli;
@@ -111,7 +111,7 @@ struct BombBody {
 	BombBody();  // 0x8018AAF0
 	~BombBody(); // 0x8018AB54
 
-	int getGround(Vec3f* out) const;       // 0x8018ABB4 the floor below while it is near
+	int getGround(Vec3f* out) const; // 0x8018ABB4 the floor below while it is near
 	void launch(const Vec3f* vel);   // 0x8018ABE8
 	void start(const Vec3f* vel);    // 0x8018AC24
 	void stop();                     // 0x8018AC60
@@ -123,15 +123,15 @@ struct BombBody {
 	void stateFly(int event);        // 0x8018AF18
 	void probe();                    // 0x8018AF94
 
-	s8 mState;         // _00
-	FlagByte mFlags;   // _01 1 = a floor is near
-	u16 mTri;          // _02 the triangle it stands on
-	Vec3f mPos;        // _04
-	Vec3f mVel;        // _10
-	f32 mRadius;       // _1C
-	BombRider mRider;  // _20
-	Vec3f mLocal;      // _34 where it stands in the mesh's space
-	Vec3f mGround;     // _40
+	s8 mState;        // _00
+	FlagByte mFlags;  // _01 1 = a floor is near
+	u16 mTri;         // _02 the triangle it stands on
+	Vec3f mPos;       // _04
+	Vec3f mVel;       // _10
+	f32 mRadius;      // _1C
+	BombRider mRider; // _20
+	Vec3f mLocal;     // _34 where it stands in the mesh's space
+	Vec3f mGround;    // _40
 };
 
 #endif

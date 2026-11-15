@@ -15,7 +15,7 @@ void ADXB_SetAhxInSj(ADXB adxb, SJ sj)
 void ADXB_SetAhxDecSmpl(ADXB adxb, int nsmpl)
 {
 	adxb->ahx_dec_smpl = nsmpl;
-	adxb->ahx_dec_frm = nsmpl / 96;
+	adxb->ahx_dec_frm  = nsmpl / 96;
 }
 
 // 0x8021BD68

@@ -106,29 +106,29 @@ struct ResPackList {
 	ResPackNode* append();
 	ResPackNode* allocNode();
 
-	ResPackNode* mFirst;    // _00
-	ResPackNode* mLast;     // _04
-	int mCount;             // _08
-	ResPackNode mNodes[4];  // _0C
-	ResPackNode* mFree;     // _3C
+	ResPackNode* mFirst;   // _00
+	ResPackNode* mLast;    // _04
+	int mCount;            // _08
+	ResPackNode mNodes[4]; // _0C
+	ResPackNode* mFree;    // _3C
 };
 
 // What a caller asks to have read
 struct ResLoadRequest {
-	ResName mName;     // _00
-	int mId;           // _20
-	void* mDest;       // _24
+	ResName mName;                   // _00
+	int mId;                         // _20
+	void* mDest;                     // _24
 	void (*mDone)(int size, int id); // _28
 };
 
 struct ResLoadNode {
 	ResLoadNode();
 
-	ResLoadNode* mNext; // _00
-	ResLoadNode* mPrev; // _04
-	ResName mName;      // _08
-	int mId;            // _28
-	void* mDest;        // _2C
+	ResLoadNode* mNext;              // _00
+	ResLoadNode* mPrev;              // _04
+	ResName mName;                   // _08
+	int mId;                         // _28
+	void* mDest;                     // _2C
 	void (*mDone)(int size, int id); // _30
 };
 
@@ -171,14 +171,14 @@ struct TResLoader {
 	int request(const char* path, void* dest, void (*done)(int, int));
 	int cancel(int id);
 
-	s8 mState;         // _00 0 = reading 1 = cancelling 2 = idle
+	s8 mState; // _00 0 = reading 1 = cancelling 2 = idle
 	u8 _01[3];
-	ResLoadList mList; // _04
-	int mNextId;       // _18
-	DVDFileInfo mInfo; // _1C
-	ResName mName;     // _58
-	int mId;           // _78
-	void* mDest;       // _7C
+	ResLoadList mList;       // _04
+	int mNextId;             // _18
+	DVDFileInfo mInfo;       // _1C
+	ResName mName;           // _58
+	int mId;                 // _78
+	void* mDest;             // _7C
 	void (*mDone)(int, int); // _80
 };
 
@@ -197,7 +197,7 @@ struct ResTocEntry {
  */
 struct ResToc {
 	u8 _00[0x14];
-	u32 mCount;            // _14
+	u32 mCount; // _14
 	u8 _18[8];
 	ResTocEntry* mEntries; // _20
 	char* mNames;          // _24
@@ -205,9 +205,8 @@ struct ResToc {
 
 extern "C" {
 int resTocFind(const ResToc* toc, const char* name); // 0x800686F4 -1 when missing
-u32 resTocOffset(ResToc* toc, int index);      // 0x80068764
-u32 resTocSize(ResToc* toc, int index);        // 0x80068778
-
+u32 resTocOffset(ResToc* toc, int index);            // 0x80068764
+u32 resTocSize(ResToc* toc, int index);              // 0x80068778
 }
 
 class BinFile;

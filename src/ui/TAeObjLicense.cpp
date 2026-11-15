@@ -12,14 +12,14 @@ const char* gTAeObjLicenseName = "TAeObjLicense";
 
 /** The data block of ae_license.arc */
 struct LicenseFile {
-	void* mAe;      // _00 relocated by relocateAe
+	void* mAe;             // _00 relocated by relocateAe
 	NJS_TEXLIST* mTexList; // _04
-	void* mGvm;     // _08
+	void* mGvm;            // _08
 };
 
-static TArc* sLicenseArc; // 0x802C5700
-static void* sLicenseAe;     // 0x802C5704
-static NJS_TEXLIST* sLicenseTex;    // 0x802C5708
+static TArc* sLicenseArc;        // 0x802C5700
+static void* sLicenseAe;         // 0x802C5704
+static NJS_TEXLIST* sLicenseTex; // 0x802C5708
 
 typedef char TAeObjLicense_size_check[(sizeof(TAeObjLicense) == 0x3C) ? 1 : -1];
 
@@ -68,7 +68,9 @@ TAeObjLicense::TAeObjLicense(TObject* parent, void* data, void* assets)
 }
 
 // 0x80140980
-TAeObjLicense::~TAeObjLicense() { }
+TAeObjLicense::~TAeObjLicense()
+{
+}
 
 // 0x801409DC
 void TAeObjLicense::draw()

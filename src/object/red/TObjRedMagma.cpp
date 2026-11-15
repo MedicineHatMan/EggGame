@@ -27,9 +27,9 @@ static const int sStageObjModels[7]   = { 0, 1, 2, 3, 4, 5, 6 };
 static const int sBossSceneModels[2]  = { 0, 1 };
 static const int sBossObjModels[2]    = { 2, 3 };
 
-const char* gTObjRedMagmaName = "TObjRedMagma";
+const char* gTObjRedMagmaName      = "TObjRedMagma";
 const char* gTObjRedMagmaSceneName = "TObjRedMagmaScene";
-const char* gTObjRedMagmaObjName = "TObjRedMagmaObj";
+const char* gTObjRedMagmaObjName   = "TObjRedMagmaObj";
 
 extern u32 gScrollWarpCoord; // the texture coordinate the scroll's warp reads
 
@@ -53,10 +53,15 @@ static f32 scrollStep(f32 at, f32 speed)
 }
 
 // 0x80064A2C
-ScrollModel::ScrollModel() { reset(); }
+ScrollModel::ScrollModel()
+{
+	reset();
+}
 
 // 0x80064A68
-ScrollModel::~ScrollModel() {}
+ScrollModel::~ScrollModel()
+{
+}
 
 // 0x80064AA4
 void ScrollModel::reset()
@@ -184,7 +189,10 @@ void ScrollModel::bindModel(void* node, SetTransform* trans)
 }
 
 // 0x80064E24
-extern "C" f32 scrollModelRadius(SetTransform* trans) { return trans->mRadius; }
+extern "C" f32 scrollModelRadius(SetTransform* trans)
+{
+	return trans->mRadius;
+}
 
 // 0x80064E2C
 void ScrollModel::draw(SetTransform* trans, void* model, void* texList)
@@ -229,12 +237,11 @@ void ScrollModel::debugPrintTrans(const SetTransform* trans)
 // --- The red magma models ---
 
 // 0x80065048
-static void loadRedMagma(const char* arc, const char* textures, int sceneCount, const int* scene, int objCount,
-                         const int* obj)
+static void loadRedMagma(const char* arc, const char* textures, int sceneCount, const int* scene, int objCount, const int* obj)
 {
 	resBankLoad(&gRedMagmaBank, arc);
 	resBankAddTextures(&gRedMagmaBank, 0, textures);
-	gRedMagmaModels = resBankGetModels(&gRedMagmaBank);
+	gRedMagmaModels   = resBankGetModels(&gRedMagmaBank);
 	gRedMagmaTexLists = resBankGetTextures(&gRedMagmaBank);
 	setRedMagmaSceneModels(sceneCount, (int*)scene);
 	setRedMagmaObjModels(objCount, (int*)obj);
@@ -245,10 +252,10 @@ static void loadRedMagma(const char* arc, const char* textures, int sceneCount, 
 extern "C" void loadRedMagmaStage()
 {
 	loadRedMagma("ar_obj_red_magma.arc", "obj_red_magma.gvm", 7, sStageSceneModels, 7, sStageObjModels);
-	gRedMagmaSceneRange = 1000050.0f;
+	gRedMagmaSceneRange  = 1000050.0f;
 	gRedMagmaSceneFarAdd = 1000050.0f;
-	gRedMagmaObjRange = 950.0f;
-	gRedMagmaObjFarAdd = 950.0f;
+	gRedMagmaObjRange    = 950.0f;
+	gRedMagmaObjFarAdd   = 950.0f;
 }
 
 // 0x80065138
@@ -256,7 +263,7 @@ extern "C" void releaseRedMagma()
 {
 	resBankRemoveTextures(&gRedMagmaBank, 0);
 	resBankRelease(&gRedMagmaBank);
-	gRedMagmaModels = 0;
+	gRedMagmaModels   = 0;
 	gRedMagmaTexLists = 0;
 }
 
@@ -265,17 +272,23 @@ extern "C" void releaseRedMagma()
 extern "C" void loadRedMagmaBoss()
 {
 	loadRedMagma("ar_obj_red_boss_magma.arc", "obj_red_boss_magma.gvm", 2, sBossSceneModels, 2, sBossObjModels);
-	gRedMagmaSceneRange = 2050.0f;
+	gRedMagmaSceneRange  = 2050.0f;
 	gRedMagmaSceneFarAdd = 2050.0f;
-	gRedMagmaObjRange = 1850.0f;
-	gRedMagmaObjFarAdd = 1850.0f;
+	gRedMagmaObjRange    = 1850.0f;
+	gRedMagmaObjFarAdd   = 1850.0f;
 }
 
 // 0x800651D4
-extern "C" void releaseRedMagmaBoss() { releaseRedMagma(); }
+extern "C" void releaseRedMagmaBoss()
+{
+	releaseRedMagma();
+}
 
 // 0x800651F4
-extern "C" NJS_TEXLIST* redMagmaTexList() { return *gRedMagmaTexLists; }
+extern "C" NJS_TEXLIST* redMagmaTexList()
+{
+	return *gRedMagmaTexLists;
+}
 
 typedef char TObjRedMagma_size_check[(sizeof(TObjRedMagma) == 0xB8) ? 1 : -1];
 
@@ -360,7 +373,7 @@ typedef char TObjRedMagmaScene_size_check[(sizeof(TObjRedMagmaScene) == 0xB8) ? 
 // Stores the scene's model count and index table
 extern "C" void setRedMagmaSceneModels(int count, int* indices)
 {
-	sRedMagmaCount = count;
+	sRedMagmaCount   = count;
 	sRedMagmaIndices = indices;
 }
 
@@ -404,7 +417,7 @@ typedef char TObjRedMagmaObj_size_check[(sizeof(TObjRedMagmaObj) == 0xB8) ? 1 : 
 // Stores the object's model count and index table
 extern "C" void setRedMagmaObjModels(int count, int* indices)
 {
-	sRedMagmaSceneCount = count;
+	sRedMagmaSceneCount   = count;
 	sRedMagmaSceneIndices = indices;
 }
 

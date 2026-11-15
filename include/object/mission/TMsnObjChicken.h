@@ -62,19 +62,19 @@ public:
 	void leave();
 	void fly();
 
-	ObjModel mModel;       // _64
-	MotionPlayer mMotion;  // _84
-	DrawTask* mDrawTask;       // _C0
-	f32 mMatrix[12];       // _C4
-	int mType;             // _F4
-	int mState;            // _F8
-	ObjRef mRider;         // _FC
-	int mRiderAngle;       // _108
-	u16 mUnlockSwitch;     // _10C
-	ObjShadow mShadow;     // _110
-	TCamPath* mCamera;     // _148
-	u16 mTimer;            // _14C
-	int mLights;           // _150
+	ObjModel mModel;      // _64
+	MotionPlayer mMotion; // _84
+	DrawTask* mDrawTask;  // _C0
+	f32 mMatrix[12];      // _C4
+	int mType;            // _F4
+	int mState;           // _F8
+	ObjRef mRider;        // _FC
+	int mRiderAngle;      // _108
+	u16 mUnlockSwitch;    // _10C
+	ObjShadow mShadow;    // _110
+	TCamPath* mCamera;    // _148
+	u16 mTimer;           // _14C
+	int mLights;          // _150
 };
 
 extern "C" {

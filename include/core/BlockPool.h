@@ -10,8 +10,8 @@ class BlockPool {
 public:
 	/** The header ahead of each block */
 	struct Block {
-		Block* mNext;   // _00 the next free block
-		u8 _04[0x1C];   // _04
+		Block* mNext; // _00 the next free block
+		u8 _04[0x1C]; // _04
 	};
 
 	BlockPool(u32 size, int count); // 0x8012BFFC

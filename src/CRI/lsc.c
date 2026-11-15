@@ -17,8 +17,8 @@ static inline void lsc_Clear(LSC lsc)
 		return;
 	}
 	if (lsc->stat == 0) {
-		lsc->wpos = 0;
-		lsc->rpos = 0;
+		lsc->wpos    = 0;
+		lsc->rpos    = 0;
 		lsc->num_stm = 0;
 	}
 }
@@ -58,13 +58,13 @@ LSC LSC_Create(SJ sj)
 	if (lsc == 0) {
 		LSC_CallErrFunc("E0002: Not enough instance (LSC_Create)\n");
 	} else {
-		lsc->sj = sj;
-		lsc->stat = 0;
-		a = (*(int (***)(SJ, int))sj)[9](sj, 1);
-		b = (*(int (***)(SJ, int))sj)[9](sj, 0);
-		lsc->sj_size = b + a;
+		lsc->sj         = sj;
+		lsc->stat       = 0;
+		a               = (*(int (***)(SJ, int))sj)[9](sj, 1);
+		b               = (*(int (***)(SJ, int))sj)[9](sj, 0);
+		lsc->sj_size    = b + a;
 		lsc->flow_limit = (lsc->sj_size * 8) / 10;
-		j = 0;
+		j               = 0;
 		while (j < LSC_MAX_STM) {
 			lsc->stms[j].stat = 0;
 			j++;
@@ -119,24 +119,24 @@ int LSC_EntryFileRange(LSC lsc, const char* fname, void* dir, int ofst, int nsct
 		return -1;
 	}
 	prev = lsc->stms[(lsc->wpos + 15) % LSC_MAX_STM].id;
-	s = &lsc->stms[lsc->wpos];
+	s    = &lsc->stms[lsc->wpos];
 	if (prev == 0x7FFFFFFF) {
 		id = 0;
 	} else {
 		id = prev + 1;
 	}
-	s->id = id;
-	s->fname = fname;
-	p = (const int*)fname;
-	n = strlen(fname) >> 2;
+	s->id     = id;
+	s->fname  = fname;
+	p         = (const int*)fname;
+	n         = strlen(fname) >> 2;
 	s->chksum = 0;
 	for (i = 0; i < n; i++) {
 		s->chksum += p[i];
 	}
-	s->ofst = ofst;
-	s->nsct = nsct;
-	s->dir = dir;
-	s->stat = 0;
+	s->ofst   = ofst;
+	s->nsct   = nsct;
+	s->dir    = dir;
+	s->stat   = 0;
 	s->rd_sct = 0;
 	lsc->num_stm++;
 	lsc->wpos = (lsc->wpos + 1) % LSC_MAX_STM;

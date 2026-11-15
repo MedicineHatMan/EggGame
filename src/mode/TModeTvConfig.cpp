@@ -130,8 +130,8 @@ void TModeTvConfig::loadText()
 	data = (u32*)sTvConfigFile->mData;
 	text = *data;
 	text += (u32)data++;
-	u32 size = *data++;
-	sTvConfigText = (char**)data;
+	u32 size       = *data++;
+	sTvConfigText  = (char**)data;
 	sTvConfigCount = size >> 2;
 	for (i = 0; i < (int)sTvConfigCount; i++) {
 		sTvConfigText[i] += text + 8;
@@ -152,7 +152,9 @@ TModeTvConfig::TModeTvConfig()
 }
 
 // 0x8016C008
-TModeTvConfig::~TModeTvConfig() { }
+TModeTvConfig::~TModeTvConfig()
+{
+}
 
 // 0x8016C030
 void TModeTvConfig::update()
@@ -346,7 +348,7 @@ int TModeTvConfig::answered()
 // 0x8016C568
 int TModeTvConfig::closed()
 {
-	int textDone = mText != NULL ? (mText->mState == 3 ? 1 : 0) : 1;
+	int textDone   = mText != NULL ? (mText->mState == 3 ? 1 : 0) : 1;
 	int windowDone = mWindow != NULL ? (u8)(mWindow->mState == TAeObjMsgWindow::MSGWIN_CLOSED) : 1;
 	if (textDone && windowDone) {
 		return 1;

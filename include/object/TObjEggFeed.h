@@ -30,11 +30,11 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();                  // _0C
-	virtual void vfn_10();                // _10
-	virtual void render();                // _1C
+	virtual void draw();                      // _0C
+	virtual void vfn_10();                    // _10
+	virtual void render();                    // _1C
 	virtual void initFromDesc(SetDesc* desc); // _30
-	virtual void debugPrint(void* arg);   // _34
+	virtual void debugPrint(void* arg);       // _34
 
 	void place(int kind, const Vec3f* pos, const SetRot* rot, int sizeKind, int rebirth);
 	void makeShape();
@@ -54,34 +54,34 @@ public:
 	void drawShadow();
 	void drawSpecial();
 
-	DrawTask* mTask;            // _64 addDrawTask priority 0x22
-	ObjModel mModel;        // _68
-	ObjModel mShadow;       // _88
-	f32 mMtx[12];           // _A8
-	f32 mShadowMtx[12];     // _D8
-	ObjDrawState mDraw;        // _108 both models point here
-	MotionPlayer mMotion;   // _12C
-	Vec3f mSway;            // _168
-	f32 mScale;             // _174 1.25 1.8 or 4
-	f32 mBob;               // _178
-	Vec3f mVel;             // _17C
-	int mKind;              // _188 0 to 6
-	int mSizeKind;          // _18C 0 normal 1 big 2 extreme
-	int mRebirth;           // _190 0 off 1 on
-	int mAmount;            // _194 1 5 or 100
-	s16 mSpawned;           // _198 1 when built from code
-	u16 _19A;               // _19A
-	ObjRef mEater;          // _19C
-	s16 mLife;              // _1A8 counts down 0x4B0 while it waits
-	s16 mSpin;              // _1AA
-	Rider mGround;          // _1AC
-	s8 mShade;              // _1C0 -1 with no link otherwise climbs by 4
-	u8 _1C1[3];             // _1C1
-	u32 mFeedFlags;         // _1C4 1 on the ground 2 flying 4 model 8 shadow 0x10 special
-	EnemyLight mLight;      // _1C8
-	int mUser;              // _208 record int 3
-	f32 mUserF[4];          // _20C record floats
-	int mPhase;             // _21C 0 wait 1 eaten 2 flying
+	DrawTask* mTask;      // _64 addDrawTask priority 0x22
+	ObjModel mModel;      // _68
+	ObjModel mShadow;     // _88
+	f32 mMtx[12];         // _A8
+	f32 mShadowMtx[12];   // _D8
+	ObjDrawState mDraw;   // _108 both models point here
+	MotionPlayer mMotion; // _12C
+	Vec3f mSway;          // _168
+	f32 mScale;           // _174 1.25 1.8 or 4
+	f32 mBob;             // _178
+	Vec3f mVel;           // _17C
+	int mKind;            // _188 0 to 6
+	int mSizeKind;        // _18C 0 normal 1 big 2 extreme
+	int mRebirth;         // _190 0 off 1 on
+	int mAmount;          // _194 1 5 or 100
+	s16 mSpawned;         // _198 1 when built from code
+	u16 _19A;             // _19A
+	ObjRef mEater;        // _19C
+	s16 mLife;            // _1A8 counts down 0x4B0 while it waits
+	s16 mSpin;            // _1AA
+	Rider mGround;        // _1AC
+	s8 mShade;            // _1C0 -1 with no link otherwise climbs by 4
+	u8 _1C1[3];           // _1C1
+	u32 mFeedFlags;       // _1C4 1 on the ground 2 flying 4 model 8 shadow 0x10 special
+	EnemyLight mLight;    // _1C8
+	int mUser;            // _208 record int 3
+	f32 mUserF[4];        // _20C record floats
+	int mPhase;           // _21C 0 wait 1 eaten 2 flying
 };
 
 extern "C" {

@@ -52,21 +52,21 @@ public:
 	void floatAway();
 	void hop();
 
-	NJS_TEXLIST* mTexList;      // _64
-	void* mShineTex;     // _68
-	ObjDrawState mState; // _6C
-	ObjPlace mPlace;     // _90
-	EnemyLight mLight;   // _EC
-	ObjShadow mShadow;   // _12C
-	DrawTask* mDrawTask; // _164
-	int mMode;           // _168
-	int mSwitch;         // _16C
-	int mKind;           // _170 0 or 1
-	f32 mScale;          // _174
-	int mSpin;           // _178 added to mRot.y each frame
-	int mLife;           // _17C
-	f32 mSpeed;          // _180 up
-	int mOnGround;       // _184 whether the shadow found ground
+	NJS_TEXLIST* mTexList; // _64
+	void* mShineTex;       // _68
+	ObjDrawState mState;   // _6C
+	ObjPlace mPlace;       // _90
+	EnemyLight mLight;     // _EC
+	ObjShadow mShadow;     // _12C
+	DrawTask* mDrawTask;   // _164
+	int mMode;             // _168
+	int mSwitch;           // _16C
+	int mKind;             // _170 0 or 1
+	f32 mScale;            // _174
+	int mSpin;             // _178 added to mRot.y each frame
+	int mLife;             // _17C
+	f32 mSpeed;            // _180 up
+	int mOnGround;         // _184 whether the shadow found ground
 };
 
 // A ring's shape and size, by kind. @size 0x30

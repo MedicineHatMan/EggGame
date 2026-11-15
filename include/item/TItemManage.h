@@ -23,34 +23,34 @@ struct ItemArcHandler {
 
 /** The start of an item archive with no handler: its textures. @size 0x10 */
 struct ItemArcData {
-	u8 _00[8];      // _00
+	u8 _00[8];             // _00
 	NJS_TEXLIST* mTexList; // _08
-	void* mGvm;     // _0C
+	void* mGvm;            // _0C
 };
 
 /** An item id and the archive it loads from. @size 0x8 */
 struct ItemArcName {
-	int mKind;          // _00 0xFFFF ends the table
-	const char* mName;  // _04
+	int mKind;         // _00 0xFFFF ends the table
+	const char* mName; // _04
 };
 
 /** What the item code asks of a player its bonuses its held item and the specs it is handed */
 class ItemUser : public TObjAction {
 public:
 	virtual void vfn_6C();
-	virtual void addBonus(int n);                     // _70
-	virtual void addBigBonus(int n);                  // _74
-	virtual int getItem(int* kind, int* arg);         // _78 nonzero when it holds one
-	virtual void dropItem();                          // _7C
-	virtual void setItem(const ItemSpec* spec);       // _80
+	virtual void addBonus(int n);               // _70
+	virtual void addBigBonus(int n);            // _74
+	virtual int getItem(int* kind, int* arg);   // _78 nonzero when it holds one
+	virtual void dropItem();                    // _7C
+	virtual void setItem(const ItemSpec* spec); // _80
 	virtual void vfn_84();
 	virtual void vfn_88();
 	virtual void vfn_8C();
 	virtual void vfn_90();
 	virtual void vfn_94();
-	virtual void useSpec(const ItemSpec* spec);       // _98
-	virtual void setStatus(int status, int frames);   // _9C
-	virtual u16 getEggId();                           // _A0
+	virtual void useSpec(const ItemSpec* spec);     // _98
+	virtual void setStatus(int status, int frames); // _9C
+	virtual u16 getEggId();                         // _A0
 };
 
 /**

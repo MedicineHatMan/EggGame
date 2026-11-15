@@ -11,7 +11,6 @@ struct CharaColli;
 struct Fx;
 
 extern "C" {
-
 }
 
 typedef char TObjLastRipple_size_check[(sizeof(TObjLastRipple) == 0x48) ? 1 : -1];
@@ -57,7 +56,7 @@ void TObjLastRipple::draw()
 	if ((f32)mLife > 80.0f) {
 		mFlags |= 1;
 	}
-	mLife = (u16)(mLife + 1);
+	mLife                                       = (u16)(mLife + 1);
 	*(f32*)((u8*)colliGetShapes(mShape) + 0x18) = mRadius;
 }
 

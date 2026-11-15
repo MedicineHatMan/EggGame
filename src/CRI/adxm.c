@@ -13,39 +13,39 @@ typedef struct {
 	int mwidle; /* 14 */
 } ADXM_TPRM;
 
-#define ADXM_STACK_LEN 0x2000
+#define ADXM_STACK_LEN      0x2000
 #define ADXM_SAFE_STACK_LEN 0x1000
 
 /* The file's variables one after another in .bss */
 typedef struct {
-	int unk00;                                   /* 00 */
-	int setup_cnt;                               /* 04 */
-	int lock_level;                              /* 08 */
-	int border;                                  /* 0C set while the main thread waits for the idle thread */
-	int safe_cnt;                                /* 10 */
-	int vsync_cnt;                               /* 14 */
-	int fs_cnt;                                  /* 18 */
-	int mwidle_cnt;                              /* 1C */
-	int unk20;                                   /* 20 */
-	OSThread* main_thrd;                         /* 24 */
-	OSThread mwidle_thrd;                        /* 28 */
-	OSThread vsync_thrd;                         /* 340 */
-	OSThread fs_thrd;                            /* 658 */
-	OSThread safe_thrd;                          /* 970 */
-	OSPriority save_prio;                        /* C88 */
-	int in_lock;                                 /* C8C */
-	volatile int fs_end;                                /* C90 */
-	volatile int fs_run;                                  /* C94 */
-	volatile int vsync_end;                               /* C98 */
-	volatile int vsync_run;                               /* C9C */
-	volatile int mwidle_end;                              /* CA0 */
-	volatile int mwidle_run;                              /* CA4 */
-	volatile int safe_end;                                /* CA8 */
-	volatile int safe_run;                                /* CAC */
-	char mwidle_stack[ADXM_STACK_LEN];           /* CB0 */
-	char fs_stack[ADXM_STACK_LEN];               /* 2CB0 */
-	char vsync_stack[ADXM_STACK_LEN];            /* 4CB0 */
-	char safe_stack[ADXM_SAFE_STACK_LEN];        /* 6CB0 */
+	int unk00;                            /* 00 */
+	int setup_cnt;                        /* 04 */
+	int lock_level;                       /* 08 */
+	int border;                           /* 0C set while the main thread waits for the idle thread */
+	int safe_cnt;                         /* 10 */
+	int vsync_cnt;                        /* 14 */
+	int fs_cnt;                           /* 18 */
+	int mwidle_cnt;                       /* 1C */
+	int unk20;                            /* 20 */
+	OSThread* main_thrd;                  /* 24 */
+	OSThread mwidle_thrd;                 /* 28 */
+	OSThread vsync_thrd;                  /* 340 */
+	OSThread fs_thrd;                     /* 658 */
+	OSThread safe_thrd;                   /* 970 */
+	OSPriority save_prio;                 /* C88 */
+	int in_lock;                          /* C8C */
+	volatile int fs_end;                  /* C90 */
+	volatile int fs_run;                  /* C94 */
+	volatile int vsync_end;               /* C98 */
+	volatile int vsync_run;               /* C9C */
+	volatile int mwidle_end;              /* CA0 */
+	volatile int mwidle_run;              /* CA4 */
+	volatile int safe_end;                /* CA8 */
+	volatile int safe_run;                /* CAC */
+	char mwidle_stack[ADXM_STACK_LEN];    /* CB0 */
+	char fs_stack[ADXM_STACK_LEN];        /* 2CB0 */
+	char vsync_stack[ADXM_STACK_LEN];     /* 4CB0 */
+	char safe_stack[ADXM_SAFE_STACK_LEN]; /* 6CB0 */
 } ADXM_WORK;
 
 ADXM_WORK adxm_work;
@@ -67,7 +67,7 @@ const char* const volatile adxm_build = "\nADXGC Ver.1.21 Build:Mar  3 2003 16:4
 
 typedef int (*SVM_SVRFN)(void*);
 
-#define SVM_BDR_MWIDLE 6
+#define SVM_BDR_MWIDLE   6
 #define ADXM_BORDER_WAIT 200000000
 
 // 0x80226CF4
@@ -102,11 +102,11 @@ void adxm_svm_lock(void* obj)
 		intr = OSDisableInterrupts();
 		OSDisableScheduler();
 		w->in_lock = 1;
-		thrd = OSGetCurrentThread();
-		prio = OSGetThreadPriority(thrd);
+		thrd       = OSGetCurrentThread();
+		prio       = OSGetThreadPriority(thrd);
 		OSSetThreadPriority(thrd, adxm_tprm.lock);
 		w->save_prio = prio;
-		w->in_lock = 0;
+		w->in_lock   = 0;
 		OSEnableScheduler();
 		OSRestoreInterrupts(intr);
 		OSResumeThread(&w->safe_thrd);
@@ -172,8 +172,8 @@ void adxm_vsync_thrd(void* prm)
 	ADXM_CB* cb;
 	unsigned int* vcnt;
 
-	w = &adxm_work;
-	cb = &adxm_cb;
+	w    = &adxm_work;
+	cb   = &adxm_cb;
 	vcnt = &adxt_svcnt;
 	while (w->vsync_run == 1) {
 		VIWaitForRetrace();
@@ -212,9 +212,9 @@ void adxm_idle_thrd(void* prm)
 	ADXM_TPRM* tprm;
 	ADXM_CB* cb;
 
-	w = &adxm_work;
+	w    = &adxm_work;
 	tprm = &adxm_tprm;
-	cb = &adxm_cb;
+	cb   = &adxm_cb;
 	while (w->mwidle_run == 1) {
 		w->mwidle_cnt++;
 		if (SVM_ExecSvrMain() == 0 || w->border == 1) {
@@ -243,33 +243,33 @@ void ADXM_SetupThrd(ADXM_TPRM* tprm)
 		SVM_SetCbLock(adxm_svm_lock, 0);
 		SVM_SetCbUnlock(adxm_svm_unlock, 0);
 		if (tprm == 0) {
-			adxm_tprm.main = 16;
-			adxm_tprm.lock = 1;
-			adxm_tprm.safe = 8;
-			adxm_tprm.vsync = 12;
-			adxm_tprm.fs = 14;
+			adxm_tprm.main   = 16;
+			adxm_tprm.lock   = 1;
+			adxm_tprm.safe   = 8;
+			adxm_tprm.vsync  = 12;
+			adxm_tprm.fs     = 14;
 			adxm_tprm.mwidle = 24;
 		} else {
 			adxm_tprm = *tprm;
 		}
 		OSCreateThread(&w->safe_thrd, (OSThreadStartFunction)adxm_safe_thrd, 0, (void*)((unsigned int)w->safe_stack + ADXM_SAFE_STACK_LEN),
 		               ADXM_SAFE_STACK_LEN, adxm_tprm.safe, OS_THREAD_ATTR_DETACH);
-		OSCreateThread(&w->vsync_thrd, (OSThreadStartFunction)adxm_vsync_thrd, 0, (void*)((unsigned int)w->vsync_stack + ADXM_STACK_LEN), ADXM_STACK_LEN,
-		               adxm_tprm.vsync, OS_THREAD_ATTR_DETACH);
-		OSCreateThread(&w->fs_thrd, (OSThreadStartFunction)adxm_fs_thrd, 0, (void*)((unsigned int)w->fs_stack + ADXM_STACK_LEN), ADXM_STACK_LEN,
-		               adxm_tprm.fs, OS_THREAD_ATTR_DETACH);
+		OSCreateThread(&w->vsync_thrd, (OSThreadStartFunction)adxm_vsync_thrd, 0, (void*)((unsigned int)w->vsync_stack + ADXM_STACK_LEN),
+		               ADXM_STACK_LEN, adxm_tprm.vsync, OS_THREAD_ATTR_DETACH);
+		OSCreateThread(&w->fs_thrd, (OSThreadStartFunction)adxm_fs_thrd, 0, (void*)((unsigned int)w->fs_stack + ADXM_STACK_LEN),
+		               ADXM_STACK_LEN, adxm_tprm.fs, OS_THREAD_ATTR_DETACH);
 		OSCreateThread(&w->mwidle_thrd, (OSThreadStartFunction)adxm_idle_thrd, 0, (void*)((unsigned int)w->mwidle_stack + ADXM_STACK_LEN),
 		               ADXM_STACK_LEN, adxm_tprm.mwidle, OS_THREAD_ATTR_DETACH);
-		w->main_thrd = OSGetCurrentThread();
-		w->fs_run = 1;
+		w->main_thrd  = OSGetCurrentThread();
+		w->fs_run     = 1;
 		w->mwidle_run = 1;
-		w->vsync_run = 1;
-		w->safe_run = 1;
-		w->fs_end = 0;
+		w->vsync_run  = 1;
+		w->safe_run   = 1;
+		w->fs_end     = 0;
 		w->mwidle_end = 0;
-		w->vsync_end = 0;
-		w->safe_end = 0;
-		w->in_lock = 0;
+		w->vsync_end  = 0;
+		w->safe_end   = 0;
+		w->in_lock    = 0;
 		OSResumeThread(&w->vsync_thrd);
 		OSResumeThread(&w->fs_thrd);
 		OSResumeThread(&w->mwidle_thrd);

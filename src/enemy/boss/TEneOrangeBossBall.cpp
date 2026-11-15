@@ -20,9 +20,9 @@ struct CharaColli;
 struct NJS_OBJECT;
 struct DrawTask;
 
-static NJS_OBJECT* sBallModel;   // 0x802C55A8
+static NJS_OBJECT* sBallModel;    // 0x802C55A8
 static NJS_TEXLIST* sBallTexList; // 0x802C55AC
-static int sNextBallColor; // 0x802C55B0
+static int sNextBallColor;        // 0x802C55B0
 
 // 0x8024882C
 // A sphere of 5
@@ -34,12 +34,11 @@ static const ColliShape sBallShape = { { 0.0f, 0.0f, 0.0f }, 0, 0, 0, 5.0f, 0.0f
 // Red blue and yellow
 static const f32 sBallColors[3 * 3] = {
 	1.0f, 0.0f, 0.4f, // r g b
-	0.0f, 0.2f, 1.0f,
-	1.0f, 1.0f, 0.0f,
+	0.0f, 0.2f, 1.0f, 1.0f, 1.0f, 0.0f,
 };
-static const int sBallTrail[3] = { 0x48, 0x49, 0x4A };  // 0x80248880 particle bank 1
+static const int sBallTrail[3]  = { 0x48, 0x49, 0x4A }; // 0x80248880 particle bank 1
 static const int sBallSparks[3] = { 0x4D, 0x4E, 0x4C }; // 0x8024888C particle bank 1
-static const int sBallBurst[3] = { 7, 9, 3 };           // 0x80248898 effect bank 5
+static const int sBallBurst[3]  = { 7, 9, 3 };          // 0x80248898 effect bank 5
 
 // 0x80122234
 extern "C" void orangeBallLoad()
@@ -272,9 +271,9 @@ void TEneOrangeBossBall::drawBall()
 	f32 argb[4];
 	int i   = mColor * 3;
 	argb[0] = 1.0f;
-	int j = i++;
+	int j   = i++;
 	argb[1] = sBallColors[j];
-	j = i++;
+	j       = i++;
 	argb[2] = sBallColors[j];
 	argb[3] = sBallColors[i];
 	njSetConstantMaterial(argb);
@@ -301,12 +300,12 @@ extern const char* gTEneOrangeBossPunchName;
 TEneOrangeBossPunch::TEneOrangeBossPunch(TObject* parent, const Vec3f* from, const Vec3f* to)
     : TObjAction(parent)
 {
-	_00    = (u32)gTEneOrangeBossPunchName;
-	mSize  = 0x50;
-	mFrom  = *from;
-	mTo    = *to;
-	mTo.y  = 0.5f;
-	mLife  = 30;
+	_00   = (u32)gTEneOrangeBossPunchName;
+	mSize = 0x50;
+	mFrom = *from;
+	mTo   = *to;
+	mTo.y = 0.5f;
+	mLife = 30;
 	setObjId(this, 0xFFFF);
 	mShape = colliCreate(1, 1);
 	colliSetOwner((CharaColli*)mShape, (u16)mObjId);
@@ -352,14 +351,26 @@ void TEneOrangeBossPunch::draw()
 }
 
 // 0x80122C78
-Vec3f* TEneOrangeBossPunch::getPos() { return &mFrom; }
+Vec3f* TEneOrangeBossPunch::getPos()
+{
+	return &mFrom;
+}
 
 // 0x80122C80
-int TEneOrangeBossPunch::getKind() { return 2; }
+int TEneOrangeBossPunch::getKind()
+{
+	return 2;
+}
 
 // 0x80122C88
 // The ball's which come after the punch
-Vec3f* TEneOrangeBossBall::getPos() { return &mPos; }
+Vec3f* TEneOrangeBossBall::getPos()
+{
+	return &mPos;
+}
 
 // 0x80122C90
-int TEneOrangeBossBall::getKind() { return 2; }
+int TEneOrangeBossBall::getKind()
+{
+	return 2;
+}

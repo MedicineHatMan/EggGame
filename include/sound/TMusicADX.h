@@ -28,13 +28,13 @@ public:
 	void pause();
 	void resume();
 
-	void* mPlayer;   // _20
-	void* mWork;     // _24
+	void* mPlayer;    // _20
+	void* mWork;      // _24
 	char mName[0x20]; // _28
-	s8 mState;       // _48 0 playing 1 waiting for the drive 2 drive error 3 stopped
-	u16 mFade;       // _4A frames left
-	f32 mVolume;     // _4C
-	f32 mTarget;     // _50
+	s8 mState;        // _48 0 playing 1 waiting for the drive 2 drive error 3 stopped
+	u16 mFade;        // _4A frames left
+	f32 mVolume;      // _4C
+	f32 mTarget;      // _50
 };
 
 extern "C" {

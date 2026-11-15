@@ -16,10 +16,14 @@ static inline f32 random01()
 }
 
 // 0x8007C134
-MoleBrainBase::MoleBrainBase() { }
+MoleBrainBase::MoleBrainBase()
+{
+}
 
 // 0x8007C164
-MoleBrainBase::~MoleBrainBase() { }
+MoleBrainBase::~MoleBrainBase()
+{
+}
 
 // 0x8007C1C0
 MoleBrain* createMoleBrain(TEneBoss03Mole* owner)
@@ -83,10 +87,10 @@ int MoleBrain::look()
 	Vec3f pos;
 	pos = dir;
 	gjScaleVector(140.0f, &pos, &pos);
-	pos.x = 40.0f * dir.z + pos.x;
-	pos.z = pos.z - 40.0f * dir.x;
+	pos.x     = 40.0f * dir.z + pos.x;
+	pos.z     = pos.z - 40.0f * dir.x;
 	f32 angle = atan2(pos.x, pos.z);
-	pos.y = 200.0f;
+	pos.y     = 200.0f;
 	return mSight.findInBox(&pos, (int)(10430.38043493439 * angle), 25.0f, 60.000004f);
 }
 
@@ -116,7 +120,7 @@ int MoleBrain::getAttack()
 void MoleBrain::startCircle()
 {
 	Vec3f center;
-	mTurn = 0x95;
+	mTurn    = 0x95;
 	center.x = 0.0f;
 	center.y = 200.0f;
 	center.z = 0.0f;
@@ -135,7 +139,7 @@ void MoleBrain::startCircle()
 			mTurn = 0x95;
 		}
 	}
-	mWave = (int)(65536.0f * random01());
+	mWave     = (int)(65536.0f * random01());
 	int stage = getStage();
 	mOwner->setRate(gMoleParams->mCircleSpeed[stage]);
 }
@@ -169,7 +173,7 @@ int MoleBrain::isNearGoal()
 void MoleBrain::startCamera()
 {
 	Vec3f pos;
-	pos = *mOwner->getPos();
+	pos     = *mOwner->getPos();
 	mCamera = createTCamConversation(0, 2, &pos, 0x400, 0x1000);
 	if (mCamera != 0) {
 		mCamera->setTarget(camGetTarget(0));

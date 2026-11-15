@@ -85,13 +85,13 @@ public:
 	void calcMotion();
 	void draw();
 
-	NJS_OBJECT* mModel;          // _00
-	GjActor* mActor;          // _04 allocated when the model has flag 0x2000
+	NJS_OBJECT* mModel;    // _00
+	GjActor* mActor;       // _04 allocated when the model has flag 0x2000
 	DrawState* mState;     // _08
 	MotionPlayer* mMotion; // _0C
 	ObjPlace* mPlace;      // _10
 	ObjPlace* mNodes;      // _14 one per node from setModelNodes
-	NJS_TEXLIST* mTexList;        // _18
+	NJS_TEXLIST* mTexList; // _18
 	u32 mFlags;            // _1C 1 = has mNodes
 };
 

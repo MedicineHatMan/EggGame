@@ -63,7 +63,10 @@ extern "C" int particlePosSlotAlloc(s16* out)
 }
 
 // 0x80026990
-extern "C" void particlePosSlotFree(s16 slot) { particleSlotFree(&sParticlePosCount, sParticlePosUsed, 0x40, slot); }
+extern "C" void particlePosSlotFree(s16 slot)
+{
+	particleSlotFree(&sParticlePosCount, sParticlePosUsed, 0x40, slot);
+}
 
 // 0x800269C4
 extern "C" void particlePosSlotSet(s16 slot, const Vec3f* pos)
@@ -106,7 +109,10 @@ extern "C" ParticleDesc* particleDescSlotAlloc(s16* out)
 }
 
 // 0x80026AD8
-extern "C" void particleDescSlotFree(s16 slot) { particleSlotFree(&sParticleDescCount, sParticleDescUsed, 0x40, slot); }
+extern "C" void particleDescSlotFree(s16 slot)
+{
+	particleSlotFree(&sParticleDescCount, sParticleDescUsed, 0x40, slot);
+}
 
 // 0x80026B0C
 extern "C" TParticleGenerator* particleGenNew(TObject* parent, const Vec3f* pos, const ParticleDesc* desc)
@@ -116,10 +122,16 @@ extern "C" TParticleGenerator* particleGenNew(TObject* parent, const Vec3f* pos,
 
 // 0x80026B68
 // with no record and so no particles
-extern "C" TParticleGenerator* particleGenEmpty(TObject* parent, const Vec3f* pos, int, int) { return particleGenNew(parent, pos, 0); }
+extern "C" TParticleGenerator* particleGenEmpty(TObject* parent, const Vec3f* pos, int, int)
+{
+	return particleGenNew(parent, pos, 0);
+}
 
 // 0x80026B8C
-extern "C" TParticleGenerator* particleGenEmptyDefault(const Vec3f* pos, int a, int b) { return particleGenEmpty(gTL_07, pos, a, b); }
+extern "C" TParticleGenerator* particleGenEmptyDefault(const Vec3f* pos, int a, int b)
+{
+	return particleGenEmpty(gTL_07, pos, a, b);
+}
 
 // 0x80026BC4
 extern "C" TParticleGenerator* particleGenById(TObject* parent, const Vec3f* pos, int bank, int id)
@@ -212,7 +224,7 @@ extern "C" TParticleGenerator* particleGenTimedById(TObject* parent, const Vec3f
 
 // 0x80026F78
 extern "C" TParticleGenerator* particleGenTimedByIdRot(TObject* parent, const Vec3f* pos, int bank, int id, int rotX, int rotY, int delay,
-                                         int life, f32 scale)
+                                                       int life, f32 scale)
 {
 	TParticleGenerator* gen = particleGenById(parent, pos, bank, id);
 	if (gen != 0) {
@@ -232,7 +244,7 @@ extern "C" TParticleGenerator* particleGenTimedByIdDefault(const Vec3f* pos, int
 
 // 0x80027040
 extern "C" TParticleGenerator* particleGenTimedByIdRotDefault(const Vec3f* pos, int bank, int id, int rotX, int rotY, int delay, int life,
-                                                f32 scale)
+                                                              f32 scale)
 {
 	return particleGenTimedByIdRot(gTL_07, pos, bank, id, rotX, rotY, delay, life, scale);
 }
@@ -276,7 +288,10 @@ TParticleGenerator::~TParticleGenerator()
 }
 
 // 0x8002721C
-void TParticleGenerator::setDelay(int delay) { mTime = -delay; }
+void TParticleGenerator::setDelay(int delay)
+{
+	mTime = -delay;
+}
 
 // 0x80027228
 void TParticleGenerator::setLife(int life)
@@ -286,7 +301,10 @@ void TParticleGenerator::setLife(int life)
 }
 
 // 0x8002723C
-void TParticleGenerator::setScale(f32 scale) { mScale = scale; }
+void TParticleGenerator::setScale(f32 scale)
+{
+	mScale = scale;
+}
 
 // 0x80027244
 void TParticleGenerator::setRot(int rotX, int rotY)
@@ -328,9 +346,9 @@ void TParticleGenerator::draw()
 		mCount += mRate * njSin(mPhase);
 	}
 
-	bool t = false;
+	bool t                   = false;
 	const ParticleDesc* desc = mDesc;
-	int kind = desc->mKind;
+	int kind                 = desc->mKind;
 	if (mRotX != 0 || mRotY != 0) {
 		t = true;
 	}
@@ -397,15 +415,27 @@ void TParticleGenerator::draw()
 }
 
 // 0x800275C8
-int TParticleGenerator::hasOwnDesc() { return mGenFlags & 8; }
+int TParticleGenerator::hasOwnDesc()
+{
+	return mGenFlags & 8;
+}
 
 // 0x800275D4
 // ParticleDesc as the original seems to have declared it value/range pairs and the start box are nested structs so a
 // copy moves them as word pairs makeOwnDesc
-struct DescRange { f32 v, r; };
-struct DescRangeI { s32 v; u32 r; };
-struct DescBox { f32 x, y, z; };
-struct DescBoxW { DescBox b; };
+struct DescRange {
+	f32 v, r;
+};
+struct DescRangeI {
+	s32 v;
+	u32 r;
+};
+struct DescBox {
+	f32 x, y, z;
+};
+struct DescBoxW {
+	DescBox b;
+};
 struct DescMirror {
 	u16 kind, flags;
 	ParticleTex tex;
@@ -436,7 +466,7 @@ void TParticleGenerator::makeOwnDesc()
 	if (own != 0) {
 		mGenFlags |= 8;
 		*(DescMirror*)own = *(const DescMirror*)mDesc;
-		mDesc = own;
+		mDesc             = own;
 	}
 }
 

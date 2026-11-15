@@ -10,9 +10,9 @@
 #include "animal/RacerMover.h"
 
 struct CamHeadState {
-	Vec3f mPos;      // _00
-	int mRot;        // _0C the way it last went
-	u16 mId;         // _10
+	Vec3f mPos; // _00
+	int mRot;   // _0C the way it last went
+	u16 mId;    // _10
 	u8 _12[2];
 	int mHidden;     // _14 the object said not to follow it
 	Vec3f mLastPos;  // _18
@@ -44,9 +44,9 @@ f32 camTrailPush(f32 step, CamTrail* trail, const Vec3f* pos)
 {
 	Vec3f d;
 	Vec3f* p = &trail->mPoints[trail->mIndex];
-	d.x = p->x;
-	d.y = p->y;
-	d.z = p->z;
+	d.x      = p->x;
+	d.y      = p->y;
+	d.z      = p->z;
 	njSubVector(&d, pos);
 	f32 dist = njScalor(&d);
 	if (dist > step) {
@@ -63,7 +63,7 @@ f32 camTrailPush(f32 step, CamTrail* trail, const Vec3f* pos)
 // A place counting back from the newest
 void camTrailGet(const CamTrail* trail, int back, Vec3f* out)
 {
-	int i = camTrailIndex(trail, back);
+	int i  = camTrailIndex(trail, back);
 	out->x = trail->mPoints[i].x;
 	out->y = trail->mPoints[i].y;
 	out->z = trail->mPoints[i].z;

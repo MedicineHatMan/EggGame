@@ -370,7 +370,7 @@ GXFifoObj* GXInit(void* base, u32 size)
 	GX_BP_LOAD_REG(0x24000000)
 	GX_BP_LOAD_REG(0x67000000)
 
-__GXSetTmemConfig(2);
+	__GXSetTmemConfig(2);
 	__GXInitGX();
 
 	return &FifoObj;

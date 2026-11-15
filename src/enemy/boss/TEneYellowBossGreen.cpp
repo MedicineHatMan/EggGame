@@ -29,8 +29,8 @@ struct Vec3f;
 struct GjActor;
 
 extern "C" {
-NJS_OBJECT** gYellowGreenModels;       // 0x802C5A58
-NJS_MOTION** gYellowGreenMotion;        // 0x802C5A5C
+NJS_OBJECT** gYellowGreenModels; // 0x802C5A58
+NJS_MOTION** gYellowGreenMotion; // 0x802C5A5C
 }
 
 const char* gTEneYellowBossGreenName = "TEneYellowBossGreen";
@@ -140,7 +140,7 @@ u8 TEneYellowBossGreen::isBroken()
 #pragma optimization_level 1
 int TEneYellowBossGreen::onHit(const TObjAction* other, int arg, int* result)
 {
-	int ret = 0;
+	int ret      = 0;
 	HitInfo* hit = (HitInfo*)result;
 
 	if (arg == 1) {
@@ -151,17 +151,17 @@ int TEneYellowBossGreen::onHit(const TObjAction* other, int arg, int* result)
 		}
 		if (isPlayerOrKind4(other)) {
 			hit->mDamage = 0x14;
-			ret = 1;
+			ret          = 1;
 			hit->mFlags.clear();
 		} else if (isEggObj(other)) {
 			hit->mDamage = 1;
-			ret = 1;
+			ret          = 1;
 			hit->mFlags.clear();
 			hit->mFlags.setBit(0xD);
 		}
 	} else if (isPlayerOrKind4(other)) {
 		hit->mDamage = 0x14;
-		ret = 1;
+		ret          = 1;
 		hit->mFlags.clear();
 	}
 	return ret;
@@ -169,7 +169,10 @@ int TEneYellowBossGreen::onHit(const TObjAction* other, int arg, int* result)
 #pragma optimization_level reset
 
 // 0x801A96A4
-f32 TEneYellowBossGreen::vfn_40() { return 80.0f; }
+f32 TEneYellowBossGreen::vfn_40()
+{
+	return 80.0f;
+}
 
 // 0x801A96AC
 void TEneYellowBossGreen::pose()
@@ -322,7 +325,10 @@ void TEneYellowBossGreen::slide(f32 rate)
 }
 
 // 0x801A9AF0
-f32 TEneYellowBossGreen::motionRate(s16 entry) { return mSpeed * sYellowBossGreenMotions[entry].mRate; }
+f32 TEneYellowBossGreen::motionRate(s16 entry)
+{
+	return mSpeed * sYellowBossGreenMotions[entry].mRate;
+}
 
 // 0x801A9B14
 void TEneYellowBossGreen::draw()
@@ -405,8 +411,8 @@ void TEneYellowBossGreen::actBreak(int phase)
 // Turns *angle toward target by rate a frame scaled by mSpeed
 int TEneYellowBossGreen::turnTo(int* angle, f32* step, int rate, int target)
 {
-	int diff  = angleDiff(*angle, target);
-	f32 left  = diff;
+	int diff = angleDiff(*angle, target);
+	f32 left = diff;
 	int there;
 
 	if (diff >= 0) {
@@ -465,7 +471,10 @@ void TEneYellowBossGreen::actTurn(int phase)
 }
 
 // 0x801A9F6C
-int TEneYellowBossGreen::isNear(Vec3f* at) { return distXZ(&mXform.mPos, at) <= 50.0f; }
+int TEneYellowBossGreen::isNear(Vec3f* at)
+{
+	return distXZ(&mXform.mPos, at) <= 50.0f;
+}
 
 // 0x801A9FA4
 int TEneYellowBossGreen::isAhead(int angle)
@@ -607,7 +616,10 @@ void TEneYellowBossGreen::actDie(int phase)
 }
 
 // 0x801AA3F4
-void TEneYellowBossGreen::vfn_10() { cull(mDraw, 3000.0f, 60.0f, &mXform.mPos, 0); }
+void TEneYellowBossGreen::vfn_10()
+{
+	cull(mDraw, 3000.0f, 60.0f, &mXform.mPos, 0);
+}
 
 // 0x801AA428
 void TEneYellowBossGreen::render()

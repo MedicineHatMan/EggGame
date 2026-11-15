@@ -14,13 +14,15 @@ extern "C" void* createGameRescue(TObject* parent)
 TGameRescue::TGameRescue(TObject* parent)
     : TGameContext(parent)
 {
-	_00   = (u32)gTGameRescueName;
-	mSize = 0x3C;
+	_00    = (u32)gTGameRescueName;
+	mSize  = 0x3C;
 	mPhase = 0;
 }
 
 // 0x8010EA00
-TGameRescue::~TGameRescue() { }
+TGameRescue::~TGameRescue()
+{
+}
 
 // 0x8010EA5C
 void TGameRescue::startState()
@@ -59,22 +61,22 @@ TGameStateRescue::TGameStateRescue()
 int TGameStateRescue::onTime(TGameContext* context, RescueMsg* msg)
 {
 	HudRatioMsg ratio;
-	ratio.mType = 0xC1;
+	ratio.mType  = 0xC1;
 	ratio.mRatio = (f32)msg->mTime / (f32)msg->mLimit;
 	aeSendMissionIcon(&ratio);
 
 	StageTime time;
 	HudTimeMsg hud;
-	hud.mType = 0xBF;
-	time.mHour = 0;
+	hud.mType    = 0xBF;
+	time.mHour   = 0;
 	time.mMinute = 0;
 	time.mSecond = 0;
-	time.mMilli = 0;
+	time.mMilli  = 0;
 	stageTimeSet(&time, msg->mTime);
 
 	hud.mMinute = time.mMinute;
 	hud.mSecond = time.mSecond;
-	hud.mMilli = time.mMilli;
+	hud.mMilli  = time.mMilli;
 	aeSendMissionIcon(&hud);
 	return 0;
 }

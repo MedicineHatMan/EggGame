@@ -34,14 +34,14 @@ typedef char TObjMapCollision_size_check[(sizeof(TObjMapCollision) == 0xB4) ? 1 
 // The four corners of an upright wall width wide and height high centred on x
 extern "C" void mapColliWallVerts(Vec3f* verts, f32 width, f32 height, f32 z)
 {
-	f32 right = 0.5f * width;
+	f32 right  = 0.5f * width;
 	verts[0].x = right;
 	verts[0].y = height;
 	verts[0].z = z;
 	verts[1].x = right;
 	verts[1].y = 0.0f;
 	verts[1].z = z;
-	f32 left  = -0.5f * width;
+	f32 left   = -0.5f * width;
 	verts[2].x = left;
 	verts[2].y = height;
 	verts[2].z = z;
@@ -65,11 +65,11 @@ extern "C" void mapColliSetTri(Vec3f* verts, int a, int b, int c, MeshTri* tri)
 	tri->mVerts[0] = a;
 	tri->mVerts[1] = b;
 	tri->mVerts[2] = c;
-	p0 = verts[a];
-	p1 = verts[b];
-	p2 = verts[c];
-	tri->mMask = 1;
-	tri->_06   = 0;
+	p0             = verts[a];
+	p1             = verts[b];
+	p2             = verts[c];
+	tri->mMask     = 1;
+	tri->_06       = 0;
 
 	e0 = p1;
 	njSubVector(&e0, &p0);
@@ -123,7 +123,7 @@ void TObjMapCollision::initFromDesc(SetDesc* desc)
 	desc->getRot(&mRot);
 	mtxSetTransV(mMtx, &mPos);
 	mtxRotateZYX((f32*)mMtx, (const f32*)mMtx, (const int*)&mRot);
-	mSwitch = desc->getInt(0);
+	mSwitch  = desc->getInt(0);
 	mModel   = desc->getInt(1);
 	mModel   = CLAMP_RANGE(mModel, 0, 1);
 	mScale.x = 1.0f;
@@ -219,8 +219,8 @@ int TObjMapCollision::buildVerts()
 		count = 8;
 		break;
 	}
-	mData._04 = count;
-	mVerts    = new Vec3f[count];
+	mData._04    = count;
+	mVerts       = new Vec3f[count];
 	Vec3f* verts = mVerts;
 	if (verts == 0) {
 		return 0;

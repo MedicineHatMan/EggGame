@@ -17,8 +17,8 @@ extern u32 gColorGreen; // 0x00FF00FF
 extern u32 gColorBlue;  // 0x0000FFFF
 
 void lerpColor(f32 t, u32* out, const u32* from, const u32* to); // 0x80044E90
-void setColorRed(u32* color, u8 value);                       // 0x80044EC4
-void setColorAlpha(u32* color, int value);                        // 0x80044ED4
+void setColorRed(u32* color, u8 value);                          // 0x80044EC4
+void setColorAlpha(u32* color, int value);                       // 0x80044ED4
 
 int addColorRed(u32* color, int step);
 int addColorGreen(u32* color, int step);

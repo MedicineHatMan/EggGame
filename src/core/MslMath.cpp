@@ -107,10 +107,10 @@ f32 sqrtf(f32 x)
 	volatile f32 y;
 	if (x > 0.0f) {
 		f64 guess = __frsqrte((f64)x);
-		guess = 0.5 * guess * (3.0 - guess * guess * x);
-		guess = 0.5 * guess * (3.0 - guess * guess * x);
-		guess = 0.5 * guess * (3.0 - guess * guess * x);
-		y = (f32)(x * guess);
+		guess     = 0.5 * guess * (3.0 - guess * guess * x);
+		guess     = 0.5 * guess * (3.0 - guess * guess * x);
+		guess     = 0.5 * guess * (3.0 - guess * guess * x);
+		y         = (f32)(x * guess);
 		return y;
 	}
 	return x;

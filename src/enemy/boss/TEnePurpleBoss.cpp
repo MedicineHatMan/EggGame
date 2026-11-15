@@ -45,29 +45,23 @@ struct Quat;
 struct EnemyLight;
 
 extern "C" {
-extern const int sPurpleBossNodes[] = { 1, 15, 24, 34, 36, 59, -1 };
-const char* gTEnePurpleBossName = "TEnePurpleBoss";
+extern const int sPurpleBossNodes[]               = { 1, 15, 24, 34, 36, 59, -1 };
+const char* gTEnePurpleBossName                   = "TEnePurpleBoss";
 extern const EnemyFrameKey sPurpleBossFrameKey0[] = { { 18.0f, 0 }, { 28.0f, 5 }, { 41.0f, 0 }, { 47.0f, 3 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sPurpleBossFrameKey1[] = { { 10.0f, 4 }, { 27.0f, 0 }, { 37.0f, 4 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sPurpleBossFrameKey2[] = { { 12.0f, 3 }, { 23.0f, 0 }, { 30.0f, 4 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sPurpleBossFrameKey3[] = { { 54.0f, 0 }, { -1.0f, 4 } };
 extern const EnemyFrameKey sPurpleBossFrameKey4[] = { { 12.0f, 4 }, { 23.0f, 0 }, { 28.0f, 4 }, { -1.0f, 0 } };
-extern const ColliShape sPurpleBossShapes[1] = {
+extern const ColliShape sPurpleBossShapes[1]      = {
 	{ { 0.0f, 0.0f, 0.0f }, 0x0, 0, 0x0, 25.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
 MotionEntry sPurpleBossMotionKeys[] = {
-	{ MOTION_LOOP, 11, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 12, -1, 0, 0.0f, 35.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 59.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 8, -1, 0, 0.0f, 30.0f, 1.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 59.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 6, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 59.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 69.0f, 0.45f, 0.0f, 0 },
-	{ MOTION_ONCE, 3, -1, 0, 0.0f, 14.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 14.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 11, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 12, -1, 0, 0.0f, 35.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 9, -1, 0, 0.0f, 59.0f, 0.3f, 0.0f, 0 },   { MOTION_LOOP, 8, -1, 0, 0.0f, 30.0f, 1.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 1, -1, 0, 0.0f, 59.0f, 0.4f, 0.0f, 0 },   { MOTION_ONCE, 2, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 6, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },   { MOTION_ONCE, 7, -1, 0, 0.0f, 59.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 69.0f, 0.45f, 0.0f, 0 },  { MOTION_ONCE, 3, -1, 0, 0.0f, 14.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_ONCE, 4, -1, 0, 0.0f, 14.0f, 0.5f, 0.0f, 0 },   { MOTION_ONCE, 5, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
 	{ MOTION_ONCE, 10, -1, 0, 0.0f, 539.0f, 1.0f, 0.0f, 0 },
 };
 PurpleBossParams* gPurpleBossParams;
@@ -131,7 +125,7 @@ extern "C" void* paramsTEnePurpleBoss()
 TEnePurpleBoss::TEnePurpleBoss(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)gTEnePurpleBossName;
+	_00   = (u32)gTEnePurpleBossName;
 	mSize = 0x318;
 	init(desc);
 	initBossBar();
@@ -145,7 +139,7 @@ void TEnePurpleBoss::init(SetDesc* desc)
 	motionCtrlInit(&mAnim, sPurpleBossMotionKeys, sPurpleBossMotion);
 	motionCtrlPlay(&mAnim, 0);
 	mBody.mRot.x = 0;
-	mCollider = colliCreate(1, 1);
+	mCollider    = colliCreate(1, 1);
 	colliCopyShapes(mCollider, (const ColliShape*)sPurpleBossShapes);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 0xFF, 0, 0x10);
@@ -166,12 +160,12 @@ void TEnePurpleBoss::init(SetDesc* desc)
 		mNodes[i].y = 0.0f;
 		mNodes[i].z = 0.0f;
 	}
-	_1BC.x = 0.0f;
-	_1BC.y = 0.0f;
-	_1BC.z = 0.0f;
-	_1C8.x = 0.0f;
-	_1C8.y = 0.0f;
-	_1C8.z = 0.0f;
+	_1BC.x       = 0.0f;
+	_1BC.y       = 0.0f;
+	_1BC.z       = 0.0f;
+	_1C8.x       = 0.0f;
+	_1C8.y       = 0.0f;
+	_1C8.z       = 0.0f;
 	mTargetAngle = 0;
 	mMaxHealth   = 500;
 	mHealth      = 500;
@@ -237,10 +231,10 @@ TEnePurpleBoss::~TEnePurpleBoss()
 // 0x800C83C4
 void TEnePurpleBoss::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -280,19 +274,19 @@ void TEnePurpleBoss::readEnemyDesc(SetDesc* desc)
 int TEnePurpleBoss::onHit(const TObjAction* other, int arg, int* result)
 {
 	HitInfo* info = (HitInfo*)result;
-	int hit = 0;
+	int hit       = 0;
 
 	if (!(mBossFlags & BOSS_CLOSED)) {
 		if (isPlayerOrKind4(other)) {
 			info->mDamage = 20;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			if (mBossFlags & BOSS_HITTABLE) {
 				mBossFlags |= BOSS_BOUNCED;
 			}
 		} else if (isEggObj(other) && (mBossFlags & (BOSS_HITTABLE | BOSS_ICE))) {
 			info->mDamage = 1;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			info->mFlags.setBit(13);
 		}
@@ -611,8 +605,7 @@ void TEnePurpleBoss::spinMove()
 	from.y = start.y + 40.0f;
 	if (probeWall(40.0f, &from, &dir, &speed, &hit, &normal)) {
 		mBossFlags |= BOSS_BUMPED;
-		particleOnceByIdRotDefault(&hit, 1, 0x48, 0x4000, (int)(10430.38043493439 * (f32)atan2(normal.x, normal.z)),
-		                           0.0f);
+		particleOnceByIdRotDefault(&hit, 1, 0x48, 0x4000, (int)(10430.38043493439 * (f32)atan2(normal.x, normal.z)), 0.0f);
 	} else {
 		mBossFlags &= ~BOSS_BUMPED;
 	}
@@ -693,22 +686,21 @@ void TEnePurpleBoss::aimSpeed()
 	f32 vx;
 	f32 vz = mBody.mVel.z;
 	f32 px = mBody.mPos.x;
-	vx = mBody.mVel.x;
+	vx     = mBody.mVel.x;
 	pz *= 1.2f;
 	vz *= 1.2f;
 	f32 x;
 	f32 z;
 
 	t[1] = 1.2f;
-	quadRoots(vx * vx + vz * vz, 2.0f * (px * vx + pz * vz), (px * px + pz * pz) - 90000.0f, &t[0],
-	            &t[1]);
+	quadRoots(vx * vx + vz * vz, 2.0f * (px * vx + pz * vz), (px * px + pz * pz) - 90000.0f, &t[0], &t[1]);
 	if (t[1] > t[0]) {
 		t[0] = t[1];
 	}
 	vx *= t[0];
 	vz *= 0.8333333f * t[0];
-	t[1] = vx * vx + vz * vz;
-	z = __frsqrte(t[1]);
+	t[1]   = vx * vx + vz * vz;
+	z      = __frsqrte(t[1]);
 	mSpeed = __fres(z);
 }
 #pragma opt_common_subs reset
@@ -718,11 +710,11 @@ void TEnePurpleBoss::aimSpeed()
 void TEnePurpleBoss::dashBack(f32 scale)
 {
 	f32 speed = 2.0f;
-	speed = -speed;
+	speed     = -speed;
 	speed *= scale;
 	f32 x;
-	f32 z = mBody.mVel.z;
-	x = mBody.mVel.x;
+	f32 z   = mBody.mVel.z;
+	x       = mBody.mVel.x;
 	f32 len = x * x + z * z;
 
 	if (len <= 1e-8f) {
@@ -889,7 +881,7 @@ void TEnePurpleBoss::updateTrails()
 // 0x800C96A4
 void TEnePurpleBoss::spawnFx(int model, int motion)
 {
-	void* object = resBankGetObjects(&sPurpleBossBank)[model];
+	void* object         = resBankGetObjects(&sPurpleBossBank)[model];
 	NJS_MOTION** motions = resBankGetMotion(&sPurpleBossBank, 1);
 
 	mFx = createCamPath(0, 2, object, motions[motion], 0, 1.0f, 1.0f);
@@ -1046,8 +1038,8 @@ void TEnePurpleBoss::actAppear(int phase)
 // Turns *angle toward target fast between frames 11 and 15 and easing off after
 int TEnePurpleBoss::turnStep(f32 frame, int* angle, f32* rate, int target)
 {
-	int diff  = angleDiff(*angle, target);
-	f32 left  = diff;
+	int diff = angleDiff(*angle, target);
+	f32 left = diff;
 	int there;
 
 	if (frame >= 11.0f && frame < 15.0f) {
@@ -1110,7 +1102,7 @@ int TEnePurpleBoss::pushOff(SetTransform* body, void* anim, int angle)
 	int pushed;
 
 	body->mRot.y = angleApproach(body->mRot.y, angle, 0x100);
-	pushed = 0;
+	pushed       = 0;
 	if (!motionCtrlIsBlending(anim) && motionCtrlFrame(anim) > 36.0f) {
 		pushed = 1;
 		njSinCos(body->mRot.y, &body->mVel.x, &body->mVel.z);
@@ -1306,8 +1298,7 @@ void TEnePurpleBoss::actSlam(int phase)
 	switch (phase) {
 	case 0: {
 		motionCtrlPlayBlend(0.1f, &mAnim, 7);
-		int diff  = angleDiff(mBody.mRot.y,
-		                        (int)(10430.38043493439 * (f32)atan2(-mBody.mPos.x, -mBody.mPos.z)));
+		int diff  = angleDiff(mBody.mRot.y, (int)(10430.38043493439 * (f32)atan2(-mBody.mPos.x, -mBody.mPos.z)));
 		mTurnRate = (int)((f32)diff / 20.0f);
 		break;
 	}
@@ -1661,7 +1652,7 @@ void TEnePurpleBoss::render()
 	} else {
 		ObjDrawState state;
 		DrawStateSlot* slot = getDrawStateSlot();
-		state = *(DrawState*)getDefaultDrawState();
+		state               = *(DrawState*)getDefaultDrawState();
 		setDrawAmbient(&mLight, &state);
 		mTint.addToLight(&state.mFlags);
 		beginDrawState(slot, (const DrawState*)&state);

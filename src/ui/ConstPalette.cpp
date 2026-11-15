@@ -18,7 +18,7 @@ void ConstPalette::init(ConstPaletteFile* file, int index)
 {
 	mEntries = (u8*)file + file->mEntries;
 	mCount   = file->mCount;
-	mTable     = (u8*)file + file->mTables + file->mTableSize * index;
+	mTable   = (u8*)file + file->mTables + file->mTableSize * index;
 }
 
 // 0x8006C4AC

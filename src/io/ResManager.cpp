@@ -65,7 +65,7 @@ int TDvdFile::read(void* dest, int size)
 	case 2:
 		switch (DVDGetCommandBlockStatus(&mInfo.cBlock)) {
 		case 0:
-			mState = 1;
+			mState        = 1;
 			mBufferOffset = 0;
 			break;
 		case 10:
@@ -106,9 +106,9 @@ int TDvdFile::read(void* dest, int size)
 						DCFlushRange(mDest, (mLeft + 0x1F) & ~0x1F);
 					}
 					mPos += mLeft;
-					mLeft = 0;
-					mDest = 0;
-					mState = 3;
+					mLeft         = 0;
+					mDest         = 0;
+					mState        = 3;
 					mBufferOffset = mPos - ((mBufferPos + 3) & ~3);
 					if (mBufferOffset == 0 && mPos < mFileSize) {
 						fillBuffer(mPos);
@@ -217,7 +217,9 @@ int TDvdFile::isBuffered(int pos)
 	return -1;
 }
 
-extern "C" void checkResName(const char* name) { }
+extern "C" void checkResName(const char* name)
+{
+}
 
 TResLoader::TResLoader()
 {
@@ -243,7 +245,7 @@ void TResLoader::update()
 	}
 	if (mState == 2 && mList.mCount != 0) {
 		ResLoadRequest* req = (ResLoadRequest*)&mList.mHead->mName;
-		mState = 0;
+		mState              = 0;
 		DVDOpen(req->mName.mText, &mInfo);
 		DVDReadAsyncPrio(&mInfo, req->mDest, (mInfo.length + 0x1F) & ~0x1F, 0, 0, 2);
 		resNameCopy(&mName, &req->mName);
@@ -550,8 +552,8 @@ extern "C" int readFromResPack(const char* name, void* dest)
 	if (node == 0) {
 		return 0;
 	}
-	int pos = ARCGetStartOffset(&entry) - node->mPack->mFileStart;
-	void* size = (void*)ARCGetLength(&entry);
+	int pos         = ARCGetStartOffset(&entry) - node->mPack->mFileStart;
+	void* size      = (void*)ARCGetLength(&entry);
 	TAramFile* file = new (stream) TAramFile(pos + node->mPack->mAram, (u32)size);
 	fileReadAll(file, dest, (u32)size);
 	ARCClose(&entry);
@@ -625,14 +627,14 @@ extern "C" int findCachedSized(const char* name, BinFile** out)
 
 ResCache::ResCache()
 {
-	mFree     = 0;
-	mNodes    = 0;
-	mBuckets  = 0;
+	mFree        = 0;
+	mNodes       = 0;
+	mBuckets     = 0;
 	mBucketCount = 0;
-	mLast     = 0;
-	mFirst    = 0;
-	mCapacity = 0;
-	mCount    = 0;
+	mLast        = 0;
+	mFirst       = 0;
+	mCapacity    = 0;
+	mCount       = 0;
 }
 
 // 0x80033678
@@ -661,20 +663,20 @@ ResCacheNode* ResCache::insert(const ResName* name, u8* isNew)
 		node = allocNode();
 		if (node != 0) {
 			resNameCopy(&node->mName, name);
-			node->mNext  = bucket->mNext;
-			node->mPrev  = (ResCacheNode*)bucket;
+			node->mNext          = bucket->mNext;
+			node->mPrev          = (ResCacheNode*)bucket;
 			bucket->mNext->mPrev = node;
-			bucket->mNext = node;
+			bucket->mNext        = node;
 			if (mFirst == 0) {
-				mLast = node;
-				mFirst = node;
+				mLast           = node;
+				mFirst          = node;
 				node->mListNext = 0;
 				node->mListPrev = 0;
 			} else {
-				node->mListNext = 0;
-				node->mListPrev = mLast;
+				node->mListNext  = 0;
+				node->mListPrev  = mLast;
 				mLast->mListNext = node;
-				mLast = node;
+				mLast            = node;
 			}
 			*isNew = 1;
 		} else {
@@ -710,10 +712,10 @@ void ResCache::init(int nodes, int buckets)
 	initBuckets(buckets);
 	initNodes(nodes);
 	mBucketCount = buckets;
-	mLast  = 0;
-	mFirst = 0;
-	mFree  = mNodes;
-	mCount = 0;
+	mLast        = 0;
+	mFirst       = 0;
+	mFree        = mNodes;
+	mCount       = 0;
 }
 
 // 0x8003390C
@@ -722,8 +724,8 @@ void ResCache::initBuckets(int count)
 	mBuckets = (ResCacheBucket*)operator new[](count * sizeof(ResCacheBucket));
 	for (int i = 0; i < count; i++) {
 		ResCacheBucket* bucket = &mBuckets[i];
-		bucket->mPrev = (ResCacheNode*)bucket;
-		mBuckets[i].mNext = (ResCacheNode*)bucket;
+		bucket->mPrev          = (ResCacheNode*)bucket;
+		mBuckets[i].mNext      = (ResCacheNode*)bucket;
 	}
 }
 
@@ -751,12 +753,12 @@ void ResCache::removeNode(ResCacheNode* node)
 	} else {
 		mLast = node->mListPrev;
 	}
-	node->mListNext = 0;
-	node->mListPrev = 0;
+	node->mListNext    = 0;
+	node->mListPrev    = 0;
 	node->mNext->mPrev = node->mPrev;
 	node->mPrev->mNext = node->mNext;
-	node->mPrev = mFree;
-	mFree = node;
+	node->mPrev        = mFree;
+	mFree              = node;
 	mCount--;
 }
 
@@ -786,10 +788,12 @@ void ResCache::initNodes(int count)
 		mNodes[i].mPrev = &mNodes[i + 1];
 	}
 	mNodes[count - 1].mPrev = 0;
-	mCapacity = 0;
+	mCapacity               = 0;
 }
 
-ResCacheNode::ResCacheNode() { }
+ResCacheNode::ResCacheNode()
+{
+}
 
 ResPackNode* ResPackList::append()
 {
@@ -801,9 +805,9 @@ ResPackNode* ResPackList::append()
 		mLast  = node;
 		mFirst = node;
 	} else {
-		node->mPrev = mLast;
+		node->mPrev  = mLast;
 		mLast->mNext = node;
-		mLast = node;
+		mLast        = node;
 	}
 	mCount++;
 	return node;
@@ -813,7 +817,7 @@ ResPackNode* ResPackList::allocNode()
 {
 	ResPackNode* node = mFree;
 	if (node != 0) {
-		mFree = node->mNext;
+		mFree       = node->mNext;
 		node->mNext = 0;
 		node->mPrev = 0;
 	}
@@ -830,10 +834,12 @@ ResPackList::ResPackList()
 		mNodes[i].mNext = &mNodes[i + 1];
 	}
 	mNodes[3].mNext = 0;
-	mFree = mNodes;
+	mFree           = mNodes;
 }
 
-ResPackList::~ResPackList() { }
+ResPackList::~ResPackList()
+{
+}
 
 ResLoadList::ResLoadList()
 {
@@ -883,7 +889,7 @@ void ResLoadList::remove(ResLoadNode* node)
 	if (node->mNext == node) {
 		mHead = 0;
 	} else if (mHead == node) {
-		mHead = node->mPrev;
+		mHead              = node->mPrev;
 		node->mNext->mPrev = 0;
 		if (node->mPrev != 0) {
 			node->mPrev->mNext = node->mNext;
@@ -897,7 +903,7 @@ void ResLoadList::remove(ResLoadNode* node)
 		}
 	}
 	node->mPrev = mFree;
-	mFree = node;
+	mFree       = node;
 	mCount--;
 }
 
@@ -909,10 +915,12 @@ void ResLoadList::initNodes(int count)
 		mNodes[i].mPrev = &mNodes[i + 1];
 	}
 	mNodes[count - 1].mPrev = 0;
-	mCapacity = count;
+	mCapacity               = count;
 }
 
-ResLoadNode::ResLoadNode() { }
+ResLoadNode::ResLoadNode()
+{
+}
 
 // 0x80033EEC
 ResLoadIter ResLoadList::insertBefore(ResLoadIter where, const ResLoadRequest* from)
@@ -924,12 +932,12 @@ ResLoadIter ResLoadList::insertBefore(ResLoadIter where, const ResLoadRequest* f
 		if (mHead == 0) {
 			node->mNext = node;
 			node->mPrev = 0;
-			mHead = node;
+			mHead       = node;
 		} else {
-			node->mNext = mHead->mNext;
-			node->mPrev = 0;
+			node->mNext         = mHead->mNext;
+			node->mPrev         = 0;
 			mHead->mNext->mPrev = node;
-			mHead->mNext = node;
+			mHead->mNext        = node;
 		}
 	} else {
 		if (mHead == before) {
@@ -937,14 +945,14 @@ ResLoadIter ResLoadList::insertBefore(ResLoadIter where, const ResLoadRequest* f
 		} else {
 			before->mNext->mPrev = node;
 		}
-		node->mNext = before->mNext;
-		node->mPrev = before;
+		node->mNext   = before->mNext;
+		node->mPrev   = before;
 		before->mNext = node;
 	}
 	resNameCopy(&node->mName, &from->mName);
-	node->mId   = from->mId;
-	node->mDest = from->mDest;
-	node->mDone = from->mDone;
+	node->mId    = from->mId;
+	node->mDest  = from->mDest;
+	node->mDone  = from->mDone;
 	result.mNode = node;
 	return result;
 }

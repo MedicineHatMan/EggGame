@@ -11,7 +11,7 @@ struct DBInterface* __DBInterface;
  */
 void DBInit(void)
 {
-	__DBInterface = (void*)IsDebuggerPresent;
+	__DBInterface                   = (void*)IsDebuggerPresent;
 	*(u32*)ExceptionHookDestination = (u32)__DBExceptionDestination - OS_BASE_CACHED;
 	DBVerbose                       = 1;
 }

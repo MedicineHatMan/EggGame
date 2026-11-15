@@ -4,7 +4,7 @@
 
 #define SJ_LIN_FREE 0
 #define SJ_LIN_DATA 1
-#define SJ_ERR_PRM (-3)
+#define SJ_ERR_PRM  (-3)
 
 typedef struct {
 	unsigned int Data1;
@@ -40,15 +40,15 @@ typedef struct _sj_vtbl {
 	void (*EntryErrFunc)(SJ sj, SJ_ERRFN func, void* obj);
 } SJ_IF;
 
-#define SJ_Destroy(sj) ((sj)->vtbl->Destroy((sj)))
-#define SJ_GetUuid(sj) ((sj)->vtbl->GetUuid((sj)))
-#define SJ_Reset(sj) ((sj)->vtbl->Reset((sj)))
-#define SJ_GetChunk(sj, id, nbyte, ck) ((sj)->vtbl->GetChunk((sj), (id), (nbyte), (ck)))
-#define SJ_UngetChunk(sj, id, ck) ((sj)->vtbl->UngetChunk((sj), (id), (ck)))
-#define SJ_PutChunk(sj, id, ck) ((sj)->vtbl->PutChunk((sj), (id), (ck)))
-#define SJ_GetNumData(sj, id) ((sj)->vtbl->GetNumData((sj), (id)))
+#define SJ_Destroy(sj)                      ((sj)->vtbl->Destroy((sj)))
+#define SJ_GetUuid(sj)                      ((sj)->vtbl->GetUuid((sj)))
+#define SJ_Reset(sj)                        ((sj)->vtbl->Reset((sj)))
+#define SJ_GetChunk(sj, id, nbyte, ck)      ((sj)->vtbl->GetChunk((sj), (id), (nbyte), (ck)))
+#define SJ_UngetChunk(sj, id, ck)           ((sj)->vtbl->UngetChunk((sj), (id), (ck)))
+#define SJ_PutChunk(sj, id, ck)             ((sj)->vtbl->PutChunk((sj), (id), (ck)))
+#define SJ_GetNumData(sj, id)               ((sj)->vtbl->GetNumData((sj), (id)))
 #define SJ_IsGetChunk(sj, id, nbyte, rbyte) ((sj)->vtbl->IsGetChunk((sj), (id), (nbyte), (rbyte)))
-#define SJ_EntryErrFunc(sj, f, o) ((sj)->vtbl->EntryErrFunc((sj), (f), (o)))
+#define SJ_EntryErrFunc(sj, f, o)           ((sj)->vtbl->EntryErrFunc((sj), (f), (o)))
 
 void SJCRS_Lock(void);
 void SJCRS_Unlock(void);

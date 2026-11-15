@@ -63,9 +63,9 @@ struct EggRot {
 
 // What a holder sends to pick it up and what it gets back
 struct EggHoldMsg {
-	u16 mType;     // _00
+	u16 mType; // _00
 	u8 _02[2];
-	u16 mHolder;   // _04
+	u16 mHolder; // _04
 	u8 _06[2];
 	void* mHandle; // _08
 	Vec3f mPos;    // _0C
@@ -75,16 +75,16 @@ struct EggHoldMsg {
 
 // Message 0x64 and 0x71 let go with this speed
 struct EggThrowMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mHolder; // _04
 	u8 _06[2];
-	Vec3f mVel;  // _08
+	Vec3f mVel; // _08
 };
 
 // Message 0x6B throw it along a path
 struct EggPathMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mHolder; // _04
 	u8 _06[2];
@@ -95,7 +95,7 @@ struct EggPathMsg {
 
 // Message 0x18
 struct EggFeedMsg {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u8 mFood;   // _04
 	u8 mAmount; // _05
@@ -103,17 +103,17 @@ struct EggFeedMsg {
 
 // Message 0x2A
 struct EggKickMsg {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mAngle; // _04
 };
 
 // Message 0x76 asks how grown it is and how many hits it has taken
 struct EggLevelMsg {
-	u16 mType;      // _00
+	u16 mType; // _00
 	u8 _02[2];
-	f32 mProgress;  // _04
-	u8 mHits;       // _08
+	f32 mProgress; // _04
+	u8 mHits;      // _08
 };
 
 // An element of EggHit's array
@@ -163,7 +163,7 @@ struct EggSize {
  * @size 0x10
  */
 struct EggType {
-	u8 mId;        // _00
+	u8 mId; // _00
 	u8 _01[2];
 	u8 mMaxPoints; // _03
 	u8 mMinSize;   // _04
@@ -200,16 +200,16 @@ struct EggLevel {
 	void setPoints(int points);
 	void getProgress(void* msg);
 
-	s8 mSize;       // _00 a step in EggTable::mSizes from 1
-	s8 mPoints;     // _01
+	s8 mSize;   // _00 a step in EggTable::mSizes from 1
+	s8 mPoints; // _01
 	u8 _02[2];
 	EggType* mType; // _04
 };
 
 // One of an EggBody's riders 0 is what it rests on 2 the last mesh its move ran into 1 is unused here
-struct EggBodyItem { // size 0x24 laid out like an AniRider
-	EggBodyItem() { riderInit((AniRider*)this); }      // 0x8008FBB8
-	~EggBodyItem(); // 0x8008B2B8 TMobileObject.cpp
+struct EggBodyItem {                              // size 0x24 laid out like an AniRider
+	EggBodyItem() { riderInit((AniRider*)this); } // 0x8008FBB8
+	~EggBodyItem();                               // 0x8008B2B8 TMobileObject.cpp
 
 	AniRider* mNext;  // _00
 	AniRider* mPrev;  // _04
@@ -218,7 +218,7 @@ struct EggBodyItem { // size 0x24 laid out like an AniRider
 	MeshColli* mMesh; // _10 the mesh it stands on or null
 	u16 mTri;         // _14 the triangle it touched
 	u8 _16[2];
-	Vec3f mPos;       // _18 where it touched in the mesh's space
+	Vec3f mPos; // _18 where it touched in the mesh's space
 };
 
 class MeshColli;
@@ -242,21 +242,21 @@ struct EggParticle {
 };
 
 struct EggBody {
-	EggBody(); // 0x8008FADC
-	virtual ~EggBody() { }                                    // _08 inline everywhere its copy is at 0x8008FA48
-	virtual void setPos(const Vec3f* pos);                    // _0C 0x80090C5C
-	virtual f32 getBounce(MeshColli* mesh, u16 tri, void* arg);   // _10 0x8008FC30 how much of the speed into a face comes back
-	virtual f32 getFriction(MeshColli* mesh, u16 tri, void* arg); // _14 0x8008FC38
+	EggBody();                                                           // 0x8008FADC
+	virtual ~EggBody() { }                                               // _08 inline everywhere its copy is at 0x8008FA48
+	virtual void setPos(const Vec3f* pos);                               // _0C 0x80090C5C
+	virtual f32 getBounce(MeshColli* mesh, u16 tri, void* arg);          // _10 0x8008FC30 how much of the speed into a face comes back
+	virtual f32 getFriction(MeshColli* mesh, u16 tri, void* arg);        // _14 0x8008FC38
 	virtual int canStop(MeshColli* mesh, u16 tri, u32 flags, void* arg); // _18 0x8008FC40 whether a face stops the ball
 
-	void makeMatrix(f32* mtx);                                  // 0x8008FBE8
-	void stepRoll(f32 dt, void* arg, u32 mask, EggFaceFn graze, EggFaceFn face);  // 0x8008FC48
-	void stepSlide(f32 dt, void* arg, u32 mask, EggFaceFn graze, EggFaceFn face); // 0x8008FC90
-	void move(f32 dt, void* arg, u32 mask, EggFaceFn graze, EggFaceFn face, int roll); // 0x8008FCD8
-	void spin(f32 dt);                                          // 0x80090234
-	void followMesh(Vec3f* pos);                                // 0x80090318
+	void makeMatrix(f32* mtx);                                                                             // 0x8008FBE8
+	void stepRoll(f32 dt, void* arg, u32 mask, EggFaceFn graze, EggFaceFn face);                           // 0x8008FC48
+	void stepSlide(f32 dt, void* arg, u32 mask, EggFaceFn graze, EggFaceFn face);                          // 0x8008FC90
+	void move(f32 dt, void* arg, u32 mask, EggFaceFn graze, EggFaceFn face, int roll);                     // 0x8008FCD8
+	void spin(f32 dt);                                                                                     // 0x80090234
+	void followMesh(Vec3f* pos);                                                                           // 0x80090318
 	MeshColli* sweep(MeshList* list, const Vec3f* from, const Vec3f* to, Vec3f* pos, f32* dist, u16* tri); // 0x8009043C
-	MeshColli* touching(int slot, u16* tri, Vec3f* pos, Vec3f* normal) const; // 0x80090670
+	MeshColli* touching(int slot, u16* tri, Vec3f* pos, Vec3f* normal) const;                              // 0x80090670
 
 	FlagByte mFlags;       // _04 what the last sweep ran into 2 = anything 3-6 = surface kinds
 	EggBodyItem mItems[3]; // _08
@@ -268,13 +268,13 @@ struct EggBody {
 	EggRot mRot;           // _B0
 	f32 mRadius;           // _C0
 	union {
-		f32 mBounce;      // _C4
-		u32 mBounceBits;  // _C4 for the callers that clear it as a word
+		f32 mBounce;     // _C4
+		u32 mBounceBits; // _C4 for the callers that clear it as a word
 	};
-	f32 mFriction;         // _C8
-	u32 mStopMask;         // _CC the surface kinds that set mFlags
-	f32 mMeshMtx[12];      // _D0 the matrix of the mesh it rests on when it rested on it
-	Vec3f mMeshPos;        // _100 where it rested in that mesh's space
+	f32 mFriction;    // _C8
+	u32 mStopMask;    // _CC the surface kinds that set mFlags
+	f32 mMeshMtx[12]; // _D0 the matrix of the mesh it rests on when it rested on it
+	Vec3f mMeshPos;   // _100 where it rested in that mesh's space
 	u8 _10C[0xC];
 };
 
@@ -360,9 +360,9 @@ struct EggHandle : public EggHandleBase {
 // Collected while moving
 struct EggHitInfo {
 	FlagWord mBits; // _00
-	u32 mMask;     // _04 the flags of every face touched
-	void* mCb;     // _08
-	void* mArg;    // _0C
+	u32 mMask;      // _04 the flags of every face touched
+	void* mCb;      // _08
+	void* mArg;     // _0C
 };
 
 class TObjEgg;
@@ -402,16 +402,16 @@ struct EggRoll { // size 0x30
 	void stepSlow();
 	int isGrounded();
 
-	EggBody* mBody;     // _00
-	TObjEgg* mOwner;    // _04
+	EggBody* mBody;  // _00
+	TObjEgg* mOwner; // _04
 	u8 _08[4];
-	FlagWord mGround;    // _0C
-	u32 mMask;          // _10
-	Vec3f _14;          // _14
-	EggCollide* mPath;  // _20 the owner's
-	f32 mPathSpeed;     // _24
-	void* mHitCb;       // _28
-	void* mHitArg;      // _2C
+	FlagWord mGround;  // _0C
+	u32 mMask;         // _10
+	Vec3f _14;         // _14
+	EggCollide* mPath; // _20 the owner's
+	f32 mPathSpeed;    // _24
+	void* mHitCb;      // _28
+	void* mHitArg;     // _2C
 };
 
 struct EggGlow { // size 0x8
@@ -425,7 +425,7 @@ struct EggGlow { // size 0x8
 
 	u16 mTimer; // _00
 	u8 _02[2];
-	Fx* mFx;  // _04
+	Fx* mFx; // _04
 };
 
 // A squash and stretch when something bumps the egg
@@ -439,7 +439,7 @@ struct EggTilt { // size 0x10
 	void stateWobble(int phase);
 	int getScale(void* mtx);
 
-	s8 mState;  // _00 0 = wobbling 1 = still
+	s8 mState; // _00 0 = wobbling 1 = still
 	u8 _01;
 	u16 mTimer; // _02
 	f32 mXZ;    // _04
@@ -449,7 +449,7 @@ struct EggTilt { // size 0x10
 
 // The glow around an egg a looping particle that follows the body and every eighth frame a ring effect at its feet
 // See EggAura.cpp
-struct EggAura { // size 0x10
+struct EggAura {          // size 0x10
 	EggAura(void* owner); // 0x801CFF0C
 	~EggAura();           // 0x801CFF24
 
@@ -475,17 +475,17 @@ public:
 	inline void* operator new(unsigned long size, void* pool);
 	inline void operator delete(void* mem);
 
-	virtual void draw();                  // _0C the per-frame update
-	virtual void vfn_10();                // _10
-	virtual Vec3f* getPos();              // _20
-	virtual int getRotY();                // _28
-	virtual int getKind();                // _2C
-	virtual void initFromDesc(SetDesc* desc); // _30
-	virtual void debugPrint(void* arg);   // _34
-	virtual int sendToHandle(ObjMsg* msg); // _4C
-	virtual f32 getRadiusV();             // _54
+	virtual void draw();                                              // _0C the per-frame update
+	virtual void vfn_10();                                            // _10
+	virtual Vec3f* getPos();                                          // _20
+	virtual int getRotY();                                            // _28
+	virtual int getKind();                                            // _2C
+	virtual void initFromDesc(SetDesc* desc);                         // _30
+	virtual void debugPrint(void* arg);                               // _34
+	virtual int sendToHandle(ObjMsg* msg);                            // _4C
+	virtual f32 getRadiusV();                                         // _54
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58
-	virtual void setPos(const Vec3f* pos); // _6C
+	virtual void setPos(const Vec3f* pos);                            // _6C
 
 	void setup();
 	int onMessage(ObjMsg* msg);
@@ -561,62 +561,62 @@ public:
 	int msgTakeIdle(ObjMsg* msg);
 	int msgSlam(ObjMsg* msg);
 
-	u8 _30;               // _30
-	u8 mSavedPoints;      // _31 what msgFeedMax restores when mFeedTimer runs out
-	s8 mHits;             // _32 0 to 2 A hit has a 30% chance of breaking it and a third hit always does
-	s8 mState;            // _33 see EggState
-	s8 mContentKind;      // _34 0 = aniSpawn 1 = spawnItem
-	s8 mContentId;        // _35 -1 = none
-	s8 mDamageMul;        // _36
-	s8 mDamageAdd;        // _37
-	FlagByte mEggFlags;   // _38
+	u8 _30;             // _30
+	u8 mSavedPoints;    // _31 what msgFeedMax restores when mFeedTimer runs out
+	s8 mHits;           // _32 0 to 2 A hit has a 30% chance of breaking it and a third hit always does
+	s8 mState;          // _33 see EggState
+	s8 mContentKind;    // _34 0 = aniSpawn 1 = spawnItem
+	s8 mContentId;      // _35 -1 = none
+	s8 mDamageMul;      // _36
+	s8 mDamageAdd;      // _37
+	FlagByte mEggFlags; // _38
 	u8 _39[3];
-	u16 mOwnerId;         // _3C 0xFFFF = none
-	u16 mHitTimer;        // _3E
-	u16 mTick;            // _40
-	u16 mFeedTimer;     // _42
-	u16 mTimer;           // _44
-	u16 mPulse;           // _46
-	Vec3f mHome;          // _48
-	f32 mWobble;          // _54
-	f32 mWobbleVal;       // _58
-	f32 mWobbleVel;       // _5C
-	SetLinkMember mLink;  // _60
-	EggLevel mLevel;      // _6C
-	CharaColli* mColl;          // _74
-	f32 _78;              // _78
-	DrawTask* mDrawObj;   // _7C
-	DrawTask* mAuraDrawObj;   // _80
-	u32 _84;              // _84
-	ObjShadow mShadow;    // _88
-	u16 _C0;              // _C0
-	u16 _C2;              // _C2
-	void* mEggParam;      // _C4
-	void* mPlayerParam;   // _C8
-	EggBody mBody;        // _CC
-	EggCollide mCollide;  // _1E4
-	EggGrow mGrow;        // _200
-	f32 mMatrix[12];      // _20C
-	f32 mRotMatrix[12];   // _23C
-	f32 mModelMatrix[12]; // _26C
-	f32 mFxMatrix[12];    // _29C
-	Vec3f mDrawPos;       // _2CC
-	EggHandle mHandle;    // _2D8
-	EggRoll mRoll;        // _2EC
+	u16 mOwnerId;              // _3C 0xFFFF = none
+	u16 mHitTimer;             // _3E
+	u16 mTick;                 // _40
+	u16 mFeedTimer;            // _42
+	u16 mTimer;                // _44
+	u16 mPulse;                // _46
+	Vec3f mHome;               // _48
+	f32 mWobble;               // _54
+	f32 mWobbleVal;            // _58
+	f32 mWobbleVel;            // _5C
+	SetLinkMember mLink;       // _60
+	EggLevel mLevel;           // _6C
+	CharaColli* mColl;         // _74
+	f32 _78;                   // _78
+	DrawTask* mDrawObj;        // _7C
+	DrawTask* mAuraDrawObj;    // _80
+	u32 _84;                   // _84
+	ObjShadow mShadow;         // _88
+	u16 _C0;                   // _C0
+	u16 _C2;                   // _C2
+	void* mEggParam;           // _C4
+	void* mPlayerParam;        // _C8
+	EggBody mBody;             // _CC
+	EggCollide mCollide;       // _1E4
+	EggGrow mGrow;             // _200
+	f32 mMatrix[12];           // _20C
+	f32 mRotMatrix[12];        // _23C
+	f32 mModelMatrix[12];      // _26C
+	f32 mFxMatrix[12];         // _29C
+	Vec3f mDrawPos;            // _2CC
+	EggHandle mHandle;         // _2D8
+	EggRoll mRoll;             // _2EC
 	MotionPlayer* mHatchModel; // _31C made while it hatches
 	u8 _320[0x10];
-	EggGlow mGlow;        // _330
-	EggTilt mTilt;        // _338
-	void* mThrowTag;      // _348
-	void* mTexture;       // _34C
-	int mForm;            // _350
-	Fx* mFormFx;        // _354
-	Fx* mPlayerFx;      // _358
-	PlyInput mPush;       // _35C
-	int mPushAngle;       // _374
-	EggAura mAuraA;       // _378
-	EggAura mAuraB;       // _388
-	ItemHolder mContent;  // _398
+	EggGlow mGlow;       // _330
+	EggTilt mTilt;       // _338
+	void* mThrowTag;     // _348
+	void* mTexture;      // _34C
+	int mForm;           // _350
+	Fx* mFormFx;         // _354
+	Fx* mPlayerFx;       // _358
+	PlyInput mPush;      // _35C
+	int mPushAngle;      // _374
+	EggAura mAuraA;      // _378
+	EggAura mAuraB;      // _388
+	ItemHolder mContent; // _398
 };
 
 class TArc;

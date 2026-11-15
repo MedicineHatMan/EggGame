@@ -94,12 +94,12 @@ struct SetSlot {
 	void setLinkIndex(int index);
 	void killObject();
 
-	int mState; // _00 0 free 1 blocked 2 spawned 3 timed 4 and 5 hidden
-	u16 mObjId; // _04 0xFFFF = none
-	u16 mTimer; // _06
-	void* mObj; // _08
-	void* mData; // _0C
-	int _10;    // _10
+	int mState;            // _00 0 free 1 blocked 2 spawned 3 timed 4 and 5 hidden
+	u16 mObjId;            // _04 0xFFFF = none
+	u16 mTimer;            // _06
+	void* mObj;            // _08
+	void* mData;           // _0C
+	int _10;               // _10
 	struct SetLink* mLink; // _14
 };
 
@@ -116,10 +116,10 @@ struct SetLink {
 	void onDeath(void* obj);
 	inline void setMode(s16 mode) { mMode = mode; }
 
-	int mKind;   // _00 -1 = detached
-	s16 mIndex;  // _04
-	s16 mMode;   // _06
-	u16 mTimer;  // _08
+	int mKind;  // _00 -1 = detached
+	s16 mIndex; // _04
+	s16 mMode;  // _06
+	u16 mTimer; // _08
 };
 
 /**
@@ -158,13 +158,13 @@ public:
 	BinFile* mFile;  // _10
 
 	// _14 = vtable
-	virtual void resetAll() = 0;                                  // _08
-	virtual void clearAll() = 0;                                  // _0C
-	virtual void load(const char* name) = 0;                      // _10
-	virtual void prepareAll() = 0;                                // _14
-	virtual void* spawnNow(TObject* parent, int index) = 0;          // _18
+	virtual void resetAll()                                                   = 0; // _08
+	virtual void clearAll()                                                   = 0; // _0C
+	virtual void load(const char* name)                                       = 0; // _10
+	virtual void prepareAll()                                                 = 0; // _14
+	virtual void* spawnNow(TObject* parent, int index)                        = 0; // _18
 	virtual void* spawn(TObject* parent, int index, Vec3f* centre, int check) = 0; // _1C
-	virtual void remove(int index) = 0;                           // _20
+	virtual void remove(int index)                                            = 0; // _20
 	// getDesc is declared in each subclass SetList's vtable has 7 slots
 };
 
@@ -228,11 +228,11 @@ struct SetManager {
 	void clearKind(int kind);
 	void attachLink(SetLink* link);
 
-	SetList* mLists[3];         // _00 indexed by SetKind
-	SetListObj* mObjLists[2];   // _0C kinds 0 and 2 in that order
-	SetListEnemy* mEnemy;       // _14
-	TObject* mParents[3];         // _18
-	int mTick;                  // _24
+	SetList* mLists[3];       // _00 indexed by SetKind
+	SetListObj* mObjLists[2]; // _0C kinds 0 and 2 in that order
+	SetListEnemy* mEnemy;     // _14
+	TObject* mParents[3];     // _18
+	int mTick;                // _24
 };
 
 /**
@@ -242,17 +242,17 @@ struct SetManager {
  * @size 0x2C
  */
 struct SetTransformBase {
-	f32 mRadius; // _00
-	Vec3f mPos;  // _04
-	Vec3f mVel;  // _10
+	f32 mRadius;  // _00
+	Vec3f mPos;   // _04
+	Vec3f mVel;   // _10
 	Vec3f mForce; // _1C the velocity to add this frame
 
 	SetTransformBase();
-	inline virtual ~SetTransformBase() { } // _08
-	virtual void vfn_0C();                 // _0C
+	inline virtual ~SetTransformBase() { }                       // _08
+	virtual void vfn_0C();                                       // _0C
 	virtual void vfn_10(const Vec3f* point, const Vec3f* force); // _10
-	virtual void vfn_14();                 // _14
-	virtual void vfn_18();                 // _18
+	virtual void vfn_14();                                       // _14
+	virtual void vfn_18();                                       // _18
 
 	Vec3f mGravity; // _2C
 };
@@ -264,9 +264,9 @@ struct SetTransformBase {
  */
 struct SetTransform : public SetTransformBase {
 	SetTransform();
-	inline virtual ~SetTransform() { } // _08
+	inline virtual ~SetTransform() { }      // _08
 	virtual void vfn_1C(const SetRot* rot); // _1C
-	virtual void vfn_20();             // _20
+	virtual void vfn_20();                  // _20
 
 	SetRot mRot; // _38
 };
@@ -279,22 +279,22 @@ public:
 
 	inline void operator delete(void* mem);
 
-	virtual Vec3f* getPos();                // _20
-	virtual int getRotY();                  // _28
-	virtual int getKind();                  // _2C
-	virtual void initFromDesc(SetDesc* desc);        // _30
-	virtual void debugPrint(void* arg);     // _34
-	virtual void setPos(const Vec3f* pos);  // _6C
-	virtual SetLink* getLink();             // _70
-	virtual void readDesc(SetDesc* desc);   // _74
-	virtual void vfn_78(SetDesc* desc);     // _78
+	virtual Vec3f* getPos();                  // _20
+	virtual int getRotY();                    // _28
+	virtual int getKind();                    // _2C
+	virtual void initFromDesc(SetDesc* desc); // _30
+	virtual void debugPrint(void* arg);       // _34
+	virtual void setPos(const Vec3f* pos);    // _6C
+	virtual SetLink* getLink();               // _70
+	virtual void readDesc(SetDesc* desc);     // _74
+	virtual void vfn_78(SetDesc* desc);       // _78
 
 	void readHome(SetDesc* desc);
 
-	SetTransform mTrans;  // _30
-	Vec3f mHome;          // _74
-	int _80;              // _80
-	SetLinkMember mLink;  // _84
+	SetTransform mTrans; // _30
+	Vec3f mHome;         // _74
+	int _80;             // _80
+	SetLinkMember mLink; // _84
 };
 
 /**
@@ -311,22 +311,22 @@ public:
 	int getKind();
 	int isSpawned();
 
-	int mKind;   // _00 -1 = none
-	s16 mIndex;  // _04
-	u16 mObjId;  // _06 0xFFFF = none
+	int mKind;  // _00 -1 = none
+	s16 mIndex; // _04
+	u16 mObjId; // _06 0xFFFF = none
 
 	// _08 = vtable
-	virtual ~SetDesc();                           // _08
-	virtual void clear() = 0;                     // _0C
-	virtual void getPos(Vec3f* out) = 0;          // _10
-	virtual void getRot(SetRot* out) = 0;            // _14
-	virtual int getId() = 0;                      // _18
-	virtual int isEmpty() = 0;                    // _1C
-	virtual void prepare() = 0;                   // _20
-	virtual void* spawnNow(TObject* parent) = 0;     // _24
+	virtual ~SetDesc();                                                 // _08
+	virtual void clear()                                           = 0; // _0C
+	virtual void getPos(Vec3f* out)                                = 0; // _10
+	virtual void getRot(SetRot* out)                               = 0; // _14
+	virtual int getId()                                            = 0; // _18
+	virtual int isEmpty()                                          = 0; // _1C
+	virtual void prepare()                                         = 0; // _20
+	virtual void* spawnNow(TObject* parent)                        = 0; // _24
 	virtual void* spawn(TObject* parent, Vec3f* centre, int check) = 0; // _28
-	virtual int getInt(int index) = 0;            // _2C
-	virtual f32 getFloat(int index) = 0;          // _30
+	virtual int getInt(int index)                                  = 0; // _2C
+	virtual f32 getFloat(int index)                                = 0; // _30
 };
 
 class SetDescObj : public SetDesc {
@@ -378,10 +378,10 @@ public:
  * @size 0x10
  */
 struct SetClass {
-	int mId;                               // _00
+	int mId;                                             // _00
 	TObject* (*mCreate)(TObject* parent, SetDesc* desc); // _04
-	void (*mPrepare)(SetDesc* desc);       // _08 can be null
-	f32 mRangeSq;                          // _0C squared
+	void (*mPrepare)(SetDesc* desc);                     // _08 can be null
+	f32 mRangeSq;                                        // _0C squared
 };
 
 struct SetClassList {

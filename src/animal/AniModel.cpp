@@ -104,9 +104,9 @@ void AniModel::pose(AniAsset* asset, const f32* matrix, MotionPlayer* motion)
 		if (motion->isBlending() != 0) {
 			calcActorLink(mActor, motion->getBlend(), (NodeCallback)poseNode, motion->mBlendTime, &cursor);
 		} else {
-			int cur = motion->mCurrent;
-			f32 frame    = motion->mFrame;
-			NJS_MOTION* data   = motion->getMotion(cur);
+			int cur          = motion->mCurrent;
+			f32 frame        = motion->mFrame;
+			NJS_MOTION* data = motion->getMotion(cur);
 			calcActorMotion(mActor, data, (NodeCallback)poseNode, frame, &cursor);
 		}
 		njPopMatrixEx();
@@ -126,8 +126,8 @@ void* AniModel::find(const AniAsset* asset)
 void AniModel::draw(const AniAsset* asset, const f32* matrix, DrawState* state)
 {
 	if (asset->mLink.mList != NULL && asset->mFile->mArc != NULL) {
-		AniModelFile* file = (AniModelFile*)find(asset);
-		DrawStateSlot* slot         = getDrawStateSlot();
+		AniModelFile* file  = (AniModelFile*)find(asset);
+		DrawStateSlot* slot = getDrawStateSlot();
 		shadowAlphaBegin();
 		njPushMatrix(matrix);
 		beginDrawState(slot, state);

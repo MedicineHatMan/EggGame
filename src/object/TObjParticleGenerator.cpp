@@ -9,7 +9,6 @@
 
 extern "C" {
 const char* gTObjParticleGeneratorName = "TObjParticleGenerator";
-
 }
 
 enum {
@@ -89,8 +88,8 @@ void TObjParticleGenerator::initFromDesc(SetDesc* desc)
 	}
 
 	if (mGen != 0) {
-		int rotX = mTrans.mRot.x;
-		int rotY = mTrans.mRot.y;
+		int rotX   = mTrans.mRot.x;
+		int rotY   = mTrans.mRot.y;
 		mGen->mPos = mTrans.mPos;
 		mGen->setRot(rotX, rotY);
 		mGen->setScale(mScale);
@@ -100,8 +99,7 @@ void TObjParticleGenerator::initFromDesc(SetDesc* desc)
 // 0x8004D7EC
 void TObjParticleGenerator::start()
 {
-	mGen = particleGenByIdRot(gTL_07, &mTrans.mPos, mBank, mId, mTrans.mRot.x, mTrans.mRot.y,
-	                                               mScale);
+	mGen = particleGenByIdRot(gTL_07, &mTrans.mPos, mBank, mId, mTrans.mRot.x, mTrans.mRot.y, mScale);
 }
 
 // 0x8004D838

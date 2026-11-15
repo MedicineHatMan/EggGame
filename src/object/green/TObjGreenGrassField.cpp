@@ -32,9 +32,9 @@ TObjGreenGrassField::~TObjGreenGrassField()
 void TObjGreenGrassField::placeGroups()
 {
 	Vec3f center;
-	center.x = 0.0f;
-	center.y = 25.0f;
-	center.z = 0.0f;
+	center.x   = 0.0f;
+	center.y   = 25.0f;
+	center.z   = 0.0f;
 	mGroups[0] = createTObjGreenGrassGroup(this, &center);
 	for (int i = 0; i < 6; i++) {
 		placeGroup(40.0f, 0.0f, i, 0);
@@ -60,13 +60,13 @@ void TObjGreenGrassField::placeGroup(f32 a, f32 b, int sector, int k)
 	b         = b * njCos(next);
 
 	Vec3f pos;
-	pos.x = a * njCos(angle) + b;
-	pos.y = 25.0f;
-	pos.z = z;
+	pos.x                      = a * njCos(angle) + b;
+	pos.y                      = 25.0f;
+	pos.z                      = z;
 	TObjGreenGrassGroup* group = createTObjGreenGrassGroup(this, &pos);
-	int index = sector * 9 + 1;
-	index = k + index;
-	mGroups[index] = group;
+	int index                  = sector * 9 + 1;
+	index                      = k + index;
+	mGroups[index]             = group;
 }
 
 // 0x8018005C
@@ -105,8 +105,8 @@ int TObjGreenGrassField::findFarOuter(const Vec3f* pos, int exclude, int percent
 	int i;
 	int index;
 	f32 dist;
-	f32 best       = 0.0f;
-	int found      = 0;
+	f32 best  = 0.0f;
+	int found = 0;
 
 	for (i = 0; i < 6; i++) {
 		index = corners[i];
@@ -132,8 +132,8 @@ int TObjGreenGrassField::findFarNeighbor(const Vec3f* pos, int index, int exclud
 	int across[2] = { 18, 37 };
 	int i;
 	f32 dist;
-	f32 best      = 0.0f;
-	int found     = index;
+	f32 best  = 0.0f;
+	int found = index;
 	int other;
 
 	for (i = 0; i < 3; i++) {
@@ -212,9 +212,9 @@ int TObjGreenGrassField::hasGrassNear(const Vec3f* pos, int percent)
 	int start;
 	int i;
 	int result;
-	Vec3f* center    = getGroupPos(0);
-	int starts[6]    = { 1, 10, 19, 28, 37, 46 };
-	result           = 0;
+	Vec3f* center = getGroupPos(0);
+	int starts[6] = { 1, 10, 19, 28, 37, 46 };
+	result        = 0;
 
 	if (distXZ(center, pos) <= 20.0f) {
 		result = hasGrass(0, percent);

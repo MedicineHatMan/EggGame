@@ -25,7 +25,7 @@ public:
 	virtual void vfn_10();
 	virtual void initFromDesc(SetDesc* desc);
 
-	Fx* mFx;       // _64
+	Fx* mFx;         // _64
 	f32 mMatrix[12]; // _68
 };
 

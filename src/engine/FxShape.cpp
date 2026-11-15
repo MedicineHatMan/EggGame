@@ -8,17 +8,17 @@
 #include "Ninja/ninja.h"
 #include "engine/FxEmitter.h"
 
-#define FX_PIPE (*(volatile f32*)0xCC008000)
+#define FX_PIPE  (*(volatile f32*)0xCC008000)
 #define FX_PIPE8 (*(volatile u8*)0xCC008000)
 
 #define FX_ANGLE 10430.38043493439
 
 struct FxShapeParams {
-	u8 mSlices;  // _00
-	u8 mSegs;    // _01
+	u8 mSlices; // _00
+	u8 mSegs;   // _01
 	u8 _02[2];
-	f32 mFrom;   // _04
-	f32 mTo;     // _08
+	f32 mFrom; // _04
+	f32 mTo;   // _08
 };
 
 /** Texture matrix setup for a material */
@@ -30,16 +30,16 @@ struct FxMaterial {
 };
 
 struct FxArray {
-	u16 mType;  // _00
+	u16 mType; // _00
 	s16 _02;
 	void* mData; // _04
 };
 
 struct FxModelPart {
 	int _00;
-	int mStrips;    // _04
-	s16* mLengths;  // _08
-	u8* mIndices;   // _0C
+	int mStrips;   // _04
+	s16* mLengths; // _08
+	u8* mIndices;  // _0C
 };
 
 struct FxModelEntry {
@@ -49,10 +49,10 @@ struct FxModelEntry {
 
 struct FxModel {
 	u32 _00[4];
-	FxArray mPositions; // _10
-	FxArray mNormals;   // _18
-	FxArray mTexCoords; // _20
-	int mEntryCount;    // _28
+	FxArray mPositions;     // _10
+	FxArray mNormals;       // _18
+	FxArray mTexCoords;     // _20
+	int mEntryCount;        // _28
 	FxModelEntry* mEntries; // _2C
 };
 
@@ -60,7 +60,6 @@ extern "C" {
 u32 sFxBoneMatrixSlots[] = {
 	0x0000001E, 0x00000021, 0x0000003C, 0x00000040, 0x00000043, 0x0000007D,
 };
-
 }
 
 static inline f32 fxRandom()
@@ -68,15 +67,15 @@ static inline f32 fxRandom()
 	return (f32)rand() * 3.0517578E-5f;
 }
 
-#define SHAPE_RAND_COLOR(i)                                  \
-	value = (f32)((s8)pc[i] << 1) * fxRandom();              \
-	c     = (f32)fx->mColorTo[i] + value;                    \
-	if (c < 0.0f) {                                          \
-		c = 0.0f;                                            \
-	}                                                        \
-	if (c > 255.0f) {                                        \
-		c = 255.0f;                                          \
-	}                                                        \
+#define SHAPE_RAND_COLOR(i)                     \
+	value = (f32)((s8)pc[i] << 1) * fxRandom(); \
+	c     = (f32)fx->mColorTo[i] + value;       \
+	if (c < 0.0f) {                             \
+		c = 0.0f;                               \
+	}                                           \
+	if (c > 255.0f) {                           \
+		c = 255.0f;                             \
+	}                                           \
 	fx->mColorTo[i] = (int)c
 
 // 0x800DC4EC
@@ -224,52 +223,52 @@ void fxShapeRunScript(FxShape* fx)
 				}
 				break;
 			case 0x90:
-				n = *pc++;
+				n                    = *pc++;
 				fx->mKeys[n].mFrames = 0;
 				fx->mKeys[n].mFrom   = fx->mKeys[n].mTo;
 				fx->mKeys[n].mTanTo  = 0.0f;
-				pc = fxRead32(pc, (u8*)&fx->mKeys[n].mTo);
+				pc                   = fxRead32(pc, (u8*)&fx->mKeys[n].mTo);
 				break;
 			case 0x91:
-				n = *pc++;
+				n                   = *pc++;
 				fx->mKeys[n].mType  = 0;
 				fx->mKeys[n].mFrom  = fx->mKeys[n].mTo;
 				fx->mKeys[n].mTanTo = 0.0f;
-				pc = fxReadFrames(pc, (s16*)&fx->mKeys[n].mFrames);
-				pc = fxRead32(pc, (u8*)&fx->mKeys[n].mTo);
+				pc                  = fxReadFrames(pc, (s16*)&fx->mKeys[n].mFrames);
+				pc                  = fxRead32(pc, (u8*)&fx->mKeys[n].mTo);
 				fx->mKeys[n].mFrame = fx->mKeys[n].mFrames;
 				break;
 			case 0x92:
-				n = *pc++;
+				n                     = *pc++;
 				fx->mKeys[n].mType    = 1;
 				fx->mKeys[n].mFrom    = fx->mKeys[n].mTo;
 				fx->mKeys[n].mTanFrom = fx->mKeys[n].mTanTo;
 				fx->mKeys[n].mTanTo   = 0.0f;
-				pc = fxReadFrames(pc, (s16*)&fx->mKeys[n].mFrames);
-				pc = fxRead32(pc, (u8*)&fx->mKeys[n].mTo);
-				fx->mKeys[n].mFrame = fx->mKeys[n].mFrames;
+				pc                    = fxReadFrames(pc, (s16*)&fx->mKeys[n].mFrames);
+				pc                    = fxRead32(pc, (u8*)&fx->mKeys[n].mTo);
+				fx->mKeys[n].mFrame   = fx->mKeys[n].mFrames;
 				break;
 			case 0x93:
-				n = *pc++;
+				n                     = *pc++;
 				fx->mKeys[n].mType    = 1;
 				fx->mKeys[n].mFrom    = fx->mKeys[n].mTo;
 				fx->mKeys[n].mTanFrom = fx->mKeys[n].mTanTo;
-				pc = fxReadFrames(pc, (s16*)&fx->mKeys[n].mFrames);
-				pc = fxRead32(pc, (u8*)&fx->mKeys[n].mTo);
-				pc = fxRead32(pc, (u8*)&fx->mKeys[n].mTanTo);
-				fx->mKeys[n].mFrame = fx->mKeys[n].mFrames;
+				pc                    = fxReadFrames(pc, (s16*)&fx->mKeys[n].mFrames);
+				pc                    = fxRead32(pc, (u8*)&fx->mKeys[n].mTo);
+				pc                    = fxRead32(pc, (u8*)&fx->mKeys[n].mTanTo);
+				fx->mKeys[n].mFrame   = fx->mKeys[n].mFrames;
 				break;
 			case 0x94:
-				n = *pc++;
-				pc  = fxRead32(pc, (u8*)&fx->mKeys[n].mTanTo);
+				n  = *pc++;
+				pc = fxRead32(pc, (u8*)&fx->mKeys[n].mTanTo);
 				break;
 			case 0x98:
 				fx->mWaves[(u8)(int)pc[0]].mType = pc[1];
 				pc += 2;
 				break;
 			case 0x99:
-				n  = *pc++;
-				pc = fxRead32(pc, (u8*)&value);
+				n                   = *pc++;
+				pc                  = fxRead32(pc, (u8*)&value);
 				fx->mWaves[n].mStep = (int)(FX_ANGLE * value);
 				break;
 			case 0x9A:
@@ -282,7 +281,7 @@ void fxShapeRunScript(FxShape* fx)
 				}
 				break;
 			case 0x85:
-				pc = fxReadFrames(pc, (s16*)&fx->mColorFrames);
+				pc              = fxReadFrames(pc, (s16*)&fx->mColorFrames);
 				fx->mColorTo[0] = fx->mColor[0];
 				fx->mColorTo[1] = fx->mColor[1];
 				fx->mColorTo[2] = fx->mColor[2];
@@ -407,7 +406,7 @@ void fxInitBlades(FxShape* fx, FxShape* self, void* params)
 {
 	fxChannelsInit(self, (FxChannel*)((u8*)params + 0xC), 4);
 	fx->mUpdate = (void (*)(Fx*))fxUpdateBlades;
-	fx->mDraw   = (void (*)(Fx*))fxDrawBlades;
+	fx->mDraw   = fxDrawBlades;
 }
 
 // 0x800DD1E0
@@ -495,7 +494,7 @@ void fxUpdateModelShape(FxShape* fx)
 void fxShapeColor(FxShape* fx, u8* out)
 {
 	if (fx->mColorFrames != 0) {
-		int t = (fx->mColorLeft << 16) / fx->mColorFrames;
+		int t  = (fx->mColorLeft << 16) / fx->mColorFrames;
 		out[0] = ((fx->mColorTo[0] << 16) + t * (fx->mColor[0] - fx->mColorTo[0])) >> 16;
 		out[1] = ((fx->mColorTo[1] << 16) + t * (fx->mColor[1] - fx->mColorTo[1])) >> 16;
 		out[2] = ((fx->mColorTo[2] << 16) + t * (fx->mColor[2] - fx->mColorTo[2])) >> 16;
@@ -505,7 +504,7 @@ void fxShapeColor(FxShape* fx, u8* out)
 		out[2] = fx->mColor[2];
 	}
 	if (fx->mAlphaFrames != 0) {
-		int t = (fx->mAlphaLeft << 16) / fx->mAlphaFrames;
+		int t  = (fx->mAlphaLeft << 16) / fx->mAlphaFrames;
 		out[3] = ((fx->mColorTo[3] << 16) + t * (fx->mColor[3] - fx->mColorTo[3])) >> 16;
 	} else {
 		out[3] = fx->mColor[3];
@@ -570,7 +569,7 @@ void fxShapeDrawBegin(Fx* fx, FxShape* shape, FxDesc*)
 	ref.mMaterial = shape->mDesc->mMaterial;
 	ref.mTexGroup = shape->mDesc->mTexGroup;
 	ref.mTexUses  = uses;
-	u8 flags = 0;
+	u8 flags      = 0;
 	if (fx->mFlags & 0x40000) {
 		flags |= 1;
 	} else {
@@ -598,7 +597,7 @@ void fxShapeDrawBegin(Fx* fx, FxShape* shape, FxDesc*)
 	fxSetTevColor((u8*)&tev);
 	if (gFxRenderReady != 0) {
 		gFxRenderReady = 0;
-		int* in = (int*)(state + 0x260);
+		int* in        = (int*)(state + 0x260);
 		GXSetTevColorIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
 		in = (int*)(state + 0x280);
 		GXSetTevAlphaIn(GX_TEVSTAGE0, in[0], in[1], in[2], in[3]);
@@ -657,9 +656,9 @@ void fxDrawSphere(FxShape* fx)
 		for (int j = params->mSegs + 1; j != 0; j--) {
 			njSinCos(a, &s, &c);
 			a += step;
-			f32 cc = c;
+			f32 cc  = c;
 			FX_PIPE = ringN * cc;
-			f32 ss = s;
+			f32 ss  = s;
 			FX_PIPE = ringN * ss;
 			FX_PIPE = zN;
 			FX_PIPE = u;
@@ -671,7 +670,7 @@ void fxDrawSphere(FxShape* fx)
 			u += du;
 			FX_PIPE = v;
 		}
-		v    = vn;
+		v = vn;
 		angle += late;
 		ring = ringN;
 		z    = zN;
@@ -726,9 +725,9 @@ void fxDrawDome(FxShape* fx)
 		for (int j = params->mSegs + 1; j != 0; j--) {
 			njSinCos(a, &s, &c);
 			a += step;
-			f32 cc = c;
+			f32 cc  = c;
 			FX_PIPE = ringN * cc;
-			f32 ss = s;
+			f32 ss  = s;
 			FX_PIPE = ringN * ss;
 			FX_PIPE = zN;
 			FX_PIPE = u;
@@ -740,7 +739,7 @@ void fxDrawDome(FxShape* fx)
 			u += du;
 			FX_PIPE = v;
 		}
-		v    = vn;
+		v = vn;
 		angle += late;
 		ring = ringN;
 		z    = zN;
@@ -786,9 +785,9 @@ void fxDrawCylinder(FxShape* fx)
 		f32 s, c;
 		njSinCos(a, &s, &c);
 		a += step;
-		f32 x = radius * c;
+		f32 x   = radius * c;
 		FX_PIPE = x;
-		f32 y = radius * s;
+		f32 y   = radius * s;
 		FX_PIPE = y;
 		FX_PIPE = z0;
 		FX_PIPE = u;
@@ -810,19 +809,19 @@ void fxDrawCone(FxShape* fx)
 	FxShapeParams* params = (FxShapeParams*)fx->mDesc->mParams;
 	fxShapeDrawBegin(fx, fx, fx->mDesc);
 	int verts = (params->mSlices + 1) << 1;
-	f32 r1 = fx->mValues[0];
-	f32 r0 = fx->mValues[1];
-	f32 z1 = fx->mValues[2];
-	f32 z0 = fx->mValues[3];
-	int from = (int)(FX_ANGLE * params->mFrom);
-	int to   = (int)(FX_ANGLE * params->mTo);
+	f32 r1    = fx->mValues[0];
+	f32 r0    = fx->mValues[1];
+	f32 z1    = fx->mValues[2];
+	f32 z0    = fx->mValues[3];
+	int from  = (int)(FX_ANGLE * params->mFrom);
+	int to    = (int)(FX_ANGLE * params->mTo);
 	if (from == to) {
 		to = from + 0x10000;
 	}
 	int i;
 	int a;
 	int step = (to - from) / params->mSlices;
-	a = from;
+	a        = from;
 	f32 u    = 0.0f;
 	f32 u1   = fx->mU;
 	f32 v0   = 0.0f;
@@ -841,12 +840,12 @@ void fxDrawCone(FxShape* fx)
 		f32 s, c;
 		njSinCos(a, &s, &c);
 		a += step;
-		f32 x0 = r0 * c;
-		f32 x1 = r1 * c;
+		f32 x0  = r0 * c;
+		f32 x1  = r1 * c;
 		FX_PIPE = x0;
-		f32 y0 = r0;
+		f32 y0  = r0;
 		y0 *= s;
-		f32 y1 = r1 * s;
+		f32 y1  = r1 * s;
 		FX_PIPE = y0;
 		FX_PIPE = z0;
 		FX_PIPE = u;
@@ -863,27 +862,29 @@ void fxDrawCone(FxShape* fx)
 
 // 0x800DE23C
 // Flat blades around a circle
-void fxDrawBlades(FxShape* fx)
+void fxDrawBlades(Fx* base)
 {
+	FxShape* fx           = (FxShape*)base;
 	FxShapeParams* params = (FxShapeParams*)fx->mDesc->mParams;
 	fxShapeDrawBegin(fx, fx, fx->mDesc);
 	f32 r0 = fx->mValues[0];
 	f32 r1 = fx->mValues[1];
-	f32 z1 = fx->mValues[2];
-	f32 z0 = fx->mValues[3];
+	f32 z0;
+	f32 z1    = fx->mValues[2];
+	z0        = fx->mValues[3];
 	int verts = params->mSegs << 2;
-	int from = (int)(FX_ANGLE * params->mFrom);
-	int to   = (int)(FX_ANGLE * params->mTo);
+	int from  = (int)(FX_ANGLE * params->mFrom);
+	int to    = (int)(FX_ANGLE * params->mTo);
 	if (from == to) {
 		to = from + 0x10000;
 	}
 	int a;
 	int step = (to - from) / params->mSegs;
-	a = from + step / 2;
-	f32 u0 = 0.0f;
-	f32 u1 = 1.0f;
-	f32 v0 = 1.0f;
-	f32 v1 = 0.0f;
+	a        = from + step / 2;
+	f32 u0   = 0.0f;
+	f32 u1   = 1.0f;
+	f32 v0   = 1.0f;
+	f32 v1   = 0.0f;
 	if (fx->mFlags & 0x10000) {
 		u0 = 1.0f;
 		u1 = 0.0f;
@@ -893,19 +894,19 @@ void fxDrawBlades(FxShape* fx)
 		v1 = 1.0f;
 	}
 	f32 s, c;
-	njSinCos(step / 2, &s, &c);
+	njSinCos(step >> 1, &s, &c);
 	f32 half = r0 * s;
 	r0 *= c;
 	GXBegin(GX_QUADS, GX_VTXFMT7, verts & 0xFFFF);
 	for (int i = params->mSegs; i != 0; i--) {
 		njSinCos(a, &s, &c);
 		a += step;
-		f32 x0 = r0 * c;
-		f32 y0 = r0 * s;
-		f32 x1 = r1 * c;
-		f32 y1 = r1 * s;
-		f32 dx = half * -s;
-		f32 dy = half * c;
+		f32 x0  = r0 * c;
+		f32 y0  = r0 * s;
+		f32 x1  = r1 * c;
+		f32 y1  = r1 * s;
+		f32 dx  = half * -s;
+		f32 dy  = half * c;
 		FX_PIPE = x0 + dx;
 		FX_PIPE = y0 + dy;
 		FX_PIPE = z0;
@@ -937,17 +938,17 @@ void fxDrawRing(FxShape* fx)
 	FxShapeParams* params = (FxShapeParams*)fx->mDesc->mParams;
 	fxShapeDrawBegin(fx, fx, fx->mDesc);
 	int verts = (params->mSlices + 1) << 1;
-	f32 r1   = fx->mValues[0];
-	f32 r0   = fx->mValues[1];
-	int from = (int)(FX_ANGLE * params->mFrom);
-	int to   = (int)(FX_ANGLE * params->mTo);
+	f32 r1    = fx->mValues[0];
+	f32 r0    = fx->mValues[1];
+	int from  = (int)(FX_ANGLE * params->mFrom);
+	int to    = (int)(FX_ANGLE * params->mTo);
 	if (from == to) {
 		to = from + 0x10000;
 	}
 	int i;
 	int a;
 	int step = (to - from) / params->mSlices;
-	a = from;
+	a        = from;
 	f32 u    = 0.0f;
 	f32 u1   = fx->mU;
 	f32 v0   = 0.0f;
@@ -967,12 +968,12 @@ void fxDrawRing(FxShape* fx)
 		f32 s, c;
 		njSinCos(a, &s, &c);
 		a += step;
-		f32 x0 = r0 * c;
-		f32 x1 = r1 * c;
+		f32 x0  = r0 * c;
+		f32 x1  = r1 * c;
 		FX_PIPE = x0;
-		f32 y0 = r0;
+		f32 y0  = r0;
 		y0 *= s;
-		f32 y1 = r1 * s;
+		f32 y1  = r1 * s;
 		FX_PIPE = y0;
 		FX_PIPE = z;
 		FX_PIPE = u;
@@ -992,13 +993,13 @@ void fxDrawRing(FxShape* fx)
 void fxDrawBentBlades(FxShape* fx)
 {
 	FxShapeParams* params = (FxShapeParams*)fx->mDesc->mParams;
-	f32* angles = (f32*)((u8*)params + 0xC);
+	f32* angles           = (f32*)((u8*)params + 0xC);
 	fxShapeDrawBegin(fx, fx, fx->mDesc);
 	f32 r1 = fx->mValues[0];
 	f32 r0 = fx->mValues[1];
 	f32 z;
-	f32 len = fx->mValues[2];
-	z       = fx->mValues[3];
+	f32 len  = fx->mValues[2];
+	z        = fx->mValues[3];
 	int from = (int)(FX_ANGLE * params->mFrom);
 	int to   = (int)(FX_ANGLE * params->mTo);
 	if (from == to) {
@@ -1006,12 +1007,12 @@ void fxDrawBentBlades(FxShape* fx)
 	}
 	int i;
 	int a;
-	int step  = (to - from) / (params->mSegs - 1);
-	a = from;
-	f32 u0 = 0.0f;
-	f32 u1 = 1.0f;
-	f32 v0 = 0.0f;
-	f32 v1 = 1.0f;
+	int step = (to - from) / (params->mSegs - 1);
+	a        = from;
+	f32 u0   = 0.0f;
+	f32 u1   = 1.0f;
+	f32 v0   = 0.0f;
+	f32 v1   = 1.0f;
 	int bend;
 	int bendD = (int)(FX_ANGLE * (angles[1] - angles[0])) / (params->mSegs - 1);
 	bend      = (int)(FX_ANGLE * angles[0]);
@@ -1031,12 +1032,12 @@ void fxDrawBentBlades(FxShape* fx)
 		njSinCos(bend, &bs, &bc);
 		a += step;
 		bend += bendD;
-		f32 x1 = r1 * c;
-		f32 y1 = r1 * s;
-		f32 x0 = r0 * c;
-		f32 y0 = r0 * s;
-		f32 dy = bs * (c * len);
-		f32 dx = bs * (-s * len);
+		f32 x1  = r1 * c;
+		f32 y1  = r1 * s;
+		f32 x0  = r0 * c;
+		f32 y0  = r0 * s;
+		f32 dy  = bs * (c * len);
+		f32 dx  = bs * (-s * len);
 		FX_PIPE = x1 + dx;
 		FX_PIPE = y1 + dy;
 		f32 top = len * bc + z;
@@ -1091,7 +1092,7 @@ void fxDrawModelShape(Fx* base)
 	ref.mMaterial = fx->mDesc->mMaterial;
 	ref.mTexGroup = fx->mDesc->mTexGroup;
 	ref.mTexUses  = uses;
-	i = 0;
+	i             = 0;
 	while (i < 3) {
 		uses[i].mTex   = fx->mTex[i];
 		uses[i].mFlags = 0x12;
@@ -1219,7 +1220,7 @@ FxShape* fxEmitterAlloc()
 		return NULL;
 	}
 	gFxRigFreeList = (FxEmitter*)fx->mNext;
-	fx->mFlags   = 0;
+	fx->mFlags     = 0;
 	return fx;
 }
 

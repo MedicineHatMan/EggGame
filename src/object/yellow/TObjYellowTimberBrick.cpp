@@ -41,12 +41,11 @@ struct CamView;
 
 extern "C" {
 const f32 gYellowTimberBrickSetRange = 2000.0f;
-const f32 gYellowSandFloorSetRange = 2000.0f;
+const f32 gYellowSandFloorSetRange   = 2000.0f;
 
 // 0x802C44D8
 const char* gTObjYellowTimberBrickName = "TObjYellowTimberBrick";
-const char* gTObjYellowSandFloorName = "TObjYellowSandFloor";
-
+const char* gTObjYellowSandFloorName   = "TObjYellowSandFloor";
 }
 
 #define sBrick gTimberBrickObj
@@ -467,9 +466,9 @@ void TObjYellowSandFloor::vfn_74()
 // 0x80155C1C
 void TObjYellowSandFloor::updatePlace()
 {
-	mCenter = mPos;
+	mCenter        = mPos;
 	GjModel* model = mModelData->model;
-	mRadius  = model->r;
+	mRadius        = model->r;
 
 	u8* brick = (u8*)sBrick;
 	if (brick != 0) {
@@ -487,7 +486,7 @@ void TObjYellowSandFloor::updatePlace()
 	mtxTranslateV(mMatrix, mMatrix, &offset);
 	meshColliSetMatrix(mColli, (const f32*)mMatrix);
 
-	f32 y = mCenter.y - sColliBox.y;
+	f32 y                                         = mCenter.y - sColliBox.y;
 	((ColliShape*)colliGetShapes(mShape))->mPos.y = y;
 	colliRefreshBounds(mShape);
 }
@@ -498,12 +497,12 @@ void TObjYellowSandFloor::updateColliBox()
 	Vec3f low;
 	Vec3f high;
 	f32 size = 10.0f + mRadius;
-	high.x = size;
-	low.x  = -size;
-	high.y = size;
-	low.y  = -size;
-	low.z  = -size;
-	high.z = size;
+	high.x   = size;
+	low.x    = -size;
+	high.y   = size;
+	low.y    = -size;
+	low.z    = -size;
+	high.z   = size;
 	mtxMultVec(mMatrix, &low, &low);
 	mtxMultVec(mMatrix, &high, &high);
 

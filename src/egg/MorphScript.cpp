@@ -41,7 +41,7 @@ void MorphScript::update()
 
 	if (mActive != 0) {
 		bits = mActive;
-		bit = 1;
+		bit  = 1;
 		for (i = 0; i < 16; i++) {
 			if ((bits & bit) != 0 && mSlot[i]->update() != 0) {
 				bits &= ~bit;
@@ -59,7 +59,7 @@ void MorphScript::update()
 	pc   = mPc;
 	hold = 0;
 	for (;;) {
-		op   = *pc++;
+		op = *pc++;
 		if (op == 0x7f) {
 			mDone = (u8)(mDone | 1);
 			return;
@@ -72,13 +72,13 @@ void MorphScript::update()
 				pc += 1;
 			}
 		} else if (c == 0x7b) {
-			mLoops  = *pc;
+			mLoops = *pc;
 			pc += 1;
 			mLoopAt = pc;
 		} else if (c == 0x7c) {
 			if (mLoops != 0) {
-				mLoops  = (u8)(mLoops - 1);
-				pc      = mLoopAt;
+				mLoops = (u8)(mLoops - 1);
+				pc     = mLoopAt;
 			}
 		} else if (c == 0x7d) {
 			mMark = pc;
@@ -119,8 +119,8 @@ u8* MorphScript::runCmd(u8* data, int mode)
 // 0x80056A00
 static u8* readSpan(u8* data, u16* out)
 {
-	u8 c = *data++;
-	u8 n = c & 0x7f;
+	u8 c  = *data++;
+	u8 n  = c & 0x7f;
 	u32 v = n;
 	if (c & 0x80) {
 		v = (n << 8) | *data++;
@@ -133,8 +133,8 @@ static u8* readSpan(u8* data, u16* out)
 // 0x80056A2C
 static u8* readSpanKey(u8* data, u16* out)
 {
-	u8 c = *data++;
-	u8 n = c & 0x7f;
+	u8 c  = *data++;
+	u8 n  = c & 0x7f;
 	u32 v = n;
 	if (c & 0x80) {
 		v = (n << 8) | *data++;
@@ -148,10 +148,10 @@ static u8* readSpanKey(u8* data, u16* out)
 static u8* readFloat(const u8* data, f32* out)
 {
 	u8* dst = (u8*)out;
-	dst[0] = *data++;
-	dst[1] = *data++;
-	dst[2] = *data++;
-	dst[3] = *data++;
+	dst[0]  = *data++;
+	dst[1]  = *data++;
+	dst[2]  = *data++;
+	dst[3]  = *data++;
 	return (u8*)data;
 }
 
@@ -159,8 +159,8 @@ static u8* readFloat(const u8* data, f32* out)
 // 0x80056A84
 static f32 hermite(f32 p0, f32 m0, f32 p1, f32 m1, f32 t)
 {
-	f32 t2 = t * t;
-	f32 t3 = t2 * t;
+	f32 t2  = t * t;
+	f32 t3  = t2 * t;
 	f32 h00 = 1.0f + (2.0f * t3 - 3.0f * t2);
 	f32 h10 = t + (t3 - 2.0f * t2);
 	f32 h01 = -2.0f * t3 + 3.0f * t2;
@@ -207,7 +207,7 @@ int MorphKey::update()
 		mValue += (mTarget - mValue) / (f32)mTime;
 		break;
 	case 2:
-		t = (f32)mTime / (f32)mSpan;
+		t      = (f32)mTime / (f32)mSpan;
 		mValue = hermite(mFrom, 0.0f, mTarget, 0.0f, t);
 		break;
 	case 3:

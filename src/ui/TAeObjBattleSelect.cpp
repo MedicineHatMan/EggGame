@@ -13,29 +13,29 @@ struct NJS_TEXLIST;
 extern "C" const u32 sAeBattleSelectPalettes[] = {
 	0xFFFFFFFF, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0xFFFFFFFF, 0x19,
 };
-static const u32 sAeBattleSelectTitleLayers[] = { 0xCB, 0xD5, 0xDF, 0xE9 };
+static const u32 sAeBattleSelectTitleLayers[]  = { 0xCB, 0xD5, 0xDF, 0xE9 };
 static const u32 sAeBattleSelectIconSlots[][4] = {
 	{ 0x143, 0x147, 0x14B, 0x14F },
 	{ 0x144, 0x148, 0x14C, 0x150 },
 	{ 0x145, 0x149, 0x14D, 0x151 },
 	{ 0x146, 0x14A, 0x14E, 0x152 },
 };
-static const u32 sAeBattleSelectRowLayers[] = { 0xCF, 0xD9, 0xE3, 0xED };
-static const u32 sAeBattleSelectPairSlots[] = { 0xCD, 0xD7, 0xE1, 0xEB };
-static const u32 sAeBattleSelectRowSlots[] = { 0x10, 0x11, 0x12, 0x13 };
+static const u32 sAeBattleSelectRowLayers[]    = { 0xCF, 0xD9, 0xE3, 0xED };
+static const u32 sAeBattleSelectPairSlots[]    = { 0xCD, 0xD7, 0xE1, 0xEB };
+static const u32 sAeBattleSelectRowSlots[]     = { 0x10, 0x11, 0x12, 0x13 };
 static const u32 sAeBattleSelectAttachSlotsA[] = { 0x18, 0x19, 0x1A, 0x1B };
 static const u32 sAeBattleSelectAttachSlotsB[] = { 0x4, 0x5, 0x6, 0x7 };
-static const u32 sAeBattleSelectCells[] = { 0x9E, 0xA3, 0xA8, 0xAD };
-static const u32 sAeBattleSelectFrames[] = { 0x38, 0x39, 0x3A, 0x3B };
-static const u32 sAeBattleSelectOtherFrames[] = { 0xF, 0x10, 0x11, 0x12 };
-static const u32 sAeBattleSelectChoiceSlots[] = { 0x52, 0x53, 0x54 };
-static const u32 sAeBattleSelectPairA[] = { 0x4C, 0x4D };
-static const u32 sAeBattleSelectPairB[] = { 0x4E, 0x50 };
-static const u32 sAeBattleSelectPairC[] = { 0x4F, 0x51 };
+static const u32 sAeBattleSelectCells[]        = { 0x9E, 0xA3, 0xA8, 0xAD };
+static const u32 sAeBattleSelectFrames[]       = { 0x38, 0x39, 0x3A, 0x3B };
+static const u32 sAeBattleSelectOtherFrames[]  = { 0xF, 0x10, 0x11, 0x12 };
+static const u32 sAeBattleSelectChoiceSlots[]  = { 0x52, 0x53, 0x54 };
+static const u32 sAeBattleSelectPairA[]        = { 0x4C, 0x4D };
+static const u32 sAeBattleSelectPairB[]        = { 0x4E, 0x50 };
+static const u32 sAeBattleSelectPairC[]        = { 0x4F, 0x51 };
 static const u32 sAeBattleSelectChoiceFrames[] = { 0x51, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57 };
-static const u32 sAeBattleSelectValueFrames[] = { 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50 };
-static const u32 sAeBattleSelectValueCells[] = { 0x38, 0x39, 0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F };
-static const u32 sAeBattleSelectFrameCells[] = { 0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47 };
+static const u32 sAeBattleSelectValueFrames[]  = { 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50 };
+static const u32 sAeBattleSelectValueCells[]   = { 0x38, 0x39, 0x3A, 0x3B, 0x3C, 0x3D, 0x3E, 0x3F };
+static const u32 sAeBattleSelectFrameCells[]   = { 0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47 };
 
 const char* gTAeObjBattleSelectName = "TAeObjBattleSelect";
 
@@ -50,7 +50,7 @@ void loadBattleSelect()
 {
 	loadArc("ae_battle_menu.arc", &sAeBattleSelectArc);
 	if (sAeBattleSelectArc != 0) {
-		void** block = (void**)sAeBattleSelectArc->mData;
+		void** block        = (void**)sAeBattleSelectArc->mData;
 		sAeBattleSelectData = (u32)block[0];
 		relocateAe((void*)sAeBattleSelectData);
 		sAeBattleSelectTex = (u32)block[1];
@@ -85,7 +85,7 @@ void freeBattleSelect()
 		releaseTextures((NJS_TEXLIST*)sAeBattleSelectTex);
 		sAeBattleSelectTex = 0;
 		releaseResource(sAeBattleSelectArc);
-		sAeBattleSelectArc = 0;
+		sAeBattleSelectArc  = 0;
 		sAeBattleSelectData = 0;
 	}
 }
@@ -98,14 +98,18 @@ TAeObjBattleSelect* createBattleSelect()
 	if (sAeBattleSelectArc == 0) {
 		return 0;
 	}
-	made         = new TAeObjBattleSelect((TObject*)gTL_07, (void*)sAeBattleSelectData, (void*)sAeBattleSelectTex);
+	made                  = new TAeObjBattleSelect((TObject*)gTL_07, (void*)sAeBattleSelectData, (void*)sAeBattleSelectTex);
 	sAeBattleSelectScreen = made;
 	return made;
 }
 
 // 0x801968A4
 // Stores the new layer in field then gives it the palettes
-#define MAKE_LAYER(field, id, flags) field = createLayer(id, flags); if (field != 0) { field->mBanks = sAeBattleSelectPalettes; }
+#define MAKE_LAYER(field, id, flags)             \
+	field = createLayer(id, flags);              \
+	if (field != 0) {                            \
+		field->mBanks = sAeBattleSelectPalettes; \
+	}
 
 TAeObjBattleSelect::TAeObjBattleSelect(TObject* parent, void* data, void* assets)
     : TAeObject(parent, data, assets)
@@ -160,7 +164,10 @@ TAeObjBattleSelect::TAeObjBattleSelect(TObject* parent, void* data, void* assets
 }
 
 // 0x80196CA8
-TAeObjBattleSelect::~TAeObjBattleSelect() { sAeBattleSelectScreen = 0; }
+TAeObjBattleSelect::~TAeObjBattleSelect()
+{
+	sAeBattleSelectScreen = 0;
+}
 
 // 0x80196D0C
 void TAeObjBattleSelect::draw()
@@ -686,7 +693,13 @@ void aeBattleSelectOpenStage(s8 choice)
 }
 
 // 0x80197BA8
-static void taskList3E(TAeObjBattleSelect* self) { presentFront(self); }
+static void taskList3E(TAeObjBattleSelect* self)
+{
+	presentFront(self);
+}
 
 // 0x80197BC8
-static void taskList3C(TAeObjBattleSelect* self) { presentBack(self); }
+static void taskList3C(TAeObjBattleSelect* self)
+{
+	presentBack(self);
+}

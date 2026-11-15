@@ -19,10 +19,10 @@ struct MirrorPiece {
 	MirrorPiece();
 
 	NJS_OBJECT* mModel; // _00
-	void* mTex;    // _04
-	Vec3f mCenter; // _08
-	f32 mRadius;   // _14
-	int mShow;     // _18 1 when the camera is inside the radius plus 200
+	void* mTex;         // _04
+	Vec3f mCenter;      // _08
+	f32 mRadius;        // _14
+	int mShow;          // _18 1 when the camera is inside the radius plus 200
 	CharaColli* mShape; // _1C
 };
 
@@ -43,8 +43,8 @@ public:
 	virtual void vfn_10(); // _10
 	virtual void render(); // _1C
 
-	DrawTask* mDrawTask;   // _20
-	MirrorPiece* mPieces;  // _24 three
+	DrawTask* mDrawTask;  // _20
+	MirrorPiece* mPieces; // _24 three
 };
 
 void mapMirrorDropSphere(int);

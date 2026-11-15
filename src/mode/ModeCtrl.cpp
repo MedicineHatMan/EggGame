@@ -185,8 +185,8 @@ TModeAllocator::TModeAllocator(u32 slotSize)
 	mSlotSize = slotSize;
 	mBuffer   = memAlloc(slotSize << 1);
 	if (mBuffer != 0) {
-		ModeBlock* first = (ModeBlock*)mBuffer;
-		first->mNext = (ModeBlock*)((u8*)first + slotSize);
+		ModeBlock* first    = (ModeBlock*)mBuffer;
+		first->mNext        = (ModeBlock*)((u8*)first + slotSize);
 		first->mNext->mNext = 0;
 	}
 	mFree = (ModeBlock*)mBuffer;
@@ -205,7 +205,7 @@ void* TModeAllocator::alloc(u32 size)
 
 	ModeBlock* block = (ModeBlock*)mFree;
 	if (block != 0) {
-		mFree       = block->mNext;
+		mFree        = block->mNext;
 		block->mNext = 0;
 	}
 	return block;

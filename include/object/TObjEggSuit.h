@@ -73,22 +73,22 @@ public:
 	void modeDemo(int phase);
 	void modeEnd(int phase);
 
-	s8 mMode;              // _30
-	u8 _31;                // _31
-	u16 mEventId;          // _32 the event script it asks for at the end
-	u16 mFrame;            // _34 of the cutscene
-	u8 _36[2];             // _36
-	Vec3f mPos;            // _38
-	f32 mMtx[12];          // _44
-	int mRotY;             // _74
-	CharaColli* mColli;    // _78
-	DrawTask* mDraw;       // _7C
-	SetLinkMember mLink;   // _80
-	ObjShadow mShadow;     // _8C
-	Fx* mEffect;         // _C4 the sparkle while it waits
-	TCamPath* mCam;        // _C8
-	EggSuitEvent* mEvent;  // _CC
-	TSimpleText* mText;    // _D0 the message after the cutscene
+	s8 mMode;             // _30
+	u8 _31;               // _31
+	u16 mEventId;         // _32 the event script it asks for at the end
+	u16 mFrame;           // _34 of the cutscene
+	u8 _36[2];            // _36
+	Vec3f mPos;           // _38
+	f32 mMtx[12];         // _44
+	int mRotY;            // _74
+	CharaColli* mColli;   // _78
+	DrawTask* mDraw;      // _7C
+	SetLinkMember mLink;  // _80
+	ObjShadow mShadow;    // _8C
+	Fx* mEffect;          // _C4 the sparkle while it waits
+	TCamPath* mCam;       // _C8
+	EggSuitEvent* mEvent; // _CC
+	TSimpleText* mText;   // _D0 the message after the cutscene
 };
 
 extern "C" {

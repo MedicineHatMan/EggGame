@@ -19,10 +19,10 @@ typedef char TStageSelectModel_size_check[(sizeof(TStageSelectModel) == 0x140) ?
 
 // One node of the index-1 model
 struct SelectNode {
-	u8 _00[8];     // _00
-	Vec3f mPos;    // _08
-	int mAngle[3]; // _14
-	u8 _20[0xC];   // _20
+	u8 _00[8];          // _00
+	Vec3f mPos;         // _08
+	int mAngle[3];      // _14
+	u8 _20[0xC];        // _20
 	SelectNode* mChild; // _2C
 	SelectNode* mNext;  // _30
 };
@@ -32,7 +32,7 @@ const char* gTStageSelectModelName = "TStageSelectModel";
 TArc* gMenuModelArc;
 MenuModelSet* gMenuModelSet;
 extern "C" {
-BinFile* sKeikokuFile; // mes_keikoku.bin
+BinFile* sKeikokuFile;     // mes_keikoku.bin
 BinFile* sMissionTextFile; // mission_text.bin
 int sKeikokuCount;
 char** sKeikokuMsgs;
@@ -84,14 +84,14 @@ struct AngleTriple {
 TStageSelectModel::TStageSelectModel(TObject* parent, const Vec3f* pos, int* angle, int index, u16 priority)
     : TObject(parent)
 {
-	mIndex = index;
-	*(SetRot*)&mPos = *(const SetRot*)pos;
+	mIndex                = index;
+	*(SetRot*)&mPos       = *(const SetRot*)pos;
 	*(AngleTriple*)mAngle = *(AngleTriple*)angle;
-	_7C  = 0;
-	_9C  = 0;
-	_00  = (u32)gTStageSelectModelName;
-	mSize = 0x140;
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, (u16)priority, 0);
+	_7C                   = 0;
+	_9C                   = 0;
+	_00                   = (u32)gTStageSelectModelName;
+	mSize                 = 0x140;
+	mDraw                 = addDrawTask(this, (void (*)(void*))drawObjectTask, (u16)priority, 0);
 	setup();
 }
 
@@ -112,20 +112,20 @@ TStageSelectModel::~TStageSelectModel()
 void TStageSelectModel::setup()
 {
 	updateMatrix();
-	mScale = 1.0f;
-	_24    = 0;
-	mSaved = *(u32*)(*(u8**)gMenuModelSet->mTexLists[0] + 0x1AC);
-	mPlaying = 1;
-	mFrame   = 0.0f;
-	mRate    = 1.0f;
-	mBurst   = 0;
-	mFx      = 0;
-	mFxB     = 0;
+	mScale        = 1.0f;
+	_24           = 0;
+	mSaved        = *(u32*)(*(u8**)gMenuModelSet->mTexLists[0] + 0x1AC);
+	mPlaying      = 1;
+	mFrame        = 0.0f;
+	mRate         = 1.0f;
+	mBurst        = 0;
+	mFx           = 0;
+	mFxB          = 0;
 	mLightColor.x = mLightColor.y = mLightColor.z = 1.0f;
 	mAmbient.x = mAmbient.y = mAmbient.z = 0.5f;
-	mLightX = 0.5f;
-	mLightY = -1.0f;
-	mLightZ = 0.0f;
+	mLightX                              = 0.5f;
+	mLightY                              = -1.0f;
+	mLightZ                              = 0.0f;
 }
 
 // 0x8017968C
@@ -142,7 +142,9 @@ void TStageSelectModel::draw()
 }
 
 // 0x80179728
-void TStageSelectModel::vfn_10() { }
+void TStageSelectModel::vfn_10()
+{
+}
 
 // 0x8017972C
 void TStageSelectModel::render()
@@ -305,8 +307,8 @@ extern "C" void loadStageSelectText()
 	data = (u32*)sKeikokuFile->mData;
 	text = *data;
 	text += (u32)data++;
-	size = *data++;
-	sKeikokuMsgs = (char**)data;
+	size          = *data++;
+	sKeikokuMsgs  = (char**)data;
 	sKeikokuCount = size >> 2;
 	for (i = 0; i < sKeikokuCount; i++) {
 		sKeikokuMsgs[i] += text + 8;
@@ -316,8 +318,8 @@ extern "C" void loadStageSelectText()
 	data = (u32*)sMissionTextFile->mData;
 	text = *data;
 	text += (u32)data++;
-	size = *data++;
-	sMissionTextMsgs = (char**)data;
+	size              = *data++;
+	sMissionTextMsgs  = (char**)data;
 	sMissionTextCount = size >> 2;
 	for (i = 0; i < sMissionTextCount; i++) {
 		sMissionTextMsgs[i] += text + 8;

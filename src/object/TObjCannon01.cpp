@@ -68,7 +68,10 @@ static inline Vec3f cannonScale(f32 s, const Vec3f* v)
 	return r;
 }
 
-static inline Vec3f cannonZero() { return gVecZero; }
+static inline Vec3f cannonZero()
+{
+	return gVecZero;
+}
 
 // x y z turned about Y
 static inline void cannonTurnY(Vec3f* out, f32 x, f32 y, f32 z, int ang)
@@ -93,7 +96,7 @@ void TObjCannon01::initFromDesc(SetDesc* desc)
 	up     = desc->getFloat(3);
 	flat   = 1.0f - up;
 	cannonTurnY(&mDir, 0.0f, up, flat, rot);
-	mPitch = (int)(ANGLE_PER_RADIAN * (f32)atan2(up, flat));
+	mPitch   = (int)(ANGLE_PER_RADIAN * (f32)atan2(up, flat));
 	mShotVel = cannonScale(mPower, &mDir);
 	aimMouth();
 	mScope = landingPoint();
@@ -211,8 +214,8 @@ Vec3f TObjCannon01::landingPoint()
 	shot.mGravity.x = 0.0f;
 	shot.mGravity.y = -CANNON_GRAVITY;
 	shot.mGravity.z = 0.0f;
-	shot.mPos = mMouth;
-	shot.mVel = mShotVel;
+	shot.mPos       = mMouth;
+	shot.mVel       = mShotVel;
 	shot.vfn_0C();
 	while (flying) {
 		shot.vfn_0C();
@@ -223,7 +226,7 @@ Vec3f TObjCannon01::landingPoint()
 
 			if (!(rise < shot.mVel.y)) {
 				shot.mVel.y = rise;
-				flying = 0;
+				flying      = 0;
 			}
 		} else if (shot.mPos.y < -9999.0f) {
 			Vec3f origin;
@@ -250,9 +253,9 @@ static inline Vec3f vecDiff(const Vec3f* a, const Vec3f* b)
 // time up to the top of the arc then the fall from there
 void TObjCannon01::aimAt(const Vec3f* target)
 {
-	f32 up = mShotVel.y / CANNON_GRAVITY;
-	f32 peak = mShotVel.y * up - CANNON_GRAVITY * (0.5f * (up * up));
-	f32 down = dolsqrtf(2.0f * (peak + (mMouth.y - mScope.y)) / CANNON_GRAVITY);
+	f32 up     = mShotVel.y / CANNON_GRAVITY;
+	f32 peak   = mShotVel.y * up - CANNON_GRAVITY * (0.5f * (up * up));
+	f32 down   = dolsqrtf(2.0f * (peak + (mMouth.y - mScope.y)) / CANNON_GRAVITY);
 	Vec3f flat = vecDiff(target, &mMouth);
 	flat.y     = 0.0f;
 	gjScaleVector(1.0f / (up + down), &flat, &flat);
@@ -309,7 +312,7 @@ void TObjCannon01::stateFire()
 		}
 		target = mTarget.get();
 		if (target != 0) {
-			Vec3f at = *target->getPos();
+			Vec3f at   = *target->getPos();
 			Vec3f flat = vecDiff(&at, &mPos);
 			int left;
 			f32 len;

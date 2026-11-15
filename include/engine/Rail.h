@@ -72,14 +72,20 @@ struct RailEntry {
 	s16 mLast;  // _04
 };
 
+// A leaf's list in RailSet::mEntries, at RailNode::mEntries
+struct RailLeaf {
+	s16 mCount;            // _00
+	RailEntry mEntries[1]; // _02 RailNode::mCount of them
+};
+
 // The rail file of a stage
 struct RailSet {
-	int mCount;        // _00
-	RailData* mRails;  // _04
-	u32 _08;           // _08
-	RailNode* mNodes;  // _0C
-	u32 _10;           // _10
-	u8* mEntries;      // _14
+	int mCount;       // _00
+	RailData* mRails; // _04
+	u32 _08;          // _08
+	RailNode* mNodes; // _0C
+	u32 _10;          // _10
+	u8* mEntries;     // _14
 };
 
 struct RailBox {
@@ -88,10 +94,10 @@ struct RailBox {
 };
 
 struct RailSphere {
-	Vec3f mCenter;  // _00
-	f32 mRadius;    // _0C
-	RailHitFn mCb;  // _10
-	void* mArg;     // _14
+	Vec3f mCenter; // _00
+	f32 mRadius;   // _0C
+	RailHitFn mCb; // _10
+	void* mArg;    // _14
 };
 
 struct RailQuery {
@@ -141,9 +147,9 @@ struct RailPath {
 	void getDir(int seg, f32 dist, Vec3f* out);
 	void getPos(int seg, f32 dist, Vec3f* out);
 
-	RailData* mData;    // _00
-	u32 _04;            // _04
-	RailList mRiders;   // _08
+	RailData* mData;  // _00
+	u32 _04;          // _04
+	RailList mRiders; // _08
 };
 
 struct RailArray {
@@ -167,8 +173,8 @@ struct RailFile {
 	int walk(const RailBox* box, int node, int* more, int hits, const RailSphere* sphere);
 	int search(const Vec3f* pos, RailHitFn cb, void* arg, int* more, f32 radius);
 
-	RailSet* mSet;          // _00
-	WorldVector<u8> mSeen;  // _04
+	RailSet* mSet;         // _00
+	WorldVector<u8> mSeen; // _04
 };
 
 /** @size 0x10 */
@@ -187,9 +193,9 @@ struct RailMgr {
 
 // What searchOpen and searchAll pass through RailFile::search
 struct RailCall {
-	RailMgr* mMgr;   // _00
-	RailPathFn mCb;  // _04
-	void* mArg;      // _08
+	RailMgr* mMgr;  // _00
+	RailPathFn mCb; // _04
+	void* mArg;     // _08
 };
 
 extern "C" {

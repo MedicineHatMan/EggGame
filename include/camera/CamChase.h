@@ -10,17 +10,17 @@ struct CamPath;
 
 /** The last 15 places something was each at least some way from the one before */
 struct CamTrail {
-	int mIndex;        // _00 the newest
+	int mIndex;         // _00 the newest
 	HitVec mPoints[15]; // _04
 };
 
 /** What a camera's view looks like to the chase */
 struct CamViewInfo {
-	Vec3f mEye;   // _00
+	Vec3f mEye; // _00
 	u8 _0C[0xC];
-	Vec3f mDir;   // _18 the way the view faces
+	Vec3f mDir; // _18 the way the view faces
 	u8 _24[0x24];
-	f32 mSlope;   // _48 how far the view reaches up for each unit ahead
+	f32 mSlope; // _48 how far the view reaches up for each unit ahead
 };
 
 /** One steered value a position from -1 to 1 its speed and how many frames the input has pushed one way negative for
@@ -56,73 +56,73 @@ enum CamChaseEvent {
  * @size 0x1A0
  */
 struct CamChase {
-	CamCurve* mCurve;     // _00
-	CamHead* mHead;       // _04
-	CamViewInfo* mView;   // _08 set each update
-	Vec3f mPos;           // _0C the eye
-	f32 mBaseHeight;      // _18
-	f32 mBaseDist;        // _1C
-	f32 mHeight;          // _20
-	f32 mDist;            // _24 negative behind
-	CamSteer mGround;     // _28 the pitch the ground ahead asks for
-	CamSteer mStick;      // _34 the pitch the stick asks for
-	int mPitchMax;        // _40
-	int mPitch;           // _44 the stick pitch's top
-	int mPitchMin;        // _48
-	int mWallCount;       // _4C frames since a wall was near
-	f32 _50;              // _50
-	f32 mWall;            // _54 how much the walls pull the camera in
-	int mSideCount;       // _58
-	f32 mSideVel;         // _5C
-	f32 _60;              // _60
-	f32 mSide;            // _64 the turn the side walls ask for
-	f32 _68;              // _68
-	f32 mOffset[2];       // _6C the eye's height and distance from the head this frame
-	int mRot;             // _74 the way the camera looks
-	f32 mRotVel;          // _78
-	f32 mBaseSpeed;       // _7C
-	f32 mSpeed;           // _80
-	f32 mRiseRate;        // _84
-	f32 mFallRate;        // _88
-	f32 mDropRate;        // _8C
-	f32 mFollowRate;      // _90
-	Vec3f mTarget;        // _94 the lock-on target
-	Vec3f mToTarget;      // _A0
-	CamTrail mTrail;      // _AC
-	CamPath* mPad;        // _164
-	u32 mHits;            // _168 what the walls did this frame 1 up 2 down 4 8 the sides 0x10 0x20 ahead 0x40 no sight
-	u32 mFlags;           // _16C 1 2 the follow has stopped the walls
-	int mState;           // _170 a CamChaseState
-	int mSub;             // _174
-	int mTimer;           // _178
-	int mSubFlag;         // _17C
-	int mSubRot;          // _180
-	f32 mSubStep;         // _184
-	int mFollow;          // _188
-	int mFollowTimer;     // _18C
-	int mWallFrames;      // _190
-	f32 mGap;             // _194
-	f32 mRise;            // _198
-	u32 mGapFlags;        // _19C
+	CamCurve* mCurve;   // _00
+	CamHead* mHead;     // _04
+	CamViewInfo* mView; // _08 set each update
+	Vec3f mPos;         // _0C the eye
+	f32 mBaseHeight;    // _18
+	f32 mBaseDist;      // _1C
+	f32 mHeight;        // _20
+	f32 mDist;          // _24 negative behind
+	CamSteer mGround;   // _28 the pitch the ground ahead asks for
+	CamSteer mStick;    // _34 the pitch the stick asks for
+	int mPitchMax;      // _40
+	int mPitch;         // _44 the stick pitch's top
+	int mPitchMin;      // _48
+	int mWallCount;     // _4C frames since a wall was near
+	f32 _50;            // _50
+	f32 mWall;          // _54 how much the walls pull the camera in
+	int mSideCount;     // _58
+	f32 mSideVel;       // _5C
+	f32 _60;            // _60
+	f32 mSide;          // _64 the turn the side walls ask for
+	f32 _68;            // _68
+	f32 mOffset[2];     // _6C the eye's height and distance from the head this frame
+	int mRot;           // _74 the way the camera looks
+	f32 mRotVel;        // _78
+	f32 mBaseSpeed;     // _7C
+	f32 mSpeed;         // _80
+	f32 mRiseRate;      // _84
+	f32 mFallRate;      // _88
+	f32 mDropRate;      // _8C
+	f32 mFollowRate;    // _90
+	Vec3f mTarget;      // _94 the lock-on target
+	Vec3f mToTarget;    // _A0
+	CamTrail mTrail;    // _AC
+	CamPath* mPad;      // _164
+	u32 mHits;          // _168 what the walls did this frame 1 up 2 down 4 8 the sides 0x10 0x20 ahead 0x40 no sight
+	u32 mFlags;         // _16C 1 2 the follow has stopped the walls
+	int mState;         // _170 a CamChaseState
+	int mSub;           // _174
+	int mTimer;         // _178
+	int mSubFlag;       // _17C
+	int mSubRot;        // _180
+	f32 mSubStep;       // _184
+	int mFollow;        // _188
+	int mFollowTimer;   // _18C
+	int mWallFrames;    // _190
+	f32 mGap;           // _194
+	f32 mRise;          // _198
+	u32 mGapFlags;      // _19C
 };
 
 typedef char CamChase_size_check[(sizeof(CamChase) == 0x1A0) ? 1 : -1];
 
 extern "C" {
-void camChaseInit(CamChase* chase, CamHead* head, CamCurve* curve); // 0x80095E74
-void camChaseReset(CamChase* chase, int rot);                       // 0x80095F30
-void camChaseSnap(CamChase* chase, int rot);                        // 0x80096010
-void camChaseGetPos(const CamChase* chase, Vec3f* out);                   // 0x800960F8
-void camChaseSetBase(CamChase* chase, f32 height, f32 dist);        // 0x80096114
-void camChaseSetOffset(CamChase* chase, f32 height, f32 dist);      // 0x80096120
-void camChaseResetOffset(CamChase* chase);                          // 0x8009612C
-void camChaseSetBaseSpeed(CamChase* chase, f32 speed);              // 0x80096140
-void camChaseSetSpeed(CamChase* chase, f32 speed);                  // 0x80096158
-void camChaseResetSpeed(CamChase* chase);                           // 0x80096170
-void camChaseSetPitch(CamChase* chase, int pitch);                  // 0x8009617C
-void camChaseResetPitch(CamChase* chase);                           // 0x80096184
+void camChaseInit(CamChase* chase, CamHead* head, CamCurve* curve);    // 0x80095E74
+void camChaseReset(CamChase* chase, int rot);                          // 0x80095F30
+void camChaseSnap(CamChase* chase, int rot);                           // 0x80096010
+void camChaseGetPos(const CamChase* chase, Vec3f* out);                // 0x800960F8
+void camChaseSetBase(CamChase* chase, f32 height, f32 dist);           // 0x80096114
+void camChaseSetOffset(CamChase* chase, f32 height, f32 dist);         // 0x80096120
+void camChaseResetOffset(CamChase* chase);                             // 0x8009612C
+void camChaseSetBaseSpeed(CamChase* chase, f32 speed);                 // 0x80096140
+void camChaseSetSpeed(CamChase* chase, f32 speed);                     // 0x80096158
+void camChaseResetSpeed(CamChase* chase);                              // 0x80096170
+void camChaseSetPitch(CamChase* chase, int pitch);                     // 0x8009617C
+void camChaseResetPitch(CamChase* chase);                              // 0x80096184
 void camChaseUpdate(CamChase* chase, CamViewInfo* view, CamPath* pad); // 0x80097668
-void camChaseSetState(CamChase* chase, int state);                  // 0x800976D8
+void camChaseSetState(CamChase* chase, int state);                     // 0x800976D8
 }
 
 struct EggHit;

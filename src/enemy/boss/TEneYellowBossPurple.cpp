@@ -43,12 +43,12 @@ TEneYellowBossPurple::TEneYellowBossPurple(TObject* parent, const Vec3f* pos)
 {
 	int i;
 
-	_00            = gTEneYellowBossPurpleName;
-	mSize          = 0x264;
-	mShape         = 0;
-	mModel         = modelTEneYellowBoss(6);
-	mMotions       = motionTEneYellowBoss(5);
-	mXform.mPos    = *pos;
+	_00         = gTEneYellowBossPurpleName;
+	mSize       = 0x264;
+	mShape      = 0;
+	mModel      = modelTEneYellowBoss(6);
+	mMotions    = motionTEneYellowBoss(5);
+	mXform.mPos = *pos;
 	motionCtrlInit(&mClip, sYellowBossPurpleMotions, mMotions);
 	motionCtrlPlay(&mClip, 0);
 	mAnim  = (GjActor*)actorCreate(mModel);
@@ -87,21 +87,24 @@ TEneYellowBossPurple::~TEneYellowBossPurple()
 }
 
 // 0x8014E730
-u8 TEneYellowBossPurple::isBroken() { return mHits >= 3; }
+u8 TEneYellowBossPurple::isBroken()
+{
+	return mHits >= 3;
+}
 
 // 0x8014E750
 int TEneYellowBossPurple::onHit(const TObjAction* other, int arg, int* result)
 {
 	HitInfo* hit = (HitInfo*)result;
-	int ret = 0;
+	int ret      = 0;
 
 	if (isPlayerOrKind4(other)) {
 		hit->mDamage = 0x14;
-		ret = 1;
+		ret          = 1;
 		hit->mFlags.clear();
 	} else if (isEggObj(other) && (mPurpleFlags & 1)) {
 		hit->mDamage = 1;
-		ret = 1;
+		ret          = 1;
 		hit->mFlags.clear();
 		hit->mFlags.setBit(0xD);
 	}
@@ -109,7 +112,10 @@ int TEneYellowBossPurple::onHit(const TObjAction* other, int arg, int* result)
 }
 
 // 0x8014E7EC
-f32 TEneYellowBossPurple::vfn_40() { return 80.0f; }
+f32 TEneYellowBossPurple::vfn_40()
+{
+	return 80.0f;
+}
 
 // 0x8014E7F4
 void TEneYellowBossPurple::pose()
@@ -153,7 +159,10 @@ void TEneYellowBossPurple::bodyMatrix()
 }
 
 // 0x8014E928
-void TEneYellowBossPurple::gravity(Vec3f* vel) { TEnePurpleBoss::gravity(vel); }
+void TEneYellowBossPurple::gravity(Vec3f* vel)
+{
+	TEnePurpleBoss::gravity(vel);
+}
 
 // 0x8014E94C
 // Returns whether it hit a wall
@@ -412,7 +421,10 @@ void TEneYellowBossPurple::actDie(int phase)
 }
 
 // 0x8014F144
-void TEneYellowBossPurple::vfn_10() { cull(mDraw, 3000.0f, 40.0f, &mXform.mPos, 0); }
+void TEneYellowBossPurple::vfn_10()
+{
+	cull(mDraw, 3000.0f, 40.0f, &mXform.mPos, 0);
+}
 
 // 0x8014F178
 void TEneYellowBossPurple::render()
@@ -437,10 +449,19 @@ void TEneYellowBossPurple::render()
 }
 
 // 0x8014F214
-int TEneYellowBossCrystal::getKind() { return 2; }
+int TEneYellowBossCrystal::getKind()
+{
+	return 2;
+}
 
 // 0x8014F21C
-Vec3f* TEneYellowBossCrystal::getPos() { return &mXform.mPos; }
+Vec3f* TEneYellowBossCrystal::getPos()
+{
+	return &mXform.mPos;
+}
 
 // 0x8014F224
-int TEneYellowBossCrystal::canAct() { return !(mCrystalFlags & 8); }
+int TEneYellowBossCrystal::canAct()
+{
+	return !(mCrystalFlags & 8);
+}

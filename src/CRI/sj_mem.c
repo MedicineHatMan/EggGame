@@ -4,15 +4,15 @@
 #define SJMEM_MAX_OBJ 32
 
 typedef struct {
-	SJ_IF* vtbl;         /* 00 */
-	int used;            /* 04 */
-	const UUID* uuid;    /* 08 */
-	int remain;          /* 0C */
-	int pos;             /* 10 */
-	char* data;          /* 14 */
-	int size;            /* 18 */
-	SJ_ERRFN errfn;      /* 1C */
-	void* errobj;        /* 20 */
+	SJ_IF* vtbl;      /* 00 */
+	int used;         /* 04 */
+	const UUID* uuid; /* 08 */
+	int remain;       /* 0C */
+	int pos;          /* 10 */
+	char* data;       /* 14 */
+	int size;         /* 18 */
+	SJ_ERRFN errfn;   /* 1C */
+	void* errobj;     /* 20 */
 } SJMEM_OBJ;
 
 void SJMEM_Destroy(SJ sj);
@@ -28,7 +28,9 @@ void SJMEM_EntryErrFunc(SJ sj, SJ_ERRFN func, void* obj);
 static const UUID sjmem_uuid = { 0xDD9EEE41, 0x1679, 0x11D2, { 0x93, 0x6C, 0x00, 0x60, 0x08, 0x94, 0x48, 0xBC } };
 
 static SJ_IF sjmem_if = {
-	0, 0, 0,
+	0,
+	0,
+	0,
 	SJMEM_Destroy,
 	SJMEM_GetUuid,
 	SJMEM_Reset,
@@ -46,8 +48,7 @@ static int sjmem_init_cnt;
 // 0x8022C5D4
 static void sjmem_DefErrFunc(void* obj, int ecode)
 {
-	for (;;) {
-	}
+	for (;;) { }
 }
 
 // 0x8022C580
@@ -81,16 +82,16 @@ SJ SJMEM_Create(char* data, int size)
 	if (i == SJMEM_MAX_OBJ) {
 		return 0;
 	}
-	mem = &sjmem_obj[i];
-	mem->used = 1;
-	mem->vtbl = &sjmem_if;
-	mem->data = data;
-	mem->size = size;
-	mem->uuid = &sjmem_uuid;
-	mem->errfn = sjmem_DefErrFunc;
+	mem         = &sjmem_obj[i];
+	mem->used   = 1;
+	mem->vtbl   = &sjmem_if;
+	mem->data   = data;
+	mem->size   = size;
+	mem->uuid   = &sjmem_uuid;
+	mem->errfn  = sjmem_DefErrFunc;
 	mem->errobj = mem;
 	mem->remain = mem->size;
-	mem->pos = 0;
+	mem->pos    = 0;
 	return (SJ)mem;
 }
 
@@ -116,7 +117,7 @@ void SJMEM_EntryErrFunc(SJ sj, SJ_ERRFN func, void* obj)
 {
 	SJMEM_OBJ* mem = (SJMEM_OBJ*)sj;
 
-	mem->errfn = func;
+	mem->errfn  = func;
 	mem->errobj = obj;
 }
 
@@ -126,7 +127,7 @@ void SJMEM_Reset(SJ sj)
 	SJMEM_OBJ* mem = (SJMEM_OBJ*)sj;
 
 	mem->remain = mem->size;
-	mem->pos = 0;
+	mem->pos    = 0;
 }
 
 // 0x8022C34C
@@ -153,15 +154,15 @@ void SJMEM_GetChunk(SJ sj, int id, int nbyte, SJCK* ck)
 
 	SJCRS_Lock();
 	if (id == SJ_LIN_FREE) {
-		ck->len = 0;
+		ck->len  = 0;
 		ck->data = 0;
 	} else if (id == SJ_LIN_DATA) {
-		ck->len = (mem->remain < nbyte) ? mem->remain : nbyte;
+		ck->len  = (mem->remain < nbyte) ? mem->remain : nbyte;
 		ck->data = mem->data + mem->pos;
 		mem->pos += ck->len;
 		mem->remain -= ck->len;
 	} else {
-		ck->len = 0;
+		ck->len  = 0;
 		ck->data = 0;
 		if (mem->errfn != 0) {
 			mem->errfn(mem->errobj, SJ_ERR_PRM);
@@ -180,7 +181,7 @@ void SJMEM_PutChunk(SJ sj, int id, SJCK* ck)
 	}
 	SJCRS_Lock();
 	if ((unsigned int)id > SJ_LIN_DATA) {
-		ck->len = 0;
+		ck->len  = 0;
 		ck->data = 0;
 		if (mem->errfn != 0) {
 			mem->errfn(mem->errobj, SJ_ERR_PRM);
@@ -205,9 +206,9 @@ void SJMEM_UngetChunk(SJ sj, int id, SJCK* ck)
 			mem->errfn(mem->errobj, SJ_ERR_PRM);
 		}
 	} else if (id == SJ_LIN_DATA) {
-		pos = (mem->pos - ck->len > 0L) ? mem->pos - ck->len : 0L;
-		mem->pos = pos;
-		remain = mem->remain + ck->len;
+		pos         = (mem->pos - ck->len > 0L) ? mem->pos - ck->len : 0L;
+		mem->pos    = pos;
+		remain      = mem->remain + ck->len;
 		mem->remain = (mem->size < remain) ? mem->size : remain;
 		if (pos != ck->data - mem->data) {
 			if (mem->errfn != 0) {
@@ -215,7 +216,7 @@ void SJMEM_UngetChunk(SJ sj, int id, SJCK* ck)
 			}
 		}
 	} else {
-		ck->len = 0;
+		ck->len  = 0;
 		ck->data = 0;
 		if (mem->errfn != 0) {
 			mem->errfn(mem->errobj, SJ_ERR_PRM);

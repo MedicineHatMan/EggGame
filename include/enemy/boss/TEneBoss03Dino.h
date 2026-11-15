@@ -104,23 +104,23 @@ public:
 	void actBite(int phase);
 	void actDead(int phase);
 
-	void* mOwner;      // _158
-	u8 _15C[4];        // _15C
+	void* mOwner;          // _158
+	u8 _15C[4];            // _15C
 	DrawTask* mDrawTask;   // _160
 	MotionLinkHooks mPose; // _164
-	f32 mRingRadius;   // _16C
-	Vec3f mLastStomp;  // _170
-	f32 mMotionRate;   // _17C
-	u32 mStateFlags;   // _180 1 on the ring 2 breath out 4 roared 8 swiping 0x10 biting 0x20 no effects
-	HitVec mNodes[13]; // _184
-	HitVec mDirs[2];   // _220
-	EnemyFx* mFx[4];   // _238
-	int mStep;         // _248
-	int mTimer;        // _24C
-	int mTurn;         // _250
-	int mTurnTo;       // _254
-	f32 mStepSpeed;    // _258
-	f32 mDrift;        // _25C
+	f32 mRingRadius;       // _16C
+	Vec3f mLastStomp;      // _170
+	f32 mMotionRate;       // _17C
+	u32 mStateFlags;       // _180 1 on the ring 2 breath out 4 roared 8 swiping 0x10 biting 0x20 no effects
+	HitVec mNodes[13];     // _184
+	HitVec mDirs[2];       // _220
+	EnemyFx* mFx[4];       // _238
+	int mStep;             // _248
+	int mTimer;            // _24C
+	int mTurn;             // _250
+	int mTurnTo;           // _254
+	f32 mStepSpeed;        // _258
+	f32 mDrift;            // _25C
 };
 
 typedef char TEneBoss03Dino_size_check[(sizeof(TEneBoss03Dino) == 0x260) ? 1 : -1];

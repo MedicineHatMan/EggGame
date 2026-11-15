@@ -38,7 +38,7 @@ void AXRNARES_Finish(void)
 		if (len != axrnares_size) {
 			axrna_call_errfn("E1090601:Free area other than ADX buffer.\n");
 		}
-		axrnares_num = 0;
+		axrnares_num  = 0;
 		axrnares_size = 0;
 		axrnares_base = 0;
 	}
@@ -52,7 +52,7 @@ void AXRNARES_Init(void)
 
 	if (axrnares_init_cnt == 0) {
 		if (axrnares_ext_buf == 0) {
-			axrnares_num = AXRNARES_MAX;
+			axrnares_num  = AXRNARES_MAX;
 			axrnares_size = AXRNARES_SIZE;
 			axrnares_base = ARAlloc(AXRNARES_SIZE);
 		}

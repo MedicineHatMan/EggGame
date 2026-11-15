@@ -34,12 +34,12 @@ public:
 	void* operator new(unsigned long size) { return objHeapAlloc(gObjHeap, size); }
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	SetTransform mXform; // _20
-	int mArg;         // _64
-	NJS_OBJECT* mModel;     // _68
+	SetTransform mXform;  // _20
+	int mArg;             // _64
+	NJS_OBJECT* mModel;   // _68
 	MotionPlayer mMotion; // _6C
 	DrawTask* mDraw;      // _A8
-	TObject* mPart[2]; // _AC the two sparkles
+	TObject* mPart[2];    // _AC the two sparkles
 };
 
 #endif

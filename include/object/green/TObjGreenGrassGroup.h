@@ -51,13 +51,13 @@ public:
 	int hasCameraMoved();
 	void sortBlades();
 
-	DrawTask* mDrawTask;        // _64
+	DrawTask* mDrawTask; // _64
 	u8 _68[4];
 	GrassBlade* mBlades[20]; // _6C
-	u8 mGrassFlags;         // _BC GrassFlags
-	Vec3f mHitFrom;         // _C0
-	int mOrder[20];         // _CC blade indices in draw order
-	Vec3f mCameraPos;       // _11C
+	u8 mGrassFlags;          // _BC GrassFlags
+	Vec3f mHitFrom;          // _C0
+	int mOrder[20];          // _CC blade indices in draw order
+	Vec3f mCameraPos;        // _11C
 	u8 _128[4];
 };
 

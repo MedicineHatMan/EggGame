@@ -36,18 +36,18 @@ public:
 	virtual void vfn_10(); // _10
 	virtual void render(); // _1C
 
-	DrawTask* mDraw;     // _20
-	ModelDraw mModel;    // _24
-	int mFlags;          // _40
+	DrawTask* mDraw;  // _20
+	ModelDraw mModel; // _24
+	int mFlags;       // _40
 	u8 _44[0x10];
-	u32 mColor;          // _54
+	u32 mColor; // _54
 	u8 _58[8];
-	int mZero;           // _60
-	MotionTrack mTrack;  // _64
-	Vec3f mPos;          // _80
-	f32 mMtx[12];        // _8C
-	void* mEffect;       // _BC
-	TLensFlare* mFlare;  // _C0
+	int mZero;          // _60
+	MotionTrack mTrack; // _64
+	Vec3f mPos;         // _80
+	f32 mMtx[12];       // _8C
+	void* mEffect;      // _BC
+	TLensFlare* mFlare; // _C0
 };
 
 #endif

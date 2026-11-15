@@ -36,7 +36,7 @@ extern "C" void initBlueKatana()
 {
 	resBankLoad(&sBlueKatanaBank, "ar_obj_blue_katana.arc");
 	resBankAddTextures(&sBlueKatanaBank, 0, "obj_blue_katana.gvm");
-	sBlueKatanaModels = resBankGetModels(&sBlueKatanaBank);
+	sBlueKatanaModels   = resBankGetModels(&sBlueKatanaBank);
 	sBlueKatanaTextures = resBankGetTextures(&sBlueKatanaBank);
 }
 
@@ -45,7 +45,7 @@ extern "C" void termBlueKatana()
 {
 	resBankRemoveTextures(&sBlueKatanaBank, 0);
 	resBankRelease(&sBlueKatanaBank);
-	sBlueKatanaModels = 0;
+	sBlueKatanaModels   = 0;
 	sBlueKatanaTextures = 0;
 }
 
@@ -59,8 +59,8 @@ extern "C" TObject* createTObjBlueKatana(TObject* parent, SetDesc* desc)
 TObjBlueKatana::TObjBlueKatana(TObject* parent, SetDesc* desc)
     : TSetObj(parent, desc)
 {
-	_00        = (u32)gTObjBlueKatanaName;
-	mSize      = 0xA4;
+	_00   = (u32)gTObjBlueKatanaName;
+	mSize = 0xA4;
 	initFromDesc(desc);
 	mAct       = 0;
 	mRecord3E  = (u8)((SetDescObj*)desc)->get3E();
@@ -134,11 +134,11 @@ void TObjBlueKatana::draw()
 	frameTexRequestCur();
 	switch (mAct) {
 	case 0:
-			stateWait();
-			break;
+		stateWait();
+		break;
 	case 1:
-			stateHeld();
-			break;
+		stateHeld();
+		break;
 	}
 }
 

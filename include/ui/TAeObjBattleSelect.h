@@ -20,30 +20,30 @@ public:
 
 	virtual void draw(); // _0C
 
-	DrawTask* mTask;       // _34
-	void* mTask2;      // _38
-	TAeLayer* _3C;     // _3C
-	TAeLayer* _40;     // _40
-	TAeLayer* _44;     // _44
-	TAeLayer* _48;     // _48
-	TAeLayer* _4C[4];  // _4C
-	TAeLayer* _5C[4];  // _5C
-	TAeLayer* _6C[4];  // _6C
-	TAeLayer* _7C[4];  // _7C
-	TAeLayer* _8C[4];  // _8C
-	TAeLayer* _9C;     // _9C
-	TAeLayer* _A0;     // _A0
-	TAeLayer* _A4;     // _A4
-	TAeLayer* _A8;     // _A8
-	u8 _AC[4];         // _AC
-	u8 _B0;            // _B0
-	u8 _B1;            // _B1
-	u8 _B2[2];         // _B2
+	DrawTask* mTask;  // _34
+	void* mTask2;     // _38
+	TAeLayer* _3C;    // _3C
+	TAeLayer* _40;    // _40
+	TAeLayer* _44;    // _44
+	TAeLayer* _48;    // _48
+	TAeLayer* _4C[4]; // _4C
+	TAeLayer* _5C[4]; // _5C
+	TAeLayer* _6C[4]; // _6C
+	TAeLayer* _7C[4]; // _7C
+	TAeLayer* _8C[4]; // _8C
+	TAeLayer* _9C;    // _9C
+	TAeLayer* _A0;    // _A0
+	TAeLayer* _A4;    // _A4
+	TAeLayer* _A8;    // _A8
+	u8 _AC[4];        // _AC
+	u8 _B0;           // _B0
+	u8 _B1;           // _B1
+	u8 _B2[2];        // _B2
 };
 
 // The battle select screen's free functions
-void loadBattleSelect();               // 0x80196620 loads ae_battle_menu.arc
-void freeBattleSelect();               // 0x801967F8
+void loadBattleSelect();                  // 0x80196620 loads ae_battle_menu.arc
+void freeBattleSelect();                  // 0x801967F8
 TAeObjBattleSelect* createBattleSelect(); // 0x80196844
 void aeBattleSelectSetDigits(s8 index, u8 value);
 void aeBattleSelectShowIcon(s8 row, s8 which);

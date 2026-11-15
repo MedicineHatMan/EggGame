@@ -3,9 +3,9 @@ struct NJS_TEXLIST;
 struct NJS_OBJECT;
 #include "io/ResBank.h"
 
-static ResBank sGreenObjBank;      // 0x80286638
-static NJS_OBJECT** sGreenObjModels;     // 0x802C5988
-static NJS_TEXLIST** sGreenObjTexLists;   // 0x802C598C
+static ResBank sGreenObjBank;           // 0x80286638
+static NJS_OBJECT** sGreenObjModels;    // 0x802C5988
+static NJS_TEXLIST** sGreenObjTexLists; // 0x802C598C
 
 // 0x801901D0
 void greenObjLoad()

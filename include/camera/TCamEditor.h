@@ -39,11 +39,11 @@ public:
 	void apply();     // 0x800159B0 puts the eye mDist from the point at mYaw and mPitch
 	void nextSpeed(); // 0x80015C6C
 
-	BOOL mMoveAt;  // _50 whether the stick moves the point when the camera isn't turning
-	int mPitch;    // _54
-	int mYaw;      // _58
-	f32 mDist;     // _5C
-	int mSpeed;    // _60 0 to 3 see editSpeed
+	BOOL mMoveAt; // _50 whether the stick moves the point when the camera isn't turning
+	int mPitch;   // _54
+	int mYaw;     // _58
+	f32 mDist;    // _5C
+	int mSpeed;   // _60 0 to 3 see editSpeed
 };
 
 struct SpriteKeyFields {
@@ -86,7 +86,7 @@ extern int gSpriteRoll;
 void spriteDrawQuads(Sprite** list, int count);
 
 extern "C" {
-extern const f32 gSpriteCoordGrid[0x80];   // 0x802407D0 a grid of them
+extern const f32 gSpriteCoordGrid[0x80]; // 0x802407D0 a grid of them
 }
 
 #endif

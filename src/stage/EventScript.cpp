@@ -42,7 +42,7 @@ extern "C" {
 }
 
 /** What loadArc gives for a script archive */
-TArc* gEventArchive;   // 0x802C5628
+TArc* gEventArchive;           // 0x802C5628
 EventScriptSet* gEventScripts; // 0x802C562C
 EventScriptMgr* gEventMgr;     // 0x802C5630
 
@@ -208,7 +208,7 @@ int EventScriptMgr::run()
 // 0x8012C538
 int EventScriptMgr::exec()
 {
-	EventCmd* cmds  = getEventCmds();
+	EventCmd* cmds = getEventCmds();
 	mBits &= ~BIT_DONE;
 	EventLine* line = mScript->mLines[mLine];
 	if (cmds[line->mCmd].mFunc(line->mArgs) != 0) {
@@ -411,8 +411,8 @@ void eventScriptLoad(const char* name)
 		script = gEventScripts->mScripts[i];
 		lines  = script->mLineCount;
 		for (j = 0; j < lines; j++) {
-			line = script->mLines[j];
-			line->mCmd      = -1;
+			line       = script->mLines[j];
+			line->mCmd = -1;
 			for (int k = 0; cmds[k].mName != 0; k++) {
 				if (strncmp(line->mName, cmds[k].mName, 0x100) == 0) {
 					line->mCmd = k;
@@ -493,27 +493,27 @@ static void eventCamRestart()
 
 /** The argument blocks of the commands here */
 struct EventSeArgs { // "se"
-	int mId; // _00
+	int mId;         // _00
 };
 struct EventSePosArgs { // "se_pos"
-	int mId;    // _00
-	Vec3f mPos; // _04
+	int mId;            // _00
+	Vec3f mPos;         // _04
 };
 struct EventSwitchArgs { // "sw_chk_on" "sw_chk_off" "sw_on" "sw_off"
-	int mBit; // _00
+	int mBit;            // _00
 };
 struct EventBgmArgs { // "bgm_play"
-	u16 mId; // _00
+	u16 mId;          // _00
 };
 struct EventBgmVolArgs { // "bgm_vol"
-	f32 mVolume; // _00
-	u16 mFrames; // _04
+	f32 mVolume;         // _00
+	u16 mFrames;         // _04
 };
 struct EventSendArgs { // "send" send a message to a set object
-	int mSetId; // _00
-	int mType;  // _04
-	int mA;     // _08
-	int mB;     // _0C
+	int mSetId;        // _00
+	int mType;         // _04
+	int mA;            // _08
+	int mB;            // _0C
 };
 
 /** The message "send" builds */
@@ -682,4 +682,3 @@ static int cmdMissionBoot(void*)
 	sendGameMsg((ObjMsg*)&msg);
 	return 1;
 }
-

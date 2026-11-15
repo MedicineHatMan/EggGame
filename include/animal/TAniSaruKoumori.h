@@ -35,18 +35,18 @@ public:
 	virtual int vfn_20();
 	virtual const Vec3f* vfn_24();
 
-	u32 mTexList;       // _20
-	ElectricVtx mVtx[4]; // _24
+	u32 mTexList;         // _20
+	ElectricVtx mVtx[4];  // _24
 	const Vec3f* mPosRef; // _84
-	Vec3f mGround;      // _88
-	f32 mWidth;         // _94
-	f32 mHeight;        // _98
-	f32 mFrame;         // _9C
-	u32 mColor;         // _A0
-	DrawTask* mDrawTask;    // _A4
+	Vec3f mGround;        // _88
+	f32 mWidth;           // _94
+	f32 mHeight;          // _98
+	f32 mFrame;           // _9C
+	u32 mColor;           // _A0
+	DrawTask* mDrawTask;  // _A4
 	u8 _A8[4];
-	void* mFx;          // _AC
-	f32 mMatrix[12];    // _B0
+	void* mFx;       // _AC
+	f32 mMatrix[12]; // _B0
 };
 
 /**
@@ -68,15 +68,15 @@ public:
 	void runEnd();
 	void killElectric();
 
-	Vec3f mStart;      // _384
-	f32 mSwing;        // _390
-	f32 mSwingSpeed;   // _394
-	int mStartRot[3];  // _398
-	f32 mSpeed;        // _3A4
-	f32 mTravelled;    // _3A8
-	f32 _3AC;          // _3AC
+	Vec3f mStart;            // _384
+	f32 mSwing;              // _390
+	f32 mSwingSpeed;         // _394
+	int mStartRot[3];        // _398
+	f32 mSpeed;              // _3A4
+	f32 mTravelled;          // _3A8
+	f32 _3AC;                // _3AC
 	TAniElectric* mElectric; // _3B0
-	Vec3f mElectricPos; // _3B4
+	Vec3f mElectricPos;      // _3B4
 };
 
 extern "C" {

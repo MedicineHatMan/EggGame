@@ -38,7 +38,7 @@ void TPlyDemoLastCtrl::stepLose()
 	int ready;
 
 	player = (TChrPlayer*)findPlayer(0);
-	ready = player->vfn_84();
+	ready  = player->vfn_84();
 	if (ready == 0) {
 		return;
 	}

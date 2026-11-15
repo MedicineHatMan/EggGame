@@ -88,10 +88,10 @@ void __OSReboot(u32 resetCode, u32 bootDol)
 	u32 offset;
 	OSDisableInterrupts();
 	OS_REBOOT_RESET_CODE = 0;
-	OS_REBOOT_BOOT_DOL = 0;
-	OS_REBOOT_BOOL    = TRUE;
-	BOOT_REGION_START = (u32)SaveStart;
-	BOOT_REGION_END   = (u32)SaveEnd;
+	OS_REBOOT_BOOT_DOL   = 0;
+	OS_REBOOT_BOOL       = TRUE;
+	BOOT_REGION_START    = (u32)SaveStart;
+	BOOT_REGION_END      = (u32)SaveEnd;
 	OSClearContext(&exceptionContext);
 	OSSetCurrentContext(&exceptionContext);
 	DVDInit();

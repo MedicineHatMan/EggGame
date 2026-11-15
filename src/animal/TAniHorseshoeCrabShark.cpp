@@ -38,41 +38,37 @@ extern "C" void* createHorseshoeCrabShark(TObject* parent)
 }
 
 const MotionEntry sHorseshoeCrabSharkMotions[] = {
-	{ 0, 8, -1, 0, 0.0f, 30.0f, 0.35f, 0.0f, 0 },
-	{ 0, 7, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
-	{ 0, 6, -1, 0, 0.0f, 30.0f, 0.45f, 0.0f, 0 },
-	{ 1, 0, -1, 0, 0.0f, 19.0f, 0.37f, 0.0f, 0 },
-	{ 1, 3, -1, 0, 5.0f, 7.0f, 0.3f, 0.0f, 0 },
-	{ 1, 3, -1, 0, 8.0f, 17.0f, 0.3f, 0.0f, 0 },
-	{ 2, 3, -1, 1, 18.0f, 20.0f, 0.3f, 0.0f, 0 },
-	{ 0, 5, -1, 0, 0.0f, 20.0f, 0.36f, 0.0f, 0 },
-	{ 1, 4, -1, 0, 0.0f, 44.0f, 0.45f, 0.0f, 0 },
-	{ 1, 1, -1, 0, 0.0f, 4.0f, 0.3f, 0.0f, 0 },
-	{ 1, 2, -1, 0, 0.0f, 25.0f, 0.45f, 0.0f, 0 },
-	{ 1, 0, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
+	{ 0, 8, -1, 0, 0.0f, 30.0f, 0.35f, 0.0f, 0 }, { 0, 7, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
+	{ 0, 6, -1, 0, 0.0f, 30.0f, 0.45f, 0.0f, 0 }, { 1, 0, -1, 0, 0.0f, 19.0f, 0.37f, 0.0f, 0 },
+	{ 1, 3, -1, 0, 5.0f, 7.0f, 0.3f, 0.0f, 0 },   { 1, 3, -1, 0, 8.0f, 17.0f, 0.3f, 0.0f, 0 },
+	{ 2, 3, -1, 1, 18.0f, 20.0f, 0.3f, 0.0f, 0 }, { 0, 5, -1, 0, 0.0f, 20.0f, 0.36f, 0.0f, 0 },
+	{ 1, 4, -1, 0, 0.0f, 44.0f, 0.45f, 0.0f, 0 }, { 1, 1, -1, 0, 0.0f, 4.0f, 0.3f, 0.0f, 0 },
+	{ 1, 2, -1, 0, 0.0f, 25.0f, 0.45f, 0.0f, 0 }, { 1, 0, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 };
 
 const char* gTAniHorseshoeCrabSharkName = "TAniHorseshoeCrabShark";
 
 // 0x801C3ADC
 TAniHorseshoeCrabShark::TAniHorseshoeCrabShark(TObject* parent)
-    : TAniMount(parent, 0x16), mBob(0), mMove(0)
+    : TAniMount(parent, 0x16)
+    , mBob(0)
+    , mMove(0)
 {
 	mBirth = 0;
 	_00    = (u32)gTAniHorseshoeCrabSharkName;
 	mSize  = 0x4D4;
 
 	TObject* shotParent = new TObject(this);
-	mShotParent = shotParent;
+	mShotParent         = shotParent;
 
-	mBodyHit.mOwnerId = mObjId;
-	mBodyHit.mRadius  = 10.0f;
-	mBodyHit.mOffset  = sHorseshoeBodyOffset;
-	mDiveHit.mOwnerId = mObjId;
-	mDiveHit.mActive  = 0;
-	mDiveHit.mRadius  = 10.0f;
-	mDiveHit.mKind      = 1;
-	mDiveHit.mNode      = 2;
+	mBodyHit.mOwnerId  = mObjId;
+	mBodyHit.mRadius   = 10.0f;
+	mBodyHit.mOffset   = sHorseshoeBodyOffset;
+	mDiveHit.mOwnerId  = mObjId;
+	mDiveHit.mActive   = 0;
+	mDiveHit.mRadius   = 10.0f;
+	mDiveHit.mKind     = 1;
+	mDiveHit.mNode     = 2;
 	mHits.mList.mBody  = &mBody;
 	mHits.mList.mModel = &mModel;
 	mHits.mList.mLife  = &mLife;
@@ -82,7 +78,7 @@ TAniHorseshoeCrabShark::TAniHorseshoeCrabShark(TObject* parent)
 	mBody.setMask(4);
 	mBlink.mLife = &mLife;
 	mBlink.mBody = &mBody;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawTask, 0x21, 0);
+	mDrawTask    = addDrawTask(this, (void (*)(void*))drawTask, 0x21, 0);
 	mModel.setNodes(sHorseshoeCrabSharkModelNodes, 3);
 	mModel.update(&mAsset);
 	mMotions.set(&mMotion, sHorseshoeCrabSharkMotions);
@@ -93,20 +89,20 @@ TAniHorseshoeCrabShark::TAniHorseshoeCrabShark(TObject* parent)
 
 	mWalk.setBody(&mBody);
 	mWalk.mRunSpeed = 100.0f;
-	mWalk.mRunFrom = 70.0f;
-	mWalk.mAccel = 0.1f;
-	mWalk.mDecel = 0.1f;
-	mWalk.mTilt = 1;
+	mWalk.mRunFrom  = 70.0f;
+	mWalk.mAccel    = 0.1f;
+	mWalk.mDecel    = 0.1f;
+	mWalk.mTilt     = 1;
 	mJump.setBody(&mBody);
-	mJump.mGravity = -400.0f;
+	mJump.mGravity   = -400.0f;
 	mJump.mJumpSpeed = 200.0f;
-	mJump.mAirSpeed = 60.0f;
+	mJump.mAirSpeed  = 60.0f;
 	mDive.setBody(&mBody);
-	mDive.mDrag = 0.985f;
-	mDive.mSpeed = 120.0f;
+	mDive.mDrag      = 0.985f;
+	mDive.mSpeed     = 120.0f;
 	mDive.mStopSpeed = 40.0f;
 	mSlam.setBody(&mBody);
-	mSlam.mMaxFall = 300.0f;
+	mSlam.mMaxFall  = 300.0f;
 	mSlam.mFallRate = 0.5f;
 }
 
@@ -120,8 +116,8 @@ TAniHorseshoeCrabShark::~TAniHorseshoeCrabShark()
 // 0x801C3FCC
 void TAniHorseshoeCrabShark::onLoaded()
 {
-	mPos  = mStartPos;
-	mRotY = mStartRot;
+	mPos       = mStartPos;
+	mRotY      = mStartRot;
 	mBody.mPos = mPos;
 	updateMatrix();
 	updateShadow();
@@ -191,7 +187,7 @@ void TAniHorseshoeCrabShark::drawTask(TAniHorseshoeCrabShark* self)
 		f32 matrix[12];
 		DrawState state;
 		state.mFlags = 0;
-		state._20 = 0;
+		state._20    = 0;
 		if (self->mBirth != 0) {
 			self->mBirth->getDrawState(&state);
 		} else {
@@ -392,16 +388,16 @@ void TAniHorseshoeCrabShark::runBirth(int phase)
 	if (phase == 0) {
 		mMotion.play(0xB);
 		TAniBirth* birth = new TAniBirth(this, this, (ItemHolder*)&mAsset, &mBody);
-		mBirth = birth;
-		mBirth->mFxBank    = 0x23;
-		mBirth->mTextId    = 0x1C;
-		TAniBirth* at = mBirth;
-		at->mTextAtA.x = 0.0f;
-		at->mTextAtA.y = 6.0f;
-		at->mTextAtA.z = 0.0f;
-		at->mTextAtB.x = 60.0f;
-		at->mTextAtB.y = 10.0f;
-		at->mTextAtB.z = 10.0f;
+		mBirth           = birth;
+		mBirth->mFxBank  = 0x23;
+		mBirth->mTextId  = 0x1C;
+		TAniBirth* at    = mBirth;
+		at->mTextAtA.x   = 0.0f;
+		at->mTextAtA.y   = 6.0f;
+		at->mTextAtA.z   = 0.0f;
+		at->mTextAtB.x   = 60.0f;
+		at->mTextAtB.y   = 10.0f;
+		at->mTextAtB.z   = 10.0f;
 	} else if (phase == 1) {
 		mBirth->mFlags |= 1;
 		mBirth = 0;
@@ -521,8 +517,8 @@ void TAniHorseshoeCrabShark::runDive(int phase)
 		sound(0x1F6);
 		mDives     = 1;
 		mDiveFxOff = 0;
-		mFx2 = 0;
-		mFx  = 0;
+		mFx2       = 0;
+		mFx        = 0;
 		startDiveFx();
 	} else if (phase == 1) {
 		mHits.mList.remove(&mDiveHit);
@@ -556,8 +552,8 @@ void TAniHorseshoeCrabShark::runDive(int phase)
 		if (mDiveFxOff == 0 && mDive.state() == 1) {
 			fxStop(mFx);
 			fxStop(mFx2);
-			mFx2 = 0;
-			mFx  = 0;
+			mFx2       = 0;
+			mFx        = 0;
 			mDiveFxOff = 1;
 		}
 		if (mFx != 0) {
@@ -663,7 +659,7 @@ void TAniHorseshoeCrabShark::runSlam(int phase)
 void TAniHorseshoeCrabShark::runStun(int phase)
 {
 	if (phase == 0) {
-		mWait = 0x3C;
+		mWait      = 0x3C;
 		mBody.mVel = gVecZero;
 		useMove(&mWalk);
 	} else if (phase == 2) {

@@ -84,7 +84,7 @@ void TObjPurpleIceFloor::initFromDesc(SetDesc* desc)
 	mtxSetTransV(mMatrix, &mPos);
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 
-	mCenter  = *(Vec3f*)&mModelData->model->center;
+	mCenter = *(Vec3f*)&mModelData->model->center;
 	mtxMultVec(mMatrix, &mCenter, &mCenter);
 	mRadius = mModelData->model->r;
 	updateShape();
@@ -156,9 +156,9 @@ void TObjPurpleIceFloor::setColliBox(void* colli, const Vec3f* center, f32 radiu
 	high.z = size.z;
 	Vec3f low;
 	Vec3f t = colliNeg(size);
-	low.x = t.x;
-	low.y = t.y;
-	low.z = t.z;
+	low.x   = t.x;
+	low.y   = t.y;
+	low.z   = t.z;
 
 	gjPushUnitMatrix();
 	njTranslateEx(center);
@@ -205,11 +205,11 @@ void TObjPurpleIceFloor::draw()
 	}
 	switch (mAct) {
 	case 0:
-			stateWait();
-			break;
+		stateWait();
+		break;
 	case 1:
-			shatter();
-			break;
+		shatter();
+		break;
 	}
 }
 

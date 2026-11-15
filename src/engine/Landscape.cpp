@@ -268,10 +268,10 @@ void TLandscape::updateAnims()
 
 void initLandscape()
 {
-	sLandscapeArc = 0;
-	sLandscapeObj = 0;
-	sLandscapeCur = 0;
-	sLandscapeBlend = 0.0f;
+	sLandscapeArc     = 0;
+	sLandscapeObj     = 0;
+	sLandscapeCur     = 0;
+	sLandscapeBlend   = 0.0f;
 	sLandscapeEnabled = 1;
 }
 
@@ -334,13 +334,13 @@ static void drawOpaque();
 static void drawAlpha();
 
 TLandNightTest::TLandNightTest(TObject* parent)
-	: TObject(parent)
+    : TObject(parent)
 {
-	_00        = (u32)gTLandNightTestName;
-	mSize      = sizeof(TLandNightTest);
-	mDraw      = addDrawTask(this, (void (*)(void*))drawOpaque, 0x21, 0);
-	mDrawAlpha = addDrawTask(this, (void (*)(void*))drawAlpha, 0x22, 0);
-	mBlend     = sLandscapeBlend;
+	_00         = (u32)gTLandNightTestName;
+	mSize       = sizeof(TLandNightTest);
+	mDraw       = addDrawTask(this, (void (*)(void*))drawOpaque, 0x21, 0);
+	mDrawAlpha  = addDrawTask(this, (void (*)(void*))drawAlpha, 0x22, 0);
+	mBlend      = sLandscapeBlend;
 	mBlendTimer = 0;
 	applyBlend(mBlend);
 }

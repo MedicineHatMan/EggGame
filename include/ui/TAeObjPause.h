@@ -39,31 +39,31 @@ public:
 	virtual void draw();   // _0C
 	virtual void render(); // _1C
 
-	void stateOpen();    // 0x80124C90
-	void stateSelect();  // 0x80124D24
-	void stateConfirm(); // 0x801251C0
-	void stateWait();    // 0x8012532C
-	void stateClose();   // 0x80125398
-	void close();        // 0x801253F0 starts the menu playing out
-	void closeConfirm(); // 0x801254F8
+	void stateOpen();     // 0x80124C90
+	void stateSelect();   // 0x80124D24
+	void stateConfirm();  // 0x801251C0
+	void stateWait();     // 0x8012532C
+	void stateClose();    // 0x80125398
+	void close();         // 0x801253F0 starts the menu playing out
+	void closeConfirm();  // 0x801254F8
 	void setPad(int pad); // 0x801255C0 whose pad steers it shown on the backdrop
 
-	TAeLayer* mBase;                // _34 the backdrop with the others attached
-	TAeLayer* mTitle;               // _38
-	TAeLayer* mRow[PAUSE_ROWS];     // _3C
-	DrawTask* mTask;                // _4C
-	int mState;                     // _50
-	int mCursor;                    // _54
-	s32 mResult;                    // _58 the row chosen -1 until then
-	BOOL mDisabled[PAUSE_ROWS];     // _5C rows the cursor skips
-	u32 mPad;                       // _6C
-	u32 mCoins;                     // _70
-	BOOL mDone;                     // _74 it has played out
-	f32 mColor[4];                  // _78 what the rows are tinted
-	TSimpleText* mHint;             // _88 the question over the yes/no window
-	TSimpleText* mText[2];          // _8C shown with the window
-	TAeObjMsgWindow* mWindow;       // _94
-	int mChoice;                    // _98 0 yes 1 no
+	TAeLayer* mBase;            // _34 the backdrop with the others attached
+	TAeLayer* mTitle;           // _38
+	TAeLayer* mRow[PAUSE_ROWS]; // _3C
+	DrawTask* mTask;            // _4C
+	int mState;                 // _50
+	int mCursor;                // _54
+	s32 mResult;                // _58 the row chosen -1 until then
+	BOOL mDisabled[PAUSE_ROWS]; // _5C rows the cursor skips
+	u32 mPad;                   // _6C
+	u32 mCoins;                 // _70
+	BOOL mDone;                 // _74 it has played out
+	f32 mColor[4];              // _78 what the rows are tinted
+	TSimpleText* mHint;         // _88 the question over the yes/no window
+	TSimpleText* mText[2];      // _8C shown with the window
+	TAeObjMsgWindow* mWindow;   // _94
+	int mChoice;                // _98 0 yes 1 no
 };
 
 class TAeObjPlayRest;

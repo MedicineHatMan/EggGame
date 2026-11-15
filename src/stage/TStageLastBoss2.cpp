@@ -15,7 +15,9 @@ extern "C" TStage* createLastBoss2Stage()
 }
 
 // 0x8017BB18
-TStageLastBoss2::TStageLastBoss2() { }
+TStageLastBoss2::TStageLastBoss2()
+{
+}
 
 // 0x8017BB54
 void TStageLastBoss2::loadAssets()
@@ -42,4 +44,6 @@ void TStageLastBoss2::vfn_14()
 }
 
 // 0x8017BBDC
-TStageLastBoss2::~TStageLastBoss2() { }
+TStageLastBoss2::~TStageLastBoss2()
+{
+}

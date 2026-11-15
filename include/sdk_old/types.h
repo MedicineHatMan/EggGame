@@ -204,13 +204,13 @@ enum { false, true };
 #endif
 
 // Random and useful macros
-#define PATH_MAX  (256)                     // Max path length
+#define PATH_MAX (256) // Max path length
 // #define MAX(a, b) (((a) > (b)) ? (a) : (b)) // Returns the maximum of a and b
 // #define MIN(a, b) (((a) < (b)) ? (a) : (b)) // Returns the minimum of a and b
 
 // Flag manipulation macros
 #define ARRAY_SIZE(o)        (sizeof((o)) / sizeof(*(o)))   // Array size define
-#define ARRAY_COUNT(o)       (int)ARRAY_SIZE(o)   // Array size define
+#define ARRAY_COUNT(o)       (int)ARRAY_SIZE(o)             // Array size define
 #define ALIGN_PREV(X, N)     ((X) & ~((N) - 1))             // Align X to the previous N bytes N must be power of two
 #define ALIGN_NEXT(X, N)     ALIGN_PREV(((X) + (N) - 1), N) // Align X to the next N bytes N must be power of two
 #define IS_NOT_ALIGNED(X, N) (((X) & ((N) - 1)) != 0)       // True if X is not aligned to N bytes else false
@@ -348,7 +348,7 @@ inline void padStack(void)
 
 #ifndef __cplusplus
 #define staticassert_name_helper(line) static_assert##line
-#define static_assert(x) extern void* static_assert_helper[(x) ? 1 : 0];
+#define static_assert(x)               extern void* static_assert_helper[(x) ? 1 : 0];
 #endif
 
 #define size_assert(struct, size) static_assert(sizeof(struct) == size)

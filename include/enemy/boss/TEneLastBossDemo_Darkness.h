@@ -16,9 +16,9 @@ public:
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
 	NJS_OBJECT mBank; // _20 a bare object for the motion to move
-	void* mTable;   // _58
-	f32 mTime;      // _5C
-	void* mFx[2];   // _60
+	void* mTable;     // _58
+	f32 mTime;        // _5C
+	void* mFx[2];     // _60
 };
 
 #endif

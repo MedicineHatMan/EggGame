@@ -41,17 +41,17 @@ public:
 	void resetChase(int rot);                  // 0x80063948
 	void setLookFrom(const Vec3f* from);       // 0x8006397C
 
-	u32 mCamFlags;        // _50 ZELDA_ bits
-	BOOL mShaking;        // _54
-	f32 mShakeVel;        // _58
-	f32 mShake;           // _5C the swing settling back to 0
-	CamHead mHead;        // _60
-	HitVec mSample[15];   // _A0
-	Vec3f mCurvePos;      // _154
-	CamCurve mCurve;      // _160
-	HitVec mKnot[15];     // _1C4
-	CamChase mChase;      // _278
-	Vec3f mLookFrom;      // _418
+	u32 mCamFlags;      // _50 ZELDA_ bits
+	BOOL mShaking;      // _54
+	f32 mShakeVel;      // _58
+	f32 mShake;         // _5C the swing settling back to 0
+	CamHead mHead;      // _60
+	HitVec mSample[15]; // _A0
+	Vec3f mCurvePos;    // _154
+	CamCurve mCurve;    // _160
+	HitVec mKnot[15];   // _1C4
+	CamChase mChase;    // _278
+	Vec3f mLookFrom;    // _418
 };
 
 #endif

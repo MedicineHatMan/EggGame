@@ -52,8 +52,8 @@ void TStageBattle::setPlayers(int n)
 // 0x8006B6A8
 void TStageBattle::setCamera(int slot, int camera)
 {
-	slot           = slot < 0 ? 0 : (slot > 3 ? 3 : slot);
-	mCamera[slot]  = camera < 0 ? 0 : (camera > 3 ? 3 : camera);
+	slot          = slot < 0 ? 0 : (slot > 3 ? 3 : slot);
+	mCamera[slot] = camera < 0 ? 0 : (camera > 3 ? 3 : camera);
 }
 
 // 0x8006B6F8
@@ -196,9 +196,9 @@ void TStageBattle::loadAssets()
 	u32 ambient;
 
 	SceneLights* scene = mLights;
-	dir.x        = 0.0f;
-	dir.y        = -1.0f;
-	dir.z        = 0.0f;
+	dir.x              = 0.0f;
+	dir.y              = -1.0f;
+	dir.z              = 0.0f;
 	sceneLightsSetSunDir(scene, &dir);
 	sun = 0xFFFFFFFF;
 	sceneLightsSetSunColor(scene, &sun);
@@ -236,14 +236,14 @@ void TStageBattle::run(u32 flags)
 		case 4:
 		default:
 			useCamera(mCamera[0]);
-		viewTopLeft();
-		drawView();
-		useCamera(mCamera[1]);
-		viewTopRight();
-		drawView();
-		useCamera(mCamera[2]);
-		viewBottomLeft();
-		drawView();
+			viewTopLeft();
+			drawView();
+			useCamera(mCamera[1]);
+			viewTopRight();
+			drawView();
+			useCamera(mCamera[2]);
+			viewBottomLeft();
+			drawView();
 			useCamera(mCamera[3]);
 			viewBottomRight();
 			drawView();

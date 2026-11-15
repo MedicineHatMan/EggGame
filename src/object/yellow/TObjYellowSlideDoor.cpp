@@ -105,11 +105,11 @@ void TObjYellowSlideDoor::initFromDesc(SetDesc* desc)
 	mHasOffset = hasOffset;
 
 	if (mHasOffset != 0) {
-		f32 z       = desc->getFloat(2);
-		f32 y       = desc->getFloat(1);
-		mCamEye.x  = desc->getFloat(0);
-		mCamEye.y  = y;
-		mCamEye.z  = z;
+		f32 z     = desc->getFloat(2);
+		f32 y     = desc->getFloat(1);
+		mCamEye.x = desc->getFloat(0);
+		mCamEye.y = y;
+		mCamEye.z = z;
 		vecRotateY(&mCamEye, &mCamEye, mRot.y);
 		vecAdd(&mCamEye, &mCamEye, &mPos);
 	} else {
@@ -173,9 +173,9 @@ void TObjYellowSlideDoor::setColliBox(void* colli, const Vec3f* center, f32 radi
 	high.z = size.z;
 	Vec3f low;
 	Vec3f t = colliNeg(size);
-	low.x = t.x;
-	low.y = t.y;
-	low.z = t.z;
+	low.x   = t.x;
+	low.y   = t.y;
+	low.z   = t.z;
 
 	gjPushUnitMatrix();
 	njTranslateEx(center);
@@ -196,7 +196,7 @@ void TObjYellowSlideDoor::updateMatrix()
 	mtxTranslate((float*)mMatrix, (const float*)mMatrix, mLift, 0.0f, 0.0f);
 
 	GjModel* model = mModelData->model;
-	mCenter  = *(Vec3f*)&model->center;
+	mCenter        = *(Vec3f*)&model->center;
 	mtxMultVec(mMatrix, &mCenter, &mCenter);
 	mRadius = mModelData->model->r;
 }

@@ -24,7 +24,7 @@ BossTail::BossTail(int count)
 		mPoints[i].set(0.0f, 0.0f, 0.0f);
 		mPrev[i].set(0.0f, 0.0f, 0.0f);
 		mVel[i].set(0.0f, 0.0f, 0.0f);
-		mLengths[i]  = 0.0f;
+		mLengths[i] = 0.0f;
 	}
 	mBend = 0.0004f;
 	mDrop = 1.0f;
@@ -112,7 +112,7 @@ void BossTail::step(int index, Vec3f* dir)
 	njAddVector(&pull, &mVel[index]);
 
 	int angle = 10430.38043493439 * (f32)acos(njInnerProduct(dir, &link));
-	bend = *dir;
+	bend      = *dir;
 	njSubVector(&bend, &link);
 	if (njUnitVector(&bend) < gUnitVectorMin) {
 		bend = gVecZero;

@@ -3,7 +3,6 @@
 
 #include "ui/TAeObject.h"
 
-
 /**
  * One sprite inside a clip. _02 is the kind: 0 empty, 1 eight shorts plus a texture,
  * 2 a cell id, 4 a linked clip, 5 a draw function and a clip. The bytes at _04 change
@@ -121,10 +120,10 @@ public:
 	TAeObject* mOwner; // _04
 	u32 mPlayFlags;    // _08 low 7 bits are the repeat count
 	u32 mId;           // _0C
-	f32 mTime;     // _10 advanced by step
-	f32 mPrevTime; // _14
-	f32 mStart;    // _18
-	f32 mEnd;      // _1C
+	f32 mTime;         // _10 advanced by step
+	f32 mPrevTime;     // _14
+	f32 mStart;        // _18
+	f32 mEnd;          // _1C
 	f32 mMtx[12];      // _20
 	f32 _50;           // _50
 	f32 _54;           // _54

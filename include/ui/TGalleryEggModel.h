@@ -26,12 +26,12 @@ public:
 
 	void initMotion(); // 0x801B6434
 
-	s16 mEgg;      // _20
-	u16 _22;       // _22
-	f32 mMtx[12];  // _24
-	DrawTask* mDraw;   // _54
-	f32 mFrame;    // _58
-	f32 mRate;     // _5C
+	s16 mEgg;        // _20
+	u16 _22;         // _22
+	f32 mMtx[12];    // _24
+	DrawTask* mDraw; // _54
+	f32 mFrame;      // _58
+	f32 mRate;       // _5C
 };
 
 class TObject;

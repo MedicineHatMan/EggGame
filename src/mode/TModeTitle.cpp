@@ -42,14 +42,16 @@ TModeTitle::TModeTitle()
 }
 
 // 0x80014B10
-TModeTitle::~TModeTitle() { }
+TModeTitle::~TModeTitle()
+{
+}
 
 // 0x80014B38
 void TModeTitle::nextScene()
 {
-	u8 scene = gTitleScene + 1;
+	u8 scene    = gTitleScene + 1;
 	gTitleScene = scene;
-	int value = (s8)scene;
+	int value   = (s8)scene;
 	if (value >= 5 || value < 0) {
 		gTitleScene = 0;
 	}
@@ -127,7 +129,9 @@ int TModeTitle::init()
 }
 
 // 0x80014DD0
-void TStage::loadAssets() { }
+void TStage::loadAssets()
+{
+}
 
 // 0x80014DD4
 int TModeTitle::shutdown()
@@ -147,7 +151,9 @@ int TModeTitle::shutdown()
 }
 
 // 0x80014E60
-void TStage::freeAssets() { }
+void TStage::freeAssets()
+{
+}
 
 // 0x80014E64
 void TModeTitle::update()
@@ -164,7 +170,10 @@ void TModeTitle::update()
 }
 
 // 0x80014EC4
-void TModeTitle::requestSwitch() { mFlags |= 1; }
+void TModeTitle::requestSwitch()
+{
+	mFlags |= 1;
+}
 
 // 0x80014ED4
 void TModeTitle::switchPart()
@@ -215,10 +224,13 @@ int TModeTitle::startTitle()
 }
 
 // 0x80015054
-void TStage::vfn_14() { }
+void TStage::vfn_14()
+{
+}
 
 // Deletes and clears The callers check for null first as well which leaves the doubled branch in the DOL
-template <typename T> inline void deleteObj(T*& obj)
+template <typename T>
+inline void deleteObj(T*& obj)
 {
 	if (obj != 0) {
 		delete obj;

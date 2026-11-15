@@ -22,15 +22,15 @@ public:
 	virtual void vfn_10();
 
 	virtual void setTarget(u16 id); // _2C 0x8008AA00
-	void vfn_20();          // 0x8008AA5C
+	void vfn_20();                  // 0x8008AA5C
 
-	CamHead mHead;       // _50
+	CamHead mHead;      // _50
 	HitVec mSample[15]; // _90
 	CamCurve mCurve;    // _144
 	HitVec mKnot[15];   // _1A8
-	Vec3f mTarget; // _25C
-	f32 mRise;     // _268 the float at line+4
-	f32 mReach;    // _26C
+	Vec3f mTarget;      // _25C
+	f32 mRise;          // _268 the float at line+4
+	f32 mReach;         // _26C
 };
 
 #endif

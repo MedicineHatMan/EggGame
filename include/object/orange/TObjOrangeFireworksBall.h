@@ -15,16 +15,16 @@ extern "C" void objHeapFree(void*, void*);
 /** The holder's side of the ball */
 struct FireworksBallHandle : public EggHandleBase {
 	inline FireworksBallHandle() { }
-	virtual ~FireworksBallHandle() { }  // _08 0x8012F330
+	virtual ~FireworksBallHandle() { }         // _08 0x8012F330
 	virtual inline int onMessage(ObjMsg* msg); // _0C 0x80130380
 
 	u32 _10; // _10
 };
 
 struct FireworksHoldMsg {
-	u16 mType;     // _00
+	u16 mType; // _00
 	u8 _02[2];
-	u16 mHolder;   // _04
+	u16 mHolder; // _04
 	u8 _06[2];
 	void* mHandle; // _08
 	Vec3f mPos;    // _0C
@@ -33,11 +33,11 @@ struct FireworksHoldMsg {
 };
 
 struct FireworksThrowMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u8 _02[2];
 	u16 mHolder; // _04
 	u8 _06[2];
-	Vec3f mVel;  // _08
+	Vec3f mVel; // _08
 };
 
 /**
@@ -101,24 +101,24 @@ public:
 	int onDrop(ObjMsg* msg);
 	int onSlam(ObjMsg* msg);
 
-	s8 mState;             // _30
-	FlagByte mBusy;        // _31 8 once it has burst
-	u16 mTimer;            // _32
-	u16 mOwner;            // _34
+	s8 mState;      // _30
+	FlagByte mBusy; // _31 8 once it has burst
+	u16 mTimer;     // _32
+	u16 mOwner;     // _34
 	u8 _36[2];
 	CharaColli* mShape;          // _38
-	DrawTask* mDrawTask;   // _3C
-	EggBody mBody;         // _40
-	EggCollide mCollide;   // _158
-	SetLinkMember mLink;   // _174
-	f32 mPlace[12];        // _180
-	f32 mDrawMtx[12];      // _1B0
+	DrawTask* mDrawTask;         // _3C
+	EggBody mBody;               // _40
+	EggCollide mCollide;         // _158
+	SetLinkMember mLink;         // _174
+	f32 mPlace[12];              // _180
+	f32 mDrawMtx[12];            // _1B0
 	FireworksBallHandle mHandle; // _1E0
-	Vec3f mPos;            // _1F4
+	Vec3f mPos;                  // _1F4
 	u8 _200[0x10];
 	// An EggRoll without the fields only TObjEgg uses the next member here starts 0x30 in
-	EggRoll mRoll;         // _210
-	ObjShadow mShadow;     // _240
+	EggRoll mRoll;     // _210
+	ObjShadow mShadow; // _240
 };
 
 class TArc;

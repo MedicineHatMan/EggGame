@@ -9,7 +9,7 @@ extern "C" void* createGameRace(TObject* parent)
 	return new TGameRace(parent);
 }
 
-const char* gTGameRaceName = "TGameRace";
+const char* gTGameRaceName      = "TGameRace";
 const char* gTGameStateRaceName = "TGameStateRace";
 
 // 0x801B3FA4
@@ -22,7 +22,9 @@ TGameRace::TGameRace(TObject* parent)
 }
 
 // 0x801B3FF8
-TGameRace::~TGameRace() { }
+TGameRace::~TGameRace()
+{
+}
 
 // 0x801B4054
 void TGameRace::startState()

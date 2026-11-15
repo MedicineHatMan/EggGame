@@ -27,11 +27,11 @@ public:
 	void runBurst();
 	void throwBombs();
 
-	f32 mTravelled;    // _384
-	f32 mSpeed;        // _388
-	f32 mAccel;        // _38C
-	f32 mGrowth;       // _390
-	int mWait;         // _394
+	f32 mTravelled;                 // _384
+	f32 mSpeed;                     // _388
+	f32 mAccel;                     // _38C
+	f32 mGrowth;                    // _390
+	int mWait;                      // _394
 	TAniFlushFlowerBomb* mBombs[8]; // _398
 };
 

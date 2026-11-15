@@ -22,7 +22,7 @@ int loadGoal()
 
 	aeLoadArc((const char*)("ae_goal.arc"), (TArc**)&sAeGoalArc);
 	if (sAeGoalArc != 0) {
-		header       = *(u32**)(sAeGoalArc + 0x4C);
+		header = *(u32**)(sAeGoalArc + 0x4C);
 		relocateAe((void*)(sAeGoalData = header[0]));
 		sAeGoalTex = header[1];
 		bindGvmTextures((u8*)header[2], (NJS_TEXLIST*)sAeGoalTex);
@@ -38,7 +38,7 @@ void aeGoalFree()
 		releaseTextures((NJS_TEXLIST*)sAeGoalTex);
 		sAeGoalTex = 0;
 		aeFreeArc((TArc**)&sAeGoalArc);
-		sAeGoalArc = 0;
+		sAeGoalArc  = 0;
 		sAeGoalData = 0;
 	}
 }

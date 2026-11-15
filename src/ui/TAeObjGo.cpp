@@ -17,15 +17,15 @@ const char* gTAeObjGoName = "TAeObjGo";
 
 // What ae_go.arc holds
 struct AeGoArc {
-	void* mAe;      // _00
+	void* mAe;             // _00
 	NJS_TEXLIST* mTexList; // _04
-	void* mGvm;     // _08
+	void* mGvm;            // _08
 };
 
 extern "C" {
-TArc* gAeGoArc;      // 0x802C5770
-void* gAeGoData;     // 0x802C5774
-NJS_TEXLIST* gAeGoTexList;  // 0x802C5778
+TArc* gAeGoArc;            // 0x802C5770
+void* gAeGoData;           // 0x802C5774
+NJS_TEXLIST* gAeGoTexList; // 0x802C5778
 }
 
 // 0x80152BE0
@@ -37,7 +37,9 @@ extern "C" void initAeGo()
 }
 
 // 0x80152BF4
-extern "C" void termAeGo() {}
+extern "C" void termAeGo()
+{
+}
 
 // 0x80152BF8
 extern "C" int loadAeGo()

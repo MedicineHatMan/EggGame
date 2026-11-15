@@ -35,11 +35,11 @@ void fill2DSetColor(u32 color)
 void fill2DRect(f32 z, const f32* rect, int)
 {
 	f32 x0, x1, y0, y1, w;
-	w  = -1.0f / z;
-	x0 = rect[0] * w;
-	x1 = rect[2] * w;
-	y0 = rect[1] * w;
-	y1 = rect[3] * w;
+	w          = -1.0f / z;
+	x0         = rect[0] * w;
+	x1         = rect[2] * w;
+	y0         = rect[1] * w;
+	y1         = rect[3] * w;
 	u32 top    = sFillTop;
 	u32 bottom = sFillBottom;
 

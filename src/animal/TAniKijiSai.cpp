@@ -37,16 +37,11 @@ f32 sKijiSaiRate3 = 0.65f;
 
 extern "C" {
 MotionEntry gKijiMotions[] = {
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 15.0f, sKijiSaiRate0, 0.0f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, sKijiSaiRate1, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 32.0f, sKijiSaiRate2, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 15.0f, sKijiSaiRate3, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 32.0f, sKijiSaiRate2, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 32.0f, sKijiSaiRate2, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 30.0f, sKijiSaiRate1, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 32.0f, sKijiSaiRate2, 0.0f, 0 },
-	{ MOTION_LOOP, 2, -1, 0, 0.0f, 32.0f, sKijiSaiRate2, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 0.0f, 15.0f, sKijiSaiRate0, 0.0f, 0 }, { MOTION_LOOP, 1, -1, 0, 0.0f, 30.0f, sKijiSaiRate1, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 32.0f, sKijiSaiRate2, 0.0f, 0 }, { MOTION_LOOP, 3, -1, 0, 0.0f, 15.0f, sKijiSaiRate3, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 32.0f, sKijiSaiRate2, 0.0f, 0 }, { MOTION_ONCE, 4, -1, 0, 0.0f, 55.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 2, -1, 0, 0.0f, 32.0f, sKijiSaiRate2, 0.0f, 0 }, { MOTION_ONCE, 1, -1, 0, 0.0f, 30.0f, sKijiSaiRate1, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 32.0f, sKijiSaiRate2, 0.0f, 0 }, { MOTION_LOOP, 2, -1, 0, 0.0f, 32.0f, sKijiSaiRate2, 0.0f, 0 },
 };
 ColliShape sKijiSaiFirstShape[] = {
 	{ { 0.0f, 5.0f, 0.0f }, 0x0, 0, 0x0, 5.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
@@ -104,7 +99,16 @@ TAniKijiSai::~TAniKijiSai()
 }
 
 /** Draws one copy spread to the side */
-#define KIJISAI_DRAW_ONE(spread)                                 	njPushMatrixEx();                                           	gjTranslate(spread, 0.0f, 0.0f);                            	gjRotateZ(-mRot[2]);                                        	if (mActor != 0) {                                          		gjDrawActor(mActor);                                       	} else {                                                    		debugWireSphere(gjGetMatrix(), &gColorBlack);              	}                                                           	njPopMatrixEx();
+#define KIJISAI_DRAW_ONE(spread)                      \
+	njPushMatrixEx();                                 \
+	gjTranslate(spread, 0.0f, 0.0f);                  \
+	gjRotateZ(-mRot[2]);                              \
+	if (mActor != 0) {                                \
+		gjDrawActor(mActor);                          \
+	} else {                                          \
+		debugWireSphere(gjGetMatrix(), &gColorBlack); \
+	}                                                 \
+	njPopMatrixEx();
 
 // 0x8013273C
 void TAniKijiSai::render()
@@ -137,9 +141,9 @@ void TAniKijiSai::onPhase(int phase)
 		playMotion(3, 1, 0.075f);
 		eggTypeStopAllFx(this);
 		startFollowers();
-		mTimer = 0;
-		mAniFlags   = 0;
-		mStep  = 0xC;
+		mTimer    = 0;
+		mAniFlags = 0;
+		mStep     = 0xC;
 
 		u8 shape[0x30];
 		if ((int)mParams->mValues[4] == 0) {
@@ -219,7 +223,8 @@ void TAniKijiSai::runFly()
 	EggHits hits;
 	EggProbe probe;
 	Vec3f to = kijiAdd(&mPos, &mVel);
-	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&mPos, (const Vec3f*)&to, (unsigned long)((-1))) != 0 || mTravelled >= mParams->mValues[3] || touchedTarget() != 0) {
+	if (meshColliProbeLine((EggHit*)&hits, (const Vec3f*)&mPos, (const Vec3f*)&to, (unsigned long)((-1))) != 0
+	    || mTravelled >= mParams->mValues[3] || touchedTarget() != 0) {
 		eggTypeStopAllFx(this);
 		killFx();
 		killFx2();

@@ -35,13 +35,13 @@ struct MirrorVec : public Vec3f {
 	}
 };
 
-NJS_TEXNAME sMirrorTexName;    // 0x80282798
+NJS_TEXNAME sMirrorTexName;                // 0x80282798
 MirrorVec sMirrorPos(0.0f, 0.0f, 0.0f);    // 0x802827A4 a point on the mirror
 MirrorVec sMirrorNormal(1.0f, 0.0f, 0.0f); // 0x802827B0
-NJS_TEXLIST sMirrorTexList;    // 0x802C55B8
-int sMirrorCopyPending;        // 0x802C55C0
-int sMirrorReflecting;         // 0x802C55C4
-u16 sMirrorSync;               // 0x802C55C8
+NJS_TEXLIST sMirrorTexList;                // 0x802C55B8
+int sMirrorCopyPending;                    // 0x802C55C0
+int sMirrorReflecting;                     // 0x802C55C4
+u16 sMirrorSync;                           // 0x802C55C8
 
 // Unused the linker strips it but its 1.0 stays first in the pool ahead of the __sinit's 0.0
 void mirrorResetNormal()
@@ -76,7 +76,9 @@ extern "C" TStage* createOrangeStage()
 }
 
 // 0x801233E0
-TStageOrange::TStageOrange() { }
+TStageOrange::TStageOrange()
+{
+}
 
 // 0x8012341C
 void TStageOrange::loadAssets()
@@ -146,7 +148,7 @@ void TStageOrange::run(u32 flags)
 	}
 	if (draw) {
 		TObjAction* player = (TObjAction*)findPlayer(0);
-		Vec3f pos = *player->getPos();
+		Vec3f pos          = *player->getPos();
 		GXSetCopyClear(*(GXColor*)&sStageOrangeClearColor, 0xFFFFFF);
 		shadowTexGet()->begin(&pos);
 		runDrawTasks(0x1F);
@@ -161,7 +163,9 @@ void TStageOrange::run(u32 flags)
 }
 
 // 0x8012364C
-TStageOrange::~TStageOrange() { }
+TStageOrange::~TStageOrange()
+{
+}
 
 // 0x801236A4
 // Makes the 320x240 texture the reflection is copied into
@@ -247,8 +251,7 @@ extern "C" void mirrorCopyTex()
 {
 	if (sMirrorCopyPending != 0) {
 		GXSetDrawSync(++sMirrorSync);
-		while (sMirrorSync != GXReadDrawSync()) {
-		}
+		while (sMirrorSync != GXReadDrawSync()) { }
 		GXSetZMode(GX_ENABLE, GX_LEQUAL, GX_ENABLE);
 		GXSetTexCopySrc(0, 0, 320, 240);
 		GXSetTexCopyDst(320, 240, GX_TF_RGB565, GX_FALSE);

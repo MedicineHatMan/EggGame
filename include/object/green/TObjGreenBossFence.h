@@ -25,8 +25,8 @@ public:
 	virtual void vfn_10();
 	virtual void render();
 
-	DrawTask* mDrawTask;  // _90
-	EnemyLight mLight; // _94
+	DrawTask* mDrawTask; // _90
+	EnemyLight mLight;   // _94
 };
 
 extern "C" {

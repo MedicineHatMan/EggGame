@@ -29,10 +29,10 @@ public:
 	virtual void debugPrint(void*);           // _34
 	virtual void vfn_74();                    // _74 empty
 
-	NJS_OBJECT* mModel;        // _64
-	NJS_TEXLIST* mTexList;      // _68
-	DrawTask* mDraw;     // _6C
-	WaterSurface mWater; // _70
+	NJS_OBJECT* mModel;    // _64
+	NJS_TEXLIST* mTexList; // _68
+	DrawTask* mDraw;       // _6C
+	WaterSurface mWater;   // _70
 };
 
 extern "C" {

@@ -29,10 +29,14 @@ typedef char TObjHelios_size_check[(sizeof(TObjHelios) == 0xC4) ? 1 : -1];
 
 // 0x80189CD0
 // The set init pair both empty
-extern "C" void initTObjHelios() { }
+extern "C" void initTObjHelios()
+{
+}
 
 // 0x80189CD4
-extern "C" void termTObjHelios() { }
+extern "C" void termTObjHelios()
+{
+}
 
 // 0x80189CD8
 // The "sol" event command a helios at the three floats it is given
@@ -59,10 +63,10 @@ TObjHelios::TObjHelios(TObject* parent, const Vec3f* pos)
     , mZero(0)
     , mPos(*pos)
 {
-	_00     = (u32)gTObjHeliosName;
-	mSize   = 0xC4;
-	mFlags  = 0x200;
-	mColor  = 0xFF;
+	_00    = (u32)gTObjHeliosName;
+	mSize  = 0xC4;
+	mFlags = 0x200;
+	mColor = 0xFF;
 	mTrack.set(gStgObjCommon->mSet.mMotions[12], 1, 0.2f);
 	mModel.setModel(getStgObjModels()[51]);
 	mModel.mDrawState = (DrawState*)&mFlags;

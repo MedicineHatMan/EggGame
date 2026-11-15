@@ -36,14 +36,14 @@ TObjChickenBomb::TObjChickenBomb(TObject* parent, s16 id, const Vec3f* pos)
 {
 	ColliShape* shape;
 
-	_00      = (u32)gTObjChickenBombName;
+	_00       = (u32)gTObjChickenBombName;
 	mHolderId = id;
-	mSize    = 0x190;
-	mState = 3;
-	mDir.x = 0.0f;
-	mDir.y = 0.0f;
-	mDir.z = 0.0f;
-	mPos     = *pos;
+	mSize     = 0x190;
+	mState    = 3;
+	mDir.x    = 0.0f;
+	mDir.y    = 0.0f;
+	mDir.z    = 0.0f;
+	mPos      = *pos;
 	mtxSetTransV(mMtx, pos);
 	mBomb.mRadius = 4.0f;
 	mBomb.mPos    = *pos;
@@ -57,9 +57,9 @@ TObjChickenBomb::TObjChickenBomb(TObject* parent, s16 id, const Vec3f* pos)
 		colliGetShape((CharaColli*)mShape, 0)->mFlags = 4;
 		colliGetShape((CharaColli*)mShape, 0)->mSizeX = 4.0f;
 	}
-	mDraw        = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
-	mShadow._30  = 8.0f;
-	mShadow._34  = 8.0f;
+	mDraw       = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mShadow._30 = 8.0f;
+	mShadow._34 = 8.0f;
 	shadowDisable(&mShadow);
 	if (itemHolderAttach(0x14, &mHolder) == 0) {
 		mFlags |= 1;
@@ -144,7 +144,7 @@ u16 TObjChickenBomb::findTarget() const
 		return best;
 	}
 	ObjIdIter it = objIdIter();
-	found = 0;
+	found        = 0;
 	for (it.begin(); !it.atEnd(); it.next()) {
 		obj = (TObjAction*)it.getEgg();
 		if ((obj->getKind() == 2 || obj->getKind() == 0) && obj->canAct() && obj->mObjId != mHolderId) {
@@ -475,7 +475,7 @@ int EventQueue::push(void* arg, int (*start)(void*, int))
 {
 	EventEntry* entry = (EventEntry*)::operator new(sizeof(EventEntry));
 	entry->__ct(arg, start, mNextId);
-	int id = mNextId;
+	int id  = mNextId;
 	mNextId = id + 1;
 	EventEntry* last;
 
@@ -497,9 +497,9 @@ int EventQueue::pop(EventEntry* out)
 	if (mHead == 0) {
 		return 0;
 	}
-	*out        = *mHead;
-	out->mNext  = 0;
-	next        = mHead->mNext;
+	*out       = *mHead;
+	out->mNext = 0;
+	next       = mHead->mNext;
 	if (mHead != 0) {
 		delete mHead;
 		mHead = 0;

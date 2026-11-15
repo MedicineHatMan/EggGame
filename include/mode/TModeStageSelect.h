@@ -18,9 +18,9 @@ public:
 
 	const char* getStageName();
 
-	u8 mCursor;        // _0C
-	int mPlayer;       // _10 0 to 4
-	TArray<const char*> mStages;  // _14
+	u8 mCursor;                  // _0C
+	int mPlayer;                 // _10 0 to 4
+	TArray<const char*> mStages; // _14
 };
 
 #endif

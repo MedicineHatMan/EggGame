@@ -34,10 +34,10 @@ typedef struct NJS_POLYGON_VTX {
 static inline f32 plateSqrt(f32 x)
 {
 	if (x > 0.0f) {
-		double g = __frsqrte(x);
-		g = 0.5 * g * (3.0 - g * g * x);
-		g = 0.5 * g * (3.0 - g * g * x);
-		g = 0.5 * g * (3.0 - g * g * x);
+		double g       = __frsqrte(x);
+		g              = 0.5 * g * (3.0 - g * g * x);
+		g              = 0.5 * g * (3.0 - g * g * x);
+		g              = 0.5 * g * (3.0 - g * g * x);
 		volatile f32 y = (f32)(x * g);
 		return y;
 	}
@@ -58,21 +58,23 @@ ContactQuery::ContactQuery()
 }
 
 // 0x80051DEC
-ContactQuery::~ContactQuery() { }
+ContactQuery::~ContactQuery()
+{
+}
 
 // 0x80051E28
 void ContactQuery::reset()
 {
 	mOwner = _02 = mHitOwner = 0xFFFF;
-	mContact   = 0;
-	mPos.x     = 0.0f;
-	mPos.y     = 0.0f;
-	mPos.z     = 0.0f;
-	mHitPos.x  = 0.0f;
-	mHitPos.y  = 0.0f;
-	mHitPos.z  = 0.0f;
-	mGroup     = 0;
-	mHitGroup  = 0;
+	mContact                 = 0;
+	mPos.x                   = 0.0f;
+	mPos.y                   = 0.0f;
+	mPos.z                   = 0.0f;
+	mHitPos.x                = 0.0f;
+	mHitPos.y                = 0.0f;
+	mHitPos.z                = 0.0f;
+	mGroup                   = 0;
+	mHitGroup                = 0;
 	resetHitInfo(&mHit);
 	mFlags = 0;
 }
@@ -103,10 +105,10 @@ int ContactQuery::findHit(TObjAction* attacker, CharaColli* colli)
 			TObjAction* obj = findObjById(mOwner);
 			if (obj != 0 && obj->onHit(attacker, colliContactTag(contact), (int*)&mHit)) {
 				mFlags |= 2;
-				mContact   = contact;
-				mHitOwner  = mOwner;
-				mHitPos    = contact->mPos;
-				mHitGroup  = colliGetGroup(contact->mOther);
+				mContact  = contact;
+				mHitOwner = mOwner;
+				mHitPos   = contact->mPos;
+				mHitGroup = colliGetGroup(contact->mOther);
 				return 1;
 			}
 		}
@@ -121,7 +123,9 @@ MotionTrack::MotionTrack()
 }
 
 // 0x80052038
-MotionTrack::~MotionTrack() { }
+MotionTrack::~MotionTrack()
+{
+}
 
 // 0x80052074
 void MotionTrack::set(void* motion, int loop, f32 speed)
@@ -188,7 +192,9 @@ ModelDraw::ModelDraw()
 }
 
 // 0x800521A4
-ModelDraw::~ModelDraw() { }
+ModelDraw::~ModelDraw()
+{
+}
 
 // 0x800521E0
 void ModelDraw::setModel(void* model)
@@ -325,29 +331,29 @@ void MeshPlate::setVerts()
 // 0x800525DC
 void MeshPlate::setTris()
 {
-	mTris[0].mVerts[0]  = 0;
-	mTris[0].mVerts[1]  = 1;
-	mTris[0].mVerts[2]  = 2;
-	mTris[0].mMask      = mMask;
-	mTris[0].mNormal.x  = 0.0f;
-	mTris[0].mNormal.y  = 1.0f;
-	mTris[0].mNormal.z  = 0.0f;
-	mTris[0].mCenter.x  = 0.0f;
-	mTris[0].mCenter.y  = 0.0f;
-	mTris[0].mCenter.z  = 0.0f;
-	mTris[0].mRadius    = mRadius;
+	mTris[0].mVerts[0] = 0;
+	mTris[0].mVerts[1] = 1;
+	mTris[0].mVerts[2] = 2;
+	mTris[0].mMask     = mMask;
+	mTris[0].mNormal.x = 0.0f;
+	mTris[0].mNormal.y = 1.0f;
+	mTris[0].mNormal.z = 0.0f;
+	mTris[0].mCenter.x = 0.0f;
+	mTris[0].mCenter.y = 0.0f;
+	mTris[0].mCenter.z = 0.0f;
+	mTris[0].mRadius   = mRadius;
 
-	mTris[1].mVerts[0]  = 3;
-	mTris[1].mVerts[1]  = 2;
-	mTris[1].mVerts[2]  = 1;
-	mTris[1].mMask      = mMask;
-	mTris[1].mNormal.x  = 0.0f;
-	mTris[1].mNormal.y  = 1.0f;
-	mTris[1].mNormal.z  = 0.0f;
-	mTris[1].mCenter.x  = 0.0f;
-	mTris[1].mCenter.y  = 0.0f;
-	mTris[1].mCenter.z  = 0.0f;
-	mTris[1].mRadius    = mRadius;
+	mTris[1].mVerts[0] = 3;
+	mTris[1].mVerts[1] = 2;
+	mTris[1].mVerts[2] = 1;
+	mTris[1].mMask     = mMask;
+	mTris[1].mNormal.x = 0.0f;
+	mTris[1].mNormal.y = 1.0f;
+	mTris[1].mNormal.z = 0.0f;
+	mTris[1].mCenter.x = 0.0f;
+	mTris[1].mCenter.y = 0.0f;
+	mTris[1].mCenter.z = 0.0f;
+	mTris[1].mRadius   = mRadius;
 }
 
 // 0x80052660
@@ -400,7 +406,7 @@ void shatterBank(f32 scale, TObjAction* obj, const Vec3f* hit, const Vec3f* size
 		vel.z *= randRange(0.5f, 1.5f);
 		vecNormalize(&vel, &vel);
 		f32 lift = 0.2f * randUnit();
-		vel.y = vel.y + lift;
+		vel.y    = vel.y + lift;
 		vecScale(randRange(0.5f * pieces->mSpeed, pieces->mSpeed), &vel, &vel);
 
 		int pick = rand() % pieces->mModelCount;
@@ -417,8 +423,7 @@ void shatterListAt(TObjAction* obj, const Vec3f* hit, const Vec3f* size, const S
 }
 
 // 0x80052B2C
-void shatterList(TObjAction* obj, const Vec3f* center, int rotY, const Vec3f* hit, const Vec3f* size,
-                 const ShatterList* pieces)
+void shatterList(TObjAction* obj, const Vec3f* center, int rotY, const Vec3f* hit, const Vec3f* size, const ShatterList* pieces)
 {
 	f32 floorY = center->y - 100.0f;
 	TObject* parent;
@@ -443,12 +448,11 @@ void shatterList(TObjAction* obj, const Vec3f* center, int rotY, const Vec3f* hi
 		vel.z *= randRange(0.5f, 1.5f);
 		vecNormalize(&vel, &vel);
 		f32 lift = 0.2f * randUnit();
-		vel.y = vel.y + lift;
+		vel.y    = vel.y + lift;
 		vecScale(randRange(0.5f * pieces->mSpeed, pieces->mSpeed), &vel, &vel);
 
 		int pick = rand() % pieces->mModelCount;
-		new TObjLauncher(parent, floorY, pieces->mScale, &pos, &vel, pieces->mModels[pieces->mFirst + pick],
-		                 pieces->mTexture);
+		new TObjLauncher(parent, floorY, pieces->mScale, &pos, &vel, pieces->mModels[pieces->mFirst + pick], pieces->mTexture);
 	}
 }
 
@@ -484,7 +488,7 @@ void shatterModel(TObjAction* obj, const Vec3f* hit, int rotY, NJS_OBJECT* model
 		vel.z *= randRange(0.5f, 1.5f);
 		vecNormalize(&vel, &vel);
 		f32 lift = 0.2f * randUnit();
-		vel.y = vel.y + lift;
+		vel.y    = vel.y + lift;
 		vecScale(randRange(0.5f * speed, speed), &vel, &vel);
 
 		size.x = model->scl[0];
@@ -505,7 +509,8 @@ void shatterModel(TObjAction* obj, const Vec3f* hit, int rotY, NJS_OBJECT* model
 }
 
 // 0x8005319C
-void shatterModelRot(TObjAction* obj, const Vec3f* hit, const Vec3f* center, const SetRot* rot, NJS_OBJECT* model, void* texList, f32 scale, f32 speed)
+void shatterModelRot(TObjAction* obj, const Vec3f* hit, const Vec3f* center, const SetRot* rot, NJS_OBJECT* model, void* texList, f32 scale,
+                     f32 speed)
 {
 	f32 floorY = hit->y - 100.0f;
 	TObject* parent;
@@ -539,7 +544,7 @@ void shatterModelRot(TObjAction* obj, const Vec3f* hit, const Vec3f* center, con
 		vel.z *= randRange(0.5f, 1.5f);
 		vecNormalize(&vel, &vel);
 		f32 lift = 0.2f * randUnit();
-		vel.y = vel.y + lift;
+		vel.y    = vel.y + lift;
 		vecScale(randRange(0.5f * speed, speed), &vel, &vel);
 
 		size.set(node->scl[0], node->scl[1], node->scl[2]);
@@ -601,9 +606,9 @@ void colliSetSphere(CharaColli* colli, const Vec3f* pos, u32 flags, const Vec3f*
 	if (colli != 0) {
 		ColliShape shape;
 		colliShapeInit(&shape);
-		shape.mPos    = *offset;
-		shape.mType   = COLLISHAPE_SPHERE;
-		shape.mSizeX  = radius;
+		shape.mPos   = *offset;
+		shape.mType  = COLLISHAPE_SPHERE;
+		shape.mSizeX = radius;
 		shape.mFlags |= flags;
 		colliCopyShapes(colli, &shape);
 		colliPlaceShapes(colli, pos, &shape);
@@ -616,10 +621,10 @@ void colliSetCylinder(CharaColli* colli, const Vec3f* pos, u32 flags, const Vec3
 	if (colli != 0) {
 		ColliShape shape;
 		colliShapeInit(&shape);
-		shape.mPos    = *offset;
-		shape.mType   = COLLISHAPE_CYLINDER;
-		shape.mSizeX  = radius;
-		shape.mSizeY  = height;
+		shape.mPos   = *offset;
+		shape.mType  = COLLISHAPE_CYLINDER;
+		shape.mSizeX = radius;
+		shape.mSizeY = height;
 		shape.mFlags |= flags;
 		colliCopyShapes(colli, &shape);
 		colliPlaceShapes(colli, pos, &shape);

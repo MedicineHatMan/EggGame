@@ -36,15 +36,9 @@ struct FlowStep {
 	int mUnk18;
 };
 static const FlowStep sFlowSteps[9] = {
-	{ 0, -1, 0, 0, 30.0f, 1.0f, 0, 0 },
-	{ 1, -1, 0, 0, 10.0f, 1.0f, 0, 0 },
-	{ 2, -1, 0, 0, 10.0f, 1.0f, 0, 0 },
-	{ 3, -1, 0, 0, 30.0f, 1.0f, 0, 0 },
-	{ 4, -1, 0, 0, 30.0f, 1.0f, 0, 0 },
-	{ (int)0xFF000000, 0, 0, 0, 0.0f, 0.0f, 0, 0 },
-	{ 0, -1, 0, 0, 30.0f, 1.0f, 0, 0 },
-	{ 1, -1, 0, 0, 10.0f, 1.0f, 0, 0 },
-	{ 0x02000000, 0, 0, 0, 0.0f, 0.0f, 0, 0 },
+	{ 0, -1, 0, 0, 30.0f, 1.0f, 0, 0 }, { 1, -1, 0, 0, 10.0f, 1.0f, 0, 0 }, { 2, -1, 0, 0, 10.0f, 1.0f, 0, 0 },
+	{ 3, -1, 0, 0, 30.0f, 1.0f, 0, 0 }, { 4, -1, 0, 0, 30.0f, 1.0f, 0, 0 }, { (int)0xFF000000, 0, 0, 0, 0.0f, 0.0f, 0, 0 },
+	{ 0, -1, 0, 0, 30.0f, 1.0f, 0, 0 }, { 1, -1, 0, 0, 10.0f, 1.0f, 0, 0 }, { 0x02000000, 0, 0, 0, 0.0f, 0.0f, 0, 0 },
 };
 
 // The stage names Eight per world the last ones the bosses
@@ -61,10 +55,10 @@ const char* gBossAgainNames[8] = {
 	"blue_boss2", "red_boss2", "purple_boss2", "orange_boss2", "yellow_boss2", "green_boss2", NULL, NULL,
 };
 
-static const int sBossMovie[8]          = { 5, 6, 7, 8, 9, 4, 10, 0 };            // 0x8024AFF8
-static const int sWorldOpenBit[7]       = { 8, 16, 24, 32, 40, 0, 49 };          // 0x8024B018
-static const int sWorldKeyBase[7]       = { 0x41, 0x49, 0x51, 0x59, 0x61, 0x39, 0x69 }; // 0x8024B034
-static const int sBossKey[8]            = { 0x72, 0x73, 0x74, 0x75, 0x76, 0x71, 0x77, 0x78 }; // 0x8024B050
+static const int sBossMovie[8]    = { 5, 6, 7, 8, 9, 4, 10, 0 };                        // 0x8024AFF8
+static const int sWorldOpenBit[7] = { 8, 16, 24, 32, 40, 0, 49 };                       // 0x8024B018
+static const int sWorldKeyBase[7] = { 0x41, 0x49, 0x51, 0x59, 0x61, 0x39, 0x69 };       // 0x8024B034
+static const int sBossKey[8]      = { 0x72, 0x73, 0x74, 0x75, 0x76, 0x71, 0x77, 0x78 }; // 0x8024B050
 
 struct WorldEmblem {
 	u16 mBit;
@@ -74,7 +68,7 @@ static const WorldEmblem sWorldEmblem[7] = {
 	{ 0x00, 0x01 }, { 0x08, 0x02 }, { 0x10, 0x04 }, { 0x18, 0x08 }, { 0x20, 0x10 }, { 0x28, 0x20 }, { 0x31, 0x40 },
 }; // 0x8024B070
 
-static const int sWorldStageBase[7]     = { 8, 16, 24, 32, 40, 0, 48 };          // 0x8024B08C
+static const int sWorldStageBase[7] = { 8, 16, 24, 32, 40, 0, 48 }; // 0x8024B08C
 
 // 0x80181970
 // The boss of a world the same number
@@ -101,7 +95,10 @@ int bossOfWorld(u32 world)
 
 // 0x801819C8
 TGameFlow::TGameFlow()
-    : mAllocator(0x300), mScene(SCENE_NONE), mPrevScene(SCENE_NONE), mAttract(0)
+    : mAllocator(0x300)
+    , mScene(SCENE_NONE)
+    , mPrevScene(SCENE_NONE)
+    , mAttract(0)
 {
 	_58        = 0;
 	mScene     = SCENE_NONE;
@@ -659,8 +656,8 @@ void TGameFlow::sceneBattleStage(int event)
 	int i;
 
 	if (event == FLOW_ENTER) {
-		mode = TModeBattle::create(&mAllocator);
-		mode->mRule       = battle()->mRule;
+		mode        = TModeBattle::create(&mAllocator);
+		mode->mRule = battle()->mRule;
 		switch (battle()->mRule) {
 		case 0:
 			mode->mLives = battle()->mTimeLimit;

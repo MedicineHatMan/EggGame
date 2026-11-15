@@ -9,7 +9,9 @@ SetLinkMember::SetLinkMember()
 	mTimer = 0;
 }
 
-SetLinkMember::~SetLinkMember() { }
+SetLinkMember::~SetLinkMember()
+{
+}
 
 // 0x80061244
 void SetLink::attach(const SetDesc* desc)

@@ -34,10 +34,12 @@ const char* gTObjSensorBombName = "TObjSensorBomb";
 
 // 0x8018B0C8
 TObjSensorBomb::TObjSensorBomb(TObject* parent)
-    : TItem(parent), mState(0), mColli(0)
+    : TItem(parent)
+    , mState(0)
+    , mColli(0)
 {
-	_00    = (u32)gTObjSensorBombName;
-	mSize  = 0x154;
+	_00           = (u32)gTObjSensorBombName;
+	mSize         = 0x154;
 	mBody.mRadius = 7.5f;
 	mDrawTask     = addDrawTask(this, (void (*)(void*))drawForOwner, 33, 0);
 	mShadow._30   = 15.0f;
@@ -138,7 +140,7 @@ void TObjSensorBomb::vfn_10()
 		mDrawTask->mFlags &= ~1;
 	}
 	TObjAction* owner = getOwner();
-	u16 view = playerGetDrawView();
+	u16 view          = playerGetDrawView();
 	if (view == owner->mObjId) {
 		mDrawTask->mFunc = drawForOwner;
 	} else {

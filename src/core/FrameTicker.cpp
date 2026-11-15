@@ -23,7 +23,11 @@ FrameTicker::FrameTicker()
 }
 
 // 0x800421AC
-FrameTicker::~FrameTicker() { }
+FrameTicker::~FrameTicker()
+{
+}
 
 // 0x800421F4
-void FrameTicker::update() { }
+void FrameTicker::update()
+{
+}

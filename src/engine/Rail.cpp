@@ -5,6 +5,10 @@
 #include "engine/WorldMesh.h"
 #include "Ninja/ninja.h"
 
+// The stage's rails, 0x800A4348-0x800A5B64: the rider (EggCollide), the rail geometry, the sphere search over the
+// rails' quad tree, and the manager that owns one RailPath per rail. The list and array code at the end is MW
+// template instances. The names are ours.
+
 extern "C" {
 WorldVector<u8>* worldByteVecDtor(WorldVector<u8>*, s16);
 }
@@ -99,10 +103,11 @@ void EggCollide::advance(f32 dist)
 }
 
 // 0x800A4598
-RailPath::RailPath() { }
+RailPath::RailPath()
+{
+}
 
-// 0x800A45CC
-// The riders are left on no rail
+// 0x800A45CC. The riders are left on no rail.
 RailPath::~RailPath()
 {
 	for (RailLink* link = mRiders.mHead; link != 0; link = link->mNext) {
@@ -116,8 +121,7 @@ f32 RailPath::getLength()
 	return mData->mLength;
 }
 
-// 0x800A4648
-// Finds the segment at a distance along the rail searching from seg
+// 0x800A4648. Finds the segment at a distance along the rail, searching from seg.
 int RailPath::findSeg(f32 dist, int seg, f32* rest)
 {
 	RailData* data = mData;
@@ -208,8 +212,7 @@ void RailData::getPosFlat(int seg, f32 dist, Vec3f* out)
 	vecScaleAdd(getFrac(seg, dist), out, &to, &from);
 }
 
-// 0x800A497C
-// The last point uses the segment before it
+// 0x800A497C. The last point uses the segment before it.
 void RailData::getDirFree(int seg, Vec3f* out)
 {
 	Vec3f from;
@@ -269,8 +272,7 @@ void RailPath::getPos(int seg, f32 dist, Vec3f* out)
 	}
 }
 
-// 0x800A4BE4
-// Tests segments first..last-1 and then points first..last against the sphere
+// 0x800A4BE4. Tests segments first..last-1 and then points first..last against the sphere. Counts every touch.
 int RailData::hitFree(int first, int last, const Vec3f* center, RailHitFn cb, void* arg, int* more, f32 radius)
 {
 	Vec3f near;
@@ -329,8 +331,7 @@ int RailData::hitFree(int first, int last, const Vec3f* center, RailHitFn cb, vo
 	return hits;
 }
 
-// 0x800A4E64
-// As hitFree but only counts the touches the callback accepts
+// 0x800A4E64. As hitFree, but only counts the touches the callback accepts.
 int RailData::hitFlat(int first, int last, const Vec3f* center, RailHitFn cb, void* arg, int* more, f32 radius)
 {
 	Vec3f near;
@@ -410,13 +411,11 @@ void RailFile::setSet(RailSet* set)
 	mSet = set;
 }
 
-// 0x800A5188
-// Walks the quad tree from one node testing the rails in each leaf the box reaches
+// 0x800A5188. Walks the quad tree from one node, testing the rails in each leaf the box reaches.
 int RailFile::walk(const RailBox* box, int index, int* more, int hits, const RailSphere* sphere)
 {
 	RailNode* node = &mSet->mNodes[index];
-	if (box->mMax.x < node->mMinX || box->mMin.x > node->mMaxX || box->mMax.z < node->mMinZ
-	    || box->mMin.z > node->mMaxZ) {
+	if (box->mMax.x < node->mMinX || box->mMin.x > node->mMaxX || box->mMax.z < node->mMinZ || box->mMin.z > node->mMaxZ) {
 		return hits;
 	}
 
@@ -425,11 +424,11 @@ int RailFile::walk(const RailBox* box, int index, int* more, int hits, const Rai
 			hits = walk(box, node->mChild[i], more, hits, sphere);
 		}
 	} else {
-		RailEntry* entry = (RailEntry*)((s16*)(mSet->mEntries + (node->mEntries & ~1)) + 1);
+		RailLeaf* leaf   = (RailLeaf*)(mSet->mEntries + (node->mEntries & ~1));
+		RailEntry* entry = leaf->mEntries;
 		for (int i = 0; i < node->mCount && *more != 0; i++) {
 			RailEntry* e = entry++;
-			hits += mSet->mRails[e->mRail].hit(e->mFirst, e->mLast, &sphere->mCenter, sphere->mCb, sphere->mArg,
-			                                   more, sphere->mRadius);
+			hits += mSet->mRails[e->mRail].hit(e->mFirst, e->mLast, &sphere->mCenter, sphere->mCb, sphere->mArg, more, sphere->mRadius);
 		}
 	}
 	return hits;
@@ -521,16 +520,15 @@ void RailMgr::load(RailSet* set)
 static int railHitOpen(RailData* rail, RailPoint* point, Vec3f* pos, void* arg, int* more);
 static int railHitAll(RailData* rail, RailPoint* point, Vec3f* pos, void* arg, int* more);
 
-// 0x800A55E4
-// Only finds rails of type 0
+// 0x800A55E4. Only finds rails of type 0.
 int RailMgr::searchOpen(f32 radius, const Vec3f* pos, RailPathFn cb, void* arg)
 {
 	RailCall call;
 	int more;
-	more       = 1;
-	call.mMgr  = this;
-	call.mCb   = cb;
-	call.mArg  = arg;
+	more      = 1;
+	call.mMgr = this;
+	call.mCb  = cb;
+	call.mArg = arg;
 	return mFile->search(pos, railHitOpen, &call, &more, radius);
 }
 
@@ -553,10 +551,10 @@ int RailMgr::searchAll(f32 radius, const Vec3f* pos, RailPathFn cb, void* arg)
 {
 	RailCall call;
 	int more;
-	more       = 1;
-	call.mMgr  = this;
-	call.mCb   = cb;
-	call.mArg  = arg;
+	more      = 1;
+	call.mMgr = this;
+	call.mCb  = cb;
+	call.mArg = arg;
 	return mFile->search(pos, railHitAll, &call, &more, radius);
 }
 

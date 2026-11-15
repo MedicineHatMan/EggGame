@@ -22,7 +22,7 @@
 #include "Ninja/ninja.h"
 #include "core/VecMath.h"
 #include "object/TObjPlayer.h"
-#include "object/TObjShark01.h"
+#include "object/TObjShark01.h"
 
 extern const f32 gUnitVectorMin;
 struct DrawTask;
@@ -40,7 +40,6 @@ const char* gTObjShark01Name = "TObjShark01";
 extern const ColliShape sShark01Shape[] = {
 	{ { 0.0f, 0.0f, 10.0f }, 0x0, 0, 0x0, 10.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
-
 }
 
 typedef char TObjShark01_size_check[(sizeof(TObjShark01) == 0xFC) ? 1 : -1];
@@ -55,8 +54,8 @@ extern "C" TObject* createTObjShark01(TObject* parent, SetDesc* desc)
 void TObjShark01::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
-	mRadius = 100.0f + desc->getFloat(1);
-	f32 height = 30.0f + desc->getFloat(2);
+	mRadius      = 100.0f + desc->getFloat(1);
+	f32 height   = 30.0f + desc->getFloat(2);
 	Vec3f offset = gVecZero;
 	colliSetCylinder((CharaColli*)mTerritory, &mPos, 0, &offset, mRadius, height);
 	colliRefreshBounds(mTerritory);
@@ -74,8 +73,8 @@ void TObjShark01::debugPrint(void*)
 TObjShark01::TObjShark01(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00   = (u32)gTObjShark01Name;
-	mSize = 0xFC;
+	_00        = (u32)gTObjShark01Name;
+	mSize      = 0xFC;
 	mTerritory = colliCreate(1, 1);
 	colliSetOwner(mTerritory, (u16)mObjId);
 	colliSetMasks(mTerritory, 4, 0xFF, 0xFF, 0xF6);
@@ -116,7 +115,7 @@ void TObjShark01::vfn_74()
 	mMotion.mSpeed = 0.5f;
 
 	void* model = getGeObjModels()[0];
-	mActor = (GjActor*)(memAlloc(gjActorSize((NJS_OBJECT*)model)));
+	mActor      = (GjActor*)(memAlloc(gjActorSize((NJS_OBJECT*)model)));
 	gjCreateActor((NJS_OBJECT*)model, (u8*)mActor);
 	updateActor();
 
@@ -195,7 +194,7 @@ int TObjShark01::findPlayer()
 void TObjShark01::stateSwim()
 {
 	if (findPlayer() != 0) {
-		mAct = 1;
+		mAct           = 1;
 		mMotion.mSpeed = 1.0f;
 		return;
 	}
@@ -262,16 +261,16 @@ void TObjShark01::stateLeap()
 	mVel.y += -0.08166667f;
 	njAddVector(&mPos, &mVel);
 	int yaw = vecAngleXZ(&mVel);
-	mRot.y = angleApproach(getRotY(), (u16)yaw, mTurnRate);
-	mRot.x = -(u16)(int)(10430.38043493439 * (f32)atan2(mVel.y, vecLenXZ(&mVel)));
+	mRot.y  = angleApproach(getRotY(), (u16)yaw, mTurnRate);
+	mRot.x  = -(u16)(int)(10430.38043493439 * (f32)atan2(mVel.y, vecLenXZ(&mVel)));
 }
 
 // 0x8002DA64
 void TObjShark01::chaseTarget()
 {
-	mTarget.x = 0.0f;
-	mTarget.y = 0.0f;
-	mTarget.z = 0.0f;
+	mTarget.x          = 0.0f;
+	mTarget.y          = 0.0f;
+	mTarget.z          = 0.0f;
 	TObjAction* player = (TObjAction*)mPlayer.get();
 	if (player != 0) {
 		mTarget = *player->getPos();
@@ -300,10 +299,10 @@ void TObjShark01::pickTarget()
 // 0x8002DC0C
 void TObjShark01::swimToTarget()
 {
-	int yaw = angleToXZ(getPos(), &mTarget);
+	int yaw  = angleToXZ(getPos(), &mTarget);
 	int rotY = angleApproach(getRotY(), (u16)yaw, mTurnRate);
-	mRot.y = rotY;
-	mRot.x = angleApproach(mRot.x, 0, mTurnRate);
+	mRot.y   = rotY;
+	mRot.x   = angleApproach(mRot.x, 0, mTurnRate);
 	vecFromAngleXZ(mSpeed, &mVel, rotY);
 
 	f32 rise = mHome.y - mPos.y;
@@ -337,7 +336,7 @@ void TObjShark01::updateActor()
 	if (mMotion.isBlending()) {
 		gjMotionLinkActor(mActor, (void*)mMotion.getBlend(), mMotion.mBlendTime);
 	} else {
-		int cur = mMotion.mCurrent;
+		int cur   = mMotion.mCurrent;
 		f32 frame = mMotion.mFrame;
 		gjMotionActor(frame, mActor, mMotion.getMotion(cur));
 	}

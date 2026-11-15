@@ -54,22 +54,22 @@ public:
 	EventScriptMgr();  // 0x8012C148
 	~EventScriptMgr(); // 0x8012C178
 
-	void clear();                           // 0x8012C1B4
-	void reset();                           // 0x8012C1E8
-	EventScript* find(int kind, int id);    // 0x8012C22C
-	int start(int kind, int id);            // 0x8012C27C
-	EventLine* nextLine();                  // 0x8012C320
-	int run();                              // 0x8012C41C returns 1 once the script has ended
-	int exec();                             // 0x8012C538
-	void end();                             // 0x8012C5E4
-	int request(int id, u16 eventId);       // 0x8012C648
-	void clearQueue();                      // 0x8012C6BC
-	void trigger(int id);                   // 0x8012C704
-	int runQueued();                        // 0x8012C760
-	int resume(int arg);                    // 0x8012C874
-	void signal();                          // 0x8012C8E4
-	void done();                            // 0x8012C8F4
-	void update();                          // 0x8012C904
+	void clear();                        // 0x8012C1B4
+	void reset();                        // 0x8012C1E8
+	EventScript* find(int kind, int id); // 0x8012C22C
+	int start(int kind, int id);         // 0x8012C27C
+	EventLine* nextLine();               // 0x8012C320
+	int run();                           // 0x8012C41C returns 1 once the script has ended
+	int exec();                          // 0x8012C538
+	void end();                          // 0x8012C5E4
+	int request(int id, u16 eventId);    // 0x8012C648
+	void clearQueue();                   // 0x8012C6BC
+	void trigger(int id);                // 0x8012C704
+	int runQueued();                     // 0x8012C760
+	int resume(int arg);                 // 0x8012C874
+	void signal();                       // 0x8012C8E4
+	void done();                         // 0x8012C8F4
+	void update();                       // 0x8012C904
 
 	int mState;           // _00
 	int mTimer;           // _04
@@ -82,28 +82,28 @@ public:
 	int mPhase;           // _20 how far nextLine is through the waiting lines
 };
 
-void eventScriptInit();                        // 0x8012C9DC
-void eventScriptExit();                        // 0x8012CA28
-void eventScriptReset();                       // 0x8012CA80
-void eventScriptLoad(const char* name);        // 0x8012CAB0
-int eventScriptRequest(int id);                // 0x8012CB9C
-int eventScriptRequest(int id, u16 eventId);   // 0x8012CBC4
-void eventScriptSignal();                      // 0x8012CC08
-void eventScriptDone();                        // 0x8012CC34
-void eventScriptTrigger(int id);               // 0x8012CC60
-void eventScriptUpdate();                      // 0x8012CC94
-EventCmd* getEventCmds();                      // 0x8012CD20
+void eventScriptInit();                      // 0x8012C9DC
+void eventScriptExit();                      // 0x8012CA28
+void eventScriptReset();                     // 0x8012CA80
+void eventScriptLoad(const char* name);      // 0x8012CAB0
+int eventScriptRequest(int id);              // 0x8012CB9C
+int eventScriptRequest(int id, u16 eventId); // 0x8012CBC4
+void eventScriptSignal();                    // 0x8012CC08
+void eventScriptDone();                      // 0x8012CC34
+void eventScriptTrigger(int id);             // 0x8012CC60
+void eventScriptUpdate();                    // 0x8012CC94
+EventCmd* getEventCmds();                    // 0x8012CD20
 
 // The argument blocks of the commands kept in EventCam.cpp
 struct EventCamSetArgs { // "set" hand the set object mSetId an event camera
-	int mSetId; // _00
-	int mArg;   // _04 passed on in the message
+	int mSetId;          // _00
+	int mArg;            // _04 passed on in the message
 };
 struct EventWaitArgs { // "wait"
-	int mFrames; // _00
+	int mFrames;       // _00
 };
 struct EventMsgArgs { // "msg" show a message and wait for it to close
-	u16 mId; // _00
+	u16 mId;          // _00
 };
 
 int eventCmdSet(EventCamSetArgs* args); // 0x8012D0B4 "set"

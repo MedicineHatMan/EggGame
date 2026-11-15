@@ -10,10 +10,10 @@ struct NJS_TEXLIST;
  * @size 0x10
  */
 struct TitleObjData {
-	NJS_OBJECT** mModels;     // _00
-	NJS_MOTION*** mMotions;   // _04 a motion list per entry
-	NJS_TEXLIST** mTexLists;  // _08 the first is the one obj_title.GVM binds to
-	void** mScene;            // _0C TModeTitle's own model
+	NJS_OBJECT** mModels;    // _00
+	NJS_MOTION*** mMotions;  // _04 a motion list per entry
+	NJS_TEXLIST** mTexLists; // _08 the first is the one obj_title.GVM binds to
+	void** mScene;           // _0C TModeTitle's own model
 };
 
 extern "C" {

@@ -1,15 +1,14 @@
 #include "Dolphin/gx.h"
 #include "math.h"
 
-static GXVtxDescList vcd[27];     // 0x802A1B70
-static GXVtxAttrFmtList vat[27];  // 0x802A1C48
+static GXVtxDescList vcd[27];    // 0x802A1B70
+static GXVtxAttrFmtList vat[27]; // 0x802A1C48
 
 // 0x80271448
 // The dodecahedron's faces five vertex indices each
 static u32 dodecaFaces[12][5] = {
-	{ 0, 12, 10, 11, 16 }, { 1, 17, 8, 9, 13 },   { 2, 14, 9, 8, 18 },  { 3, 19, 11, 10, 15 },
-	{ 4, 14, 2, 3, 15 },   { 5, 12, 0, 1, 13 },   { 6, 17, 1, 0, 16 },  { 7, 19, 3, 2, 18 },
-	{ 8, 17, 6, 7, 18 },   { 9, 14, 4, 5, 13 },   { 10, 12, 5, 4, 15 }, { 11, 19, 7, 6, 16 },
+	{ 0, 12, 10, 11, 16 }, { 1, 17, 8, 9, 13 }, { 2, 14, 9, 8, 18 }, { 3, 19, 11, 10, 15 }, { 4, 14, 2, 3, 15 },  { 5, 12, 0, 1, 13 },
+	{ 6, 17, 1, 0, 16 },   { 7, 19, 3, 2, 18 }, { 8, 17, 6, 7, 18 }, { 9, 14, 4, 5, 13 },   { 10, 12, 5, 4, 15 }, { 11, 19, 7, 6, 16 },
 };
 
 #define DA 0.809017f
@@ -18,16 +17,14 @@ static u32 dodecaFaces[12][5] = {
 
 // 0x80271538
 static f32 dodecaVerts[20][3] = {
-	{ -DA, 0.0f, DB },  { -DA, 0.0f, -DB }, { DA, 0.0f, -DB },  { DA, 0.0f, DB },   { DB, -DA, 0.0f },
-	{ -DB, -DA, 0.0f }, { -DB, DA, 0.0f },  { DB, DA, 0.0f },   { 0.0f, DB, -DA },  { 0.0f, -DB, -DA },
-	{ 0.0f, -DB, DA },  { 0.0f, DB, DA },   { -DC, -DC, DC },   { -DC, -DC, -DC },  { DC, -DC, -DC },
-	{ DC, -DC, DC },    { -DC, DC, DC },    { -DC, DC, -DC },   { DC, DC, -DC },    { DC, DC, DC },
+	{ -DA, 0.0f, DB }, { -DA, 0.0f, -DB }, { DA, 0.0f, -DB },  { DA, 0.0f, DB },  { DB, -DA, 0.0f }, { -DB, -DA, 0.0f }, { -DB, DA, 0.0f },
+	{ DB, DA, 0.0f },  { 0.0f, DB, -DA },  { 0.0f, -DB, -DA }, { 0.0f, -DB, DA }, { 0.0f, DB, DA },  { -DC, -DC, DC },   { -DC, -DC, -DC },
+	{ DC, -DC, -DC },  { DC, -DC, DC },    { -DC, DC, DC },    { -DC, DC, -DC },  { DC, DC, -DC },   { DC, DC, DC },
 };
 
 // 0x80271628
 static f32 octaVerts[6][3] = {
-	{ 1.0f, 0.0f, 0.0f }, { -1.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f },
-	{ 0.0f, -1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, -1.0f },
+	{ 1.0f, 0.0f, 0.0f }, { -1.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f }, { 0.0f, -1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f }, { 0.0f, 0.0f, -1.0f },
 };
 
 // 0x80271670
@@ -40,16 +37,15 @@ static u8 octaFaces[8][3] = {
 
 // 0x80271688
 static f32 icosaVerts[12][3] = {
-	{ -IX, 0.0f, IZ }, { IX, 0.0f, IZ },  { -IX, 0.0f, -IZ }, { IX, 0.0f, -IZ },
-	{ 0.0f, IZ, IX },  { 0.0f, IZ, -IX }, { 0.0f, -IZ, IX },  { 0.0f, -IZ, -IX },
-	{ IZ, IX, 0.0f },  { -IZ, IX, 0.0f }, { IZ, -IX, 0.0f },  { -IZ, -IX, 0.0f },
+	{ -IX, 0.0f, IZ }, { IX, 0.0f, IZ },   { -IX, 0.0f, -IZ }, { IX, 0.0f, -IZ }, { 0.0f, IZ, IX },  { 0.0f, IZ, -IX },
+	{ 0.0f, -IZ, IX }, { 0.0f, -IZ, -IX }, { IZ, IX, 0.0f },   { -IZ, IX, 0.0f }, { IZ, -IX, 0.0f }, { -IZ, -IX, 0.0f },
 };
 
 // 0x80271718
 static u8 icosaFaces[20][3] = {
-	{ 0, 4, 1 },  { 0, 9, 4 },  { 9, 5, 4 },  { 4, 5, 8 },  { 4, 8, 1 },  { 8, 10, 1 }, { 8, 3, 10 },
-	{ 5, 3, 8 },  { 5, 2, 3 },  { 2, 7, 3 },  { 7, 10, 3 }, { 7, 6, 10 }, { 7, 11, 6 }, { 11, 0, 6 },
-	{ 0, 1, 6 },  { 6, 1, 10 }, { 9, 0, 11 }, { 9, 11, 2 }, { 9, 2, 5 },  { 7, 2, 11 },
+	{ 0, 4, 1 }, { 0, 9, 4 },  { 9, 5, 4 },  { 4, 5, 8 },  { 4, 8, 1 },  { 8, 10, 1 }, { 8, 3, 10 },
+	{ 5, 3, 8 }, { 5, 2, 3 },  { 2, 7, 3 },  { 7, 10, 3 }, { 7, 6, 10 }, { 7, 11, 6 }, { 11, 0, 6 },
+	{ 0, 1, 6 }, { 6, 1, 10 }, { 9, 0, 11 }, { 9, 11, 2 }, { 9, 2, 5 },  { 7, 2, 11 },
 };
 
 static inline void GetVertState(void)
@@ -180,8 +176,7 @@ void GXDrawCylinder(u8 numEdges)
  * @note Address: 0x801F7194
  * @note Size: 0x218
  */
-static void GXDrawCubeFace(f32 nx, f32 ny, f32 nz, f32 tx, f32 ty, f32 tz, f32 bx, f32 by, f32 bz,
-                           GXAttrType binormal, GXAttrType texture)
+static void GXDrawCubeFace(f32 nx, f32 ny, f32 nz, f32 tx, f32 ty, f32 tz, f32 bx, f32 by, f32 bz, GXAttrType binormal, GXAttrType texture)
 {
 	GXPosition3f32(0.57735026f * (nx + tx + bx), 0.57735026f * (ny + ty + by), 0.57735026f * (nz + tz + bz));
 	GXNormal3f32(nx, ny, nz);
@@ -270,8 +265,7 @@ void GXDrawSphere1(u8 depth)
 	GetVertState();
 
 	for (i = 19; i >= 0; i--) {
-		Subdivide(depth, icosaVerts[icosaFaces[(u8)i][0]], icosaVerts[icosaFaces[(u8)i][1]],
-		          icosaVerts[icosaFaces[(u8)i][2]]);
+		Subdivide(depth, icosaVerts[icosaFaces[(u8)i][0]], icosaVerts[icosaFaces[(u8)i][1]], icosaVerts[icosaFaces[(u8)i][2]]);
 	}
 
 	RestoreVertState();

@@ -3,12 +3,10 @@
 #include "Ninja/gjPrim.h"
 
 u32 gjMatrixSlotTable[] = {
-	0x00000000, 0x00000003, 0x00000006, 0x00000009, 0x0000000C, 0x0000000F, 0x00000012, 0x00000015,
-	0x00000018, 0x0000001B,
+	0x00000000, 0x00000003, 0x00000006, 0x00000009, 0x0000000C, 0x0000000F, 0x00000012, 0x00000015, 0x00000018, 0x0000001B,
 }; // matrix slots
 u32 gjTexSlotTable[] = {
-	0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000005, 0x00000006, 0x00000007,
-	0x000000FF, 0x00000000,
+	0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000005, 0x00000006, 0x00000007, 0x000000FF, 0x00000000,
 }; // texture map slots
 GXTexObj gjTexObj1;
 GXTexObj gjTexObj0;
@@ -100,9 +98,9 @@ void gjLoadNrmMatrix(s32 slot)
 // 0x80216EA4
 void gjLoadTextureNum(s32 num, s32 wrapS, s32 wrapT, s32 map)
 {
-	GjTexMem* mem = _nj_current_ctx_->texlist->textures[num].texaddr;
+	GjTexMem* mem   = _nj_current_ctx_->texlist->textures[num].texaddr;
 	GjTexInfo* info = &mem->hdr->info;
-	u32 flags = info->flags;
+	u32 flags       = info->flags;
 	u8 mipmap;
 	if (flags & 0x80000000) {
 		mipmap = 1;
@@ -120,9 +118,9 @@ void gjLoadTextureNum(s32 num, s32 wrapS, s32 wrapT, s32 map)
 // 0x80216F88
 void gjLoadTexture(NJS_TEXLIST* list, s32 num, s32 wrapS, s32 wrapT, s32 map)
 {
-	GjTexMem* mem = list->textures[num].texaddr;
+	GjTexMem* mem   = list->textures[num].texaddr;
 	GjTexInfo* info = &mem->hdr->info;
-	u32 flags = info->flags;
+	u32 flags       = info->flags;
 	u8 mipmap;
 	if (flags & 0x80000000) {
 		mipmap = 1;
@@ -140,6 +138,7 @@ void gjLoadTexture(NJS_TEXLIST* list, s32 num, s32 wrapS, s32 wrapT, s32 map)
 // 0x80217064
 // Runs gjMtxGetTranspose on the top matrix in place by falling into it
 // asm hand written
+// clang-format off
 asm void gjMtxTopInPlace(void)
 {
 	nofralloc
@@ -148,9 +147,11 @@ asm void gjMtxTopInPlace(void)
 	lwz r5, 0x0(r4)
 	mr r6, r5
 }
+// clang-format on
 
 // 0x80217074
 // asm hand written
+// clang-format off
 asm void gjMtxGetTranspose(void)
 {
 	nofralloc
@@ -174,9 +175,11 @@ asm void gjMtxGetTranspose(void)
 	psq_st f10, 0x28(r6), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x802170C0
 // asm hand written
+// clang-format off
 asm void gjMtxPush(void)
 {
 	nofralloc
@@ -187,9 +190,11 @@ asm void gjMtxPush(void)
 	stw r6, 0x0(r4)
 	b gjMtxGetTranspose
 }
+// clang-format on
 
 // 0x802170D8
 // asm hand written
+// clang-format off
 asm void gjUnitMatrix(void)
 {
 	nofralloc
@@ -197,9 +202,11 @@ asm void gjUnitMatrix(void)
 	addi r4, r4, _gj_matrix_@l
 	lwz r6, 0x0(r4)
 }
+// clang-format on
 
 // 0x802170E4
 // asm hand written
+// clang-format off
 asm void gjMtxWriteIdentity(void)
 {
 	nofralloc
@@ -215,9 +222,11 @@ asm void gjMtxWriteIdentity(void)
 	psq_st f1, 0x28(r6), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80217110
 // asm hand written
+// clang-format off
 asm void gjPushUnitMatrix(void)
 {
 	nofralloc
@@ -228,6 +237,7 @@ asm void gjPushUnitMatrix(void)
 	stw r6, 0x0(r4)
 	b gjMtxWriteIdentity
 }
+// clang-format on
 
 // 0x80217128
 void gjEnableFog(void)
@@ -253,7 +263,7 @@ void gjSetFogColor(u32 col)
 void gjSetFogRange(f32 start, f32 end)
 {
 	gjFogStart = start;
-	gjFogEnd = end;
+	gjFogEnd   = end;
 }
 
 // 0x80217180
@@ -302,12 +312,12 @@ void gjStartVertex2D(void)
 	f32 scale;
 
 	PSMTXIdentity(m);
-	inv = gProjection._54;
+	inv   = gProjection._54;
 	scale = gProjection.aspect / ((f32)_gj_rmode_->fbWidth / (f32)_gj_rmode_->efbHeight);
-	m[0] = -inv * scale;
-	m[2] = scale * (0.5f * (f32)_gj_rmode_->fbWidth * inv);
-	m[5] = inv;
-	m[6] = 0.5f * (f32)(s32)-_gj_rmode_->efbHeight * inv;
+	m[0]  = -inv * scale;
+	m[2]  = scale * (0.5f * (f32)_gj_rmode_->fbWidth * inv);
+	m[5]  = inv;
+	m[6]  = 0.5f * (f32)(s32)-_gj_rmode_->efbHeight * inv;
 	GXLoadPosMtxImm(m, 0);
 	GXSetCurrentMtx(0);
 }
@@ -376,8 +386,8 @@ void gjEndVertex(void)
 void gjSetTexture(void)
 {
 	NJS_CONTEXT* ctx = _nj_current_ctx_;
-	GjTexInfo* info = ctx->tex;
-	u32 flags = info->flags;
+	GjTexInfo* info  = ctx->tex;
+	u32 flags        = info->flags;
 	u8 mipmap;
 	s32 wrapS;
 	s32 wrapT;

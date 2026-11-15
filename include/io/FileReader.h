@@ -82,12 +82,12 @@ public:
 	int startNext();
 	void update();
 
-	int mState;             // _00 0 = reading 1 = cancelling 2 = idle
-	FileReadPool mPool;     // _04
-	FileReadList mPending;  // _10
-	FileReadList mActive;   // _1C
-	void* mFileBuffer;      // _28 0xA088 bytes for a TDvdFile
-	int mNextId;            // _2C
+	int mState;            // _00 0 = reading 1 = cancelling 2 = idle
+	FileReadPool mPool;    // _04
+	FileReadList mPending; // _10
+	FileReadList mActive;  // _1C
+	void* mFileBuffer;     // _28 0xA088 bytes for a TDvdFile
+	int mNextId;           // _2C
 };
 
 #endif

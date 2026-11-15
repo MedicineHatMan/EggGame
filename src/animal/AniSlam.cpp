@@ -21,10 +21,10 @@ void AniSlam::enter()
 void AniSlam::update(f32 dt)
 {
 	AniBody* body = mBody;
-	int ground = (bool)body->touching(5, 0, NULL, NULL);
-	f32 x = body->mVel.x;
-	f32 y = body->mVel.y;
-	f32 z = body->mVel.z;
+	int ground    = (bool)body->touching(5, 0, NULL, NULL);
+	f32 x         = body->mVel.x;
+	f32 y         = body->mVel.y;
+	f32 z         = body->mVel.z;
 
 	switch (mState) {
 	case 0:

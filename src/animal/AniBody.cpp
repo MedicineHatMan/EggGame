@@ -54,16 +54,16 @@ AniBody::AniBody()
     , mMask(1)
     , mStopMask(0x810C)
 {
-	mStep = 8.0f;
-	mPushOut.x = 0.0f;
-	mPushOut.y = 0.0f;
-	mPushOut.z = 0.0f;
+	mStep       = 8.0f;
+	mPushOut.x  = 0.0f;
+	mPushOut.y  = 0.0f;
+	mPushOut.z  = 0.0f;
 	mWallPush.x = 0.0f;
 	mWallPush.y = 0.0f;
 	mWallPush.z = 0.0f;
-	mVel.x = 0.0f;
-	mVel.y = 0.0f;
-	mVel.z = 0.0f;
+	mVel.x      = 0.0f;
+	mVel.y      = 0.0f;
+	mVel.z      = 0.0f;
 	njCreateQuaternion(0, 0.0f, 0.0f, 1.0f, (NJS_QUATERNION*)&mQuat);
 	setState(0);
 }
@@ -85,9 +85,9 @@ void AniBody::update()
 {
 	runState(mState, 2);
 	runState(mState, 3);
-	mPushOut.x = 0.0f;
-	mPushOut.y = 0.0f;
-	mPushOut.z = 0.0f;
+	mPushOut.x  = 0.0f;
+	mPushOut.y  = 0.0f;
+	mPushOut.z  = 0.0f;
 	mWallPush.x = 0.0f;
 	mWallPush.y = 0.0f;
 	mWallPush.z = 0.0f;

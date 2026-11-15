@@ -32,6 +32,7 @@ BEGIN_SCOPE_EXTERN_C
 static inline void OSInitFastCast(void)
 {
 #ifdef __MWERKS__
+	// clang-format off
 	asm {
 		li     r3,     OS_GQR_U8
 		oris   r3, r3, OS_GQR_U8
@@ -46,16 +47,19 @@ static inline void OSInitFastCast(void)
 		oris   r3, r3, OS_GQR_S16
 		mtspr  SPR_GQR5, r3
 	}
+	// clang-format on
 #endif
 }
 
 static inline void OSf32tou8(register f32* in, register u8* out)
 {
 #ifdef __MWERKS__
+	// clang-format off
 	asm {
 		lfs     f1, 0 (in)
 		psq_st  f1, 0 (out), 1, OS_FASTCAST_U8
 	}
+	// clang-format on
 #else
 	*out = *in;
 #endif
@@ -64,10 +68,12 @@ static inline void OSf32tou8(register f32* in, register u8* out)
 static inline void OSf32tou16(register f32* in, register u16* out)
 {
 #ifdef __MWERKS__
+	// clang-format off
 	asm {
 		lfs     f1, 0 (in)
 		psq_st  f1, 0 (out), 1, OS_FASTCAST_U16
 	}
+	// clang-format on
 #else
 	*out = *in;
 #endif
@@ -76,10 +82,12 @@ static inline void OSf32tou16(register f32* in, register u16* out)
 static inline void OSf32tos8(register f32* in, register s8* out)
 {
 #ifdef __MWERKS__
+	// clang-format off
 	asm {
 		lfs     fp1, 0 (in)
 		psq_st  fp1, 0 (out), 1, OS_FASTCAST_S8
 	}
+	// clang-format on
 #else
 	*out = *in;
 #endif
@@ -88,10 +96,12 @@ static inline void OSf32tos8(register f32* in, register s8* out)
 static inline void OSf32tos16(register f32* in, register s16* out)
 {
 #ifdef __MWERKS__
+	// clang-format off
 	asm {
 		lfs     fp1, 0 (in)
 		psq_st  fp1, 0 (out), 1, OS_FASTCAST_S16
 	}
+	// clang-format on
 #else
 	*out = *in;
 #endif
@@ -100,10 +110,12 @@ static inline void OSf32tos16(register f32* in, register s16* out)
 static inline void OSu8tof32(register u8* in, register f32* out)
 {
 #ifdef __MWERKS__
+	// clang-format off
 	asm {
 		psq_l  fp1, 0 (in), 1, OS_FASTCAST_U8
 		stfs   fp1, 0 (out)
 	}
+	// clang-format on
 #else
 	*out = *in;
 #endif
@@ -112,10 +124,12 @@ static inline void OSu8tof32(register u8* in, register f32* out)
 static inline void OSu16tof32(register u16* in, register f32* out)
 {
 #ifdef __MWERKS__
+	// clang-format off
 	asm {
 		psq_l  fp1, 0 (in), 1, OS_FASTCAST_U16
 		stfs   fp1, 0 (out)
 	}
+	// clang-format on
 #else
 	*out = *in;
 #endif
@@ -124,10 +138,12 @@ static inline void OSu16tof32(register u16* in, register f32* out)
 static inline void OSs8tof32(register s8* in, register f32* out)
 {
 #ifdef __MWERKS__
+	// clang-format off
 	asm {
 		psq_l  fp1, 0 (in), 1, OS_FASTCAST_S8
 		stfs   fp1, 0 (out)
 	}
+	// clang-format on
 #else
 	*out = *in;
 #endif
@@ -136,10 +152,12 @@ static inline void OSs8tof32(register s8* in, register f32* out)
 static inline void OSs16tof32(register s16* in, register f32* out)
 {
 #ifdef __MWERKS__
+	// clang-format off
 	asm {
 		psq_l  fp1, 0 (in), 1, OS_FASTCAST_S16
 		stfs   fp1, 0 (out)
 	}
+	// clang-format on
 #else
 	*out = *in;
 #endif

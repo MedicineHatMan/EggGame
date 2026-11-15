@@ -37,9 +37,9 @@ void MotionPlayer::play(s16 id)
 		mFlags &= ~0xE;
 		mFlags |= 2;
 		mFlags &= ~0x10;
-		mPrev      = mCurrent;
-		mCurrent   = id;
-		mFrame     = 0.0f;
+		mPrev    = mCurrent;
+		mCurrent = id;
+		mFrame   = 0.0f;
 	}
 }
 
@@ -96,7 +96,7 @@ void MotionPlayer::update()
 {
 	if (mFlags & 2) {
 		if (mFlags & 4) {
-			mState = 3;
+			mState            = 3;
 			mBlend.mFrom      = getMotion(mPrev);
 			mBlend.mTo        = getMotion(mCurrent);
 			mBlend.mFromFrame = mFrame;
@@ -104,7 +104,7 @@ void MotionPlayer::update()
 			mFrame            = getStart(mCurrent);
 			startBlend();
 		} else if (mFlags & 8) {
-			mState = 4;
+			mState       = 4;
 			mBlend.mFrom = getMotion(mPrev);
 			mBlend.mTo   = getMotion(mCurrent);
 			startBlend();

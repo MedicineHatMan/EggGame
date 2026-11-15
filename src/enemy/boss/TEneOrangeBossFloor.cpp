@@ -94,7 +94,7 @@ TEneOrangeBossFloor* createTEneOrangeBossFloor(TObject* parent)
 // 0x802497F8
 // The map model of each floor piece
 extern const int gOrangeFloorModels[3] = { 1, 2, 4 };
-const char* gTEneOrangeBossFloorName = "TEneOrangeBossFloor";
+const char* gTEneOrangeBossFloorName   = "TEneOrangeBossFloor";
 
 // 0x8013C9D4
 TEneOrangeBossFloor::TEneOrangeBossFloor(TObject* parent)
@@ -103,8 +103,8 @@ TEneOrangeBossFloor::TEneOrangeBossFloor(TObject* parent)
 	int angle;
 	int i;
 
-	_00    = (u32)gTEneOrangeBossFloorName;
-	mSize  = 0xB0;
+	_00   = (u32)gTEneOrangeBossFloorName;
+	mSize = 0xB0;
 	for (i = 0; i < 8; i++) {
 		f32 sn;
 		f32 cs;
@@ -113,11 +113,11 @@ TEneOrangeBossFloor::TEneOrangeBossFloor(TObject* parent)
 		mPoint[i].x = 220.0f * sn;
 		mPoint[i].y = 50.0f;
 		mPoint[i].z = 220.0f * cs;
-		mAngle[i] = angle;
+		mAngle[i]   = angle;
 	}
-	mIndex = 0;
-	mFrame = 0.0f;
-	mDraw  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x19, 0);
+	mIndex  = 0;
+	mFrame  = 0.0f;
+	mDraw   = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x19, 0);
 	mMotion = *orangeBossMapMotion(0);
 }
 

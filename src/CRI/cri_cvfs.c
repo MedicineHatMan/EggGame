@@ -93,7 +93,7 @@ static inline void cvfs_SplitName(const char* fname, char* devname, char* path)
 	devname[i] = 0;
 	i++;
 	if (i == 2) {
-		i = 0;
+		i          = 0;
 		devname[0] = 0;
 	}
 	for (j = i; j < CVFS_PATH_LEN - 3 && fname[j] != 0; j++) {
@@ -300,26 +300,26 @@ CVFS cvFsOpen(const char* fname, void* dir, int rw)
 found:
 	hn->dev = dev;
 	if (devname == 0) {
-		hn->fd = 0;
+		hn->fd  = 0;
 		hn->dev = 0;
 		cvfs_CallErrW("cvFsOpen #2:illegal device name");
 		return 0;
 	}
 	if (hn->dev == 0) {
-		hn->fd = 0;
+		hn->fd  = 0;
 		hn->dev = 0;
 		cvfs_CallErrW("cvFsOpen #4:device not found");
 		return 0;
 	}
 	if (hn->dev->Open == 0) {
-		hn->fd = 0;
+		hn->fd  = 0;
 		hn->dev = 0;
 		cvfs_CallErrW("cvFsOpen #5:vtbl error");
 		return 0;
 	}
 	hn->fd = hn->dev->Open(path, dir, rw);
 	if (hn->fd == 0) {
-		hn->fd = 0;
+		hn->fd  = 0;
 		hn->dev = 0;
 		cvfs_CallErrW("cvFsOpen #6:open failed");
 		return 0;
@@ -336,7 +336,7 @@ void cvFsClose(CVFS cvfs)
 	}
 	if (cvfs->dev->Close != 0) {
 		cvfs->dev->Close(cvfs->fd);
-		cvfs->fd = 0;
+		cvfs->fd  = 0;
 		cvfs->dev = 0;
 	} else {
 		cvfs_CallErr("cvFsClose #2:vtbl error");
@@ -896,10 +896,10 @@ int cvFsSetDefVol(const char* devname, const char* volname)
 void cvFsEntryErrFunc(CVFS_ERRFN func, void* obj)
 {
 	if (func == 0) {
-		cvfs_errfn = 0;
+		cvfs_errfn  = 0;
 		cvfs_errobj = 0;
 	} else {
-		cvfs_errfn = func;
+		cvfs_errfn  = func;
 		cvfs_errobj = obj;
 	}
 }

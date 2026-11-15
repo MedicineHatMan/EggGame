@@ -42,18 +42,18 @@ public:
 	void startEffect();
 	void stopEffect();
 
-	int mIndex;         // _30
-	NJS_OBJECT* mModelData;   // _34
-	NJS_TEXLIST* mTexList;     // _38
+	int mIndex;             // _30
+	NJS_OBJECT* mModelData; // _34
+	NJS_TEXLIST* mTexList;  // _38
 	DrawTask* mDrawTask;    // _3C
-	ModelDraw mModel;   // _40
-	Vec3f mPos;         // _5C
-	int mRotY;          // _68
-	f32 mMatrix[12];    // _6C
-	int mEffectId;      // _9C
-	Fx* mEffect;      // _A0
-	SoundHandle mSound; // _A4
-	int _D0;            // _D0
+	ModelDraw mModel;       // _40
+	Vec3f mPos;             // _5C
+	int mRotY;              // _68
+	f32 mMatrix[12];        // _6C
+	int mEffectId;          // _9C
+	Fx* mEffect;            // _A0
+	SoundHandle mSound;     // _A4
+	int _D0;                // _D0
 };
 
 /**
@@ -87,27 +87,27 @@ public:
 	void updateEvent();
 	void endEvent();
 
-	NJS_OBJECT* mModelData;            // _30
-	NJS_TEXLIST* mTexList;              // _34
-	DrawTask* mDrawTask;             // _38
-	SetLinkMember mLink;         // _3C
-	CharaColli* mShape;                // _48
-	Vec3f mPos;                  // _4C
-	SetRot mRot;                 // _58
-	f32 mMatrix[12];             // _64
-	FlagByte mFlagByte;          // _94
+	NJS_OBJECT* mModelData; // _30
+	NJS_TEXLIST* mTexList;  // _34
+	DrawTask* mDrawTask;    // _38
+	SetLinkMember mLink;    // _3C
+	CharaColli* mShape;     // _48
+	Vec3f mPos;             // _4C
+	SetRot mRot;            // _58
+	f32 mMatrix[12];        // _64
+	FlagByte mFlagByte;     // _94
 	u8 _95[3];
 	TObjWidgetGate* mParts[7]; // _98 the six pedestals and then the centre
-	TCamPath* mEvent;            // _B4
-	u16 mSwitchId;               // _B8
-	int mEventBefore;            // _BC ":EVID ANTE"
-	int mEventAfter;             // _C0 ":EVID POST"
-	int mEventFailed;            // _C4 ":EVID FAILED"
-	EventCamRef mCam;            // _C8
-	int mSound;                  // _D0
-	ObjRef mToucher;             // _D4
-	int mAct;                    // _E0 0 = wait 1 = camera 2 = event 3 = finish 4 = done
-	int mStep;                   // _E4
+	TCamPath* mEvent;          // _B4
+	u16 mSwitchId;             // _B8
+	int mEventBefore;          // _BC ":EVID ANTE"
+	int mEventAfter;           // _C0 ":EVID POST"
+	int mEventFailed;          // _C4 ":EVID FAILED"
+	EventCamRef mCam;          // _C8
+	int mSound;                // _D0
+	ObjRef mToucher;           // _D4
+	int mAct;                  // _E0 0 = wait 1 = camera 2 = event 3 = finish 4 = done
+	int mStep;                 // _E4
 };
 
 extern "C" {

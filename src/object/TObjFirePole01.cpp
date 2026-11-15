@@ -55,7 +55,8 @@ void TObjFirePole01::debugPrint(void*)
 	njPushMatrixEx();
 	njTranslateEx(&mPos);
 	gjRotateY(mRot.y);
-	debugCylinder((const Vec3f*)(&colliGetShapes(mShape)->mPos), (GXColor*)&color, colliGetShapes(mShape)->mSizeX, colliGetShapes(mShape)->mSizeY);
+	debugCylinder((const Vec3f*)(&colliGetShapes(mShape)->mPos), (GXColor*)&color, colliGetShapes(mShape)->mSizeX,
+	              colliGetShapes(mShape)->mSizeY);
 	njPopMatrixEx();
 }
 

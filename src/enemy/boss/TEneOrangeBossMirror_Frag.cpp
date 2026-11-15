@@ -38,7 +38,7 @@ void MirrorShard::setVel(const Vec3f* from)
 	}
 	gjScaleVector(randRange(0.5f, 1.5f), &mVel, &mVel);
 	f32 base = 1.0f;
-	mVel.y = base * randUnit() + base;
+	mVel.y   = base * randUnit() + base;
 }
 
 // Not in the DOL the linker stripped it
@@ -50,8 +50,8 @@ f32 mirrorShardRandSigned()
 // 0x801B7140
 void MirrorShard::setSpin(int yaw)
 {
-	mRotX = 0;
-	mRotY = yaw;
+	mRotX    = 0;
+	mRotY    = yaw;
 	int spin = (int)(3000.0f * (2.0f * (3.0517578125e-05f * (f32)rand() - 0.5f)));
 	if (spin < 0) {
 		spin -= 500;
@@ -72,12 +72,12 @@ void MirrorShard::setCorners(f32 sizeX, f32 sizeY)
 	mCorners[0].x = far * (c * sizeX);
 	mCorners[0].y = far * (s * sizeY);
 	mCorners[0].z = 0.0f;
-	far = -2.0f * randUnit() + 2.5f;
+	far           = -2.0f * randUnit() + 2.5f;
 	njSinCos((int)(24576.0f * RAND_SIGNED()) + 0x5555, &s, &c);
 	mCorners[1].x = far * (c * sizeX);
 	mCorners[1].y = far * (s * sizeY);
 	mCorners[1].z = 0.0f;
-	far = -2.0f * randUnit() + 2.5f;
+	far           = -2.0f * randUnit() + 2.5f;
 	njSinCos((int)(24576.0f * RAND_SIGNED()) + 0xAAAA, &s, &c);
 	mCorners[2].x = far * (c * sizeX);
 	mCorners[2].y = far * (s * sizeY);
@@ -108,20 +108,20 @@ const char* gTEneOrangeBossMirror_FragName = "TEneOrangeBossMirror_Frag";
 TEneOrangeBossMirror_Frag::TEneOrangeBossMirror_Frag(TObject* parent, const Vec3f* pos, int yaw)
     : TObject(parent)
 {
-	_00   = (u32)gTEneOrangeBossMirror_FragName;
-	mSize = 0x1228;
+	_00       = (u32)gTEneOrangeBossMirror_FragName;
+	mSize     = 0x1228;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
-	mAlpha = 0xE8;
+	mAlpha    = 0xE8;
 	Vec3f from;
 	Vec3f across;
 	vecFromAngleXZ(1.0f, &across, yaw);
 	across.y = 0.0f;
 	gjMulAddVector(-40.0f, &from, pos, &across);
-	from.y = 0.0f;
-	f32 z = across.z;
+	from.y   = 0.0f;
+	f32 z    = across.z;
 	across.z = -across.x;
 	across.x = z;
-	int n = 0;
+	int n    = 0;
 	for (int row = 0; row < 8; row++) {
 		f32 up = 100.0f - (12.5f * (f32)row + 6.25f);
 		for (int col = 0; col < 8; col++) {

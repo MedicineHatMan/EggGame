@@ -10,22 +10,22 @@ class TCamLockOnCursor;
 
 /** A short record camKeyClear clears a half and two bytes */
 struct CamPathKey { // size 0x4
-	u16 mValue;   // _00
-	u8 mPressed;  // _02 this frame 1 down 2 hard
-	u8 mHeld;     // _03 1 down 2 hard
+	u16 mValue;     // _00
+	u8 mPressed;    // _02 this frame 1 down 2 hard
+	u8 mHeld;       // _03 1 down 2 hard
 };
 
 /** A record camSpanClear clears */
 struct CamPathSpan { // size 0x10
-	u32 mPressed; // _00 the bits new this frame
-	u32 mHeld;    // _04
-	f32 mValue;   // _08 -1 to 1
-	s16 mRepeat;  // _0C frames it has been one way negative for back
-	s16 mRaw;     // _0E
+	u32 mPressed;    // _00 the bits new this frame
+	u32 mHeld;       // _04
+	f32 mValue;      // _08 -1 to 1
+	s16 mRepeat;     // _0C frames it has been one way negative for back
+	s16 mRaw;        // _0E
 };
 
 /** Per camera the pad as the camera reads it */
-struct CamPath { // size 0x2C
+struct CamPath {          // size 0x2C
 	CamPathKey mKey[2];   // _00
 	int mKeyIndex;        // _08 the button the checks read
 	CamPathSpan mSpan[2]; // _0C x then y
@@ -33,10 +33,10 @@ struct CamPath { // size 0x2C
 
 /** Per camera a setting saved to put back later whether it is set and three values */
 struct CamSaved { // size 0x10
-	int mSet;  // _00
-	f32 mA;    // _04 for camSetCurveLift
-	f32 mB;    // _08 for camSetChaseOffset
-	f32 mC;    // _0C
+	int mSet;     // _00
+	f32 mA;       // _04 for camSetCurveLift
+	f32 mB;       // _08 for camSetChaseOffset
+	f32 mC;       // _0C
 };
 
 class TCameraCtrl : public TObject {
@@ -48,40 +48,40 @@ public:
 
 	virtual void draw(); // _0C 0x8000632C
 
-	void setView(int i);                    // 0x80006490
-	void setTarget(int i, TObjAction* obj); // 0x8000660C
-	u16 getTarget(int i);                   // 0x800066F4
-	void getPos(int i, Vec3f* out);         // 0x80006AC4
-	void getFlat(int i, Vec3f* out);        // 0x80006BB4
-	int getYaw(int i);                      // 0x80006D10
-	void getAt(int i, Vec3f* out);          // 0x80006DA8
-	CamView* getView(int i);                // 0x80006E50
-	CamView* getDrawView();                 // 0x80006ED8
-	TCamera* getCamera(int i);              // 0x80006F44
-	f32* getMtx(int i);                     // 0x80006F94
-	f32* getDrawMtx();                      // 0x80006FE0
-	int getRoll(int i);                     // 0x80007004
-	int getDrawRoll();                      // 0x8000704C
+	void setView(int i);                                              // 0x80006490
+	void setTarget(int i, TObjAction* obj);                           // 0x8000660C
+	u16 getTarget(int i);                                             // 0x800066F4
+	void getPos(int i, Vec3f* out);                                   // 0x80006AC4
+	void getFlat(int i, Vec3f* out);                                  // 0x80006BB4
+	int getYaw(int i);                                                // 0x80006D10
+	void getAt(int i, Vec3f* out);                                    // 0x80006DA8
+	CamView* getView(int i);                                          // 0x80006E50
+	CamView* getDrawView();                                           // 0x80006ED8
+	TCamera* getCamera(int i);                                        // 0x80006F44
+	f32* getMtx(int i);                                               // 0x80006F94
+	f32* getDrawMtx();                                                // 0x80006FE0
+	int getRoll(int i);                                               // 0x80007004
+	int getDrawRoll();                                                // 0x8000704C
 	int isVisible(const Vec3f* pos, Vec3f* out, f32 far, f32 radius); // 0x800070E0
-	int getDrawIndex();                     // 0x80007220
-	int getPad(int i);                      // 0x80007270
-	CamPath* getPath(int i);                // 0x80007308
-	void resetCamera(int i);                // 0x80007398
-	void shake(int i, f32 power);           // 0x80007420
-	void shakeNear(const Vec3f* pos, f32 range, f32 power); // 0x800074EC
-	void setMode(int mode);                 // 0x80007620
-	int lockA(int i);                       // 0x80007740
-	void lockB(int i);                      // 0x800077D4
-	void lockC(int i);                      // 0x80007860
-	void lockD(int i);                      // 0x800078EC
-	u16 lockGetId(int i);                   // 0x80007984
-	void lockE(int i);                      // 0x80007A7C
-	void lockF(int i);                      // 0x80007B08
-	void lockAll();                         // 0x80007B84
+	int getDrawIndex();                                               // 0x80007220
+	int getPad(int i);                                                // 0x80007270
+	CamPath* getPath(int i);                                          // 0x80007308
+	void resetCamera(int i);                                          // 0x80007398
+	void shake(int i, f32 power);                                     // 0x80007420
+	void shakeNear(const Vec3f* pos, f32 range, f32 power);           // 0x800074EC
+	void setMode(int mode);                                           // 0x80007620
+	int lockA(int i);                                                 // 0x80007740
+	void lockB(int i);                                                // 0x800077D4
+	void lockC(int i);                                                // 0x80007860
+	void lockD(int i);                                                // 0x800078EC
+	u16 lockGetId(int i);                                             // 0x80007984
+	void lockE(int i);                                                // 0x80007A7C
+	void lockF(int i);                                                // 0x80007B08
+	void lockAll();                                                   // 0x80007B84
 
-	void makeGameCameras();                 // 0x80005FD0 in TCamera.cpp
-	void makeEditCameras();                 // 0x80005FF4
-	void makeCameras(int mode);             // 0x80006018 0 the game cameras 1 the edit ones
+	void makeGameCameras();     // 0x80005FD0 in TCamera.cpp
+	void makeEditCameras();     // 0x80005FF4
+	void makeCameras(int mode); // 0x80006018 0 the game cameras 1 the edit ones
 
 	CamView mView[4];           // _20
 	TCamera* mCamera[4];        // _280

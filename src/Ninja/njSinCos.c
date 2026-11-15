@@ -2,6 +2,7 @@
 #include "Ninja/njInternal.h"
 
 // 0x8020CB54
+// clang-format off
 asm f32 njSin(s32 angle)
 {
 	nofralloc
@@ -13,8 +14,10 @@ asm f32 njSin(s32 angle)
 	lfs f1, 0x0(r6)
 	blr
 }
+// clang-format on
 
 // 0x8020CB70
+// clang-format off
 asm f32 njCos(s32 angle)
 {
 	nofralloc
@@ -26,8 +29,10 @@ asm f32 njCos(s32 angle)
 	lfs f1, 0x4(r6)
 	blr
 }
+// clang-format on
 
 // 0x8020CB8C
+// clang-format off
 asm void njSinCos(s32 angle, f32* sinValue, f32* cosValue)
 {
 	nofralloc
@@ -42,3 +47,4 @@ asm void njSinCos(s32 angle, f32* sinValue, f32* cosValue)
 	stfs f1, 0x0(r5)
 	blr
 }
+// clang-format on

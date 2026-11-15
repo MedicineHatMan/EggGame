@@ -78,9 +78,9 @@ void** resBankGetObjects(ResBank* bank)
 void resBankAddTextures(ResBank* bank, int no, const char* name)
 {
 	ResBankExtra* extra = new ResBankExtra;
-	extra->mNo   = no;
-	extra->mNext = NULL;
-	extra->mFile = NULL;
+	extra->mNo          = no;
+	extra->mNext        = NULL;
+	extra->mFile        = NULL;
 	if (bank->mExtra == NULL) {
 		bank->mExtra = extra;
 	} else {
@@ -102,7 +102,7 @@ void resBankAddTextures(ResBank* bank, int no, const char* name)
 void resBankRemoveTextures(ResBank* bank, int no)
 {
 	njReleaseTexture(bank->mData->mTextures[no]);
-	ResBankExtra* prev = NULL;
+	ResBankExtra* prev  = NULL;
 	ResBankExtra* extra = bank->mExtra;
 	while (extra != NULL) {
 		if (extra->mNo == no) {
@@ -150,7 +150,7 @@ extern "C" u32 findEggAhead(const Vec3f* from, int angle, int self, int spread, 
 {
 	TObjEgg* egg;
 	u32 found = 0xFFFF;
-	Vec3f at = *from;
+	Vec3f at  = *from;
 	ObjIdIter iter;
 	Vec3f dir;
 	f32 dist;
@@ -215,7 +215,8 @@ struct FxModelMatrix {
 	f32 m[12];
 };
 
-TObjFxModel::TObjFxModel(TObject* parent, void* model, void* textures, const f32* matrix) : TObject(parent)
+TObjFxModel::TObjFxModel(TObject* parent, void* model, void* textures, const f32* matrix)
+    : TObject(parent)
 {
 	mActor    = NULL;
 	mTextures = NULL;
@@ -231,11 +232,11 @@ TObjFxModel::TObjFxModel(TObject* parent, void* model, void* textures, const f32
 		gjBuildActorVertices((GjActor*)mActor);
 		njPopMatrixEx();
 	}
-	mTextures = textures;
+	mTextures                = textures;
 	*(FxModelMatrix*)mMatrix = *(const FxModelMatrix*)matrix;
-	mState[0] = 0x200;
-	mState[5] = -1;
-	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mState[0]                = 0x200;
+	mState[5]                = -1;
+	mTask                    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 }
 
 // 0x800E7DE0
@@ -307,7 +308,7 @@ extern const TexVtx sResMarkQuad[4] = {
 };
 
 TexList* sTexSwapList; // 0x802C5308
-int sTexSwapSlot;          // 0x802C530C
+int sTexSwapSlot;      // 0x802C530C
 void* sTexSwapSaved;   // 0x802C5310
 }
 
@@ -325,7 +326,7 @@ extern "C" void* aniTexSwap(TexList* list, int slot, int from)
 {
 	TexName* name = &list->textures[slot];
 	void* old     = name->texaddr;
-	name->texaddr     = ((AniCommonTex*)gAnimalCommonModel)->mTextures[0]->textures[from].texaddr;
+	name->texaddr = ((AniCommonTex*)gAnimalCommonModel)->mTextures[0]->textures[from].texaddr;
 	return old;
 }
 
@@ -347,7 +348,7 @@ extern "C" void aniTexSwapEnd()
 		return;
 	}
 	sTexSwapList->textures[sTexSwapSlot].texaddr = sTexSwapSaved;
-	sTexSwapList = 0;
+	sTexSwapList                                 = 0;
 }
 
 /**
@@ -367,9 +368,9 @@ public:
 	virtual void vfn_10(); // _10
 	virtual void render(); // _1C
 
-	Vec3f mPos;      // _20
-	Vec3f mVel;      // _2C
-	int mLife;       // _38
+	Vec3f mPos;          // _20
+	Vec3f mVel;          // _2C
+	int mLife;           // _38
 	DrawTask* mDrawTask; // _3C
 };
 
@@ -383,7 +384,8 @@ extern "C" TAniGreetMark* createTAniGreetMark(TObject* parent, const Vec3f* pos)
 
 // 0x800E809C
 TAniGreetMark::TAniGreetMark(TObject* parent, const Vec3f* pos)
-    : TObject(parent), mPos(*pos)
+    : TObject(parent)
+    , mPos(*pos)
 {
 	mVel.x    = 0.0f;
 	mVel.y    = 0.2f;
@@ -422,7 +424,7 @@ void TAniGreetMark::vfn_10()
 void TAniGreetMark::render()
 {
 	DrawStateSlot* slot = getDrawStateSlot();
-	int rot    = camGetDrawYaw() + 0x8000;
+	int rot             = camGetDrawYaw() + 0x8000;
 	njPushMatrixEx();
 	njTranslateEx(&mPos);
 	gjRotateY((u16)rot);

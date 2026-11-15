@@ -140,10 +140,10 @@ void TObjMapRock01::stateBroken()
 void TObjMapRock01::setSize(f32 scale)
 {
 	Vec3f tmp;
-	tmp.x = 0.0f;
-	tmp.y = 0.0f;
-	tmp.z = 0.0f;
-	tmp.y = 0.7f * scale * mScale;
+	tmp.x        = 0.0f;
+	tmp.y        = 0.0f;
+	tmp.z        = 0.0f;
+	tmp.y        = 0.7f * scale * mScale;
 	Vec3f offset = tmp;
 	colliSetSphere((CharaColli*)mShape, &mPos, 0x80, &offset, scale * mScale);
 }

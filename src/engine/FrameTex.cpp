@@ -125,7 +125,7 @@ void FrameTex::setOrigin(u16 x, u16 y)
 void FrameTex::setDest(u16 x, u16 y)
 {
 	GjTexHeader* hdr = mTexList.textures->texaddr->hdr;
-	int off = y * hdr->info.width * 2;
+	int off          = y * hdr->info.width * 2;
 	off += (x >> 2) * 32;
 	u8* dest = (u8*)hdr->info.image;
 	dest += off;

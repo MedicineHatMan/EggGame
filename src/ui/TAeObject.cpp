@@ -25,11 +25,11 @@ TAeObject::TAeObject(TObject* parent, void* data, void* assets)
 // Groups of 0x38-byte records separated by a zero kind
 void relocateAe(void* file)
 {
-	u32 base       = (u32)file;
-	u32* header    = (u32*)file;
-	header[0]     += base;
-	header[1]     += base;
-	AeRecord* rec  = (AeRecord*)header[1];
+	u32 base    = (u32)file;
+	u32* header = (u32*)file;
+	header[0] += base;
+	header[1] += base;
+	AeRecord* rec = (AeRecord*)header[1];
 	while (rec->mKind != 0) {
 		while (rec->mKind != 0) {
 			rec->mOff20 += base;
@@ -47,13 +47,21 @@ void relocateAe(void* file)
 }
 
 // 0x800A70A8
-TAeObject::~TAeObject() { }
+TAeObject::~TAeObject()
+{
+}
 
 // 0x800A7104
-void* TAeObject::getAssets() { return mAssets; }
+void* TAeObject::getAssets()
+{
+	return mAssets;
+}
 
 // 0x800A710C
-TAeLayer* TAeObject::createLayer(int id, u32 flags) { return new TAeLayer(this, this, id, flags); }
+TAeLayer* TAeObject::createLayer(int id, u32 flags)
+{
+	return new TAeLayer(this, this, id, flags);
+}
 
 #include "ui/TAeLayer.h"
 #include "egg/EggCreature.h"
@@ -123,7 +131,7 @@ void TAeClip::setup(TAeObject* owner, u32 id, u32 flags)
 	s16 ids[0x96];
 	aeCollectSlots(((AeFile*)mOwner->mData)->mList, (s16)id, ids, 0x96, &mCount);
 	if (mCount > 0) {
-		mItems      = (AeSlot*)memAlloc(mCount * sizeof(AeSlot));
+		mItems = (AeSlot*)memAlloc(mCount * sizeof(AeSlot));
 		int i;
 		AeSlot* dst = mItems;
 		for (i = 0; i < mCount; i++) {
@@ -136,7 +144,10 @@ void TAeClip::setup(TAeObject* owner, u32 id, u32 flags)
 }
 
 // 0x800A7368
-void TAeClip::reset(u32 id, u32 flags) { setup(mOwner, id, flags); }
+void TAeClip::reset(u32 id, u32 flags)
+{
+	setup(mOwner, id, flags);
+}
 
 // 0x800A7398
 void TAeClip::step()
@@ -215,22 +226,25 @@ void TAeClip::paint()
 // 0x800A7618
 void TAeClip::fillFrame(AeFrame* frame)
 {
-	frame->mHead  = ((AeFile*)mOwner->mData)->_00;
-	frame->mList  = ((AeFile*)mOwner->mData)->mList;
-	frame->mTime  = mTime;
-	frame->mRate  = _58;
-	frame->mMark  = 0;
-	frame->mColor.a    = _6C;
-	frame->mColor.r    = _70;
-	frame->mColor.g    = _74;
-	frame->mColor.b    = _78;
-	frame->mCount = mCount;
-	frame->mItems = mItems;
+	frame->mHead    = ((AeFile*)mOwner->mData)->_00;
+	frame->mList    = ((AeFile*)mOwner->mData)->mList;
+	frame->mTime    = mTime;
+	frame->mRate    = _58;
+	frame->mMark    = 0;
+	frame->mColor.a = _6C;
+	frame->mColor.r = _70;
+	frame->mColor.g = _74;
+	frame->mColor.b = _78;
+	frame->mCount   = mCount;
+	frame->mItems   = mItems;
 }
 
 // 0x800A7684
 // Bit 10 set by step when playback finishes
-int TAeClip::isDone() { return (mPlayFlags >> 10) & 1; }
+int TAeClip::isDone()
+{
+	return (mPlayFlags >> 10) & 1;
+}
 
 // 0x800A7690
 // The window is the step just taken
@@ -265,7 +279,10 @@ void TAeClip::setScale(f32 x, f32 y)
 }
 
 // 0x800A7784
-void TAeClip::setSpin(f32 angle) { _5C = angle; }
+void TAeClip::setSpin(f32 angle)
+{
+	_5C = angle;
+}
 
 // 0x800A778C
 void TAeClip::setColor(f32* color)
@@ -277,7 +294,10 @@ void TAeClip::setColor(f32* color)
 }
 
 // 0x800A77B0
-void TAeClip::setRate(f32 rate) { _68 = rate; }
+void TAeClip::setRate(f32 rate)
+{
+	_68 = rate;
+}
 
 // 0x800A77B8
 // Replaces the low 7 flag bits
@@ -291,18 +311,30 @@ void TAeClip::setMode(u32 mode)
 }
 
 // 0x800A77E4
-void TAeClip::show() { mPlayFlags &= ~0x180u; }
+void TAeClip::show()
+{
+	mPlayFlags &= ~0x180u;
+}
 
 // 0x800A77F4
 // Bit 7 makes step and paint skip this clip
-void TAeClip::hide() { mPlayFlags |= 0x80; }
+void TAeClip::hide()
+{
+	mPlayFlags |= 0x80;
+}
 
 // 0x800A7804
 // Bit 9 makes paint skip this clip
-void TAeClip::hold() { mPlayFlags |= 0x200; }
+void TAeClip::hold()
+{
+	mPlayFlags |= 0x200;
+}
 
 // 0x800A7814
-void TAeClip::release() { mPlayFlags &= ~0x200u; }
+void TAeClip::release()
+{
+	mPlayFlags &= ~0x200u;
+}
 
 // 0x800A7824
 // 1 parks the clip on its last frame
@@ -322,11 +354,17 @@ void TAeClip::cue(int mode)
 
 // 0x800A7870
 // Clears hide pause and the done bit
-void TAeClip::wake() { mPlayFlags &= ~0x580u; }
+void TAeClip::wake()
+{
+	mPlayFlags &= ~0x580u;
+}
 
 // 0x800A7884
 // Bit 8 makes step return before it advances the time
-void TAeClip::pause() { mPlayFlags |= 0x100; }
+void TAeClip::pause()
+{
+	mPlayFlags |= 0x100;
+}
 
 // 0x800A7894
 void TAeClip::flipPause()
@@ -354,7 +392,7 @@ AeSlot* TAeClip::findSlot(int id)
 	if (mItems == 0) {
 		return 0;
 	}
-	int count = mCount;
+	int count    = mCount;
 	AeSlot* slot = mItems;
 	int i;
 	for (i = 0; i < count; i++) {
@@ -379,7 +417,7 @@ void TAeClip::setSprite(u32 id, AeUv* src, void* tex)
 	if (tex == 0) {
 		tex = mOwner->mAssets;
 	}
-	slot->_02        = 1;
+	slot->_02                    = 1;
 	((AeUv*)slot->_04)->mVals[0] = src->mVals[0];
 	((AeUv*)slot->_04)->mVals[1] = src->mVals[1];
 	((AeUv*)slot->_04)->mVals[2] = src->mVals[2];
@@ -388,7 +426,7 @@ void TAeClip::setSprite(u32 id, AeUv* src, void* tex)
 	((AeUv*)slot->_04)->mVals[5] = src->mVals[5];
 	((AeUv*)slot->_04)->mVals[6] = src->mVals[6];
 	((AeUv*)slot->_04)->mVals[7] = src->mVals[7];
-	slot->_14        = tex;
+	slot->_14                    = tex;
 }
 
 // 0x800A7A1C
@@ -414,8 +452,8 @@ void TAeClip::setCell(u32 id, int index)
 	}
 	AeSlot* slot = findSlot(id);
 	if (slot != 0) {
-		slot->_02            = 2;
-		*(s16*)slot->_04     = (s16)index;
+		slot->_02        = 2;
+		*(s16*)slot->_04 = (s16)index;
 	}
 }
 
@@ -467,14 +505,23 @@ void TAeClip::clearSlots()
 }
 
 // 0x800A7BA8
-void* TAeClip::getAssets() { return mOwner->getAssets(); }
+void* TAeClip::getAssets()
+{
+	return mOwner->getAssets();
+}
 
 // 0x800A7BCC
-u32 TAeClip::getId() { return mId; }
+u32 TAeClip::getId()
+{
+	return mId;
+}
 
 // 0x800A7BD4
 // The callers pass a trailing zero that this does not read
-void TAeClip::bind(u32 id, TAeClip* other, u32) { setHook(id, (u32)&drawLinked, (u32)other); }
+void TAeClip::bind(u32 id, TAeClip* other, u32)
+{
+	setHook(id, (u32)&drawLinked, (u32)other);
+}
 
 // 0x800A7C00
 // Stored in a slot by bind and called with the AE file a record index and the clip
@@ -517,7 +564,9 @@ TAeLayer::TAeLayer(TObject* parent, TAeObject* owner, int id, u32 flags)
 }
 
 // 0x800A7D80
-TAeLayer::~TAeLayer() { }
+TAeLayer::~TAeLayer()
+{
+}
 
 // 0x800A7DF4
 // Bit 3 of the clip flags asks for the layer to be deleted once the clip is done
@@ -530,11 +579,17 @@ void TAeLayer::update()
 }
 
 // 0x800A7E58
-void TAeLayer::present() { paint(); }
+void TAeLayer::present()
+{
+	paint();
+}
 
 // 0x800A7E84
 // Reached from the clip vtable through the thunk at 0x800A80C4
-void TAeLayer::onEnd() { mFlags |= 1; } // TObject::mFlags bit 0 = delete me
+void TAeLayer::onEnd()
+{
+	mFlags |= 1;
+} // TObject::mFlags bit 0 = delete me
 
 // 0x800A7E94
 int TAeLayer::play()
@@ -600,4 +655,6 @@ int TAeLayer::play()
 }
 
 // 0x800A80C0
-void TAeClip::onEnd() { }
+void TAeClip::onEnd()
+{
+}

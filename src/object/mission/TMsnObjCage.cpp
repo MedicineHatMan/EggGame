@@ -77,7 +77,7 @@ extern "C" void initCage()
 {
 	loadArc("geobj_cage.arc", &gCageArc);
 	gCageShadowModel = (NJS_OBJECT*)findArcExport(gCageArc, "model");
-	gCageTexList = (NJS_TEXLIST*)findArcExport(gCageArc, "texlist");
+	gCageTexList     = (NJS_TEXLIST*)findArcExport(gCageArc, "texlist");
 	bindGvmTextures((u8*)findArcExport(gCageArc, "texture"), gCageTexList);
 }
 
@@ -102,9 +102,9 @@ void TMsnObjCage::initFromDesc(SetDesc* desc)
 	mKeyId = desc->getInt(0);
 
 	// The file stores how much to add to 1
-	mScale = 1.0f + (f32)(int)desc->getFloat(0);
-	mScale = mScale < 1.0f ? 1.0f : (mScale > 3.0f ? 3.0f : mScale);
-	mCamera = desc->getInt(1);
+	mScale     = 1.0f + (f32)(int)desc->getFloat(0);
+	mScale     = mScale < 1.0f ? 1.0f : (mScale > 3.0f ? 3.0f : mScale);
+	mCamera    = desc->getInt(1);
 	int camera = mCamera;
 	if (camera < 0) {
 		camera = 0;
@@ -114,7 +114,7 @@ void TMsnObjCage::initFromDesc(SetDesc* desc)
 	mCamera = camera;
 
 	mPlace.mFlags = 7;
-	mPlace.mPos = mPos;
+	mPlace.mPos   = mPos;
 	njXYZAngleToQuaternion((const s32*)&mRot, (NJS_QUATERNION*)mPlace.mRot);
 	mPlace.mScale.set(mScale, mScale, mScale);
 	mPlace.update();
@@ -123,9 +123,9 @@ void TMsnObjCage::initFromDesc(SetDesc* desc)
 
 	if (gCageShadowModel != 0) {
 		mShadow.setModel(gCageShadowModel);
-		mShadow.mPlace = &mPlace;
+		mShadow.mPlace   = &mPlace;
 		mShadow.mTexList = gCageTexList;
-		mShadow.mState = &mSaved;
+		mShadow.mState   = &mSaved;
 	}
 
 	// 0 in the file draws to the mirror
@@ -170,7 +170,7 @@ void TMsnObjCage::loadModel()
 {
 	mTimer = 0;
 	mPhase = PHASE_WAIT;
-	mBeam = 0;
+	mBeam  = 0;
 
 	// Already collected and not in the state that keeps the prop on screen delete it
 	if (keyBitIsSet((u16)mKeyId) == 1 && debugEditActive() == 0) {
@@ -179,9 +179,9 @@ void TMsnObjCage::loadModel()
 		return;
 	}
 	if (gCageArc != 0) {
-		void** list = (void**)findArcExport(gCageArc, "dymodels");
+		void** list        = (void**)findArcExport(gCageArc, "dymodels");
 		MeshData* resource = ((MeshData**)list)[(int)mScale - 1];
-		mModel = (MeshObject*)meshColliCreate();
+		mModel             = (MeshObject*)meshColliCreate();
 		meshColliSetData(mModel, resource);
 
 		f32 fit = 1.0f / mScale;
@@ -219,7 +219,7 @@ void TMsnObjCage::fitModel()
 TMsnObjCage::TMsnObjCage(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0x198;
 	initFromDesc(desc);
 	setLinkDone((SetLink*)&mLink);
@@ -388,7 +388,7 @@ int TMsnObjCage::sendToHandle(ObjMsg* msg)
 {
 	switch (msg->mType) {
 	case MSG_OPEN:
-			return acceptMessage(msg);
+		return acceptMessage(msg);
 		break;
 	}
 	return 0;

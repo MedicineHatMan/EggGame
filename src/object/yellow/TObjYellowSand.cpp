@@ -37,12 +37,11 @@ extern "C" {
 
 // Effects and the looping sound
 
-const char* gTObjYellowSandGenName = "TObjYellowSandGen";
+const char* gTObjYellowSandGenName   = "TObjYellowSandGen";
 const char* gTObjYellowSandBoardName = "TObjYellowSandBoard";
-const char* gTObjYellowSandMdlName = "TObjYellowSandMdl";
+const char* gTObjYellowSandMdlName   = "TObjYellowSandMdl";
 const char* gTObjYellowSandStormName = "TObjYellowSandStorm";
 }
-
 
 #define GX_FIFO_F32 (*(volatile f32*)0xCC008000)
 #define GX_FIFO_U32 (*(volatile u32*)0xCC008000)
@@ -89,16 +88,16 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	Vec3f mPos;     // _20
-	Vec3f mVel;     // _2C
-	int mRot;       // _38
-	int mLife;      // _3C
-	int mAlpha;     // _40
-	f32 mLenFront;  // _44
-	f32 mLenMiddle; // _48
-	f32 mLenBack;   // _4C
-	f32 mWidthSide; // _50
-	f32 mWidthMid;  // _54
+	Vec3f mPos;          // _20
+	Vec3f mVel;          // _2C
+	int mRot;            // _38
+	int mLife;           // _3C
+	int mAlpha;          // _40
+	f32 mLenFront;       // _44
+	f32 mLenMiddle;      // _48
+	f32 mLenBack;        // _4C
+	f32 mWidthSide;      // _50
+	f32 mWidthMid;       // _54
 	DrawTask* mDrawTask; // _58
 };
 
@@ -121,16 +120,16 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	Vec3f mPos;       // _30
-	Vec3f mDir;       // _3C
-	f32 mSpeed;       // _48
-	f32 mMaxSpeed;    // _4C
-	int mTimer;       // _50
-	f32 mScale;       // _54
-	int mState;       // _58 0 = grow 1 = run 2 = die
-	void* mEffect;    // _5C
-	f32 mMatrix[12];  // _60
-	SeHolder mSound;  // _90
+	Vec3f mPos;      // _30
+	Vec3f mDir;      // _3C
+	f32 mSpeed;      // _48
+	f32 mMaxSpeed;   // _4C
+	int mTimer;      // _50
+	f32 mScale;      // _54
+	int mState;      // _58 0 = grow 1 = run 2 = die
+	void* mEffect;   // _5C
+	f32 mMatrix[12]; // _60
+	SeHolder mSound; // _90
 };
 
 typedef char TObjYellowSandStorm_size_check[(sizeof(TObjYellowSandStorm) == 0xC4) ? 1 : -1];
@@ -153,9 +152,9 @@ public:
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
 	ScrollModel mSurface; // _90
-	NJS_OBJECT* mModel;           // _B0
+	NJS_OBJECT* mModel;   // _B0
 	f32 mCullRadius;      // _B4
-	DrawTask* mDrawTask;      // _B8
+	DrawTask* mDrawTask;  // _B8
 };
 
 typedef char TObjYellowSandMdl_size_check[(sizeof(TObjYellowSandMdl) == 0xBC) ? 1 : -1];
@@ -283,23 +282,23 @@ extern "C" void spawnSandBoard(f32 y)
 	Vec3f pos;
 	f32 sn;
 	f32 cs;
-	pos = *player->getPos();
+	pos   = *player->getPos();
 	pos.y = y;
 
 	njSinCos(0x1800, &dir.x, &dir.z);
-	dir.y = 0.0f;
+	dir.y     = 0.0f;
 	f32 reach = halfOf(800.0f);
 	gjMulAddVector(-reach, &pos, &pos, &dir);
 
 	njSinCos((int)(65536.0f * randUnit()), &sn, &cs);
 
-	start = pos;
+	start     = pos;
 	f32 ahead = reach * randUnit();
 	start.x += ahead * sn;
 	start.z += ahead * cs;
 
 	f32 side = 500.0f * randUnit();
-	dir.y = 0.0f;
+	dir.y    = 0.0f;
 	start.x += side * cs;
 	start.z -= side * sn;
 
@@ -372,14 +371,14 @@ void TObjYellowSandGen::debugPrint(void*)
 TObjYellowSandBoard::TObjYellowSandBoard(TObject* parent, const Vec3f* pos, int rot, const Vec3f* vel)
     : TObject(parent)
 {
-	_00   = (u32)gTObjYellowSandBoardName;
-	mSize = 0x5C;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 42, 0);
-	mPos  = *pos;
-	mRot  = rot;
-	mVel  = *vel;
-	mLife = 100;
-	mAlpha = 0;
+	_00        = (u32)gTObjYellowSandBoardName;
+	mSize      = 0x5C;
+	mDrawTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 42, 0);
+	mPos       = *pos;
+	mRot       = rot;
+	mVel       = *vel;
+	mLife      = 100;
+	mAlpha     = 0;
 	mLenFront  = 10.0f;
 	mLenMiddle = 33.0f;
 	mLenBack   = 70.0f;
@@ -551,8 +550,8 @@ void TObjYellowSandBoard::render()
 	z3 = z2 - mLenBack;
 
 	f32 halfWidth = 0.5f * (mWidthMid + mWidthSide);
-	f32 x0 = halfWidth - mWidthSide;
-	f32 x1 = x0 - mWidthMid;
+	f32 x0        = halfWidth - mWidthSide;
+	f32 x1        = x0 - mWidthMid;
 
 	drawSandBand(halfWidth, x0, z0, z1, z2, z3, 0xFFFFFF00, alpha);
 	drawSandBand(x0, x1, z0, z1, z2, z3, alpha, alpha);
@@ -574,10 +573,10 @@ extern "C" void createSandStorm(TObject* parent, const Vec3f* pos, const Vec3f* 
 TObjYellowSandStorm::TObjYellowSandStorm(TObject* parent, const Vec3f* pos, const Vec3f* dir)
     : TObjAction(parent)
 {
-	_00   = (u32)gTObjYellowSandStormName;
-	mSize = 0xC4;
-	mPos  = *pos;
-	mDir  = *dir;
+	_00     = (u32)gTObjYellowSandStormName;
+	mSize   = 0xC4;
+	mPos    = *pos;
+	mDir    = *dir;
 	f32 len = njUnitVector(&mDir);
 	if (len < 1e-06f) {
 		mDir = gVecZero;

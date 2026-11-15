@@ -10,16 +10,16 @@ static const char adx_copyright[] = "(c)CRI";
 /* MSL's inline sqrtf the result goes through a volatile float on the stack */
 static inline float sqrtf(float x)
 {
-	static const double _half = .5;
+	static const double _half  = .5;
 	static const double _three = 3.0;
 	volatile float y;
 
 	if (x > 0.0f) {
 		double guess = __frsqrte((double)x);
-		guess = _half * guess * (_three - guess * guess * x);
-		guess = _half * guess * (_three - guess * guess * x);
-		guess = _half * guess * (_three - guess * guess * x);
-		y = (float)(x * guess);
+		guess        = _half * guess * (_three - guess * guess * x);
+		guess        = _half * guess * (_three - guess * guess * x);
+		guess        = _half * guess * (_three - guess * guess * x);
+		y            = (float)(x * guess);
 		return y;
 	}
 	return x;
@@ -34,12 +34,12 @@ void ADX_GetCoefficient(int cof, int sfreq, short* c1, short* c2)
 	float s;
 	float c;
 
-	x = (6.2831855f * (float)cof) / (float)sfreq;
-	c = (float)cos(x);
-	a = sqrtf(2.0f) - c;
-	b = sqrtf(2.0f) - 1.0f;
-	s = sqrtf((a + b) * (a - b));
-	c = (a - s) / b;
+	x   = (6.2831855f * (float)cof) / (float)sfreq;
+	c   = (float)cos(x);
+	a   = sqrtf(2.0f) - c;
+	b   = sqrtf(2.0f) - 1.0f;
+	s   = sqrtf((a + b) * (a - b));
+	c   = (a - s) / b;
 	*c1 = (short)(4096.0f * (2.0f * c));
 	*c2 = (short)(4096.0f * (-c * c));
 }
@@ -67,8 +67,8 @@ int ADX_DecodeFooter(void* buf, int len, short* ftlen)
 }
 
 // 0x8021F43C
-int ADX_DecodeInfo(const void* hdr, int len, short* hdlen, signed char* type, signed char* bps, signed char* blk_len,
-                   signed char* nch, int* sfreq, int* nsmpl, int* blk_smpl)
+int ADX_DecodeInfo(const void* hdr, int len, short* hdlen, signed char* type, signed char* bps, signed char* blk_len, signed char* nch,
+                   int* sfreq, int* nsmpl, int* blk_smpl)
 {
 	unsigned char* p = (unsigned char*)hdr;
 
@@ -78,13 +78,13 @@ int ADX_DecodeInfo(const void* hdr, int len, short* hdlen, signed char* type, si
 	if ((unsigned short)((p[0] << 8) | p[1]) != ADX_HDR_MAGIC) {
 		return -2;
 	}
-	*hdlen = ((p[2] << 8) | p[3]) + 4;
-	*type = p[4];
+	*hdlen   = ((p[2] << 8) | p[3]) + 4;
+	*type    = p[4];
 	*blk_len = p[5];
-	*bps = p[6];
-	*nch = p[7];
-	*sfreq = (p[8] << 24) | (p[9] << 16) | (p[10] << 8) | p[11];
-	*nsmpl = (p[12] << 24) | (p[13] << 16) | (p[14] << 8) | p[15];
+	*bps     = p[6];
+	*nch     = p[7];
+	*sfreq   = (p[8] << 24) | (p[9] << 16) | (p[10] << 8) | p[11];
+	*nsmpl   = (p[12] << 24) | (p[13] << 16) | (p[14] << 8) | p[15];
 	if (*bps == 0) {
 		*blk_smpl = 0;
 	} else {
@@ -125,7 +125,7 @@ int ADX_DecodeInfoExVer(void* hdr, int len, unsigned char* ver, unsigned char* f
 	if (h[1] < 0x10) {
 		return -1;
 	}
-	*ver = ((unsigned char*)hdr)[0x12];
+	*ver  = ((unsigned char*)hdr)[0x12];
 	*flag = ((unsigned char*)hdr)[0x13];
 	return 0;
 }
@@ -164,8 +164,8 @@ int ADX_DecodeInfoExIdly(void* hdr, int len, short* dly0, short* dly1)
 }
 
 // 0x8021F1B8
-int ADX_DecodeInfoExLoop(void* hdr, int len, int* ins_nsmpl, short* nloop, short* lp_type, int* lp_spos, int* lp_sofst,
-                         int* lp_epos, int* lp_eofst)
+int ADX_DecodeInfoExLoop(void* hdr, int len, int* ins_nsmpl, short* nloop, short* lp_type, int* lp_spos, int* lp_sofst, int* lp_epos,
+                         int* lp_eofst)
 {
 	short* h = (short*)hdr;
 	unsigned char ver;
@@ -175,7 +175,7 @@ int ADX_DecodeInfoExLoop(void* hdr, int len, int* ins_nsmpl, short* nloop, short
 	int ofs;
 
 	*nloop = 0;
-	ret = ADX_DecodeInfoExVer(hdr, len, &ver, &flag);
+	ret    = ADX_DecodeInfoExVer(hdr, len, &ver, &flag);
 	if (ret != 0) {
 		return ret;
 	}
@@ -197,14 +197,14 @@ int ADX_DecodeInfoExLoop(void* hdr, int len, int* ins_nsmpl, short* nloop, short
 		ofs = 0x20;
 	}
 	*ins_nsmpl = *(short*)((char*)hdr + ofs);
-	*nloop = *(short*)(&((char*)hdr)[ofs + 2]);
+	*nloop     = *(short*)(&((char*)hdr)[ofs + 2]);
 	if (*nloop != 1) {
 		return -2;
 	}
-	*lp_type = *(short*)(&((char*)hdr)[ofs + 6]);
-	*lp_spos = *(int*)(&((char*)hdr)[ofs + 8]);
+	*lp_type  = *(short*)(&((char*)hdr)[ofs + 6]);
+	*lp_spos  = *(int*)(&((char*)hdr)[ofs + 8]);
 	*lp_sofst = *(int*)(&((char*)hdr)[ofs + 0xC]);
-	*lp_epos = *(int*)(&((char*)hdr)[ofs + 0x10]);
+	*lp_epos  = *(int*)(&((char*)hdr)[ofs + 0x10]);
 	*lp_eofst = *(int*)(&((char*)hdr)[ofs + 0x14]);
 	return 0;
 }

@@ -14,8 +14,8 @@ char** sEggMessages;
 
 /** mes_egg.bin The table holds one offset per message from 8 bytes past mTextStart */
 struct EggMessageFile {
-	u32 mTextStart; // _00 from the start of the file
-	u32 mTableSize; // _04 in bytes
+	u32 mTextStart;  // _00 from the start of the file
+	u32 mTableSize;  // _04 in bytes
 	char* mTable[1]; // _08
 };
 
@@ -29,11 +29,11 @@ extern "C" void loadEggMessages()
 	int i;
 
 	loadSizedResource(getLangFileName("mes_egg.bin"), &sEggMessageFile);
-	data = (u32*)sEggMessageFile->mData;
+	data      = (u32*)sEggMessageFile->mData;
 	textStart = *data;
 	textStart += (u32)data++;
-	u32 size = *data++;
-	sEggMessages = (char**)data;
+	u32 size         = *data++;
+	sEggMessages     = (char**)data;
 	sEggMessageCount = size >> 2;
 	for (i = 0; i < sEggMessageCount; i++) {
 		sEggMessages[i] += textStart + 8;

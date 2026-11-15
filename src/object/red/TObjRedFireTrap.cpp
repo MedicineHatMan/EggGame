@@ -16,8 +16,8 @@ struct SetLink;
 extern "C" {
 // 0x802C3E20
 ObjClassName gTObjRedFireTrapName = { "TObjRedFireTrap", 0 };
-extern const MotionEntry sRedFireTrapMotions[] = { { 1, 1, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 }, { 1, 2, -1, 0, 0.0f, 14.0f, 0.4f, 0.0f, 0 } };
-
+extern const MotionEntry sRedFireTrapMotions[]
+    = { { 1, 1, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 }, { 1, 2, -1, 0, 0.0f, 14.0f, 0.4f, 0.0f, 0 } };
 }
 
 typedef char TObjRedFireTrap_size_check[(sizeof(TObjRedFireTrap) == 0x144) ? 1 : -1];

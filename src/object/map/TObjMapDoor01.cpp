@@ -50,7 +50,6 @@ const f32 gDoorASetRange = 1000.0f;
 ObjClassName gTObjMapDoor01Name = { "TObjMapDoor01", 0 };
 
 // The event camera handle See TObjYellowSlideDoor.cpp
-
 }
 
 class TObjMapDoor01;
@@ -77,7 +76,31 @@ static inline TObjMapDoor01* makeDoor(TObject* parent, SetDesc* desc)
 }
 
 // Everything but the door with the second model
-#define CREATE_DOOR01(parent, desc, node, sound, frameColli)         	TObjMapDoor01* door = makeDoor(parent, desc);                    	if (door == 0) {                                                 		return 0;                                                    	}                                                                	door->mColliNode      = node;                                    	door->mDustId         = 0x1A8;                                   	door->mSoundId        = sound;                                   	door->mModel          = (NJS_OBJECT*)findGeObjData("MODEL_DOOR01");           	door->mFrameModel     = (NJS_OBJECT*)findGeObjData("MODEL_MON01");            	door->mTexList        = (NJS_TEXLIST*)findGeObjData("TLS_MODEL_DOOR01");       	door->mFrameTexList   = findGeObjData("TLS_MODEL_MON01");        	door->mMotion         = findGeObjData("MOTION_DOOR01");          	door->mColliData      = (MeshData*)findStgObjData("COL_MODEL_DOOR01");      	door->mFrameColliData = (MeshData*)frameColli;                              	door->mBoxLow.x       = -70.0f;                                  	door->mBoxLow.y       = -10.0f;                                  	door->mBoxLow.z       = -20.0f;                                  	door->mBoxHigh.x      = 70.0f;                                   	door->mBoxHigh.y      = 90.0f;                                   	door->mBoxHigh.z      = 20.0f;                                   	door->createColli(0);                                            	door->mRadius = 100.0f;                                          	door->initOpen();                                                	return door;
+#define CREATE_DOOR01(parent, desc, node, sound, frameColli)                 \
+	TObjMapDoor01* door = makeDoor(parent, desc);                            \
+	if (door == 0) {                                                         \
+		return 0;                                                            \
+	}                                                                        \
+	door->mColliNode      = node;                                            \
+	door->mDustId         = 0x1A8;                                           \
+	door->mSoundId        = sound;                                           \
+	door->mModel          = (NJS_OBJECT*)findGeObjData("MODEL_DOOR01");      \
+	door->mFrameModel     = (NJS_OBJECT*)findGeObjData("MODEL_MON01");       \
+	door->mTexList        = (NJS_TEXLIST*)findGeObjData("TLS_MODEL_DOOR01"); \
+	door->mFrameTexList   = findGeObjData("TLS_MODEL_MON01");                \
+	door->mMotion         = findGeObjData("MOTION_DOOR01");                  \
+	door->mColliData      = (MeshData*)findStgObjData("COL_MODEL_DOOR01");   \
+	door->mFrameColliData = (MeshData*)frameColli;                           \
+	door->mBoxLow.x       = -70.0f;                                          \
+	door->mBoxLow.y       = -10.0f;                                          \
+	door->mBoxLow.z       = -20.0f;                                          \
+	door->mBoxHigh.x      = 70.0f;                                           \
+	door->mBoxHigh.y      = 90.0f;                                           \
+	door->mBoxHigh.z      = 20.0f;                                           \
+	door->createColli(0);                                                    \
+	door->mRadius = 100.0f;                                                  \
+	door->initOpen();                                                        \
+	return door;
 
 // 0x80070AB0
 extern "C" TObject* createDoorA(TObject* parent, SetDesc* desc)
@@ -140,20 +163,20 @@ extern "C" TObject* createDoor02(TObject* parent, SetDesc* desc)
 	if (door == 0) {
 		return 0;
 	}
-	door->mModel      = (NJS_OBJECT*)findGeObjData("MODEL_DOOR02");
-	door->mFrameModel = 0;
-	door->mTexList    = (NJS_TEXLIST*)findGeObjData("TLS_MODEL_DOOR02");
-	door->mFrameTexList = 0;
-	door->mMotion     = findGeObjData("MOTION_DOOR02");
-	door->mColliData  = (MeshData*)findGeObjData("COL_MODEL_DOOR02");
+	door->mModel          = (NJS_OBJECT*)findGeObjData("MODEL_DOOR02");
+	door->mFrameModel     = 0;
+	door->mTexList        = (NJS_TEXLIST*)findGeObjData("TLS_MODEL_DOOR02");
+	door->mFrameTexList   = 0;
+	door->mMotion         = findGeObjData("MOTION_DOOR02");
+	door->mColliData      = (MeshData*)findGeObjData("COL_MODEL_DOOR02");
 	door->mFrameColliData = 0;
-	door->mColliNode  = 0;
-	door->mBoxLow.x   = -100.0f;
-	door->mBoxLow.y   = -10.0f;
-	door->mBoxLow.z   = -20.0f;
-	door->mBoxHigh.x  = 100.0f;
-	door->mBoxHigh.y  = 100.0f;
-	door->mBoxHigh.z  = 20.0f;
+	door->mColliNode      = 0;
+	door->mBoxLow.x       = -100.0f;
+	door->mBoxLow.y       = -10.0f;
+	door->mBoxLow.z       = -20.0f;
+	door->mBoxHigh.x      = 100.0f;
+	door->mBoxHigh.y      = 100.0f;
+	door->mBoxHigh.z      = 20.0f;
 	door->createColli(0);
 	door->initOpen();
 	door->mBurstId = 1;
@@ -197,8 +220,8 @@ void TObjMapDoor01::initFromDesc(SetDesc* desc)
 	mSetCamPos = desc->getInt(1) < 0 ? 0 : (desc->getInt(1) > 1 ? 1 : desc->getInt(1));
 
 	if (mSetCamPos != 0) {
-		f32 z = desc->getFloat(2);
-		f32 y = desc->getFloat(1);
+		f32 z     = desc->getFloat(2);
+		f32 y     = desc->getFloat(1);
 		mCamPos.x = desc->getFloat(0);
 		mCamPos.y = y;
 		mCamPos.z = z;
@@ -287,7 +310,7 @@ void TObjMapDoor01::setup()
 	mFrameStep      = 0.25f;
 	mLight.setFadeDist(0.0f);
 	mLight.mTimer = 0;
-	mLightSet = lightSetFindArea(&mPos);
+	mLightSet     = lightSetFindArea(&mPos);
 }
 
 // 0x80071984
@@ -333,7 +356,7 @@ void TObjMapDoor01::startEffects()
 {
 	if (mDustId > -1 && mDust == 0) {
 		Vec3f* pos = getPos();
-		mDust = particleGenById(this, pos, 0, mDustId);
+		mDust      = particleGenById(this, pos, 0, mDustId);
 		if (mDust != 0) {
 			mDust->setRot(0, mRot.y);
 		}
@@ -635,10 +658,10 @@ void DoorList::clear()
 	DoorListNode* node = mHead;
 	while (node != 0) {
 		DoorListNode* next = node->mNext;
-		node->mList = 0;
-		node->mNext = 0;
-		node->mPrev = 0;
-		node = next;
+		node->mList        = 0;
+		node->mNext        = 0;
+		node->mPrev        = 0;
+		node               = next;
 	}
 }
 

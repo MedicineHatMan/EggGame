@@ -32,26 +32,26 @@ public:
 	virtual void vfn_10(); // _10 empty
 	virtual void render(); // _1C
 
-	void setup();            // 0x801B7CE0
-	void updateMatrix();     // 0x801B7F70
-	void stepMotion();       // 0x801B7FB4
-	void play(s16 id);       // 0x801B8054
-	void setIdle();          // 0x801B80A0
-	void setState1();        // 0x801B80D8
-	void setState2();        // 0x801B8110
+	void setup();        // 0x801B7CE0
+	void updateMatrix(); // 0x801B7F70
+	void stepMotion();   // 0x801B7FB4
+	void play(s16 id);   // 0x801B8054
+	void setIdle();      // 0x801B80A0
+	void setState1();    // 0x801B80D8
+	void setState2();    // 0x801B8110
 
-	GjActor* mActor;         // _20 built when the model's first word has bit 0x2000
-	GjActor* mActorB;        // _24 the same test on model mKind+3
-	int mKind;            // _28
-	int mAlt;             // _2C
-	f32 mMtx[12];         // _30
-	Vec3f mPos;           // _60
+	GjActor* mActor;       // _20 built when the model's first word has bit 0x2000
+	GjActor* mActorB;      // _24 the same test on model mKind+3
+	int mKind;             // _28
+	int mAlt;              // _2C
+	f32 mMtx[12];          // _30
+	Vec3f mPos;            // _60
 	MenuModelAngle mAngle; // _6C
-	DrawTask* mDraw;          // _78
-	MotionPlayer mMotion; // _7C
-	s16 mMotionId;        // _B8
-	u16 _BA;              // _BA
-	int mState;           // _BC
+	DrawTask* mDraw;       // _78
+	MotionPlayer mMotion;  // _7C
+	s16 mMotionId;         // _B8
+	u16 _BA;               // _BA
+	int mState;            // _BC
 };
 
 extern "C" {

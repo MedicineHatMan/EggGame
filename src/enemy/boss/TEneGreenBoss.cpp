@@ -32,61 +32,56 @@ struct NJS_TEXLIST;
 
 struct GjActor;
 
-ResBank sGreenBossBank;   // 0x802861E8
-NJS_OBJECT** sGreenBossModels;  // 0x802C57F0
+ResBank sGreenBossBank;        // 0x802861E8
+NJS_OBJECT** sGreenBossModels; // 0x802C57F0
 NJS_TEXLIST** sGreenBossTextures;
 NJS_MOTION** sGreenBossMotion;
 extern "C" {
-GreenBossParams* gGreenBossParams;       // 0x802C57FC
+GreenBossParams* gGreenBossParams; // 0x802C57FC
 }
-FxBankFile sGreenBossFx;  // 0x802C5800
+FxBankFile sGreenBossFx; // 0x802C5800
 
 // 0x8024A2B8
 // The nodes the body points follow -1 at the end
-extern const int sGreenBossNodes[] = { 6, 11, 14, 22, 23, 25, 27, 104, 111, 118, 125, 131, 137, -1 };
-const char* sGreenBossName = "TEneGreenBoss";
+extern const int sGreenBossNodes[]               = { 6, 11, 14, 22, 23, 25, 27, 104, 111, 118, 125, 131, 137, -1 };
+const char* sGreenBossName                       = "TEneGreenBoss";
 extern const EnemyFrameKey sGreenBossFrameKey0[] = { { 18.0f, 0 }, { 28.0f, 5 }, { 41.0f, 0 }, { 47.0f, 3 }, { -1.0f, 0 } };
 // 0x802614B8
 // The twenty-three motions
 MotionEntry sGreenBossMotionKeys[23] = {
-	{ MOTION_LOOP, 20, -1, 0, 0.0f, 40.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 21, -1, 0, 0.0f, 40.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 22, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 16, -1, 0, 0.0f, 20.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_ONCE, 10, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 9.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 6, -1, 0, 0.0f, 10.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 23, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 24, -1, 0, 0.0f, 10.0f, 0.55f, 0.0f, 0 },
-	{ MOTION_ONCE, 25, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 4, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 12, -1, 0, 0.0f, 19.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 17, -1, 0, 0.0f, 29.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 18, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 11, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 19.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 9.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 19, -1, 0, 0.0f, 539.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 20, -1, 0, 0.0f, 40.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 21, -1, 0, 0.0f, 40.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 22, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 16, -1, 0, 0.0f, 20.0f, 0.6f, 0.0f, 0 },
+	{ MOTION_ONCE, 10, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 0, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 5, -1, 0, 0.0f, 9.0f, 0.3f, 0.0f, 0 },    { MOTION_LOOP, 6, -1, 0, 0.0f, 10.0f, 0.2f, 0.0f, 0 },
+	{ MOTION_ONCE, 7, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },   { MOTION_ONCE, 23, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 24, -1, 0, 0.0f, 10.0f, 0.55f, 0.0f, 0 }, { MOTION_ONCE, 25, -1, 0, 0.0f, 19.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 4, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },   { MOTION_ONCE, 12, -1, 0, 0.0f, 19.0f, 0.25f, 0.0f, 0 },
+	{ MOTION_ONCE, 17, -1, 0, 0.0f, 29.0f, 0.5f, 0.0f, 0 },  { MOTION_ONCE, 18, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 11, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 8, -1, 0, 0.0f, 19.0f, 0.35f, 0.0f, 0 },
+	{ MOTION_ONCE, 9, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },   { MOTION_ONCE, 1, -1, 0, 0.0f, 9.0f, 0.35f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 9.0f, 0.4f, 0.0f, 0 },    { MOTION_ONCE, 19, -1, 0, 0.0f, 539.0f, 1.0f, 0.0f, 0 },
 	{ MOTION_ONCE, 3, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
 };
 
 // Never called so the linker drops them
-f32 greenBossWaterLine() { return 25.31f; }
-f32 greenBossRand01() { return 3.0517578e-5f * rand(); }
+f32 greenBossWaterLine()
+{
+	return 25.31f;
+}
+f32 greenBossRand01()
+{
+	return 3.0517578e-5f * rand();
+}
 
 // 0x8015F608
 extern "C" void initTEneGreenBoss()
 {
 	resBankLoad(&sGreenBossBank, "ar_ene_green_boss.arc");
 	resBankAddTextures(&sGreenBossBank, 0, "ene_green_boss.gvm");
-	sGreenBossModels = resBankGetModels(&sGreenBossBank);
+	sGreenBossModels   = resBankGetModels(&sGreenBossBank);
 	sGreenBossTextures = resBankGetTextures(&sGreenBossBank);
-	sGreenBossMotion = resBankGetMotion(&sGreenBossBank, 0);
-	gGreenBossParams = (GreenBossParams*)enemyParamGet(1);
+	sGreenBossMotion   = resBankGetMotion(&sGreenBossBank, 0);
+	gGreenBossParams   = (GreenBossParams*)enemyParamGet(1);
 	fxBankLoadDefault(&sGreenBossFx, "pa_greenboss.pad");
 }
 
@@ -97,9 +92,9 @@ extern "C" void shutdownTEneGreenBoss()
 	gGreenBossParams = 0;
 	resBankRemoveTextures(&sGreenBossBank, 0);
 	resBankRelease(&sGreenBossBank);
-	sGreenBossModels = 0;
+	sGreenBossModels   = 0;
 	sGreenBossTextures = 0;
-	sGreenBossMotion = 0;
+	sGreenBossMotion   = 0;
 }
 
 // 0x8015F6FC
@@ -142,7 +137,7 @@ void TEneGreenBoss::init()
 	mBody.mPos.z = 0.0f;
 	mBody.mPos.y = 25.0f;
 	mBody.mRot.x = 0;
-	mCollider = colliCreate(5, 1);
+	mCollider    = colliCreate(5, 1);
 	colliSetOwner(mCollider, (u16)mObjId);
 	colliSetMasks(mCollider, 2, 0xFF, 0, 0x14);
 	shapes = colliGetShapes(mCollider);
@@ -163,7 +158,8 @@ void TEneGreenBoss::init()
 	colliSetOwner(mBoxColli, (u16)mObjId);
 	colliSetMasks(mBoxColli, 2, 0xFF, 0xFF, 0xF6);
 	shapes = colliGetShapes(mBoxColli);
-	colliShapeMakeBox(shapes, &mBody.mPos, mBody.mRot.y, gGreenBossParams->mBoxSize[0], gGreenBossParams->mBoxSize[1], gGreenBossParams->mBoxSize[2], 1);
+	colliShapeMakeBox(shapes, &mBody.mPos, mBody.mRot.y, gGreenBossParams->mBoxSize[0], gGreenBossParams->mBoxSize[1],
+	                  gGreenBossParams->mBoxSize[2], 1);
 	shapes->mFlags |= 8;
 	shapes->mFlags |= 0x10;
 	colliDisable(mBoxColli);
@@ -175,10 +171,10 @@ void TEneGreenBoss::init()
 	colliShapeSetTag(mSwingColli, 0, j);
 	j++;
 	colliShapeSetTag(mBoxColli, 0, j++);
-	mBrain   = 0;
-	mModelFx = 0;
-	mPose    = (GjActor*)allocPose(sGreenBossModels[1]);
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mBrain     = 0;
+	mModelFx   = 0;
+	mPose      = (GjActor*)allocPose(sGreenBossModels[1]);
+	mDrawTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	mBossFlags = 0;
 	mHitDir.x  = 0.0f;
 	mHitDir.y  = 0.0f;
@@ -252,10 +248,10 @@ TEneGreenBoss::~TEneGreenBoss()
 // 0x8015FD84
 void TEneGreenBoss::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -303,14 +299,14 @@ void TEneGreenBoss::syncSwing()
 void TEneGreenBoss::syncBox()
 {
 	ColliShape* shapes = colliGetShapes(mBoxColli);
-	int rotY = mBody.mRot.y;
+	int rotY           = mBody.mRot.y;
 	Vec3f at;
 	at.x = mBody.mPos.x;
 	at.y = mBody.mPos.y;
 	at.z = mBody.mPos.z;
 
-	at.x = gGreenBossParams->mBoxSize[2] * njSin(rotY) + at.x;
-	at.z = gGreenBossParams->mBoxSize[2] * njCos(rotY) + at.z;
+	at.x         = gGreenBossParams->mBoxSize[2] * njSin(rotY) + at.x;
+	at.z         = gGreenBossParams->mBoxSize[2] * njCos(rotY) + at.z;
 	shapes->mPos = at;
 	colliShapeSetBoxRot(shapes, rotY);
 	colliShapeSetPos(shapes, &at);
@@ -329,7 +325,7 @@ void TEneGreenBoss::readEnemyDesc(SetDesc* desc)
 int TEneGreenBoss::onHit(const TObjAction* other, int arg, int* result)
 {
 	HitInfo* info = (HitInfo*)result;
-	int hit = 0;
+	int hit       = 0;
 
 	switch (arg) {
 	case 5: {
@@ -343,11 +339,11 @@ int TEneGreenBoss::onHit(const TObjAction* other, int arg, int* result)
 	if (!(mBossFlags & BOSS_GUARD)) {
 		if (isPlayerOrKind4(other)) {
 			info->mDamage = 10;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 		} else if (isEggObj(other)) {
 			info->mDamage = 1;
-			hit = 1;
+			hit           = 1;
 			info->mFlags.clear();
 			info->mFlags.setBit(0xD);
 		}
@@ -678,7 +674,7 @@ void TEneGreenBoss::updateShadow()
 // 0x801608EC
 void TEneGreenBoss::spawnFx(int model, int motion)
 {
-	void* obj = resBankGetObjects(&sGreenBossBank)[model];
+	void* obj            = resBankGetObjects(&sGreenBossBank)[model];
 	NJS_MOTION** motions = resBankGetMotion(&sGreenBossBank, 1);
 
 	mModelFx = createCamPath(0, 3, obj, motions[motion], 0, 1.0f, 1.0f);
@@ -770,7 +766,7 @@ int TEneGreenBoss::shrink(f32 min, f32 rate)
 	done = 0;
 	if (mScale <= min) {
 		mScale = min;
-		done  = 1;
+		done   = 1;
 	}
 	setScale(mScale);
 	return done;
@@ -785,7 +781,7 @@ int TEneGreenBoss::grow(f32 max, f32 rate)
 	done = 0;
 	if (mScale >= max) {
 		mScale = max;
-		done  = 1;
+		done   = 1;
 	}
 	setScale(mScale);
 	return done;
@@ -811,9 +807,9 @@ void TEneGreenBoss::startDust()
 static inline void fxPlace(TObject* fx, f32 x, f32 y, f32 z)
 {
 	Vec3f* pos = (Vec3f*)((u8*)fx + 0x24);
-	pos->x = x;
-	pos->y = y;
-	pos->z = z;
+	pos->x     = x;
+	pos->y     = y;
+	pos->z     = z;
 }
 
 static inline void fxKill(TObject** fx)
@@ -828,15 +824,15 @@ static inline void fxKill(TObject** fx)
 static inline void fxPlaceAt(TObject* fx, const Vec3f* at)
 {
 	Vec3f* pos = (Vec3f*)((u8*)fx + 0x24);
-	pos->x = at->x;
-	pos->y = at->y;
-	pos->z = at->z;
+	pos->x     = at->x;
+	pos->y     = at->y;
+	pos->z     = at->z;
 }
 
 void TEneGreenBoss::moveDust()
 {
 	TObject* fx = mFx[0];
-	Vec3f at = mBody.mPos;
+	Vec3f at    = mBody.mPos;
 
 	if (fx != 0) {
 		fxPlaceAt(fx, &at);
@@ -876,7 +872,7 @@ void TEneGreenBoss::startSplash()
 void TEneGreenBoss::moveSplash()
 {
 	TObject* fx = mFx[5];
-	Vec3f at = mBody.mPos;
+	Vec3f at    = mBody.mPos;
 
 	if (fx != 0) {
 		fxPlaceAt(fx, &at);
@@ -943,8 +939,8 @@ void TEneGreenBoss::moveSpinFx(const Vec3f* pos, int angle)
 	f32 z = pos->z;
 	TObject* fx;
 
-	x = 130.0f * njSin(angle) + x;
-	z = 130.0f * njCos(angle) + z;
+	x  = 130.0f * njSin(angle) + x;
+	z  = 130.0f * njCos(angle) + z;
 	fx = mFx[7];
 	if (fx != 0) {
 		fxPlace(fx, x, y, z);
@@ -1316,8 +1312,7 @@ void TEneGreenBoss::actWalk(int phase)
 			}
 		}
 		moveBody(&mBody.mVel);
-		if (probeLine(&mLookTarget, &mBody.mPos, (void*)gGreenBossParams->mTurnRate, &mBody.mVel) ||
-		    mActStep >= 0x4B0) {
+		if (probeLine(&mLookTarget, &mBody.mPos, (void*)gGreenBossParams->mTurnRate, &mBody.mVel) || mActStep >= 0x4B0) {
 			mHitFlags |= 0x20;
 		}
 		calcPoints();
@@ -1361,8 +1356,7 @@ void TEneGreenBoss::actRun(int phase)
 		}
 		moveByNode(node, &mBody.mVel);
 		moveBody(&mBody.mVel);
-		if (probeLine(&mLookTarget, &mBody.mPos, (void*)gGreenBossParams->mTurnRate, &mBody.mVel) ||
-		    mActStep >= 0x4B0) {
+		if (probeLine(&mLookTarget, &mBody.mPos, (void*)gGreenBossParams->mTurnRate, &mBody.mVel) || mActStep >= 0x4B0) {
 			mHitFlags |= 0x20;
 		}
 		moveDust();
@@ -1895,7 +1889,7 @@ void TEneGreenBoss::actDie(int phase)
 			mBody.mRot.x = 0;
 			mBody.mRot.y = 0;
 			mBody.mRot.z = 0;
-			mScale = 1.0f;
+			mScale       = 1.0f;
 			motionCtrlPlay(&mAnim, 0x16);
 			mEnemyFlags |= ENEMY_INTANGIBLE | ENEMY_BLOCKED;
 			colliDisable(mCollider);
@@ -1936,7 +1930,7 @@ void TEneGreenBoss::actDie(int phase)
 			break;
 		}
 		Vec3f at = mBody.mPos;
-		at.y = 0.0f;
+		at.y     = 0.0f;
 		at.z += 20.0f;
 		if (bossSuitUpdate(mActTime, &mSuit, &at, sGreenBossModels[0])) {
 			mBossFlags |= BOSS_ALPHA;

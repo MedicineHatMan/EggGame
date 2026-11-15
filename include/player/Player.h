@@ -38,7 +38,7 @@ struct PlyHealth {
 	int mMin;     // _0C
 };
 
-extern "C" void plyHealthInit(PlyHealth* health);         // 0x8003F6C8
+extern "C" void plyHealthInit(PlyHealth* health);           // 0x8003F6C8
 extern "C" void plyHealthSet(PlyHealth* health, int value); // 0x8003F6D4
 
 class TChrPlayer;
@@ -95,25 +95,25 @@ public:
 	virtual void vfn_98();
 	virtual void vfn_9C(int arg0, int arg1);
 	// TChrPlayer gives these The first two have no default so their slots are 0
-	virtual u16 vfn_A0() = 0;                             // _A0
-	virtual void vfn_A4(void* model, void* texList) = 0;  // _A4
-	virtual void vfn_A8(int joint, f32* mtx);          // _A8 0x80013790
-	virtual void vfn_AC(int joint, f32* mtx) const;          // _AC 0x80013794
-	virtual void vfn_B0(const int* motions);                 // _B0 0x80013798
-	virtual void vfn_B4(int on);                       // _B4 0x8001379C
-	virtual void resetCamera();                        // _B8 0x800137A0
-	virtual void vfn_BC(const int* motions, f32* mtx);       // _BC 0x800137A4
-	virtual void vfn_C0(const Vec3f* pos, const EggRot* rot);         // _C0 0x800137A8
-	virtual void vfn_C4(const int* motions, f32* mtx);       // _C4 0x800137AC
-	virtual void vfn_C8(const int* motions, f32* mtx);       // _C8 0x800137B0
-	virtual void vfn_CC();                             // _CC 0x800137B4
-	virtual void vfn_D0();                             // _D0 0x800137B8
-	virtual int vfn_D4();                    // _D4 0x800137BC
-	virtual int vfn_D8();                    // _D8 0x800137C4
+	virtual u16 vfn_A0()                            = 0;      // _A0
+	virtual void vfn_A4(void* model, void* texList) = 0;      // _A4
+	virtual void vfn_A8(int joint, f32* mtx);                 // _A8 0x80013790
+	virtual void vfn_AC(int joint, f32* mtx) const;           // _AC 0x80013794
+	virtual void vfn_B0(const int* motions);                  // _B0 0x80013798
+	virtual void vfn_B4(int on);                              // _B4 0x8001379C
+	virtual void resetCamera();                               // _B8 0x800137A0
+	virtual void vfn_BC(const int* motions, f32* mtx);        // _BC 0x800137A4
+	virtual void vfn_C0(const Vec3f* pos, const EggRot* rot); // _C0 0x800137A8
+	virtual void vfn_C4(const int* motions, f32* mtx);        // _C4 0x800137AC
+	virtual void vfn_C8(const int* motions, f32* mtx);        // _C8 0x800137B0
+	virtual void vfn_CC();                                    // _CC 0x800137B4
+	virtual void vfn_D0();                                    // _D0 0x800137B8
+	virtual int vfn_D4();                                     // _D4 0x800137BC
+	virtual int vfn_D8();                                     // _D8 0x800137C4
 
-	u8 mCharId;    // _30
+	u8 mCharId; // _30
 	u8 _31[3];
-	int _34;       // _34
+	int _34;           // _34
 	LightSet* mStatus; // _38
 };
 
@@ -130,7 +130,11 @@ struct PlyDemoExport {
 
 // A message to another object
 struct PlyMsg {
-	inline PlyMsg(u16 type) { mFrom = 0xFFFF; mType = type; }
+	inline PlyMsg(u16 type)
+	{
+		mFrom = 0xFFFF;
+		mType = type;
+	}
 
 	u16 mType; // _00
 	u8 _02[2];
@@ -140,7 +144,11 @@ struct PlyMsg {
 
 // The same message built type first
 struct PlyMsgT {
-	inline PlyMsgT(u16 type) { mType = type; mFrom = 0xFFFF; }
+	inline PlyMsgT(u16 type)
+	{
+		mType = type;
+		mFrom = 0xFFFF;
+	}
 
 	u16 mType; // _00
 	u8 _02[2];
@@ -160,8 +168,8 @@ struct PlyRider {
 	MeshColli* mMesh; // _10 the mesh it stands on or null
 	u16 mTri;         // _14 the triangle it touched
 	u8 _16[2];
-	Vec3f mPos;       // _18 where it touched in the mesh's space
-	Vec3f mNormal;    // _24
+	Vec3f mPos;    // _18 where it touched in the mesh's space
+	Vec3f mNormal; // _24
 };
 
 class TChrPlayer : public TObjPlayer {
@@ -169,31 +177,31 @@ public:
 	TChrPlayer(TObject* parent, int playerNo, u8 charId, int active);
 	void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 	virtual ~TChrPlayer();
-	virtual void draw();   // _0C runs every frame despite the name inherited from TObject
-	virtual void vfn_10(); // _10
-	virtual Vec3f* getPos();                        // _20
-	virtual void getNodeMatrix(int node, f32* mtx); // _24
-	virtual int getRotY();                          // _28
-	virtual f32 vfn_40();                           // _40
-	virtual int canAct();                           // _44
-	virtual int sendToHandle(ObjMsg* msg);          // _4C
+	virtual void draw();                                              // _0C runs every frame despite the name inherited from TObject
+	virtual void vfn_10();                                            // _10
+	virtual Vec3f* getPos();                                          // _20
+	virtual void getNodeMatrix(int node, f32* mtx);                   // _24
+	virtual int getRotY();                                            // _28
+	virtual f32 vfn_40();                                             // _40
+	virtual int canAct();                                             // _44
+	virtual int sendToHandle(ObjMsg* msg);                            // _4C
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58
-	virtual u16 vfn_A0();                           // _A0 the egg's id
-	virtual void vfn_A4(void* model, void* texList); // _A4 swaps the outer model
-	virtual void vfn_A8(int joint, f32* mtx);       // _A8 copies a joint's matrix
-	virtual void vfn_AC(int joint, f32* mtx) const;       // _AC the same for the outer model
-	virtual void vfn_B0(const int* motions);              // _B0
-	virtual void vfn_B4(int on);                    // _B4 whether the pad is read
-	virtual void resetCamera();                     // _B8 shows the player and starts Appear
-	virtual void vfn_BC(const int* motions, f32* mtx);    // _BC
-	virtual void vfn_C0(const Vec3f* pos, const EggRot* rot);      // _C0
-	virtual void vfn_C4(const int* motions, f32* mtx);    // _C4
-	virtual void vfn_C8(const int* motions, f32* mtx);    // _C8
-	virtual void vfn_CC();                          // _CC
-	virtual void vfn_D0();                          // _D0
-	virtual int vfn_D4();                           // _D4
-	virtual int vfn_D8();                           // _D8
-	virtual void setPos(const Vec3f* pos);                // _DC
+	virtual u16 vfn_A0();                                             // _A0 the egg's id
+	virtual void vfn_A4(void* model, void* texList);                  // _A4 swaps the outer model
+	virtual void vfn_A8(int joint, f32* mtx);                         // _A8 copies a joint's matrix
+	virtual void vfn_AC(int joint, f32* mtx) const;                   // _AC the same for the outer model
+	virtual void vfn_B0(const int* motions);                          // _B0
+	virtual void vfn_B4(int on);                                      // _B4 whether the pad is read
+	virtual void resetCamera();                                       // _B8 shows the player and starts Appear
+	virtual void vfn_BC(const int* motions, f32* mtx);                // _BC
+	virtual void vfn_C0(const Vec3f* pos, const EggRot* rot);         // _C0
+	virtual void vfn_C4(const int* motions, f32* mtx);                // _C4
+	virtual void vfn_C8(const int* motions, f32* mtx);                // _C8
+	virtual void vfn_CC();                                            // _CC
+	virtual void vfn_D0();                                            // _D0
+	virtual int vfn_D4();                                             // _D4
+	virtual int vfn_D8();                                             // _D8
+	virtual void setPos(const Vec3f* pos);                            // _DC
 
 	// What runs when a status bit changes from the table at gPlayerStatusEntries
 	void statusFlag2(int on);
@@ -229,19 +237,19 @@ public:
 	PlyEffectList mEffects; // _48
 	u16 _D0;                // _D0
 	u8 _D2[2];
-	u8 _D4;                 // _D4
-	u8 _D5;                 // _D5
-	u16 mTimerD6;           // _D6 counts down
-	u16 mAge;               // _D8 counts up
+	u8 _D4;       // _D4
+	u8 _D5;       // _D5
+	u16 mTimerD6; // _D6 counts down
+	u16 mAge;     // _D8 counts up
 	u8 _DA[2];
-	PlyHealth mHealth;      // _DC
-	void** mBodyBuffer;     // _EC
-	DrawTask* mDrawTask;        // _F0
-	DrawTask* mShadowTask;      // _F4 0 when the character casts no separate shadow
-	u16 mTimerF8;           // _F8 counts down
+	PlyHealth mHealth;     // _DC
+	void** mBodyBuffer;    // _EC
+	DrawTask* mDrawTask;   // _F0
+	DrawTask* mShadowTask; // _F4 0 when the character casts no separate shadow
+	u16 mTimerF8;          // _F8 counts down
 	u8 _FA[2];
-	CharaColli* mEmitter0;        // _FC
-	CharaColli* mEmitter1;        // _100
+	CharaColli* mEmitter0;  // _FC
+	CharaColli* mEmitter1;  // _100
 	f32 mMoveAmount;        // _104 the stick's strength
 	int mMoveAngle;         // _108 the stick's angle
 	ObjRef mEggRef;         // _10C the egg held now
@@ -258,9 +266,9 @@ public:
 	int _194;               // _194
 	u16 _198;               // _198
 	u8 _19A[0xE];
-	u8 _1A8[0xC];           // _1A8 plyTintStop
-	f32 mMatrix[12];        // _1B4
-	u16 mTargetId;          // _1E4
+	u8 _1A8[0xC];    // _1A8 plyTintStop
+	f32 mMatrix[12]; // _1B4
+	u16 mTargetId;   // _1E4
 	u8 _1E6[6];
 	u8 _1EC[0x50];          // _1EC a SpawnGuard in the first 0x20
 	Vec3f _23C;             // _23C
@@ -269,61 +277,61 @@ public:
 	void* mState;           // _258
 	TMobileObject* mMobile; // _25C
 	u8 _260[0x10];
-	f32 _270[12];           // _270 the player's matrix against the body they ride
-	u16 _2A0;               // _2A0 what the Place state is on
-	u16 _2A2;               // _2A2 the part of it
-	PlyInput mInput;        // _2A4
-	u8 _2BC[0xC];           // _2BC
-	TSpeakCursor* _2C8;     // _2C8
-	int _2CC;               // _2CC
-	Vec3f mPrevPos;         // _2D0
+	f32 _270[12];       // _270 the player's matrix against the body they ride
+	u16 _2A0;           // _2A0 what the Place state is on
+	u16 _2A2;           // _2A2 the part of it
+	PlyInput mInput;    // _2A4
+	u8 _2BC[0xC];       // _2BC
+	TSpeakCursor* _2C8; // _2C8
+	int _2CC;           // _2CC
+	Vec3f mPrevPos;     // _2D0
 	u8 _2DC[4];
-	Vec3f mPos;             // _2E0
-	Vec3f mVel;             // _2EC
-	Vec3f _2F8;             // _2F8
-	EggRot mRot;            // _304
-	TPlyComb* mModel;       // _314
-	u8 _318;                // _318
+	Vec3f mPos;       // _2E0
+	Vec3f mVel;       // _2EC
+	Vec3f _2F8;       // _2F8
+	EggRot mRot;      // _304
+	TPlyComb* mModel; // _314
+	u8 _318;          // _318
 	u8 _319;
-	u16 mFade;              // _31A
-	u8 _31C[0x4];           // _31C
-	u32 _320;               // _320
-	u32 _324;               // _324
-	u32 _328;               // _328
-	u32 _32C;               // _32C
-	u32 _330;               // _330
-	u32 _334;               // _334
-	int _338;               // _338
-	volatile u32 mPlayFlags;         // _33C
-	Vec3f _340;             // _340
-	TPlyEyelid* _34C;       // _34C
-	MotionPlayer mBody;     // _350 the motions export
-	MotionPlayer mBodyCopy; // _38C the same table and motions on a second buffer
-	MotionPlayer mFace;     // _3C8 fa_mtn with fa_sm
+	u16 mFade;               // _31A
+	u8 _31C[0x4];            // _31C
+	u32 _320;                // _320
+	u32 _324;                // _324
+	u32 _328;                // _328
+	u32 _32C;                // _32C
+	u32 _330;                // _330
+	u32 _334;                // _334
+	int _338;                // _338
+	volatile u32 mPlayFlags; // _33C
+	Vec3f _340;              // _340
+	TPlyEyelid* _34C;        // _34C
+	MotionPlayer mBody;      // _350 the motions export
+	MotionPlayer mBodyCopy;  // _38C the same table and motions on a second buffer
+	MotionPlayer mFace;      // _3C8 fa_mtn with fa_sm
 	MotionPlayer mRightHand; // _404 rh_mtn
-	MotionPlayer mLeftHand; // _440 lh_mtn
-	PlyPose* mPose;         // _47C
+	MotionPlayer mLeftHand;  // _440 lh_mtn
+	PlyPose* mPose;          // _47C
 	u8 _480[8];
-	u8* mJoints;            // _488
-	int mJointCount;        // _48C
+	u8* mJoints;     // _488
+	int mJointCount; // _48C
 	u8 _490[4];
-	Vec3f _494;             // _494 where the player stands on a moving mesh in its space
-	Vec3f _4A0;             // _4A0 the facing likewise
+	Vec3f _494; // _494 where the player stands on a moving mesh in its space
+	Vec3f _4A0; // _4A0 the facing likewise
 	u8 _4AC[0xC];
-	Vec3f _4B8;             // _4B8 the way a ledge faces likewise
-	Vec3f mStartPos;        // _4C4
-	TObject* _4D0;          // _4D0 the status effects are its children
-	int _4D4;               // _4D4 health saved by status 4
-	u32 mBitsD8;            // _4D8
-	u32 mBitsDC;            // _4DC tested with flagTest
-	u32 mBitsE0;            // _4E0
-	u32 mBitsE4;            // _4E4
-	void** mModels;         // _4E8 the models export
-	void** mTexLists;       // _4EC the texlists export
-	u8 _4F0[0x18];          // _4F0 an ItemHolder
-	u8 _508[0x18];          // _508 an ItemHolder
-	void* _520;             // _520
-	PlyRider mRiders[8];    // _524 riderArrayCtor
+	Vec3f _4B8;          // _4B8 the way a ledge faces likewise
+	Vec3f mStartPos;     // _4C4
+	TObject* _4D0;       // _4D0 the status effects are its children
+	int _4D4;            // _4D4 health saved by status 4
+	u32 mBitsD8;         // _4D8
+	u32 mBitsDC;         // _4DC tested with flagTest
+	u32 mBitsE0;         // _4E0
+	u32 mBitsE4;         // _4E4
+	void** mModels;      // _4E8 the models export
+	void** mTexLists;    // _4EC the texlists export
+	u8 _4F0[0x18];       // _4F0 an ItemHolder
+	u8 _508[0x18];       // _508 an ItemHolder
+	void* _520;          // _520
+	PlyRider mRiders[8]; // _524 riderArrayCtor
 };
 
 class ObjRef;
@@ -618,47 +626,47 @@ extern NJS_TEXLIST** sPlayerTexLists;
 // Only what the on-foot states read of the settings at gPlyParams
 struct PlyParams {
 	u8 _00[0x2];
-	u16 mDamageTime;         // _02 frames of the Damage state
-	u16 _04;                 // _04
+	u16 mDamageTime; // _02 frames of the Damage state
+	u16 _04;         // _04
 	u8 _06[0x6];
-	u16 _0C;                 // _0C
-	u16 _0E;                 // _0E
+	u16 _0C; // _0C
+	u16 _0E; // _0E
 	u8 _10[0x2];
-	u16 mCrowRecover;        // _12 frames of Crow's getting-up phase
-	u16 mCrowHold;           // _14 frames before Crow escapes on its own
+	u16 mCrowRecover; // _12 frames of Crow's getting-up phase
+	u16 mCrowHold;    // _14 frames before Crow escapes on its own
 	u8 _16[0x12];
-	int _28;                 // _28 an angle
+	int _28; // _28 an angle
 	u8 _2C[0x10];
-	f32 _3C;                 // _3C
-	f32 mSteepSlope;         // _40
+	f32 _3C;         // _3C
+	f32 mSteepSlope; // _40
 	u8 _44[0x4];
-	f32 mDrag;               // _48 how much of the speed is lost each frame
-	f32 _4C;                 // _4C
-	f32 mRunSpeed;           // _50
-	f32 mWalkMotionSpeed;    // _54
-	f32 mTurnSpeed;          // _58 per frame at 60 frames a second
-	f32 _5C;                 // _5C
-	f32 mAccel;              // _60 how fast the speed approaches its target
-	f32 mRunMotionSpeed;     // _64
+	f32 mDrag;            // _48 how much of the speed is lost each frame
+	f32 _4C;              // _4C
+	f32 mRunSpeed;        // _50
+	f32 mWalkMotionSpeed; // _54
+	f32 mTurnSpeed;       // _58 per frame at 60 frames a second
+	f32 _5C;              // _5C
+	f32 mAccel;           // _60 how fast the speed approaches its target
+	f32 mRunMotionSpeed;  // _64
 	u8 _68[0x4];
-	f32 _6C;                 // _6C
-	f32 _70;                 // _70
-	f32 _74;                 // _74
-	f32 _78;                 // _78
-	f32 _7C;                 // _7C
+	f32 _6C; // _6C
+	f32 _70; // _70
+	f32 _74; // _74
+	f32 _78; // _78
+	f32 _7C; // _7C
 	u8 _80[0x10];
-	f32 _90;                 // _90
+	f32 _90; // _90
 	u8 _94[0x4];
-	f32 _98;                 // _98
-	f32 _9C;                 // _9C
-	f32 _A0;                 // _A0
-	f32 _A4;                 // _A4
-	f32 mSlipNormal;         // _A8 ground normal Y Below this Slip keeps its timer full
-	f32 _AC;                 // _AC
-	f32 _B0;                 // _B0
-	f32 _B4;                 // _B4
+	f32 _98;         // _98
+	f32 _9C;         // _9C
+	f32 _A0;         // _A0
+	f32 _A4;         // _A4
+	f32 mSlipNormal; // _A8 ground normal Y Below this Slip keeps its timer full
+	f32 _AC;         // _AC
+	f32 _B0;         // _B0
+	f32 _B4;         // _B4
 	u8 _B8[0xC];
-	f32 _C4;                 // _C4
+	f32 _C4; // _C4
 };
 extern PlyParams* gPlyParams;
 extern int lbl_802C4D68;

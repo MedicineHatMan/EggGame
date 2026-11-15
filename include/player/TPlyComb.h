@@ -66,12 +66,12 @@ struct CombGroup {
 	CombLink* mLink; // _00
 	int mCount;      // _04
 
-	void fill(f32* mtx);                 // 0x800453F0
-	void drag(f32* mtx);                 // 0x800459D8
-	void push(f32* mtx);                 // 0x80045AB0
-	void solve(f32* root);               // 0x80045B40
-	void limit();                        // 0x80045D98
-	void separate(CombGroup* other);     // 0x80045F84
+	void fill(f32* mtx);             // 0x800453F0
+	void drag(f32* mtx);             // 0x800459D8
+	void push(f32* mtx);             // 0x80045AB0
+	void solve(f32* root);           // 0x80045B40
+	void limit();                    // 0x80045D98
+	void separate(CombGroup* other); // 0x80045F84
 };
 
 /**
@@ -89,27 +89,27 @@ public:
 	virtual void draw(); // _0C
 
 	// The names below are ours
-	void build(void* model);             // 0x80045210
-	void getJoint(int index, f32** out); // 0x800455D0
-	void drawModel(void* state);         // 0x80045674
-	void setRoot(f32* mtx);              // 0x800456F4
+	void build(void* model);                // 0x80045210
+	void getJoint(int index, f32** out);    // 0x800455D0
+	void drawModel(void* state);            // 0x80045674
+	void setRoot(f32* mtx);                 // 0x800456F4
 	void readPose(void* motion, f32 frame); // 0x80045968 the motion at that frame
 
-	u8 mOn;            // _20
-	u8 _21;            // _21
-	s16 mBits;         // _22 bit 0x40 means the root just moved
-	u8 _24[4];         // _24
-	CombVec<u8> mStore; // _28
-	CombVec<HitVec> mHits; // _34
-	void* mTexture;    // _40
-	PointLight mLight; // _44
-	f32* mRoot;        // _C0
-	CombGroup mGroup[3]; // _C4
+	u8 mOn;                    // _20
+	u8 _21;                    // _21
+	s16 mBits;                 // _22 bit 0x40 means the root just moved
+	u8 _24[4];                 // _24
+	CombVec<u8> mStore;        // _28
+	CombVec<HitVec> mHits;     // _34
+	void* mTexture;            // _40
+	PointLight mLight;         // _44
+	f32* mRoot;                // _C0
+	CombGroup mGroup[3];       // _C4
 	CombList<CombLink> mLinks; // _DC
-	u32 _E8;           // _E8
-	f32 mMtx[12];      // _EC
+	u32 _E8;                   // _E8
+	f32 mMtx[12];              // _EC
 };
-
+
 extern "C" {
 extern const char* gTPlyCombName;
 }

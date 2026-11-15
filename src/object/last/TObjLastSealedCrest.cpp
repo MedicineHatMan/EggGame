@@ -29,7 +29,6 @@ struct ColliShape;
 struct Fx;
 
 extern "C" {
-
 }
 
 const f32 gLastSealedCrestSetRange = 700.0f;
@@ -71,9 +70,9 @@ TObjLastSealedCrest::TObjLastSealedCrest(TObject* parent, SetDesc* desc)
     , mFx(0)
 {
 	mPulse = 0;
-	_00   = (u32)gTObjLastSealedCrestName;
-	mSize = 0x174;
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	_00    = (u32)gTObjLastSealedCrestName;
+	mSize  = 0x174;
+	mDraw  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	mShape = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks((CharaColli*)mShape, 4, 0xFF, 0xFF, 0xF6);
@@ -132,13 +131,13 @@ void TObjLastSealedCrest::debugPrint(void*)
 // 0x8019A570
 void TObjLastSealedCrest::arm()
 {
-	mLinked              = 0;
-	mGlow.mFlags  = 2;
-	mGlow.mPos    = mPos;
-	mGlow.mKa[0]  = 1.0f;
-	mGlow.mKa[1]  = 0.0010000000474974513f;
-	mGlow.mKa[2]  = 0.0010000000474974513f;
-	mGlow.mColor  = 0xFFFF00FF;
+	mLinked      = 0;
+	mGlow.mFlags = 2;
+	mGlow.mPos   = mPos;
+	mGlow.mKa[0] = 1.0f;
+	mGlow.mKa[1] = 0.0010000000474974513f;
+	mGlow.mKa[2] = 0.0010000000474974513f;
+	mGlow.mColor = 0xFFFF00FF;
 	mMesh.setModel(*getGeObjModels());
 	mMesh.mDrawState = &mState;
 	mMesh.mTexList   = *getGeObjTextures();
@@ -149,7 +148,7 @@ void TObjLastSealedCrest::arm()
 	} else {
 		mState.mFlags   = 0x200;
 		mState.mAmbient = 0xFFFFFF20;
-		mDarkMap          = darkCtrlAddMap(80.0f, &mPos, 300);
+		mDarkMap        = darkCtrlAddMap(80.0f, &mPos, 300);
 		mMode           = 0;
 	}
 }

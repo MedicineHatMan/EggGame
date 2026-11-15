@@ -61,14 +61,14 @@ struct PlyRailMsg : public ObjMsg {
 
 // The message handlers the states share in PlyState.cpp
 extern "C" {
-int plyMsgClimb(TChrPlayer* player, ObjMsg* msg); // drops the egg and climbs
+int plyMsgClimb(TChrPlayer* player, ObjMsg* msg);     // drops the egg and climbs
 int plyMsgEnterGate(TChrPlayer* player, ObjMsg* msg); // enters a gate
 int plyMsgKnockBack(TChrPlayer* player, ObjMsg* msg); // knocked back
 int plyMsgGetAnimal(TChrPlayer* player, ObjMsg* msg);
-int plyMsgPickup(TChrPlayer* player, ObjMsg* msg); // takes a pickup
+int plyMsgPickup(TChrPlayer* player, ObjMsg* msg);   // takes a pickup
 int plyMsgHangHook(TChrPlayer* player, ObjMsg* msg); // grabs a hook
-int plyMsgLaunch(TChrPlayer* player, ObjMsg* msg); // launched
-int plyMsgToStart(TChrPlayer* player, ObjMsg* msg); // back to the start point
+int plyMsgLaunch(TChrPlayer* player, ObjMsg* msg);   // launched
+int plyMsgToStart(TChrPlayer* player, ObjMsg* msg);  // back to the start point
 int plyMsgStatusBits(TChrPlayer* player, ObjMsg* msg);
 int plyMsgHangEgg(TChrPlayer* player, ObjMsg* msg);
 int plyMsgMountHangEgg(TChrPlayer* player, ObjMsg* msg);
@@ -84,7 +84,7 @@ int plyMsgIgnoreB(TChrPlayer* player, ObjMsg* msg);
 int plyMsgIgnoreC(TChrPlayer* player, ObjMsg* msg);
 int plyMsgBounceFlag(TChrPlayer* player, ObjMsg* msg);
 int plyMsgStartEvent(TChrPlayer* player, ObjMsg* msg); // starts an event
-int plyMsgFall(TChrPlayer* player, ObjMsg* msg); // loses the egg and falls
+int plyMsgFall(TChrPlayer* player, ObjMsg* msg);       // loses the egg and falls
 }
 
 /**
@@ -96,11 +96,11 @@ int plyMsgFall(TChrPlayer* player, ObjMsg* msg); // loses the egg and falls
 class TPlyStateBase : public TActionState {
 public:
 	TPlyStateBase() { }
-	virtual ~TPlyStateBase() { }                         // _08
-	virtual void enter(TChrPlayer* player) { }           // _0C
-	virtual void exit(TChrPlayer* player) { }            // _10
-	virtual void run(TChrPlayer* player) { }             // _14
-	virtual void update(TChrPlayer* player) = 0;         // _18
+	virtual ~TPlyStateBase() { }                 // _08
+	virtual void enter(TChrPlayer* player) { }   // _0C
+	virtual void exit(TChrPlayer* player) { }    // _10
+	virtual void run(TChrPlayer* player) { }     // _14
+	virtual void update(TChrPlayer* player) = 0; // _18
 };
 
 /**
@@ -110,15 +110,15 @@ class TPlyState : public TPlyStateBase {
 public:
 	TPlyState();
 	static void* operator new(unsigned long size, void* pool) { return allocPlyState(size, pool); }
-	virtual ~TPlyState() { }                                  // _08
-	virtual void run(TChrPlayer* player);                     // _14 calls update
-	virtual void update(TChrPlayer* player);                  // _18
-	virtual void check(TChrPlayer* player);                   // _1C moves to another state when the world calls for it
-	virtual void vfn_20(TChrPlayer* player);                  // _20
+	virtual ~TPlyState() { }                                      // _08
+	virtual void run(TChrPlayer* player);                         // _14 calls update
+	virtual void update(TChrPlayer* player);                      // _18
+	virtual void check(TChrPlayer* player);                       // _1C moves to another state when the world calls for it
+	virtual void vfn_20(TChrPlayer* player);                      // _20
 	virtual int handleInput(TChrPlayer* player, PlyInput* input); // _24 1 = the input started something
-	virtual void onMessage(TChrPlayer* player, ObjMsg* msg);  // _28
-	virtual int vfn_2C(TChrPlayer* player);                   // _2C 1 in Roll and RollDash
-	virtual int vfn_30(TChrPlayer* player);                   // _30
+	virtual void onMessage(TChrPlayer* player, ObjMsg* msg);      // _28
+	virtual int vfn_2C(TChrPlayer* player);                       // _2C 1 in Roll and RollDash
+	virtual int vfn_30(TChrPlayer* player);                       // _30
 };
 
 // 800ADBC4
@@ -252,8 +252,8 @@ public:
 	void startEscape(TChrPlayer* player);
 	void getUp(TChrPlayer* player);
 
-	int mPhase;    // _14 0 held 1 escaping 2 getting up
-	int mTimer;    // _18
+	int mPhase;  // _14 0 held 1 escaping 2 getting up
+	int mTimer;  // _18
 	Fx* mEffect; // _1C stopped on escape or exit
 };
 extern "C" void* createPlyStateCrow(void* pool, TChrPlayer* player);
@@ -276,7 +276,7 @@ public:
 	virtual void update(TChrPlayer* player);
 	virtual void check(TChrPlayer* player);
 
-	int mTimer;   // _14 read by tickTimer32
+	int mTimer; // _14 read by tickTimer32
 };
 extern "C" void* createPlyStateDamage(void* pool, TChrPlayer* player);
 
@@ -297,7 +297,7 @@ public:
 	virtual void enter(TChrPlayer* player);
 	virtual void update(TChrPlayer* player);
 
-	u8 _14[4];    // _14 a FlagByte
+	u8 _14[4]; // _14 a FlagByte
 };
 extern "C" void* createPlyStateDie(void* pool, TChrPlayer* player);
 
@@ -319,7 +319,7 @@ public:
 	virtual void exit(TChrPlayer* player);
 	virtual void update(TChrPlayer* player);
 
-	s8 mStep;      // _14 0 burning 1 rising as ash
+	s8 mStep; // _14 0 burning 1 rising as ash
 	u8 _15[0x3];
 	Fx* mEffect; // _18 the flames that follow the body
 };
@@ -486,7 +486,7 @@ public:
 	virtual void update(TChrPlayer* player);
 	virtual void check(TChrPlayer* player);
 
-	u16 mFrame;       // _14
+	u16 mFrame; // _14
 	u8 _16[2];
 	TCamPath* mCam;   // _18
 	f32 mMtx[12];     // _1C where the camera path rides
@@ -648,7 +648,7 @@ public:
 	virtual void check(TChrPlayer* player);
 	virtual int handleInput(TChrPlayer* player, PlyInput* input);
 
-	u16 mTimer;   // _14 counts down before a fall can start
+	u16 mTimer; // _14 counts down before a fall can start
 	u8 _16[2];
 };
 extern "C" void* createPlyStateJump(void* pool, TChrPlayer* player);
@@ -965,9 +965,9 @@ public:
 	int onLand(TChrPlayer* player);
 
 	FlagByte mFlags; // _14 2 = landed 4 = the jump button came up
-	u8 mStep;    // _15
-	s16 mDelay;  // _16
-	u16 mTimer;  // _18
+	u8 mStep;        // _15
+	s16 mDelay;      // _16
+	u16 mTimer;      // _18
 	u8 _1A[2];
 };
 extern "C" void* createPlyStateRollBounce(void* pool, TChrPlayer* player);
@@ -1209,9 +1209,9 @@ public:
 	int onLand(TChrPlayer* player);
 
 	FlagByte mFlags; // _14 2 = landed 4 = the jump button came up
-	u8 mStep;    // _15
-	s16 mDelay;  // _16
-	u16 mTimer;  // _18
+	u8 mStep;        // _15
+	s16 mDelay;      // _16
+	u16 mTimer;      // _18
 	u8 _1A[2];
 };
 extern "C" void* createPlyStateSpinBounce(void* pool, TChrPlayer* player);
@@ -1241,7 +1241,6 @@ public:
 	virtual void check(TChrPlayer* player);
 	virtual void onMessage(TChrPlayer* player, ObjMsg* msg);
 	int onLand(TChrPlayer* player);
-
 };
 extern "C" void* createPlyStateSpinFall(void* pool, TChrPlayer* player);
 
@@ -1254,7 +1253,6 @@ public:
 	virtual void check(TChrPlayer* player);
 	virtual void onMessage(TChrPlayer* player, ObjMsg* msg);
 	int onLand(TChrPlayer* player);
-
 };
 extern "C" void* createPlyStateSpinLaunch(void* pool, TChrPlayer* player);
 
@@ -1284,7 +1282,6 @@ public:
 	virtual void check(TChrPlayer* player);
 	virtual void onMessage(TChrPlayer* player, ObjMsg* msg);
 	int onLaneEnd(TChrPlayer* player);
-
 };
 extern "C" void* createPlyStateSpinOnLane(void* pool, TChrPlayer* player);
 
@@ -1349,9 +1346,9 @@ public:
 	virtual void check(TChrPlayer* player);
 	virtual int handleInput(TChrPlayer* player, PlyInput* input);
 
-	u16 mPhase;   // _14 0 = settling 1 = waiting to settle 2 = waiting to fidget 3 = fidgeting 4 = finishing 5 = hurt pose
-	u16 mTimer;   // _16
-	u16 mLoops;   // _18
+	u16 mPhase; // _14 0 = settling 1 = waiting to settle 2 = waiting to fidget 3 = fidgeting 4 = finishing 5 = hurt pose
+	u16 mTimer; // _16
+	u16 mLoops; // _18
 	u8 _1A[2];
 };
 extern "C" void* createPlyStateStand(void* pool, TChrPlayer* player);
@@ -1374,7 +1371,7 @@ public:
 	virtual void exit(TChrPlayer* player);
 	virtual void update(TChrPlayer* player);
 
-	u16 mFrame;    // _14
+	u16 mFrame; // _14
 	u8 _16[2];
 	Fx* mEffect; // _18
 };
@@ -1441,8 +1438,8 @@ public:
 	virtual void check(TChrPlayer* player);
 	virtual int handleInput(TChrPlayer* player, PlyInput* input);
 
-	u16 mPhase;   // _14 1 = blending in from row 0xB 2 = walking
-	u16 mFrames;  // _16
+	u16 mPhase;  // _14 1 = blending in from row 0xB 2 = walking
+	u16 mFrames; // _16
 };
 extern "C" void* createPlyStateWalk(void* pool, TChrPlayer* player);
 

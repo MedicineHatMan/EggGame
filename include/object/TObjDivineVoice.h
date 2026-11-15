@@ -40,27 +40,27 @@ public:
 	void talk();
 	void close();
 
-	void* mModelData;     // _64
-	void* mModelData2;    // _68
-	NJS_TEXLIST* mTexList;       // _6C
-	ObjModel mModel;      // _70
-	ObjModel mModel2;     // _90
-	MotionPlayer mMotion; // _B0
-	ObjDrawState mState;  // _EC
-	ObjDrawState mState2; // _110
-	DrawTask* mDrawTask;      // _134
-	u16 mMsgId;           // _138 set int 0
-	u8 mShapeKind;        // _13A set int 1 0 sphere 1 box 2 cylinder
-	int mMsgOnly;         // _13C set int 2 no camera model or sound
-	ObjRef mRef;          // _140 who walked in
-	Vec3f mAt;            // _14C where they stood
-	int mAtRotY;          // _158
-	f32 mMtx[12];         // _15C the model's place
-	TCamPath* mCamera;    // _18C
-	Fx* mFx;              // _190
-	TSimpleText* mText;   // _194
-	int mSound;           // _198 -1 for none
-	int mMode;            // _19C
+	void* mModelData;      // _64
+	void* mModelData2;     // _68
+	NJS_TEXLIST* mTexList; // _6C
+	ObjModel mModel;       // _70
+	ObjModel mModel2;      // _90
+	MotionPlayer mMotion;  // _B0
+	ObjDrawState mState;   // _EC
+	ObjDrawState mState2;  // _110
+	DrawTask* mDrawTask;   // _134
+	u16 mMsgId;            // _138 set int 0
+	u8 mShapeKind;         // _13A set int 1 0 sphere 1 box 2 cylinder
+	int mMsgOnly;          // _13C set int 2 no camera model or sound
+	ObjRef mRef;           // _140 who walked in
+	Vec3f mAt;             // _14C where they stood
+	int mAtRotY;           // _158
+	f32 mMtx[12];          // _15C the model's place
+	TCamPath* mCamera;     // _18C
+	Fx* mFx;               // _190
+	TSimpleText* mText;    // _194
+	int mSound;            // _198 -1 for none
+	int mMode;             // _19C
 };
 
 extern "C" {

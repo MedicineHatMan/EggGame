@@ -56,7 +56,6 @@ extern "C" {
 // 0x802A5950
 // 0x80240A10
 // Texture sides from the log2 in a record
-
 }
 
 // 0x80018E10
@@ -164,13 +163,14 @@ int resNameCompare(const ResName* a, const ResName* b)
 
 // 0x8001900C
 // A little endian word to big endian in place
+// clang-format off
 asm void ninjaSwap32(u32* word)
 {
 	nofralloc
 	lwz r4, 0(r3)
 	stwbrx r4, r0, r3
 	blr
-}
+} // clang-format on
 
 // 0x80019018
 NinjaFile* ninjaFileInit(NinjaFile* file)
@@ -320,7 +320,7 @@ void* ninjaFileAlloc(NinjaFile* file, u32 magic, u32 size, u32* kind)
 // Applies POF0 the top two bits of a byte say how many more bytes hold the distance to the next word to fix in words
 void ninjaApplyPof(void* data, void* pof, u32 size)
 {
-	u8* src = (u8*)pof;
+	u8* src    = (u8*)pof;
 	u32 offset = 0;
 	while (size != 0) {
 		u8 b0, b1, b2, b3;
@@ -499,10 +499,10 @@ int gvmLoaderStep(GvmLoader* loader, TFile* file, int step)
 		if (header->mCount == 0) {
 			return 1;
 		}
-		loader->mNext        = header->mSize + file->tell() - 4;
-		int count            = header->mCount;
-		int size             = gvmRecordSize(header->mFlags);
-		loader->mInfoSize    = size;
+		loader->mNext            = header->mSize + file->tell() - 4;
+		int count                = header->mCount;
+		int size                 = gvmRecordSize(header->mFlags);
+		loader->mInfoSize        = size;
 		loader->mList->nbTexture = count;
 		if (loader->mInfo != NULL) {
 			memFree(loader->mInfo);
@@ -657,6 +657,7 @@ int gvmRecordSize(u16 flags)
 }
 
 // 0x80019DC0
+// clang-format off
 asm void gvmSwap32(u32* word)
 {
 	nofralloc
@@ -664,6 +665,7 @@ asm void gvmSwap32(u32* word)
 	stwbrx r4, r0, r3
 	blr
 }
+// clang-format on
 
 // 0x80019DCC
 // The format and size a record gives

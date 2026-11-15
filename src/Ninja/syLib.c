@@ -24,6 +24,7 @@ u8 syPadStatus[0x30];
 // 0x80215B4C
 // Hand written with lbzu and bdnz
 // 0x80215B4C
+// clang-format off
 asm void syMemCopy(void* dst, const void* src, s32 size)
 {
 	nofralloc
@@ -38,9 +39,11 @@ L_80215B60:
 	bdnz L_80215B60
 	blr
 }
+// clang-format on
 
 // 0x80215B70
 // 0x80215B70
+// clang-format off
 asm void syMemCopy2(void* dst, const void* src, s32 count)
 {
 	nofralloc
@@ -55,6 +58,7 @@ L_80215B84:
 	bdnz L_80215B84
 	blr
 }
+// clang-format on
 
 // 0x80215B94
 void syMemSet(void* dst, u8 value, u32 size)
@@ -65,6 +69,7 @@ void syMemSet(void* dst, u8 value, u32 size)
 // 0x80215BB8
 // Eight words at a time then what is left
 // 0x80215BB8
+// clang-format off
 asm void syMemSet4(void* dst, u32 value, s32 count)
 {
 	nofralloc
@@ -95,11 +100,12 @@ L_80215C04:
 	bdnz L_80215C04
 	blr
 }
+// clang-format on
 
 // 0x80215C14
 void syMallocInit(void* mem, u32 size)
 {
-	syHeap = OSCreateHeap(mem, (u8*)mem + size);
+	syHeap      = OSCreateHeap(mem, (u8*)mem + size);
 	syMallocPtr = &syMallocFuncs;
 }
 
@@ -124,7 +130,7 @@ void syFree(void* mem)
 // 0x80215CCC
 void syMallocStat(s32* used, s32* blocks)
 {
-	*used = OSCheckHeap(syHeap);
+	*used   = OSCheckHeap(syHeap);
 	*blocks = 0;
 }
 

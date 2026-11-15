@@ -5,7 +5,6 @@
 extern const f32 gUnitVectorMin;
 
 extern "C" {
-
 }
 
 typedef char TCamFix_size_check[(sizeof(TCamFix) == 0x68) ? 1 : -1];

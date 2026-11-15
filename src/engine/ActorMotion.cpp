@@ -210,5 +210,4 @@ void walkPoseNodes(NJS_OBJECT* node, NodeCallback fn, void* arg)
 		node = node->sibling;
 	} while (node != 0);
 }
-
 }

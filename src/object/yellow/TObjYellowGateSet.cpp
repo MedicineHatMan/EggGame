@@ -67,7 +67,7 @@ typedef char TObjWidgetGate_size_check[(sizeof(TObjWidgetGate) == 0xD4) ? 1 : -1
 
 typedef char TObjYellowGateSet_size_check[(sizeof(TObjYellowGateSet) == 0xE8) ? 1 : -1];
 
-const char* gTObjWidgetGateName = "TObjWidgetGate";
+const char* gTObjWidgetGateName  = "TObjWidgetGate";
 const f32 gYellowGateSetSetRange = 10000.0f;
 
 // 0x80191A9C
@@ -80,15 +80,15 @@ TObjWidgetGate::TObjWidgetGate(TObject* parent, int index, NJS_OBJECT* model, NJ
     , mEffect(0)
     , _D0(0)
 {
-	_00      = (u32)gTObjWidgetGateName;
-	mSize     = 0xD4;
+	_00   = (u32)gTObjWidgetGateName;
+	mSize = 0xD4;
 	mtxIdentity(mMatrix);
 	mModel.setModel(mModelData);
 	mModel.mDrawState = getDefaultDrawState();
 	mModel.mTexList   = mTexList;
 	mModel.mMatrix    = mMatrix;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 34, 0);
-	mEffect   = fxSpawnFollow(1, 8, mEffectId, mMatrix);
+	mDrawTask         = addDrawTask(this, (void (*)(void*))drawObjectTask, 34, 0);
+	mEffect           = fxSpawnFollow(1, 8, mEffectId, mMatrix);
 	sePlay3DHeld(500.0f, &mSound, 0x266, 100, &gVecZero);
 }
 
@@ -164,8 +164,8 @@ TObjYellowGateSet::TObjYellowGateSet(TObject* parent, const SetDesc* desc)
     , mEvent(0)
     , mSound(-1)
 {
-	_00    = (u32)gTObjYellowGateSetName;
-	mSize  = 0xE8;
+	_00   = (u32)gTObjYellowGateSetName;
+	mSize = 0xE8;
 	setObjId(this, desc->mObjId);
 	mLink.get()->attach((SetDesc*)desc);
 
@@ -259,10 +259,10 @@ void TObjYellowGateSet::createParts(int opened)
 	if (mParts[0] != 0) {
 		return;
 	}
-	NJS_OBJECT* centre   = getGeObjModels()[10];
-	NJS_OBJECT* pedestal = getGeObjModels()[11];
+	NJS_OBJECT* centre     = getGeObjModels()[10];
+	NJS_OBJECT* pedestal   = getGeObjModels()[11];
 	NJS_TEXLIST** textures = getGeObjTextures();
-	int effect      = (opened != 0) ? 0x5C : 0x42;
+	int effect             = (opened != 0) ? 0x5C : 0x42;
 
 	mParts[6] = new TObjWidgetGate(this, 6, centre, textures[10], effect);
 	mParts[0] = new TObjWidgetGate(this, 0, pedestal, textures[11], 0x2F);
@@ -415,11 +415,8 @@ static inline TextVec makeVec(f32 x, f32 y, f32 z)
 static void spawnGateFlash(int index)
 {
 	static TextVec sFlashPos[5] = {
-		makeVec(-1678.94f, 679.5463f, -1687.62f),
-		makeVec(-1272.71f, 679.5463f, -1455.49f),
-		makeVec(-1388.78f, 679.5463f, -1751.45f),
-		makeVec(-1301.73f, 679.5463f, -1281.39f),
-		makeVec(-1725.36f, 679.5463f, -1536.73f),
+		makeVec(-1678.94f, 679.5463f, -1687.62f), makeVec(-1272.71f, 679.5463f, -1455.49f), makeVec(-1388.78f, 679.5463f, -1751.45f),
+		makeVec(-1301.73f, 679.5463f, -1281.39f), makeVec(-1725.36f, 679.5463f, -1536.73f),
 	};
 
 	f32 mtx[12];

@@ -30,7 +30,7 @@ public:
 	ScrollModel mSurface; // _90
 	NJS_OBJECT* mModel;   // _B0
 	f32 mRadius;          // _B4
-	DrawTask* mDraw;          // _B8
+	DrawTask* mDraw;      // _B8
 	int mOpen;            // _BC 1 once gLastBossEggOpen has been set
 	FxHolder mGlow;       // _C0
 };

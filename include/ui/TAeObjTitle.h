@@ -26,7 +26,7 @@ public:
 	void showPrompt();
 	void pressed();
 
-	DrawTask* mTask;       // _34
+	DrawTask* mTask;   // _34
 	TAeLayer* mLayer;  // _38
 	TAeLayer* mLayer2; // _3C
 	u32 _40;           // _40

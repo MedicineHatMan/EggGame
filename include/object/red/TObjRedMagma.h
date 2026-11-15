@@ -21,9 +21,9 @@ public:
 	TObjRedMagma(TObject* parent, SetDesc* desc);
 	virtual ~TObjRedMagma();
 
-	virtual void draw();       // _0C
-	virtual void vfn_10();     // _10
-	virtual void render();     // _1C
+	virtual void draw();                      // _0C
+	virtual void vfn_10();                    // _10
+	virtual void render();                    // _1C
 	virtual void initFromDesc(SetDesc* desc); // _30
 	virtual void debugPrint(void*);           // _34
 

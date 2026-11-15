@@ -9,7 +9,7 @@ typedef char TPeriVibrate_size_check[(sizeof(TPeriVibrate) == 0x500) ? 1 : -1];
 extern "C" void vibeUnpack(VibePattern* pattern, VibeRecord* record)
 {
 	int i;
-	u8* out         = pattern->mSteps;
+	u8* out          = pattern->mSteps;
 	pattern->mValueA = (record->mHeader & 0xFF00) >> 8;
 	pattern->mValueB = record->mHeader & 0xFF;
 	for (i = 0; i < 2; i++) {
@@ -58,7 +58,10 @@ TPeriVibrate::~TPeriVibrate()
 }
 
 // 0x800320F0
-extern "C" int periVibrateExists() { return sPeriVibrateObj != 0; }
+extern "C" int periVibrateExists()
+{
+	return sPeriVibrateObj != 0;
+}
 
 // 0x80032104
 void TPeriVibrate::play(int port, int pattern)
@@ -78,4 +81,6 @@ extern "C" void periVibratePlay(int port, int pattern)
 }
 
 // 0x80032170
-void TPeriVibrate::draw() { }
+void TPeriVibrate::draw()
+{
+}

@@ -9,6 +9,7 @@ struct DrawTask;
 #include "engine/FrameTex.h"
 #include "camera/TCameraCtrl.h"
 #include "animal/TAniBubble.h"
+#include "animal/AniModel.h"
 
 static const GXColor sBubbleTevColor = { 0, 0, 0, 0xC0 };
 struct NJS_OBJECT;
@@ -17,9 +18,9 @@ struct CamView;
 // The field of view and aspect of the current view
 struct AniCamera {
 	u8 _00[0x44];
-	int mFov;     // _44
+	int mFov; // _44
 	u8 _48[4];
-	f32 mAspect;  // _4C
+	f32 mAspect; // _4C
 };
 
 const char* gTAniBubbleName = "TAniBubble";
@@ -28,20 +29,20 @@ const char* gTAniBubbleName = "TAniBubble";
 TAniBubble::TAniBubble(TEggCreatureTypeE* owner)
     : TObject(owner)
 {
-	_00         = (u32)gTAniBubbleName;
-	mSize       = 0x50;
-	mDrawTask   = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x2A, 0);
-	mPosRef     = 0;
-	mRotRef     = 0;
-	mSizeRef    = 0;
-	mWobble.x   = 1.0f;
-	mWobble.y   = 1.0f;
-	mWobble.z   = 1.0f;
+	_00          = (u32)gTAniBubbleName;
+	mSize        = 0x50;
+	mDrawTask    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x2A, 0);
+	mPosRef      = 0;
+	mRotRef      = 0;
+	mSizeRef     = 0;
+	mWobble.x    = 1.0f;
+	mWobble.y    = 1.0f;
+	mWobble.z    = 1.0f;
 	mWobbleAngle = 0;
-	mWarp       = 0.5f;
-	mWarpAngle  = 0;
-	mObject  = (NJS_OBJECT*)(((void***)owner->mMotion)[0][1]);
-	mTexList = (NJS_TEXLIST*)((void***)owner->mMotion)[5][0];
+	mWarp        = 0.5f;
+	mWarpAngle   = 0;
+	mObject      = (NJS_OBJECT*)owner->mMotion->mObject[1];
+	mTexList     = (NJS_TEXLIST*)*owner->mMotion->mTexList;
 }
 
 // 0x80133BD8

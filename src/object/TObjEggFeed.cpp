@@ -30,10 +30,10 @@
 #include "enemy/boss/TEnePurpleBoss.h"
 
 const char* gTObjEggFeedName = "TObjEggFeed";
-const f32 gEggFeedSetRange = 600.0f;
+const f32 gEggFeedSetRange   = 600.0f;
 int gEggFeedFlag;
-char* sEggFeedKindNames[7] = { "APPLE", "BANANA", "CHERRY", "MELON", "PINEAPPLE", "STRAWBERRY", "WATERMELON" };
-char* sEggFeedSizeNames[3] = { "NRM SIZE", "BIG SIZE", "EXTREME SIZE" };
+char* sEggFeedKindNames[7]  = { "APPLE", "BANANA", "CHERRY", "MELON", "PINEAPPLE", "STRAWBERRY", "WATERMELON" };
+char* sEggFeedSizeNames[3]  = { "NRM SIZE", "BIG SIZE", "EXTREME SIZE" };
 char* sEggFeedOnOffNames[2] = { "OFF", "ON" };
 struct ColliContact;
 struct CharaColli;
@@ -50,7 +50,7 @@ struct FeedContact {
 };
 
 struct FeedMsg { // padded to 8
-	u16 mType;  // _00
+	u16 mType;   // _00
 	u16 _02;
 	u8 mKind;   // _04
 	u8 mAmount; // _05
@@ -58,9 +58,9 @@ struct FeedMsg { // padded to 8
 };
 
 struct FeedNote { // padded to 8
-	u16 mType; // _00
+	u16 mType;    // _00
 	u16 _02;
-	u16 mId;   // _04
+	u16 mId; // _04
 	u16 _06;
 };
 
@@ -98,7 +98,9 @@ extern "C" void initTObjEggFeed()
 }
 
 // 0x800CBD98
-extern "C" void termTObjEggFeed() { }
+extern "C" void termTObjEggFeed()
+{
+}
 
 // 0x800CBD9C
 extern "C" TObject* createTObjEggFeed(TObject* parent, SetDesc* desc)
@@ -117,11 +119,11 @@ void TObjEggFeed::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
 	place(desc->getInt(0), &mPos, &mRot, desc->getInt(2), desc->getInt(1));
-	mUser      = desc->getInt(3);
-	mUserF[0]  = desc->getFloat(0);
-	mUserF[1]  = desc->getFloat(1);
-	mUserF[2]  = desc->getFloat(2);
-	mUserF[3]  = desc->getFloat(3);
+	mUser     = desc->getInt(3);
+	mUserF[0] = desc->getFloat(0);
+	mUserF[1] = desc->getFloat(1);
+	mUserF[2] = desc->getFloat(2);
+	mUserF[3] = desc->getFloat(3);
 }
 
 // 0x800CBF78
@@ -139,7 +141,7 @@ TObjEggFeed::TObjEggFeed(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
     , mSpawned(0)
 {
-	_00  = (u32)gTObjEggFeedName;
+	_00   = (u32)gTObjEggFeedName;
 	mSize = 0x220;
 	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
 	makeShape();
@@ -151,7 +153,7 @@ TObjEggFeed::TObjEggFeed(TObject* parent, int kind, const Vec3f* pos, int sizeKi
     : TSetActor(parent)
     , mSpawned(1)
 {
-	_00  = (u32)gTObjEggFeedName;
+	_00   = (u32)gTObjEggFeedName;
 	mSize = 0x220;
 	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
 	makeShape();
@@ -178,26 +180,26 @@ void TObjEggFeed::place(int kind, const Vec3f* pos, const SetRot* rot, int sizeK
 	NJS_OBJECT** models;
 	NJS_TEXLIST** tex;
 
-	mKind = kind < 0 ? 0 : (kind > 6 ? 6 : kind);
-	mPos.x = pos->x;
-	mPos.y = pos->y;
-	mPos.z = pos->z;
-	mRot.x = rot->x;
-	mRot.y = rot->y;
-	mRot.z = rot->z;
+	mKind     = kind < 0 ? 0 : (kind > 6 ? 6 : kind);
+	mPos.x    = pos->x;
+	mPos.y    = pos->y;
+	mPos.z    = pos->z;
+	mRot.x    = rot->x;
+	mRot.y    = rot->y;
+	mRot.z    = rot->z;
 	mSizeKind = sizeKind < 0 ? 0 : (sizeKind > 2 ? 2 : sizeKind);
-	mRebirth = rebirth < 0 ? 0 : (rebirth > 1 ? 1 : rebirth);
+	mRebirth  = rebirth < 0 ? 0 : (rebirth > 1 ? 1 : rebirth);
 	mEater.setId(0xFFFF);
-	mSway.x  = 0.0f;
-	mSway.y  = 0.0f;
-	mSway.z  = 0.0f;
-	mBob     = 0.0f;
-	mVel.x   = 0.0f;
-	mVel.y   = 0.0f;
-	mVel.z   = 0.0f;
-	mLife    = 0x4B0;
-	mSpin    = 0;
-	mPhase   = 0;
+	mSway.x    = 0.0f;
+	mSway.y    = 0.0f;
+	mSway.z    = 0.0f;
+	mBob       = 0.0f;
+	mVel.x     = 0.0f;
+	mVel.y     = 0.0f;
+	mVel.z     = 0.0f;
+	mLife      = 0x4B0;
+	mSpin      = 0;
+	mPhase     = 0;
 	mFeedFlags = 0;
 	mFeedFlags |= 0xD;
 	switch (mSizeKind) {
@@ -217,14 +219,14 @@ void TObjEggFeed::place(int kind, const Vec3f* pos, const SetRot* rot, int sizeK
 	mPos.y = 4.0f * mScale + mPos.y;
 	setLinkFree((SetLink*)&mLink);
 	mDraw.mFlags = 0;
-	models = getStgObjModels();
+	models       = getStgObjModels();
 	mModel.setModel(*(NJS_OBJECT**)((u8*)models + mKind * 4 + 0x64));
-	tex = getStgObjTextures();
+	tex             = getStgObjTextures();
 	mModel.mTexList = *(NJS_TEXLIST**)((u8*)tex + mKind * 4 + 0x60);
 	mModel.mState   = &mDraw;
-	models = getStgObjModels();
+	models          = getStgObjModels();
 	mShadow.setModel(models[24]);
-	tex = getStgObjTextures();
+	tex              = getStgObjTextures();
 	mShadow.mTexList = tex[23];
 	mShadow.mState   = &mDraw;
 	buildMatrix();
@@ -346,7 +348,7 @@ void TObjEggFeed::idle()
 	}
 	{
 		int shade = (u8)mShade + 4;
-		mShade = shade > 0xFF ? 0xFF : shade;
+		mShade    = shade > 0xFF ? 0xFF : shade;
 	}
 }
 
@@ -508,9 +510,9 @@ int TObjEggFeed::inReach(Vec3f* pos, f32 radius)
 	if (dist > reach) {
 		return 0;
 	}
-	dist   = reach - dist;
-	mBob   = -dist / reach;
-	gap.y  = 0.0f;
+	dist  = reach - dist;
+	mBob  = -dist / reach;
+	gap.y = 0.0f;
 	vecScale(0.0625f * dist, &mSway, &gap);
 	return 0;
 }
@@ -569,7 +571,7 @@ void TObjEggFeed::vfn_10()
 		mDraw.mFlags = 0;
 		mTask->mFlags &= ~1;
 	} else if ((mFeedFlags & 2) != 0) {
-		mDraw.mFlags = 0;
+		mDraw.mFlags    = 0;
 		mTask->mSortKey = drawTaskDepthKey(0.0f);
 		mTask->mFlags &= ~1;
 	} else {

@@ -27,7 +27,7 @@ void axrna_unlock(void)
 void axrna_entry_errfn(void (*func)(void*, char*), void* obj)
 {
 	axrna_err_func = func;
-	axrna_err_obj = obj;
+	axrna_err_obj  = obj;
 }
 
 // 0x8022EA18

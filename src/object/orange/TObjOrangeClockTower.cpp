@@ -54,7 +54,7 @@ static const GXColor sLampColors[8] = {
 	{ 0x00, 0xFF, 0x00, 0xFF }, { 0x00, 0x80, 0xFF, 0xFF }, { 0x7F, 0x00, 0xFF, 0xFF }, { 0xFF, 0x00, 0xFF, 0xFF },
 };
 
-}
+} // namespace ClockTower
 
 typedef char TObjOrangeClockTower_size_check[(sizeof(TObjOrangeClockTower) == 0x10C) ? 1 : -1];
 
@@ -74,23 +74,23 @@ static inline void** geObjMotions()
 
 static inline ClockTower::TParts* makeFace(TObjOrangeClockTower* tower, int model, int tex, int motion, int sorted, f32 speed)
 {
-	return new ClockTower::TParts(tower, getGeObjModels()[model], getGeObjTextures()[tex], (NJS_MOTION*)geObjMotions()[motion],
-	                              sorted, speed);
+	return new ClockTower::TParts(tower, getGeObjModels()[model], getGeObjTextures()[tex], (NJS_MOTION*)geObjMotions()[motion], sorted,
+	                              speed);
 }
 
 // 0x8012A2E4
 TObjOrangeClockTower::TObjOrangeClockTower(TObject* parent, SetDesc* desc)
     : TObjAction(parent)
 {
-	_00         = (u32)gTObjOrangeClockTowerName;
-	mSize       = 0x10C;
-	mRadius     = 1000.0f;
-	mParts[0]   = makeFace(this, 3, 4, 0, 0, 0.03f);
-	mParts[1]   = makeFace(this, 4, 5, 1, 1, 0.003f);
-	mParts[2]   = makeFace(this, 5, 6, 2, 0, 0.03f);
-	mParts[3]   = makeFace(this, 6, 7, 3, 0, 0.03f);
-	mParts[4]   = makeFace(this, 6, 7, 3, 0, 0.03f);
-	mLamp       = new ClockTower::TLamp(this);
+	_00       = (u32)gTObjOrangeClockTowerName;
+	mSize     = 0x10C;
+	mRadius   = 1000.0f;
+	mParts[0] = makeFace(this, 3, 4, 0, 0, 0.03f);
+	mParts[1] = makeFace(this, 4, 5, 1, 1, 0.003f);
+	mParts[2] = makeFace(this, 5, 6, 2, 0, 0.03f);
+	mParts[3] = makeFace(this, 6, 7, 3, 0, 0.03f);
+	mParts[4] = makeFace(this, 6, 7, 3, 0, 0.03f);
+	mLamp     = new ClockTower::TLamp(this);
 	mLamp->clearAll();
 	setObjId(this, 0xFFFF);
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
@@ -170,9 +170,9 @@ int TObjOrangeClockTower::sendToHandle(ObjMsg* msg)
 // 0x8012A9AC
 void TObjOrangeClockTower::setup()
 {
-	mFx     = 0;
-	mChime  = 0;
-	mTimer  = 0.0f;
+	mFx    = 0;
+	mChime = 0;
+	mTimer = 0.0f;
 	setLinkFree((SetLink*)&mLink);
 	if (switchSet(0)) {
 		mLamp->light(0);
@@ -285,7 +285,7 @@ void TObjOrangeClockTower::stateWait()
 	if (mClock.isActive() == 0) {
 		return;
 	}
-	mHand = -1;
+	mHand     = -1;
 	int ready = 1;
 	for (u16 i = 0; i < 4; i++) {
 		if (faceReady(i) == 0) {
@@ -295,9 +295,9 @@ void TObjOrangeClockTower::stateWait()
 		if (mLamp->isLit((u16)(i << 1)) != 0) {
 			continue;
 		}
-		Vec3f at = mPos;
+		Vec3f at  = mPos;
 		Vec3f off = clockFaceFxOffsets[i];
-		at.y = 0.0f;
+		at.y      = 0.0f;
 		vecRotateY(&off, &off, mRot.y);
 		vecAdd(&at, &at, &off);
 		mFx = createTCamFix(0, 3, &clockFaceFxScale, &at);
@@ -321,7 +321,7 @@ void TObjOrangeClockTower::stateWait()
 // 0x8012AEDC
 void TObjOrangeClockTower::stateFace()
 {
-	s16 hand = mHand;
+	s16 hand  = mHand;
 	int frame = (int)(0.5f + mTimer);
 	if (hand >= 0) {
 		switch (frame) {
@@ -396,7 +396,7 @@ void TObjOrangeClockTower::stateChime()
 		mChime = 0;
 		mClock.release();
 		mLamp->mSpeed = 0.005f;
-		s16 msg = 0x8C;
+		s16 msg       = 0x8C;
 		sendGameMsg((ObjMsg*)&msg);
 		setAct(3);
 	}
@@ -546,26 +546,26 @@ TLamp::TLamp(TObjAction* parent)
 	NJS_TEXLIST* tex2;
 	u16 j;
 	*(u32*)&mColor = *(const u32*)&sLampWhite;
-	mPhase = 0.0f;
-	mSpeed = 0.005f;
-	mBits  = 0;
-	_00    = (u32)lampName;
-	mSize  = 0x6C;
-	mLights = new LampLight[LAMP_COUNT];
-	node    = getGeObjModels()[7]->child;
-	texture = getGeObjTextures()[8];
+	mPhase         = 0.0f;
+	mSpeed         = 0.005f;
+	mBits          = 0;
+	_00            = (u32)lampName;
+	mSize          = 0x6C;
+	mLights        = new LampLight[LAMP_COUNT];
+	node           = getGeObjModels()[7]->child;
+	texture        = getGeObjTextures()[8];
 	for (i = 0; node != 0; node = node->sibling) {
-		light = &mLights[i++];
+		light                  = &mLights[i++];
 		light->mObject         = *node;
 		light->mObject.sibling = 0;
 		light->mTexture        = texture;
 		light->mBits           = 0;
 	}
 	mGlows = new LampLight[LAMP_COUNT];
-	glow = getGeObjModels()[8]->child;
-	tex2 = getGeObjTextures()[9];
+	glow   = getGeObjModels()[8]->child;
+	tex2   = getGeObjTextures()[9];
 	for (j = 0; glow != 0; glow = glow->sibling) {
-		lt2 = &mGlows[j++];
+		lt2                  = &mGlows[j++];
 		lt2->mObject         = *glow;
 		lt2->mObject.sibling = 0;
 		lt2->mTexture        = tex2;

@@ -47,10 +47,10 @@ int sChickenLoaded;
 // Init half of the set-init pair
 extern "C" void clearChickenArc()
 {
-	gChickenArc = 0;
-	gChickenModel = 0;
+	gChickenArc      = 0;
+	gChickenModel    = 0;
 	gChickenTexLists = 0;
-	gChickenMotions = 0;
+	gChickenMotions  = 0;
 }
 
 static void openChickenArc();
@@ -70,11 +70,11 @@ static void openChickenArc()
 		return;
 	}
 	loadArc("geobj_chicken.arc", &gChickenArc);
-	void** models  = (void**)findArcExport(gChickenArc, "models");
-	gChickenModel   = (NJS_OBJECT*)models[0];
-	gChickenTexLists   = (NJS_TEXLIST**)findArcExport(gChickenArc, "texlists");
-	gChickenMotions   = (NJS_MOTION**)findArcExport(gChickenArc, "motions");
-	void* texture  = findArcExport(gChickenArc, "texture");
+	void** models    = (void**)findArcExport(gChickenArc, "models");
+	gChickenModel    = (NJS_OBJECT*)models[0];
+	gChickenTexLists = (NJS_TEXLIST**)findArcExport(gChickenArc, "texlists");
+	gChickenMotions  = (NJS_MOTION**)findArcExport(gChickenArc, "motions");
+	void* texture    = findArcExport(gChickenArc, "texture");
 	for (int i = 0; i < 8; i++) {
 		bindGvmTextures((u8*)texture, gChickenTexLists[i]);
 	}
@@ -89,19 +89,19 @@ extern "C" void termChickenArc()
 			releaseTextures(gChickenTexLists[i]);
 		}
 		releaseResource(gChickenArc);
-		gChickenArc = 0;
-		gChickenModel = 0;
+		gChickenArc      = 0;
+		gChickenModel    = 0;
 		gChickenTexLists = 0;
-		gChickenMotions = 0;
+		gChickenMotions  = 0;
 	}
 	sChickenLoaded = 0;
 }
 
 enum {
-	CHICKEN_WAIT = 0, // for a rider
-	CHICKEN_TAKE = 1, // the pick-up event
+	CHICKEN_WAIT  = 0, // for a rider
+	CHICKEN_TAKE  = 1, // the pick-up event
 	CHICKEN_LEAVE = 2,
-	CHICKEN_FLY = 3,
+	CHICKEN_FLY   = 3,
 };
 
 // Message 0x7D where the rider sits
@@ -123,7 +123,7 @@ void TMsnObjChicken::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
 	placeMatrix();
-	mType = CLAMP_RANGE(desc->getInt(0), 0, 7);
+	mType         = CLAMP_RANGE(desc->getInt(0), 0, 7);
 	mUnlockSwitch = (u16)CLAMP_RANGE(desc->getInt(1), 0, 0x800);
 	if (gChickenTexLists != 0) {
 		mModel.mTexList = (NJS_TEXLIST*)gChickenTexLists[mType];
@@ -149,15 +149,15 @@ void TMsnObjChicken::debugPrint(void*)
 extern "C" void chickenBuild(TMsnObjChicken* self)
 {
 	self->mRiderAngle = 0;
-	self->mState = CHICKEN_WAIT;
-	self->mCamera = 0;
-	self->mTimer = 0;
+	self->mState      = CHICKEN_WAIT;
+	self->mCamera     = 0;
+	self->mTimer      = 0;
 	if (gChickenArc != 0) {
 		self->mMotion.init(sMsnChickenMotions, gChickenMotions);
 		self->mMotion.play(0);
 		self->mModel.setModel(gChickenModel);
 		self->mModel.mMotion = &self->mMotion;
-		self->mModel.mState = (DrawState*)getDefaultDrawState();
+		self->mModel.mState  = (DrawState*)getDefaultDrawState();
 		self->mModel.calcMotion();
 	}
 
@@ -182,7 +182,7 @@ extern "C" void chickenBuild(TMsnObjChicken* self)
 TMsnObjChicken::TMsnObjChicken(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0x154;
 	initFromDesc(desc);
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
@@ -246,7 +246,7 @@ void TMsnObjChicken::waitRider()
 				}
 				if (mRider.get() != 0) {
 					ChickenSeatMsg seat;
-					seat.mType = 0x7D;
+					seat.mType  = 0x7D;
 					seat.mPos.x = 15.0f;
 					seat.mPos.y = 0.0f;
 					seat.mPos.z = 0.0f;
@@ -301,7 +301,7 @@ void TMsnObjChicken::leave()
 // 0x8010D5C4
 void TMsnObjChicken::fly()
 {
-	f64 h = __fabs(mPos.y - mHome.y);
+	f64 h      = __fabs(mPos.y - mHome.y);
 	f32 height = h;
 	if (height > 100.0f) {
 		setLinkForever((SetLink*)&mLink);

@@ -46,17 +46,17 @@ public:
 	void drawCloth();
 	void calcNormals();
 
-	ObjModel mModel;       // _64
-	ObjPlace mPlace;       // _84
-	FlagCloth* mCloth;     // _E0
-	HitVec mNormals[4][4]; // _E4 one per cloth point
-	DrawTask* mDrawTask;       // _1A4
-	int mState;            // _1A8
-	int mWindTarget;       // _1AC
-	int mWindAngle;        // _1B0
-	Vec3f mCenter;         // _1B4
-	f32 mRadius;           // _1C0
-	CharaColli* mClothColli;     // _1C4
+	ObjModel mModel;         // _64
+	ObjPlace mPlace;         // _84
+	FlagCloth* mCloth;       // _E0
+	HitVec mNormals[4][4];   // _E4 one per cloth point
+	DrawTask* mDrawTask;     // _1A4
+	int mState;              // _1A8
+	int mWindTarget;         // _1AC
+	int mWindAngle;          // _1B0
+	Vec3f mCenter;           // _1B4
+	f32 mRadius;             // _1C0
+	CharaColli* mClothColli; // _1C4
 };
 
 #include "Ninja/njtypes.h"

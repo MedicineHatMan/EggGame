@@ -31,7 +31,7 @@ extern "C" void createSetSpawner()
 extern "C" int setSpawnerMode(int mode)
 {
 	if (gSetGenerator != 0) {
-		int old             = gSetGenerator->mMode;
+		int old              = gSetGenerator->mMode;
 		gSetGenerator->mMode = mode;
 		return old;
 	}
@@ -54,7 +54,7 @@ extern "C" void setSpawnerOff()
 }
 
 TSetGenerator::TSetGenerator(TObject* parent)
-	: TObject(parent)
+    : TObject(parent)
 {
 	_00         = (u32)gTSetGeneratorName;
 	mSize       = sizeof(TSetGenerator);

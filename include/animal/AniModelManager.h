@@ -36,9 +36,9 @@ struct AniModelSlotPool {
 	AniModelSlotPool();  // 0x801B08D0
 	~AniModelSlotPool(); // 0x801B0A5C
 
-	AniModelSlot* take();           // 0x801B08E4
-	void give(AniModelSlot* slot);  // 0x801B090C
-	void init(int count);           // 0x801B0924
+	AniModelSlot* take();          // 0x801B08E4
+	void give(AniModelSlot* slot); // 0x801B090C
+	void init(int count);          // 0x801B0924
 
 	AniModelSlot* mSlots; // _00
 	AniModelSlot* mFree;  // _04
@@ -50,12 +50,12 @@ struct AniModelManager {
 	AniModelManager();  // 0x801B0324
 	~AniModelManager(); // 0x801B0374
 
-	void request(int kind);                  // 0x801B0408
-	int attach(int kind, AniAsset* asset);   // 0x801B0518
-	void detach(AniAsset* asset);            // 0x801B0584
-	AniModelSlot* find(int kind);            // 0x801B069C
-	AniModelSlot* allocSlot(int kind);       // 0x801B06C4
-	static void onLoaded(int size, int id);  // 0x801B0768
+	void request(int kind);                 // 0x801B0408
+	int attach(int kind, AniAsset* asset);  // 0x801B0518
+	void detach(AniAsset* asset);           // 0x801B0584
+	AniModelSlot* find(int kind);           // 0x801B069C
+	AniModelSlot* allocSlot(int kind);      // 0x801B06C4
+	static void onLoaded(int size, int id); // 0x801B0768
 
 	AniModelSlotPool mPool;  // _00
 	AniModelSlotList mSlots; // _0C
@@ -63,8 +63,8 @@ struct AniModelManager {
 
 /** One kind and its file */
 struct AniModelName {
-	int mKind;          // _00
-	const char* mFile;  // _04 null at the end
+	int mKind;         // _00
+	const char* mFile; // _04 null at the end
 };
 
 extern "C" {

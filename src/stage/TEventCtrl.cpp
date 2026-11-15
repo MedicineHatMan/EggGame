@@ -23,7 +23,6 @@ extern "C" void eventRequestClear(EventRequest* request)
 	}
 	request->mObj = 0;
 }
-
 }
 
 typedef char TEventCtrl_size_check[(sizeof(TEventCtrl) == 0x38) ? 1 : -1];
@@ -36,9 +35,9 @@ extern "C" void clearFlagByte(void*);
 TEventCtrl::TEventCtrl(TObject* parent)
     : TObject(parent)
 {
-	_00           = (u32)gTEventCtrlName;
-	mSize         = 0x38;
-	mState        = 0;
+	_00    = (u32)gTEventCtrlName;
+	mSize  = 0x38;
+	mState = 0;
 	clearFlagByte(&mFlag);
 	_24           = 1;
 	mCamera       = 0;
@@ -53,14 +52,17 @@ void TEventCtrl::reset()
 	if ((s8)mState == 1 && (mFlag.mBits & 2)) {
 		end();
 	}
-	mState        = 0;
+	mState = 0;
 	clearFlagByte(&mFlag);
-	_24           = 1;
-	mCamera       = 0;
+	_24     = 1;
+	mCamera = 0;
 }
 
 // 0x8006A4D4
-int TEventCtrl::isFree() { return !(mFlag.mBits & 8); }
+int TEventCtrl::isFree()
+{
+	return !(mFlag.mBits & 8);
+}
 
 // 0x8006A4E8
 void TEventCtrl::start()
@@ -175,7 +177,7 @@ extern "C" void eventInit()
 	sEventCtrlObj = 0;
 	eventRequestClear(&sEventReq);
 	sEventStartCb = 0;
-	gEventQueue = new EventQueue();
+	gEventQueue   = new EventQueue();
 	gEventCurrent.clear();
 }
 
@@ -199,7 +201,7 @@ extern "C" void eventCreate()
 {
 	if (sEventCtrlObj == 0) {
 		TEventCtrl* obj = new TEventCtrl(gTL_00);
-		sEventCtrlObj = obj;
+		sEventCtrlObj   = obj;
 	}
 }
 
@@ -246,7 +248,7 @@ extern "C" int eventStartById(u16 id, int (*callback)(int))
 		sEventReq.mIds[0] = id;
 		sEventReq.mIds[1] = 0xFFFF;
 		sEventReq.mObj    = 0;
-		sEventStartCb         = callback;
+		sEventStartCb     = callback;
 		return 1;
 	}
 	return 0;
@@ -261,7 +263,7 @@ extern "C" int eventStartByIds(u16 id, u16 id2)
 		sEventReq.mIds[1] = id2;
 		sEventReq.mIds[2] = 0xFFFF;
 		sEventReq.mObj    = 0;
-		sEventStartCb         = 0;
+		sEventStartCb     = 0;
 		return 1;
 	}
 	return 0;
@@ -274,7 +276,7 @@ extern "C" int eventStartByObj(void* obj)
 		((TEventCtrl*)sEventCtrlObj)->request();
 		sEventReq.mIds[0] = 0xFFFF;
 		sEventReq.mObj    = obj;
-		sEventStartCb         = 0;
+		sEventStartCb     = 0;
 		return 1;
 	}
 	return 0;

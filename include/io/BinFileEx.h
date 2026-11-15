@@ -24,24 +24,24 @@ struct PrdHeader {
  */
 class BinFileEx : public TResource {
 public:
-	BinFileEx();                      // 0x801AC4D8
-	virtual ~BinFileEx();             // 0x801AC53C
-	virtual int load(TFile* file);    // 0x801AC59C
-	virtual int getState();           // 0x801AC6D4 0 = loading 1 = done 2 = failed
+	BinFileEx();                   // 0x801AC4D8
+	virtual ~BinFileEx();          // 0x801AC53C
+	virtual int load(TFile* file); // 0x801AC59C
+	virtual int getState();        // 0x801AC6D4 0 = loading 1 = done 2 = failed
 
-	void free();                      // 0x801AC708
+	void free(); // 0x801AC708
 
 	u8 _28[4];
-	void* mData;        // _2C
-	u32 mSize;          // _30
-	int mState;         // _34 0 header 1 packed data 2 decode 3 done 4 memory it does not own
-	PrdHeader mHeader;  // _38
-	u8* mPacked;        // _58 where the packed data goes
+	void* mData;       // _2C
+	u32 mSize;         // _30
+	int mState;        // _34 0 header 1 packed data 2 decode 3 done 4 memory it does not own
+	PrdHeader mHeader; // _38
+	u8* mPacked;       // _58 where the packed data goes
 };
 
 extern "C" {
-void prsInit();                                // 0x801AC34C
-int prsDecode(u8* dst, u8* src, u32 size);     // 0x801AC3C4 returns the decoded size
+void prsInit();                            // 0x801AC34C
+int prsDecode(u8* dst, u8* src, u32 size); // 0x801AC3C4 returns the decoded size
 }
 
 #endif

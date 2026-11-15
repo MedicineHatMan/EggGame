@@ -35,12 +35,12 @@ public:
 	void stepPlay();
 	void stepClose();
 
-	int mTimer;                            // _20
-	TCamPath* mEvent;                       // _24
-	TSimpleText* mText;                    // _28
-	Fx* mPart;                           // _2C
-	f32 mMtx[12];                          // _30
-	void (TPlyDemoLastSuper::*mStep)();    // _60
+	int mTimer;                         // _20
+	TCamPath* mEvent;                   // _24
+	TSimpleText* mText;                 // _28
+	Fx* mPart;                          // _2C
+	f32 mMtx[12];                       // _30
+	void (TPlyDemoLastSuper::*mStep)(); // _60
 };
 
 extern "C" {

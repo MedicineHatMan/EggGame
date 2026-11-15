@@ -37,20 +37,13 @@ extern "C" void* createLionKangaroo(TObject* parent)
 }
 
 const MotionEntry sLionKangarooMotions[] = {
-	{ 0, 11, -1, 0, 0.0f, 30.0f, 0.7f, 0.0f, 1 },
-	{ 0, 8, -1, 0, 0.0f, 16.0f, 0.39f, 0.0f, 1 },
-	{ 1, 6, -1, 0, 5.0f, 11.0f, 0.35f, 0.0f, 0 },
-	{ 1, 6, -1, 0, 11.0f, 16.0f, 0.35f, 0.0f, 0 },
-	{ 3, 6, -1, 5, 16.0f, 19.0f, 0.35f, 0.1f, 0 },
-	{ 0, 10, -1, 0, 0.0f, 30.0f, 0.2f, 0.0f, 0 },
-	{ 1, 0, -1, 0, 0.0f, 19.0f, 0.28f, 0.0f, 0 },
-	{ 1, 9, -1, 0, 0.0f, 16.0f, 0.33f, 0.0f, 0 },
-	{ 0, 7, -1, 0, 0.0f, 5.0f, 0.5f, 0.0f, 0 },
-	{ 1, 3, -1, 0, 0.0f, 6.0f, 0.3f, 0.0f, 0 },
-	{ 0, 2, -1, 0, 0.0f, 16.0f, 0.3f, 0.0f, 0 },
-	{ 1, 1, -1, 0, 0.0f, 6.0f, 0.3f, 0.0f, 0 },
-	{ 1, 4, -1, 0, 0.0f, 4.0f, 0.27f, 0.0f, 0 },
-	{ 1, 5, -1, 0, 0.0f, 29.0f, 0.25f, 0.0f, 0 },
+	{ 0, 11, -1, 0, 0.0f, 30.0f, 0.7f, 0.0f, 1 },  { 0, 8, -1, 0, 0.0f, 16.0f, 0.39f, 0.0f, 1 },
+	{ 1, 6, -1, 0, 5.0f, 11.0f, 0.35f, 0.0f, 0 },  { 1, 6, -1, 0, 11.0f, 16.0f, 0.35f, 0.0f, 0 },
+	{ 3, 6, -1, 5, 16.0f, 19.0f, 0.35f, 0.1f, 0 }, { 0, 10, -1, 0, 0.0f, 30.0f, 0.2f, 0.0f, 0 },
+	{ 1, 0, -1, 0, 0.0f, 19.0f, 0.28f, 0.0f, 0 },  { 1, 9, -1, 0, 0.0f, 16.0f, 0.33f, 0.0f, 0 },
+	{ 0, 7, -1, 0, 0.0f, 5.0f, 0.5f, 0.0f, 0 },    { 1, 3, -1, 0, 0.0f, 6.0f, 0.3f, 0.0f, 0 },
+	{ 0, 2, -1, 0, 0.0f, 16.0f, 0.3f, 0.0f, 0 },   { 1, 1, -1, 0, 0.0f, 6.0f, 0.3f, 0.0f, 0 },
+	{ 1, 4, -1, 0, 0.0f, 4.0f, 0.27f, 0.0f, 0 },   { 1, 5, -1, 0, 0.0f, 29.0f, 0.25f, 0.0f, 0 },
 	{ 1, 0, -1, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 };
 
@@ -60,47 +53,49 @@ const char* gTAniLionKangarooName = "TAniLionKangaroo";
 
 // 0x801C2160
 TAniLionKangaroo::TAniLionKangaroo(TObject* parent)
-    : TAniMount(parent, 0x15), mCharge(0), mMove(0)
+    : TAniMount(parent, 0x15)
+    , mCharge(0)
+    , mMove(0)
 {
 	mChargeFx = 0;
 	mBirth    = 0;
 	_00       = (u32)gTAniLionKangarooName;
 	mSize     = 0x474;
 
-	mBodyHit.mOwnerId = mObjId;
-	mBodyHit.mRadius  = 10.0f;
-	mBodyHit.mOffset  = sLionBodyOffset;
+	mBodyHit.mOwnerId  = mObjId;
+	mBodyHit.mRadius   = 10.0f;
+	mBodyHit.mOffset   = sLionBodyOffset;
 	mHits.mList.mBody  = &mBody;
 	mHits.mList.mModel = &mModel;
 	mHits.mList.mLife  = &mLife;
 	mHits.mList.add(&mBodyHit);
-	mLife.mHp = 100; // the DOL stores to this one twice and never to mMax
-	mLife.mHp = 100;
+	mLife.mHp    = 100; // the DOL stores to this one twice and never to mMax
+	mLife.mHp    = 100;
 	mBlink.mLife = &mLife;
 	mBlink.mBody = &mBody;
-	mDrawTask = addDrawTask(this, (void (*)(void*))drawTask, 0x21, 0);
+	mDrawTask    = addDrawTask(this, (void (*)(void*))drawTask, 0x21, 0);
 	mModel.setNodes(sLionKangarooModelNodes, 3);
 	mMotions.set(&mMotion, sLionKangarooMotions);
 	mMotions.update(&mAsset);
 	mModel.update(&mAsset);
 
 	TObject* shotParent = new TObject(this);
-	mShotParent = shotParent;
+	mShotParent         = shotParent;
 
 	mShadow._30 = 20.0f;
 	mShadow._34 = 20.0f;
 	mMotion.play(5);
 
 	mWalk.setBody(&mBody);
-	mWalk.mRunSpeed = 150.0f;
-	mWalk.mRunFrom = 140.0f;
+	mWalk.mRunSpeed  = 150.0f;
+	mWalk.mRunFrom   = 140.0f;
 	mWalk.mWalkSpeed = 100.0f;
-	mWalk.mAccel = 0.05f;
-	mWalk.mDecel = 0.2f;
+	mWalk.mAccel     = 0.05f;
+	mWalk.mDecel     = 0.2f;
 	mJump.setBody(&mBody);
-	mJump.mGravity = -400.0f;
+	mJump.mGravity   = -400.0f;
 	mJump.mJumpSpeed = 225.0f;
-	mJump.mAirSpeed = 60.0f;
+	mJump.mAirSpeed  = 60.0f;
 }
 
 // 0x801C23A8
@@ -116,8 +111,8 @@ TAniLionKangaroo::~TAniLionKangaroo()
 // 0x801C24F0
 void TAniLionKangaroo::onLoaded()
 {
-	mPos  = mStartPos;
-	mRotY = mStartRot;
+	mPos       = mStartPos;
+	mRotY      = mStartRot;
 	mBody.mPos = mPos;
 	updateMatrix();
 	updateShadow();
@@ -193,7 +188,7 @@ void TAniLionKangaroo::drawTask(TAniLionKangaroo* self)
 		f32 matrix[12];
 		DrawState state;
 		state.mFlags = 0;
-		state._20 = 0;
+		state._20    = 0;
 		if (self->mBirth != 0) {
 			self->mBirth->getDrawState(&state);
 		} else {
@@ -397,16 +392,16 @@ void TAniLionKangaroo::runBirth(int phase)
 	if (phase == 0) {
 		mMotion.play(0xE);
 		TAniBirth* birth = new TAniBirth(this, this, (ItemHolder*)&mAsset, &mBody);
-		mBirth = birth;
-		mBirth->mFxBank    = 0x22;
-		mBirth->mTextId    = 0x1B;
-		TAniBirth* at = mBirth;
-		at->mTextAtA.x = 0.0f;
-		at->mTextAtA.y = 15.0f;
-		at->mTextAtA.z = 0.0f;
-		at->mTextAtB.x = 60.0f;
-		at->mTextAtB.y = 25.0f;
-		at->mTextAtB.z = 35.0f;
+		mBirth           = birth;
+		mBirth->mFxBank  = 0x22;
+		mBirth->mTextId  = 0x1B;
+		TAniBirth* at    = mBirth;
+		at->mTextAtA.x   = 0.0f;
+		at->mTextAtA.y   = 15.0f;
+		at->mTextAtA.z   = 0.0f;
+		at->mTextAtB.x   = 60.0f;
+		at->mTextAtB.y   = 25.0f;
+		at->mTextAtB.z   = 35.0f;
 	} else if (phase == 1) {
 		mBirth->mFlags |= 1;
 		mBirth = 0;
@@ -624,9 +619,9 @@ void TAniLionKangaroo::runBreath(int phase)
 			mModel.getMatrix(1, mFx->mMatrix);
 		}
 		clearCharge();
-		mHitValue = scoreNewChain(3);
+		mHitValue                  = scoreNewChain(3);
 		TAniLionFireBreath* breath = new TAniLionFireBreath(this, mObjId);
-		mBreath = breath;
+		mBreath                    = breath;
 	} else if (phase == 1) {
 		fxStop(mFx);
 		seStop3D(&mSounds[0]);

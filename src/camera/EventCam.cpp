@@ -175,9 +175,9 @@ int eventCmdPtclTest(void*)
 inline TEventMsg::TEventMsg(TObject* parent, u16 id)
     : TObject(parent)
 {
-	mText = 0;
+	mText             = 0;
 	TSimpleText* text = createSimpleTextPlain(getMessage(id));
-	mText = text;
+	mText             = text;
 	if (text == 0) {
 		eventScriptSignal();
 		mFlags |= 1;
@@ -190,7 +190,7 @@ int eventCmdMsg(EventMsgArgs* args)
 	TObject* parent;
 	u16 id;
 	TEventMsg* msg;
-	id = args->mId;
+	id     = args->mId;
 	parent = gTL_02;
 	if (gEventMsg != 0) {
 		msg = 0;

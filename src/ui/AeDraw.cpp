@@ -250,16 +250,16 @@ void aeDrawGroup(AeFrame* frame, int index, const u32* banks)
 			continue;
 		}
 		AeFrame sub;
-		sub.mHead   = frame->mHead;
-		sub.mList   = frame->mList;
-		sub.mTime   = frame->mTime;
-		sub.mRate   = frame->mRate;
-		sub.mMark   = frame->mMark;
-		sub.mColor  = frame->mColor;
-		sub.mCount  = frame->mCount;
-		sub.mItems  = frame->mItems;
-		sub.mTime   = time;
-		sub.mMark   = frame->mMark | rec->mFlags;
+		sub.mHead  = frame->mHead;
+		sub.mList  = frame->mList;
+		sub.mTime  = frame->mTime;
+		sub.mRate  = frame->mRate;
+		sub.mMark  = frame->mMark;
+		sub.mColor = frame->mColor;
+		sub.mCount = frame->mCount;
+		sub.mItems = frame->mItems;
+		sub.mTime  = time;
+		sub.mMark  = frame->mMark | rec->mFlags;
 		njPushMatrixEx();
 		aeApplyRecord(&sub, (s16)index);
 		switch (rec->mKind) {
@@ -292,13 +292,13 @@ void aeDrawGroup(AeFrame* frame, int index, const u32* banks)
 				NJS_TEXLIST* tex = njGetCurrentTexList();
 				AeFrame inner;
 				clip->fillFrame(&inner);
-				sub.mHead  = inner.mHead;
-				sub.mList  = inner.mList;
-				sub.mColor.r    = inner.mColor.r;
-				sub.mColor.g    = inner.mColor.g;
-				sub.mColor.b    = inner.mColor.b;
-				sub.mCount = inner.mCount;
-				sub.mItems = inner.mItems;
+				sub.mHead    = inner.mHead;
+				sub.mList    = inner.mList;
+				sub.mColor.r = inner.mColor.r;
+				sub.mColor.g = inner.mColor.g;
+				sub.mColor.b = inner.mColor.b;
+				sub.mCount   = inner.mCount;
+				sub.mItems   = inner.mItems;
 				if (*(u32*)slot->_04 == 0) {
 					sub.mTime = inner.mTime;
 				}

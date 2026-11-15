@@ -33,10 +33,9 @@ ObjDrawState gDefaultDrawState;
 
 // The eight corners of a cube with its corners on the unit sphere
 static Vec3f gWireBoxVerts[8] = {
-	{ 0.57735026f, 0.57735026f, 0.57735026f },    { 0.57735026f, 0.57735026f, -0.57735026f },
-	{ -0.57735026f, 0.57735026f, 0.57735026f },   { -0.57735026f, 0.57735026f, -0.57735026f },
-	{ 0.57735026f, -0.57735026f, 0.57735026f },   { 0.57735026f, -0.57735026f, -0.57735026f },
-	{ -0.57735026f, -0.57735026f, 0.57735026f },  { -0.57735026f, -0.57735026f, -0.57735026f },
+	{ 0.57735026f, 0.57735026f, 0.57735026f },   { 0.57735026f, 0.57735026f, -0.57735026f },   { -0.57735026f, 0.57735026f, 0.57735026f },
+	{ -0.57735026f, 0.57735026f, -0.57735026f }, { 0.57735026f, -0.57735026f, 0.57735026f },   { 0.57735026f, -0.57735026f, -0.57735026f },
+	{ -0.57735026f, -0.57735026f, 0.57735026f }, { -0.57735026f, -0.57735026f, -0.57735026f },
 };
 
 #define LAUNCH_MIN(a, b) ((a) > (b) ? (b) : (a))
@@ -45,8 +44,8 @@ typedef char TObjLauncher_size_check[(sizeof(TObjLauncher) == 0xE4) ? 1 : -1];
 
 inline void TObjLauncher::spin()
 {
-	int y = (int)(65536.0f * (0.000030517578f * (f32)(int)rand()));
-	int x = (int)(65536.0f * (0.000030517578f * (f32)(int)rand()));
+	int y     = (int)(65536.0f * (0.000030517578f * (f32)(int)rand()));
+	int x     = (int)(65536.0f * (0.000030517578f * (f32)(int)rand()));
 	mX.mRot.x = x;
 	mX.mRot.y = y;
 	mX.mRot.z = 0;
@@ -68,10 +67,10 @@ void TObjLauncher::init(const Vec3f* pos, const Vec3f* vel)
 	mX.mVel.y = vel->y;
 	mX.mVel.z = vel->z;
 	mX.mPos.set(pos->x, pos->y, pos->z);
-	mDrag     = 0.01f;
-	mBits     = 0;
-	mAge      = 0;
-	mSpinMax  = LAUNCH_MIN(1024.0f * vecLength(vel), 1024.0f);
+	mDrag    = 0.01f;
+	mBits    = 0;
+	mAge     = 0;
+	mSpinMax = LAUNCH_MIN(1024.0f * vecLength(vel), 1024.0f);
 	setRandomSpin();
 	if (gLauncherHold == 1 && !eventIsBusy()) {
 		mBits |= BIT_DELAYED;
@@ -80,8 +79,7 @@ void TObjLauncher::init(const Vec3f* pos, const Vec3f* vel)
 }
 
 // 0x800552E8
-TObjLauncher::TObjLauncher(TObject* parent, f32 floorY, f32 scale, const Vec3f* pos, const Vec3f* vel, int bank,
-                           int model, int texture)
+TObjLauncher::TObjLauncher(TObject* parent, f32 floorY, f32 scale, const Vec3f* pos, const Vec3f* vel, int bank, int model, int texture)
     : TObjAction(parent)
 {
 	ObjCommonData* pack;
@@ -103,8 +101,7 @@ TObjLauncher::TObjLauncher(TObject* parent, f32 floorY, f32 scale, const Vec3f* 
 }
 
 // 0x80055480
-TObjLauncher::TObjLauncher(TObject* parent, f32 floorY, f32 scale, const Vec3f* pos, const Vec3f* vel, void* model,
-                           void* texture)
+TObjLauncher::TObjLauncher(TObject* parent, f32 floorY, f32 scale, const Vec3f* pos, const Vec3f* vel, void* model, void* texture)
     : TObjAction(parent)
 {
 	_00      = (u32)gTObjLauncherName;
@@ -123,8 +120,8 @@ TObjLauncher::TObjLauncher(TObject* parent, f32 floorY, f32 scale, const Vec3f* 
 }
 
 // 0x800555E8
-TObjLauncher::TObjLauncher(TObject* parent, f32 floorY, const Vec3f* pos, const SetRot* rot, const Vec3f* vel,
-                           Vec3f scale, void* motion, void* texture)
+TObjLauncher::TObjLauncher(TObject* parent, f32 floorY, const Vec3f* pos, const SetRot* rot, const Vec3f* vel, Vec3f scale, void* motion,
+                           void* texture)
     : TObjAction(parent)
 {
 	_00      = (u32)gTObjLauncherName;
@@ -138,7 +135,7 @@ TObjLauncher::TObjLauncher(TObject* parent, f32 floorY, const Vec3f* pos, const 
 	mTexture = texture;
 	init(pos, vel);
 	mX.mRot = *rot;
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mDraw   = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	calcMatrix();
 }
 
@@ -291,7 +288,7 @@ void TObjLauncher::setRandomSpin()
 	for (i = 0; i < 3; i++) {
 		f32 min;
 		f32 max  = mSpinMax;
-		min = -max;
+		min      = -max;
 		mSpin[i] = (int)((max - min) * (3.0517578125e-05f * (f32)(int)rand()) + min);
 	}
 }
@@ -365,27 +362,27 @@ f32* gjGetMatrix()
 }
 
 // The colour channels and TEV for a flat colour at mtx
-#define debugDrawSetup(mtx, color) \
-	do { \
-	GXColor c; \
-	u32 rgba; \
-	GXSetNumTexGens(0); \
-	GXSetNumChans(1); \
-	GXSetNumTevStages(1); \
-	GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR); \
-	GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0); \
-	GXSetChanCtrl(GX_COLOR0A0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE); \
-	GXSetChanCtrl(GX_COLOR1A1, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE); \
-	rgba = *color; \
-	c.r  = rgba >> 24; \
-	c.g  = rgba >> 16; \
-	c.b  = rgba >> 8; \
-	c.a  = rgba; \
-	GXSetChanMatColor(GX_COLOR0A0, c); \
-	GXLoadPosMtxImm(mtx, GX_PNMTX0); \
-	GXLoadNrmMtxImm(mtx, GX_PNMTX0); \
-	GXSetCurrentMtx(GX_PNMTX0); \
-	GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_ALWAYS, 0); \
+#define debugDrawSetup(mtx, color)                                                                             \
+	do {                                                                                                       \
+		GXColor c;                                                                                             \
+		u32 rgba;                                                                                              \
+		GXSetNumTexGens(0);                                                                                    \
+		GXSetNumChans(1);                                                                                      \
+		GXSetNumTevStages(1);                                                                                  \
+		GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);                                                                  \
+		GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);                            \
+		GXSetChanCtrl(GX_COLOR0A0, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE); \
+		GXSetChanCtrl(GX_COLOR1A1, GX_DISABLE, GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE); \
+		rgba = *color;                                                                                         \
+		c.r  = rgba >> 24;                                                                                     \
+		c.g  = rgba >> 16;                                                                                     \
+		c.b  = rgba >> 8;                                                                                      \
+		c.a  = rgba;                                                                                           \
+		GXSetChanMatColor(GX_COLOR0A0, c);                                                                     \
+		GXLoadPosMtxImm(mtx, GX_PNMTX0);                                                                       \
+		GXLoadNrmMtxImm(mtx, GX_PNMTX0);                                                                       \
+		GXSetCurrentMtx(GX_PNMTX0);                                                                            \
+		GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_ALWAYS, 0);                                            \
 	} while (0)
 
 // 0x80055D48

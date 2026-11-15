@@ -58,18 +58,20 @@ ColliShape sMsnEmblemShape[] = {
 }
 
 static const char* sClassName = "TMsnObjEmblem";
-const char* gTEmblemGetName = "TEmblemGet";
+const char* gTEmblemGetName   = "TEmblemGet";
 
 extern "C" {
 extern const int sEmblemCameras[] = {
-	4, 5, 6,
+	4,
+	5,
+	6,
 }; // the camera of each camera id
 }
 
 // The field of view and aspect of the current view
 struct EmblemCamera {
 	u8 _00[0x44];
-	int mFov;    // _44
+	int mFov; // _44
 	u8 _48[4];
 	f32 mAspect; // _4C
 };
@@ -84,8 +86,8 @@ struct EmblemTakeMsg : public ObjMsg {
 enum {
 	EMBLEM_HIDDEN = 0, // waiting for the event camera
 	EMBLEM_APPEAR = 1,
-	EMBLEM_SHOW = 2,
-	EMBLEM_TAKEN = 3,
+	EMBLEM_SHOW   = 2,
+	EMBLEM_TAKEN  = 3,
 };
 
 typedef char TMsnObjEmblem_size_check[(sizeof(TMsnObjEmblem) == 0x210) ? 1 : -1];
@@ -94,7 +96,7 @@ typedef char TMsnObjEmblem_size_check[(sizeof(TMsnObjEmblem) == 0x210) ? 1 : -1]
 extern "C" void loadEmblemArc()
 {
 	loadArc("geobj_emblem.arc", &gEmblemArc);
-	gEmblemModel = (NJS_OBJECT*)findArcExport(gEmblemArc, "model");
+	gEmblemModel   = (NJS_OBJECT*)findArcExport(gEmblemArc, "model");
 	gEmblemMotions = (NJS_MOTION**)findArcExport(gEmblemArc, "motions");
 	gEmblemTexList = (NJS_TEXLIST*)findArcExport(gEmblemArc, "texlist");
 	bindGvmTextures((u8*)findArcExport(gEmblemArc, "texture"), gEmblemTexList);
@@ -118,21 +120,21 @@ extern "C" TObject* createTMsnObjEmblem(TObject* parent, SetDesc* desc)
 void TMsnObjEmblem::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
-	mKind = desc->getInt(0);
+	mKind     = desc->getInt(0);
 	int value = mKind;
 	if (value < 0) {
 		value = 0;
 	} else if (value > 1) {
 		value = 1;
 	}
-	mKind = value;
+	mKind     = value;
 	mCameraId = CLAMP_RANGE(desc->getInt(2), 0, 3);
 	switch (mKind) {
 	case 0:
 		break;
 	case 1:
 		mSwitch = desc->getInt(1);
-		int sw = mSwitch;
+		int sw  = mSwitch;
 		if (sw < 0) {
 			sw = 0;
 		} else if (sw > 0x7FF) {
@@ -170,7 +172,7 @@ void TMsnObjEmblem::debugPrint(void*)
 TMsnObjEmblem::TMsnObjEmblem(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00 = (u32)sClassName;
+	_00   = (u32)sClassName;
 	mSize = 0x210;
 	initFromDesc(desc);
 	setLinkDone((SetLink*)&mLink);
@@ -204,11 +206,11 @@ TMsnObjEmblem::~TMsnObjEmblem()
 // 0x80104D38
 void TMsnObjEmblem::setup()
 {
-	_15C = 0;
+	_15C          = 0;
 	sEmblemTint.a = 0x60;
-	mGenA = 0;
-	mGenB = 0;
-	mShape = colliCreate(1, 1);
+	mGenA         = 0;
+	mGenB         = 0;
+	mShape        = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks(mShape, 4, 255, 255, 0xFE);
 	colliCopyShapes(mShape, sMsnEmblemShape);
@@ -216,9 +218,9 @@ void TMsnObjEmblem::setup()
 	mMotion.init(sMsnEmblemMotions, gEmblemMotions);
 	mMotion.play(0);
 	mModel.setModelNodes(gEmblemModel, 1);
-	mModel.mState = (DrawState*)getDefaultDrawState();
+	mModel.mState   = (DrawState*)getDefaultDrawState();
 	mModel.mTexList = gEmblemTexList;
-	mModel.mMotion = &mMotion;
+	mModel.mMotion  = &mMotion;
 	mModel.calcMotion();
 	placeGenerators();
 	mCamera = 0;
@@ -385,7 +387,9 @@ void TMsnObjEmblem::show()
 }
 
 // 0x80105488
-void TMsnObjEmblem::taken() { }
+void TMsnObjEmblem::taken()
+{
+}
 
 // 0x8010548C
 void TMsnObjEmblem::draw()
@@ -459,7 +463,8 @@ extern "C" void emblemShineBegin()
 	frameTexSetCur();
 	gjLoadTextureNum(0, 0, 0, 1);
 	EmblemCamera* camera = (EmblemCamera*)camGetDrawView();
-	C_MTXLightPerspective((float*)light, (f32)(0.75 * (0.0054931640625 * (f64)camera->mFov)), camera->mAspect, -0.55f, -0.55f, 0.55f, 0.55f);
+	C_MTXLightPerspective((float*)light, (f32)(0.75 * (0.0054931640625 * (f64)camera->mFov)), camera->mAspect, -0.55f, -0.55f, 0.55f,
+	                      0.55f);
 	PSMTXConcat(light, _gj_matrix_, light);
 	GXLoadTexMtxImm(light, GX_TEXMTX5, GX_MTX3x4);
 	gjSetNumPostTexGens(1);
@@ -542,14 +547,14 @@ TEmblemGet::TEmblemGet(TObject* parent, const f32* matrix)
 	mGenA = particleGenById(this, &at, 0, 0x19B);
 	mGenB = particleGenById(this, &at, 0, 0x19A);
 
-	mCamera       = 0;
-	mState.mFlags  = DRAWSTATE_AMBIENT;
+	mCamera         = 0;
+	mState.mFlags   = DRAWSTATE_AMBIENT;
 	mState.mAmbient = 0xFFFFFFFF;
-	mFading       = 0;
-	mFadeStep     = 0;
-	_14C          = 0;
-	mSounded      = 0;
-	mLight.mFlags = 2;
+	mFading         = 0;
+	mFadeStep       = 0;
+	_14C            = 0;
+	mSounded        = 0;
+	mLight.mFlags   = 2;
 
 	Vec3f node;
 	mtxGetPos(mModel.mNodes->mMatrix, &node);
@@ -618,7 +623,7 @@ void TEmblemGet::draw()
 		mFadeStep = 5;
 	} else if (mAnim.passedFrame(215.0f)) {
 		setColorAlpha(&mState.mAmbient, 0);
-		mFading = 0;
+		mFading       = 0;
 		mLight.mColor = gColorBlack;
 	}
 	if (mFading != 0) {

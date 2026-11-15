@@ -46,14 +46,15 @@ int TextGlyph::isNarrow()
 }
 
 // 0x8006AE30
-void TextGlyph::update() { }
+void TextGlyph::update()
+{
+}
 
 // 0x8006AE34
 f32 TextGlyph::draw(f32 x, f32 y, const Vec3f* scale)
 {
 	textSetColor(mColor);
-	textDrawQuad(mGlyph.mU0, mGlyph.mV0, mGlyph.mU1, mGlyph.mV1, x, y, mGlyph.mWidth * scale->x,
-	             mGlyph.mHeight * scale->y);
+	textDrawQuad(mGlyph.mU0, mGlyph.mV0, mGlyph.mU1, mGlyph.mV1, x, y, mGlyph.mWidth * scale->x, mGlyph.mHeight * scale->y);
 	return mGlyph.mWidth * scale->x;
 }
 

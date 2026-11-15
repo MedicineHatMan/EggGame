@@ -35,14 +35,14 @@ public:
 	inline void* operator new(u32 size) { return objHeapAlloc(gObjHeap, size); }
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void readEnemyDesc(SetDesc* desc); // _38
-	virtual void vfn_3C();                     // _3C prints debug text
-	virtual int canAct();                      // _44
-	virtual void vfn_6C();                     // _6C
-	virtual void updateBody();                 // _70
-	virtual void syncCollider();               // _78
+	virtual void readEnemyDesc(SetDesc* desc);         // _38
+	virtual void vfn_3C();                             // _3C prints debug text
+	virtual int canAct();                              // _44
+	virtual void vfn_6C();                             // _6C
+	virtual void updateBody();                         // _70
+	virtual void syncCollider();                       // _78
 	virtual void onActionPhase(int action, int phase); // _7C
-	virtual void vfn_B0();                     // _B0
+	virtual void vfn_B0();                             // _B0
 
 	void init(SetDesc* desc);
 

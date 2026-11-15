@@ -8,7 +8,7 @@ struct AniList;
 struct ObjMsg;
 
 /** How an animal hangs in TAniManager's list */
-struct AniListLink { // size 0x10
+struct AniListLink {           // size 0x10
 	AniListLink* mNext;        // _00
 	AniListLink* mPrev;        // _04
 	TEggCreatureTypeE* mOwner; // _08
@@ -30,7 +30,7 @@ public:
 	virtual int vfn_74();                            // _74 message 0x47
 	virtual void vfn_78();                           // _78 message 0x46 let the rider go
 	virtual void vfn_7C();                           // _7C die
-	virtual void vfn_80(const void* body);                 // _80 message 0x23 given what follows the type
+	virtual void vfn_80(const void* body);           // _80 message 0x23 given what follows the type
 	virtual int vfn_84();
 	virtual int vfn_88();
 	virtual void vfn_8C(u32 flags);

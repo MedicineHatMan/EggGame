@@ -113,9 +113,9 @@ int WorldMesh::gatherBox(MeshEntry* entry, const void* box)
 int WorldMesh::queryDown(const MeshEntry* entry, const Vec3f* pos, u32 mask, MeshHitFn hit, void* arg)
 {
 	int found;
-	u16* id = (u16*)entry->_04;
+	u16* id   = (u16*)entry->_04;
 	int count = entry->mCount;
-	found = 0;
+	found     = 0;
 	Vec3f at;
 	f32 dist;
 	for (; count > 0; count--, id++) {
@@ -134,9 +134,9 @@ int WorldMesh::queryDown(const MeshEntry* entry, const Vec3f* pos, u32 mask, Mes
 int WorldMesh::queryLine(const MeshEntry* entry, const Vec3f* from, const Vec3f* to, u32 mask, MeshHitFn hit, void* arg)
 {
 	int found;
-	u16* id = (u16*)entry->_04;
+	u16* id   = (u16*)entry->_04;
 	int count = entry->mCount;
-	found = 0;
+	found     = 0;
 	Vec3f at;
 	f32 dist;
 	for (; count > 0; count--, id++) {
@@ -156,10 +156,10 @@ int WorldMesh::querySphere(const MeshEntry* entry, const MeshSphere* sphere, u32
 {
 	typedef int (*Fn)(WorldMesh*, int, void*, f32);
 	int found;
-	u16* id = (u16*)entry->_04;
+	u16* id      = (u16*)entry->_04;
 	Vec3f* verts = mVerts;
-	int count = entry->mCount;
-	found = 0;
+	int count    = entry->mCount;
+	found        = 0;
 	Vec3f at;
 	u16 which;
 	for (; count > 0; count--, id++) {
@@ -168,7 +168,7 @@ int WorldMesh::querySphere(const MeshEntry* entry, const MeshSphere* sphere, u32
 			continue;
 		}
 		const Vec3f* a = &verts[tri->mVerts[0]];
-		f32 height = njInnerProduct(&tri->mNormal, &sphere->mPos);
+		f32 height     = njInnerProduct(&tri->mNormal, &sphere->mPos);
 		height -= njInnerProduct(&tri->mNormal, a);
 		if ((f32)__fabs(height) > sphere->mRadius) {
 			continue;
@@ -198,16 +198,17 @@ int WorldMesh::querySphere(const MeshEntry* entry, const MeshSphere* sphere, u32
 
 // 0x800774E8
 // A separate callback for the face the corners and the edges
-int WorldMesh::querySphereEx(const MeshEntry* entry, const MeshSphere* sphere, u32 mask, void* faceFn, void* cornerFn, void* edgeFn, void* arg)
+int WorldMesh::querySphereEx(const MeshEntry* entry, const MeshSphere* sphere, u32 mask, void* faceFn, void* cornerFn, void* edgeFn,
+                             void* arg)
 {
 	typedef int (*Face)(WorldMesh*, int, void*, const Vec3f*, f32);
 	typedef int (*Corner)(WorldMesh*, int, void*, int, f32);
 	typedef int (*Edge)(WorldMesh*, int, void*, int, const Vec3f*, f32);
 	int found;
-	u16* id = (u16*)entry->_04;
+	u16* id      = (u16*)entry->_04;
 	Vec3f* verts = mVerts;
-	int count = entry->mCount;
-	found = 0;
+	int count    = entry->mCount;
+	found        = 0;
 	Vec3f at;
 	u16 which;
 	for (; count > 0; count--, id++) {
@@ -216,7 +217,7 @@ int WorldMesh::querySphereEx(const MeshEntry* entry, const MeshSphere* sphere, u
 			continue;
 		}
 		const Vec3f* a = &verts[tri->mVerts[0]];
-		f32 height = njInnerProduct(&tri->mNormal, &sphere->mPos);
+		f32 height     = njInnerProduct(&tri->mNormal, &sphere->mPos);
 		height -= njInnerProduct(&tri->mNormal, a);
 		if ((f32)__fabs(height) > sphere->mRadius) {
 			continue;
@@ -295,9 +296,9 @@ void worldLeavesToTris(WorldMesh* mesh, WorldGather* gather, MeshEntry* entry)
 	int count;
 	u16* out;
 	count = 0;
-	seen = mesh->mSeen.mData;
-	leaf = gather->mData;
-	out = (u16*)entry->_04;
+	seen  = mesh->mSeen.mData;
+	leaf  = gather->mData;
+	out   = (u16*)entry->_04;
 	for (i = 0; i < gather->mCount; i++, leaf++) {
 		for (k = 0; k < (*leaf)->mTriCount; k++) {
 			u16 tri = (*leaf)->mTris[k];

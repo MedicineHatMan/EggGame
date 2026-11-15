@@ -55,7 +55,7 @@ extern "C" int eventTalk(int* args)
 {
 	EventMsg msg;
 
-	msg.mMsg.mType = 0x1003;
+	msg.mMsg.mType   = 0x1003;
 	*(s16*)&msg.mArg = args[1];
 	sendSetMsg(args[0], &msg.mMsg);
 	return 1;
@@ -90,7 +90,7 @@ extern "C" int eventSetTalkMode(int* args)
 	EventMsg msg;
 
 	msg.mMsg.mType = 0x1004;
-	msg.mArg = args[1];
+	msg.mArg       = args[1];
 	sendSetMsg(args[0], &msg.mMsg);
 	return 1;
 }
@@ -124,7 +124,7 @@ TEneYellowBossDemo_Gate::TEneYellowBossDemo_Gate(TObject* parent, int arg)
 	mXform.mPos.x = 0.0f;
 	mXform.mPos.y = 0.0f;
 	mXform.mPos.z = 0.0f;
-	mDraw    = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mDraw         = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	for (int i = 0; i < 2; i++) {
 		mPart[i] = 0;
 	}
@@ -183,8 +183,8 @@ void TEneYellowBossDemo_Gate::render()
 	njSetTexture(textureTEneYellowBoss());
 	njPushMatrixEx();
 	njTranslateEx(&mXform.mPos);
-	int cur = mMotion.mCurrent;
-	frame = mMotion.mFrame;
+	int cur            = mMotion.mCurrent;
+	frame              = mMotion.mFrame;
 	NJS_MOTION* motion = mMotion.getMotion(cur);
 	drawMotionDefault(mModel, motion, frame);
 	njPopMatrixEx();

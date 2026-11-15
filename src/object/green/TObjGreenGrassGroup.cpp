@@ -262,9 +262,9 @@ void TObjGreenGrassGroup::vfn_10()
 
 		if ((mGrassFlags & GRASS_NEAR) != 0) {
 			Vec3f top;
-			top.x = 0.0f;
-			top.y = 25.31f;
-			top.z = 0.0f;
+			top.x     = 0.0f;
+			top.y     = 25.31f;
+			top.z     = 0.0f;
 			f32 reach = 25.0f + distXZ(&mCameraPos, &top);
 
 			GrassLine line;
@@ -335,7 +335,7 @@ void TObjGreenGrassGroup::sortBlades()
 		mOrder[1] = 0;
 	}
 	for (i = 2; i < 20; i++) {
-		dist[i]  = distXZ(&mCameraPos, &mBlades[i]->mPos);
+		dist[i]   = distXZ(&mCameraPos, &mBlades[i]->mPos);
 		mOrder[i] = i;
 		for (int j = 0; j < i; j++) {
 			if (dist[mOrder[j]] >= dist[i]) {

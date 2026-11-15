@@ -21,7 +21,9 @@ TGameGoldenEgg::TGameGoldenEgg(TObject* parent)
 }
 
 // 0x800CDEE8
-TGameGoldenEgg::~TGameGoldenEgg() { }
+TGameGoldenEgg::~TGameGoldenEgg()
+{
+}
 
 // 0x800CDF44
 void TGameGoldenEgg::startState()
@@ -94,8 +96,8 @@ extern "C" void* createGameStateGoldenEggLost(void* pool, TGameContext*)
 // 0x800CE14C
 TGameStateGoldenEggLost::TGameStateGoldenEggLost()
 {
-	mName = gTGameStateGoldenEggLostName; // "TGameStateGoldenEggLost"
-	mSize = 0x1C;
+	mName   = gTGameStateGoldenEggLostName; // "TGameStateGoldenEggLost"
+	mSize   = 0x1C;
 	mTarget = 0;
 	eventQueueAdd((int)this, (int)goldenEggLostFound);
 }

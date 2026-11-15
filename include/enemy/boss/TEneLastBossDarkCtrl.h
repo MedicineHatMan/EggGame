@@ -55,32 +55,32 @@ class TEneLastBossDarkCtrl : public TObjAction {
 public:
 	TEneLastBossDarkCtrl(TObject* parent);
 	virtual ~TEneLastBossDarkCtrl();
-	virtual void draw();                                        // _0C 0x8015C8D4
-	virtual void vfn_10();                                      // _10 0x8015CCE4
-	virtual void render();                                      // _1C 0x8015CD60
-	virtual Vec3f* getPos();                                    // _20 0x8015D2B0
-	virtual int getKind();                                      // _2C 0x8015D2A8
+	virtual void draw();                                              // _0C 0x8015C8D4
+	virtual void vfn_10();                                            // _10 0x8015CCE4
+	virtual void render();                                            // _1C 0x8015CD60
+	virtual Vec3f* getPos();                                          // _20 0x8015D2B0
+	virtual int getKind();                                            // _2C 0x8015D2A8
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58 0x8015C618
 
-void setPos(const Vec3f* pos);                 // 0x8015B9C8
-	void deleteMaps();                             // 0x8015BA34
-	void clearAll();                               // 0x8015BAA4
-	void show();                                   // 0x8015BAF0
-	void hide();                                   // 0x8015BB08
-	void fadeOut();                                // 0x8015BB20
-	void setNoContact();                           // 0x8015BB5C
-	void clearNoContact();                         // 0x8015BB98
-	void toTexel(f32 radius, const Vec3f* pos, f32* x, f32* z, f32* r); // 0x8015BBE8
+	void setPos(const Vec3f* pos);                                          // 0x8015B9C8
+	void deleteMaps();                                                      // 0x8015BA34
+	void clearAll();                                                        // 0x8015BAA4
+	void show();                                                            // 0x8015BAF0
+	void hide();                                                            // 0x8015BB08
+	void fadeOut();                                                         // 0x8015BB20
+	void setNoContact();                                                    // 0x8015BB5C
+	void clearNoContact();                                                  // 0x8015BB98
+	void toTexel(f32 radius, const Vec3f* pos, f32* x, f32* z, f32* r);     // 0x8015BBE8
 	int getBounds(f32 x, f32 z, f32 r, f32* x0, f32* x1, f32* z0, f32* z1); // 0x8015BC44
-	int addMap(f32 radius, const Vec3f* pos, int hold); // 0x8015BD94
-	int paint(f32 radius, const Vec3f* pos, u8 value);  // 0x8015C050
-	void clearMap(int id);                         // 0x8015C2A0
-	void fadeMaps();                               // 0x8015C318
-	int countMaps();                               // 0x8015C3A4
-	int getMap(int index, Vec3f* pos, f32* radius); // 0x8015C414
-	int hasMap(int id);                            // 0x8015C4A8
-	int isInDark(const TObjAction* obj);                // 0x8015C4DC
-	int touchContacts();                           // 0x8015C6D0
+	int addMap(f32 radius, const Vec3f* pos, int hold);                     // 0x8015BD94
+	int paint(f32 radius, const Vec3f* pos, u8 value);                      // 0x8015C050
+	void clearMap(int id);                                                  // 0x8015C2A0
+	void fadeMaps();                                                        // 0x8015C318
+	int countMaps();                                                        // 0x8015C3A4
+	int getMap(int index, Vec3f* pos, f32* radius);                         // 0x8015C414
+	int hasMap(int id);                                                     // 0x8015C4A8
+	int isInDark(const TObjAction* obj);                                    // 0x8015C4DC
+	int touchContacts();                                                    // 0x8015C6D0
 
 	Vec3f mPos;                // _30
 	DrawTask* mDraw;           // _3C
@@ -113,26 +113,26 @@ void setPos(const Vec3f* pos);                 // 0x8015B9C8
 };
 
 extern "C" {
-extern u8* gDarkTexture;               // 0x802C57C8 TEneLastBoss allocates it
-extern u32 gDarkTextureSize;           // 0x802C57CC
+extern u8* gDarkTexture;                // 0x802C57C8 TEneLastBoss allocates it
+extern u32 gDarkTextureSize;            // 0x802C57CC
 extern TEneLastBossDarkCtrl* gDarkCtrl; // 0x802C57D0
 
-void darkCtrlSetFx(int kind, int hit, int gone); // 0x8015B95C
-void darkCtrlSetSe(int id);                      // 0x8015B980
-void darkCtrlSetPos(const Vec3f* pos);           // 0x8015B994
-void darkCtrlClearAll();                         // 0x8015BA78
-void darkCtrlFadeOut();                          // 0x8015BB30
-void darkCtrlSetNoContact();                     // 0x8015BB6C
-void darkCtrlClearNoContact();                   // 0x8015BBA8
-void darkCtrlSetPhaseRate(f32 rate);             // 0x8015BBD4
+void darkCtrlSetFx(int kind, int hit, int gone);            // 0x8015B95C
+void darkCtrlSetSe(int id);                                 // 0x8015B980
+void darkCtrlSetPos(const Vec3f* pos);                      // 0x8015B994
+void darkCtrlClearAll();                                    // 0x8015BA78
+void darkCtrlFadeOut();                                     // 0x8015BB30
+void darkCtrlSetNoContact();                                // 0x8015BB6C
+void darkCtrlClearNoContact();                              // 0x8015BBA8
+void darkCtrlSetPhaseRate(f32 rate);                        // 0x8015BBD4
 int darkCtrlAddMap(f32 radius, const Vec3f* pos, int hold); // 0x8015BD50
 int darkCtrlPaint(f32 radius, const Vec3f* pos, u8 value);  // 0x8015C00C
-void darkCtrlClearMap(int id);                   // 0x8015C26C
-void darkCtrlFadeMaps();                         // 0x8015C2EC
-int darkCtrlCountMaps();                         // 0x8015C370
-int darkCtrlGetMap(int index, Vec3f* pos, f32* radius); // 0x8015C3C8
-int darkCtrlHasMap(int id);                      // 0x8015C46C
-void darkPulse(f32* scale, int* timer);          // 0x8015C804
+void darkCtrlClearMap(int id);                              // 0x8015C26C
+void darkCtrlFadeMaps();                                    // 0x8015C2EC
+int darkCtrlCountMaps();                                    // 0x8015C370
+int darkCtrlGetMap(int index, Vec3f* pos, f32* radius);     // 0x8015C3C8
+int darkCtrlHasMap(int id);                                 // 0x8015C46C
+void darkPulse(f32* scale, int* timer);                     // 0x8015C804
 
 // TEneLastBossFeather's at the end of this unit
 void lastBossFeatherInit(); // 0x8015D2B8

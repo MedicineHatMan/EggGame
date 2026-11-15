@@ -43,7 +43,6 @@ static inline void resetRot(SetRot* dst, SetRot* src)
 const char* gEggRingKindNames[6] = { "TRANSFER", "SPIN", "SPRING", "ROCKET", "TRAPEZE", "SWING" };
 
 extern "C" {
-
 }
 
 #define RING_ABS(x) ((x) < 0 ? -(x) : (x))
@@ -53,10 +52,10 @@ static inline f32 ringSqrt(f32 x)
 	static const f64 _half  = 0.5;
 	static const f64 _three = 3.0;
 	if (x > 0.0f) {
-		f64 guess = __frsqrte((f64)x);
-		guess     = _half * guess * (_three - guess * guess * x);
-		guess     = _half * guess * (_three - guess * guess * x);
-		guess     = _half * guess * (_three - guess * guess * x);
+		f64 guess         = __frsqrte((f64)x);
+		guess             = _half * guess * (_three - guess * guess * x);
+		guess             = _half * guess * (_three - guess * guess * x);
+		guess             = _half * guess * (_three - guess * guess * x);
 		volatile f32 root = (f32)(x * guess);
 		return root;
 	}
@@ -127,18 +126,18 @@ EggRingContent::EggRingContent(TObjEggRing* owner)
 	mPos.y = 0.0f;
 	mPos.z = 0.0f;
 	mRot.set(0, 0, 0);
-	mRadius      = 15.0f;
-	mShadowPos.x = 0.0f;
-	mShadowPos.y = 0.0f;
-	mShadowPos.z = 0.0f;
-	_6C          = 0;
-	mPower       = 100.0f;
-	mPhase       = 0;
-	mFx          = 0;
+	mRadius           = 15.0f;
+	mShadowPos.x      = 0.0f;
+	mShadowPos.y      = 0.0f;
+	mShadowPos.z      = 0.0f;
+	_6C               = 0;
+	mPower            = 100.0f;
+	mPhase            = 0;
+	mFx               = 0;
 	mDrawState.mFlags = 0;
 	mDrawState._20    = 0;
-	mFlags       = 0;
-	mState       = 0;
+	mFlags            = 0;
+	mState            = 0;
 	mHolder.setId(0xFFFF);
 	mRing.mRadius = mRadius;
 	mModels[0]    = getStgObjModels()[0x30];
@@ -400,7 +399,7 @@ void EggRingContent::idle()
 			f32 along  = njInnerProduct(&up, &diff);
 			f32 height = along - obj->getRadiusV();
 			f32 gap    = RING_ABS(vecLength(&diff) - obj->getRadiusV());
-			mRadius = lerpF(obj->getRadiusV(), 15.0f, gap / 15.0f);
+			mRadius    = lerpF(obj->getRadiusV(), 15.0f, gap / 15.0f);
 			touch();
 
 			if (along < 0.0f) {
@@ -614,7 +613,7 @@ EggRingTransfer::~EggRingTransfer()
 void EggRingTransfer::readDesc(SetDescObj* desc)
 {
 	EggRingContent::readDesc(desc);
-	mPos      = mHome;
+	mPos = mHome;
 	resetRot(&mRot, &mHomeRot);
 	mTag      = desc->getInt(2);
 	mOffset.x = 0.0f;
@@ -624,7 +623,7 @@ void EggRingTransfer::readDesc(SetDescObj* desc)
 	vecRotateY(&mOffset, &mOffset, mDir);
 	vecAdd(&mEnd, &mHome, &mOffset);
 	f32 speed = desc->getFloat(0);
-	mSpeed = (int)(speed * (65535.0f / vecLength(&mOffset)));
+	mSpeed    = (int)(speed * (65535.0f / vecLength(&mOffset)));
 	calc();
 }
 
@@ -661,7 +660,7 @@ int EggRingTransfer::move()
 	int wrapped;
 	if (mPhase <= old) {
 		wrapped = 1;
-		mPhase = 0;
+		mPhase  = 0;
 	} else {
 		wrapped = 0;
 	}
@@ -762,8 +761,8 @@ EggRingSpin::EggRingSpin(TObjEggRing* owner)
     : EggRingContent(owner)
 {
 	mKind        = EGGRING_SPIN;
-	mTop        = getStgObjModels()[0xC];
-	mPole         = getStgObjModels()[0xD];
+	mTop         = getStgObjModels()[0xC];
+	mPole        = getStgObjModels()[0xD];
 	mTopTex      = getStgObjTextures()[0xB];
 	mPoleTex     = getStgObjTextures()[0xC];
 	mRing.mColor = 0xFFD639FF;
@@ -982,7 +981,7 @@ void EggRingSpring::release()
 		mVel.x = 0.0f;
 		mVel.y = 0.0f;
 		mVel.z = 0.0f;
-		mPos = mHome;
+		mPos   = mHome;
 		setState(EGGRING_IDLE);
 	}
 	EggRingContent::release();
@@ -1021,7 +1020,7 @@ void EggRingSpring::draw()
 {
 	f32 mtx[12];
 	u32* color = &mRing.mColor;
-	int lod = mRing.mLod;
+	int lod    = mRing.mLod;
 
 	for (int i = 0; i < 4; i++) {
 		mtxConcat(mtx, (f32*)gjGetMatrix(), mRope[i]);
@@ -1079,7 +1078,7 @@ void EggRingRocket::readDesc(SetDescObj* desc)
 	mtxMultVec(mtx, &mOffset, &mOffset);
 	vecAdd(&mEnd, &mHome, &mOffset);
 	f32 speed = desc->getFloat(0);
-	mSpeed = (int)(speed * (65535.0f / vecLength(&mOffset)));
+	mSpeed    = (int)(speed * (65535.0f / vecLength(&mOffset)));
 	if (((int (*)(void*))debugInfoActive)(mOwner) != 0) {
 		move(0);
 	}
@@ -1236,8 +1235,8 @@ void EggRingTrapeze::readDesc(SetDescObj* desc)
 	mHomeRot.x = -0x4000;
 	mPos       = mHome;
 	resetRot(&mRot, &mHomeRot);
-	mSpeed     = -RING_ABS((int)(182.04445f * desc->getFloat(0)));
-	mPivot     = mHome;
+	mSpeed = -RING_ABS((int)(182.04445f * desc->getFloat(0)));
+	mPivot = mHome;
 	mPivot.y += desc->getFloat(1);
 	mMaxAngle = (int)(182.04445f * desc->getFloat(2));
 	if (((int (*)(void*))debugInfoActive)(mOwner) != 0) {
@@ -1387,8 +1386,8 @@ void EggRingSwing::readDesc(SetDescObj* desc)
 	mHomeRot.x = -0x4000;
 	mPos       = mHome;
 	resetRot(&mRot, &mHomeRot);
-	mSpeed     = -RING_ABS((int)(182.04445f * desc->getFloat(0)));
-	mPivot     = mHome;
+	mSpeed = -RING_ABS((int)(182.04445f * desc->getFloat(0)));
+	mPivot = mHome;
 	mPivot.y += desc->getFloat(1);
 	if (((int (*)(void*))debugInfoActive)(mOwner) != 0) {
 		swing();
@@ -1538,7 +1537,7 @@ extern "C" TObject* createTObjEggRing(TObject* parent, SetDesc* desc)
 void TObjEggRing::initFromDesc(SetDesc* desc)
 {
 	TSetActor::initFromDesc(desc);
-	mKind = desc->getInt(0);
+	mKind    = desc->getInt(0);
 	int kind = mKind;
 	if (kind < 0) {
 		kind = 0;

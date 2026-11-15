@@ -17,7 +17,7 @@ struct SetLink;
  * @size 0x28
  */
 struct LightArea {
-	~LightArea() {}
+	~LightArea() { }
 	LightArea* mNext; // _00
 	int mLight;       // _04 0 to 3 lightAreaFind gives one more
 	Vec3f mPos;       // _08
@@ -49,7 +49,7 @@ static void lightAreaRead(SetDesc* desc, LightArea* area)
 	int light;
 	int shape;
 
-desc->getPos(&area->mPos);
+	desc->getPos(&area->mPos);
 	desc->getRot(&rot);
 	area->mRotY   = rot.y;
 	area->mLight  = desc->getInt(0);
@@ -65,13 +65,13 @@ desc->getPos(&area->mPos);
 		light = 3;
 	}
 	area->mLight = light;
-	shape = area->mShape;
+	shape        = area->mShape;
 	if (shape < 0) {
 		shape = 0;
 	} else if (shape > 2) {
 		shape = 2;
 	}
-	area->mShape = shape;
+	area->mShape  = shape;
 	area->mRadius = area->mRadius < 10.0f ? 10.0f : area->mRadius;
 	area->mHeight = area->mHeight < 10.0f ? 10.0f : area->mHeight;
 	area->mDepth  = area->mDepth < 10.0f ? 10.0f : area->mDepth;
@@ -169,7 +169,7 @@ extern "C" void prepareTObjSceneLightCollision(SetDesc* desc)
 		return;
 	}
 	LightArea* area = new LightArea;
-	area->mNext = NULL;
+	area->mNext     = NULL;
 	lightAreaRead(desc, area);
 	if (sLightAreas == NULL) {
 		sLightAreas = area;
@@ -188,7 +188,7 @@ const char* gTObjSceneLightCollisionName = "TObjSceneLightCollision";
 TObjSceneLightCollision::TObjSceneLightCollision(TObject* parent, const SetDesc* desc)
     : TObjAction(parent)
 {
-	_00 = (u32)gTObjSceneLightCollisionName;
+	_00   = (u32)gTObjSceneLightCollisionName;
 	mSize = 0x48;
 	setObjId(this, desc->mObjId);
 	((SetLink*)&mLink)->attach((SetDesc*)desc);

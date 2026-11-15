@@ -527,6 +527,8 @@ object/TObjFogCollision.cpp:
 
 engine/PortalVis.cpp:
 	.text       start:0x8004FDDC end:0x80050700
+	.sdata      start:0x802C3CF8 end:0x802C3D08
+	.sdata2     start:0x802C7168 end:0x802C7178
 
 egg/TEggCreature.cpp:
 	.text       start:0x80050700 end:0x8005097C
@@ -3267,6 +3269,10 @@ ui/TAeObjTimeUp.cpp:
 animal/TAniBirth.cpp:
 	.text       start:0x801D0630 end:0x801D1040
 	.ctors      start:0x80240268 end:0x8024026C
+	.rodata     start:0x8024E480 end:0x8024E498
+	.data       start:0x8026AA28 end:0x8026AA68
+	.sdata      start:0x802C48E0 end:0x802C48E8
+	.sdata2     start:0x802CC780 end:0x802CC7A0
 
 animal/TAniLionFireBreath.cpp:
 	.text       start:0x801D1040 end:0x801D12C0

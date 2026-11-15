@@ -8,9 +8,9 @@
 #include "engine/FxSystem.h"
 struct Vec3f;
 
-#define FX_ANGLE 10430.38043493439
-#define FX_PI 3.141592653589793
-#define FX_TWO_PI 6.283185307179586
+#define FX_ANGLE   10430.38043493439
+#define FX_PI      3.141592653589793
+#define FX_TWO_PI  6.283185307179586
 #define FX_HALF_PI 1.5707963267948966
 
 static inline f32 fxRandom()
@@ -23,10 +23,10 @@ static inline f32 fxSqrtHeld(f32 x)
 	volatile f32 y;
 	if (x > 0.0f) {
 		double g = __frsqrte(x);
-		g = 0.5 * g * (3.0 - g * g * x);
-		g = 0.5 * g * (3.0 - g * g * x);
-		g = 0.5 * g * (3.0 - g * g * x);
-		y = (f32)(x * g);
+		g        = 0.5 * g * (3.0 - g * g * x);
+		g        = 0.5 * g * (3.0 - g * g * x);
+		g        = 0.5 * g * (3.0 - g * g * x);
+		y        = (f32)(x * g);
 		return y;
 	}
 	return x;
@@ -58,7 +58,7 @@ void fxSpawnLocal(FxEmitter* fx, FxEmitter* self)
 	vec[0] = self->mDir[0];
 	vec[1] = self->mDir[1];
 	vec[2] = self->mDir[2];
-	speed = njUnitVector((Vec3f*)vec);
+	speed  = njUnitVector((Vec3f*)vec);
 	if (speed > 1.0E-5) {
 		f32 s, c, s1, c1;
 		f32 a = atan2(vec[1], vec[2]);
@@ -110,10 +110,10 @@ void fxSpawnLocal(FxEmitter* fx, FxEmitter* self)
 					angle += step;
 					lift = (FX_HALF_PI - (f32)atan2(self->mShapeC, radius)) - self->_A4;
 				} else {
-					f32 low = self->mShapeB;
-					angle = (self->mShapeA - low) * FX_RAND() + low;
+					f32 low  = self->mShapeB;
+					angle    = (self->mShapeA - low) * FX_RAND() + low;
 					f32 tilt = atan2(self->mShapeC, radius);
-					lift  = self->_A4 + (FX_HALF_PI - tilt);
+					lift     = self->_A4 + (FX_HALF_PI - tilt);
 				}
 				break;
 			case 4:
@@ -122,8 +122,8 @@ void fxSpawnLocal(FxEmitter* fx, FxEmitter* self)
 					lift = FX_HALF_PI - self->_A4;
 				} else {
 					f32 low = self->mShapeB;
-					angle = (self->mShapeA - low) * FX_RAND() + low;
-					lift  = FX_HALF_PI + self->_A4;
+					angle   = (self->mShapeA - low) * FX_RAND() + low;
+					lift    = FX_HALF_PI + self->_A4;
 				}
 				break;
 			default:
@@ -132,7 +132,7 @@ void fxSpawnLocal(FxEmitter* fx, FxEmitter* self)
 					lift *= -self->_A4;
 				} else {
 					f32 low = self->mShapeB;
-					angle = (self->mShapeA - low) * FX_RAND() + low;
+					angle   = (self->mShapeA - low) * FX_RAND() + low;
 					lift *= self->_A4;
 				}
 				break;
@@ -157,8 +157,8 @@ void fxSpawnLocal(FxEmitter* fx, FxEmitter* self)
 			vec[0] = c1 * s0;
 			vec[1] = s1 * s0;
 			vec[2] = c0 * speed;
-			fxSpriteSpawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vec[0], vec[1], vec[2], self->mGravity,
-			            self->mDamp, self->mScale);
+			fxSpriteSpawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vec[0], vec[1], vec[2],
+			              self->mGravity, self->mDamp, self->mScale);
 			break;
 		}
 		case 2: {
@@ -218,8 +218,8 @@ void fxSpawnLocal(FxEmitter* fx, FxEmitter* self)
 			vec[0] = 0.0f;
 			vec[1] = 0.0f;
 			vec[2] = speed;
-			fxSpriteSpawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vec[0], vec[1], vec[2], self->mGravity,
-			            self->mDamp, self->mScale);
+			fxSpriteSpawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vec[0], vec[1], vec[2],
+			              self->mGravity, self->mDamp, self->mScale);
 			break;
 		}
 		case 5: {
@@ -252,8 +252,8 @@ void fxSpawnLocal(FxEmitter* fx, FxEmitter* self)
 			pos[0] *= radius;
 			pos[1] *= radius;
 			pos[2] *= radius;
-			fxSpriteSpawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vec[0], vec[1], vec[2], self->mGravity,
-			            self->mDamp, self->mScale);
+			fxSpriteSpawn(self->mPartFlags, self->mPartLife, self->mPartScript, self, pos[0], pos[1], pos[2], vec[0], vec[1], vec[2],
+			              self->mGravity, self->mDamp, self->mScale);
 			break;
 		}
 		}
@@ -287,9 +287,9 @@ void fxEmitterReadShape(FxEmitter* fx, FxEmitterDesc* desc)
 		fx->mShapeC = desc->mShapeD;
 		break;
 	case 2:
-		fx->mShapeB = desc->mShapeB;
-		fx->mShapeC = desc->mShapeC;
-		fx->mShapeD = desc->mShapeD;
+		fx->mShapeB         = desc->mShapeB;
+		fx->mShapeC         = desc->mShapeC;
+		fx->mShapeD         = desc->mShapeD;
 		*(u16*)&fx->mShapeA = 0;
 		if (desc->mShapeB < 0.0f) {
 			*(u16*)&fx->mShapeA |= 1;
@@ -320,8 +320,8 @@ FxParticle* fxPartAlloc()
 	FxParticle* part = gFxParticleFreeList;
 	if (part != NULL) {
 		gFxParticleFreeList = part->mNext;
-		part->mExtraCount = 0;
-		part->mExtra = NULL;
+		part->mExtraCount   = 0;
+		part->mExtra        = NULL;
 		gFxParticleCount++;
 	}
 	return part;
@@ -334,7 +334,7 @@ FxParticle* fxPartAllocExtra()
 	FxParticle* part;
 	if ((part = gFxParticleFreeList) != NULL) {
 		part->mExtraCount = 0;
-		part->mExtra = NULL;
+		part->mExtra      = NULL;
 		if (fxExtraAlloc(part) == NULL) {
 			return NULL;
 		}
@@ -349,10 +349,10 @@ void fxPartFree(FxParticle* part)
 {
 	if (part->mExtra != NULL) {
 		part->mExtra->mPrev->mNext = gFxExtraFreeList;
-		gFxExtraFreeList = part->mExtra;
+		gFxExtraFreeList           = part->mExtra;
 		gFxParticleExtraCount -= part->mExtraCount;
 	}
-	part->mNext = gFxParticleFreeList;
+	part->mNext         = gFxParticleFreeList;
 	gFxParticleFreeList = part;
 	gFxParticleCount--;
 }
@@ -369,14 +369,14 @@ void fxPartFreeList(FxParticle* list)
 	while (part != NULL) {
 		if (part->mExtra != NULL) {
 			part->mExtra->mPrev->mNext = gFxExtraFreeList;
-			gFxExtraFreeList = part->mExtra;
+			gFxExtraFreeList           = part->mExtra;
 			gFxParticleExtraCount -= part->mExtraCount;
 		}
 		gFxParticleCount--;
 		last = part;
 		part = part->mNext;
 	}
-	last->mNext = gFxParticleFreeList;
+	last->mNext         = gFxParticleFreeList;
 	gFxParticleFreeList = list;
 }
 
@@ -386,16 +386,16 @@ FxExtra* fxExtraAlloc(FxParticle* part)
 	FxExtra* extra = gFxExtraFreeList;
 	if (extra != NULL) {
 		gFxExtraFreeList = extra->mNext;
-		FxExtra* head = part->mExtra;
+		FxExtra* head    = part->mExtra;
 		if (head == NULL) {
 			extra->mPrev = extra;
 			part->mExtra = extra;
 			extra->mNext = NULL;
 		} else {
-			extra->mPrev = head->mPrev;
-			extra->mNext = part->mExtra;
+			extra->mPrev        = head->mPrev;
+			extra->mNext        = part->mExtra;
 			part->mExtra->mPrev = extra;
-			part->mExtra = extra;
+			part->mExtra        = extra;
 		}
 		part->mExtraCount++;
 		gFxParticleExtraCount++;
@@ -425,7 +425,7 @@ void fxExtraFree(FxParticle* part, FxExtra* extra)
 		}
 	}
 	part->mExtraCount--;
-	extra->mNext = gFxExtraFreeList;
+	extra->mNext     = gFxExtraFreeList;
 	gFxExtraFreeList = extra;
 	gFxParticleExtraCount--;
 }
@@ -435,7 +435,7 @@ void fxExtraFree(FxParticle* part, FxExtra* extra)
 void fxPartColor(FxParticle* part, u8* out)
 {
 	if (part->mColorFrames != 0) {
-		int t = (part->mColorLeft << 16) / part->mColorFrames;
+		int t  = (part->mColorLeft << 16) / part->mColorFrames;
 		out[0] = ((part->mColorTo[0] << 16) + t * (part->mColor[0] - part->mColorTo[0])) >> 16;
 		out[1] = ((part->mColorTo[1] << 16) + t * (part->mColor[1] - part->mColorTo[1])) >> 16;
 		out[2] = ((part->mColorTo[2] << 16) + t * (part->mColor[2] - part->mColorTo[2])) >> 16;
@@ -445,7 +445,7 @@ void fxPartColor(FxParticle* part, u8* out)
 		out[2] = part->mColor[2];
 	}
 	if (part->mAlphaFrames != 0) {
-		int t = (part->mAlphaLeft << 16) / part->mAlphaFrames;
+		int t  = (part->mAlphaLeft << 16) / part->mAlphaFrames;
 		out[3] = ((part->mColorTo[3] << 16) + t * (part->mColor[3] - part->mColorTo[3])) >> 16;
 	} else {
 		out[3] = part->mColor[3];
@@ -471,10 +471,10 @@ void fxPartDeflect(FxParticle* part, int angle)
 	njSinCos((int)(65536.0f * fxRandom()), &s2, &c2);
 	njSinCos(angle, &s3, &c3);
 	f32 sx;
-	f32 t = s3 * speed;
-	f32 sy = s2 * t;
-	sx = c2 * t;
-	f32 fw = c3 * speed;
+	f32 t         = s3 * speed;
+	f32 sy        = s2 * t;
+	sx            = c2 * t;
+	f32 fw        = c3 * speed;
 	part->mVel[0] = sx * c1 + fw * s1;
 	part->mVel[1] = c1 * (fw * s0) + (s1 * (-sx * s0) + sy * c0);
 	part->mVel[2] = c1 * (fw * c0) + (s1 * (-sx * c0) - sy * s0);

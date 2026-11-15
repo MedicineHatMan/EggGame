@@ -13,14 +13,16 @@ Am01AntBrain::Am01AntBrain(AntLink* head, int slot)
 }
 
 // 0x800951C4
-Am01AntBrain::~Am01AntBrain() { }
+Am01AntBrain::~Am01AntBrain()
+{
+}
 
 // 0x80095254
 // Slot _24 Starts coming out of the queen's mouth and drops nothing when it dies
 void Am01AntBrain::attach(TEneAm01* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	mState = STATE_APPEAR_AIMED;
 	onPhase(mState, 0);
 	if (mNext != -1) {
@@ -134,11 +136,11 @@ void Am01AntBrain::phaseWander(int phase)
 {
 	switch (phase) {
 	case 0:
-		mStep = 1;
+		mStep  = 1;
 		mTimer = 0;
 		pickTarget();
 		mOwner->mTopSpeed = 0.3f;
-		mNext = TEneAm01::ACT_WALK;
+		mNext             = TEneAm01::ACT_WALK;
 		break;
 	case 2:
 		if (mStep == 2) {
@@ -156,8 +158,8 @@ void Am01AntBrain::phaseWander(int phase)
 			if (mOwner->hasArrived() != 0 || mTimer >= 600) {
 				if (random01() < 0.2f) {
 					mTimer = (int)(420.0f * random01() + 180.0f);
-					mStep = 0;
-					mNext = TEneAm01::ACT_IDLE;
+					mStep  = 0;
+					mNext  = TEneAm01::ACT_IDLE;
 				} else {
 					mTimer = 0;
 					pickTarget();
@@ -168,10 +170,10 @@ void Am01AntBrain::phaseWander(int phase)
 			mTimer--;
 			if (mTimer <= 0) {
 				mTimer = 0;
-				mStep = 1;
+				mStep  = 1;
 				pickTarget();
 				mOwner->mTopSpeed = 0.3f;
-				mNext = TEneAm01::ACT_WALK;
+				mNext             = TEneAm01::ACT_WALK;
 			}
 			break;
 		}
@@ -186,9 +188,9 @@ void Am01AntBrain::phaseChase(int phase)
 {
 	switch (phase) {
 	case 0:
-		mStep = 0;
+		mStep             = 0;
 		mOwner->mTopSpeed = 0.5f;
-		mNext = TEneAm01::ACT_CHASE;
+		mNext             = TEneAm01::ACT_CHASE;
 		mOwner->mBody.mVel.y += 1.0f;
 		break;
 	case 2:

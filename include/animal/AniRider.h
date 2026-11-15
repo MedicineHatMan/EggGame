@@ -24,7 +24,7 @@ inline void riderDtor(AniRider* rider, s16)
  * @size 0x24
  */
 struct AniRider {
-	AniRider() { riderInit(this); }        // 0x801C1228
+	AniRider() { riderInit(this); }      // 0x801C1228
 	~AniRider() { riderDtor(this, -1); } // 0x801C11DC
 
 	AniRider* mNext;  // _00
@@ -34,7 +34,7 @@ struct AniRider {
 	MeshColli* mMesh; // _10 the mesh it stands on or null
 	u16 mTri;         // _14 the triangle it touched
 	u8 _16[2];
-	Vec3f mPos;       // _18 where it touched in the mesh's space
+	Vec3f mPos; // _18 where it touched in the mesh's space
 };
 
 #endif

@@ -76,27 +76,27 @@ public:
 	void pose();
 	int drawNodes(void* node, int index);
 
-	RedHeadLink mLink;       // _64
-	DrawTask* mDrawTask;     // _74
-	ObjModel mModel;         // _78
-	void* mGeo;              // _98 getGeObjModels()[8]
-	ObjDrawState mDrawState;    // _9C
-	MotionPlayer mMotion;    // _C0
-	f32 mMatrix[12];         // _FC
-	f32 mScale;              // _12C 1 + the record's first float
-	EnemyTint mTint;         // _130
-	MobileLoopEffect mLoop;  // _138 sound 0x21C while the head is alive
-	Vec3f mFxPos;            // _164 scaled node centre yawed and added to mPos
-	s16 mGroupId;            // _170 record int 0
-	u16 mSwitchId;           // _172 record int 3
-	s16 mLife;               // _174 record int 1
-	u32 mHitFlags;           // _178 bit 0 = the hit flash is running
-	u32 mOpen;               // _17C non-zero while at least one area holds it open
-	TParticleGenerator* mPartL; // _180 particle id 8 yaw + 0x4000
-	TParticleGenerator* mPartR; // _184 particle id 8 yaw - 0x4000
+	RedHeadLink mLink;              // _64
+	DrawTask* mDrawTask;            // _74
+	ObjModel mModel;                // _78
+	void* mGeo;                     // _98 getGeObjModels()[8]
+	ObjDrawState mDrawState;        // _9C
+	MotionPlayer mMotion;           // _C0
+	f32 mMatrix[12];                // _FC
+	f32 mScale;                     // _12C 1 + the record's first float
+	EnemyTint mTint;                // _130
+	MobileLoopEffect mLoop;         // _138 sound 0x21C while the head is alive
+	Vec3f mFxPos;                   // _164 scaled node centre yawed and added to mPos
+	s16 mGroupId;                   // _170 record int 0
+	u16 mSwitchId;                  // _172 record int 3
+	s16 mLife;                      // _174 record int 1
+	u32 mHitFlags;                  // _178 bit 0 = the hit flash is running
+	u32 mOpen;                      // _17C non-zero while at least one area holds it open
+	TParticleGenerator* mPartL;     // _180 particle id 8 yaw + 0x4000
+	TParticleGenerator* mPartR;     // _184 particle id 8 yaw - 0x4000
 	TParticleGenerator* mPartFront; // _188 particle id 10 at mFxPos
-	int mOpenCount;          // _18C
-	int mAct;                // _190 0 = up 1 = dying 2 = down
+	int mOpenCount;                 // _18C
+	int mAct;                       // _190 0 = up 1 = dying 2 = down
 };
 
 extern "C" {
@@ -121,7 +121,11 @@ struct RedHeadList {
 // 0x802803D8
 // built right after the list
 struct RedHeadSlots {
-	RedHeadSlots() : _00(0), _20(0) { }
+	RedHeadSlots()
+	    : _00(0)
+	    , _20(0)
+	{
+	}
 
 	int _00;      // _00
 	u8 _04[0x1C]; // _04

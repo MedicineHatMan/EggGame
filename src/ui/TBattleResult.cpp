@@ -44,9 +44,9 @@ const u32 sAeBattleScoreChangeLayers[6] = { 0xB2, 0xB2, 0xC1, 0xC1, 0xC1, 0xC1 }
 
 extern const u32 gAeBattleScoreSlots[6] = { 0xE4, 0xE2, 0xE4, 0xE3, 0xE2, 0xE1 }; // leader mark slot per character
 // TBattleResult's rank slots per player cleared cleared and bound in readPick
-extern const u32 sBattleResultSlotsA[6] = { 0xEA, 0xE9, 0xE8, 0xE7, 0xE6, 0xE5 };
-extern const u32 sBattleResultSlotsB[6] = { 0xF0, 0xEF, 0xEE, 0xED, 0xEC, 0xEB };
-extern const u32 sBattleResultSlotsC[6] = { 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1 };
+extern const u32 sBattleResultSlotsA[6]  = { 0xEA, 0xE9, 0xE8, 0xE7, 0xE6, 0xE5 };
+extern const u32 sBattleResultSlotsB[6]  = { 0xF0, 0xEF, 0xEE, 0xED, 0xEC, 0xEB };
+extern const u32 sBattleResultSlotsC[6]  = { 0xF6, 0xF5, 0xF4, 0xF3, 0xF2, 0xF1 };
 extern const u32 sAeBattleDigitCells[10] = {
 	0x74, 0x76, 0x78, 0x7A, 0x7C, 0x7E, 0x80, 0x82, 0x84, 0x86,
 }; // big digit cells 0-9
@@ -68,7 +68,10 @@ const char* gTBattleResultName = "TBattleResult"; // its string sits between the
 extern "C" {
 
 extern const int sBattleResultMarks[] = {
-	120, 72, 66, 50,
+	120,
+	72,
+	66,
+	50,
 };
 }
 
@@ -122,7 +125,7 @@ extern "C" TBattleResult* createTBattleResult(TObject* parent)
 // From the battle mode for each port still in the round
 void TBattleResult::setRow(u8 slot, const BattleResultRow* row)
 {
-	mLive[slot]          = 1;
+	mLive[slot]        = 1;
 	mRow[slot].mPlace  = row->mPlace;
 	mRow[slot].mWins   = row->mWins;
 	mRow[slot].mPoints = row->mPoints;
@@ -174,49 +177,49 @@ void TBattleResult::setup()
 	mDone  = 0;
 	mTimer = 0;
 	for (s8 i = 0; i < 4; i++) {
-		mLive[i]   = 0;
-		mPicked[i] = 0;
+		mLive[i]        = 0;
+		mPicked[i]      = 0;
 		mRow[i].mPlace  = 0xFF;
 		mRow[i].mWins   = 0;
 		mRow[i].mPoints = 0;
 		mRow[i].mLost   = 0;
 		mRow[i]._08     = 0;
-		mPlace[i] = 0;
-		mRank[i]  = 0;
-		mText[0][i][1] = 0;
-		mText[0][i][0] = 0;
-		mText[1][i][1] = 0;
-		mText[1][i][0] = 0;
-		mText[2][i][1] = 0;
-		mText[2][i][0] = 0;
-		mText[3][i][1] = 0;
-		mText[3][i][0] = 0;
-		mNum[0][i] = new char[2];
-		mNum[1][i] = new char[2];
-		mNum[2][i] = new char[2];
-		mNum[3][i] = new char[2];
+		mPlace[i]       = 0;
+		mRank[i]        = 0;
+		mText[0][i][1]  = 0;
+		mText[0][i][0]  = 0;
+		mText[1][i][1]  = 0;
+		mText[1][i][0]  = 0;
+		mText[2][i][1]  = 0;
+		mText[2][i][0]  = 0;
+		mText[3][i][1]  = 0;
+		mText[3][i][0]  = 0;
+		mNum[0][i]      = new char[2];
+		mNum[1][i]      = new char[2];
+		mNum[2][i]      = new char[2];
+		mNum[3][i]      = new char[2];
 	}
 	mLayer = createLayer(0x142, 0);
 	markLayer(mLayer);
 	for (s8 i = 0; i < 4; i++) {
 		Vec3f a;
-		a.x = (f32)sBattleResultPosX[i];
-		a.y = (f32)sBattleResultPosY1[i];
-		a.z = -2.0f;
+		a.x            = (f32)sBattleResultPosX[i];
+		a.y            = (f32)sBattleResultPosY1[i];
+		a.z            = -2.0f;
 		mText[1][i][0] = createSimpleText(this, 1, -1, &a, &battleTextBox, &battleTextGlyph, sBattleMsgTable[0]);
 		flagText(mText[1][i][0], 0x10);
 
 		Vec3f b;
-		b.x = (f32)sBattleResultPosX[i];
-		b.y = (f32)sBattleResultPosY2[i];
-		b.z = -2.0f;
+		b.x            = (f32)sBattleResultPosX[i];
+		b.y            = (f32)sBattleResultPosY2[i];
+		b.z            = -2.0f;
 		mText[2][i][0] = createSimpleText(this, 1, -1, &b, &battleTextBox, &battleTextGlyph, sBattleMsgTable[1]);
 		flagText(mText[2][i][0], 0x10);
 
 		Vec3f c;
-		c.x = (f32)sBattleResultPosX[i];
-		c.y = (f32)sBattleResultPosY3[i];
-		c.z = -2.0f;
+		c.x            = (f32)sBattleResultPosX[i];
+		c.y            = (f32)sBattleResultPosY3[i];
+		c.z            = -2.0f;
 		mText[3][i][0] = createSimpleText(this, 1, -1, &c, &battleTextBox, &battleTextGlyph, sBattleMsgTable[2]);
 		flagText(mText[3][i][0], 0x10);
 	}
@@ -416,30 +419,30 @@ void TBattleResult::reveal()
 			}
 			sprintf(mNum[0][i], "%2d", mRow[i].mWins);
 			Vec3f a;
-			a.x = 120.0f + (f32)sBattleResultPosX[who];
-			a.y = (f32)sBattleResultPosY0[who];
-			a.z = -2.0f;
+			a.x            = 120.0f + (f32)sBattleResultPosX[who];
+			a.y            = (f32)sBattleResultPosY0[who];
+			a.z            = -2.0f;
 			mText[0][i][1] = createSimpleText(this, 1, -1, &a, &battleTextBox, &battleTextGlyph, mNum[0][i]);
 
 			sprintf(mNum[1][i], "%2d", mRow[i].mPoints);
 			Vec3f b;
-			b.x = 120.0f + (f32)sBattleResultPosX[who];
-			b.y = (f32)sBattleResultPosY1[who];
-			b.z = -2.0f;
+			b.x            = 120.0f + (f32)sBattleResultPosX[who];
+			b.y            = (f32)sBattleResultPosY1[who];
+			b.z            = -2.0f;
 			mText[1][i][1] = createSimpleText(this, 1, -1, &b, &battleTextBox, &battleTextGlyph, mNum[1][i]);
 
 			sprintf(mNum[2][i], "%2d", mRow[i].mLost);
 			Vec3f c;
-			c.x = 120.0f + (f32)sBattleResultPosX[who];
-			c.y = (f32)sBattleResultPosY2[who];
-			c.z = -2.0f;
+			c.x            = 120.0f + (f32)sBattleResultPosX[who];
+			c.y            = (f32)sBattleResultPosY2[who];
+			c.z            = -2.0f;
 			mText[2][i][1] = createSimpleText(this, 1, -1, &c, &battleTextBox, &battleTextGlyph, mNum[2][i]);
 
 			sprintf(mNum[3][i], "%2d", mRow[i]._08);
 			Vec3f d;
-			d.x = 120.0f + (f32)sBattleResultPosX[who];
-			d.y = (f32)sBattleResultPosY3[who];
-			d.z = -2.0f;
+			d.x            = 120.0f + (f32)sBattleResultPosX[who];
+			d.y            = (f32)sBattleResultPosY3[who];
+			d.z            = -2.0f;
 			mText[3][i][1] = createSimpleText(this, 1, -1, &d, &battleTextBox, &battleTextGlyph, mNum[3][i]);
 		}
 	}
@@ -595,10 +598,10 @@ extern "C" void loadBattleResult()
 
 	loadArc("ae_battle.arc", &gBattleResultArc);
 	if (gBattleResultArc != 0) {
-		void** block  = (void**)gBattleResultArc->mData;
-		gBattleResultAe0  = block[0];
+		void** block     = (void**)gBattleResultArc->mData;
+		gBattleResultAe0 = block[0];
 		relocateAe(gBattleResultAe0);
-		void* tex = block[1];
+		void* tex        = block[1];
 		gBattleResultAe1 = tex;
 		bindGvmTextures((u8*)block[2], (NJS_TEXLIST*)tex);
 		u8* buf = new u8[0x800];
@@ -614,7 +617,7 @@ extern "C" void loadBattleResult()
 	data = (u32*)sBattleMsgFile->mData;
 	text = *data;
 	text += (u32)data++;
-	u32 size = *data++;
+	u32 size        = *data++;
 	sBattleMsgTable = (char**)data;
 	sBattleMsgCount = size >> 2;
 	for (i = 0; i < sBattleMsgCount; i++) {
@@ -675,10 +678,10 @@ static inline TAeLayer* make(TAeObjBattle* self, int id, u32 flags)
 }
 
 // Stores the layer first and tests the member it stored
-#define MAKE_LAYER(self, member, id, flags)                                                                      \
-	member = (self)->createLayer(id, flags);                                                                 \
-	if (member != 0) {                                                                                      \
-		member->mBanks = gAeBattlePalettes;                                                              \
+#define MAKE_LAYER(self, member, id, flags)  \
+	member = (self)->createLayer(id, flags); \
+	if (member != 0) {                       \
+		member->mBanks = gAeBattlePalettes;  \
 	}
 
 static void clearSlots(TAeObjBattle* self);
@@ -745,7 +748,6 @@ void battleRuleHatch(TAeObjBattle* self)
 	}
 	self->mRule = 3;
 }
-
 }
 
 // 0x801A729C

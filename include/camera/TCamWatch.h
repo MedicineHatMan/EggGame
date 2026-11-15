@@ -24,11 +24,11 @@ public:
 	virtual void setTarget(u16 id); // _2C 0x8008A768
 	virtual void vfn_20();          // 0x8008A7C4
 
-	CamHead mHead;       // _50
+	CamHead mHead;      // _50
 	HitVec mSample[15]; // _90
 	CamCurve mCurve;    // _144
 	HitVec mKnot[15];   // _1A8
-	Vec3f mTarget;     // _25C
+	Vec3f mTarget;      // _25C
 };
 
 #endif

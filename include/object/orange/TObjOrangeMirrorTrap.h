@@ -17,10 +17,10 @@ struct MirrorTrapList;
  * @size 0x10
  */
 struct MirrorTrapNode {
-	MirrorTrapNode* mNext;         // _00
-	MirrorTrapNode* mPrev;         // _04
-	TObjOrangeMirrorTrap* mOwner;  // _08
-	MirrorTrapList* mList;         // _0C
+	MirrorTrapNode* mNext;        // _00
+	MirrorTrapNode* mPrev;        // _04
+	TObjOrangeMirrorTrap* mOwner; // _08
+	MirrorTrapList* mList;        // _0C
 };
 
 /**

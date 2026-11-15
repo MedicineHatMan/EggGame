@@ -21,13 +21,16 @@ extern "C" void* footPrinterCreate()
 {
 	if (sFootPrinterObj == 0) {
 		TFootPrinter* obj = new TFootPrinter(gTL_05);
-		sFootPrinterObj = obj;
+		sFootPrinterObj   = obj;
 	}
 	return sFootPrinterObj;
 }
 
 // 0x8008601C
-extern "C" void* footPrinterGet() { return sFootPrinterObj; }
+extern "C" void* footPrinterGet()
+{
+	return sFootPrinterObj;
+}
 
 const char* gTFootPrinterName = "TFootPrinter";
 
@@ -113,7 +116,9 @@ void TFootPrinter::draw()
 }
 
 // 0x8008637C
-void TFootPrinter::vfn_10() { }
+void TFootPrinter::vfn_10()
+{
+}
 
 // 0x80086380
 void TFootPrinter::render()
@@ -136,8 +141,8 @@ void TFootPrinter::render()
 			verts[j].mU   = sFootCorners[j].mU;
 			verts[j].mV   = sFootCorners[j].mV;
 		}
-		u32 alpha  = (u32)(128.0f * ((f32)print->mLife / 180.0f));
-		u32 colour = (alpha << 24) | 0xFFFFFF;
+		u32 alpha        = (u32)(128.0f * ((f32)print->mLife / 180.0f));
+		u32 colour       = (alpha << 24) | 0xFFFFFF;
 		verts[0].mColour = verts[1].mColour = verts[2].mColour = verts[3].mColour = colour;
 		njDrawTexture3DExSetData((const NJS_TEXTURE_VTX*)verts, 4);
 		print = print->mNext;

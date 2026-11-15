@@ -25,14 +25,15 @@ const char* gTPlyCrowName = "TPlyCrow";
 
 // 0x8003F738
 TPlyCrow::TPlyCrow(TObject* parent, u16 id, const f32* mtx)
-    : TObject(parent), mId(id)
+    : TObject(parent)
+    , mId(id)
 {
 	Vec3f pos;
 
-	_00     = (u32)gTPlyCrowName;
-	mSize   = 0xDC;
-	mState  = 0;
-	mLife   = 0x32;
+	_00    = (u32)gTPlyCrowName;
+	mSize  = 0xDC;
+	mState = 0;
+	mLife  = 0x32;
 	mtxCopy(mMtx, mtx);
 	mColli = colliCreate(1, 1);
 	if (mColli != 0) {
@@ -40,14 +41,14 @@ TPlyCrow::TPlyCrow(TObject* parent, u16 id, const f32* mtx)
 		colliCopyShapes((CharaColli*)mColli, (const ColliShape*)sPlyCrowShape);
 		colliSetMasks((CharaColli*)mColli, 1, 0, 0xFF, 0x10);
 		colliGetShape((CharaColli*)mColli, 0)->mFlags = 0x58;
-		pos.x         = 0.0f;
-		pos.y         = 0.0f;
-		pos.z         = 10.0f;
+		pos.x                                         = 0.0f;
+		pos.y                                         = 0.0f;
+		pos.z                                         = 10.0f;
 		mtxMultVec(mtx, &pos, &pos);
 		colliPlaceShapes((CharaColli*)mColli, &pos, (const ColliShape*)sPlyCrowShape);
 	}
 	mLight.mFlags = 2;
-	mPulse       = 0;
+	mPulse        = 0;
 }
 
 // 0x8003F8B8
@@ -81,7 +82,7 @@ void TPlyCrow::draw()
 		grey  = 0xC8C8C8FF;
 		lerpColor(0.5f * njSin(mPulse) + 0.5f, &color, &grey, &white);
 		mLight.mColor = color;
-		mPulse       += 0x1000;
+		mPulse += 0x1000;
 		if (mLit != 0) {
 			if (--mLit == 0) {
 				playerRemoveLight(mId, &mLight);

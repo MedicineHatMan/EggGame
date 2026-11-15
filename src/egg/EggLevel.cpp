@@ -41,7 +41,7 @@ extern "C" void unloadEggLevels()
 {
 	releaseResource(sEggLevelArc);
 	sEggLevelTable = 0;
-	sEggLevelArc = 0;
+	sEggLevelArc   = 0;
 }
 
 int EggLevel::pickRandomType(f32 random)
@@ -298,12 +298,12 @@ void EggTilt::runState(int state, int phase)
 void EggTilt::stateWobble(int phase)
 {
 	if (phase == 0) {
-		f32 two = 2.0f;
-		mY      = 0.7f;
+		f32 two  = 2.0f;
+		mY       = 0.7f;
 		f32 zero = 0.0f;
-		mXZ     = two - mY;
-		mVel    = zero;
-		mTimer  = 60;
+		mXZ      = two - mY;
+		mVel     = zero;
+		mTimer   = 60;
 	} else if (phase == 2) {
 		if (mTimer != 0 && --mTimer == 0) {
 			setState(1);
@@ -331,7 +331,8 @@ extern "C" int eggAnyTouch(void* coll, EggContact* it, EggContact* end)
 {
 	EggContact* cur;
 	for (cur = it; cur != end; cur = cur->mNext) {
-		if ((*(u32*)((u8*)colliContactShape((ColliContact*)cur) + 0x24) & 0x40) != 0 && (*(u32*)((u8*)colliGetShape((CharaColli*)coll, cur->mShape) + 0x24) & 0x400) != 0) {
+		if ((*(u32*)((u8*)colliContactShape((ColliContact*)cur) + 0x24) & 0x40) != 0
+		    && (*(u32*)((u8*)colliGetShape((CharaColli*)coll, cur->mShape) + 0x24) & 0x400) != 0) {
 			return 1;
 		}
 	}
@@ -342,7 +343,8 @@ extern "C" int eggFindHatchTouch(EggColl* coll, u16* who)
 {
 	EggContact* it = coll->mContacts;
 	for (; it != 0; it = it->mNext) {
-		if ((*(u32*)((u8*)colliContactShape((ColliContact*)it) + 0x24) & 0x40) != 0 && (*(u32*)((u8*)colliGetShape((CharaColli*)coll, it->mShape) + 0x24) & 0x400) != 0) {
+		if ((*(u32*)((u8*)colliContactShape((ColliContact*)it) + 0x24) & 0x40) != 0
+		    && (*(u32*)((u8*)colliGetShape((CharaColli*)coll, it->mShape) + 0x24) & 0x400) != 0) {
 			if (who != 0) {
 				*who = colliContactOwner((ColliContact*)it);
 			}
@@ -358,10 +360,12 @@ extern "C" int eggFirstDamage(void* coll, EggContact* first, EggContact* end, vo
 	EggDamage damage;
 
 	for (EggContact* it = first; it != end; it = it->mNext) {
-		if ((*(u32*)((u8*)colliContactShape((ColliContact*)it) + 0x24) & 8) != 0 && (*(u32*)((u8*)colliGetShape((CharaColli*)coll, it->mShape) + 0x24) & 0x400) != 0) {
+		if ((*(u32*)((u8*)colliContactShape((ColliContact*)it) + 0x24) & 8) != 0
+		    && (*(u32*)((u8*)colliGetShape((CharaColli*)coll, it->mShape) + 0x24) & 0x400) != 0) {
 			TObjAction* other = findObjById(colliContactOwner((ColliContact*)it));
 			if (other != 0) {
-				if (((TObjEgg*)other)->onHit((TObjEgg*)me, colliContactTag((ColliContact*)it), (int*)&damage) != 0 && damage.mFlags.testBit(0xD) != 0) {
+				if (((TObjEgg*)other)->onHit((TObjEgg*)me, colliContactTag((ColliContact*)it), (int*)&damage) != 0
+				    && damage.mFlags.testBit(0xD) != 0) {
 					return damage.mDamage;
 				}
 			}
@@ -377,10 +381,12 @@ extern "C" int eggFindHit(EggColl* coll, TObjEgg* me, Vec3f* away)
 	EggDamage damage;
 
 	for (EggContact* it = coll->mContacts; it != 0; it = it->mNext) {
-		if ((*(u32*)((u8*)colliContactShape((ColliContact*)it) + 0x24) & 8) != 0 && (*(u32*)((u8*)colliGetShape((CharaColli*)coll, it->mShape) + 0x24) & 0x400) != 0) {
+		if ((*(u32*)((u8*)colliContactShape((ColliContact*)it) + 0x24) & 8) != 0
+		    && (*(u32*)((u8*)colliGetShape((CharaColli*)coll, it->mShape) + 0x24) & 0x400) != 0) {
 			TObjAction* other = findObjById(colliContactOwner((ColliContact*)it));
 			if (other != 0) {
-				if (((TObjEgg*)other)->onHit(me, colliContactTag((ColliContact*)it), (int*)&damage) != 0 && damage.mFlags.testBit(0xD) != 0) {
+				if (((TObjEgg*)other)->onHit(me, colliContactTag((ColliContact*)it), (int*)&damage) != 0
+				    && damage.mFlags.testBit(0xD) != 0) {
 					if (away != 0) {
 						dir = *me->getPos();
 						vecSub(&dir, &dir, &it->mPos);
@@ -409,12 +415,13 @@ extern "C" void eggPushFromContacts(f32 radius, void* coll, EggContact* first, E
 	out->z   = zero;
 	for (EggContact* it = first; it != end; it = it->mNext) {
 		u32 mine = *(u32*)((u8*)colliContactShape((ColliContact*)it) + 0x24);
-		if ((*(u32*)((u8*)colliGetShape((CharaColli*)coll, it->mShape) + 0x24) & 0x400) != 0 && (*(u32*)((u8*)colliContactShape((ColliContact*)it) + 0x24) & 0x10) == 0) {
+		if ((*(u32*)((u8*)colliGetShape((CharaColli*)coll, it->mShape) + 0x24) & 0x400) != 0
+		    && (*(u32*)((u8*)colliContactShape((ColliContact*)it) + 0x24) & 0x10) == 0) {
 			if (mine & 0x400) {
 				vecSub(&dir, pos, &it->mPos);
-				f32 dist = vecNormalize(&dir, &dir);
+				f32 dist          = vecNormalize(&dir, &dir);
 				ColliShape* other = (ColliShape*)(colliContactShape((ColliContact*)it));
-				f32 push = radius + other->mSizeX - dist;
+				f32 push          = radius + other->mSizeX - dist;
 				push *= 360.0f;
 				vecScaleAdd(push, out, &dir, out);
 			} else if ((mine & 0x10) == 0 && (mine & 0x800) == 0) {

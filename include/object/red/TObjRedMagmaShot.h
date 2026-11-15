@@ -24,13 +24,13 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();                      // _0C
-	virtual void vfn_10();                    // _10
-	virtual void render();                    // _1C
-	virtual void initFromDesc(SetDesc* desc); // _30
-	virtual void debugPrint(void*);           // _34
+	virtual void draw();                                              // _0C
+	virtual void vfn_10();                                            // _10
+	virtual void render();                                            // _1C
+	virtual void initFromDesc(SetDesc* desc);                         // _30
+	virtual void debugPrint(void*);                                   // _34
 	virtual int onHit(const TObjAction* other, int arg, int* result); // _58
-	virtual void setup();                     // _74
+	virtual void setup();                                             // _74
 
 	// idle waits rise moves the shot up
 	void makeShapes();
@@ -39,20 +39,20 @@ public:
 	void idle();
 	void rise();
 
-	DrawTask* mDrawTask;     // _64
-	ObjModel mModel;         // _68
-	MotionPlayer mMotion;    // _88
-	f32 mMatrix[12];         // _C4
-	int _F4;                 // _F4
-	int _F8;                 // _F8
-	int mType;               // _FC set int 0 clamped to 0 or 1
-	int mPower;              // _100 set int 1 written into the hit
-	int mWait;               // _104 set int 2 frames before an ALWAYS shot rises
-	f32 mRadius;             // _108 set float 0 plus a constant
-	f32 mTop;                // _10C the offset y that ends the rise
-	Vec3f mOffset;           // _110 added to mHome y climbs while rising
-	s16 mState;              // _11C 0 idle 1 rising
-	s16 mTimer;              // _11E
+	DrawTask* mDrawTask;  // _64
+	ObjModel mModel;      // _68
+	MotionPlayer mMotion; // _88
+	f32 mMatrix[12];      // _C4
+	int _F4;              // _F4
+	int _F8;              // _F8
+	int mType;            // _FC set int 0 clamped to 0 or 1
+	int mPower;           // _100 set int 1 written into the hit
+	int mWait;            // _104 set int 2 frames before an ALWAYS shot rises
+	f32 mRadius;          // _108 set float 0 plus a constant
+	f32 mTop;             // _10C the offset y that ends the rise
+	Vec3f mOffset;        // _110 added to mHome y climbs while rising
+	s16 mState;           // _11C 0 idle 1 rising
+	s16 mTimer;           // _11E
 };
 
 extern "C" {

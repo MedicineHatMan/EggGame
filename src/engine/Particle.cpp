@@ -91,7 +91,10 @@ void Particle::init(const ParticleDesc* desc, f32 scale)
 }
 
 // 0x80027B80
-void Particle::setSpriteScale(f32 scale) { mSpriteScale = scale; }
+void Particle::setSpriteScale(f32 scale)
+{
+	mSpriteScale = scale;
+}
 
 // 0x80027B88
 f32 Particle::getFade()
@@ -115,7 +118,7 @@ f32 Particle::getFade()
 void Particle::setAlpha(f32 alpha)
 {
 	u32 keep = mColour;
-	f32 a = (f32)(mColour & 0xFF);
+	f32 a    = (f32)(mColour & 0xFF);
 	a *= alpha;
 	keep &= 0xFFFFFF00;
 	mColourNow = keep | ((u32)a & 0xFF);
@@ -147,7 +150,7 @@ void Particle::updateColour()
 		for (int i = 0; i < 3; i++) {
 			u32 value = mColourValue[i];
 			value += mColourStep[i];
-			value     = value > 0xFF00 ? 0xFF00 : value;
+			value           = value > 0xFF00 ? 0xFF00 : value;
 			mColourValue[i] = value;
 			colour <<= 8;
 			colour |= value & 0xFF00;
@@ -193,7 +196,10 @@ int Particle::advance()
 }
 
 // 0x80027E4C
-void Particle::updateStretch() { updateStretchAt(&mPos); }
+void Particle::updateStretch()
+{
+	updateStretchAt(&mPos);
+}
 
 // 0x80027E70
 void Particle::updateStretchAt(const Vec3f* pos)
@@ -219,7 +225,10 @@ void Particle::updateStretchAt(const Vec3f* pos)
 }
 
 // 0x80027F80
-void Particle::addPos(const Vec3f* move) { njAddVector(&mPos, move); }
+void Particle::addPos(const Vec3f* move)
+{
+	njAddVector(&mPos, move);
+}
 
 // 0x80027FA4
 void Particle::setLocalPos(int slot, const Vec3f* local)
@@ -229,7 +238,13 @@ void Particle::setLocalPos(int slot, const Vec3f* local)
 }
 
 // 0x80027FE8
-void Particle::setLastAt(const Vec3f* pos) { mLast = *pos; }
+void Particle::setLastAt(const Vec3f* pos)
+{
+	mLast = *pos;
+}
 
 // 0x80028004
-void Particle::setLast() { mLast = mPos; }
+void Particle::setLast()
+{
+	mLast = mPos;
+}

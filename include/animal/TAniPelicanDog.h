@@ -28,14 +28,14 @@ public:
 	void runFly();
 	void runShrink();
 
-	f32 mTravelled;  // _384
-	f32 mSpeed;      // _388
-	int mSpin;       // _38C
-	s16 mNodeKind;   // _390
+	f32 mTravelled; // _384
+	f32 mSpeed;     // _388
+	int mSpin;      // _38C
+	s16 mNodeKind;  // _390
 	u8 _392[2];
 	void* mExtraTask; // _394
-	int mShowExtra;  // _398
-	f32 mExtraFrame; // _39C
+	int mShowExtra;   // _398
+	f32 mExtraFrame;  // _39C
 };
 
 #include "engine/MotionPlayer.h"

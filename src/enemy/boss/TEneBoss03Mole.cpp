@@ -37,31 +37,24 @@ struct GjActor;
 struct ObjShadow;
 
 extern "C" {
-extern const int sMoleTrackNodes[] = { 2, 36, 40, 44, 48, -1 };
-const char* gTEneBoss03MoleName = "TEneBoss03Mole";
+extern const int sMoleTrackNodes[]          = { 2, 36, 40, 44, 48, -1 };
+const char* gTEneBoss03MoleName             = "TEneBoss03Mole";
 extern const EnemyFrameKey sMoleFrameKey0[] = { { 12.0f, 3 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sMoleFrameKey1[] = { { 12.0f, 0 }, { 19.0f, 5 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sMoleFrameKey2[] = { { 18.0f, 3 }, { -1.0f, 0 } };
 extern const EnemyFrameKey sMoleFrameKey3[] = { { 11.0f, 0 }, { 18.0f, 4 }, { -1.0f, 0 } };
 
 MotionEntry gMoleMotionTable[] = {
-	{ MOTION_LOOP, 12, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 13, -1, 0, 0.0f, 20.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 10, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 7, -1, 0, 0.0f, 14.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_LOOP, 9, -1, 0, 0.0f, 20.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_ONCE, 0, -1, 0, 8.0f, 22.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 34.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 4, -1, 0, 0.0f, 10.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 5, -1, 0, 0.0f, 20.0f, 0.7f, 0.0f, 0 },
-	{ MOTION_ONCE, 1, -1, 0, 0.0f, 34.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 11, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 14, -1, 0, 0.0f, 34.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 12, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 }, { MOTION_LOOP, 13, -1, 0, 0.0f, 20.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_LOOP, 10, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 }, { MOTION_ONCE, 7, -1, 0, 0.0f, 14.0f, 0.25f, 0.0f, 0 },
+	{ MOTION_LOOP, 9, -1, 0, 0.0f, 20.0f, 0.2f, 0.0f, 0 },  { MOTION_ONCE, 8, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },
+	{ MOTION_ONCE, 0, -1, 0, 8.0f, 22.0f, 0.25f, 0.0f, 0 }, { MOTION_ONCE, 6, -1, 0, 0.0f, 34.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_LOOP, 4, -1, 0, 0.0f, 10.0f, 0.3f, 0.0f, 0 },  { MOTION_LOOP, 5, -1, 0, 0.0f, 20.0f, 0.7f, 0.0f, 0 },
+	{ MOTION_ONCE, 1, -1, 0, 0.0f, 34.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 11, -1, 0, 0.0f, 29.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 14, -1, 0, 0.0f, 34.0f, 0.3f, 0.0f, 0 }, { MOTION_ONCE, 2, -1, 0, 0.0f, 419.0f, 1.0f, 0.0f, 0 },
 	{ MOTION_ONCE, 3, -1, 0, 0.0f, 539.0f, 1.0f, 0.0f, 0 },
 };
-const EnemyFrameKey* sMoleFrameKeys[4] = { sMoleFrameKey0, sMoleFrameKey1, sMoleFrameKey2, sMoleFrameKey3 };
+const EnemyFrameKey* sMoleFrameKeys[4]     = { sMoleFrameKey0, sMoleFrameKey1, sMoleFrameKey2, sMoleFrameKey3 };
 extern const ColliShape sMoleAttackShape[] = {
 	{ { 0.0f, 15.0f, 0.0f }, 0x0, 0, 0x0, 15.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
 };
@@ -188,20 +181,20 @@ void TEneBoss03Mole::init(SetDesc* desc)
 	shadowDisable(&mShadow);
 	mLight.reset();
 	mTint.reset();
-	mRate  = 1.0f;
-	mBlur  = 0;
-	_2A4   = 0;
-	mDemo  = 0;
+	mRate = 1.0f;
+	mBlur = 0;
+	_2A4  = 0;
+	mDemo = 0;
 	seCueClear(&mCue);
 	seHolderStop(&mSe);
 	mSe.setRange(700.0f);
-	mStep    = 0;
-	mTimer   = 0;
-	mAngle   = 0;
-	_2F0     = 0.0f;
-	_2F4     = 0.0f;
-	mFallAt  = 0.0f;
-	mFlight  = 0.0f;
+	mStep   = 0;
+	mTimer  = 0;
+	mAngle  = 0;
+	_2F0    = 0.0f;
+	_2F4    = 0.0f;
+	mFallAt = 0.0f;
+	mFlight = 0.0f;
 	createBrain();
 	setBossView(10.0f, 33.0f, 150.0f);
 }
@@ -258,10 +251,10 @@ TEneBoss03Mole::~TEneBoss03Mole()
 // Slot _74
 void TEneBoss03Mole::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -328,11 +321,11 @@ int TEneBoss03Mole::onHit(const TObjAction* other, int arg, int* result)
 		info->mPos.z = info->mPos.y = info->mPos.x = 0.0f;
 		if (arg == 0) {
 			if (mMoleFlags & MOLE_EXPOSED) {
-				hit            = 1;
+				hit           = 1;
 				info->mDamage = 10;
 			}
 		} else if (arg == 1) {
-			hit            = 1;
+			hit           = 1;
 			info->mDamage = 20;
 		}
 	} else if (isEggObj(other)) {
@@ -340,7 +333,7 @@ int TEneBoss03Mole::onHit(const TObjAction* other, int arg, int* result)
 			hit = 1;
 			info->mFlags.clear();
 			info->mPos.z = info->mPos.y = info->mPos.x = 0.0f;
-			info->mDamage = 1;
+			info->mDamage                              = 1;
 			info->mFlags.setBit(0xD);
 		}
 	} else if (other != this && isEnemyObj(other)) {
@@ -348,7 +341,7 @@ int TEneBoss03Mole::onHit(const TObjAction* other, int arg, int* result)
 			hit = 1;
 			info->mFlags.clear();
 			info->mPos.z = info->mPos.y = info->mPos.x = 0.0f;
-			info->mDamage = 0;
+			info->mDamage                              = 0;
 		}
 	}
 	return hit;
@@ -409,7 +402,7 @@ void TEneBoss03Mole::moveToTarget(f32 maxSpeed, f32 accel, int rate)
 	Vec3f dir;
 	f32 speed;
 	int turn = turnToTarget(rate, &dir);
-	speed = mBody.mVel.z;
+	speed    = mBody.mVel.z;
 	if (turn > 0x4000) {
 		speed -= accel;
 		if (speed < 0.0f) {
@@ -503,10 +496,14 @@ void TEneBoss03Mole::biteFx()
 }
 
 // 0x80080BD0
-void TEneBoss03Mole::startFx() { }
+void TEneBoss03Mole::startFx()
+{
+}
 
 // 0x80080BD4
-void TEneBoss03Mole::endFx() { }
+void TEneBoss03Mole::endFx()
+{
+}
 
 // 0x80080BD8
 void TEneBoss03Mole::killBlur()
@@ -854,9 +851,9 @@ void TEneBoss03Mole::turnWithDino()
 // The cut-in as it appears 1 1 and as it dies 0 0
 void TEneBoss03Mole::startDemo(int model, int motion)
 {
-	void* obj      = resBankGetObjects(&gBoss03Bank)[model];
+	void* obj            = resBankGetObjects(&gBoss03Bank)[model];
 	NJS_MOTION** motions = resBankGetMotion(&gBoss03Bank, 0);
-	mDemo          = createCamPath(0, 3, obj, motions[motion], 0, 1.0f, 1.0f);
+	mDemo                = createCamPath(0, 3, obj, motions[motion], 0, 1.0f, 1.0f);
 	if (mDemo != 0) {
 		((TCamera*)mDemo)->setCut();
 	}
@@ -931,9 +928,9 @@ void TEneBoss03Mole::actAppear(int phase)
 		setCantAct();
 		clearFrameKey();
 		mBody.mPos.z = mBody.mPos.y = mBody.mPos.x = 0.0f;
-		mBody.mRot.x = 0;
-		mBody.mRot.y = 0;
-		mBody.mRot.z = 0;
+		mBody.mRot.x                               = 0;
+		mBody.mRot.y                               = 0;
+		mBody.mRot.z                               = 0;
 		motionCtrlPlay(&mAnim, 0xE);
 		killBlur();
 		mStep = 0;
@@ -960,7 +957,7 @@ void TEneBoss03Mole::actAppear(int phase)
 		case 1:
 			if (frame >= 10.0f) {
 				mStep = 2;
-				pos = mBody.mPos;
+				pos   = mBody.mPos;
 				pos.y = 200.0f;
 				particleGenTimedByIdDefault(&pos, 1, 0x48, 0, 0x37);
 				particleGenTimedByIdDefault(&pos, 1, 0x50, 0, 0x37);
@@ -969,7 +966,7 @@ void TEneBoss03Mole::actAppear(int phase)
 		case 2:
 			if (frame >= 65.0f) {
 				mStep = 3;
-				pos = mBody.mPos;
+				pos   = mBody.mPos;
 				pos.y = 200.0f;
 				bindTEneBoss03Mole(&pos);
 			}
@@ -1183,15 +1180,15 @@ void TEneBoss03Mole::actLeap(int phase)
 		f32 gravity;
 		f32 time = flatVelocityTo(&mBody.mPos, &mTarget, &vel, 3.0f);
 		ballisticSolve(time, 80.0f, mTarget.y - mBody.mPos.y, &rise, &gravity);
-		mFrom.x       = mBody.mPos.x;
-		mFrom.y       = mBody.mPos.y;
-		mFrom.z       = mBody.mPos.z;
-		mBody.mVel.x  = vel.x;
-		mBody.mVel.y  = rise;
-		mBody.mVel.z  = vel.z;
+		mFrom.x        = mBody.mPos.x;
+		mFrom.y        = mBody.mPos.y;
+		mFrom.z        = mBody.mPos.z;
+		mBody.mVel.x   = vel.x;
+		mBody.mVel.y   = rise;
+		mBody.mVel.z   = vel.z;
 		mBody.mForce.y = gravity;
-		mAngle        = mBody.mRot.x;
-		_2F4          = (0x28000 - (int)mAngle) / (1.5f + time);
+		mAngle         = mBody.mRot.x;
+		_2F4           = (0x28000 - (int)mAngle) / (1.5f + time);
 		seStartAtFar(0x124, &mBody.mPos);
 		break;
 	}
@@ -1378,7 +1375,7 @@ void TEneBoss03Mole::actPounce(int phase)
 			}
 			f32 lastY = mBody.mPos.y;
 			parabolaPoint(&mFrom, &mBody.mVel, &mBody.mPos, mBody.mForce.y, _2F4);
-			f32 dy = mBody.mPos.y - lastY;
+			f32 dy       = mBody.mPos.y - lastY;
 			mBody.mRot.y = (int)mAngle + (int)(_2F0 * _2F4);
 			if (dy < 0.0f) {
 				mDino->getHeadPos(&mTarget);
@@ -1594,7 +1591,9 @@ void TEneBoss03Mole::actDie(int phase)
 
 // 0x80082C28
 // Slot _3C
-void TEneBoss03Mole::vfn_3C() { }
+void TEneBoss03Mole::vfn_3C()
+{
+}
 
 // 0x80082C2C
 // Slot _10 Hidden while appearing or out of view
@@ -1622,7 +1621,9 @@ void TEneBoss03Mole::bodyMatrix()
 }
 
 // 0x80082D1C
-void TEneBoss03Mole::modelMatrix() { }
+void TEneBoss03Mole::modelMatrix()
+{
+}
 
 // 0x80082D20
 // Slot _1C

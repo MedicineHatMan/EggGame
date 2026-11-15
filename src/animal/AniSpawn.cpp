@@ -7,7 +7,7 @@
 #include "core/TMainTask.h"
 
 struct AniSpawnEntry {
-	int mKind;                       // _00 -1 ends the table
+	int mKind;                         // _00 -1 ends the table
 	void* (*mCreate)(TObject* parent); // _04
 };
 
@@ -31,8 +31,8 @@ extern "C" TEggCreature* aniSpawn(int kind, int eggId, Vec3f* pos)
 		if (kind == sMounts[i].mKind) {
 			TEggCreature* animal = (TEggCreature*)sMounts[i].mCreate(gTL_05);
 			if (animal != NULL) {
-				animal->mEggId   = eggId;
-				animal->mPlayer  = findObjById(eggId)->mPlayer;
+				animal->mEggId  = eggId;
+				animal->mPlayer = findObjById(eggId)->mPlayer;
 				animal->setPose(pos, 0);
 			}
 			return animal;

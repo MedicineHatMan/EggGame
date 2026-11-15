@@ -6,7 +6,7 @@
 #include "object/ObjAction.h"
 #include "Ninja/ninja.h"
 
-const char* gTObjectName = "TObject";
+const char* gTObjectName   = "TObject";
 const char* gTMainTaskName = "TMainTask";
 
 // The names of the TL_* parents createTopLevels makes
@@ -30,27 +30,27 @@ const char* gTL_06BName      = "TL_06B";
 // 0x80013B68
 TObject::TObject(TObject* parent)
 {
-	mFlags  = 0;
-	_1C     = 0;
-	mSize   = 0;
-	mParent = (TObject*)parent;
-	mChild  = NULL;
-	_00     = (u32)gTObjectName;
-	mSize   = 0x20;
+	mFlags         = 0;
+	_1C            = 0;
+	mSize          = 0;
+	mParent        = (TObject*)parent;
+	mChild         = NULL;
+	_00            = (u32)gTObjectName;
+	mSize          = 0x20;
 	TObject* owner = (TObject*)parent;
 	if (owner == NULL) {
 		mPrev = this;
 		mNext = NULL;
 	} else if (owner->mChild != NULL) {
-		TObject* first = owner->mChild;
-		mPrev = first->mPrev;
-		mNext = NULL;
+		TObject* first      = owner->mChild;
+		mPrev               = first->mPrev;
+		mNext               = NULL;
 		first->mPrev->mNext = this;
-		first->mPrev = this;
+		first->mPrev        = this;
 	} else {
-		mPrev = this;
+		mPrev         = this;
 		owner->mChild = this;
-		mNext = NULL;
+		mNext         = NULL;
 	}
 	sObjAliveCount++;
 }
@@ -70,7 +70,7 @@ TObject::~TObject()
 			mParent->mChild = NULL;
 		} else if (mParent->mChild == this) {
 			mParent->mChild = mNext;
-			mPrev->mNext = NULL;
+			mPrev->mNext    = NULL;
 			if (mNext != NULL) {
 				mNext->mPrev = mPrev;
 			}
@@ -114,7 +114,7 @@ void objApplyFlags(TObject* obj)
 	TObject* next = obj->mChild;
 	while (obj->mChild != NULL && next != NULL) {
 		TObject* child = next;
-		next = next->mNext;
+		next           = next->mNext;
 		if (child->mFlags & 3) {
 			if (child->mFlags & 1) {
 				child->mFlags &= 0xFFFE;
@@ -142,7 +142,7 @@ void objUpdateTree(TObject* obj)
 	TObject* next = obj->mChild;
 	while (obj->mChild != NULL && next != NULL) {
 		TObject* child = next;
-		next = next->mNext;
+		next           = next->mNext;
 		if (child->mFlags & 0xF) {
 			if (child->mFlags & 1) {
 				child->mFlags &= 0xFFFE;
@@ -184,7 +184,8 @@ void objWalkChildren(TObject* obj)
 // Prints the tree
 void objPrintTree(TObject* obj)
 {
-	objDumpPrintf("%5d:%5d:%s%s", obj->_1C, obj->mSize, sObjDumpSpaces + (strlen(sObjDumpSpaces) - sObjWalkDepth * 2), (const char*)obj->_00);
+	objDumpPrintf("%5d:%5d:%s%s", obj->_1C, obj->mSize, sObjDumpSpaces + (strlen(sObjDumpSpaces) - sObjWalkDepth * 2),
+	              (const char*)obj->_00);
 	sObjWalkDepth++;
 	TObject* child = obj->mChild;
 	while (child != NULL) {
@@ -203,7 +204,7 @@ void objSetParent(TObject* obj, TObject* parent)
 			obj->mParent->mChild = NULL;
 		} else if (obj->mParent->mChild == obj) {
 			obj->mParent->mChild = obj->mNext;
-			obj->mPrev->mNext = NULL;
+			obj->mPrev->mNext    = NULL;
 			if (obj->mNext != NULL) {
 				obj->mNext->mPrev = obj->mPrev;
 			}
@@ -221,15 +222,15 @@ void objSetParent(TObject* obj, TObject* parent)
 		obj->mPrev = obj;
 		obj->mNext = NULL;
 	} else if (parent->mChild != NULL) {
-		TObject* first = parent->mChild;
-		obj->mPrev = first->mPrev;
-		obj->mNext = NULL;
+		TObject* first      = parent->mChild;
+		obj->mPrev          = first->mPrev;
+		obj->mNext          = NULL;
 		first->mPrev->mNext = obj;
-		first->mPrev = obj;
+		first->mPrev        = obj;
 	} else {
-		obj->mPrev = obj;
+		obj->mPrev     = obj;
 		parent->mChild = obj;
-		obj->mNext = NULL;
+		obj->mNext     = NULL;
 	}
 }
 
@@ -261,7 +262,7 @@ typedef char TMainTask_size_check[(sizeof(TMainTask) == 0x20) ? 1 : -1];
 // Node walked from gMainTask.mChild The next link is at +0x0C and flags at +0x04
 struct TaskLink {
 	u8 _00[4];
-	u16 mFlags;      // _04
+	u16 mFlags; // _04
 	u8 _06[6];
 	TaskLink* mNext; // _0C
 };
@@ -316,37 +317,37 @@ extern "C" void initObjects(TObject* parent)
 	}
 	gObjHeap = mem;
 
-	gTL_SU = new TObject(parent);
-	gTL_SU->_00 = (u32)gTL_SUName;
-	gTL_00 = new TObject(parent);
-	gTL_00->_00 = (u32)gTL_00Name;
-	gTL_01 = new TObject(parent);
-	gTL_01->_00 = (u32)gTL_01Name;
-	gTL_02 = new TObject(parent);
-	gTL_02->_00 = (u32)gTL_02Name;
-	gTL_06 = new TObject(parent);
-	gTL_06->_00 = (u32)gTL_06Name;
-	gTL_06B = new TObject(parent);
-	gTL_06B->_00 = (u32)gTL_06BName;
-	gTL_05 = new TObject(parent);
-	gTL_05->_00 = (u32)gTL_05Name;
-	gTL_05B = new TObject(parent);
-	gTL_05B->_00 = (u32)gTL_05BName;
-	gTL_04 = new TObject(parent);
-	gTL_04->_00 = (u32)gTL_04Name;
-	gTL_04B = new TObject(parent);
-	gTL_04B->_00 = (u32)gTL_04BName;
-	gTL_03 = new TObject(parent);
-	gTL_03->_00 = (u32)gTL_03Name;
-	gTL_03B = new TObject(parent);
-	gTL_03B->_00 = (u32)gTL_03BName;
-	gTL_07 = new TObject(parent);
-	gTL_07->_00 = (u32)gTL_07Name;
-	gTL_08 = new TObject(parent);
-	gTL_08->_00 = (u32)gTL_08Name;
-	gTL_PARTICLE = new TObject(parent);
+	gTL_SU            = new TObject(parent);
+	gTL_SU->_00       = (u32)gTL_SUName;
+	gTL_00            = new TObject(parent);
+	gTL_00->_00       = (u32)gTL_00Name;
+	gTL_01            = new TObject(parent);
+	gTL_01->_00       = (u32)gTL_01Name;
+	gTL_02            = new TObject(parent);
+	gTL_02->_00       = (u32)gTL_02Name;
+	gTL_06            = new TObject(parent);
+	gTL_06->_00       = (u32)gTL_06Name;
+	gTL_06B           = new TObject(parent);
+	gTL_06B->_00      = (u32)gTL_06BName;
+	gTL_05            = new TObject(parent);
+	gTL_05->_00       = (u32)gTL_05Name;
+	gTL_05B           = new TObject(parent);
+	gTL_05B->_00      = (u32)gTL_05BName;
+	gTL_04            = new TObject(parent);
+	gTL_04->_00       = (u32)gTL_04Name;
+	gTL_04B           = new TObject(parent);
+	gTL_04B->_00      = (u32)gTL_04BName;
+	gTL_03            = new TObject(parent);
+	gTL_03->_00       = (u32)gTL_03Name;
+	gTL_03B           = new TObject(parent);
+	gTL_03B->_00      = (u32)gTL_03BName;
+	gTL_07            = new TObject(parent);
+	gTL_07->_00       = (u32)gTL_07Name;
+	gTL_08            = new TObject(parent);
+	gTL_08->_00       = (u32)gTL_08Name;
+	gTL_PARTICLE      = new TObject(parent);
 	gTL_PARTICLE->_00 = (u32)gTL_PARTICLEName;
-	gTL_TIMESTOP = new TObject(parent);
+	gTL_TIMESTOP      = new TObject(parent);
 	gTL_TIMESTOP->_00 = (u32)gTL_TIMESTOPName;
 
 	gTL_03On = gTL_03;
@@ -361,7 +362,7 @@ void TMainTask::draw()
 {
 	u32 start = syTmrGetCount();
 	if (sMainTaskProcMask != sMainTaskProcMaskPrev) {
-		u32 bit       = 1;
+		u32 bit        = 1;
 		TaskLink* node = (TaskLink*)gMainTask.mChild;
 		while (node != 0) {
 			if ((sMainTaskProcMask & bit) != 0) {
@@ -385,7 +386,7 @@ void TMainTask::vfn_10()
 {
 	u32 start = syTmrGetCount();
 	if (sMainTaskDrawMask != sMainTaskDrawMaskPrev) {
-		u32 bit       = 1;
+		u32 bit        = 1;
 		TaskLink* node = (TaskLink*)gMainTask.mChild;
 		while (node != 0) {
 			if ((sMainTaskDrawMask & bit) != 0) {

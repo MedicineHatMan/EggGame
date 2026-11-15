@@ -26,11 +26,11 @@ void spawnEggYolk(f32, const Vec3f*);
 class TObjEggYolk : public TObject {
 public:
 	enum State {
-		YOLK_PROBE   = 0, // find the ground under it
-		YOLK_FALL    = 1,
-		YOLK_SPLASH  = 2, // the motion then a 30 frame hold
-		YOLK_MISS    = 3, // no ground fall for 30 frames and go
-		YOLK_FADE    = 4,
+		YOLK_PROBE  = 0, // find the ground under it
+		YOLK_FALL   = 1,
+		YOLK_SPLASH = 2, // the motion then a 30 frame hold
+		YOLK_MISS   = 3, // no ground fall for 30 frames and go
+		YOLK_FADE   = 4,
 	};
 
 	TObjEggYolk(TObject* parent);
@@ -44,7 +44,7 @@ public:
 	{
 		mFallSpeed += -6.666667f;
 		mFallSpeed *= 0.99f;
-		mPos.y     = 1.0f / 60.0f * mFallSpeed + mPos.y;
+		mPos.y = 1.0f / 60.0f * mFallSpeed + mPos.y;
 	}
 
 	u8 mState;            // _20 State
@@ -55,7 +55,7 @@ public:
 	f32 mAlpha;           // _30
 	Vec3f mPos;           // _34
 	MotionPlayer mMotion; // _40
-	GjActor* mNode;          // _7C the actor
+	GjActor* mNode;       // _7C the actor
 	DrawTask* mDraw;      // _80
 };
 

@@ -161,7 +161,7 @@ extern "C" void enemyMotionBlend(EnemyMotion* motion, int fromEntry, f32 from, i
 extern "C" void enemyMotionBlendEnds(EnemyMotion* motion, int fromEntry, int toEntry, f32 blend)
 {
 	f32 from = motion->mPlayer.getEnd(fromEntry);
-	f32 to = motion->mPlayer.getStart(toEntry);
+	f32 to   = motion->mPlayer.getStart(toEntry);
 	enemyMotionBlend(motion, fromEntry, from, toEntry, to, blend);
 }
 
@@ -315,8 +315,7 @@ extern "C" int motionStepsPlay(f32 time, const MotionStep* steps, EnemyMotion* m
 		done = 0;
 		break;
 	case MotionStep::STEP_BLEND:
-		enemyMotionBlend(motion, step->mEntry, step->mStart, next->mEntry, next->mStart,
-		                 motionStepBlendRate(time, step->mRate));
+		enemyMotionBlend(motion, step->mEntry, step->mStart, next->mEntry, next->mStart, motionStepBlendRate(time, step->mRate));
 		done = 0;
 		break;
 	}

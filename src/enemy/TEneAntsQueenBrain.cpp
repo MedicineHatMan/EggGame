@@ -11,7 +11,7 @@
 void AntsQueenBrain::update(TEneAntsQueen* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}
@@ -28,7 +28,9 @@ AntsQueenBrainBase::AntsQueenBrainBase()
 }
 
 // 0x800941DC
-AntsQueenBrainBase::~AntsQueenBrainBase() { }
+AntsQueenBrainBase::~AntsQueenBrainBase()
+{
+}
 
 // 0x80094238
 AntsQueenHuntBrain* AntsQueenHuntBrain::create(TEneAntsQueen* owner)
@@ -42,11 +44,11 @@ AntsQueenHuntBrain::AntsQueenHuntBrain(TEneAntsQueen* owner)
 	mSight.reset();
 	mMemory.reset();
 	mSummonTimer = 0;
-	mStep = 0;
-	mTimer = 0;
-	mOwner = owner;
-	mNext = -1;
-	mState = STATE_APPEAR;
+	mStep        = 0;
+	mTimer       = 0;
+	mOwner       = owner;
+	mNext        = -1;
+	mState       = STATE_APPEAR;
 	onPhase(mState, 0);
 	if (mNext != -1) {
 		mOwner->setAction(mNext);
@@ -54,7 +56,9 @@ AntsQueenHuntBrain::AntsQueenHuntBrain(TEneAntsQueen* owner)
 }
 
 // 0x8009433C
-AntsQueenHuntBrain::~AntsQueenHuntBrain() { }
+AntsQueenHuntBrain::~AntsQueenHuntBrain()
+{
+}
 
 // 0x800943A4
 // A hard hit stuns her or flips her when she isn't throwing and every ant goes after who hit her
@@ -96,7 +100,7 @@ void AntsQueenHuntBrain::pickTarget()
 void AntsQueenHuntBrain::pickRetreat()
 {
 	Vec3f player = mSight.mTarget;
-	Vec3f pos = *mOwner->getPos();
+	Vec3f pos    = *mOwner->getPos();
 	Vec3f home;
 	mOwner->getHome(&home);
 	Vec3f dir = home;
@@ -115,12 +119,12 @@ void AntsQueenHuntBrain::pickRetreat()
 	if (njUnitVector(&dir) < gUnitVectorMin) {
 		dir = gVecZero;
 	}
-	f32 dx = pos.x - home.x;
-	f32 dz = pos.z - home.z;
+	f32 dx     = pos.x - home.x;
+	f32 dz     = pos.z - home.z;
 	f32 distSq = dx * dx + dz * dz;
 	if (distSq > 3364.0f) {
 		f32 scale = (f32)__frsqrte(distSq) * 58.0f;
-		distSq = 3364.0f;
+		distSq    = 3364.0f;
 		dx *= scale;
 		dz *= scale;
 	}
@@ -181,12 +185,12 @@ void AntsQueenHuntBrain::summonOrWander()
 void AntsQueenHuntBrain::pickSlot()
 {
 	AntLink* link;
-	int rot = mOwner->getRotY();
+	int rot       = mOwner->getRotY();
 	AntLink* ants = mOwner->getAnts();
-	int count = mOwner->getMaxAnts();
-	link = ants->mNext;
-	int bestDiff = 0x7FFFF;
-	int best = -1;
+	int count     = mOwner->getMaxAnts();
+	link          = ants->mNext;
+	int bestDiff  = 0x7FFFF;
+	int best      = -1;
 	int bestAngle = 0;
 	for (int i = 0; i < count; i++) {
 		int free = 0;
@@ -204,10 +208,10 @@ void AntsQueenHuntBrain::pickSlot()
 		}
 		if (free) {
 			int angle = (i << 16) / count;
-			int diff = angleDist(rot, angle);
+			int diff  = angleDist(rot, angle);
 			if (diff < bestDiff) {
-				bestDiff = diff;
-				best = i;
+				bestDiff  = diff;
+				best      = i;
 				bestAngle = angle;
 			}
 		}
@@ -270,8 +274,8 @@ void AntsQueenHuntBrain::phaseWander(int phase)
 	switch (phase) {
 	case 0:
 		pickTarget();
-		mStep = randomInt(300.0f, 120.0f);
-		mNext = TEneAntsQueen::ACT_WALK;
+		mStep  = randomInt(300.0f, 120.0f);
+		mNext  = TEneAntsQueen::ACT_WALK;
 		mTimer = 0;
 		break;
 	case 2:
@@ -289,11 +293,11 @@ void AntsQueenHuntBrain::phaseWander(int phase)
 			mStep = randomInt(300.0f, 120.0f);
 			if (mTimer != 0) {
 				mTimer = 0;
-				mNext = TEneAntsQueen::ACT_WALK;
+				mNext  = TEneAntsQueen::ACT_WALK;
 			}
 		} else if (mOwner->hasArrived() != 0) {
 			mTimer = 1;
-			mNext = TEneAntsQueen::ACT_IDLE;
+			mNext  = TEneAntsQueen::ACT_IDLE;
 		}
 		break;
 	case 3:
@@ -431,7 +435,7 @@ void AntsQueenHuntBrain::phaseDie(int phase)
 {
 	switch (phase) {
 	case 0:
-			mNext = mOwner->deathAction();
+		mNext = mOwner->deathAction();
 		break;
 	case 1:
 		break;

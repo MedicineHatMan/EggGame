@@ -10,7 +10,9 @@ extern "C" TStage* createGreenBossStage()
 	return new TStageGreenBoss;
 }
 
-TStageGreenBoss::TStageGreenBoss() { }
+TStageGreenBoss::TStageGreenBoss()
+{
+}
 
 void TStageGreenBoss::loadAssets()
 {
@@ -27,4 +29,6 @@ void TStageGreenBoss::vfn_14()
 	stageCamLockAll();
 }
 
-TStageGreenBoss::~TStageGreenBoss() { }
+TStageGreenBoss::~TStageGreenBoss()
+{
+}

@@ -17,7 +17,9 @@ TItemEquipShoeHiJump::TItemEquipShoeHiJump(TObject* parent, const ItemSpec* spec
 }
 
 // 0x801D1314
-void TItemEquipShoeHiJump::vfn_7C() { }
+void TItemEquipShoeHiJump::vfn_7C()
+{
+}
 
 // 0x801D1318
 void TItemEquipShoeHiJump::vfn_80()
@@ -47,4 +49,6 @@ void TItemEquipShoeHiJump::vfn_84()
 }
 
 // 0x801D1408
-TItemEquipShoeHiJump::~TItemEquipShoeHiJump() { }
+TItemEquipShoeHiJump::~TItemEquipShoeHiJump()
+{
+}

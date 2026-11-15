@@ -20,9 +20,9 @@ extern "C" void spawnGuardFree()
 // 0x800707A0
 SpawnGuard::SpawnGuard()
 {
-	mNext = 0;
-	mPrev = 0;
-	mList = 0;
+	mNext  = 0;
+	mPrev  = 0;
+	mList  = 0;
 	mPos.x = 0.0f;
 	mPos.y = 0.0f;
 	mPos.z = 0.0f;
@@ -80,8 +80,8 @@ void SpawnGuard::set(Vec3f* pos, f32 radius)
 // 0x80070928
 SpawnGuardList::SpawnGuardList()
 {
-	mHead = 0;
-	mTail = 0;
+	mHead  = 0;
+	mTail  = 0;
 	mCount = 0;
 }
 
@@ -100,7 +100,7 @@ void SpawnGuardList::add(SpawnGuard* guard)
 	} else {
 		guard->mPrev = mTail;
 		mTail->mNext = guard;
-		mTail = guard;
+		mTail        = guard;
 	}
 	guard->mList = this;
 	mCount++;
@@ -132,9 +132,9 @@ void SpawnGuardList::clear()
 	SpawnGuard* node = mHead;
 	while (node != 0) {
 		SpawnGuard* next = node->mNext;
-		node->mList = 0;
-		node->mNext = 0;
-		node->mPrev = 0;
-		node = next;
+		node->mList      = 0;
+		node->mNext      = 0;
+		node->mPrev      = 0;
+		node             = next;
 	}
 }

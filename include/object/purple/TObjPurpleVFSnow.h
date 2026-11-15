@@ -38,10 +38,10 @@ public:
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
 	DrawTask* mDrawTask; // _64
-	Vec3f mCenter;   // _68 mPos plus the field offset
-	f32 mRadius;     // _74 distance from mPos to mCenter
-	MeshPlate* mPlate; // _78 the floor's collision
-	int mSoundWait;  // _7C frames until the roll sound can play again
+	Vec3f mCenter;       // _68 mPos plus the field offset
+	f32 mRadius;         // _74 distance from mPos to mCenter
+	MeshPlate* mPlate;   // _78 the floor's collision
+	int mSoundWait;      // _7C frames until the roll sound can play again
 };
 
 extern "C" {

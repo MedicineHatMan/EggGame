@@ -25,7 +25,7 @@
 void Am08Brain::update(TEneAm08* owner)
 {
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	if (checkInterrupt() == 0) {
 		onPhase(mState, 2);
 	}
@@ -43,7 +43,9 @@ Am08BrainBase::Am08BrainBase()
 }
 
 // 0x800753FC
-Am08BrainBase::~Am08BrainBase() { }
+Am08BrainBase::~Am08BrainBase()
+{
+}
 
 // 0x80075458
 Am08LizardBrain* Am08LizardBrain::create(TEneAm08* owner)
@@ -57,9 +59,9 @@ Am08LizardBrain::Am08LizardBrain(TEneAm08* owner)
 	mSight.reset();
 	mMemory.reset();
 	mTimer = 0;
-	mWait = 0;
+	mWait  = 0;
 	mOwner = owner;
-	mNext = -1;
+	mNext  = -1;
 	mState = STATE_APPEAR;
 	onPhase(mState, 0);
 	if (mNext != -1) {
@@ -68,7 +70,9 @@ Am08LizardBrain::Am08LizardBrain(TEneAm08* owner)
 }
 
 // 0x80075558
-Am08LizardBrain::~Am08LizardBrain() { }
+Am08LizardBrain::~Am08LizardBrain()
+{
+}
 
 // 0x800755C0
 // Slot _08 A flip hit while guarding only makes it flinch
@@ -193,9 +197,9 @@ void Am08LizardBrain::phaseWander(int phase)
 	switch (phase) {
 	case 0:
 		pickWanderSpot();
-		mNext = TEneAm08::ACT_WALK;
+		mNext  = TEneAm08::ACT_WALK;
 		mTimer = randomInt(300.0f, 120.0f);
-		mWait = 0;
+		mWait  = 0;
 		break;
 	case 2:
 		if (lookNear() != 0) {
@@ -255,7 +259,7 @@ void Am08LizardBrain::phaseStalk(int phase)
 		case 0:
 			if (mOwner->isThreatDone() != 0) {
 				mTimer = 1;
-				mNext = TEneAm08::ACT_APPROACH;
+				mNext  = TEneAm08::ACT_APPROACH;
 			}
 			break;
 		case 1:
@@ -271,9 +275,9 @@ void Am08LizardBrain::phaseAttack(int phase)
 {
 	switch (phase) {
 	case 0:
-		mNext = TEneAm08::ACT_LUNGE;
+		mNext  = TEneAm08::ACT_LUNGE;
 		mTimer = 0;
-		mWait = 0;
+		mWait  = 0;
 		break;
 	case 2:
 		lookFar();
@@ -288,8 +292,8 @@ void Am08LizardBrain::phaseAttack(int phase)
 		case 0:
 			if (mOwner->isLungeDone() != 0) {
 				mTimer = 1;
-				mWait = 60;
-				mNext = TEneAm08::ACT_SLIDE;
+				mWait  = 60;
+				mNext  = TEneAm08::ACT_SLIDE;
 			}
 			break;
 		case 1:
@@ -334,10 +338,10 @@ void Am08LizardBrain::phaseFlip(int phase)
 	case 0:
 		if (mOwner->isLunging() != 0) {
 			mTimer = 0;
-			mNext = TEneAm08::ACT_FLIP_LUNGING;
+			mNext  = TEneAm08::ACT_FLIP_LUNGING;
 		} else {
 			mTimer = 1;
-			mNext = TEneAm08::ACT_FLIP;
+			mNext  = TEneAm08::ACT_FLIP;
 		}
 		break;
 	case 1:
@@ -361,7 +365,7 @@ void Am08LizardBrain::phaseDie(int phase)
 {
 	switch (phase) {
 	case 0:
-			mNext = mOwner->deathAction();
+		mNext = mOwner->deathAction();
 		break;
 	case 1:
 		break;

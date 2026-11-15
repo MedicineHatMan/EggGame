@@ -21,8 +21,8 @@ public:
 	virtual void vfn_20(); // _20
 	virtual void vfn_24(); // _24
 
-	Fx* mEffect; // _28
-	f32 mMtx[12];  // _2C
+	Fx* mEffect;  // _28
+	f32 mMtx[12]; // _2C
 };
 
 extern "C" {

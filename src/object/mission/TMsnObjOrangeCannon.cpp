@@ -41,7 +41,7 @@ struct CharaColli;
 struct DrawState;
 struct Fx;
 
-static f32 sDrawDist = gOrangeCannonSetRange - 100.0f; // 0x802C5958
+static f32 sDrawDist       = gOrangeCannonSetRange - 100.0f; // 0x802C5958
 static const f32 sKeepDist = 50.0f + gOrangeCannonSetRange;  // 0x802C595C
 
 /** Message 0x7D which puts the player at a place facing an angle for the stage clear */
@@ -53,11 +53,11 @@ struct StageClearMsg {
 
 // geobj_orange_cannon.arc and its exports
 extern "C" {
-TArc* gOrangeCannonArc;      // 0x802C5960
-NJS_OBJECT* gOrangeCannonModels;   // 0x802C5964 *"models"
+TArc* gOrangeCannonArc;             // 0x802C5960
+NJS_OBJECT* gOrangeCannonModels;    // 0x802C5964 *"models"
 NJS_TEXLIST* gOrangeCannonTexLists; // 0x802C5968 *"texlists"
 NJS_MOTION** gOrangeCannonMotions;  // 0x802C596C "motions"
-void* gOrangeCannonPath;     // 0x802C5970 "path"
+void* gOrangeCannonPath;            // 0x802C5970 "path"
 }
 
 const MotionEntry sMsnOrangeCannonMotions[] = {
@@ -118,7 +118,7 @@ extern "C" void loadOrangeCannonAssets()
 	}
 }
 
-f32 gOrangeCannonSetRange = 800.0f;
+f32 gOrangeCannonSetRange     = 800.0f;
 static const char* sClassName = "TMsnObjOrangeCannon";
 
 typedef char TMsnObjOrangeCannon_size_check[(sizeof(TMsnObjOrangeCannon) == 0x2A0) ? 1 : -1];
@@ -133,8 +133,8 @@ extern "C" TObject* createTMsnObjOrangeCannon(TObject* parent, SetDesc* desc)
 TMsnObjOrangeCannon::TMsnObjOrangeCannon(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00 = (u32)sClassName;
-	mSize = 0x2A0;
+	_00    = (u32)sClassName;
+	mSize  = 0x2A0;
 	mShape = colliCreate(2, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks((CharaColli*)mShape, 4, 255, 0xF6, 0xF6);
@@ -222,11 +222,11 @@ void TMsnObjOrangeCannon::setUp()
 		mModel.mMotion  = &mMotion;
 
 		CannonNode* barrel[2] = { 0, 0 };
-		CannonNode* first = ((CannonNode*)gOrangeCannonModels)->mChild->mSibling;
-		barrel[0] = first;
-		barrel[1] = first->mSibling;
-		mMuzzle[0] = barrel[0]->mPos;
-		mMuzzle[1] = barrel[1]->mPos;
+		CannonNode* first     = ((CannonNode*)gOrangeCannonModels)->mChild->mSibling;
+		barrel[0]             = first;
+		barrel[1]             = first->mSibling;
+		mMuzzle[0]            = barrel[0]->mPos;
+		mMuzzle[1]            = barrel[1]->mPos;
 		mMuzzleRot[0].set(barrel[0]->mAng.x, barrel[0]->mAng.y, barrel[0]->mAng.z);
 		mMuzzleRot[1].set(barrel[1]->mAng.x, barrel[1]->mAng.y, barrel[1]->mAng.z);
 		mtxMultVec(mMatrix, &mMuzzle[0], &mMuzzle[0]);
@@ -235,10 +235,10 @@ void TMsnObjOrangeCannon::setUp()
 		texList = 0;
 		arc     = getFireworksBallArc();
 		if (arc != 0) {
-			burst             = *(CannonNode**)findArcExport(arc, "models");
-			texList           = *(void**)findArcExport(arc, "texlists");
-			mBurst            = *burst;
-			mBurst.mChild     = 0;
+			burst         = *(CannonNode**)findArcExport(arc, "models");
+			texList       = *(void**)findArcExport(arc, "texlists");
+			mBurst        = *burst;
+			mBurst.mChild = 0;
 		}
 		mTrack.set(gOrangeCannonPath, 0, 1.0f);
 		mDraw.setModel(&mBurst);
@@ -385,7 +385,10 @@ void TMsnObjOrangeCannon::stepOpen()
 }
 
 // The motion's frame rounded to the nearest whole frame
-static inline f32 cannonFrame(MotionPlayer* motion) { return (f32)floor(0.5f + motion->mFrame); }
+static inline f32 cannonFrame(MotionPlayer* motion)
+{
+	return (f32)floor(0.5f + motion->mFrame);
+}
 
 // 0x80188F38
 // At frame 115 of the motion the burst's glow starts
@@ -468,7 +471,9 @@ void TMsnObjOrangeCannon::stepEnd()
 }
 
 // 0x80189200
-void TMsnObjOrangeCannon::updateDone() { }
+void TMsnObjOrangeCannon::updateDone()
+{
+}
 
 // 0x80189204
 void TMsnObjOrangeCannon::vfn_10()
@@ -507,4 +512,6 @@ void TMsnObjOrangeCannon::render()
 	}
 }
 
-inline FxVec::FxVec() { }
+inline FxVec::FxVec()
+{
+}

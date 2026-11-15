@@ -85,38 +85,40 @@ s32 CARDFastDelete(s32 channel, s32 fileNo)
 	return __CARDSync(channel);
 }
 
-s32 CARDDeleteAsync(s32 chan, char *fileName, CARDCallback callback) {
-    CARDControl *card;
-    s32 fileNo;
-    s32 result;
-    CARDDir *dir;
-    CARDDir *ent;
+s32 CARDDeleteAsync(s32 chan, char* fileName, CARDCallback callback)
+{
+	CARDControl* card;
+	s32 fileNo;
+	s32 result;
+	CARDDir* dir;
+	CARDDir* ent;
 
-    result = __CARDGetControlBlock(chan, &card);
-    if (result < 0)
-        return result;
-    result = __CARDGetFileNo(card, fileName, &fileNo);
-    if (result < 0)
-        return __CARDPutControlBlock(card, result);
-    if (__CARDIsOpened(card, fileNo))
-        return __CARDPutControlBlock(card, CARD_RESULT_BUSY);
+	result = __CARDGetControlBlock(chan, &card);
+	if (result < 0)
+		return result;
+	result = __CARDGetFileNo(card, fileName, &fileNo);
+	if (result < 0)
+		return __CARDPutControlBlock(card, result);
+	if (__CARDIsOpened(card, fileNo))
+		return __CARDPutControlBlock(card, CARD_RESULT_BUSY);
 
-    dir = __CARDGetDirBlock(card)->entries;
-    ent = &dir[fileNo];
-    card->startBlock = ent->startBlock;
-    memset(ent, 0xff, sizeof(CARDDir));
+	dir              = __CARDGetDirBlock(card)->entries;
+	ent              = &dir[fileNo];
+	card->startBlock = ent->startBlock;
+	memset(ent, 0xff, sizeof(CARDDir));
 
-    card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
-    result = __CARDUpdateDir(chan, DeleteCallback);
-    if (result < 0)
-        __CARDPutControlBlock(card, result);
-    return result;
+	card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
+	result            = __CARDUpdateDir(chan, DeleteCallback);
+	if (result < 0)
+		__CARDPutControlBlock(card, result);
+	return result;
 }
 
-s32 CARDDelete(s32 chan, char *fileName) {
-    s32 result = CARDDeleteAsync(chan, fileName, __CARDSyncCallback);
+s32 CARDDelete(s32 chan, char* fileName)
+{
+	s32 result = CARDDeleteAsync(chan, fileName, __CARDSyncCallback);
 
-    if (result < 0)
-        return result;
-    return __CARDSync(chan);
+	if (result < 0)
+		return result;
+	return __CARDSync(chan);
 }

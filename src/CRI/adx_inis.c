@@ -9,9 +9,9 @@
 
 ADX_TALK adxt_obj[ADXT_MAX_OBJ];
 
-static const char adxt_build[] = "\nADXT/GC Ver.8.66 Build:Mar  3 2003 16:47:46\n";
+static const char adxt_build[]     = "\nADXT/GC Ver.8.66 Build:Mar  3 2003 16:47:46\n";
 const char* const adxt_ver_info[2] = { adxt_build, 0 };
-int adxini_chk_thrd_fg = 1; /* 1 when the file server runs in its own callback */
+int adxini_chk_thrd_fg             = 1; /* 1 when the file server runs in its own callback */
 
 unsigned int adxt_svcnt;
 int adxt_fs_svr_id;
@@ -84,7 +84,7 @@ void ADXT_Init(void)
 		memset(adxt_obj, 0, sizeof(adxt_obj));
 		if (ADXM_IsSetupThrd() == 1 && adxini_chk_thrd_fg == 1) {
 			SVM_SetCbSvrId(2, 1, adxini_vsync_cbfn, 0);
-			adxt_fs_svr_id = SVM_SetCbSvr(4, adxini_fssvr_cbfn, 0);
+			adxt_fs_svr_id   = SVM_SetCbSvr(4, adxini_fssvr_cbfn, 0);
 			adxt_main_svr_id = SVM_SetCbSvr(5, adxini_lscsvr_cbfn, 0);
 		} else {
 			adxt_main_svr_id = SVM_SetCbSvr(5, adxini_allsvr_cbfn, 0);

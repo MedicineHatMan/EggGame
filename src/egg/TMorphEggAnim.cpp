@@ -9,8 +9,7 @@ typedef char TMorphEggAnim_size_check[(sizeof(TMorphEggAnim) == 0xCC) ? 1 : -1];
 extern "C" {
 
 extern const u8 gMorphEggScript[] = {
-	0x01, 0x06, 0x00, 0x0A, 0x3F, 0x80, 0x00, 0x00,
-	0xBC, 0x7F, 0x00, 0x00,
+	0x01, 0x06, 0x00, 0x0A, 0x3F, 0x80, 0x00, 0x00, 0xBC, 0x7F, 0x00, 0x00,
 };
 }
 
@@ -22,8 +21,8 @@ TMorphEggAnim::TMorphEggAnim(TObject* parent, const Vec3f* pos, f32 scale)
     , mScale(scale)
     , mPos(*pos)
 {
-	_00    = (u32)gTMorphEggAnimName;
-	mSize  = 0xCC;
+	_00           = (u32)gTMorphEggAnimName;
+	mSize         = 0xCC;
 	mState.mFlags = 0x20;
 	mState.mTev2  = 0;
 	mScript.setSlot(0, &mKey);
@@ -42,6 +41,6 @@ TMorphEggAnim::~TMorphEggAnim()
 void TMorphEggAnim::draw()
 {
 	mScript.update();
-	u8 c = (u8)(255.0f * mKey.mValue);
+	u8 c         = (u8)(255.0f * mKey.mValue);
 	mState.mTev2 = (c << 24) | (c << 16) | (c << 8) | c;
 }

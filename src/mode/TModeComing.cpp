@@ -24,10 +24,14 @@ TModeComing* TModeComing::create(TModeAllocator* allocator)
 }
 
 // 0x80142A30
-TModeComing::TModeComing() { }
+TModeComing::TModeComing()
+{
+}
 
 // 0x80142A54
-TModeComing::~TModeComing() { }
+TModeComing::~TModeComing()
+{
+}
 
 // 0x80142A7C
 int TModeComing::init()

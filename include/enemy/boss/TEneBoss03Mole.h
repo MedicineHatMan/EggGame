@@ -175,35 +175,35 @@ public:
 	void bodyMatrix();
 	void modelMatrix();
 
-	u8 _158[0x10];               // _158
-	CharaColli* mHurt;                 // _168 the collider other things hit
-	MoleBrain* mBrain;           // _16C
-	TEneBoss03Dino* mDino;       // _170
-	GjActor* mPose;                 // _174
-	DrawTask* mDrawTask;             // _178
-	u32 mMoleFlags;              // _17C
-	Vec3f mPush;                 // _180 how far the last hit pushed it
-	HitVec mNodes[5];            // _18C node positions from sMoleTrackNodes
-	Vec3f mTarget;               // _1C8
-	Vec3f mFrom;                 // _1D4 where a leap started
-	int mMaxHealth;              // _1E0
-	ObjShadow mShadow;           // _1E4
-	EnemyLight mLight;           // _21C
-	EnemyTint mTint;             // _25C
-	f32 mRate;                   // _264 the motion rate
-	TEneBoss03_EffBlur* mBlur;   // _268
-	BossSuit mSuit;              // _26C
-	TObject* _2A4;               // _2A4
-	TCamPath* mDemo;             // _2A8 the cut-in camera as it appears and dies
-	SeCue mCue;                  // _2AC
-	SeHolder mSe;                // _2B0
-	int mStep;                   // _2E4
-	int mTimer;                  // _2E8
-	int mAngle;                  // _2EC the yaw or pitch a leap starts at
-	f32 _2F0;                    // _2F0 the time of a leap the turn rate of a pounce or time by a rock
-	f32 _2F4;                    // _2F4 the turn rate of a leap or the time of a pounce
-	f32 mFallAt;                 // _2F8 when a pounce starts its falling motion
-	f32 mFlight;                 // _2FC how long a pounce lasts
+	u8 _158[0x10];             // _158
+	CharaColli* mHurt;         // _168 the collider other things hit
+	MoleBrain* mBrain;         // _16C
+	TEneBoss03Dino* mDino;     // _170
+	GjActor* mPose;            // _174
+	DrawTask* mDrawTask;       // _178
+	u32 mMoleFlags;            // _17C
+	Vec3f mPush;               // _180 how far the last hit pushed it
+	HitVec mNodes[5];          // _18C node positions from sMoleTrackNodes
+	Vec3f mTarget;             // _1C8
+	Vec3f mFrom;               // _1D4 where a leap started
+	int mMaxHealth;            // _1E0
+	ObjShadow mShadow;         // _1E4
+	EnemyLight mLight;         // _21C
+	EnemyTint mTint;           // _25C
+	f32 mRate;                 // _264 the motion rate
+	TEneBoss03_EffBlur* mBlur; // _268
+	BossSuit mSuit;            // _26C
+	TObject* _2A4;             // _2A4
+	TCamPath* mDemo;           // _2A8 the cut-in camera as it appears and dies
+	SeCue mCue;                // _2AC
+	SeHolder mSe;              // _2B0
+	int mStep;                 // _2E4
+	int mTimer;                // _2E8
+	int mAngle;                // _2EC the yaw or pitch a leap starts at
+	f32 _2F0;                  // _2F0 the time of a leap the turn rate of a pounce or time by a rock
+	f32 _2F4;                  // _2F4 the turn rate of a leap or the time of a pounce
+	f32 mFallAt;               // _2F8 when a pounce starts its falling motion
+	f32 mFlight;               // _2FC how long a pounce lasts
 };
 
 /** The same state machine as EnemyBrain in TEneAm01.h built for the mole states run in phases 0 on entry 1 each
@@ -220,7 +220,7 @@ struct MoleBrainRoot {
 		mNext  = -1;
 	}
 
-	virtual int checkInterrupt() = 0;               // _08 1 if it changed state
+	virtual int checkInterrupt()               = 0; // _08 1 if it changed state
 	virtual void onPhase(int state, int phase) = 0; // _0C
 	inline virtual ~MoleBrainRoot() { }             // _10 0x8007D584
 
@@ -306,19 +306,19 @@ struct MoleBrain : public MoleBrainBase {
 	void phaseShow(int phase);
 	void phaseDie(int phase);
 
-	EnemySight mSight;  // _10
-	f32 _40;            // _40
-	int _44;            // _44
-	int _48;            // _48
+	EnemySight mSight;         // _10
+	f32 _40;                   // _40
+	int _44;                   // _44
+	int _48;                   // _48
 	TCamConversation* mCamera; // _4C the close-up while it surfaces
-	int _50;            // _50
-	int mSavedHealth;   // _54
-	int mTurn;          // _58 0x95 or -0x95 which way it circles
-	int mWave;          // _5C the angle of the in and out sway while circling
-	int mStep;          // _60
-	int mTimer;         // _64
-	int mCount;         // _68
-	int mDigs;          // _6C
+	int _50;                   // _50
+	int mSavedHealth;          // _54
+	int mTurn;                 // _58 0x95 or -0x95 which way it circles
+	int mWave;                 // _5C the angle of the in and out sway while circling
+	int mStep;                 // _60
+	int mTimer;                // _64
+	int mCount;                // _68
+	int mDigs;                 // _6C
 };
 
 extern "C" {

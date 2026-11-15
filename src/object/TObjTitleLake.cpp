@@ -17,12 +17,12 @@ extern "C" TObject* createTObjTitleLake(TObject* parent, SetDesc* desc)
 TObjTitleLake::TObjTitleLake(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00       = gTObjTitleLakeName;
-	mSize     = 0x100;
+	_00                 = gTObjTitleLakeName;
+	mSize               = 0x100;
 	NJS_OBJECT** models = getTitleObjModels();
-	mModel    = models[8];
-	void** textures = (void**)getTitleObjTexLists();
-	mTexList  = (NJS_TEXLIST*)textures[0];
+	mModel              = models[8];
+	void** textures     = (void**)getTitleObjTexLists();
+	mTexList            = (NJS_TEXLIST*)textures[0];
 	mWater.setModel(mModel, mTexList);
 	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x2A, 0);
 	initFromDesc(desc);

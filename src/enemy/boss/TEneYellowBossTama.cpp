@@ -118,10 +118,10 @@ TEneYellowBossTama_Orange::TEneYellowBossTama_Orange(TObject* parent, const Vec3
 {
 	EnemySight* sight;
 
-	_00     = sOrangeTamaName[0];
-	mSize   = 0x110;
+	_00   = sOrangeTamaName[0];
+	mSize = 0x110;
 	setObjId(this, 0xFFFF);
-	mModel  = modelTEneYellowBoss(3);
+	mModel      = modelTEneYellowBoss(3);
 	mXform.mPos = *pos;
 	shadowSetGround(&mShadow, &mXform.mPos, 0);
 	mShadow._30 = 9.0f;
@@ -130,7 +130,7 @@ TEneYellowBossTama_Orange::TEneYellowBossTama_Orange(TObject* parent, const Vec3
 	sight = &mSight;
 	sight->reset();
 	mSight.mHeightLimit = 1000.0f;
-	mShape  = colliCreate(1, 1);
+	mShape              = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks((CharaColli*)mShape, 2, 255, 0, 0x16);
 	colliShapeMakeSphere(colliGetShapes((CharaColli*)mShape), &mXform.mPos, 0, 5.0f);
@@ -206,14 +206,14 @@ void TEneYellowBossTama_Orange::throwAt(const Vec3f* target, int aimed)
 {
 	Vec3f dir;
 
-	mAimed = aimed;
+	mAimed    = aimed;
 	mTarget.x = target->x;
 	mTarget.y = target->y;
 	mTarget.z = target->z;
 	mTarget.y = 50.02f;
-	dir.x = mTarget.x;
-	dir.y = mTarget.y;
-	dir.z = mTarget.z;
+	dir.x     = mTarget.x;
+	dir.y     = mTarget.y;
+	dir.z     = mTarget.z;
 	njSubVector(&dir, &mXform.mPos);
 	f32 height = dir.y;
 	dir.y      = 0.0f;
@@ -341,10 +341,10 @@ TEneYellowBossTama_Blue::TEneYellowBossTama_Blue(TObject* parent, const Vec3f* p
 {
 	EnemySight* sight;
 
-	_00    = sBlueTamaName[0];
-	mSize  = 0x100;
+	_00   = sBlueTamaName[0];
+	mSize = 0x100;
 	setObjId(this, 0xFFFF);
-	mModel = modelTEneYellowBoss(3);
+	mModel        = modelTEneYellowBoss(3);
 	mXform.mPos.x = pos->x;
 	mXform.mPos.y = pos->y;
 	mXform.mPos.z = pos->z;
@@ -359,7 +359,7 @@ TEneYellowBossTama_Blue::TEneYellowBossTama_Blue(TObject* parent, const Vec3f* p
 	sight = &mSight;
 	sight->reset();
 	mSight.mHeightLimit = 1000.0f;
-	mShape = colliCreate(1, 1);
+	mShape              = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks((CharaColli*)mShape, 2, 255, 0, 0x16);
 	colliShapeMakeSphere(colliGetShapes((CharaColli*)mShape), &mXform.mPos, 0, 7.5f);
@@ -552,13 +552,13 @@ typedef char TEneYellowBossTama_ShockWave_size_check[(sizeof(TEneYellowBossTama_
 TEneYellowBossTama_ShockWave::TEneYellowBossTama_ShockWave(TObject* parent, const Vec3f* pos)
     : TObjAction(parent)
 {
-	_00     = sShockWaveName[0];
-	mSize   = 0x48;
+	_00   = sShockWaveName[0];
+	mSize = 0x48;
 	setObjId(this, 0xFFFF);
 	mPos    = *pos;
 	mRadius = -33.333332f;
 	mLife   = 10;
-	mShape = colliCreate(1, 1);
+	mShape  = colliCreate(1, 1);
 	colliSetOwner(mShape, (u16)mObjId);
 	colliSetMasks(mShape, 2, 255, 0, 0x16);
 	colliShapeMakeCylinder(colliGetShapes(mShape), &mPos, 1, 5.0f, 3.0f);
@@ -579,20 +579,20 @@ TEneYellowBossTama_ShockWave::~TEneYellowBossTama_ShockWave()
 int TEneYellowBossTama_ShockWave::onHit(const TObjAction* other, int, int* result)
 {
 	HitInfo* hit = (HitInfo*)result;
-	int hurt = 0;
+	int hurt     = 0;
 	if (isPlayerObj(other)) {
 		hurt = 1;
 		hit->mFlags.clear();
-		hit->mPos.x = 0.0f;
-		hit->mPos.y = 0.0f;
-		hit->mPos.z = 0.0f;
+		hit->mPos.x  = 0.0f;
+		hit->mPos.y  = 0.0f;
+		hit->mPos.z  = 0.0f;
 		hit->mDamage = 10;
 	} else if (isEggObj(other)) {
 		hurt = 1;
 		hit->mFlags.clear();
-		hit->mPos.x = 0.0f;
-		hit->mPos.y = 0.0f;
-		hit->mPos.z = 0.0f;
+		hit->mPos.x  = 0.0f;
+		hit->mPos.y  = 0.0f;
+		hit->mPos.z  = 0.0f;
 		hit->mDamage = 1;
 		hit->mFlags.setBit(0xD);
 	}
@@ -621,19 +621,37 @@ void TEneYellowBossTama_ShockWave::draw()
 }
 
 // 0x80151C8C
-int TEneYellowBossTama_ShockWave::getKind() { return 2; }
+int TEneYellowBossTama_ShockWave::getKind()
+{
+	return 2;
+}
 
 // 0x80151C94
-Vec3f* TEneYellowBossTama_ShockWave::getPos() { return &mPos; }
+Vec3f* TEneYellowBossTama_ShockWave::getPos()
+{
+	return &mPos;
+}
 
 // 0x80151C9C
-int TEneYellowBossTama_Blue::getKind() { return 2; }
+int TEneYellowBossTama_Blue::getKind()
+{
+	return 2;
+}
 
 // 0x80151CA4
-Vec3f* TEneYellowBossTama_Blue::getPos() { return &mXform.mPos; }
+Vec3f* TEneYellowBossTama_Blue::getPos()
+{
+	return &mXform.mPos;
+}
 
 // 0x80151CAC
-int TEneYellowBossTama_Orange::getKind() { return 2; }
+int TEneYellowBossTama_Orange::getKind()
+{
+	return 2;
+}
 
 // 0x80151CB4
-Vec3f* TEneYellowBossTama_Orange::getPos() { return &mXform.mPos; }
+Vec3f* TEneYellowBossTama_Orange::getPos()
+{
+	return &mXform.mPos;
+}

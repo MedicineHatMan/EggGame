@@ -55,18 +55,24 @@ const char* gTObjItemName = "TObjItem";
 
 // 0x800626B8
 TObjItem::TObjItem(TObject* parent, int kind, const Vec3f* pos)
-    : TObjAction(parent), mMode(ITEM_NONE), mFall(5), mLife(0x708), mAngle(0.0f), mSpin(0.0f), mLift(5.0f)
+    : TObjAction(parent)
+    , mMode(ITEM_NONE)
+    , mFall(5)
+    , mLife(0x708)
+    , mAngle(0.0f)
+    , mSpin(0.0f)
+    , mLift(5.0f)
 {
 	ColliShape* shape;
 
-	_00      = (u32)gTObjItemName;
-	mSize    = 0x194;
-	mPos.x   = pos->x;
-	mPos.y   = pos->y + 5.0f;
-	mPos.z   = pos->z;
-	mVel.x   = 0.0f;
-	mVel.y   = 0.0f;
-	mVel.z   = 0.0f;
+	_00           = (u32)gTObjItemName;
+	mSize         = 0x194;
+	mPos.x        = pos->x;
+	mPos.y        = pos->y + 5.0f;
+	mPos.z        = pos->z;
+	mVel.x        = 0.0f;
+	mVel.y        = 0.0f;
+	mVel.z        = 0.0f;
 	mBody.mRadius = 5.0f;
 	setObjId(this, 0xFFFF);
 	mShape = colliCreate(1, 1);
@@ -76,7 +82,7 @@ TObjItem::TObjItem(TObject* parent, int kind, const Vec3f* pos)
 		shape = colliGetShape((CharaColli*)mShape, 0);
 		colliShapeSetSphere((ColliShape*)shape);
 		colliGetShape((CharaColli*)mShape, 0)->mFlags = 0x10;
-		shape          = colliGetShape((CharaColli*)mShape, 0);
+		shape                                         = colliGetShape((CharaColli*)mShape, 0);
 		colliShapeSetPos(shape, pos);
 		colliGetShape((CharaColli*)mShape, 0)->mSizeX = 5.0f;
 	}
@@ -164,8 +170,8 @@ void TObjItem::updateFall()
 			bounce();
 			mFall = FALL_DROP;
 		} else {
-			f32 y = mBody.mPos.y;
-			f32 z = mBody.mPos.z;
+			f32 y  = mBody.mPos.y;
+			f32 z  = mBody.mPos.z;
 			mPos.x = mBody.mPos.x;
 			mPos.y = -2.0f * njSin(mTimer) + y;
 			mPos.z = z;

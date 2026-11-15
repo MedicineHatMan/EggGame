@@ -70,9 +70,9 @@ TObjDivineVoice::TObjDivineVoice(TObject* parent, SetDesc* desc)
 	mMotion.init((const MotionEntry*)sDivineVoiceMotions, gStgObjCommon->mSet.mMotions);
 	mMotion.play(0);
 
-	mState.mFlags   = DRAWSTATE_BLEND | DRAWSTATE_AMBIENT;
-	mState.mBlend   = 1;
-	mState.mAmbient = 0x000000FF; // black alpha 255
+	mState.mFlags    = DRAWSTATE_BLEND | DRAWSTATE_AMBIENT;
+	mState.mBlend    = 1;
+	mState.mAmbient  = 0x000000FF; // black alpha 255
 	mState2.mFlags   = DRAWSTATE_AMBIENT;
 	mState2.mAmbient = 0;
 
@@ -111,14 +111,12 @@ void TObjDivineVoice::initFromDesc(SetDesc* desc)
 	f32 c;
 
 	TSetActor::initFromDesc(desc);
-	mMsgId = desc->getInt(0) < 0 ? 0
-	       : desc->getInt(0) > getMessageCount() - 1 ? getMessageCount() - 1
-	                                                 : desc->getInt(0);
+	mMsgId     = desc->getInt(0) < 0 ? 0 : desc->getInt(0) > getMessageCount() - 1 ? getMessageCount() - 1 : desc->getInt(0);
 	mShapeKind = desc->getInt(1) < 0 ? 0 : desc->getInt(1) > 2 ? 2 : desc->getInt(1);
 	mMsgOnly   = desc->getInt(2) < 0 ? 0 : desc->getInt(2) > 1 ? 1 : desc->getInt(2);
-	a = desc->getFloat(0);
-	b = desc->getFloat(1);
-	c = desc->getFloat(2);
+	a          = desc->getFloat(0);
+	b          = desc->getFloat(1);
+	c          = desc->getFloat(2);
 	switch (mShapeKind) {
 	case 0:
 		colliShapeMakeSphere(&shape, &mPos, 0, a);
@@ -184,9 +182,9 @@ void TObjDivineVoice::draw()
 
 // Message 0x87 hold still for the voice
 struct VoiceMsg {
-	u16 mType;  // _00
+	u16 mType; // _00
 	u16 _02;
-	u16 mFrom;  // _04
+	u16 mFrom; // _04
 };
 
 // 0x80121DEC
@@ -225,7 +223,7 @@ void TObjDivineVoice::wait()
 			mtxCopy(mCamera->getMtx(), mMtx);
 			mtxTranslate(mtx, mMtx, 0.0f, 40.0f, 0.0f);
 			mtxRotateX(mtx, mtx, 0x4000);
-			mFx = fxSpawnAt(1, 7, 3, mtx);
+			mFx    = fxSpawnAt(1, 7, 3, mtx);
 			u16 id = mObjId;
 			eventStartByIds(id, mRef.getId());
 		} else {
@@ -246,8 +244,8 @@ void TObjDivineVoice::talk()
 
 	if (mText != 0 && mText->mState == 3) {
 		mText->mHold = 1;
-		mText = 0;
-		mMode = VOICE_CLOSE;
+		mText        = 0;
+		mMode        = VOICE_CLOSE;
 		return;
 	}
 	if (mMsgOnly == 0) {
@@ -301,7 +299,9 @@ void TObjDivineVoice::close()
 }
 
 // 0x801221B4
-void TObjDivineVoice::vfn_10() { }
+void TObjDivineVoice::vfn_10()
+{
+}
 
 // 0x801221B8
 void TObjDivineVoice::render()

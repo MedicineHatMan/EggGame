@@ -12,11 +12,11 @@ void LSC_EntryErrFunc(void (*func)(void*, char*), void* obj)
 {
 	if (func == 0) {
 		lsc_err_func = 0;
-		lsc_err_obj = 0;
+		lsc_err_obj  = 0;
 		return;
 	}
 	lsc_err_func = func;
-	lsc_err_obj = obj;
+	lsc_err_obj  = obj;
 }
 
 // 0x8022B0B0

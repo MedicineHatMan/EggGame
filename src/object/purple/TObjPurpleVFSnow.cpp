@@ -103,7 +103,7 @@ static inline void raiseSnow(u32 x, u32 z)
 extern "C" void initSnowField()
 {
 	sCells = new SnowCell[0x81 * 0x56];
-	sBase = new f32[0x81 * 0x56];
+	sBase  = new f32[0x81 * 0x56];
 	resetSnowField();
 }
 
@@ -115,40 +115,40 @@ extern "C" void resetSnowField()
 	u32 z;
 	for (z = 0; z < 0x56; z++) {
 		f32 zf = 6.2f * (f32)(int)z;
-		f32 v = zf / 52.7f;
+		f32 v  = zf / 52.7f;
 		for (x = 0; x < 0x81; x++) {
-			f32 height = 6.2f * (0.2f * randUnit() + 0.8f);
-			f32 xf = 6.2f * (f32)(int)x;
+			f32 height     = 6.2f * (0.2f * randUnit() + 0.8f);
+			f32 xf         = 6.2f * (f32)(int)x;
 			SnowCell* cell = snowCell(x, z);
-			cell->x = xf;
-			cell->y = height;
-			cell->z = zf;
-			cell->u = xf / 79.36f;
-			cell->v = v;
-			cell->color = 0;
+			cell->x        = xf;
+			cell->y        = height;
+			cell->z        = zf;
+			cell->u        = xf / 79.36f;
+			cell->v        = v;
+			cell->color    = 0;
 			updateSnowColor(snowCell(x, z));
 			setSnowBase(x, z, height);
 		}
 	}
 	for (x = 0; x < 0x81; x++) {
-		snowCell(x, 0)->y = 0.0f;
-		snowCell(x, 0)->color = 0xDC;
-		SnowCell* cell = snowCell(x, 0);
-		cell->z = 3.1f * randUnit() + cell->z;
-		snowCell(x, 0x55)->y = 0.0f;
+		snowCell(x, 0)->y        = 0.0f;
+		snowCell(x, 0)->color    = 0xDC;
+		SnowCell* cell           = snowCell(x, 0);
+		cell->z                  = 3.1f * randUnit() + cell->z;
+		snowCell(x, 0x55)->y     = 0.0f;
 		snowCell(x, 0x55)->color = 0xDC;
-		cell = snowCell(x, 0x55);
-		cell->z = cell->z - 3.1f * randUnit();
+		cell                     = snowCell(x, 0x55);
+		cell->z                  = cell->z - 3.1f * randUnit();
 	}
 	for (z = 0; z < 0x56; z++) {
-		snowCell(0, z)->y = 0.0f;
-		snowCell(0, z)->color = 0xDC;
-		SnowCell* cell = snowCell(0, z);
-		cell->x = 3.1f * randUnit() + cell->x;
-		snowCell(0x80, z)->y = 0.0f;
+		snowCell(0, z)->y        = 0.0f;
+		snowCell(0, z)->color    = 0xDC;
+		SnowCell* cell           = snowCell(0, z);
+		cell->x                  = 3.1f * randUnit() + cell->x;
+		snowCell(0x80, z)->y     = 0.0f;
 		snowCell(0x80, z)->color = 0xDC;
-		cell = snowCell(0x80, z);
-		cell->x = cell->x - 3.1f * randUnit();
+		cell                     = snowCell(0x80, z);
+		cell->x                  = cell->x - 3.1f * randUnit();
 	}
 }
 
@@ -175,7 +175,7 @@ TObjPurpleVFSnow::TObjPurpleVFSnow(TObject* parent, SetDesc* desc)
 	mSize = 0x80;
 	resetSnowField();
 
-	mPlate = new MeshPlate(0x80, 793.6f, 527.0f);
+	mPlate    = new MeshPlate(0x80, 793.6f, 527.0f);
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	makeShape();
 	initFromDesc(desc);
@@ -294,7 +294,7 @@ void TObjPurpleVFSnow::draw()
 		}
 
 		Vec3f head;
-		head = *other->getPos();
+		head       = *other->getPos();
 		f32 radius = other->getRadiusV();
 		vecSub(&head, &head, &mPos);
 
@@ -381,12 +381,12 @@ void TObjPurpleVFSnow::vfn_10()
 static inline void snowVertex(u16 index, const SnowCell* cell)
 {
 	GX_FIFO_U16 = index;
-	u8 color = cell->color;
+	u8 color    = cell->color;
 	GX_FIFO_U8  = color;
 	GX_FIFO_U8  = color;
 	GX_FIFO_U8  = color;
-	f32 u = cell->u;
-	f32 v = cell->v;
+	f32 u       = cell->u;
+	f32 v       = cell->v;
 	GX_FIFO_F32 = u;
 	GX_FIFO_F32 = v;
 }
@@ -394,8 +394,8 @@ static inline void snowVertex(u16 index, const SnowCell* cell)
 // 0x800F9BC4
 void TObjPurpleVFSnow::render()
 {
-	DrawState* state = getDefaultDrawState();
-	DrawStateSlot* slot  = getDrawStateSlot();
+	DrawState* state    = getDefaultDrawState();
+	DrawStateSlot* slot = getDrawStateSlot();
 	beginDrawState(slot, state);
 	gjGXSetBlendMode(0);
 	GXSetZCompLoc(GX_FALSE);
@@ -432,7 +432,7 @@ void TObjPurpleVFSnow::render()
 		GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT0, 0x102);
 		for (int col = 0; col < SNOW_STRIDE; col++) {
 			SnowCell* cell = &line[col];
-			u16 v = index + col;
+			u16 v          = index + col;
 			snowVertex(v, cell);
 			snowVertex(v - SNOW_STRIDE, cell - SNOW_STRIDE);
 		}

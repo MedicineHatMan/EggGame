@@ -21,18 +21,18 @@ struct ResBankData {
 	NJS_OBJECT** mModels;    // _00
 	NJS_MOTION*** mMotions;  // _04 a motion list per entry
 	NJS_TEXLIST** mTextures; // _08
-	void* _0C;        // _0C
+	void* _0C;               // _0C
 };
 
 struct ResBankExtra {
-	int mNo;            // _00
+	int mNo;             // _00
 	ResBankExtra* mNext; // _04
-	BinFile* mFile;        // _08
+	BinFile* mFile;      // _08
 };
 
 struct ResBank {
-	TArc* mArc;          // _00
-	ResBankData* mData;  // _04
+	TArc* mArc;           // _00
+	ResBankData* mData;   // _04
 	ResBankExtra* mExtra; // _08
 };
 
@@ -85,13 +85,13 @@ public:
 	virtual void vfn_10(); // _10
 	virtual void render(); // _1C
 
-	NJS_OBJECT* mModel;    // _20
-	void* mActor;    // _24
-	void* mTextures; // _28
-	u32 mState[8];   // _2C
-	u32 _4C;         // _4C
-	f32 mMatrix[12]; // _50
-	DrawTask* mTask;     // _80
+	NJS_OBJECT* mModel; // _20
+	void* mActor;       // _24
+	void* mTextures;    // _28
+	u32 mState[8];      // _2C
+	u32 _4C;            // _4C
+	f32 mMatrix[12];    // _50
+	DrawTask* mTask;    // _80
 };
 
 /** NJS_TEXNAME and NJS_TEXLIST ninja.h clashes with the GX prototypes above */

@@ -18,7 +18,7 @@ public:
 	virtual void render(); // _1C
 
 	TAeLayer* mLayer; // _34
-	DrawTask* mTask;      // _38 from addDrawTask
+	DrawTask* mTask;  // _38 from addDrawTask
 };
 
 extern "C" {

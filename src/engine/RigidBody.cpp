@@ -92,10 +92,10 @@ void RigidBody::vfn_18()
 {
 	SetTransformBase::vfn_18();
 	SpinQuat turn;
-	turn.w = 0.0f;
-	turn.x = mSpin.x;
-	turn.y = mSpin.y;
-	turn.z = mSpin.z;
+	turn.w       = 0.0f;
+	turn.x       = mSpin.x;
+	turn.y       = mSpin.y;
+	turn.z       = mSpin.z;
 	SpinQuat add = spinScale(spinMul(turn, mQuat), 0.5f);
 	quatAdd((Quat*)mQuat, (const Quat*)&add);
 	quatNormalize((Quat*)mQuat);

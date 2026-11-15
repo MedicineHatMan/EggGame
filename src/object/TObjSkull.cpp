@@ -19,7 +19,6 @@ MotionEntry sSkullMotions[] = {
 	{ 4, 0, 0, 0, 0.0f, 0.0f, 0.0f, 0.0f, 0 },
 	{ MOTION_ONCE, 0, -1, 0, 0.0f, 14.0f, 1.0f, 0.0f, 0 },
 };
-
 }
 
 #define sSkulls sSkullListObj
@@ -155,7 +154,7 @@ int TObjSkull::lightEyes(u16 id)
 			Vec3f left;
 			Vec3f right;
 			right = mPos;
-			left = mPos;
+			left  = mPos;
 			Vec3f leftEye;
 			leftEye.x = -9.5f;
 			leftEye.y = 0.8f;
@@ -308,9 +307,9 @@ void SkullList::clear()
 	SkullNode* node = mHead;
 	while (node != 0) {
 		SkullNode* next = node->mNext;
-		node->mList = 0;
-		node->mNext = 0;
-		node->mPrev = 0;
-		node = next;
+		node->mList     = 0;
+		node->mNext     = 0;
+		node->mPrev     = 0;
+		node            = next;
 	}
 }

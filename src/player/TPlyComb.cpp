@@ -31,14 +31,14 @@ f32 sCombLinkLimits[] = {
 
 // A node of the model the strands follow
 struct ActorNode {
-	u32 mFlags;       // _00
-	u32 mModel;       // _04
-	f32 mTrans[3];    // _08
-	f32 mRot[3];      // _14
-	f32 mScale[3];    // _20
+	u32 mFlags;        // _00
+	u32 mModel;        // _04
+	f32 mTrans[3];     // _08
+	f32 mRot[3];       // _14
+	f32 mScale[3];     // _20
 	ActorNode* mChild; // _2C
 	ActorNode* mNext;  // _30
-	f32 mQuat;        // _34
+	f32 mQuat;         // _34
 };
 
 struct JointCursor {
@@ -68,10 +68,10 @@ TPlyComb::TPlyComb(TObject* parent)
     , mRoot(0)
     , mLinks(0xF)
 {
-	_00         = (u32)gTPlyCombName;
-	mSize       = 0x11C;
-	mOn         = 1;
-	mBits       = 0;
+	_00   = (u32)gTPlyCombName;
+	mSize = 0x11C;
+	mOn   = 1;
+	mBits = 0;
 	mBits |= 0x40;
 	mLight.mFlags = 2;
 }
@@ -131,15 +131,15 @@ void CombGroup::fill(f32* mtx)
 {
 	Vec3f prev;
 	CombLink* links = mLink;
-	int count = mCount;
+	int count       = mCount;
 	f32* m;
 	CombLink* link;
 	for (int i = 0; i < count; i++) {
-		m = mtx + i * 12;
+		m    = mtx + i * 12;
 		link = &links[i];
 		mtxGetPos(m, &link->mPos);
 		mtxCopy(link->mMtx, m);
-		link->mPrev  = link->mPos;
+		link->mPrev    = link->mPos;
 		link->mForce.x = 0.0f;
 		link->mForce.y = 0.0f;
 		link->mForce.z = 0.0f;
@@ -528,4 +528,3 @@ static int skinNodes(ActorNode* node, int index, CombLink* link, Vec3f* hit)
 	} while (node != 0);
 	return index;
 }
-

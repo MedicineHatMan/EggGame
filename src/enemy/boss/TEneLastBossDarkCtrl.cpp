@@ -124,7 +124,7 @@ void DarkPixelMap::shuffle()
 			int i;
 
 			for (i = 0; i < count; i++) {
-				last = mCount - 1;
+				last     = mCount - 1;
 				int pick = (int)((f32)last * (3.0517578E-5f * (f32)rand()));
 				int temp;
 
@@ -215,7 +215,7 @@ int DarkPixelMap::update(u8* pixels)
 		switch (mState) {
 		case 3:
 			for (i = 0; i < count; i++) {
-				result = 1;
+				result                   = 1;
 				pixels[mPixels[mCursor]] = 0xFF;
 				mSeen++;
 				mCursor++;
@@ -310,10 +310,10 @@ extern "C" void darkFlashesReset(DarkFlashSlot* slots)
 // 0x8015B314
 extern "C" void darkFlashesAge(DarkFlashSlot* slots)
 {
-	
+
 	int free;
 	int i;
-	
+
 	for (int i = 0; i < 8; i++) {
 		slots[i].age();
 	}
@@ -358,8 +358,8 @@ extern "C" void initLastBossDark()
 
 	resBankLoad(&gLastBossDarkBank, "ar_ene_last_dark.arc");
 	resBankAddTextures(&gLastBossDarkBank, 0, "ene_last_dark.gvm");
-	size         = GXGetTexBufferSize(0x100, 0x100, 2, GX_FALSE, 0);
-	gDarkTexture = new u8[size];
+	size             = GXGetTexBufferSize(0x100, 0x100, 2, GX_FALSE, 0);
+	gDarkTexture     = new u8[size];
 	gDarkTextureSize = size;
 	syMemSet4(gDarkTexture, 0, (int)size / 4);
 	DCStoreRange(gDarkTexture, size);
@@ -391,10 +391,16 @@ extern "C" void createLastBossDark()
 
 #define DARK_RAND() ((1.0f / 32768.0f) * rand())
 
-static inline f32 darkSqrt(f32 x) { return __fres((f32)__frsqrte(x)); }
+static inline f32 darkSqrt(f32 x)
+{
+	return __fres((f32)__frsqrte(x));
+}
 
 // A random value in [base base + range)
-static inline f32 darkRandRange(f32 range, f32 base) { return range * DARK_RAND() + base; }
+static inline f32 darkRandRange(f32 range, f32 base)
+{
+	return range * DARK_RAND() + base;
+}
 
 // The texel of row col in the 4 by 8 tiles of an I8 texture 256 wide
 #define DARK_ROW(row) ((((row) >> 2) << 10) + (((row) & 3) << 3))
@@ -416,22 +422,22 @@ TEneLastBossDarkCtrl::TEneLastBossDarkCtrl(TObject* parent)
 	f32 col;
 	int i;
 
-	_00    = (u32)gTEneLastBossDarkCtrlName;
-	mSize  = 0x2E5C;
+	_00   = (u32)gTEneLastBossDarkCtrlName;
+	mSize = 0x2E5C;
 	setObjId(this, 0xFFFF);
-	mDraw       = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
-	mPos.x      = 0.0f;
-	mPos.y      = 20.0f;
-	mPos.z      = 0.0f;
-	mNextId     = 0x1E;
-	mDarkFlags  = 0;
-	mAlpha      = 0xFF;
-	mPhase      = 0.0f;
-	mPhaseRate  = 1.0f;
-	mHitPos.x   = 0.0f;
-	mHitPos.y   = 0.0f;
-	mHitPos.z   = 0.0f;
-	mHitTimer   = 0;
+	mDraw      = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x22, 0);
+	mPos.x     = 0.0f;
+	mPos.y     = 20.0f;
+	mPos.z     = 0.0f;
+	mNextId    = 0x1E;
+	mDarkFlags = 0;
+	mAlpha     = 0xFF;
+	mPhase     = 0.0f;
+	mPhaseRate = 1.0f;
+	mHitPos.x  = 0.0f;
+	mHitPos.y  = 0.0f;
+	mHitPos.z  = 0.0f;
+	mHitTimer  = 0;
 	seHolderStop(&mSe);
 	mFxKind = -1;
 	mFxHit  = 0;
@@ -455,7 +461,7 @@ TEneLastBossDarkCtrl::TEneLastBossDarkCtrl(TObject* parent)
 	for (row = 0.0f; row <= 19.0f; row += 1.0f) {
 		z = 250.0f - (500.0f * row) / 19.0f;
 		for (col = 0.0f; col <= 19.0f; col += 1.0f) {
-			x = 250.0f - (500.0f * col) / 19.0f;
+			x       = 250.0f - (500.0f * col) / 19.0f;
 			rest->x = x;
 			rest->y = 0.0f;
 			rest->z = z;
@@ -531,10 +537,10 @@ void TEneLastBossDarkCtrl::setPos(const Vec3f* pos)
 {
 	ColliShape* shape;
 
-	mPos.x   = pos->x;
-	mPos.y   = pos->y;
-	mPos.z   = pos->z;
-	shape    = colliGetShapes(mShape);
+	mPos.x        = pos->x;
+	mPos.y        = pos->y;
+	mPos.z        = pos->z;
+	shape         = colliGetShapes(mShape);
 	shape->mPos.x = pos->x;
 	shape->mPos.y = pos->y;
 	shape->mPos.z = pos->z;
@@ -581,7 +587,10 @@ void TEneLastBossDarkCtrl::hide()
 }
 
 // 0x8015BB20
-void TEneLastBossDarkCtrl::fadeOut() { mDarkFlags |= 8; }
+void TEneLastBossDarkCtrl::fadeOut()
+{
+	mDarkFlags |= 8;
+}
 
 // 0x8015BB30
 void darkCtrlFadeOut()
@@ -592,7 +601,10 @@ void darkCtrlFadeOut()
 }
 
 // 0x8015BB5C
-void TEneLastBossDarkCtrl::setNoContact() { mDarkFlags |= 4; }
+void TEneLastBossDarkCtrl::setNoContact()
+{
+	mDarkFlags |= 4;
+}
 
 // 0x8015BB6C
 void darkCtrlSetNoContact()
@@ -603,7 +615,10 @@ void darkCtrlSetNoContact()
 }
 
 // 0x8015BB98
-void TEneLastBossDarkCtrl::clearNoContact() { mDarkFlags &= ~4; }
+void TEneLastBossDarkCtrl::clearNoContact()
+{
+	mDarkFlags &= ~4;
+}
 
 // 0x8015BBA8
 void darkCtrlClearNoContact()
@@ -935,8 +950,8 @@ int TEneLastBossDarkCtrl::isInDark(const TObjAction* obj)
 	if (x <= 0.0f || z <= 0.0f || x >= 255.0f || z >= 255.0f) {
 		return 0;
 	}
-	col = (f32)ceil(x);
-	row = (f32)ceil(z);
+	col   = (f32)ceil(x);
+	row   = (f32)ceil(z);
 	int i = ((row >> 2) << 10) + ((col >> 3) << 5);
 	i += (row & 3) << 3;
 	i += col & 7;
@@ -947,18 +962,18 @@ int TEneLastBossDarkCtrl::isInDark(const TObjAction* obj)
 int TEneLastBossDarkCtrl::onHit(const TObjAction* other, int arg, int* result)
 {
 	HitInfo* hit = (HitInfo*)result;
-	int ret = 0;
+	int ret      = 0;
 
 	if (isPlayerOrKind4(other)) {
 		if (isInDark(other)) {
 			hit->mDamage = 10;
-			ret = 1;
+			ret          = 1;
 			hit->mFlags.clear();
 		}
 	} else if (isEggObj(other)) {
 		if (isInDark(other)) {
 			hit->mDamage = 1;
-			ret = 1;
+			ret          = 1;
 			hit->mFlags.clear();
 			hit->mFlags.setBit(0xD);
 		}
@@ -1078,9 +1093,9 @@ void TEneLastBossDarkCtrl::draw()
 			if (mFxKind >= 0) {
 				Vec3f at;
 				f32 scale;
-				at.x  = done->mPos.x;
-				at.y  = done->mPos.y;
-				at.z  = done->mPos.z;
+				at.x = done->mPos.x;
+				at.y = done->mPos.y;
+				at.z = done->mPos.z;
 				at.y += 2.0f;
 				scale = done->mRadius / 100.0f;
 				fxSpawnScaled(scale, scale, 1.0f, mFxKind, (void*)mFxGone, (const Vec3f*)&at, -0x4000, 0);
@@ -1106,7 +1121,7 @@ void TEneLastBossDarkCtrl::draw()
 			py = point->y;
 			d  = py - rest;
 			ad = __fabs(d);
-			v = *vel;
+			v  = *vel;
 			v += d * spring;
 			v *= 0.995f;
 			f32 y = py + v;
@@ -1278,27 +1293,36 @@ void TEneLastBossDarkCtrl::render()
 }
 
 // 0x8015D2A8
-int TEneLastBossDarkCtrl::getKind() { return 2; }
+int TEneLastBossDarkCtrl::getKind()
+{
+	return 2;
+}
 
 // 0x8015D2B0
-Vec3f* TEneLastBossDarkCtrl::getPos() { return &mPos; }
+Vec3f* TEneLastBossDarkCtrl::getPos()
+{
+	return &mPos;
+}
 
 // 0x8015D2B8
 // Loads the feather resources TEneLastBossFeather's at the end of this unit
 void lastBossFeatherInit()
 {
-	gLastBossFeatherObject = modelTEneLastBoss(1);
+	gLastBossFeatherObject  = modelTEneLastBoss(1);
 	gLastBossFeatherTexList = textureTEneLastBoss();
-	gLastBossFeatherMotion = motionTEneLastBoss(3);
+	gLastBossFeatherMotion  = motionTEneLastBoss(3);
 }
 
 // 0x8015D2F4
 void lastBossFeatherTerm()
 {
-	gLastBossFeatherObject = 0;
+	gLastBossFeatherObject  = 0;
 	gLastBossFeatherTexList = 0;
-	gLastBossFeatherMotion = 0;
+	gLastBossFeatherMotion  = 0;
 }
 
 // 0x8015D308
-u8* lastBossFeatherTable() { return (u8*)gLastBossFeatherNodes; }
+u8* lastBossFeatherTable()
+{
+	return (u8*)gLastBossFeatherNodes;
+}

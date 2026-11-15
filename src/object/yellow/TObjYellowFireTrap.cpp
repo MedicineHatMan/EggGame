@@ -25,7 +25,6 @@ struct SetLink;
 extern "C" {
 // 0x802C4350
 ObjClassName gTObjYellowFireTrapName = { "TObjYellowFireTrap", 0 };
-
 }
 
 #define sFireTrapVisible sYellowFireTrapVisible
@@ -92,8 +91,8 @@ int TObjYellowFireTrap::onHit(const TObjAction* other, int, int* info)
 TObjYellowFireTrap::TObjYellowFireTrap(TObject* parent, SetDesc* desc)
     : TSetActor(parent, desc)
 {
-	_00   = (u32)gTObjYellowFireTrapName.mName;
-	mSize = 0x104;
+	_00       = (u32)gTObjYellowFireTrapName.mName;
+	mSize     = 0x104;
 	mDrawTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 33, 0);
 
 	mShape = colliCreate(1, 1);

@@ -16,17 +16,17 @@ struct NJS_OBJECT;
 
 extern "C" {
 TArc* sBattleModelHiyokoArc; // battlemodel_hiyoko.arc
-void* sBattleHiyokoBlock; // the block at arc+0x4C
-int sBattleHiyokoNode;   // node counter for the motion callback
+void* sBattleHiyokoBlock;    // the block at arc+0x4C
+int sBattleHiyokoNode;       // node counter for the motion callback
 }
 
 // Block inside the archive
 struct HiyokoBlock {
-	u8 _00[8];       // _00
-	void** mModels;  // _08
-	void* mMotions;  // _0C
-	void** mTex;     // _10
-	void** mGvm;     // _14
+	u8 _00[8];      // _00
+	void** mModels; // _08
+	void* mMotions; // _0C
+	void** mTex;    // _10
+	void** mGvm;    // _14
 };
 
 // The block is read again at each use
@@ -42,7 +42,7 @@ extern "C" void loadBattleModelHiyoko()
 {
 	loadArc("battlemodel_hiyoko.arc", &sBattleModelHiyokoArc);
 	HiyokoBlock* block = (HiyokoBlock*)sBattleModelHiyokoArc->mData;
-	sBattleHiyokoBlock       = block;
+	sBattleHiyokoBlock = block;
 	bindGvmTextures((u8*)*block->mGvm, (NJS_TEXLIST*)*block->mTex);
 }
 
@@ -63,11 +63,13 @@ extern "C" TBattleModelHiyoko* createTBattleModelHiyoko(TObject* parent, const V
 
 // 0x80198830
 TBattleModelHiyoko::TBattleModelHiyoko(TObject* parent, const Vec3f* pos, int* angle)
-    : TObject(parent), mPos(*pos), mAngle(*(const BattleAngle*)angle)
+    : TObject(parent)
+    , mPos(*pos)
+    , mAngle(*(const BattleAngle*)angle)
 {
-	_00        = (u32)gTBattleModelHiyokoName;
-	mSize      = 0xB0;
-	mDraw      = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	_00   = (u32)gTBattleModelHiyokoName;
+	mSize = 0xB0;
+	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	setup();
 }
 
@@ -102,7 +104,9 @@ void TBattleModelHiyoko::draw()
 }
 
 // 0x80198A20
-void TBattleModelHiyoko::vfn_10() { }
+void TBattleModelHiyoko::vfn_10()
+{
+}
 
 // 0x80198A24
 void TBattleModelHiyoko::render()
@@ -150,7 +154,7 @@ void TBattleModelHiyoko::stepMotion()
 		if (mMotion.isBlending() != 0) {
 			gjMotionLinkActor(mActor, mMotion.getBlend(), mMotion.mBlendTime);
 		} else {
-			int cur = mMotion.mCurrent;
+			int cur   = mMotion.mCurrent;
 			f32 frame = mMotion.mFrame;
 			gjMotionActor(frame, mActor, mMotion.getMotion(cur));
 		}
@@ -185,12 +189,14 @@ extern "C" TBattleModelHiyokoProp* createTBattleModelHiyokoProp(TObject* parent,
 
 // 0x80198CC8
 TBattleModelHiyokoProp::TBattleModelHiyokoProp(TObject* parent, const Vec3f* pos, int* angle)
-    : TObject(parent), mPos(*pos), mAngle(*(const BattleAngle*)angle)
+    : TObject(parent)
+    , mPos(*pos)
+    , mAngle(*(const BattleAngle*)angle)
 {
-	mScale    = 1.0f;
-	_00       = (u32)gTBattleModelHiyokoName;
-	mSize     = 0x74;
-	mDraw     = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
+	mScale = 1.0f;
+	_00    = (u32)gTBattleModelHiyokoName;
+	mSize  = 0x74;
+	mDraw  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x21, 0);
 	setup();
 }
 
@@ -214,7 +220,9 @@ void TBattleModelHiyokoProp::draw()
 }
 
 // 0x80198E28
-void TBattleModelHiyokoProp::vfn_10() { }
+void TBattleModelHiyokoProp::vfn_10()
+{
+}
 
 // 0x80198E2C
 void TBattleModelHiyokoProp::render()

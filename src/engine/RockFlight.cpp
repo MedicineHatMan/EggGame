@@ -95,9 +95,9 @@ void RockFlight::setSize(f32 size)
 f32 RockFlight::clampSpeed(f32 max)
 {
 	Vec3f dir;
-	dir.x = mBody.mVel.x;
-	dir.y = mBody.mVel.y;
-	dir.z = mBody.mVel.z;
+	dir.x     = mBody.mVel.x;
+	dir.y     = mBody.mVel.y;
+	dir.z     = mBody.mVel.z;
 	f32 speed = njUnitVector(&dir);
 	f32 result;
 
@@ -165,7 +165,7 @@ extern "C" int rockHitTri(f32 depth, MeshColli* mesh, int tri, RockHit* hit, con
 		njAddVector(&hit->mVel, &change);
 		Vec3f lift;
 		const Vec3f& ref2 = scaled(normal, hit->mRadius - depth);
-		lift = ref2;
+		lift              = ref2;
 		njAddVector(&hit->mPos, &lift);
 		if (hit->mHit == 0) {
 			hit->mHit    = 1;
@@ -196,7 +196,8 @@ int RockFlight::collide(f32 friction)
 	hit.mVel0      = mBody.mVel;
 	queryBegin(&list);
 	queryGatherBall(&list, &sphere);
-	if (meshListQuerySphereEx(&list, (const MeshSphere*)&sphere, (void*)rockHitTri, 0, 0, (void*)&hit, (unsigned long)1) != 0 && hit.mHit != 0) {
+	if (meshListQuerySphereEx(&list, (const MeshSphere*)&sphere, (void*)rockHitTri, 0, 0, (void*)&hit, (unsigned long)1) != 0
+	    && hit.mHit != 0) {
 		njOuterProduct(&hit.mNormal, &hit.mVel, &side);
 		njOuterProduct(&side, &hit.mNormal, &along);
 		vecNormalize(&dir, &along);

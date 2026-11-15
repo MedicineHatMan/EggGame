@@ -14,6 +14,7 @@ struct CamView;
 
 static inline void lifeFastCast()
 {
+	// clang-format off
 	asm {
 		li r3, 4
 		oris r3, r3, 4
@@ -28,14 +29,17 @@ static inline void lifeFastCast()
 		oris r3, r3, 7
 		mtspr 917, r3
 	}
+	// clang-format on
 }
 
 static inline f32 lifeS16ToF32(register const s16* arg)
 {
 	register f32 ret;
+	// clang-format off
 	asm {
 		psq_l ret, 0(arg), 1, 5
 	}
+	// clang-format on
 	return ret;
 }
 
@@ -149,20 +153,20 @@ int LifePart::project(Vec3f* pos, f32 size, f32 max)
 	if (depth > 250.0f) {
 		return 0;
 	}
-	mDepth  = depth;
-	f32 inv = 1.0f / depth;
+	mDepth             = depth;
+	f32 inv            = 1.0f / depth;
 	LifeCamera* camera = (LifeCamera*)camGetDrawView();
 	if (camera == 0) {
 		return 0;
 	}
 	f32 focal  = camera->mFocal;
 	f32 aspect = camera->mAspect;
-	f32 side = (f32)__fabs(view.x) - 30.0f;
+	f32 side   = (f32)__fabs(view.x) - 30.0f;
 	side *= inv;
 	if (side > focal) {
 		return 0;
 	}
-	y = view.y;
+	y      = view.y;
 	f32 up = (f32)__fabs(y) - 30.0f;
 	up *= inv;
 	if (aspect * up > focal) {
@@ -271,9 +275,9 @@ inline void TEnemyLifeBar::operator delete(void* mem)
 TEnemyLifeBar::TEnemyLifeBar(TObject* parent)
     : TObject(parent)
 {
-	_00 = (u32)sClassName;
-	mSize = 0xAC;
-	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 61, 0);
+	_00       = (u32)sClassName;
+	mSize     = 0xAC;
+	mTask     = addDrawTask(this, (void (*)(void*))drawObjectTask, 61, 0);
 	u16* bits = &mTask->mFlags;
 	*bits &= ~1;
 
@@ -285,14 +289,14 @@ TEnemyLifeBar::TEnemyLifeBar(TObject* parent)
 		}
 	}
 
-	mPos.x = 0.0f;
-	mPos.y = 0.0f;
-	mPos.z = 0.0f;
-	mRise = 50.0f;
+	mPos.x  = 0.0f;
+	mPos.y  = 0.0f;
+	mPos.z  = 0.0f;
+	mRise   = 50.0f;
 	mHeight = 20.0f;
-	mMax = 100.0f;
-	mValue = mMax;
-	mBlink = 0;
+	mMax    = 100.0f;
+	mValue  = mMax;
+	mBlink  = 0;
 	for (int i = 0; i < 4; i++) {
 		mPart[i].init();
 	}
@@ -310,7 +314,7 @@ void TEnemyLifeBar::setMax(s16 health)
 	lifeFastCast();
 	f32 value = lifeS16ToF32(&health);
 	value *= 2.0f;
-	mMax = value;
+	mMax  = value;
 	mMark = 0.1f * value;
 }
 
@@ -335,7 +339,7 @@ void TEnemyLifeBar::setValue(s16 health)
 // 0x8004C948
 void TEnemyLifeBar::setSize(f32 rise, f32 height)
 {
-	mRise = rise;
+	mRise   = rise;
 	mHeight = height;
 }
 

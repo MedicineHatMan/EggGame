@@ -4,146 +4,146 @@
 #include "math.h"
 #define NULL 0
 
-static void DLsetdelay(struct AXFX_REVSTD_DELAYLINE * dl, long lag);
-static int DLcreate(struct AXFX_REVSTD_DELAYLINE * dl, long max_length);
-static void DLdelete(struct AXFX_REVSTD_DELAYLINE * dl);
-static int ReverbSTDCreate(struct AXFX_REVSTD_WORK * rv, float coloration, float time, float mix, float damping, float predelay);
-static int ReverbSTDModify(struct AXFX_REVSTD_WORK * rv, float coloration, float time, float mix, float damping, float predelay);
-static void HandleReverb(long * sptr, struct AXFX_REVSTD_WORK * rv);
-static void ReverbSTDCallback(long * left, long * right, long * surround, struct AXFX_REVSTD_WORK * rv);
-static void ReverbSTDFree(struct AXFX_REVSTD_WORK * rv);
+static void DLsetdelay(struct AXFX_REVSTD_DELAYLINE* dl, long lag);
+static int DLcreate(struct AXFX_REVSTD_DELAYLINE* dl, long max_length);
+static void DLdelete(struct AXFX_REVSTD_DELAYLINE* dl);
+static int ReverbSTDCreate(struct AXFX_REVSTD_WORK* rv, float coloration, float time, float mix, float damping, float predelay);
+static int ReverbSTDModify(struct AXFX_REVSTD_WORK* rv, float coloration, float time, float mix, float damping, float predelay);
+static void HandleReverb(long* sptr, struct AXFX_REVSTD_WORK* rv);
+static void ReverbSTDCallback(long* left, long* right, long* surround, struct AXFX_REVSTD_WORK* rv);
+static void ReverbSTDFree(struct AXFX_REVSTD_WORK* rv);
 
-static void DLsetdelay(struct AXFX_REVSTD_DELAYLINE * dl, long lag) {
-    dl->outPoint = dl->inPoint - (lag * 4);
-    while(dl->outPoint < 0) {
-        dl->outPoint += dl->length;
-    }
+static void DLsetdelay(struct AXFX_REVSTD_DELAYLINE* dl, long lag)
+{
+	dl->outPoint = dl->inPoint - (lag * 4);
+	while (dl->outPoint < 0) {
+		dl->outPoint += dl->length;
+	}
 }
 
-static int DLcreate(struct AXFX_REVSTD_DELAYLINE * dl, long max_length) {
-    dl->length = (max_length * 4);
-    dl->inputs = __AXFXAlloc(max_length << 2);
-    if (dl->inputs == NULL) {
-        return 0;
-    }
-    memset(dl->inputs, 0, max_length << 2);
-    dl->lastOutput = 0.0f;
-    DLsetdelay(dl, max_length >> 1);
-    dl->inPoint = 0;
-    dl->outPoint = 0;
-    return 1;
+static int DLcreate(struct AXFX_REVSTD_DELAYLINE* dl, long max_length)
+{
+	dl->length = (max_length * 4);
+	dl->inputs = __AXFXAlloc(max_length << 2);
+	if (dl->inputs == NULL) {
+		return 0;
+	}
+	memset(dl->inputs, 0, max_length << 2);
+	dl->lastOutput = 0.0f;
+	DLsetdelay(dl, max_length >> 1);
+	dl->inPoint  = 0;
+	dl->outPoint = 0;
+	return 1;
 }
 
-static void DLdelete(struct AXFX_REVSTD_DELAYLINE * dl) {
-    if (dl->inputs != NULL) {
-        __AXFXFree(dl->inputs);
-        dl->inputs = NULL;
-    }
+static void DLdelete(struct AXFX_REVSTD_DELAYLINE* dl)
+{
+	if (dl->inputs != NULL) {
+		__AXFXFree(dl->inputs);
+		dl->inputs = NULL;
+	}
 }
 
 #pragma fp_contract off
-static int ReverbSTDCreate(struct AXFX_REVSTD_WORK * rv, float coloration, float time, float mix, float damping, float predelay) {
-    u8 i;
-    u8 k;
-    static long lens[4] = {
-        0x000006FD,
-        0x000007CF,
-        0x000001B1,
-        0x00000095,
-    };
+static int ReverbSTDCreate(struct AXFX_REVSTD_WORK* rv, float coloration, float time, float mix, float damping, float predelay)
+{
+	u8 i;
+	u8 k;
+	static long lens[4] = {
+		0x000006FD,
+		0x000007CF,
+		0x000001B1,
+		0x00000095,
+	};
 
-    if ((coloration < 0.0f ) || (coloration > 1.0f ) 
-     || (time       < 0.01f) || (time       > 10.0f) 
-     || (mix        < 0.0f ) || (mix        > 1.0f ) 
-     || (damping    < 0.0f ) || (damping    > 1.0f ) 
-     || (predelay   < 0.0f ) || (predelay   > 0.1f )) {
-        return 0;
-    }
+	if ((coloration < 0.0f) || (coloration > 1.0f) || (time < 0.01f) || (time > 10.0f) || (mix < 0.0f) || (mix > 1.0f) || (damping < 0.0f)
+	    || (damping > 1.0f) || (predelay < 0.0f) || (predelay > 0.1f)) {
+		return 0;
+	}
 
-    memset(rv, 0, sizeof(struct AXFX_REVSTD_WORK));
-    for(k = 0; k < 3; k++) {
-        for(i = 0; i < 2; i++) {
-            if (DLcreate(&rv->C[i + (k * 2)], lens[i] + 2) == 0) {
-                ReverbSTDFree(rv);
-                return 0;
-            }
-            DLsetdelay(&rv->C[i + (k * 2)], lens[i]);
-            rv->combCoef[i + (k * 2)] = powf(10.0f, (lens[i] * -3) / (32000.0f * time));
-        }
-        for(i = 0; i < 2; i++) {
-            if (DLcreate(&rv->AP[i + (k * 2)], lens[i + 2] + 2) == 0) {
-                ReverbSTDFree(rv);
-                return 0;
-            }
-            DLsetdelay(&rv->AP[i + (k * 2)], lens[i + 2]);
-        }
-        rv->lpLastout[k] = 0.0f;
-    }
-    rv->allPassCoeff = coloration;
-    rv->level = mix;
-    rv->damping = damping;
-    if (rv->damping < 0.05f) {
-        rv->damping = 0.05f;
-    }
-    rv->damping = (1.0f - (0.05f + (0.8f * rv->damping)));
-    if (0.0f != predelay) {
-        rv->preDelayTime = (32000.0f * predelay);
-        for(i = 0; i < 3; i++) {
-            rv->preDelayLine[i] = __AXFXAlloc(rv->preDelayTime * 4);
-            if (rv->preDelayLine[i] == NULL) {
-                ReverbSTDFree(rv);
-                return 0;
-            }
-            memset(rv->preDelayLine[i], 0, rv->preDelayTime * 4);
-            rv->preDelayPtr[i] = rv->preDelayLine[i];
-        }
-    } else {
-        rv->preDelayTime = 0;
-        for(i = 0; i < 3; i++) {
-            rv->preDelayPtr[i] = 0;
-            rv->preDelayLine[i] = 0;
-        }
-    }
-    return 1;
+	memset(rv, 0, sizeof(struct AXFX_REVSTD_WORK));
+	for (k = 0; k < 3; k++) {
+		for (i = 0; i < 2; i++) {
+			if (DLcreate(&rv->C[i + (k * 2)], lens[i] + 2) == 0) {
+				ReverbSTDFree(rv);
+				return 0;
+			}
+			DLsetdelay(&rv->C[i + (k * 2)], lens[i]);
+			rv->combCoef[i + (k * 2)] = powf(10.0f, (lens[i] * -3) / (32000.0f * time));
+		}
+		for (i = 0; i < 2; i++) {
+			if (DLcreate(&rv->AP[i + (k * 2)], lens[i + 2] + 2) == 0) {
+				ReverbSTDFree(rv);
+				return 0;
+			}
+			DLsetdelay(&rv->AP[i + (k * 2)], lens[i + 2]);
+		}
+		rv->lpLastout[k] = 0.0f;
+	}
+	rv->allPassCoeff = coloration;
+	rv->level        = mix;
+	rv->damping      = damping;
+	if (rv->damping < 0.05f) {
+		rv->damping = 0.05f;
+	}
+	rv->damping = (1.0f - (0.05f + (0.8f * rv->damping)));
+	if (0.0f != predelay) {
+		rv->preDelayTime = (32000.0f * predelay);
+		for (i = 0; i < 3; i++) {
+			rv->preDelayLine[i] = __AXFXAlloc(rv->preDelayTime * 4);
+			if (rv->preDelayLine[i] == NULL) {
+				ReverbSTDFree(rv);
+				return 0;
+			}
+			memset(rv->preDelayLine[i], 0, rv->preDelayTime * 4);
+			rv->preDelayPtr[i] = rv->preDelayLine[i];
+		}
+	} else {
+		rv->preDelayTime = 0;
+		for (i = 0; i < 3; i++) {
+			rv->preDelayPtr[i]  = 0;
+			rv->preDelayLine[i] = 0;
+		}
+	}
+	return 1;
 }
 
 #pragma fp_contract reset
 
-static int ReverbSTDModify(struct AXFX_REVSTD_WORK * rv, float coloration, float time, float mix, float damping, float predelay) {
-    u8 i;
+static int ReverbSTDModify(struct AXFX_REVSTD_WORK* rv, float coloration, float time, float mix, float damping, float predelay)
+{
+	u8 i;
 
-    if ((coloration < 0.0f ) || (coloration > 1.0f ) 
-     || (time       < 0.01f) || (time       > 10.0f) 
-     || (mix        < 0.0f ) || (mix        > 1.0f ) 
-     || (damping    < 0.0f ) || (damping    > 1.0f ) 
-     || (predelay   < 0.0f ) || (predelay   > 0.1f )) {
-        return 0;
-    }
-    rv->allPassCoeff = coloration;
-    rv->level = mix;
-    rv->damping = damping;
-    if (rv->damping < 0.05f) {
-        rv->damping = 0.05f;
-    }
-    rv->damping = (1.0f - (0.05f + (0.8f * rv->damping)));
-    for(i = 0; i < 6; i++) {
-        DLdelete(&rv->AP[i]);
-    }
-    for(i = 0; i < 6; i++) {
-        DLdelete(&rv->C[i]);
-    }
-    if (rv->preDelayTime) {
-        for(i = 0; i < 3; i++) {
-            __AXFXFree(rv->preDelayLine[i]);
-        }
-    }
-    return ReverbSTDCreate(rv, coloration, time, mix, damping, predelay);
+	if ((coloration < 0.0f) || (coloration > 1.0f) || (time < 0.01f) || (time > 10.0f) || (mix < 0.0f) || (mix > 1.0f) || (damping < 0.0f)
+	    || (damping > 1.0f) || (predelay < 0.0f) || (predelay > 0.1f)) {
+		return 0;
+	}
+	rv->allPassCoeff = coloration;
+	rv->level        = mix;
+	rv->damping      = damping;
+	if (rv->damping < 0.05f) {
+		rv->damping = 0.05f;
+	}
+	rv->damping = (1.0f - (0.05f + (0.8f * rv->damping)));
+	for (i = 0; i < 6; i++) {
+		DLdelete(&rv->AP[i]);
+	}
+	for (i = 0; i < 6; i++) {
+		DLdelete(&rv->C[i]);
+	}
+	if (rv->preDelayTime) {
+		for (i = 0; i < 3; i++) {
+			__AXFXFree(rv->preDelayLine[i]);
+		}
+	}
+	return ReverbSTDCreate(rv, coloration, time, mix, damping, predelay);
 }
 
-const static float value0_3 = 0.3f;
-const static float value0_6 = 0.6f;
+const static float value0_3  = 0.3f;
+const static float value0_6  = 0.6f;
 const static double i2fMagic = 4503601774854144.0;
 
+// clang-format off
 asm static void HandleReverb(register long * sptr, register struct AXFX_REVSTD_WORK * rv) {
     nofralloc
 	stwu r1, -144(r1)
@@ -404,63 +404,70 @@ L_0000090C:
 	addi r1, r1, 144
 	blr
 }
+// clang-format on
 
-static void ReverbSTDCallback(long * left, long * right, long * surround, struct AXFX_REVSTD_WORK * rv) {
-    HandleReverb(left, rv);
+static void ReverbSTDCallback(long* left, long* right, long* surround, struct AXFX_REVSTD_WORK* rv)
+{
+	HandleReverb(left, rv);
 }
 
-static void ReverbSTDFree(struct AXFX_REVSTD_WORK * rv) {
-    u8 i;
+static void ReverbSTDFree(struct AXFX_REVSTD_WORK* rv)
+{
+	u8 i;
 
-    for(i = 0; i < 6; i++) {
-        DLdelete(&rv->AP[i]);
-    }
-    for(i = 0; i < 6; i++) {
-        DLdelete(&rv->C[i]);
-    }
-    if (rv->preDelayTime) {
-        for(i = 0; i < 3; i++) {
-            if (rv->preDelayLine[i] != NULL) {
-                __AXFXFree(rv->preDelayLine[i]);
-                rv->preDelayLine[i] = NULL;
-            }
-        }
-    }
+	for (i = 0; i < 6; i++) {
+		DLdelete(&rv->AP[i]);
+	}
+	for (i = 0; i < 6; i++) {
+		DLdelete(&rv->C[i]);
+	}
+	if (rv->preDelayTime) {
+		for (i = 0; i < 3; i++) {
+			if (rv->preDelayLine[i] != NULL) {
+				__AXFXFree(rv->preDelayLine[i]);
+				rv->preDelayLine[i] = NULL;
+			}
+		}
+	}
 }
 
-int AXFXReverbStdInit(struct AXFX_REVERBSTD * rev) {
-    int ret;
-    int old;
+int AXFXReverbStdInit(struct AXFX_REVERBSTD* rev)
+{
+	int ret;
+	int old;
 
-    old = OSDisableInterrupts();
-    rev->tempDisableFX = 0;
-    ret = ReverbSTDCreate(&rev->rv, rev->coloration, rev->time, rev->mix, rev->damping, rev->preDelay);
-    OSRestoreInterrupts(old);
-    return ret;
+	old                = OSDisableInterrupts();
+	rev->tempDisableFX = 0;
+	ret                = ReverbSTDCreate(&rev->rv, rev->coloration, rev->time, rev->mix, rev->damping, rev->preDelay);
+	OSRestoreInterrupts(old);
+	return ret;
 }
 
-int AXFXReverbStdShutdown(struct AXFX_REVERBSTD * rev) {
-    int old;
+int AXFXReverbStdShutdown(struct AXFX_REVERBSTD* rev)
+{
+	int old;
 
-    old = OSDisableInterrupts();
-    ReverbSTDFree(&rev->rv);
-    OSRestoreInterrupts(old);
-    return 1;
+	old = OSDisableInterrupts();
+	ReverbSTDFree(&rev->rv);
+	OSRestoreInterrupts(old);
+	return 1;
 }
 
-int AXFXReverbStdSettings(struct AXFX_REVERBSTD * rev) {
-    int old;
+int AXFXReverbStdSettings(struct AXFX_REVERBSTD* rev)
+{
+	int old;
 
-    old = OSDisableInterrupts();
-    rev->tempDisableFX = 1;
-    ReverbSTDModify(&rev->rv, rev->coloration, rev->time, rev->mix, rev->damping, rev->preDelay);
-    rev->tempDisableFX = 0;
-    OSRestoreInterrupts(old);
-    return 1;
+	old                = OSDisableInterrupts();
+	rev->tempDisableFX = 1;
+	ReverbSTDModify(&rev->rv, rev->coloration, rev->time, rev->mix, rev->damping, rev->preDelay);
+	rev->tempDisableFX = 0;
+	OSRestoreInterrupts(old);
+	return 1;
 }
 
-void AXFXReverbStdCallback(struct AXFX_BUFFERUPDATE * bufferUpdate, struct AXFX_REVERBSTD * reverb) {
-    if (reverb->tempDisableFX == 0) {
-        ReverbSTDCallback(bufferUpdate->left, bufferUpdate->right, bufferUpdate->surround, &reverb->rv);
-    }
+void AXFXReverbStdCallback(struct AXFX_BUFFERUPDATE* bufferUpdate, struct AXFX_REVERBSTD* reverb)
+{
+	if (reverb->tempDisableFX == 0) {
+		ReverbSTDCallback(bufferUpdate->left, bufferUpdate->right, bufferUpdate->surround, &reverb->rv);
+	}
 }

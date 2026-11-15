@@ -71,8 +71,8 @@ void BinFile::free()
 // 0x8004CF40
 ChunkFile::ChunkFile(u32 magic)
 {
-	mState = 0;
-	mData  = 0;
+	mState          = 0;
+	mData           = 0;
 	NinjaFile* file = (NinjaFile*)operator new(0x28);
 	if (file != 0) {
 		file = ninjaFileInit(file);
@@ -88,8 +88,8 @@ ChunkFile::ChunkFile(u32 magic)
 // 0x8004CFCC
 ChunkFile::ChunkFile(u32 magic, void* mem)
 {
-	mState = 3;
-	mData  = 0;
+	mState          = 3;
+	mData           = 0;
 	NinjaFile* file = (NinjaFile*)operator new(0x28);
 	if (file != 0) {
 		file = ninjaFileInit(file);

@@ -7,7 +7,7 @@
 
 extern "C" {
 s32 GBAJoyBootAsync(s32 chan, s32 paletteColor, s32 paletteSpeed, void* program, u32 length, u8* status,
-                void (*callback)(s32 chan, s32 result));
+                    void (*callback)(s32 chan, s32 result));
 }
 
 static JoyCarry* sJoyCarry;

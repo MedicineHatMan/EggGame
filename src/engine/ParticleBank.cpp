@@ -37,9 +37,9 @@ static void particleBankLoad(ParticleBank* bank, const char* arc, const char* gv
 	resBankAddTextures(&bank->mBank, 0, gvm);
 	int count;
 	NJS_TEXLIST* list;
-	list  = *resBankGetTextures(&bank->mBank);
-	count = list->nbTexture;
-	bank->mTexIds     = new u32[count];
+	list          = *resBankGetTextures(&bank->mBank);
+	count         = list->nbTexture;
+	bank->mTexIds = new u32[count];
 	for (int i = 0; i < count; i++) {
 		bank->mTexIds[i] = (u32)list->textures[i].texaddr->hdr->texaddr;
 	}
@@ -69,8 +69,8 @@ static NJS_TEXLIST* particleBankGetTexList(ParticleBank* bank)
 static void swapExtension(const char* name, const char* ext, char* out, int max)
 {
 	const char* p = name;
-	int len  = 0;
-	int last = max - 1;
+	int len       = 0;
+	int last      = max - 1;
 	for (; *p != '\0'; p++) {
 		if (*p == '.') {
 			break;
@@ -91,7 +91,7 @@ static void swapExtension(const char* name, const char* ext, char* out, int max)
 		out[n++] = '.';
 	}
 
-	int i   = 0;
+	int i = 0;
 	while (n < last) {
 		if (*ext == '\0') {
 			break;
@@ -172,10 +172,10 @@ static void bindParticleTextures(int slot)
 		texCount = sParticleBanks[slot].mTexCount;
 		ids      = sParticleBanks[slot].mTexIds;
 		for (i = 0; i < count; i++) {
-			desc = &descs[i];
-			desc->mTex.mBank   = slot;
-			desc->mTex.mIndex  = 0;
-			u8 index           = 0;
+			desc              = &descs[i];
+			desc->mTex.mBank  = slot;
+			desc->mTex.mIndex = 0;
+			u8 index          = 0;
 			for (int j = 0; j < texCount; j++) {
 				if (desc->mTexId == ids[j]) {
 					desc->mTex.mBank  = slot;

@@ -17,11 +17,13 @@ struct SetLink;
 extern "C" {
 
 extern const int sRoundShipNodes[3] = {
-	1, 2, 3,
+	1,
+	2,
+	3,
 }; // 1 2 3
 }
 const char* gTObjBlueRoundShipName = "TObjBlueRoundShip";
-char* sRoundShipTypeNames[2] = { "FIX", "PATH" };
+char* sRoundShipTypeNames[2]       = { "FIX", "PATH" };
 extern "C" {
 extern const MotionEntry sBlueRoundShipMotions[] = {
 	{ MOTION_LOOP, 5, -1, 0, 0.0f, 30.0f, 0.0125f, 0.0f, 0 },
@@ -80,12 +82,12 @@ void TObjBlueRoundShip::vfn_74()
 // 0x800E98B8
 void TObjBlueRoundShip::setupFixed()
 {
-	_E0 = 0;
+	_E0                 = 0;
 	NJS_OBJECT** models = getGeObjModels();
 	mModel.setModelNodes(models[0xE], 0x10);
 	NJS_TEXLIST** tex = getGeObjTextures();
-	mModel.mTexList = tex[0xE];
-	mModel.mState   = getDefaultDrawState();
+	mModel.mTexList   = tex[0xE];
+	mModel.mState     = getDefaultDrawState();
 	mtxSetTransV(mMatrix, &mPos);
 	mtxRotateY(mMatrix, mMatrix, mRot.y);
 	setLinkFree((SetLink*)&mLink);
@@ -94,8 +96,8 @@ void TObjBlueRoundShip::setupFixed()
 // 0x800E9938
 void TObjBlueRoundShip::setupPath()
 {
-	_E0     = 0;
-	mAimYaw = 0;
+	_E0            = 0;
+	mAimYaw        = 0;
 	RailPath* path = railFind(0);
 	if (path != 0) {
 		Vec3f dir;
@@ -112,13 +114,13 @@ void TObjBlueRoundShip::setupPath()
 	NJS_OBJECT** models = getGeObjModels();
 	mModel.setModelNodes(models[0xE], 0x10);
 	NJS_TEXLIST** tex = getGeObjTextures();
-	mModel.mTexList = tex[0xE];
-	mModel.mState   = getDefaultDrawState();
-	mModel.mMotion  = &mMotion;
+	mModel.mTexList   = tex[0xE];
+	mModel.mState     = getDefaultDrawState();
+	mModel.mMotion    = &mMotion;
 
 	for (int i = 0; i < 3; i++) {
-		mPart[i] = particleGenById(this, &gVecZero, 1, 0xE);
-		ObjPlace* node = mModel.mNodes + sRoundShipNodes[i];
+		mPart[i]                       = particleGenById(this, &gVecZero, 1, 0xE);
+		ObjPlace* node                 = mModel.mNodes + sRoundShipNodes[i];
 		*(f32**)((u8*)mPart[i] + 0x58) = node->mMatrix;
 	}
 	setLinkFree((SetLink*)&mLink);
@@ -152,8 +154,8 @@ void TObjBlueRoundShip::ridePath()
 	Vec3f dir;
 	mRail.getPos(&mPos);
 	mRail.getDir(&dir);
-	mAimYaw = vecAngleXZ(&dir);
-	int delta = angleDist(mRot.y, mAimYaw);
+	mAimYaw      = vecAngleXZ(&dir);
+	int delta    = angleDist(mRot.y, mAimYaw);
 	int absDelta = delta < 0 ? -delta : delta;
 	if (absDelta < 4) {
 		mRot.y = mAimYaw;
@@ -171,7 +173,7 @@ void TObjBlueRoundShip::ridePath()
 // Also publishes the result at sRoundShipVisible
 void TObjBlueRoundShip::vfn_10()
 {
-	int visible = cameraIsVisible(5000.0f, 1000.0f, &mPos, 0);
+	int visible       = cameraIsVisible(5000.0f, 1000.0f, &mPos, 0);
 	sRoundShipVisible = visible;
 	if (visible != 0) {
 		mDraw->mFlags &= ~1;

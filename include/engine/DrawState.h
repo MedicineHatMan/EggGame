@@ -28,11 +28,11 @@ struct DrawStateSlot {
 };
 
 extern "C" {
-void drawStateInit();  // 0x80043B40
-void drawStateExit();  // 0x80043B44
+void drawStateInit(); // 0x80043B40
+void drawStateExit(); // 0x80043B44
 
 void beginDrawState(DrawStateSlot* slot, const DrawState* state); // 0x80043C18
-void endDrawState(DrawStateSlot* slot);                            // 0x800442D8
+void endDrawState(DrawStateSlot* slot);                           // 0x800442D8
 
 // Light a draw with a fixed ambient colour in place of the scene's
 void beginDrawAmbient(DrawStateSlot* slot, const u32* color);

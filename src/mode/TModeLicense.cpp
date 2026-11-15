@@ -27,7 +27,9 @@ TModeLicense::TModeLicense()
 }
 
 // 0x8014065C
-TModeLicense::~TModeLicense() { }
+TModeLicense::~TModeLicense()
+{
+}
 
 // 0x80140684
 void TModeLicense::loadFiles()

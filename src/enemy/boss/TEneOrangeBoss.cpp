@@ -52,48 +52,35 @@ inline void TEneOrangeBoss::operator delete(void* mem)
 	objHeapFree(gObjHeap, mem);
 }
 
-extern const int sOrangeBossNodes[] = { 1, 9, 14, 17, 20, 25, 28, 33, 36, 46, 58, 77, 82, 93, 98, 99, -1 };
-const char* gTEneOrangeBossName = "TEneOrangeBoss";
+extern const int sOrangeBossNodes[]               = { 1, 9, 14, 17, 20, 25, 28, 33, 36, 46, 58, 77, 82, 93, 98, 99, -1 };
+const char* gTEneOrangeBossName                   = "TEneOrangeBoss";
 extern const EnemyFrameKey sOrangeBossFrameKey0[] = { { 2.0f, 0 }, { 15.0f, 3 }, { 21.0f, 2 }, { -1.0f, 3 } };
 extern const EnemyFrameKey sOrangeBossFrameKey1[] = { { 24.0f, 0 }, { -1.0f, 3 } };
 extern const EnemyFrameKey sOrangeBossFrameKey2[] = { { 2.0f, 3 }, { 19.0f, 2 }, { -1.0f, 3 } };
 extern const EnemyFrameKey sOrangeBossFrameKey3[] = { { 7.0f, 0 }, { 38.0f, 4 }, { -1.0f, 0 } };
-MotionEntry sOrangeBossMotionKeys[32] = {
-	{ MOTION_LOOP, 29, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 26, -1, 0, 0.0f, 25.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_LOOP, 27, -1, 0, 0.0f, 0.7f, 20.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 21, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 21, -1, 0, 16.0f, 24.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 22, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_ONCE, 23, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 18, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_LOOP, 19, -1, 0, 0.0f, 10.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 20, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 16, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 17, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 12, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 13, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 },
-	{ MOTION_ONCE, 14, -1, 0, 0.0f, 24.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_LOOP, 28, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 10, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },
-	{ MOTION_ONCE, 25, -1, 0, 0.0f, 34.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_LOOP, 24, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 54.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_BLEND, 0, -1, 21, 0.0f, 9.0f, 0.3f, 0.1f, 0 },
-	{ MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_BLEND, 3, -1, 24, 0.0f, 14.0f, 0.3f, 0.1f, 0 },
-	{ MOTION_LOOP, 4, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 5, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_BLEND, 6, -1, 27, 0.0f, 11.0f, 0.3f, 0.1f, 0 },
-	{ MOTION_LOOP, 7, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 22.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 30, -1, 0, 0.0f, 34.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 15, -1, 0, 0.0f, 479.0f, 1.0f, 0.0f, 0 },
-	{ MOTION_ONCE, 11, -1, 0, 0.0f, 239.0f, 1.0f, 0.0f, 0 },
+MotionEntry sOrangeBossMotionKeys[32]             = {
+	{ MOTION_LOOP, 29, -1, 0, 0.0f, 30.0f, 0.5f, 0.0f, 0 },  { MOTION_LOOP, 26, -1, 0, 0.0f, 25.0f, 0.5f, 0.0f, 0 },
+	{ MOTION_LOOP, 27, -1, 0, 0.0f, 0.7f, 20.0f, 0.0f, 0 },  { MOTION_ONCE, 21, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 21, -1, 0, 16.0f, 24.0f, 0.3f, 0.0f, 0 }, { MOTION_LOOP, 22, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 },
+	{ MOTION_ONCE, 23, -1, 0, 0.0f, 24.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 18, -1, 0, 0.0f, 19.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_LOOP, 19, -1, 0, 0.0f, 10.0f, 0.5f, 0.0f, 0 },  { MOTION_ONCE, 20, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 16, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 17, -1, 0, 0.0f, 29.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 12, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },  { MOTION_LOOP, 13, -1, 0, 0.0f, 20.0f, 0.8f, 0.0f, 0 },
+	{ MOTION_ONCE, 14, -1, 0, 0.0f, 24.0f, 0.6f, 0.0f, 0 },  { MOTION_LOOP, 28, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 10, -1, 0, 0.0f, 19.0f, 0.6f, 0.0f, 0 },  { MOTION_ONCE, 25, -1, 0, 0.0f, 34.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_LOOP, 24, -1, 0, 0.0f, 20.0f, 0.5f, 0.0f, 0 },  { MOTION_ONCE, 9, -1, 0, 0.0f, 54.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_BLEND, 0, -1, 21, 0.0f, 9.0f, 0.3f, 0.1f, 0 },  { MOTION_LOOP, 1, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 2, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },   { MOTION_BLEND, 3, -1, 24, 0.0f, 14.0f, 0.3f, 0.1f, 0 },
+	{ MOTION_LOOP, 4, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },   { MOTION_ONCE, 5, -1, 0, 0.0f, 24.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_BLEND, 6, -1, 27, 0.0f, 11.0f, 0.3f, 0.1f, 0 }, { MOTION_LOOP, 7, -1, 0, 0.0f, 20.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 8, -1, 0, 0.0f, 22.0f, 0.4f, 0.0f, 0 },   { MOTION_ONCE, 30, -1, 0, 0.0f, 34.0f, 0.4f, 0.0f, 0 },
+	{ MOTION_ONCE, 15, -1, 0, 0.0f, 479.0f, 1.0f, 0.0f, 0 }, { MOTION_ONCE, 11, -1, 0, 0.0f, 239.0f, 1.0f, 0.0f, 0 },
 };
 const EnemyFrameKey* sOrangeBossFrameKeys[4] = {
-	sOrangeBossFrameKey0, sOrangeBossFrameKey1, sOrangeBossFrameKey2, sOrangeBossFrameKey3,
+	sOrangeBossFrameKey0,
+	sOrangeBossFrameKey1,
+	sOrangeBossFrameKey2,
+	sOrangeBossFrameKey3,
 };
 extern const ColliShape sOrangeBossShapes[7] = {
 	{ { 0.0f, 0.0f, 0.0f }, 0x0, 0, 0x0, 8.0f, 0.0f, 0.0f, 0x0, COLLISHAPE_SPHERE, 0x0 },
@@ -119,10 +106,10 @@ extern "C" void initTEneOrangeBoss()
 {
 	resBankLoad(&sOrangeBossBank, "ar_ene_orange_boss.arc");
 	resBankAddTextures(&sOrangeBossBank, 0, "ene_orange_boss.gvm");
-	sOrangeBossModels = resBankGetModels(&sOrangeBossBank);
+	sOrangeBossModels   = resBankGetModels(&sOrangeBossBank);
 	sOrangeBossTextures = resBankGetTextures(&sOrangeBossBank);
-	sOrangeBossMotion = resBankGetMotion(&sOrangeBossBank, 0);
-	gOrangeBossParams = (OrangeBossParams*)enemyParamGet(5);
+	sOrangeBossMotion   = resBankGetMotion(&sOrangeBossBank, 0);
+	gOrangeBossParams   = (OrangeBossParams*)enemyParamGet(5);
 	fxBankLoadDefault(&sOrangeBossFx, "pa_orangeboss.pad");
 	orangeBallLoad();
 }
@@ -135,9 +122,9 @@ extern "C" void shutdownTEneOrangeBoss()
 	gOrangeBossParams = 0;
 	resBankRemoveTextures(&sOrangeBossBank, 0);
 	resBankRelease(&sOrangeBossBank);
-	sOrangeBossModels = 0;
+	sOrangeBossModels   = 0;
 	sOrangeBossTextures = 0;
-	sOrangeBossMotion = 0;
+	sOrangeBossMotion   = 0;
 }
 
 // 0x80114728
@@ -178,7 +165,7 @@ extern "C" void* paramsTEneOrangeBoss()
 TEneOrangeBoss::TEneOrangeBoss(TObject* parent, SetDesc* desc)
     : TObjEnemy(parent, desc)
 {
-	_00 = (u32)gTEneOrangeBossName;
+	_00   = (u32)gTEneOrangeBossName;
 	mSize = 0x5AC;
 	init(desc);
 	initBossBar();
@@ -258,16 +245,16 @@ void TEneOrangeBoss::init(SetDesc* desc)
 	for (i = 0; i < 9; i++) {
 		mSparks[i] = 0;
 	}
-	mLand     = 0;
-	mActStep  = 0;
-	mActTimer = 0;
-	mBaseAngle      = 0;
-	_594      = 0;
-	mActTime  = 0.0f;
-	mActEnd   = 0.0f;
-	_5A0      = 0.0f;
-	_5A4      = 0.0f;
-	_5A8      = 0.0f;
+	mLand      = 0;
+	mActStep   = 0;
+	mActTimer  = 0;
+	mBaseAngle = 0;
+	_594       = 0;
+	mActTime   = 0.0f;
+	mActEnd    = 0.0f;
+	_5A0       = 0.0f;
+	_5A4       = 0.0f;
+	_5A8       = 0.0f;
 	makeBrain();
 	setBossView(10.0f, 33.0f, 150.0f);
 }
@@ -338,10 +325,10 @@ TEneOrangeBoss::~TEneOrangeBoss()
 // 0x80114E2C
 void TEneOrangeBoss::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -672,7 +659,7 @@ void TEneOrangeBoss::updateBody()
 	mTint.update();
 	if (mBossFlags & 0x100) {
 		Vec3f flat = mNodes[1];
-		flat.y = 0.0f;
+		flat.y     = 0.0f;
 		if (njScalor(&flat) < 220.0f) {
 			particleKeepAt((void**)&mGlow[2], (const Vec3f*)&mNodes[1], 1, 0x47);
 		} else {
@@ -819,7 +806,7 @@ void TEneOrangeBoss::updateShadow()
 	Vec3f at;
 	Vec3f up;
 
-	at = mBody.mPos;
+	at   = mBody.mPos;
 	at.y = 50.0f;
 	up.x = 0.0f;
 	up.y = 1.0f;
@@ -942,7 +929,7 @@ void TEneOrangeBoss::slideTo(f32 t, f32 decel)
 		dir = gVecZero;
 	}
 	stop = -speed / decel;
-	t = t > stop ? stop : t;
+	t    = t > stop ? stop : t;
 	gjMulAddVector(speed * t + t * (0.5f * decel * t), &mBody.mPos, &mJumpFrom, &dir);
 	updateShadow();
 }
@@ -962,15 +949,14 @@ f32 TEneOrangeBoss::planJump(f32 dist, f32* step, f32* speed)
 	f32 n = floor(dist / *step);
 
 	*step  = dist / n;
-	n = n; // a no-op but the DOL moves n to a saved register here
+	n      = n; // a no-op but the DOL moves n to a saved register here
 	*speed = launchSpeedFor(n, 0.0f, -0.12f);
 	return n;
 }
 
 extern "C" {
 extern const int gOrangeSparkNodes[] = {
-	1, 10, 9, 11, 13, 8, 6, 2,
-	3, 4, 0,
+	1, 10, 9, 11, 13, 8, 6, 2, 3, 4, 0,
 };
 }
 
@@ -981,8 +967,8 @@ void TEneOrangeBoss::keysWalk(f32 total)
 	f32 fade;
 	f32 end;
 
-	end  = total - (f32)ceil(5.0);
-	fade = (f32)floor(5.0);
+	end              = total - (f32)ceil(5.0);
+	fade             = (f32)floor(5.0);
 	MotionStep* keys = mKeys;
 	motionStepFromEntry(0.0f, &keys[0], 8, sOrangeBossMotionKeys);
 	motionStepBlendOut(end - fade, 0.2f, &keys[1], &keys[0]);
@@ -1000,12 +986,12 @@ void TEneOrangeBoss::keysJump(f32 total)
 	f32 land;
 	MotionStep* keys;
 
-	fade = (f32)floor(6.6666665f);
+	fade   = (f32)floor(6.6666665f);
 	crouch = fade;
-	fade = (f32)floor(5.0);
-	land = total - 5.0f;
-	fade2 = (f32)floor(5.0);
-	keys = mKeys;
+	fade   = (f32)floor(5.0);
+	land   = total - 5.0f;
+	fade2  = (f32)floor(5.0);
+	keys   = mKeys;
 	motionStepOnce(0.0f, 17.0f, 19.0f, 0.3f, &keys[0], 7);
 	motionStepBlendOut(crouch, 0.2f, &keys[1], &keys[0]);
 	motionStepFromEntry(crouch + fade, &keys[2], 8, sOrangeBossMotionKeys);
@@ -1052,7 +1038,7 @@ void TEneOrangeBoss::keysThrow(f32 total, f32* t0, f32* t1)
 	MotionStep* keys;
 
 	fade = (f32)floor(16.666666f);
-	up = fade;
+	up   = fade;
 	fade = (f32)ceil(10.0);
 	keys = mKeys;
 	motionStepOnce(0.0f, 19.0f, 24.0f, 0.3f, &keys[0], 3);
@@ -1122,7 +1108,7 @@ void TEneOrangeBoss::placeAtMirror()
 // 0x80116608
 void TEneOrangeBoss::spawnFx(int model, int motion)
 {
-	void* obj = resBankGetObjects(&sOrangeBossBank)[model];
+	void* obj            = resBankGetObjects(&sOrangeBossBank)[model];
 	NJS_MOTION** motions = resBankGetMotion(&sOrangeBossBank, 1);
 
 	mFx = createCamPath(0, 2, obj, motions[motion], 0, 1.0f, 1.0f);
@@ -1269,7 +1255,9 @@ void TEneOrangeBoss::onActionPhase(int action, int phase)
 }
 
 extern "C" int sOrangeMotionPicks[3] = {
-	20, 23, 26,
+	20,
+	23,
+	26,
 };
 
 // 0x801169E8
@@ -1447,7 +1435,7 @@ void TEneOrangeBoss::actJumpIn(int phase)
 		mBody.mRot.y = angle + 0x8000;
 		step         = 3.5f;
 		mActEnd      = planJump(75.0f, &step, &mBody.mVel.y);
-		step        *= -1.0f;
+		step *= -1.0f;
 		mBody.mVel.x = dir.x * step;
 		mBody.mVel.z = dir.z * step;
 		keysWalk(mActEnd);
@@ -1590,8 +1578,8 @@ void TEneOrangeBoss::actThrow(int phase)
 		mActTime = 1000000.0f;
 		mirrorSlotDir(mSlot, &dir);
 		goalScalePos(&mMoveTarget, &dir, 120.0f);
-		*act = 0;
-		mBall    = 0;
+		*act  = 0;
+		mBall = 0;
 		break;
 	}
 	case 1: {
@@ -1790,7 +1778,7 @@ void TEneOrangeBoss::actDive(int phase)
 		if (dist < gUnitVectorMin) {
 			d = gVecZero;
 		}
-		dist        -= 29.0f;
+		dist -= 29.0f;
 		step         = 2.5f;
 		mActEnd      = planJump(dist, &step, &mBody.mVel.y);
 		mBody.mVel.x = d.x * step;
@@ -1988,11 +1976,11 @@ f32 TEneOrangeBoss::keysLand()
 
 	mBody.mVel.y = 0.0f;
 	mJumpFrom    = mBody.mPos;
-	b = (f32)floor(15.0);
-	a = b;
-	b = (f32)floor(10.0);
-	c = (f32)ceil(10.0);
-	keys = mKeys;
+	b            = (f32)floor(15.0);
+	a            = b;
+	b            = (f32)floor(10.0);
+	c            = (f32)ceil(10.0);
+	keys         = mKeys;
 	motionStepOnce(0.0f, 2.0f, 8.0f, 0.4f, &keys[0], 9);
 	motionStepBlendOut(a, 0.1f, &keys[1], &keys[0]);
 	ab = a + b;
@@ -2016,12 +2004,12 @@ f32 TEneOrangeBoss::planLeap(f32* t0, f32* t1)
 	up           = speedForJumpHeight(-0.12f, 130.0f);
 	mBody.mVel.y = up;
 	ballisticRoots(-0.12f, up, 100.0f, &a, &b);
-	a = a > b ? a : b;
+	a      = a > b ? a : b;
 	flat.x = mBody.mPos.x;
 	flat.y = mBody.mPos.y;
 	flat.z = mBody.mPos.z;
 	flat.y = 0.0f;
-	f32 d = vecLenXZ(&flat);
+	f32 d  = vecLenXZ(&flat);
 	d += 5.0f;
 	speed = d / a;
 	njSinCos(mBody.mRot.y, &mBody.mVel.x, &mBody.mVel.z);
@@ -2248,14 +2236,14 @@ f32 TEneOrangeBoss::planFall(f32* t0, f32* t1)
 	mBody.mVel.x *= -0.8f;
 	mBody.mVel.z *= -0.8f;
 	ballisticRoots(-0.12f, 0.0f, 50.0f - mBody.mPos.y, &a, &b);
-	a = a > b ? a : b;
+	a      = a > b ? a : b;
 	*t0    = 55.0f;
 	*t1    = 57.5f;
 	a      = a + *t0;
 	fade   = (f32)floor(60.0);
 	crouch = fade;
 	fade   = (f32)floor(5.0);
-	keys = mKeys;
+	keys   = mKeys;
 	motionStepFromEntry(0.0f, &keys[0], 0xC, sOrangeBossMotionKeys);
 	motionStepBlendOut(crouch, 0.2f, &keys[1], &keys[0]);
 	motionStepFromEntry(crouch + fade, &keys[2], 0xD, sOrangeBossMotionKeys);
@@ -2306,7 +2294,7 @@ void TEneOrangeBoss::actLeap(int phase)
 		switch (mActStep) {
 		case 0:
 			if (mActEnd >= *t0 && mActEnd <= *t1) {
-				f32 d = mNodes[8].z - mActTime;
+				f32 d       = mNodes[8].z - mActTime;
 				mJumpFrom.x = mBody.mForce.x * d + mJumpFrom.x;
 				mJumpFrom.z = mBody.mForce.z * d + mJumpFrom.z;
 			}
@@ -2355,10 +2343,10 @@ f32 TEneOrangeBoss::planCrouch()
 	placeAtMirror();
 	mJumpFrom    = mBody.mPos;
 	mBody.mRot.x = 0;
-	b = (f32)floor(10.0);
-	a = b;
-	b = (f32)floor(63.333332f);
-	keys = mKeys;
+	b            = (f32)floor(10.0);
+	a            = b;
+	b            = (f32)floor(63.333332f);
+	keys         = mKeys;
 	motionStepBlend(0.0f, 0.1f, &keys[0], &mMotion);
 	motionStepFromEntry(a, &keys[1], 3, sOrangeBossMotionKeys);
 	motionStepEnd(&keys[2]);
@@ -2376,7 +2364,7 @@ f32 TEneOrangeBoss::planVault(f32* t0, f32* t1)
 	up           = speedForJumpHeight(-0.12f, 30.0f);
 	mBody.mVel.y = up;
 	ballisticRoots(-0.12f, up, 50.0f - mJumpFrom.y, &a, &b);
-	a = a > b ? a : b;
+	a     = a > b ? a : b;
 	speed = 50.0f / a;
 	njSinCos(mBody.mRot.y, &mBody.mVel.x, &mBody.mVel.z);
 	mBody.mVel.x = mBody.mVel.x * speed;
@@ -2665,7 +2653,7 @@ f32 TEneOrangeBoss::planReturn()
 	mJumpFrom = mBody.mPos;
 	mJumpFrom.y += 20.0f;
 	ballisticRoots(-0.12f, 0.0f, -20.0f, &a, &b);
-	a = a > b ? a : b;
+	a     = a > b ? a : b;
 	speed = 100.0f;
 	speed /= a;
 	speed *= -1.0f;
@@ -2673,7 +2661,7 @@ f32 TEneOrangeBoss::planReturn()
 	mBody.mVel.y = 0.0f;
 	mBody.mVel.z = dir.z * speed;
 	fade         = (f32)floor(5.0);
-	keys = mKeys;
+	keys         = mKeys;
 	motionStepFromEntry(0.0f, &keys[0], 0xD, sOrangeBossMotionKeys);
 	motionStepBlendOut((a - 3.3333333f) - fade, 0.2f, &keys[1], &keys[0]);
 	motionStepFromEntry(a - 3.3333333f, &keys[2], 0xE, sOrangeBossMotionKeys);
@@ -2877,7 +2865,7 @@ void TEneOrangeBoss::drawReflections()
 	if (mBossFlags & 2) {
 		njCalcPointEx(&mBody.mPos, &at);
 		if (top.z > at.z) {
-			angle  = mSlotAngle;
+			angle      = mSlotAngle;
 			mSlotAngle = angle + 0x8000;
 			drawBody(mBossFlags & 4, _1A4, mPose);
 			mSlotAngle = angle;

@@ -7,9 +7,9 @@ struct HatchNoticeList {
 	HatchNotice* add(int, int, const Vec3f* pos, s16 kind, f32 range);
 
 	u8 _00[0x24];
-	int mCount;          // _24
-	HatchNotice* mUsed;  // _28
-	HatchNotice* mFree;  // _2C
+	int mCount;         // _24
+	HatchNotice* mUsed; // _28
+	HatchNotice* mFree; // _2C
 };
 
 static HatchNoticeList* sNoticeList; // 0x802C56B0
@@ -32,8 +32,7 @@ HatchNotice* HatchNoticeList::add(int, int, const Vec3f* pos, s16 kind, f32 rang
 		node->mNext = mUsed;
 		mUsed       = node;
 		mCount++;
-		for (int i = 0; i < 4; i++) {
-		}
+		for (int i = 0; i < 4; i++) { }
 		node->mPos     = *pos;
 		node->mRangeSq = range * range;
 		node->mKind    = kind;

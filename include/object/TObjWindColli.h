@@ -45,7 +45,7 @@ public:
 	f32 mMatrix[12];     // _34 the shape a unit sphere or box in it
 	Vec3f mWind;         // _64
 	SetLinkMember mLink; // _70
-	DrawTask* mDraw;         // _7C
+	DrawTask* mDraw;     // _7C
 };
 
 /**

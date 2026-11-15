@@ -21,10 +21,10 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	virtual void draw();        // _0C
-	virtual void vfn_10();      // _10
-	virtual void render();      // _1C
-	virtual Vec3f* getPos();    // _20
+	virtual void draw();                   // _0C
+	virtual void vfn_10();                 // _10
+	virtual void render();                 // _1C
+	virtual Vec3f* getPos();               // _20
 	virtual void setPos(const Vec3f* pos); // _6C
 
 	// Names are ours

@@ -37,42 +37,42 @@ struct SetLink;
 extern "C" {
 
 // geobj_mg_leader.arc and what it holds
-TArc* gMGLeaderArc;      // 0x802C5548
+TArc* gMGLeaderArc;            // 0x802C5548
 NJS_OBJECT* gMGLeaderModel;    // 0x802C554C
-NJS_TEXLIST* gMGLeaderTexList;  // 0x802C5550
-NJS_MOTION** gMGLeaderMotions;  // 0x802C5554
+NJS_TEXLIST* gMGLeaderTexList; // 0x802C5550
+NJS_MOTION** gMGLeaderMotions; // 0x802C5554
 }
 
 // What the 0x70 message a player talking carries
 struct LeaderTalkMsg {
 	u16 mType; // _00
 	u8 _02[2];
-	u16 mId;   // _04 the talker
+	u16 mId; // _04 the talker
 };
 
 // 0x1003 the line to say or below zero for none
 struct LeaderLineMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u8 _02[2];
-	s16 mMsgId;  // _04
+	s16 mMsgId; // _04
 };
 
 // 0x1004 whether it takes talk
 struct LeaderReadyMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u8 _02[2];
-	int mReady;  // _04
+	int mReady; // _04
 };
 
 // 0x8A asks for the height a talker looks at
 struct LeaderHeightMsg {
-	u16 mType;   // _00
+	u16 mType; // _00
 	u8 _02[2];
 	f32 mHeight; // _04
 };
 
 enum {
-	LEADER_NONE = 0,
+	LEADER_NONE  = 0,
 	LEADER_RESET = 1, // a new idle time then back to WAIT
 	LEADER_WAIT  = 2,
 	LEADER_TURN  = 3, // turns to the talker
@@ -184,16 +184,16 @@ TObjMGLeader::~TObjMGLeader()
 void TObjMGLeader::reset()
 {
 	mTalker.setId(0xFFFF);
-	mStart.x   = mPos.x;
-	mStart.y   = mPos.y;
-	mStart.z   = mPos.z;
-	mAim       = mRot.y;
-	mCam       = 0;
-	mTimer     = 0;
-	mIdleTime  = 0;
-	_164       = 0;
-	mText      = 0;
-	mReady     = 1;
+	mStart.x  = mPos.x;
+	mStart.y  = mPos.y;
+	mStart.z  = mPos.z;
+	mAim      = mRot.y;
+	mCam      = 0;
+	mTimer    = 0;
+	mIdleTime = 0;
+	_164      = 0;
+	mText     = 0;
+	mReady    = 1;
 	makeCylinder();
 	calcMatrix();
 	if (gMGLeaderArc != 0) {
@@ -390,7 +390,9 @@ void TObjMGLeader::updateAction()
 }
 
 // 0x801133CC
-void TObjMGLeader::actWait() { }
+void TObjMGLeader::actWait()
+{
+}
 
 // 0x801133D0
 void TObjMGLeader::actTurn()
@@ -433,7 +435,7 @@ int TObjMGLeader::sendToHandle(ObjMsg* msg)
 	switch (msg->mType) {
 	case 0x1004: {
 		LeaderReadyMsg ready = *(LeaderReadyMsg*)msg;
-		mReady = ready.mReady;
+		mReady               = ready.mReady;
 		return 1;
 	}
 	case 0x40:
@@ -442,7 +444,7 @@ int TObjMGLeader::sendToHandle(ObjMsg* msg)
 		if (mReady == 0) {
 			return 0;
 		}
-		u16 from = ((LeaderTalkMsg*)msg)->mId;
+		u16 from        = ((LeaderTalkMsg*)msg)->mId;
 		TObjAction* obj = findObjById(from);
 		if (obj != 0) {
 			Vec3f* at = obj->getPos();

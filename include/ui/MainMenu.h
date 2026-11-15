@@ -96,40 +96,40 @@ public:
 	// Set by the switcher after create before the mode starts
 	u8 mOpened; // _0C
 	u8 _0D[3];
-	int mFlow;      // _10 0 the switcher reads mSlot
-	int mPage;      // _14
-	int mState;     // _18
-	int mBackState; // _1C the page a confirm returns to
-	int mNextState; // _20 setState writes this advance applies it after the current page's update
-	int mSelect;    // _24 the root page's choice
-	int mCopyTo;    // _28 the copy page's target file
-	int mFile;      // _2C the root page's file
-	int _30;        // _30
-	int _34;        // _34
-	int mFileStep;  // _38
-	int mSlot;      // _3C the file page's choice
-	int mSoundStep; // _40
-	int mSoundMode; // _44 0 the sound mode 1 vibration
-	int _48;        // _48
-	int _4C;        // _4C
-	int mBoxKind;   // _50 0 when no box is up
-	int mChoice;    // _54 the box's cursor 0 is yes
-	int mBoxTimer;  // _58 frames left on a timed box
-	int _5C;        // _5C
-	int mCursor;     // _60 from cardGetState 0 idle 0x12 confirm 0xB back
-	int mPrevCursor; // _64
-	int mFrame;      // _68
-	u32 mPressedA;   // _6C pad bit 0x100 A latched for this frame
-	TWhiteFadeInOut* mFade; // _70
-	int mFadeTimer;         // _74
-	TSimpleText* mText[6];    // _78 title help two tabs yes no
-	TSimpleText* mLine[3];    // _90
-	TSimpleText* mCaption[3]; // _9C
-	TSimpleText* mBox;               // _A8 the message box text
-	TAeObjMsgWindow* mChoiceWindow;  // _AC the three-way window
-	TAeObjMsgWindow* mYesNoWindow;   // _B0
-	TMainMenuModel* mIcon[4]; // _B4 the fourth is the one advance ticks
-	void* mLight;    // _C4
+	int mFlow;                      // _10 0 the switcher reads mSlot
+	int mPage;                      // _14
+	int mState;                     // _18
+	int mBackState;                 // _1C the page a confirm returns to
+	int mNextState;                 // _20 setState writes this advance applies it after the current page's update
+	int mSelect;                    // _24 the root page's choice
+	int mCopyTo;                    // _28 the copy page's target file
+	int mFile;                      // _2C the root page's file
+	int _30;                        // _30
+	int _34;                        // _34
+	int mFileStep;                  // _38
+	int mSlot;                      // _3C the file page's choice
+	int mSoundStep;                 // _40
+	int mSoundMode;                 // _44 0 the sound mode 1 vibration
+	int _48;                        // _48
+	int _4C;                        // _4C
+	int mBoxKind;                   // _50 0 when no box is up
+	int mChoice;                    // _54 the box's cursor 0 is yes
+	int mBoxTimer;                  // _58 frames left on a timed box
+	int _5C;                        // _5C
+	int mCursor;                    // _60 from cardGetState 0 idle 0x12 confirm 0xB back
+	int mPrevCursor;                // _64
+	int mFrame;                     // _68
+	u32 mPressedA;                  // _6C pad bit 0x100 A latched for this frame
+	TWhiteFadeInOut* mFade;         // _70
+	int mFadeTimer;                 // _74
+	TSimpleText* mText[6];          // _78 title help two tabs yes no
+	TSimpleText* mLine[3];          // _90
+	TSimpleText* mCaption[3];       // _9C
+	TSimpleText* mBox;              // _A8 the message box text
+	TAeObjMsgWindow* mChoiceWindow; // _AC the three-way window
+	TAeObjMsgWindow* mYesNoWindow;  // _B0
+	TMainMenuModel* mIcon[4];       // _B4 the fourth is the one advance ticks
+	void* mLight;                   // _C4
 };
 
 extern "C" {

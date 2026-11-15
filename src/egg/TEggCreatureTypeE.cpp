@@ -50,42 +50,34 @@ class TCamera;
 
 extern "C" {
 extern const int sAnimalLeaveSounds[] = {
-	452, 450, 448, 454, 458, 456, 460, 478,
-	474, 472, 476, -1, -1, -1, -1, -1,
-	-1, -1, -1, 452, 454,
+	452, 450, 448, 454, 458, 456, 460, 478, 474, 472, 476, -1, -1, -1, -1, -1, -1, -1, -1, 452, 454,
 }; // the sound when each kind goes
 extern const int sAnimalHatchEffects[] = {
-	35, 34, 37, 30, 38, 36, 39, 37,
-	38, 36, 34, 35, 30, 34, 37, 30,
-	38, 37, 34, 35, 30,
+	35, 34, 37, 30, 38, 36, 39, 37, 38, 36, 34, 35, 30, 34, 37, 30, 38, 37, 34, 35, 30,
 }; // the hatch effect of each kind
 extern const int sAnimalHatchCries[] = {
-	451, 449, 447, 453, 457, 455, 459, 477,
-	473, 471, 475, -1, -1, -1, -1, -1,
-	-1, -1, -1, 451, 453,
+	451, 449, 447, 453, 457, 455, 459, 477, 473, 471, 475, -1, -1, -1, -1, -1, -1, -1, -1, 451, 453,
 }; // the cry of each kind as it hatches
 extern const int sAnimalIntroText[] = {
-	21, 20, 23, 22, 25, 24, 26, 32,
-	31, 33, 30, 56, 57, 58, 59, 60,
-	61, 62, 63, 64, 65,
+	21, 20, 23, 22, 25, 24, 26, 32, 31, 33, 30, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65,
 }; // the line of text each kind gets
 }
 
 // What the common model arc holds the egg's model for each kind
 struct AniCommonModel {
-	int mCount;         // _00
-	void** mObjects;    // _04
-	void** mTexLists;   // _08
-	f32** mScales;      // _0C
-	void** mTextures;   // _10 bound to mGvms
-	u8** mGvms;         // _14
+	int mCount;       // _00
+	void** mObjects;  // _04
+	void** mTexLists; // _08
+	f32** mScales;    // _0C
+	void** mTextures; // _10 bound to mGvms
+	u8** mGvms;       // _14
 };
 
 // A message between objects with the sender's id
 struct AniMsg {
 	u16 mType; // _00
 	u8 _02[2];
-	u16 mId;   // _04
+	u16 mId; // _04
 };
 
 // Told to the game when an animal first joins a player
@@ -150,16 +142,17 @@ static inline Vec3f addVecBy(const Vec3f* a, Vec3f b)
 
 // A place 20 out from where the holder stands on the camera's side and turned a little
 // A macro its locals sit in the caller's own scope
-#define BESIDE_HOLDER(at)                          \
-	Vec3f cam;                                     \
-	camGetDrawPos(&cam);                           \
-	Vec3f side = subVec(&cam, &(at));              \
-	flatten(&side);                                \
-	vecRotateY(&side, &side, 0x3000);              \
-	gjScaleVector(20.0f, &side, &side);            \
+#define BESIDE_HOLDER(at)               \
+	Vec3f cam;                          \
+	camGetDrawPos(&cam);                \
+	Vec3f side = subVec(&cam, &(at));   \
+	flatten(&side);                     \
+	vecRotateY(&side, &side, 0x3000);   \
+	gjScaleVector(20.0f, &side, &side); \
 	njAddVector(&(at), &side)
 
-template <typename T> static inline void killObj(T*& obj)
+template <typename T>
+static inline void killObj(T*& obj)
 {
 	if (obj != 0) {
 		obj->mFlags |= 1;
@@ -200,8 +193,8 @@ extern "C" void aniLoadFiles()
 	aniTexSwapReset();
 	for (int i = 0; i < sAnimalParamArcCount; i++) {
 		sAnimalParamArcRes[i] = 0;
-		out = &sAnimalParamArcRes[i];
-		const char* name = aniParamArcName(i);
+		out                   = &sAnimalParamArcRes[i];
+		const char* name      = aniParamArcName(i);
 		if (name != 0) {
 			loadArc(name, out);
 			gAnimalParams[i] = *(AniParams**)((u8*)*out + 0x4C);
@@ -235,11 +228,11 @@ extern "C" void aniFreeFiles()
 }
 
 // The animals as far as the factory needs them
-#define DECLARE_ANIMAL(name, size)                                                     \
-	class name : public TEggCreatureTypeE {                                            \
-	public:                                                                            \
-		name(TObject* parent, int player, int kind, const Vec3f* pos);                 \
-		u8 _384[size - 0x384];                                                         \
+#define DECLARE_ANIMAL(name, size)                                     \
+	class name : public TEggCreatureTypeE {                            \
+	public:                                                            \
+		name(TObject* parent, int player, int kind, const Vec3f* pos); \
+		u8 _384[size - 0x384];                                         \
 	};
 DECLARE_ANIMAL(TAniClionePenguin, 0x3BC)
 DECLARE_ANIMAL(TAniKijiSai, 0x3D4)
@@ -337,10 +330,10 @@ TEggCreatureTypeE::TEggCreatureTypeE(TObject* parent, int player, int kind, cons
     , mKind(kind)
     , mSpawnPos(*pos)
 {
-	_00                  = (u32)gTEggCreatureTypeEName;
-	mSize                = 900;
-	TObjAction::mPlayer  = player;
-	mLightTask           = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x2A, 0);
+	_00                 = (u32)gTEggCreatureTypeEName;
+	mSize               = 900;
+	TObjAction::mPlayer = player;
+	mLightTask          = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x2A, 0);
 	init();
 }
 
@@ -367,45 +360,45 @@ TEggCreatureTypeE::~TEggCreatureTypeE()
 // 0x80099E08
 void TEggCreatureTypeE::init()
 {
-	mParams      = gAnimalParams[mKind];
-	mCount       = *(int*)mParams->mValues;
-	mMode        = -1;
-	mSubMode     = -1;
-	mStep        = -1;
-	mMotionId    = -1;
-	mFree        = 0;
+	mParams           = gAnimalParams[mKind];
+	mCount            = *(int*)mParams->mValues;
+	mMode             = -1;
+	mSubMode          = -1;
+	mStep             = -1;
+	mMotionId         = -1;
+	mFree             = 0;
 	AniParams* params = mParams;
-	f32 accel = params->mAccel;
-	f32 top   = params->mTopSpeed;
-	mMover.mKind     = params->mReturnStyle - 3;
-	mMover.mAccel    = accel;
-	mMover.mTopSpeed = top;
-	mMover.mF0C      = 0.05f;
-	mMover.mTurn     = 0x400;
-	mMover.mPos      = mSpawnPos;
-	mMover.mGravity  = -0.08166667f;
-	mStartPos = mSpawnPos;
-	mPos      = mSpawnPos;
-	mVel.x    = 0.0f;
-	mVel.y    = 0.0f;
-	mVel.z    = 0.0f;
-	mRot[0]   = 0;
-	mRot[1]   = 0;
-	mRot[2]   = 0;
-	f32 scale = mParams->mBaseScale;
-	mScale.x  = scale;
-	mScale.y  = scale;
-	mScale.z  = scale;
+	f32 accel         = params->mAccel;
+	f32 top           = params->mTopSpeed;
+	mMover.mKind      = params->mReturnStyle - 3;
+	mMover.mAccel     = accel;
+	mMover.mTopSpeed  = top;
+	mMover.mF0C       = 0.05f;
+	mMover.mTurn      = 0x400;
+	mMover.mPos       = mSpawnPos;
+	mMover.mGravity   = -0.08166667f;
+	mStartPos         = mSpawnPos;
+	mPos              = mSpawnPos;
+	mVel.x            = 0.0f;
+	mVel.y            = 0.0f;
+	mVel.z            = 0.0f;
+	mRot[0]           = 0;
+	mRot[1]           = 0;
+	mRot[2]           = 0;
+	f32 scale         = mParams->mBaseScale;
+	mScale.x          = scale;
+	mScale.y          = scale;
+	mScale.z          = scale;
 	mHolderRef.setId(0xFFFF);
 	mTarget.setId(0xFFFF);
-	mGoal.x = 0.0f;
-	mGoal.y = -10000.0f;
-	mGoal.z = 0.0f;
-	mDir.x  = 0.0f;
-	mDir.y  = 0.0f;
-	mDir.z  = 0.0f;
-	_188    = 0.0f;
-	_184    = 0.0f;
+	mGoal.x  = 0.0f;
+	mGoal.y  = -10000.0f;
+	mGoal.z  = 0.0f;
+	mDir.x   = 0.0f;
+	mDir.y   = 0.0f;
+	mDir.z   = 0.0f;
+	_188     = 0.0f;
+	_184     = 0.0f;
 	mMotion  = 0;
 	mActor   = 0;
 	_1AC     = 0;
@@ -609,8 +602,7 @@ void TEggCreatureTypeE::checkContacts()
 			mAniFlags |= 2;
 			continue;
 		}
-		if ((mAniFlags & 4) != 0 && (mAniFlags & 0x200) == 0 && colliContactInGroup8(contact) != 0
-		    && colliContactHasBit8(contact) != 0) {
+		if ((mAniFlags & 4) != 0 && (mAniFlags & 0x200) == 0 && colliContactInGroup8(contact) != 0 && colliContactHasBit8(contact) != 0) {
 			TObjAction* other = findObjById(colliContactOwner(contact));
 			if (other != 0) {
 				HitInfo info;
@@ -732,13 +724,13 @@ void TEggCreatureTypeE::modeLoad(int phase)
 		if (aniAssetAttach(mKind, &mAsset) != 0) {
 			TArc* arc = mAsset.mFile->mArc;
 			if (arc != 0) {
-				mMotion    = findArcExport(arc, "AniModel");
-				mPolyAnim  = findArcExport(arc, "polyanim");
-				mFxBank    = mAsset.mFile->mFxBank;
+				mMotion   = (AniModelFile*)findArcExport(arc, "AniModel");
+				mPolyAnim = findArcExport(arc, "polyanim");
+				mFxBank   = mAsset.mFile->mFxBank;
 				if (mMotion == 0 || mFxBank == -1) {
 					return;
 				}
-				AniModelFile::AniTexList* list = *((AniModelFile*)mMotion)->mTexList;
+				AniModelFile::AniTexList* list = *mMotion->mTexList;
 				for (u32 i = 0; i < (u32)list->mCount; i++) {
 					if (list->mEntries[i].mTexture == 0) {
 						return;
@@ -753,12 +745,12 @@ void TEggCreatureTypeE::modeLoad(int phase)
 		}
 	} else if (phase == 1) {
 		if (mMotion != 0) {
-			NJS_OBJECT* obj = (NJS_OBJECT*)*((AniModelFile*)mMotion)->mObject;
+			NJS_OBJECT* obj = (NJS_OBJECT*)*mMotion->mObject;
 			mActor          = (GjActor*)(memAlloc(gjActorSize(obj)));
 			gjCreateActor(obj, (u8*)mActor);
 			_1AC     = 0;
-			mTexList = (NJS_TEXLIST*)*((AniModelFile*)mMotion)->mTexList;
-			mPlayer.init((const MotionEntry*)mNodes, ((AniModelFile*)mMotion)->mMotions);
+			mTexList = (NJS_TEXLIST*)*mMotion->mTexList;
+			mPlayer.init((const MotionEntry*)mNodes, mMotion->mMotions);
 		}
 	}
 }
@@ -1135,7 +1127,7 @@ void TEggCreatureTypeE::hatchIntro()
 void TEggCreatureTypeE::makeEggModel()
 {
 	f32* scale = *gAniCommon->mScales;
-	mEggModel = createCamPath((s8)TObjAction::mPlayer, 2, *gAniCommon->mObjects, *gAniCommon->mTexLists, 0, *scale, *scale);
+	mEggModel  = createCamPath((s8)TObjAction::mPlayer, 2, *gAniCommon->mObjects, *gAniCommon->mTexLists, 0, *scale, *scale);
 	if (mEggModel != 0) {
 		mEggModel->attachToMtx();
 		*(MtxBlock*)mEggModel->getMtx() = *(MtxBlock*)mNodeMatrix;
@@ -1146,9 +1138,8 @@ void TEggCreatureTypeE::makeEggModel()
 // The animal's egg model from its own arc
 void TEggCreatureTypeE::makeAnimalModel()
 {
-	f32* scale = *((AniModelFile*)mMotion)->mEggScale;
-	mEggModel  = createCamPath((s8)TObjAction::mPlayer, 2, *((AniModelFile*)mMotion)->mEggObject,
-	                           *((AniModelFile*)mMotion)->mEggTexList, 0, *scale, *scale);
+	f32* scale = *mMotion->mEggScale;
+	mEggModel  = createCamPath((s8)TObjAction::mPlayer, 2, *mMotion->mEggObject, *mMotion->mEggTexList, 0, *scale, *scale);
 	if (mEggModel != 0) {
 		mEggModel->attachToMtx();
 		*(MtxBlock*)mEggModel->getMtx() = *(MtxBlock*)mNodeMatrix;
@@ -1275,7 +1266,7 @@ void TEggCreatureTypeE::returnWalk()
 	}
 	camGetDrawPos(&cam);
 	const Vec3f& toCam = subVec(&cam, &at);
-	side = toCam;
+	side               = toCam;
 	flatten(&side);
 	vecRotateY(&side, &side, 0x3000);
 	gjScaleVector(20.0f, &side, &side);
@@ -1301,9 +1292,9 @@ void TEggCreatureTypeE::returnWalk()
 	if ((mMover.mFlags & 2) != 0) {
 		mAniFlags |= 0x20;
 	}
-	mPos    = mMover.mPos;
-	mVel    = mMover.mVel;
-	mRot    = mMover.mRot;
+	mPos = mMover.mPos;
+	mVel = mMover.mVel;
+	mRot = mMover.mRot;
 	if ((mMover.mFlags & 0x10) != 0) {
 		Vec3f launch;
 		launch = mMover.mLaunch;
@@ -1375,13 +1366,13 @@ void TEggCreatureTypeE::returnRun()
 		mMover.mTarget.x = to.x;
 		mMover.mTarget.y = y;
 		mMover.mTarget.z = to.z;
-		mMover.mPos    = mPos;
-		mMover.mVel    = mVel;
-		mMover.mRot    = mRot;
+		mMover.mPos      = mPos;
+		mMover.mVel      = mVel;
+		mMover.mRot      = mRot;
 		mMover.update();
-		mPos    = mMover.mPos;
-		mVel    = mMover.mVel;
-		mRot    = mMover.mRot;
+		mPos = mMover.mPos;
+		mVel = mMover.mVel;
+		mRot = mMover.mRot;
 		mAniFlags &= ~4;
 	}
 }
@@ -1630,7 +1621,7 @@ void TEggCreatureTypeE::playMotion(int motion, int events, f32 blend)
 void TEggCreatureTypeE::beginTexAnim()
 {
 	const MotionEntry* table = (const MotionEntry*)mNodes;
-	int motion = table[mPlayer.mCurrent].mMotion;
+	int motion               = table[mPlayer.mCurrent].mMotion;
 	if (mTexAnims != 0) {
 		for (int i = 0; i < mTexAnimCount; i++) {
 			AniTexAnim* anim = &mTexAnims[i];
@@ -1680,7 +1671,7 @@ void TEggCreatureTypeE::poseActor()
 		gjMotionLinkActor(mActor, (void*)mPlayer.getBlend(), mPlayer.mBlendTime);
 	} else {
 		const MotionEntry* table = (const MotionEntry*)mNodes;
-		int motion = table[mPlayer.mCurrent].mMotion;
+		int motion               = table[mPlayer.mCurrent].mMotion;
 		if ((void**)m270 != 0 && ((void**)m270)[motion] != 0) {
 			resetBones();
 			gjSetMotionCallback((void (*)(NJS_OBJECT*))((void**)m270)[motion]);
@@ -1741,7 +1732,9 @@ extern "C" void eggTypeStopAllFx(TEggCreatureTypeE* animal)
 }
 
 // 0x8009D88C
-void TEggCreatureTypeE::clearExtraFx() { }
+void TEggCreatureTypeE::clearExtraFx()
+{
+}
 
 // 0x8009D890
 // The effects some kinds keep on their bodies
@@ -1834,7 +1827,7 @@ void TEggCreatureTypeE::checkLedge()
 void TEggCreatureTypeE::aimJump(Vec3f* vel, const Vec3f* from, const Vec3f* to)
 {
 	*vel     = subVec(to, from);
-	f64 h = __fabs(vel->y);
+	f64 h    = __fabs(vel->y);
 	f32 high = h;
 	f32 dist = vecNormalizeXZ(vel, vel);
 	u32 frames;
@@ -1858,9 +1851,9 @@ void TEggCreatureTypeE::startDash()
 {
 	Vec3f goal;
 	Vec3f dir;
-	dir.x = 0.0f;
-	dir.y = 0.0f;
-	dir.z = 1.0f;
+	dir.x              = 0.0f;
+	dir.y              = 0.0f;
+	dir.z              = 1.0f;
 	TObjAction* holder = mHolderRef.get();
 	if (holder == 0) {
 		setMode(MODE_RETURN);
@@ -1868,13 +1861,13 @@ void TEggCreatureTypeE::startDash()
 	}
 	Vec3f from = *holder->getPos();
 	holder->getRotY();
-		mTarget.setId(camLockGetId(camGetDrawIndex()));
-	goal = from;
+	mTarget.setId(camLockGetId(camGetDrawIndex()));
+	goal               = from;
 	TObjAction* target = mTarget.get();
 	if (target != 0) {
 		mTargetPos = *target->getPos();
-		Vec3f d = subVec(&mTargetPos, &goal);
-		dir = d;
+		Vec3f d    = subVec(&mTargetPos, &goal);
+		dir        = d;
 		if (njUnitVector(&dir) < gUnitVectorMin) {
 			dir = gVecZero;
 		}

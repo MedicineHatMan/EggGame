@@ -4,159 +4,152 @@
 #include "math.h"
 #define NULL 0
 
-static void DLsetdelay(struct AXFX_REVHI_DELAYLINE * dl, long lag);
-static int DLcreate(struct AXFX_REVHI_DELAYLINE * dl, long max_length);
-static void DLdelete(struct AXFX_REVHI_DELAYLINE * dl);
-static int ReverbHICreate(struct AXFX_REVHI_WORK * rv, float coloration, float time, float mix, float damping, float preDelay, float crosstalk);
-static int ReverbHIModify(struct AXFX_REVHI_WORK * rv, float coloration, float time, float mix, float damping, float preDelay, float crosstalk);
-static void HandleReverb(long * sptr, struct AXFX_REVHI_WORK * rv, long k);
-static void ReverbHICallback(long * left, long * right, long * surround, struct AXFX_REVHI_WORK * rv);
-static void ReverbHIFree(struct AXFX_REVHI_WORK * rv);
+static void DLsetdelay(struct AXFX_REVHI_DELAYLINE* dl, long lag);
+static int DLcreate(struct AXFX_REVHI_DELAYLINE* dl, long max_length);
+static void DLdelete(struct AXFX_REVHI_DELAYLINE* dl);
+static int ReverbHICreate(struct AXFX_REVHI_WORK* rv, float coloration, float time, float mix, float damping, float preDelay,
+                          float crosstalk);
+static int ReverbHIModify(struct AXFX_REVHI_WORK* rv, float coloration, float time, float mix, float damping, float preDelay,
+                          float crosstalk);
+static void HandleReverb(long* sptr, struct AXFX_REVHI_WORK* rv, long k);
+static void ReverbHICallback(long* left, long* right, long* surround, struct AXFX_REVHI_WORK* rv);
+static void ReverbHIFree(struct AXFX_REVHI_WORK* rv);
 
-static void DLsetdelay(struct AXFX_REVHI_DELAYLINE * dl, long lag) {
-    dl->outPoint = dl->inPoint - (lag * 4);
-    while (dl->outPoint < 0) {
-        dl->outPoint += dl->length;
-    }
+static void DLsetdelay(struct AXFX_REVHI_DELAYLINE* dl, long lag)
+{
+	dl->outPoint = dl->inPoint - (lag * 4);
+	while (dl->outPoint < 0) {
+		dl->outPoint += dl->length;
+	}
 }
 
-static int DLcreate(struct AXFX_REVHI_DELAYLINE * dl, long max_length) {
-    dl->length = (max_length * 4);
-    dl->inputs = __AXFXAlloc(max_length << 2);
-    if (dl->inputs == NULL) {
-        return 0;
-    }
-    memset(dl->inputs, 0, max_length << 2);
-    dl->lastOutput = 0.0f;
-    DLsetdelay(dl, max_length >> 1);
-    dl->inPoint = 0;
-    dl->outPoint = 0;
-    return 1;
+static int DLcreate(struct AXFX_REVHI_DELAYLINE* dl, long max_length)
+{
+	dl->length = (max_length * 4);
+	dl->inputs = __AXFXAlloc(max_length << 2);
+	if (dl->inputs == NULL) {
+		return 0;
+	}
+	memset(dl->inputs, 0, max_length << 2);
+	dl->lastOutput = 0.0f;
+	DLsetdelay(dl, max_length >> 1);
+	dl->inPoint  = 0;
+	dl->outPoint = 0;
+	return 1;
 }
 
-static void DLdelete(struct AXFX_REVHI_DELAYLINE * dl) {
-    if (dl->inputs != NULL) {
-        __AXFXFree(dl->inputs);
-        dl->inputs = NULL;
-    }
+static void DLdelete(struct AXFX_REVHI_DELAYLINE* dl)
+{
+	if (dl->inputs != NULL) {
+		__AXFXFree(dl->inputs);
+		dl->inputs = NULL;
+	}
 }
 
 #pragma fp_contract off
 // 0x80238360
-static int ReverbHICreate(struct AXFX_REVHI_WORK * rv, float coloration, float time, float mix, float damping, float preDelay, float crosstalk) {
-    u8 i;
-    u8 k;
-    static long lens[8] = {
-        0x000006FD,
-        0x000007CF,
-        0x0000091D,
-        0x000001B1,
-        0x00000095,
-        0x0000002F,
-        0x00000049,
-        0x00000043
-    }; 
+static int ReverbHICreate(struct AXFX_REVHI_WORK* rv, float coloration, float time, float mix, float damping, float preDelay,
+                          float crosstalk)
+{
+	u8 i;
+	u8 k;
+	static long lens[8] = { 0x000006FD, 0x000007CF, 0x0000091D, 0x000001B1, 0x00000095, 0x0000002F, 0x00000049, 0x00000043 };
 
-    if ((coloration < 0.0f ) || (coloration > 1.0f )
-     || (time       < 0.01f) || (time       > 10.0f)
-     || (mix        < 0.0f ) || (mix        > 1.0f )
-     || (crosstalk  < 0.0f ) || (crosstalk  > 1.0f )
-     || (damping    < 0.0f ) || (damping    > 1.0f )
-     || (preDelay   < 0.0f ) || (preDelay   > 0.1f )) {
-        return 0;
-    }
-    memset(rv, 0, sizeof(struct AXFX_REVHI_WORK));
-    for(k = 0; k < 3; k++) {
-        for(i = 0; i < 3; i++) {
-            if (DLcreate(&rv->C[i + (k * 3)], lens[i] + 2) == 0) {
-                ReverbHIFree(rv);
-                return 0;
-            }
-            DLsetdelay(&rv->C[i + (k * 3)], lens[i]);
-            rv->combCoef[i + (k * 3)] = powf(10.0f, (lens[i] * -3) / (32000.0f * time));
-        }
-        for(i = 0; i < 2; i++) {
-            if (DLcreate(&rv->AP[i + (k * 3)], lens[i + 3] + 2) == 0) {
-                ReverbHIFree(rv);
-                return 0;
-            }
-            DLsetdelay(&rv->AP[i + (k * 3)], lens[i + 3]);
-        }
-        if (DLcreate(&rv->AP[2 + (k * 3)], lens[k + 5] + 2) == 0) {
-            ReverbHIFree(rv);
-            return 0;
-        }
-        DLsetdelay(&rv->AP[2 + (k * 3)], lens[k + 5]);
-        rv->lpLastout[k] = 0.0f;
-    }
-    rv->allPassCoeff = coloration;
-    rv->level = mix;
-    rv->crosstalk = crosstalk;
-    rv->damping = damping;
-    if (rv->damping < 0.05f) {
-        rv->damping = 0.05f;
-    }
-    rv->damping = (1.0f - (0.05f + (0.8f * rv->damping)));
-    if (0.0f != preDelay) {
-        rv->preDelayTime = (32000.0f * preDelay);
-        for(i = 0; i < 3; i++) {
-            rv->preDelayLine[i] = __AXFXAlloc(rv->preDelayTime * 4);
-            if (rv->preDelayLine[i] == NULL) {
-                ReverbHIFree(rv);
-                return 0;
-            }
-            memset(rv->preDelayLine[i], 0, rv->preDelayTime * 4);
-            rv->preDelayPtr[i] = rv->preDelayLine[i];
-        }
-    } else {
-        rv->preDelayTime = 0;
-        for(i = 0; i < 3; i++) {
-            rv->preDelayPtr[i] = 0;
-            rv->preDelayLine[i] = 0;
-        }
-    }
-    return 1;
+	if ((coloration < 0.0f) || (coloration > 1.0f) || (time < 0.01f) || (time > 10.0f) || (mix < 0.0f) || (mix > 1.0f) || (crosstalk < 0.0f)
+	    || (crosstalk > 1.0f) || (damping < 0.0f) || (damping > 1.0f) || (preDelay < 0.0f) || (preDelay > 0.1f)) {
+		return 0;
+	}
+	memset(rv, 0, sizeof(struct AXFX_REVHI_WORK));
+	for (k = 0; k < 3; k++) {
+		for (i = 0; i < 3; i++) {
+			if (DLcreate(&rv->C[i + (k * 3)], lens[i] + 2) == 0) {
+				ReverbHIFree(rv);
+				return 0;
+			}
+			DLsetdelay(&rv->C[i + (k * 3)], lens[i]);
+			rv->combCoef[i + (k * 3)] = powf(10.0f, (lens[i] * -3) / (32000.0f * time));
+		}
+		for (i = 0; i < 2; i++) {
+			if (DLcreate(&rv->AP[i + (k * 3)], lens[i + 3] + 2) == 0) {
+				ReverbHIFree(rv);
+				return 0;
+			}
+			DLsetdelay(&rv->AP[i + (k * 3)], lens[i + 3]);
+		}
+		if (DLcreate(&rv->AP[2 + (k * 3)], lens[k + 5] + 2) == 0) {
+			ReverbHIFree(rv);
+			return 0;
+		}
+		DLsetdelay(&rv->AP[2 + (k * 3)], lens[k + 5]);
+		rv->lpLastout[k] = 0.0f;
+	}
+	rv->allPassCoeff = coloration;
+	rv->level        = mix;
+	rv->crosstalk    = crosstalk;
+	rv->damping      = damping;
+	if (rv->damping < 0.05f) {
+		rv->damping = 0.05f;
+	}
+	rv->damping = (1.0f - (0.05f + (0.8f * rv->damping)));
+	if (0.0f != preDelay) {
+		rv->preDelayTime = (32000.0f * preDelay);
+		for (i = 0; i < 3; i++) {
+			rv->preDelayLine[i] = __AXFXAlloc(rv->preDelayTime * 4);
+			if (rv->preDelayLine[i] == NULL) {
+				ReverbHIFree(rv);
+				return 0;
+			}
+			memset(rv->preDelayLine[i], 0, rv->preDelayTime * 4);
+			rv->preDelayPtr[i] = rv->preDelayLine[i];
+		}
+	} else {
+		rv->preDelayTime = 0;
+		for (i = 0; i < 3; i++) {
+			rv->preDelayPtr[i]  = 0;
+			rv->preDelayLine[i] = 0;
+		}
+	}
+	return 1;
 }
 
 #pragma fp_contract reset
 
-static int ReverbHIModify(struct AXFX_REVHI_WORK * rv, float coloration, float time, float mix, float damping, float preDelay, float crosstalk) {
-    u8 i;
+static int ReverbHIModify(struct AXFX_REVHI_WORK* rv, float coloration, float time, float mix, float damping, float preDelay,
+                          float crosstalk)
+{
+	u8 i;
 
-    if ((coloration < 0.0f ) || (coloration > 1.0f  )
-     || (time       < 0.01f) || (time       > 10.0f )
-     || (mix        < 0.0f ) || (mix        > 1.0f  )
-     || (crosstalk  < 0.0f ) || (crosstalk  > 1.0f  )
-     || (damping    < 0.0f ) || (damping    > 1.0f  )
-     || (preDelay   < 0.0f ) || (preDelay   > 100.0f)) {
-        return 0;
-    }
+	if ((coloration < 0.0f) || (coloration > 1.0f) || (time < 0.01f) || (time > 10.0f) || (mix < 0.0f) || (mix > 1.0f) || (crosstalk < 0.0f)
+	    || (crosstalk > 1.0f) || (damping < 0.0f) || (damping > 1.0f) || (preDelay < 0.0f) || (preDelay > 100.0f)) {
+		return 0;
+	}
 
-    rv->allPassCoeff = coloration;
-    rv->level = mix;
-    rv->crosstalk = crosstalk;
-    rv->damping = damping;
-    if (rv->damping < 0.05f) {
-        rv->damping = 0.05f;
-    }
-    rv->damping = (1.0f - (0.05f + (0.8f * rv->damping)));
-    for(i = 0; i < 9; i++) {
-        DLdelete(&rv->AP[i]);
-    }
-    for(i = 0; i < 9; i++) {
-        DLdelete(&rv->C[i]);
-    }
-    if (rv->preDelayTime) {
-        for(i = 0; i < 3; i++) {
-            __AXFXFree(rv->preDelayLine[i]);
-        }
-    }
-    return ReverbHICreate(rv, coloration, time, mix, damping, preDelay, crosstalk);
+	rv->allPassCoeff = coloration;
+	rv->level        = mix;
+	rv->crosstalk    = crosstalk;
+	rv->damping      = damping;
+	if (rv->damping < 0.05f) {
+		rv->damping = 0.05f;
+	}
+	rv->damping = (1.0f - (0.05f + (0.8f * rv->damping)));
+	for (i = 0; i < 9; i++) {
+		DLdelete(&rv->AP[i]);
+	}
+	for (i = 0; i < 9; i++) {
+		DLdelete(&rv->C[i]);
+	}
+	if (rv->preDelayTime) {
+		for (i = 0; i < 3; i++) {
+			__AXFXFree(rv->preDelayLine[i]);
+		}
+	}
+	return ReverbHICreate(rv, coloration, time, mix, damping, preDelay, crosstalk);
 }
 
 const static double i2fMagic = 4503601774854144.0;
-const static float value1_0 = 1.0f;
+const static float value1_0  = 1.0f;
 
+// clang-format off
 asm static void DoCrossTalk(register long * l, register long * r, register float cross, register float invcross) {
     nofralloc
 	stwu r1, -48(r1)
@@ -261,10 +254,12 @@ loop:
 	addi r1, r1, 48
 	blr
 }
+// clang-format on
 
 const static float value0_3 = 0.3f;
 const static float value0_6 = 0.6f;
 
+// clang-format off
 asm static void HandleReverb(register long * sptr, register struct AXFX_REVHI_WORK * rv, register long k) {
     nofralloc
 	stwu r1, -0xc0(r1)
@@ -621,80 +616,87 @@ L_00000C7C:
 	addi r1, r1, 0xc0
 	blr
 }
+// clang-format on
 
-static void ReverbHICallback(long * left, long * right, long * surround, struct AXFX_REVHI_WORK * rv) {
-    u8 k;
+static void ReverbHICallback(long* left, long* right, long* surround, struct AXFX_REVHI_WORK* rv)
+{
+	u8 k;
 
-    for(k = 0; k < 3; k++) {
-        switch(k) {
-            case 0:
-                if (0.0f != rv->crosstalk) {
-                    DoCrossTalk(left, right, 0.5f * rv->crosstalk, 1.0f - (0.5f * rv->crosstalk));
-                }
-                HandleReverb(left, rv, 0);
-                break;
-            case 1:
-                HandleReverb(right, rv, 1);
-                break;
-            case 2:
-                HandleReverb(surround, rv, 2);
-                break;
-        }
-    }
+	for (k = 0; k < 3; k++) {
+		switch (k) {
+		case 0:
+			if (0.0f != rv->crosstalk) {
+				DoCrossTalk(left, right, 0.5f * rv->crosstalk, 1.0f - (0.5f * rv->crosstalk));
+			}
+			HandleReverb(left, rv, 0);
+			break;
+		case 1:
+			HandleReverb(right, rv, 1);
+			break;
+		case 2:
+			HandleReverb(surround, rv, 2);
+			break;
+		}
+	}
 }
 
-static void ReverbHIFree(struct AXFX_REVHI_WORK * rv) {
-    u8 i;
+static void ReverbHIFree(struct AXFX_REVHI_WORK* rv)
+{
+	u8 i;
 
-    for(i = 0; i < 9; i++) {
-        DLdelete(&rv->AP[i]);
-    }
-    for(i = 0; i < 9; i++) {
-        DLdelete(&rv->C[i]);
-    }
-    if (rv->preDelayTime) {
-        for(i = 0; i < 3; i++) {
-            if (rv->preDelayLine[i] != NULL) {
-                __AXFXFree(rv->preDelayLine[i]);
-                rv->preDelayLine[i] = NULL;
-            }
-        }
-    }
+	for (i = 0; i < 9; i++) {
+		DLdelete(&rv->AP[i]);
+	}
+	for (i = 0; i < 9; i++) {
+		DLdelete(&rv->C[i]);
+	}
+	if (rv->preDelayTime) {
+		for (i = 0; i < 3; i++) {
+			if (rv->preDelayLine[i] != NULL) {
+				__AXFXFree(rv->preDelayLine[i]);
+				rv->preDelayLine[i] = NULL;
+			}
+		}
+	}
 }
 
-int AXFXReverbHiInit(struct AXFX_REVERBHI * rev) {
-    int ret;
-    int old;
+int AXFXReverbHiInit(struct AXFX_REVERBHI* rev)
+{
+	int ret;
+	int old;
 
-    old = OSDisableInterrupts();
-    rev->tempDisableFX = 0;
-    ret = ReverbHICreate(&rev->rv, rev->coloration, rev->time, rev->mix, rev->damping, rev->preDelay, rev->crosstalk);
-    OSRestoreInterrupts(old);
-    return ret;
+	old                = OSDisableInterrupts();
+	rev->tempDisableFX = 0;
+	ret                = ReverbHICreate(&rev->rv, rev->coloration, rev->time, rev->mix, rev->damping, rev->preDelay, rev->crosstalk);
+	OSRestoreInterrupts(old);
+	return ret;
 }
 
-int AXFXReverbHiShutdown(struct AXFX_REVERBHI * rev) {
-    int old;
+int AXFXReverbHiShutdown(struct AXFX_REVERBHI* rev)
+{
+	int old;
 
-    old = OSDisableInterrupts();
-    ReverbHIFree(&rev->rv);
-    OSRestoreInterrupts(old);
-    return 1;
+	old = OSDisableInterrupts();
+	ReverbHIFree(&rev->rv);
+	OSRestoreInterrupts(old);
+	return 1;
 }
 
-int AXFXReverbHiSettings(struct AXFX_REVERBHI * rev) {
-    int old;
+int AXFXReverbHiSettings(struct AXFX_REVERBHI* rev)
+{
+	int old;
 
-    old = OSDisableInterrupts();
-    rev->tempDisableFX = 1;
-    ReverbHIModify(&rev->rv, rev->coloration, rev->time, rev->mix, rev->damping, rev->preDelay, rev->crosstalk);
-    rev->tempDisableFX = 0;
-    OSRestoreInterrupts(old);
-    return 1;
+	old                = OSDisableInterrupts();
+	rev->tempDisableFX = 1;
+	ReverbHIModify(&rev->rv, rev->coloration, rev->time, rev->mix, rev->damping, rev->preDelay, rev->crosstalk);
+	rev->tempDisableFX = 0;
+	OSRestoreInterrupts(old);
+	return 1;
 }
 
-void AXFXReverbHiCallback(struct AXFX_BUFFERUPDATE * bufferUpdate, struct AXFX_REVERBHI * reverb) {
-    if (reverb->tempDisableFX == 0) {
-        ReverbHICallback(bufferUpdate->left, bufferUpdate->right, bufferUpdate->surround, &reverb->rv);
-    }
+void AXFXReverbHiCallback(struct AXFX_BUFFERUPDATE* bufferUpdate, struct AXFX_REVERBHI* reverb)
+{
+	if (reverb->tempDisableFX == 0) {
+		ReverbHICallback(bufferUpdate->left, bufferUpdate->right, bufferUpdate->surround, &reverb->rv);
+	}
 }

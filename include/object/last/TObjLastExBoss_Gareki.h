@@ -12,8 +12,14 @@ extern void* gObjHeap;
 unsigned int rand();
 }
 
-static inline f32 randUnit() { return 3.0517578125e-05f * (f32)(int)rand(); }
-static inline f32 randSpan(f32 span, f32 base) { return span * randUnit() + base; }
+static inline f32 randUnit()
+{
+	return 3.0517578125e-05f * (f32)(int)rand();
+}
+static inline f32 randSpan(f32 span, f32 base)
+{
+	return span * randUnit() + base;
+}
 
 /**
  * A rubble piece: a model with a spin and an alpha.
@@ -34,7 +40,7 @@ public:
 	int mAlpha;          // _70
 	int mRadius;         // _74
 	NJS_OBJECT* mModel;  // _78
-	DrawTask* mDraw;         // _7C
+	DrawTask* mDraw;     // _7C
 };
 
 class TObjLastExBoss_Gareki : public TObjLastExBoss_GarekiBase {

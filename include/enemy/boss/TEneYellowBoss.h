@@ -50,10 +50,10 @@ TObject* createTEneYellowBoss(TObject*, SetDesc*);
 class TEneYellowBoss : public TObjEnemy {
 public:
 	enum {
-		BOSS_SUIT   = 0x1,  // draws with the suit's texture
-		BOSS_OPEN   = 0x2,  // hits count for more
-		BOSS_COPY   = 0x4,  // a copy No health bar and no shadow
-		BOSS_SOLID  = 0x8,  // its spheres hit the player
+		BOSS_SUIT   = 0x1, // draws with the suit's texture
+		BOSS_OPEN   = 0x2, // hits count for more
+		BOSS_COPY   = 0x4, // a copy No health bar and no shadow
+		BOSS_SOLID  = 0x8, // its spheres hit the player
 		BOSS_FADING = 0x10,
 	};
 
@@ -155,40 +155,40 @@ public:
 	void actDie(int phase);
 
 	EnemyMotion mMotionData; // _158
-	YellowBossAi* mAi;    // _194
+	YellowBossAi* mAi;       // _194
 	GjActor* mPose;          // _198
-	DrawTask* mDrawTask;      // _19C
-	u32 mBossFlags;       // _1A0
-	Vec3f mHitDir;        // _1A4
-	HitVec mPoint[5];      // _1B0
-	Vec3f mMoveTo;        // _1EC
-	int mMoveToRot;       // _1F8
-	Vec3f mAim;           // _1FC
-	int mAimRot;          // _208
-	u16 _20C;             // _20C
+	DrawTask* mDrawTask;     // _19C
+	u32 mBossFlags;          // _1A0
+	Vec3f mHitDir;           // _1A4
+	HitVec mPoint[5];        // _1B0
+	Vec3f mMoveTo;           // _1EC
+	int mMoveToRot;          // _1F8
+	Vec3f mAim;              // _1FC
+	int mAimRot;             // _208
+	u16 _20C;                // _20C
 	u8 _20E[2];
-	Vec3f mFrom;          // _210
-	int mMaxHealth;       // _21C
-	ObjShadow mShadow;    // _220
+	Vec3f mFrom;        // _210
+	int mMaxHealth;     // _21C
+	ObjShadow mShadow;  // _220
 	EnemyLight mLight;  // _258
-	EnemyTint mTint;      // _298
-	BossSuit mSuit;       // _2A0
-	f32 mTravelTime;      // _2D8
-	f32 mFade;            // _2DC
-	int mSide;            // _2E0
-	TCamPath* mFx;        // _2E4
-	CharaColli* mShape;         // _2E8
-	SeCue mSe;               // _2EC
-	TObject* mFx2;        // _2F0
-	FxHolder mGlow;       // _2F4
-	TObject* mPart[5];    // _328
+	EnemyTint mTint;    // _298
+	BossSuit mSuit;     // _2A0
+	f32 mTravelTime;    // _2D8
+	f32 mFade;          // _2DC
+	int mSide;          // _2E0
+	TCamPath* mFx;      // _2E4
+	CharaColli* mShape; // _2E8
+	SeCue mSe;          // _2EC
+	TObject* mFx2;      // _2F0
+	FxHolder mGlow;     // _2F4
+	TObject* mPart[5];  // _328
 	u8 _33C[0xC8];
-	int mStep;            // _404
-	int mBurst;           // _408
-	int mWait;            // _40C
-	int _410;             // _410
-	int _414;             // _414
-	f32 mTime;            // _418
+	int mStep;  // _404
+	int mBurst; // _408
+	int mWait;  // _40C
+	int _410;   // _410
+	int _414;   // _414
+	f32 mTime;  // _418
 };
 
 /** Runs the current state's hooks */
@@ -278,20 +278,20 @@ public:
 		onPhase(mState, 0);
 	}
 
-	EnemySight mSight;       // _10
-	u32 mFlags;              // _40
-	int mHealthMark;         // _44
-	int mNextPart;           // _48
-	YellowBossAi* mCopy[8];  // _4C
-	YellowBossAi* mParent;   // _6C
-	Vec3f mDest;             // _70
-	int _7C;                 // _7C
-	int mWaitFrames;         // _80
-	int mEndFrames;          // _84
-	int mTimer;              // _88
-	int mStep;               // _8C
-	int mCount;              // _90
-	int _94;                 // _94
+	EnemySight mSight;      // _10
+	u32 mFlags;             // _40
+	int mHealthMark;        // _44
+	int mNextPart;          // _48
+	YellowBossAi* mCopy[8]; // _4C
+	YellowBossAi* mParent;  // _6C
+	Vec3f mDest;            // _70
+	int _7C;                // _7C
+	int mWaitFrames;        // _80
+	int mEndFrames;         // _84
+	int mTimer;             // _88
+	int mStep;              // _8C
+	int mCount;             // _90
+	int _94;                // _94
 };
 
 #include "io/ResBank.h"

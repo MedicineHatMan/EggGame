@@ -34,10 +34,10 @@ public:
 	virtual void vfn_10(); // _10
 	virtual void render(); // _1C
 
-	HitVec mPoint[8]; // _20
-	int mAngle[8];   // _80
-	int mIndex;      // _A0
-	f32 mFrame;      // _A4
+	HitVec mPoint[8];    // _20
+	int mAngle[8];       // _80
+	int mIndex;          // _A0
+	f32 mFrame;          // _A4
 	DrawTask* mDraw;     // _A8
 	NJS_MOTION* mMotion; // _AC
 

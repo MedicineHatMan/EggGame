@@ -38,17 +38,17 @@ public:
 	void stateOn();
 	void stateOff();
 
-	ObjModel mModel;     // _64
-	DrawTask* mDrawTask;     // _84
-	CharaColli* mJetColli;     // _88 seven spheres along the flame
-	f32 mMatrix[12];     // _8C
-	int mEternal;        // _BC
-	int mPower;          // _C0
-	int mOnTime;         // _C4
-	int mOffTime;        // _C8
-	int mTimer;          // _CC
-	SoundHandle mSound;  // _D0
-	int mAct;            // _FC 0 = on 1 = off 2 = always on
+	ObjModel mModel;            // _64
+	DrawTask* mDrawTask;        // _84
+	CharaColli* mJetColli;      // _88 seven spheres along the flame
+	f32 mMatrix[12];            // _8C
+	int mEternal;               // _BC
+	int mPower;                 // _C0
+	int mOnTime;                // _C4
+	int mOffTime;               // _C8
+	int mTimer;                 // _CC
+	SoundHandle mSound;         // _D0
+	int mAct;                   // _FC 0 = on 1 = off 2 = always on
 	TParticleGenerator* mTrail; // _100
 };
 

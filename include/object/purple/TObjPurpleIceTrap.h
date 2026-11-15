@@ -42,18 +42,18 @@ public:
 
 	inline void operator delete(void* mem) { objHeapFree(gObjHeap, mem); }
 
-	DrawTask* mDrawTask; // _64
-	ModelDraw mModel;    // _68 geobj model 4 and texture 1
-	MotionTrack mTrack;  // _84
-	CharaColli* mSpikes;       // _A0 seven spheres
-	f32 mMatrix[12];     // _A4 placed at mPos and rotated
-	int mAct;            // _D4 0 opening 1 on 2 cooling 3 eternal
-	int mEternal;        // _D8 set int 0 clamped to 0 or 1
-	int mPower;          // _DC set int 1 plus 25
-	int _E0;             // _E0
-	int mOnTime;         // _E4 set int 2 plus 120
-	int mOffTime;        // _E8 set int 3 plus 180
-	int mTimer;          // _EC
+	DrawTask* mDrawTask;        // _64
+	ModelDraw mModel;           // _68 geobj model 4 and texture 1
+	MotionTrack mTrack;         // _84
+	CharaColli* mSpikes;        // _A0 seven spheres
+	f32 mMatrix[12];            // _A4 placed at mPos and rotated
+	int mAct;                   // _D4 0 opening 1 on 2 cooling 3 eternal
+	int mEternal;               // _D8 set int 0 clamped to 0 or 1
+	int mPower;                 // _DC set int 1 plus 25
+	int _E0;                    // _E0
+	int mOnTime;                // _E4 set int 2 plus 120
+	int mOffTime;               // _E8 set int 3 plus 180
+	int mTimer;                 // _EC
 	TParticleGenerator* mSpray; // _F0 particle 0xE9
 };
 

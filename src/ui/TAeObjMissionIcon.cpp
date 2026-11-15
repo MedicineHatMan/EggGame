@@ -18,24 +18,23 @@ struct NJS_TEXLIST;
 
 extern "C" {
 
-int missionIconSetDigits3(TAeObjMissionIcon* icon, u32 hundreds, u32 tens, u32 ones, int value,
-                          const int* cells);
+int missionIconSetDigits3(TAeObjMissionIcon* icon, u32 hundreds, u32 tens, u32 ones, int value, const int* cells);
 }
 
 typedef char TAeObjMissionIcon_size_check[(sizeof(TAeObjMissionIcon) == 0x7C) ? 1 : -1];
 
 // The gauge's colours it pulses between the first two for the first second then shows the fourth for a second then the
 // third
-static const AeColor sGaugePulseA = { 1.0f, 0.98f, 0.588f, 0.588f };
-static const AeColor sGaugePulseB = { 1.0f, 0.9f, 0.196f, 0.196f };
-static const AeColor sGaugeLate   = { 1.0f, 0.9f, 0.9f, 0.0f };
-static const AeColor sGaugeMid    = { 1.0f, 0.7843f, 0.3137f, 0.3137f };
-static const u32 sMissionIconBanks[3] = { 0xFFFFFFFF, 0x14, 0x15 }; // palette banks
-static const u32 sMarkSlots[4]        = { 0x101, 0x100, 0xFF, 0xFE };  // frame slots for the marks
+static const AeColor sGaugePulseA     = { 1.0f, 0.98f, 0.588f, 0.588f };
+static const AeColor sGaugePulseB     = { 1.0f, 0.9f, 0.196f, 0.196f };
+static const AeColor sGaugeLate       = { 1.0f, 0.9f, 0.9f, 0.0f };
+static const AeColor sGaugeMid        = { 1.0f, 0.7843f, 0.3137f, 0.3137f };
+static const u32 sMissionIconBanks[3] = { 0xFFFFFFFF, 0x14, 0x15 };     // palette banks
+static const u32 sMarkSlots[4]        = { 0x101, 0x100, 0xFF, 0xFE };   // frame slots for the marks
 static const u32 sFillSlots[4]        = { 0x106, 0x105, 0x104, 0x103 }; // frame slots for the fills
 static const int sBigDigitCells[10]   = { 0xB0, 0xB3, 0xB6, 0xB9, 0xBC, 0xBF, 0xC2, 0xC5, 0xC8, 0xCB };
 static const int sSmallDigitCells[10] = { 0xD1, 0xD4, 0xD7, 0xDA, 0xDD, 0xE0, 0xE3, 0xE6, 0xE9, 0xEC };
-static const char* sMissionIconName = "TAeObjMissionIcon";
+static const char* sMissionIconName   = "TAeObjMissionIcon";
 
 // 0x800FD2CC
 extern "C" void loadMissionIcon()
@@ -44,7 +43,7 @@ extern "C" void loadMissionIcon()
 	loadArc("ae_mission_icon.arc", &sMissionIconArc);
 	if (sMissionIconArc != 0) {
 		AeArcBlock* block = aeArcBlock(sMissionIconArc);
-		sMissionIconAe = block->mAe;
+		sMissionIconAe    = block->mAe;
 		relocateAe(sMissionIconAe);
 		sMissionIconTexList = block->mTexList;
 		bindGvmTextures((u8*)block->mGvm, sMissionIconTexList);
@@ -69,7 +68,7 @@ extern "C" void freeMissionIcon()
 		sMissionIconTexList = 0;
 		releaseResource(sMissionIconArc);
 		sMissionIconArc = 0;
-		sMissionIconAe = 0;
+		sMissionIconAe  = 0;
 	}
 }
 
@@ -92,10 +91,10 @@ TAeObjMissionIcon::TAeObjMissionIcon(TObject* parent, void* data, void* assets, 
 {
 	int i;
 
-	mKind = kind;
-	_00   = (u32)sMissionIconName;
-	mSize = 0x7C;
-	_5C   = 0;
+	mKind  = kind;
+	_00    = (u32)sMissionIconName;
+	mSize  = 0x7C;
+	_5C    = 0;
 	mLayer = 0;
 	for (i = 0; i < 4; i++) {
 		mMarks[i] = 0;
@@ -130,7 +129,7 @@ TAeObjMissionIcon::TAeObjMissionIcon(TObject* parent, void* data, void* assets, 
 		missionIconSetup8(this);
 		break;
 	}
-	mTask = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3D, 0);
+	mTask  = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3D, 0);
 	mSound = -1;
 }
 
@@ -380,21 +379,21 @@ extern "C" void missionIconSetup8(TAeObjMissionIcon* icon)
 	icon->mMarks[1]->setRate(0.05f);
 	icon->mMarks[1]->_A8 = 0.0f;
 	icon->mMarks[1]->_AC = 0;
-	icon->mMarks[2] = icon->createLayer(9, 0);
+	icon->mMarks[2]      = icon->createLayer(9, 0);
 	if (icon->mMarks[2] != 0) {
 		icon->mMarks[2]->mBanks = sMissionIconBanks;
 	}
 	icon->mMarks[2]->setRate(0.05f);
 	icon->mMarks[2]->_A8 = 0.0f;
 	icon->mMarks[2]->_AC = 0;
-	icon->mMarks[3] = icon->createLayer(0xF, 0);
+	icon->mMarks[3]      = icon->createLayer(0xF, 0);
 	if (icon->mMarks[3] != 0) {
 		icon->mMarks[3]->mBanks = sMissionIconBanks;
 	}
 	icon->mMarks[3]->setRate(0.05f);
 	icon->mMarks[3]->_A8 = 0.0f;
 	icon->mMarks[3]->_AC = 0;
-	color[0] = 1.0f;
+	color[0]             = 1.0f;
 	color[1] = color[2] = color[3] = 0.0f;
 	icon->mMarks[3]->setColor(color);
 	icon->mFills[0] = icon->createLayer(0x35, 0);
@@ -751,8 +750,7 @@ extern "C" int missionIconSetDigit(TAeObjMissionIcon* icon, u32 slot, int value,
 }
 
 // 0x800FEBD4
-extern "C" int missionIconSetDigits2(TAeObjMissionIcon* icon, u32 tens, u32 ones, int value,
-                                     const int* cells)
+extern "C" int missionIconSetDigits2(TAeObjMissionIcon* icon, u32 tens, u32 ones, int value, const int* cells)
 {
 	int n;
 
@@ -766,8 +764,7 @@ extern "C" int missionIconSetDigits2(TAeObjMissionIcon* icon, u32 tens, u32 ones
 }
 
 // 0x800FEC7C
-extern "C" int missionIconSetDigits3(TAeObjMissionIcon* icon, u32 hundreds, u32 tens, u32 ones,
-                                     int value, const int* cells)
+extern "C" int missionIconSetDigits3(TAeObjMissionIcon* icon, u32 hundreds, u32 tens, u32 ones, int value, const int* cells)
 {
 	int n;
 	int top;

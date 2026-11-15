@@ -51,30 +51,21 @@ struct Fx;
 
 extern "C" {
 MotionEntry sLastBossMotions[] = {
-	{ MOTION_LOOP, 18, -1, 0, 0.0f, 30.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_ONCE, 4, -1, 0, 0.0f, 24.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_LOOP, 3, -1, 0, 0.0f, 30.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_LOOP, 5, -1, 0, 0.0f, 25.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 10, -1, 0, 0.0f, 34.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 9, -1, 0, 0.0f, 44.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 6, -1, 0, 0.0f, 27.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_LOOP, 7, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 8, -1, 0, 0.0f, 16.0f, 0.35f, 0.0f, 0 },
-	{ MOTION_ONCE, 12, -1, 0, 0.0f, 11.0f, 0.15f, 0.0f, 0 },
-	{ MOTION_LOOP, 13, -1, 0, 0.0f, 10.0f, 0.4f, 0.0f, 0 },
-	{ MOTION_ONCE, 14, -1, 0, 0.0f, 52.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 15, -1, 0, 0.0f, 34.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_ONCE, 16, -1, 0, 0.0f, 34.0f, 0.25f, 0.0f, 0 },
-	{ MOTION_LOOP, 17, -1, 0, 0.0f, 20.0f, 0.3f, 0.0f, 0 },
-	{ MOTION_ONCE, 0, -1, 0, 0.0f, 19.0f, 0.2f, 0.0f, 0 },
-	{ MOTION_ONCE, 11, -1, 0, 0.0f, 49.0f, 0.17f, 0.0f, 0 },
-	{ MOTION_ONCE, 2, -1, 0, 0.0f, 959.0f, 1.0f, 0.0f, 0 },
+	{ MOTION_LOOP, 18, -1, 0, 0.0f, 30.0f, 0.2f, 0.0f, 0 },  { MOTION_ONCE, 4, -1, 0, 0.0f, 24.0f, 0.2f, 0.0f, 0 },
+	{ MOTION_LOOP, 3, -1, 0, 0.0f, 30.0f, 0.25f, 0.0f, 0 },  { MOTION_LOOP, 5, -1, 0, 0.0f, 25.0f, 0.25f, 0.0f, 0 },
+	{ MOTION_ONCE, 10, -1, 0, 0.0f, 34.0f, 0.25f, 0.0f, 0 }, { MOTION_ONCE, 9, -1, 0, 0.0f, 44.0f, 0.25f, 0.0f, 0 },
+	{ MOTION_ONCE, 6, -1, 0, 0.0f, 27.0f, 0.25f, 0.0f, 0 },  { MOTION_LOOP, 7, -1, 0, 0.0f, 30.0f, 0.3f, 0.0f, 0 },
+	{ MOTION_ONCE, 8, -1, 0, 0.0f, 16.0f, 0.35f, 0.0f, 0 },  { MOTION_ONCE, 12, -1, 0, 0.0f, 11.0f, 0.15f, 0.0f, 0 },
+	{ MOTION_LOOP, 13, -1, 0, 0.0f, 10.0f, 0.4f, 0.0f, 0 },  { MOTION_ONCE, 14, -1, 0, 0.0f, 52.0f, 0.25f, 0.0f, 0 },
+	{ MOTION_ONCE, 15, -1, 0, 0.0f, 34.0f, 0.25f, 0.0f, 0 }, { MOTION_ONCE, 16, -1, 0, 0.0f, 34.0f, 0.25f, 0.0f, 0 },
+	{ MOTION_LOOP, 17, -1, 0, 0.0f, 20.0f, 0.3f, 0.0f, 0 },  { MOTION_ONCE, 0, -1, 0, 0.0f, 19.0f, 0.2f, 0.0f, 0 },
+	{ MOTION_ONCE, 11, -1, 0, 0.0f, 49.0f, 0.17f, 0.0f, 0 }, { MOTION_ONCE, 2, -1, 0, 0.0f, 959.0f, 1.0f, 0.0f, 0 },
 	{ MOTION_ONCE, 1, -1, 0, 0.0f, 1199.0f, 1.0f, 0.0f, 0 },
 };
-extern const int sLastBossNodes[] = { 1, 11, 17, 18, 19, 20, 21, 22, 23, 33, 69, 70, 73, 111, 176, 191, -1 };
-extern const int sLastBossMatrixNodes[] = { 17, 18, 19, 20, 21, 22, 23, -1 };
-extern const int sLastBossFeatherNodes[] = { 2, 1, 0, 6, 3, 4, 5 };
-const char* gTEneLastBossName = "TEneLastBoss";
+extern const int sLastBossNodes[]               = { 1, 11, 17, 18, 19, 20, 21, 22, 23, 33, 69, 70, 73, 111, 176, 191, -1 };
+extern const int sLastBossMatrixNodes[]         = { 17, 18, 19, 20, 21, 22, 23, -1 };
+extern const int sLastBossFeatherNodes[]        = { 2, 1, 0, 6, 3, 4, 5 };
+const char* gTEneLastBossName                   = "TEneLastBoss";
 extern const EnemyFrameKey sLastBossFrameKey0[] = { { 18.0f, 0 }, { 28.0f, 5 }, { 41.0f, 0 }, { 47.0f, 3 }, { -1.0f, 0 } };
 }
 
@@ -92,9 +83,9 @@ extern "C" void initTEneLastBoss()
 	resBankLoad(&sLastBossResBank, "ar_ene_last_boss.arc");
 	resBankAddTextures(&sLastBossResBank, 0, "ene_last_boss.gvm");
 	sLastBossModelList = resBankGetModels(&sLastBossResBank);
-	sLastBossTextures = resBankGetTextures(&sLastBossResBank);
-	sLastBossMotion = resBankGetMotion(&sLastBossResBank, 0);
-	sLastBossParams = (int*)enemyParamGet(7);
+	sLastBossTextures  = resBankGetTextures(&sLastBossResBank);
+	sLastBossMotion    = resBankGetMotion(&sLastBossResBank, 0);
+	sLastBossParams    = (int*)enemyParamGet(7);
 	fxBankLoadDefault(&sLastBossFx, "pa_lastboss.pad");
 	lastBossFeatherInit();
 	initLastBossDark();
@@ -110,8 +101,8 @@ extern "C" void shutdownTEneLastBoss()
 	resBankRemoveTextures(&sLastBossResBank, 0);
 	resBankRelease(&sLastBossResBank);
 	sLastBossModelList = 0;
-	sLastBossTextures = 0;
-	sLastBossMotion = 0;
+	sLastBossTextures  = 0;
+	sLastBossMotion    = 0;
 }
 
 // 0x80156588
@@ -180,7 +171,7 @@ extern "C" void polarOfTEneLastBoss(const Vec3f* pos, f32* radius, int* angle)
 	x *= x;
 	z *= z;
 	z += x;
-	r = (f32)__frsqrte(z);
+	r       = (f32)__frsqrte(z);
 	*angle  = (int)(10430.38043493439 * a);
 	*radius = __fres(r);
 }
@@ -349,10 +340,10 @@ void TEneLastBoss::removeHomes()
 // 0x80156DE0
 void TEneLastBoss::setPos(const Vec3f* pos)
 {
-	f32 x = pos->x;
-	f32 y = pos->y;
+	f32 x        = pos->x;
+	f32 y        = pos->y;
 	mBody.mPos.x = x;
-	f32 z = pos->z;
+	f32 z        = pos->z;
 	mBody.mPos.y = y;
 	mBody.mPos.z = z;
 	syncCollider();
@@ -371,13 +362,13 @@ void TEneLastBoss::syncCollider()
 	f32 half;
 	Vec3f* shape;
 
-	mid   = mPoint[14].y;
-	mid  += mPoint[15].y;
-	mid  *= 0.5f;
-	half  = mPoint[12].y - mid;
+	mid = mPoint[14].y;
+	mid += mPoint[15].y;
+	mid *= 0.5f;
+	half = mPoint[12].y - mid;
 	half *= 0.5f;
-	shape = (Vec3f*)colliGetShapes(mCollider);
-	*shape = mPoint[0];
+	shape    = (Vec3f*)colliGetShapes(mCollider);
+	*shape   = mPoint[0];
 	shape->y = mid + half;
 	colliShapeSetCylHeight((ColliShape*)shape, half);
 	colliRefreshBounds(mCollider);
@@ -471,8 +462,8 @@ void TEneLastBoss::onLightHit()
 	f32 y;
 	f32 angle;
 
-	at   = mContact.mSurface;
-	y    = at.y;
+	at = mContact.mSurface;
+	y  = at.y;
 	at.x -= mContact.mCenter.x;
 	at.y = 0.0f;
 	at.z -= mContact.mCenter.z;
@@ -652,7 +643,7 @@ void TEneLastBoss::beginNodes()
 {
 	nodeTrackSet(sLastBossNodes, mPoint);
 	sLastBossNodeList = sLastBossMatrixNodes;
-	sLastBossMtxOut = mFeatherMtx[0];
+	sLastBossMtxOut   = mFeatherMtx[0];
 	nodeTrackSetCallback(saveNodeMatrixTEneLastBoss);
 }
 
@@ -863,7 +854,7 @@ void TEneLastBoss::placeOnWing(f32 t, Vec3f* out, int* rotY)
 {
 	Vec3f v;
 
-	v = mPoint[featherNodeTEneLastBoss(this, 0.0f) + 2];
+	v     = mPoint[featherNodeTEneLastBoss(this, 0.0f) + 2];
 	int n = featherNodeTEneLastBoss(this, 1.0f) + 2;
 	njSubVector(&v, &mPoint[n]);
 	*rotY = (int)(10430.38043493439 * (f32)atan2(v.x, v.z));
@@ -915,7 +906,7 @@ void TEneLastBoss::showFeathers()
 // 0x80157EDC
 void TEneLastBoss::playDemo(int model, int motion)
 {
-	void* actor  = resBankGetObjects(&sLastBossResBank)[model];
+	void* actor        = resBankGetObjects(&sLastBossResBank)[model];
 	NJS_MOTION** table = resBankGetMotion(&sLastBossResBank, 1);
 
 	mDemo = createCamPath(0, 3, actor, table[motion], 0, 1.0f, 1.0f);
@@ -928,20 +919,48 @@ void TEneLastBoss::playDemo(int model, int motion)
 void TEneLastBoss::onActionPhase(int action, int phase)
 {
 	switch (action) {
-	case 0: actAppear(phase); break;
-	case 1: actIdle(phase); break;
-	case 2: actMove(phase); break;
-	case 3: actDarks(phase); break;
-	case 4: actBurst(phase); break;
-	case 5: actSpin(phase); break;
-	case 6: actHome(phase); break;
-	case 7: actHomeEnd(phase); break;
-	case 8: actStunA(phase); break;
-	case 9: actStunB(phase); break;
-	case 10: actDown(phase); break;
-	case 11: actUp(phase); break;
-	case 12: actFlinch(phase); break;
-	case 13: actDie(phase); break;
+	case 0:
+		actAppear(phase);
+		break;
+	case 1:
+		actIdle(phase);
+		break;
+	case 2:
+		actMove(phase);
+		break;
+	case 3:
+		actDarks(phase);
+		break;
+	case 4:
+		actBurst(phase);
+		break;
+	case 5:
+		actSpin(phase);
+		break;
+	case 6:
+		actHome(phase);
+		break;
+	case 7:
+		actHomeEnd(phase);
+		break;
+	case 8:
+		actStunA(phase);
+		break;
+	case 9:
+		actStunB(phase);
+		break;
+	case 10:
+		actDown(phase);
+		break;
+	case 11:
+		actUp(phase);
+		break;
+	case 12:
+		actFlinch(phase);
+		break;
+	case 13:
+		actDie(phase);
+		break;
 	}
 }
 
@@ -1633,7 +1652,7 @@ void TEneLastBoss::render()
 	if (color >= 0) {
 		TexEntry* entries = *(TexEntry**)tex;
 
-		saved            = entries[1].mTex;
+		saved           = entries[1].mTex;
 		entries[1].mTex = entries[color].mTex;
 	}
 	if (mBossFlags & BOSS_SUIT) {

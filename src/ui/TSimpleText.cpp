@@ -17,7 +17,6 @@ struct SpeakPad {
 	u8 _00[8];
 	u32 mButtons; // _08
 };
-
 }
 
 static inline Vec3f textVec(f32 x, f32 y, f32 z)
@@ -36,12 +35,30 @@ Vec3f sTextAt         = textVec(153.0f, 190.0f, -1.0f);
 Vec3f sTextBox        = textVec(330.0f, 132.0f, 0.0f);
 Vec3f sTextGlyph      = textVec(0.91f, 0.91f, 0.91f);
 
-static inline Vec3f* textAt() { return &sTextAt; }
-static inline Vec3f* textBox() { return &sTextBox; }
-static inline Vec3f* textGlyph() { return &sTextGlyph; }
-static inline Vec3f* textAtSmall() { return &sTextAtSmall; }
-static inline Vec3f* textBoxSmall() { return &sTextBoxSmall; }
-static inline Vec3f* textGlyphSmall() { return &sTextGlyphSmall; }
+static inline Vec3f* textAt()
+{
+	return &sTextAt;
+}
+static inline Vec3f* textBox()
+{
+	return &sTextBox;
+}
+static inline Vec3f* textGlyph()
+{
+	return &sTextGlyph;
+}
+static inline Vec3f* textAtSmall()
+{
+	return &sTextAtSmall;
+}
+static inline Vec3f* textBoxSmall()
+{
+	return &sTextBoxSmall;
+}
+static inline Vec3f* textGlyphSmall()
+{
+	return &sTextGlyphSmall;
+}
 
 // 0x8010F770
 extern "C" TSimpleText* createSimpleTextId2(TObject* parent, void* desc)
@@ -102,7 +119,8 @@ extern "C" TSimpleText* createSimpleTextTimed(void* desc, int timer)
 }
 
 // 0x8010FB0C
-extern "C" TSimpleText* createSimpleText(TObject* parent, int kind, int id, const Vec3f* at, const Vec3f* box, const Vec3f* glyph, void* desc)
+extern "C" TSimpleText* createSimpleText(TObject* parent, int kind, int id, const Vec3f* at, const Vec3f* box, const Vec3f* glyph,
+                                         void* desc)
 {
 	return new TSimpleText(parent, kind, id, at, box, glyph, desc);
 }
@@ -126,13 +144,13 @@ TSimpleText::TSimpleText(TObject* parent, int kind, int id, const Vec3f* at, con
     , mGlyph(*glyph)
     , mKind(kind)
 {
-	_00   = (u32)gTSimpleTextName;
-	mSize = 0xAC;
-	mDraw = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3F, 0);
+	_00     = (u32)gTSimpleTextName;
+	mSize   = 0xAC;
+	mDraw   = addDrawTask(this, (void (*)(void*))drawObjectTask, 0x3F, 0);
 	mWindow = 0;
 	if (mId != -1) {
-		mWindow  = createMsgWindow(this, id);
-		mState = 0;
+		mWindow = createMsgWindow(this, id);
+		mState  = 0;
 	} else {
 		mState = 1;
 	}
@@ -189,10 +207,10 @@ void TSimpleText::buildLines()
 	_68    = 0;
 	_6C    = 0;
 
-	f32 rows = (mBox.y + gTextGapY) / (gTextGlyphH * mGlyph.y + gTextGapY);
+	f32 rows  = (mBox.y + gTextGapY) / (gTextGlyphH * mGlyph.y + gTextGapY);
 	f32 width = (mBox.x + gTextGapX) / (gTextGlyphW * mGlyph.x + gTextGapX);
-	int cols = (int)width * 3;
-	mRows = (int)rows;
+	int cols  = (int)width * 3;
+	mRows     = (int)rows;
 	if (mRows < 1) {
 		mRows = 1;
 	}
@@ -412,7 +430,7 @@ void TSimpleText::finishLine()
 		return;
 	}
 	mWindow->mFlags |= 1;
-	mWindow  = 0;
+	mWindow = 0;
 	if (mHold != 0) {
 		mState = 4;
 	} else {
@@ -510,8 +528,8 @@ int TSimpleText::advancePage()
 			case 1: {
 				fontGetGlyph(code, &info);
 				TextGlyph* glyph = new TextGlyph(&info, mBlock.mColor);
-				_98 = 1;
-				_94 = mBlock.mWait;
+				_98              = 1;
+				_94              = mBlock.mWait;
 				if (mLines[_7C]->add(mGlyph.x, glyph) == 0) {
 					if (rowFull() != 0) {
 						mExtra = glyph;
@@ -602,8 +620,8 @@ void TSimpleText::closeText()
 	}
 	if (*(int*)((u8*)mWindow + 0x60) == 3) {
 		mWindow->mFlags |= 1;
-		mWindow  = 0;
-		mState = 3;
+		mWindow = 0;
+		mState  = 3;
 	} else if (mWindow->close() != 0) {
 		mState = 2;
 	}

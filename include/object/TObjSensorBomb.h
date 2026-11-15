@@ -25,17 +25,17 @@ public:
 	virtual Vec3f* getPos();
 	virtual void place(const Vec3f* pos);
 
-	s8 mState;        // _38 0 = held 1 = falling 2 = arming
-	s16 mTimer;       // _3A
-	Vec3f mPos;       // _3C
-	DrawTask* mDrawTask;  // _48
-	CharaColli* mColli;     // _4C
-	ObjShadow mShadow; // _50
-	ItemHolder mItem; // _88
-	ItemGlow mGlow;   // _A0
-	BombBody mBody;   // _100
-	NJS_OBJECT* mModel;     // _14C
-	NJS_TEXLIST* mTexList;   // _150
+	s8 mState;             // _38 0 = held 1 = falling 2 = arming
+	s16 mTimer;            // _3A
+	Vec3f mPos;            // _3C
+	DrawTask* mDrawTask;   // _48
+	CharaColli* mColli;    // _4C
+	ObjShadow mShadow;     // _50
+	ItemHolder mItem;      // _88
+	ItemGlow mGlow;        // _A0
+	BombBody mBody;        // _100
+	NJS_OBJECT* mModel;    // _14C
+	NJS_TEXLIST* mTexList; // _150
 };
 
 extern "C" {

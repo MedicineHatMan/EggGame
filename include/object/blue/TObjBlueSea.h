@@ -26,16 +26,16 @@ public:
 
 	void drawSea();
 
-	void* mWarpTask; // _20 drawObjectTask when mSecondPass != 0
+	void* mWarpTask;     // _20 drawObjectTask when mSecondPass != 0
 	DrawTask* mDrawTask; // _24 the textured grid
-	f32 mHeight;     // _28
-	int mSecondPass; // _2C
-	f32 mScrollU;    // _30
-	f32 mScrollV;    // _34
-	f32 mWaveU;      // _38
-	f32 mWaveV;      // _3C
-	int mAngleU;     // _40
-	int mAngleV;     // _44
+	f32 mHeight;         // _28
+	int mSecondPass;     // _2C
+	f32 mScrollU;        // _30
+	f32 mScrollV;        // _34
+	f32 mWaveU;          // _38
+	f32 mWaveV;          // _3C
+	int mAngleU;         // _40
+	int mAngleV;         // _44
 };
 
 extern "C" {

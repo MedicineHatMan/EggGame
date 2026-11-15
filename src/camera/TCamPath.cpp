@@ -33,7 +33,10 @@ typedef char TCamPath_size_check[(sizeof(TCamPath) == 0xB4) ? 1 : -1];
 extern const char* gTCamPathName;
 
 // Not in the DOL the linker stripped it
-f32 camPathFirstFrame() { return 0.0f; }
+f32 camPathFirstFrame()
+{
+	return 0.0f;
+}
 
 // 0x80063DB8
 TCamPath::TCamPath(TObject* parent, int player, int look, void* object, void* motion, f32 start, f32 speed)
@@ -56,27 +59,38 @@ TCamPath::TCamPath(TObject* parent, int player, int look, void* object, void* mo
 }
 
 // 0x80063EA8
-TCamPath::~TCamPath() {}
+TCamPath::~TCamPath()
+{
+}
 
 // 0x80063F04
-void TCamPath::vfn_30() { mFrame = 0.0f; }
+void TCamPath::vfn_30()
+{
+	mFrame = 0.0f;
+}
 
 // 0x80063F10
-void TCamPath::setAutoDelete() { mPathFlags |= 2; }
+void TCamPath::setAutoDelete()
+{
+	mPathFlags |= 2;
+}
 
 // 0x80063F20
-void TCamPath::clearAutoDelete() { mPathFlags &= ~2; }
+void TCamPath::clearAutoDelete()
+{
+	mPathFlags &= ~2;
+}
 
 // 0x80063F30
 void TCamPath::setStart(const CamPathStart* start)
 {
-	mStart.mPos.x    = start->mPos.x;
-	mStart.mPos.y    = start->mPos.y;
-	mStart.mPos.z    = start->mPos.z;
+	mStart.mPos.x = start->mPos.x;
+	mStart.mPos.y = start->mPos.y;
+	mStart.mPos.z = start->mPos.z;
 	mStart.mTarget.set(start->mTarget.x, start->mTarget.y, start->mTarget.z);
-	mStart.mRoll     = start->mRoll;
-	mStart.mFov      = start->mFov;
-	mStart._1C       = start->_1C;
+	mStart.mRoll = start->mRoll;
+	mStart.mFov  = start->mFov;
+	mStart._1C   = start->_1C;
 }
 
 // 0x80063F7C
@@ -93,19 +107,34 @@ void TCamPath::startFromView()
 }
 
 // 0x80063FE0
-void TCamPath::attachToMtx() { mPathFlags |= 4; }
+void TCamPath::attachToMtx()
+{
+	mPathFlags |= 4;
+}
 
 // 0x80063FF0
-f32* TCamPath::getMtx() { return mMtx; }
+f32* TCamPath::getMtx()
+{
+	return mMtx;
+}
 
 // 0x80063FF8
-f32 TCamPath::getFrame() { return mFrame; }
+f32 TCamPath::getFrame()
+{
+	return mFrame;
+}
 
 // 0x80064000
-void TCamPath::setFrame(f32 frame) { mFrame = frame; }
+void TCamPath::setFrame(f32 frame)
+{
+	mFrame = frame;
+}
 
 // 0x80064008
-int TCamPath::isDone() { return mFrame >= mLastFrame; }
+int TCamPath::isDone()
+{
+	return mFrame >= mLastFrame;
+}
 
 // 0x80064024
 void TCamPath::advance()
@@ -164,9 +193,14 @@ void TCamPath::vfn_20()
 }
 
 // 0x800641E4
-void TCamPath::vfn_24() { advance(); }
+void TCamPath::vfn_24()
+{
+	advance();
+}
 
 // 0x80064204
-void TCamPath::vfn_10() {}
+void TCamPath::vfn_10()
+{
+}
 
 const char* gTCamPathName = "TCamPath";

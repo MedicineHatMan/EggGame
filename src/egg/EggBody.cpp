@@ -42,22 +42,22 @@ typedef void (*EggGrazeFn)(MeshColli* mesh, u16 tri, Vec3f* pos, const Vec3f* no
  * @size 0x78
  */
 struct EggSweep {
-	Vec3f mFrom;      // _00
-	Vec3f mTo;        // _0C
-	Vec3f mDir;       // _18 mTo - mFrom
-	Vec3f mUnit;      // _24
-	Vec3f mPos;       // _30 where the ball stops
+	Vec3f mFrom; // _00
+	Vec3f mTo;   // _0C
+	Vec3f mDir;  // _18 mTo - mFrom
+	Vec3f mUnit; // _24
+	Vec3f mPos;  // _30 where the ball stops
 	f32 _3C;
-	f32 mRadius;      // _40
-	f32 mDist;        // _44
-	Vec3f mNormal;    // _48 of the face it stops against
-	MeshColli* mMesh; // _54 that face's mesh or null
-	EggBody* mBody;   // _58
-	u16 mTri;         // _5C
-	void* mArg;       // _60
-	u32 mMask;        // _64 the faces it tests
+	f32 mRadius;       // _40
+	f32 mDist;         // _44
+	Vec3f mNormal;     // _48 of the face it stops against
+	MeshColli* mMesh;  // _54 that face's mesh or null
+	EggBody* mBody;    // _58
+	u16 mTri;          // _5C
+	void* mArg;        // _60
+	u32 mMask;         // _64 the faces it tests
 	EggGrazeFn mGraze; // _68
-	Vec3f mPush;      // _6C out of the edges it overlaps
+	Vec3f mPush;       // _6C out of the edges it overlaps
 };
 
 // 0x8008FAB0
@@ -174,13 +174,13 @@ void EggBody::move(f32 dt, void* arg, u32 mask, EggFaceFn graze, EggFaceFn face,
 	box[3] += radius;
 	box[4] += radius;
 	box[5] += radius;
-	accel     = mAccel;
-	mAccel.x  = 0.0f;
-	mAccel.y  = 0.0f;
-	mAccel.z  = 0.0f;
-	mPush.x   = 0.0f;
-	mPush.y   = 0.0f;
-	mPush.z   = 0.0f;
+	accel    = mAccel;
+	mAccel.x = 0.0f;
+	mAccel.y = 0.0f;
+	mAccel.z = 0.0f;
+	mPush.x  = 0.0f;
+	mPush.y  = 0.0f;
+	mPush.z  = 0.0f;
 	queryBegin(&list);
 	if (queryGatherBox(&list, box) == 0) {
 		mPos = to;
@@ -283,11 +283,11 @@ void EggBody::spin(f32 dt)
 	Vec3f axis;
 
 	vecScale(dt, &axis, &mAngVel);
-	turn.mW        = 0.0f;
+	turn.mW         = 0.0f;
 	turn.mAxis.v[0] = axis.x;
 	turn.mAxis.v[1] = axis.y;
 	turn.mAxis.v[2] = axis.z;
-	EggRot add = eggRotScale(eggRotMul(turn, &mRot), 0.5f);
+	EggRot add      = eggRotScale(eggRotMul(turn, &mRot), 0.5f);
 	quatAdd((Quat*)&mRot, (const Quat*)&add);
 	quatNormalize((Quat*)&mRot);
 }
@@ -342,7 +342,9 @@ MeshColli* EggBody::sweep(MeshList* list, const Vec3f* from, const Vec3f* to, Ve
 	vecScaleAdd(mRadius, &end, &dir, to);
 	EggLineHits hits;
 	hits.mFloor.mDist = hits.mAny.mDist = len + mRadius;
-	if ((u32)meshListQueryLine(list, from, (const Vec3f*)&end, 0x818D, (int (*)(MeshColli*, int, float, const Vec3f*, void*))lineHit, (void*)&hits) == 0) {
+	if ((u32)meshListQueryLine(list, from, (const Vec3f*)&end, 0x818D, (int (*)(MeshColli*, int, float, const Vec3f*, void*))lineHit,
+	                           (void*)&hits)
+	    == 0) {
 		return NULL;
 	}
 	if (hits.mAny.mMesh != NULL) {
@@ -426,8 +428,8 @@ static int sweepHit(EggSweep* sweep, MeshColli* mesh, u16 tri, u32 flags, f32 di
 
 // 0x800907BC
 // The ball against a triangle's face already touching it or meeting it along the sweep
-static int sweepFace(EggSweep* sweep, const Vec3f* a, const Vec3f* b, const Vec3f* c, const Vec3f* normal, MeshColli* mesh,
-                     u16 tri, u32 flags)
+static int sweepFace(EggSweep* sweep, const Vec3f* a, const Vec3f* b, const Vec3f* c, const Vec3f* normal, MeshColli* mesh, u16 tri,
+                     u32 flags)
 {
 	Vec3f lifted;
 	Vec3f meet;
@@ -502,7 +504,7 @@ static int sweepEdge(EggSweep* sweep, const Vec3f* a, const Vec3f* b, MeshColli*
 
 static void sweepTri(MeshColli* mesh, u16 tri, EggSweep* param)
 {
-	MeshTri* face = &mesh->mTris[tri];
+	MeshTri* face   = &mesh->mTris[tri];
 	EggSweep* sweep = (EggSweep*)(const EggSweep*)param;
 	if (face->mMask & param->mMask) {
 		Vec3f a;

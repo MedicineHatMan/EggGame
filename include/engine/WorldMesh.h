@@ -69,33 +69,33 @@ void worldMeshWalkGroup(WorldMesh*, int, void*, void*);
 }
 
 struct WorldTreeNode { // size 0x20
-	u16 mIsLeaf;      // _00
-	u16 mTriCount;    // _02
-	u16* mTris;       // _04
-	f32 mMinX;        // _08
-	f32 mMaxX;        // _0C
-	f32 mMinZ;        // _10
-	f32 mMaxZ;        // _14
-	u16 mChildren[4]; // _18
+	u16 mIsLeaf;       // _00
+	u16 mTriCount;     // _02
+	u16* mTris;        // _04
+	f32 mMinX;         // _08
+	f32 mMaxX;         // _0C
+	f32 mMinZ;         // _10
+	f32 mMaxZ;         // _14
+	u16 mChildren[4];  // _18
 };
 
 struct WorldGroup { // size 8
-	u16 mId;    // _00
+	u16 mId;        // _00
 	u16 _02;
 	u16 mFirst; // _04 the first of its tris
 	u16 mCount; // _06
 };
 
 struct WorldData {
-	Vec3f* mVerts;        // _00
+	Vec3f* mVerts; // _00
 	u32 _04;
 	MeshTri* mTris;       // _08
 	int mTriCount;        // _0C
 	WorldTreeNode* mTree; // _10
 	int mLeaves;          // _14
 	u8 _18[0x18];
-	WorldGroup* mGroups;  // _30
-	int mGroupCount;      // _34
+	WorldGroup* mGroups; // _30
+	int mGroupCount;     // _34
 };
 
 /** @size 0x98 */
@@ -119,13 +119,13 @@ public:
 };
 
 struct Rider { // size 0x14 what stands on a mesh
-	Rider();  // 0x80077D24
-	~Rider(); // 0x80077D40
+	Rider();   // 0x80077D24
+	~Rider();  // 0x80077D40
 
-	Rider* mNext;  // _00
-	Rider* mPrev;  // _04
-	Rider* mSelf;  // _08
-	void* mList;   // _0C
+	Rider* mNext;     // _00
+	Rider* mPrev;     // _04
+	Rider* mSelf;     // _08
+	void* mList;      // _0C
 	MeshColli* mMesh; // _10
 };
 
@@ -143,14 +143,14 @@ struct QueryList {
 };
 
 struct QueryEntry {
-	void* mMesh;  // _00
-	void* mTris;  // _04
-	u32 mCount;   // _08
+	void* mMesh; // _00
+	void* mTris; // _04
+	u32 mCount;  // _08
 };
 
 struct QueryPool {
 	QueryEntry* mEntries; // _00 0x40 entries
-	void* mTris;    // _04
+	void* mTris;          // _04
 };
 
 extern "C" {

@@ -25,12 +25,12 @@ TObject* createTObjSetLightCollision(TObject*, SetDesc*);
 }
 
 /** A light zone that belongs to a set object */
-struct ObjLightZone : public LightZone { // size 0x10
-	ObjLightZone();  // 0x800A21E8
-	virtual int test(u16 id, int kind, f32* dist);      // _08 0x800A228C
-	virtual int getSun(u16 id, LightZoneSun* sun);      // _0C 0x800A22C0
-	virtual int getSpot(u16 id, LightZoneSpot* spot);   // _10 0x800A22F4
-	virtual ~ObjLightZone(); // 0x800A222C
+struct ObjLightZone : public LightZone {              // size 0x10
+	ObjLightZone();                                   // 0x800A21E8
+	virtual int test(u16 id, int kind, f32* dist);    // _08 0x800A228C
+	virtual int getSun(u16 id, LightZoneSun* sun);    // _0C 0x800A22C0
+	virtual int getSpot(u16 id, LightZoneSpot* spot); // _10 0x800A22F4
+	virtual ~ObjLightZone();                          // 0x800A222C
 
 	void setOwner(TObject* owner); // 0x800A2284
 
@@ -57,8 +57,8 @@ public:
 	int getSpot(u16 id, LightZoneSpot* spot);
 
 	SetLinkMember mLink; // _30
-	CharaColli* mShape;        // _3C
-	ObjLightZone mNode; // _40
+	CharaColli* mShape;  // _3C
+	ObjLightZone mNode;  // _40
 	int mParam;          // _50 set int 0
 	Vec3f mPos;          // _54
 	int mRotY;           // _60

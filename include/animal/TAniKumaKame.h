@@ -26,7 +26,7 @@ public:
 	void runFall();
 	void runShrink();
 
-	s16 mHops;     // _384
+	s16 mHops; // _384
 	u8 _386[2];
 	f32 mDistance; // _388 to the target
 };

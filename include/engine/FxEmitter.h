@@ -47,27 +47,27 @@ struct FxMaterialRef {
 
 /** A description of an emitter */
 struct FxEmitterDesc {
-	u16 mKind;      // _00
-	u16 mLife;      // _02
-	u8 mTex[2];     // _04
-	u16 mMax;       // _06
-	u32 mFlags;     // _08
-	s16 mTexGroup;  // _0C
-	s16 mMaterial;  // _0E
-	f32 mRate;      // _10
+	u16 mKind;     // _00
+	u16 mLife;     // _02
+	u8 mTex[2];    // _04
+	u16 mMax;      // _06
+	u32 mFlags;    // _08
+	s16 mTexGroup; // _0C
+	s16 mMaterial; // _0E
+	f32 mRate;     // _10
 	f32 _14;
 	f32 _18;
-	f32 mShapeB;    // _1C
-	f32 mShapeC;    // _20
-	f32 mShapeD;    // _24
-	int mCount;     // _28
-	u8* mScript; // _2C
-	u16 mPartFlags; // _30
-	u16 mPartLife;  // _32
-	f32 mDir[3]; // _34
-	f32 mGravity;   // _40
-	f32 mDamp;      // _44
-	f32 mScale;     // _48
+	f32 mShapeB;     // _1C
+	f32 mShapeC;     // _20
+	f32 mShapeD;     // _24
+	int mCount;      // _28
+	u8* mScript;     // _2C
+	u16 mPartFlags;  // _30
+	u16 mPartLife;   // _32
+	f32 mDir[3];     // _34
+	f32 mGravity;    // _40
+	f32 mDamp;       // _44
+	f32 mScale;      // _48
 	u8* mPartScript; // _4C
 };
 

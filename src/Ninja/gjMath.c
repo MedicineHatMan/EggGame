@@ -5,6 +5,7 @@ f32 gjMathConsts[2] = { 0.0f, 1.0f };
 void gjMathSinCos(s32 ang);
 
 // 0x80216A34
+// clang-format off
 asm void gjTranslate(f32 x, f32 y, f32 z)
 {
 	nofralloc
@@ -34,8 +35,10 @@ asm void gjTranslate(f32 x, f32 y, f32 z)
 	psq_st f13, 0x2c(r5), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x80216A98
+// clang-format off
 asm void gjMathSinCos(s32 ang)
 {
 	nofralloc
@@ -48,8 +51,10 @@ asm void gjMathSinCos(s32 ang)
 	lfs f2, 0x4(r6)
 	blr
 }
+// clang-format on
 
 // 0x80216AB8
+// clang-format off
 asm void gjRotateX(s32 ang)
 {
 	nofralloc
@@ -76,8 +81,10 @@ asm void gjRotateX(s32 ang)
 	psq_st f2, 0x24(r4), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80216B10
+// clang-format off
 asm void gjRotateY(s32 ang)
 {
 	nofralloc
@@ -113,8 +120,10 @@ asm void gjRotateY(s32 ang)
 	stfs f5, 0x28(r4)
 	blr
 }
+// clang-format on
 
 // 0x80216B8C
+// clang-format off
 asm void gjRotateZ(s32 ang)
 {
 	nofralloc
@@ -141,8 +150,10 @@ asm void gjRotateZ(s32 ang)
 	psq_st f2, 0x20(r4), 0, 0
 	blr
 }
+// clang-format on
 
 // 0x80216BE4
+// clang-format off
 asm void gjAddVector(const NJS_VECTOR* a, const NJS_VECTOR* b, NJS_VECTOR* out)
 {
 	nofralloc
@@ -156,8 +167,10 @@ asm void gjAddVector(const NJS_VECTOR* a, const NJS_VECTOR* b, NJS_VECTOR* out)
 	psq_st f1, 0x8(r3), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x80216C08
+// clang-format off
 asm void gjSubVector(const NJS_VECTOR* a, const NJS_VECTOR* b, NJS_VECTOR* out)
 {
 	nofralloc
@@ -171,8 +184,10 @@ asm void gjSubVector(const NJS_VECTOR* a, const NJS_VECTOR* b, NJS_VECTOR* out)
 	psq_st f1, 0x8(r3), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x80216C2C
+// clang-format off
 asm void gjScaleVector(f32 s, const NJS_VECTOR* a, NJS_VECTOR* out)
 {
 	nofralloc
@@ -184,8 +199,10 @@ asm void gjScaleVector(f32 s, const NJS_VECTOR* a, NJS_VECTOR* out)
 	psq_st f5, 0x8(r3), 1, 0
 	blr
 }
+// clang-format on
 
 // 0x80216C48
+// clang-format off
 asm void gjMulAddVector(const NJS_VECTOR* a, const NJS_VECTOR* b, f32 s, NJS_VECTOR* out)
 {
 	nofralloc
@@ -199,3 +216,4 @@ asm void gjMulAddVector(const NJS_VECTOR* a, const NJS_VECTOR* b, f32 s, NJS_VEC
 	psq_st f5, 0x8(r3), 1, 0
 	blr
 }
+// clang-format on
