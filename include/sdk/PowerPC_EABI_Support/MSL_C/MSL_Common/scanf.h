@@ -1,0 +1,11 @@
+#ifndef _MSL_SCANF_H
+#define _MSL_SCANF_H
+
+#include "stdarg.h"
+
+int vsscanf(const char*, const char*, va_list);
+// vsscanf_s
+int sscanf(const char*, const char*, ...);
+// sscanf_s
+
+#endif

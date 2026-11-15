@@ -1,0 +1,110 @@
+object: orig/GEZE8P/sys/main.dol
+hash: 69960dfc64faeec9cdded52aa71564ccd1c6996a
+
+symbols: config/GEZE8P/symbols.txt
+splits: config/GEZE8P/splits.txt
+
+# Nothing calls the CRI ADX encoder (CRI/adx_enc.c), so the linker would strip it.
+force_active:
+  - mathZero
+  - SJ_SearchTag
+  - SVM_LockRsc
+  - SVM_LockVar
+  - SVM_UnlockRsc
+  - SVM_UnlockVar
+  - SVM_CallBdr
+  - LSC_SetLpFlg
+  - LSC_SetFlowLimit
+  - LSC_GetStmFname
+  - LSC_GetStmId
+  - LSC_GetNumStm
+  - LSC_Start
+  - LSC_EntryFname
+  - SJRBF_GetCnt
+  - gjMtxTopInPlace
+  - gjUnitMatrix
+  - TRKAccessFile
+  - TRKOpenFile
+  - TRKCloseFile
+  - TRKPositionFile
+  - __cvt_sll_flt
+  - log
+  - atoi
+  - __dec2num
+  - __minus_dec
+  - __equals_dec
+  - mbtowc
+  - is_utf8_complete
+  - sscanf
+  - __sformatter
+  - __strtold
+  - __strtoull
+  - lbl_80278E14
+  - lbl_802792CC
+  - lbl_8028FAF8
+  - sMovieEntry7C
+  - sMovieEntry80
+  - sMovieEntry84
+  - sMovieEntry88
+  - sMovieEntry8C
+  - sMovieEntry90
+  - sMovieEntry98
+  - sMovieEntry9C
+  - sMovieEntryA0
+  - sMovieEntryA4
+  - sMovieEntryA8
+  - sMovieEntryAC
+  - sMovieEntryB0
+  - sMovieEntryB4
+  - sMovieEntryB8
+  - sMovieEntryBC
+  - sMovieEntryC0
+  - sMovieEntryC4
+  - sMovieEntryC8
+  - sMovieEntryCC
+  - sMovieEntryD0
+  - sMovieEntryD4
+  - sMovieEntryD8
+  - sMovieEntryDC
+  - sMovieEntryE0
+  - sMovieEntryE4
+  - sMovieEntryE8
+  - sMovieEntryEC
+  - sMovieEntryF0
+  - sMovieEntryF8
+  - sMovieEntryFC
+  - sMovieEntry104
+  - sMovieEntry108
+  - sMovieEntry10C
+  - sMovieEntry110
+  - sMovieEntry114
+  - sMovieEntry118
+  - sMovieEntry11C
+  - sMovieEntry120
+  - sMovieEntry124
+  - sMovieEntry128
+  - sMovieEntry12C
+  - sMovieEntry130
+  - sMovieEntry134
+  - ADXT_Finish
+  - ADXT_SetSfreqFix
+  - adxenc_EncodeToBuf
+  - ADXENC_Unlock
+  - ADXENC_Lock
+  - ADXT_InsertSilence
+  - ADXT_IsEndcode
+  - ADXT_IsHeader
+  - ADXT_SetTimeOfst
+  - adxt_GetTimePause
+  - ADXT_GetErrCode
+  - ADXT_SetAutoRcvr
+  - ADXT_SetSvrFreq
+  - ADXT_GetOutVol
+  - ADXT_GetOutPan
+  - ADXT_SetOutPan
+  - ADXT_GetSfreq
+  - ADXT_GetNumSmpl
+  - ADXT_StartSj
+
+# TODO: add orig/GEZE8P/files/movie_module.rel
+# (hash 213e4e3a0ae0adc57e75ec911505612687de618d) under `modules:` once the DOL splits cleanly.

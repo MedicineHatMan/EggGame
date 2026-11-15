@@ -1,0 +1,23 @@
+# Original game files must never be committed
+orig/*/*
+!orig/*/.gitkeep
+
+build/
+build.ninja
+objdiff.json
+compile_commands.json
+.ninja_*
+__pycache__/
+*.ctx
+ctx.c
+*.o
+*.elf
+*.map
+*.dol
+*.rel
+
+# Written by tools/nonmatching.py
+/non-matching/
+/.panettone_key
+ext/decomp-permuter/
+/ext

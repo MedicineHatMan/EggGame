@@ -1,0 +1,4489 @@
+Sections:
+	.init       type:code align:4
+	extab       type:rodata align:32
+	extabindex  type:rodata align:32
+	.text       type:code align:32
+	.ctors      type:rodata align:32
+	.dtors      type:rodata align:32
+	.rodata     type:rodata align:32
+	.data       type:data align:32
+	.bss        type:bss align:32
+	.sdata      type:data align:32
+	.sbss       type:bss align:32
+	.sdata2     type:rodata align:32
+	.sbss2      type:bss align:32
+
+camera/TCamera.cpp:
+	.text       start:0x800056C0 end:0x80006114
+
+camera/TCameraCtrl.cpp:
+	.text       start:0x80006114 end:0x80007F80
+
+engine/Colli.cpp:
+	.text       start:0x80007F80 end:0x8000A9A4
+
+engine/TCharaColliCtrl.cpp:
+	.text       start:0x8000A9A4 end:0x8000AB0C
+	.rodata     start:0x802402C0 end:0x802402D0
+	.data       start:0x802521B8 end:0x802521D8
+	.sdata      start:0x802C3910 end:0x802C3918
+
+engine/ColliShape.cpp:
+	.text       start:0x8000AB0C end:0x8000AC68
+	.ctors      start:0x80240164 end:0x80240168
+
+engine/GroundQuery.cpp:
+	.text       start:0x8000AC68 end:0x8000C1D0
+	.ctors      start:0x80240168 end:0x8024016C
+	.sbss       start:0x802C4B60 end:0x802C4B68
+	.sdata2     start:0x802C6388 end:0x802C6390
+
+core/Mem.cpp:
+	.text       start:0x8000C1D0 end:0x8000C500
+	.ctors      start:0x8024016C end:0x80240170
+	.rodata     start:0x802402D0 end:0x80240348
+	.data       start:0x802521D8 end:0x802521F8
+	.bss        start:0x802797B8 end:0x802797C4
+
+enemy/EnemyHit.cpp:
+	.text       start:0x8000C500 end:0x8000E7EC
+	.rodata     start:0x80240348 end:0x80240368
+	.data       start:0x802521F8 end:0x802522A8
+	.sdata      start:0x802C3918 end:0x802C3920
+	.sdata2     start:0x802C6390 end:0x802C63D0
+
+stage/SetTransform.cpp:
+	.text       start:0x8000E7EC end:0x8000EB70
+	.data       start:0x802522A8 end:0x80252310
+	.sdata2     start:0x802C63D0 end:0x802C63D8
+
+engine/SceneMeshes.cpp:
+	.text       start:0x8000EB70 end:0x8000EED8
+	.sdata2     start:0x802C63D8 end:0x802C63E0
+
+core/main.cpp:
+	.text       start:0x8000EED8 end:0x8000F968
+	.rodata     start:0x80240368 end:0x802405B0
+	.data       start:0x80252328 end:0x8025233C
+	.sdata2     start:0x802C63E0 end:0x802C6408
+
+object/ObjAction.cpp:
+	.text       start:0x8000F968 end:0x800116E4
+	.ctors      start:0x80240170 end:0x80240174
+
+mode/ModeCtrl.cpp:
+	.text       start:0x800116E4 end:0x80011B10
+	.rodata     start:0x802405C0 end:0x802405F8
+	.data       start:0x802523B0 end:0x802523D0
+
+engine/MotionPlayer.cpp:
+	.text       start:0x80011B10 end:0x8001248C
+	.sdata2     start:0x802C6440 end:0x802C6448
+
+core/Pad.cpp:
+	.text       start:0x8001248C end:0x80012C6C
+	.rodata     start:0x80240630 end:0x80240640
+	.data       start:0x802523D0 end:0x802523E0
+	.sdata2     start:0x802C6448 end:0x802C6478
+
+object/TObjPlayer.cpp:
+	.text       start:0x80012C6C end:0x80013848
+	.ctors      start:0x80240174 end:0x80240178
+	.rodata     start:0x80240640 end:0x80240748
+	.data       start:0x802523E0 end:0x802524F8
+	.bss        start:0x80279990 end:0x80279A18
+	.sdata      start:0x802C3938 end:0x802C3940
+	.sbss       start:0x802C4BE0 end:0x802C4BE4
+
+engine/RigidBody.cpp:
+	.text       start:0x80013848 end:0x80013B68
+	.data       start:0x802524F8 end:0x80252520
+	.sdata2     start:0x802C6478 end:0x802C6488
+
+object/TObject.cpp:
+	.text       start:0x80013B68 end:0x80014AA4
+	.ctors      start:0x80240178 end:0x8024017C
+	.rodata     start:0x80240748 end:0x80240780
+	.data       start:0x80252558 end:0x80252598
+	.bss        start:0x80279A18 end:0x80279A24
+	.sdata      start:0x802C3940 end:0x802C3988
+	.sbss       start:0x802C4BF0 end:0x802C4C40
+	.sdata2     start:0x802C6488 end:0x802C6500
+
+mode/TModeTitle.cpp:
+	.text       start:0x80014AA4 end:0x8001542C
+	.rodata     start:0x80240780 end:0x802407A0
+	.data       start:0x80252598 end:0x802525B8
+	.sbss       start:0x802C4C58 end:0x802C4C60
+	.sdata2     start:0x802C6500 end:0x802C6520
+
+engine/Viewport.cpp:
+	.text       start:0x8001542C end:0x800156D4
+	.data       start:0x802525B8 end:0x802525E0
+	.sbss       start:0x802C4C60 end:0x802C4C70
+	.sdata2     start:0x802C6520 end:0x802C6538
+
+camera/TCamEditor.cpp:
+	.text       start:0x800156D4 end:0x80015C90
+	.rodata     start:0x802407A0 end:0x802407B0
+	.data       start:0x802530D0 end:0x80253128
+	.sdata      start:0x802C3988 end:0x802C3990
+	.sdata2     start:0x802C6538 end:0x802C6570
+
+camera/Sprite.cpp:
+	.text       start:0x80015C90 end:0x8001695C
+	.ctors      start:0x8024017C end:0x80240180
+	.rodata     start:0x802407B0 end:0x802409D0
+	.bss        start:0x80279A48 end:0x8027CAC8
+	.sbss       start:0x802C4C70 end:0x802C4C80
+	.sdata2     start:0x802C6570 end:0x802C6578
+
+stage/SetManager.cpp:
+	.text       start:0x8001695C end:0x80018704
+	.data       start:0x80253128 end:0x802531A0
+	.sbss       start:0x802C4C80 end:0x802C4C88
+	.sdata2     start:0x802C6578 end:0x802C6580
+
+stage/TSetObj.cpp:
+	.text       start:0x80018704 end:0x8001896C
+	.data       start:0x802531A0 end:0x80253220
+
+stage/SetTheme.cpp:
+	.text       start:0x8001896C end:0x80018E10
+	.ctors      start:0x80240180 end:0x80240184
+	.rodata     start:0x802409D0 end:0x80240A10
+	.data       start:0x80253220 end:0x80253E20
+	.sdata      start:0x802C3990 end:0x802C3AA8
+	.sbss       start:0x802C4C88 end:0x802C4C98
+	.sdata2     start:0x802C6580 end:0x802C65D0
+
+io/NinjaFile.cpp:
+	.text       start:0x80018E10 end:0x8001A16C
+
+core/VecMath.cpp:
+	.text       start:0x8001A16C end:0x8001A374
+	.ctors      start:0x80240184 end:0x80240188
+	.bss        start:0x8027CAC8 end:0x8027CAF8
+	.sdata2     start:0x802C65D0 end:0x802C65E8
+
+stage/SetDesc.cpp:
+	.text       start:0x8001A374 end:0x8001AD10
+	.data       start:0x80253E60 end:0x80253F00
+	.sdata2     start:0x802C65E8 end:0x802C65F0
+
+enemy/EnemyFx.cpp:
+	.text       start:0x8001AD10 end:0x8001CE24
+	.data       start:0x80253F00 end:0x80253F40
+	.sdata2     start:0x802C65F0 end:0x802C6688
+
+enemy/EnemyTheme.cpp:
+	.text       start:0x8001CE24 end:0x8001D038
+	.rodata     start:0x80240A28 end:0x80240A80
+	.data       start:0x80253F40 end:0x802543E0
+	.sdata      start:0x802C3AA8 end:0x802C3BE8
+	.sdata2     start:0x802C6690 end:0x802C66D8
+
+enemy/Enemy.cpp:
+	.text       start:0x8001D038 end:0x8001F7C0
+	.rodata     start:0x80240A80 end:0x80240BA0
+	.data       start:0x802543E0 end:0x80254594
+	.sdata      start:0x802C3BE8 end:0x802C3BF0
+	.sdata2     start:0x802C66D8 end:0x802C6798
+
+enemy/TEneAm02.cpp:
+	.text       start:0x8001F7C0 end:0x80021E7C
+	.rodata     start:0x80240BA0 end:0x80240D00
+	.data       start:0x802545B0 end:0x80254758
+	.bss        start:0x8027CB08 end:0x8027CBD8
+	.sdata      start:0x802C3BF0 end:0x802C3BF8
+	.sdata2     start:0x802C6798 end:0x802C6848
+
+stage/Stage.cpp:
+	.text       start:0x80021E7C end:0x8002297C
+	.rodata     start:0x80240D00 end:0x80240D28
+	.data       start:0x80254770 end:0x802548C8
+	.sbss       start:0x802C4CC8 end:0x802C4CE0
+	.sdata2     start:0x802C6848 end:0x802C6868
+
+stage/StageDef.cpp:
+	.text       start:0x8002297C end:0x80022A2C
+	.rodata     start:0x80240D28 end:0x80240D38
+	.sbss       start:0x802C4CE0 end:0x802C4CE8
+
+stage/TModeStage.cpp:
+	.text       start:0x80022A2C end:0x8002412C
+	.rodata     start:0x80240D38 end:0x80240F40
+	.data       start:0x802548C8 end:0x80254908
+	.sdata2     start:0x802C6868 end:0x802C6918
+
+object/TObjKey00.cpp:
+	.text       start:0x8002412C end:0x8002616C
+
+engine/TParticle.cpp:
+	.text       start:0x8002616C end:0x8002684C
+	.rodata     start:0x802411B0 end:0x802411D0
+	.data       start:0x802549A0 end:0x802549E0
+	.sdata      start:0x802C3C00 end:0x802C3C08
+	.sdata2     start:0x802C6968 end:0x802C6980
+
+engine/ParticleGenerator.cpp:
+	.text       start:0x8002684C end:0x800277C0
+	.rodata     start:0x802411D0 end:0x802411E8
+	.data       start:0x802549E0 end:0x80254A00
+	.sdata      start:0x802C3C08 end:0x802C3C10
+	.sbss       start:0x802C4CF8 end:0x802C4D08
+	.sdata2     start:0x802C6980 end:0x802C6998
+
+engine/Particle.cpp:
+	.text       start:0x800277C0 end:0x80028020
+	.sdata2     start:0x802C6998 end:0x802C69C8
+
+engine/ParticleSpiral.cpp:
+	.text       start:0x80028020 end:0x80028798
+	.rodata     start:0x802411E8 end:0x80241210
+	.data       start:0x80254A00 end:0x80254A40
+	.sdata      start:0x802C3C10 end:0x802C3C18
+	.sdata2     start:0x802C69C8 end:0x802C69F8
+
+engine/ParticleVacuum.cpp:
+	.text       start:0x80028798 end:0x80028ED0
+	.rodata     start:0x80241210 end:0x80241238
+	.data       start:0x80254A40 end:0x80254A80
+	.sdata      start:0x802C3C18 end:0x802C3C20
+	.sdata2     start:0x802C69F8 end:0x802C6A10
+
+engine/DrawTask.cpp:
+	.text       start:0x80028ED0 end:0x80029410
+	.sdata2     start:0x802C6A10 end:0x802C6A20
+
+egg/TEggShockWave.cpp:
+	.text       start:0x80029410 end:0x80029768
+	.rodata     start:0x80241238 end:0x80241278
+	.data       start:0x80254A80 end:0x80254AF0
+	.sdata      start:0x802C3C20 end:0x802C3C28
+	.sdata2     start:0x802C6A20 end:0x802C6A28
+
+object/TObjCannon01.cpp:
+	.text       start:0x80029768 end:0x8002A6F0
+	.rodata     start:0x80241278 end:0x802413C8
+	.data       start:0x80254AF0 end:0x80254B68
+	.sdata      start:0x802C3C28 end:0x802C3C30
+	.sdata2     start:0x802C6A28 end:0x802C6A98
+
+object/TCannonBall.cpp:
+	.text       start:0x8002A6F0 end:0x8002AAB0
+	.data       start:0x80254B68 end:0x80254B88
+	.sdata2     start:0x802C6A98 end:0x802C6AB0
+
+object/TObjAnchor01.cpp:
+	.text       start:0x8002AAB0 end:0x8002B40C
+	.rodata     start:0x802413C8 end:0x80241500
+	.data       start:0x80254B88 end:0x80254C00
+	.sdata      start:0x802C3C30 end:0x802C3C38
+	.sdata2     start:0x802C6AB0 end:0x802C6AF0
+
+stage/SetSpawner.cpp:
+	.text       start:0x8002B40C end:0x8002B774
+	.data       start:0x80254C00 end:0x80254C20
+	.sdata2     start:0x802C6AF0 end:0x802C6AF8
+
+engine/FrameTex.cpp:
+	.text       start:0x8002B774 end:0x8002BE58
+	.bss        start:0x8027F858 end:0x8027F878
+	.sbss       start:0x802C4D28 end:0x802C4D30
+
+engine/GenTex.cpp:
+	.text       start:0x8002BE58 end:0x8002CFEC
+	.bss        start:0x8027F878 end:0x8027F9F8
+	.sbss       start:0x802C4D30 end:0x802C4D40
+	.sdata2     start:0x802C6AF8 end:0x802C6B58
+
+object/TObjShark01.cpp:
+	.text       start:0x8002CFEC end:0x8002DE24
+	.rodata     start:0x80241510 end:0x80241578
+	.data       start:0x80254C20 end:0x80254CD0
+	.sdata      start:0x802C3C40 end:0x802C3C48
+	.sdata2     start:0x802C6B58 end:0x802C6BB0
+
+object/blue/TObjBlueKatana.cpp:
+	.text       start:0x8002DE24 end:0x8002E3A4
+	.rodata     start:0x80241578 end:0x802415E8
+	.data       start:0x80254CD0 end:0x80254D50
+	.sdata      start:0x802C3C48 end:0x802C3C50
+	.sdata2     start:0x802C6BB0 end:0x802C6BC0
+
+object/TObjBlast.cpp:
+	.text       start:0x8002E3A4 end:0x8002E748
+	.rodata     start:0x802415E8 end:0x802415F8
+	.data       start:0x80254D50 end:0x80254DC0
+	.sdata      start:0x802C3C50 end:0x802C3C58
+	.sdata2     start:0x802C6BC0 end:0x802C6BC8
+
+engine/TFrameBlur.cpp:
+	.text       start:0x8002E748 end:0x8002EA0C
+	.rodata     start:0x802415F8 end:0x80241608
+	.data       start:0x80254DC0 end:0x80254E40
+	.sdata      start:0x802C3C58 end:0x802C3C60
+	.sbss       start:0x802C4D48 end:0x802C4D50
+	.sdata2     start:0x802C6BC8 end:0x802C6BD0
+
+mode/TModeBattle.cpp:
+	.text       start:0x8002EA0C end:0x8002FACC
+	.ctors      start:0x80240188 end:0x8024018C
+	.rodata     start:0x80241608 end:0x80241620
+	.data       start:0x80254E40 end:0x80254E60
+	.sbss       start:0x802C4D50 end:0x802C4D58
+	.sdata2     start:0x802C6BD0 end:0x802C6BE8
+
+mode/BattleFlags.cpp:
+	.text       start:0x8002FACC end:0x8002FAFC
+
+camera/TCamLockOnCursor.cpp:
+	.text       start:0x8002FAFC end:0x80030B60
+
+sound/TSoundEffect.cpp:
+	.text       start:0x80030B60 end:0x80031B30
+	.rodata     start:0x80241730 end:0x80241740
+	.data       start:0x80254E80 end:0x80254EA0
+	.sdata      start:0x802C3C68 end:0x802C3C70
+
+sound/TMusicADX.cpp:
+	.text       start:0x80031B30 end:0x80031F14
+	.data       start:0x80254EA0 end:0x80254EC0
+	.sdata2     start:0x802C6C50 end:0x802C6C68
+
+core/TPeriVibrate.cpp:
+	.text       start:0x80031F14 end:0x80032174
+	.rodata     start:0x80241750 end:0x80241760
+	.data       start:0x80255040 end:0x80255060
+	.sdata      start:0x802C3C78 end:0x802C3C80
+
+io/ResManager.cpp:
+	.text       start:0x80032174 end:0x80034098
+	.ctors      start:0x8024018C end:0x80240190
+	.rodata     start:0x80241760 end:0x80241790
+	.data       start:0x80255060 end:0x802550D0
+	.bss        start:0x8027FA08 end:0x8027FAC0
+	.sbss       start:0x802C4D60 end:0x802C4D68
+
+player/Player.cpp:
+	.text       start:0x80034098 end:0x8003F6C8
+	.ctors      start:0x80240190 end:0x80240194
+
+player/PlyHealth.cpp:
+	.text       start:0x8003F6C8 end:0x8003F738
+
+player/TPlyCrow.cpp:
+	.text       start:0x8003F738 end:0x8003FA98
+	.rodata     start:0x80241918 end:0x80241958
+	.data       start:0x80255330 end:0x80255350
+	.sdata      start:0x802C3C88 end:0x802C3C90
+	.sdata2     start:0x802C6D80 end:0x802C6D90
+
+engine/ParticleBank.cpp:
+	.text       start:0x8003FA98 end:0x800401A0
+	.rodata     start:0x80241958 end:0x80241970
+	.bss        start:0x8027FAD0 end:0x8027FAF8
+	.sdata      start:0x802C3C90 end:0x802C3C98
+	.sbss       start:0x802C4D98 end:0x802C4DB8
+	.sdata2     start:0x802C6D90 end:0x802C6DB0
+
+egg/TEggEffBreak.cpp:
+	.text       start:0x800401A0 end:0x8004082C
+	.rodata     start:0x80241970 end:0x80241990
+	.data       start:0x80255350 end:0x80255370
+	.sdata      start:0x802C3C98 end:0x802C3CA0
+	.sdata2     start:0x802C6DB0 end:0x802C6DE0
+
+engine/FogBlend.cpp:
+	.text       start:0x8004082C end:0x80040900
+	.sbss       start:0x802C4DB8 end:0x802C4DC0
+	.sdata2     start:0x802C6DE0 end:0x802C6DF0
+
+player/TPlyEyelid.cpp:
+	.text       start:0x80040900 end:0x80040B00
+	.rodata     start:0x80241990 end:0x802419A0
+	.data       start:0x80255370 end:0x80255390
+	.sdata      start:0x802C3CA0 end:0x802C3CA8
+	.sdata2     start:0x802C6DF0 end:0x802C6E08
+
+object/ObjCommon.cpp:
+	.text       start:0x80040B00 end:0x80040EB4
+	.rodata     start:0x802419A0 end:0x802419C8
+
+enemy/TEneAm02_Rock.cpp:
+	.text       start:0x80040EB4 end:0x80041568
+	.rodata     start:0x802419C8 end:0x80241A08
+	.data       start:0x80255390 end:0x80255400
+	.sdata      start:0x802C3CA8 end:0x802C3CB0
+	.sdata2     start:0x802C6E08 end:0x802C6E68
+
+engine/RockFlight.cpp:
+	.text       start:0x80041568 end:0x80041E48
+
+engine/ShadowTex.cpp:
+	.text       start:0x80041E48 end:0x8004212C
+	.sbss       start:0x802C4DE0 end:0x802C4DE8
+	.sdata2     start:0x802C6E98 end:0x802C6EC0
+
+core/FrameTicker.cpp:
+	.text       start:0x8004212C end:0x800421F8
+	.data       start:0x80255400 end:0x80255410
+	.sbss       start:0x802C4DE8 end:0x802C4DF0
+	.sdata2     start:0x802C6EC0 end:0x802C6EC8
+
+stage/TGameState.cpp:
+	.text       start:0x800421F8 end:0x80042AFC
+	.data       start:0x80255410 end:0x80255520
+	.sbss       start:0x802C4DF0 end:0x802C4DF8
+
+stage/GameStateSlot.cpp:
+	.text       start:0x80042AFC end:0x80042BF4
+
+ui/Fill2D.cpp:
+	.text       start:0x80042BF4 end:0x80042D60
+	.sbss       start:0x802C4DF8 end:0x802C4E00
+	.sdata2     start:0x802C6EC8 end:0x802C6ED0
+
+engine/Light.cpp:
+	.text       start:0x80042D60 end:0x80043B40
+	.rodata     start:0x80241A28 end:0x80241A48
+	.data       start:0x80255520 end:0x80255560
+	.sdata2     start:0x802C6ED0 end:0x802C6EE0
+
+engine/DrawState.cpp:
+	.text       start:0x80043B40 end:0x80044E90
+
+engine/Color.cpp:
+	.text       start:0x80044E90 end:0x800450C0
+	.ctors      start:0x80240194 end:0x80240198
+	.sbss       start:0x802C4E28 end:0x802C4E40
+
+player/TPlyComb.cpp:
+	.text       start:0x800450C0 end:0x80046590
+	.rodata     start:0x80241A68 end:0x80241A78
+	.data       start:0x80255560 end:0x802555A8
+	.sdata      start:0x802C3CC0 end:0x802C3CC8
+	.sdata2     start:0x802C6F28 end:0x802C6F48
+
+enemy/TEneAm06.cpp:
+	.text       start:0x80046590 end:0x800489BC
+
+enemy/TEneAm06Brain.cpp:
+	.text       start:0x800489BC end:0x80049E04
+
+enemy/TEneAm01Brain.cpp:
+	.text       start:0x80049E04 end:0x8004AE64
+	.data       start:0x802558D0 end:0x80255950
+	.sdata2     start:0x802C6FD0 end:0x802C7010
+
+enemy/TEneAm02Brain.cpp:
+	.text       start:0x8004AE64 end:0x8004BFE4
+	.data       start:0x80255950 end:0x802559D8
+	.sdata2     start:0x802C7010 end:0x802C7040
+
+ui/TEnemyLifeBar.cpp:
+	.text       start:0x8004BFE4 end:0x8004CB7C
+
+core/PerfMeter.cpp:
+	.text       start:0x8004CB7C end:0x8004CCFC
+	.bss        start:0x8027FB08 end:0x8027FF68
+
+io/ResFile.cpp:
+	.text       start:0x8004CCFC end:0x8004D1D0
+	.data       start:0x802559F8 end:0x80255A20
+
+engine/SceneLights.cpp:
+	.text       start:0x8004D1D0 end:0x8004D45C
+	.data       start:0x80255A20 end:0x80255A40
+
+object/TObjParticleGenerator.cpp:
+	.text       start:0x8004D45C end:0x8004D9D0
+	.rodata     start:0x80241C50 end:0x80241C90
+	.data       start:0x80255A40 end:0x80255AC0
+	.sdata      start:0x802C3CD8 end:0x802C3CE0
+	.sdata2     start:0x802C70B0 end:0x802C70D8
+
+stage/SetActor.cpp:
+	.text       start:0x8004D9D0 end:0x8004DBA0
+	.data       start:0x80255AC0 end:0x80255B38
+
+object/blue/TObjBlueSea.cpp:
+	.text       start:0x8004DBA0 end:0x8004E630
+
+engine/TFogCtrl.cpp:
+	.text       start:0x8004E630 end:0x8004F640
+	.rodata     start:0x80241CC8 end:0x80241CE8
+	.data       start:0x80255B58 end:0x80255BB0
+	.sdata      start:0x802C3CE8 end:0x802C3CF0
+	.sdata2     start:0x802C7118 end:0x802C7148
+
+object/TObjFogCollision.cpp:
+	.text       start:0x8004F640 end:0x8004FDDC
+	.rodata     start:0x80241CE8 end:0x80241D98
+	.data       start:0x80255BB0 end:0x80255C20
+	.sdata      start:0x802C3CF0 end:0x802C3CF8
+	.sdata2     start:0x802C7148 end:0x802C7168
+
+engine/PortalVis.cpp:
+	.text       start:0x8004FDDC end:0x80050700
+
+egg/TEggCreature.cpp:
+	.text       start:0x80050700 end:0x8005097C
+	.data       start:0x80255C20 end:0x80255CB8
+
+object/ObjModel.cpp:
+	.text       start:0x8005097C end:0x80051044
+	.sdata2     start:0x802C7178 end:0x802C7180
+
+object/map/TObjMapFoothold01.cpp:
+	.text       start:0x80051044 end:0x80051DB0
+	.rodata     start:0x80241D98 end:0x80241F20
+	.data       start:0x80255CB8 end:0x80255D70
+	.sdata      start:0x802C3D08 end:0x802C3D10
+	.sdata2     start:0x802C7180 end:0x802C71E8
+
+stage/StageObjUtil.cpp:
+	.text       start:0x80051DB0 end:0x80053DCC
+
+object/TObjArrowPoint.cpp:
+	.text       start:0x80053DCC end:0x80054918
+	.rodata     start:0x80241F20 end:0x80242060
+	.data       start:0x80255D88 end:0x80255E00
+	.sdata      start:0x802C3D10 end:0x802C3D18
+	.sdata2     start:0x802C7238 end:0x802C7288
+
+object/TObjSkull.cpp:
+	.text       start:0x80054918 end:0x800551E0
+	.rodata     start:0x80242060 end:0x80242088
+	.data       start:0x80255E00 end:0x80255EB0
+	.sdata      start:0x802C3D18 end:0x802C3D20
+	.sdata2     start:0x802C7288 end:0x802C72B0
+
+object/TObjLauncher.cpp:
+	.text       start:0x800551E0 end:0x800565C4
+	.ctors      start:0x80240198 end:0x8024019C
+
+egg/TMorphEggAnim.cpp:
+	.text       start:0x800565C4 end:0x8005676C
+	.rodata     start:0x80242098 end:0x802420B8
+	.data       start:0x80255F80 end:0x80255FA0
+	.sdata      start:0x802C3D28 end:0x802C3D30
+	.sdata2     start:0x802C72F8 end:0x802C7300
+
+egg/MorphScript.cpp:
+	.text       start:0x8005676C end:0x80056CB0
+	.data       start:0x80255FA0 end:0x80255FC0
+	.sdata2     start:0x802C7300 end:0x802C7320
+
+object/TObjFirePole01.cpp:
+	.text       start:0x80056CB0 end:0x80057920
+	.rodata     start:0x802420B8 end:0x80242218
+	.data       start:0x80255FC0 end:0x80256038
+	.sdata      start:0x802C3D30 end:0x802C3D38
+	.sdata2     start:0x802C7320 end:0x802C7368
+
+core/TSceneManager.cpp:
+	.text       start:0x80057920 end:0x80057BB8
+	.rodata     start:0x80242218 end:0x80242228
+	.data       start:0x80256038 end:0x80256058
+	.sdata      start:0x802C3D38 end:0x802C3D40
+	.sdata2     start:0x802C7368 end:0x802C7370
+
+enemy/EnemyGroupWave.cpp:
+	.text       start:0x80057BB8 end:0x80058B34
+	.rodata     start:0x80242228 end:0x802422D0
+	.data       start:0x80256058 end:0x80256150
+	.sdata      start:0x802C3D40 end:0x802C3D48
+	.sbss       start:0x802C4EC8 end:0x802C4ED0
+	.sdata2     start:0x802C7370 end:0x802C73A8
+
+enemy/EnemyGroup.cpp:
+	.text       start:0x80058B34 end:0x800593B0
+
+enemy/boss/TEneBoss02.cpp:
+	.text       start:0x800593B0 end:0x8005DF9C
+	.rodata     start:0x802422D0 end:0x80242434
+	.data       start:0x80256380 end:0x80256480
+	.sdata      start:0x802C3D48 end:0x802C3D50
+	.sbss       start:0x802C4EE8 end:0x802C4F08
+	.sdata2     start:0x802C73A8 end:0x802C7498
+
+enemy/boss/TEneBoss02Brain.cpp:
+	.text       start:0x8005DF9C end:0x8005F95C
+	.data       start:0x80256480 end:0x80256510
+	.sdata2     start:0x802C7498 end:0x802C74B8
+
+enemy/boss/TEneBoss02_Pool.cpp:
+	.text       start:0x8005F95C end:0x80060800
+	.rodata     start:0x80242440 end:0x80242460
+	.data       start:0x80256510 end:0x802565E8
+	.sdata      start:0x802C3D50 end:0x802C3D58
+	.sdata2     start:0x802C74B8 end:0x802C7500
+
+enemy/boss/TEneBoss02_WaterShot.cpp:
+	.text       start:0x80060800 end:0x800611EC
+	.rodata     start:0x80242460 end:0x802424E0
+	.data       start:0x802565E8 end:0x802566E8
+	.sdata      start:0x802C3D58 end:0x802C3D68
+	.sdata2     start:0x802C7500 end:0x802C7520
+
+stage/SetSlot.cpp:
+	.text       start:0x800611EC end:0x80061740
+
+core/MathUtil.cpp:
+	.text       start:0x80061740 end:0x800621F4
+	.sdata2     start:0x802C7520 end:0x802C7550
+
+object/TObjBoss02Katana.cpp:
+	.text       start:0x800621F4 end:0x800625D8
+	.rodata     start:0x802424E0 end:0x802424F8
+	.data       start:0x802566E8 end:0x80256768
+	.sdata      start:0x802C3D68 end:0x802C3D70
+	.sdata2     start:0x802C7550 end:0x802C7560
+
+object/TObjItem.cpp:
+	.text       start:0x800625D8 end:0x800632D0
+	.rodata     start:0x802424F8 end:0x80242508
+	.data       start:0x80256768 end:0x802567D8
+	.sdata      start:0x802C3D70 end:0x802C3D78
+	.sdata2     start:0x802C7560 end:0x802C75B8
+
+camera/TCamZelda5.cpp:
+	.text       start:0x800632D0 end:0x80063DB8
+	.rodata     start:0x80242508 end:0x80242518
+	.data       start:0x802567D8 end:0x80256830
+	.sdata      start:0x802C3D78 end:0x802C3D80
+	.sdata2     start:0x802C75B8 end:0x802C75E8
+
+camera/TCamPath.cpp:
+	.text       start:0x80063DB8 end:0x80064208
+	.rodata     start:0x80242518 end:0x80242528
+	.data       start:0x80256830 end:0x80256888
+	.sdata      start:0x802C3D80 end:0x802C3D88
+	.sdata2     start:0x802C75E8 end:0x802C75F8
+
+enemy/EnemyLight.cpp:
+	.text       start:0x80064208 end:0x800649E4
+	.sdata2     start:0x802C75F8 end:0x802C7610
+
+object/red/TObjRedMagma.cpp:
+	.text       start:0x800649E4 end:0x80065874
+	.rodata     start:0x80242528 end:0x80242638
+	.data       start:0x80256888 end:0x80256A18
+	.sdata      start:0x802C3D88 end:0x802C3D98
+	.sdata2     start:0x802C7610 end:0x802C7658
+
+object/map/TObjMapRock01.cpp:
+	.text       start:0x80065874 end:0x80065FD0
+	.rodata     start:0x80242638 end:0x80242660
+	.data       start:0x80256A18 end:0x80256A90
+	.sdata      start:0x802C3D98 end:0x802C3DA0
+	.sdata2     start:0x802C7658 end:0x802C7678
+
+io/AramFile.cpp:
+	.text       start:0x80065FD0 end:0x80066648
+	.data       start:0x80256A90 end:0x80256AB8
+
+object/TObjRestartColli.cpp:
+	.text       start:0x80066648 end:0x800669CC
+	.rodata     start:0x80242660 end:0x80242678
+	.data       start:0x80256AB8 end:0x80256B58
+	.sdata      start:0x802C3DA0 end:0x802C3DA8
+	.sdata2     start:0x802C7678 end:0x802C7680
+
+object/TObjRestartPoint.cpp:
+	.text       start:0x800669CC end:0x80066BC0
+	.rodata     start:0x80242678 end:0x80242690
+	.data       start:0x80256B58 end:0x80256BC8
+	.sdata      start:0x802C3DA8 end:0x802C3DB0
+
+player/PlyTint.cpp:
+	.text       start:0x80066BC0 end:0x80066D60
+	.ctors      start:0x8024019C end:0x802401A0
+	.sbss       start:0x802C4F50 end:0x802C4F60
+	.sdata2     start:0x802C7680 end:0x802C7698
+
+object/TObjStageObj.cpp:
+	.text       start:0x80066D60 end:0x800683D8
+	.rodata     start:0x80242690 end:0x80242808
+	.data       start:0x80256BC8 end:0x80256C40
+	.sdata      start:0x802C3DB0 end:0x802C3DB8
+	.sdata2     start:0x802C7698 end:0x802C76F8
+
+object/TObjBoss02Fence.cpp:
+	.text       start:0x800683D8 end:0x800686F4
+	.rodata     start:0x80242808 end:0x80242838
+	.data       start:0x80256C40 end:0x80256CC0
+	.sdata2     start:0x802C76F8 end:0x802C7708
+
+io/ResToc.cpp:
+	.text       start:0x800686F4 end:0x8006878C
+
+ui/Font.cpp:
+	.text       start:0x8006878C end:0x800692F0
+
+mode/TModeMemCheck.cpp:
+	.text       start:0x800692F0 end:0x80069448
+	.rodata     start:0x80242858 end:0x80242898
+	.data       start:0x80256CE0 end:0x80256D00
+
+engine/Draw2D.cpp:
+	.text       start:0x80069448 end:0x80069948
+	.sbss       start:0x802C4F98 end:0x802C4FA8
+
+object/map/TObjMapCollision.cpp:
+	.text       start:0x80069948 end:0x8006A3C4
+	.rodata     start:0x80242898 end:0x802429E8
+	.data       start:0x80256D00 end:0x80256D70
+	.sdata      start:0x802C3DC0 end:0x802C3DC8
+	.sdata2     start:0x802C7718 end:0x802C7740
+
+stage/TEventCtrl.cpp:
+	.text       start:0x8006A3C4 end:0x8006AD74
+	.rodata     start:0x802429E8 end:0x802429F8
+	.data       start:0x80256D70 end:0x80256D90
+	.sdata      start:0x802C3DC8 end:0x802C3DD0
+
+ui/Text.cpp:
+	.text       start:0x8006AD74 end:0x8006B574
+	.data       start:0x80256D90 end:0x80256E18
+	.sdata2     start:0x802C7740 end:0x802C7760
+
+stage/TStageBattle.cpp:
+	.text       start:0x8006B574 end:0x8006BDD0
+	.data       start:0x80256E18 end:0x80256E38
+	.sbss       start:0x802C4FB8 end:0x802C4FC0
+	.sdata2     start:0x802C7760 end:0x802C7788
+
+stage/TStageBlue.cpp:
+	.text       start:0x8006BDD0 end:0x8006BF04
+	.data       start:0x80256E38 end:0x80256E58
+
+mode/TModeBattleMenu.cpp:
+	.text       start:0x8006BF04 end:0x8006C470
+	.rodata     start:0x802429F8 end:0x80242A30
+	.data       start:0x80256E58 end:0x80256E88
+	.sdata2     start:0x802C7788 end:0x802C77A8
+
+ui/ConstPalette.cpp:
+	.text       start:0x8006C470 end:0x8006C548
+	.rodata     start:0x80242A30 end:0x80242A40
+	.sbss       start:0x802C4FC0 end:0x802C4FD0
+
+enemy/TEneAm07.cpp:
+	.text       start:0x8006C548 end:0x8006F93C
+	.rodata     start:0x80242A40 end:0x80242BC0
+	.data       start:0x80256E88 end:0x80257100
+	.sdata      start:0x802C3DD0 end:0x802C3DD8
+	.sdata2     start:0x802C77A8 end:0x802C7898
+
+enemy/TEneAm07Brain.cpp:
+	.text       start:0x8006F93C end:0x80070730
+	.data       start:0x80257100 end:0x80257168
+	.sdata2     start:0x802C7898 end:0x802C78C8
+
+enemy/SpawnGuard.cpp:
+	.text       start:0x80070730 end:0x80070A50
+	.sbss       start:0x802C4FE0 end:0x802C4FE8
+	.sdata2     start:0x802C78C8 end:0x802C78D8
+
+object/map/TObjMapDoor01.cpp:
+	.text       start:0x80070A50 end:0x80072468
+	.rodata     start:0x80242BC0 end:0x80242E08
+	.data       start:0x80257168 end:0x802571D8
+	.sdata      start:0x802C3DD8 end:0x802C3DE0
+	.sdata2     start:0x802C78D8 end:0x802C7920
+
+object/TObjHook.cpp:
+	.text       start:0x80072468 end:0x80072A18
+	.data       start:0x802571D8 end:0x80257250
+	.sdata2     start:0x802C7920 end:0x802C7938
+
+enemy/EnemyAnim.cpp:
+	.text       start:0x80072A18 end:0x80073138
+	.sdata2     start:0x802C7938 end:0x802C7940
+
+enemy/TEneAm08.cpp:
+	.text       start:0x80073138 end:0x80075330
+	.rodata     start:0x80242E18 end:0x80243040
+	.data       start:0x80257250 end:0x80257498
+	.bss        start:0x80280030 end:0x80280040
+	.sdata      start:0x802C3DE8 end:0x802C3DF0
+	.sbss       start:0x802C4FF0 end:0x802C5000
+	.sdata2     start:0x802C7940 end:0x802C79D0
+
+enemy/TEneAm08Brain.cpp:
+	.text       start:0x80075330 end:0x80076060
+	.data       start:0x80257498 end:0x80257500
+	.sdata2     start:0x802C79D0 end:0x802C79F0
+
+object/TObjMirror.cpp:
+	.text       start:0x80076060 end:0x800766EC
+	.rodata     start:0x80243040 end:0x802430A8
+	.data       start:0x80257500 end:0x80257570
+	.sdata      start:0x802C3DF0 end:0x802C3DF8
+	.sdata2     start:0x802C79F0 end:0x802C7A28
+
+enemy/boss/BossTail.cpp:
+	.text       start:0x800766EC end:0x80076E4C
+	.sdata2     start:0x802C7A28 end:0x802C7A58
+
+engine/WorldMesh.cpp:
+	.text       start:0x80076E4C end:0x80077CB4
+	.data       start:0x80257570 end:0x802575A0
+
+engine/MeshColli.cpp:
+	.text       start:0x80077CB4 end:0x80078B24
+	.data       start:0x802575A0 end:0x802575D0
+	.sbss       start:0x802C5000 end:0x802C5008
+	.sdata2     start:0x802C7A58 end:0x802C7A70
+
+player/PlyPool.cpp:
+	.text       start:0x80078B24 end:0x80078CA0
+	.data       start:0x802575D0 end:0x802575E0
+
+enemy/boss/TEneBoss02_PoolPow.cpp:
+	.text       start:0x80078CA0 end:0x8007A160
+
+engine/MeshPool.cpp:
+	.text       start:0x8007A160 end:0x8007BD9C
+	.data       start:0x802576E0 end:0x80257710
+	.sdata2     start:0x802C7AD0 end:0x802C7AD8
+
+mode/TModeStageSelect.cpp:
+	.text       start:0x8007BD9C end:0x8007C134
+	.rodata     start:0x80243118 end:0x80243170
+	.data       start:0x80257710 end:0x80257730
+	.sdata2     start:0x802C7AD8 end:0x802C7AE8
+
+enemy/boss/TEneBoss03MoleBrain.cpp:
+	.text       start:0x8007C134 end:0x8007D664
+	.data       start:0x80257730 end:0x802577A0
+	.sdata2     start:0x802C7AE8 end:0x802C7B38
+
+enemy/boss/TEneBoss03Dino.cpp:
+	.text       start:0x8007D664 end:0x8007FD70
+	.rodata     start:0x80243170 end:0x802431E8
+	.data       start:0x802577A0 end:0x802579E8
+	.sdata      start:0x802C3E08 end:0x802C3E10
+	.sbss       start:0x802C5018 end:0x802C5058
+	.sdata2     start:0x802C7B38 end:0x802C7BF8
+
+enemy/boss/TEneBoss03Mole.cpp:
+	.text       start:0x8007FD70 end:0x80082E20
+	.rodata     start:0x802431E8 end:0x80243320
+	.data       start:0x802579E8 end:0x80257C98
+	.sdata      start:0x802C3E10 end:0x802C3E18
+	.sdata2     start:0x802C7BF8 end:0x802C7CA8
+
+enemy/boss/TEneBoss03_VolRock.cpp:
+	.text       start:0x80082E20 end:0x8008528C
+	.rodata     start:0x80243320 end:0x80243380
+	.data       start:0x80257C98 end:0x80257D48
+	.sdata      start:0x802C3E18 end:0x802C3E20
+	.sdata2     start:0x802C7CA8 end:0x802C7D50
+
+enemy/boss/Ballistic.cpp:
+	.text       start:0x8008528C end:0x80085500
+	.sdata2     start:0x802C7D50 end:0x802C7D78
+
+object/red/TObjRedFireTrap.cpp:
+	.text       start:0x80085500 end:0x80085FCC
+	.rodata     start:0x80243380 end:0x80243500
+	.data       start:0x80257D48 end:0x80257DC0
+	.sdata      start:0x802C3E20 end:0x802C3E28
+	.sdata2     start:0x802C7D78 end:0x802C7DA0
+
+engine/TFootPrinter.cpp:
+	.text       start:0x80085FCC end:0x800864C4
+	.rodata     start:0x80243560 end:0x80243570
+	.data       start:0x80257DC0 end:0x80257DE0
+	.sdata      start:0x802C3E28 end:0x802C3E30
+	.sdata2     start:0x802C7DA0 end:0x802C7DC0
+
+enemy/boss/TEneBoss03_Magma.cpp:
+	.text       start:0x800864C4 end:0x80088098
+
+stage/TStageRedBoss.cpp:
+	.text       start:0x80088098 end:0x800881C8
+	.data       start:0x80257E20 end:0x80257E40
+
+egg/TMorphEggAnim2.cpp:
+	.text       start:0x800881C8 end:0x800884C0
+	.rodata     start:0x80243598 end:0x802435A8
+	.data       start:0x80257E40 end:0x80257E60
+	.sdata      start:0x802C3E38 end:0x802C3E40
+	.sdata2     start:0x802C7E10 end:0x802C7E28
+
+object/TObjChickenBoss.cpp:
+	.text       start:0x800884C0 end:0x8008A418
+	.rodata     start:0x802435A8 end:0x80243760
+	.data       start:0x80257E60 end:0x80257F28
+	.sdata      start:0x802C3E40 end:0x802C3E48
+	.sbss       start:0x802C50A8 end:0x802C50C8
+	.sdata2     start:0x802C7E28 end:0x802C7E98
+
+camera/TCamFix.cpp:
+	.text       start:0x8008A418 end:0x8008A5D8
+	.data       start:0x80257F28 end:0x80257F80
+	.sdata      start:0x802C3E48 end:0x802C3E50
+	.sdata2     start:0x802C7E98 end:0x802C7EA8
+
+camera/TCamWatch.cpp:
+	.text       start:0x8008A5D8 end:0x8008A84C
+	.rodata     start:0x80243760 end:0x80243770
+	.data       start:0x80257F80 end:0x80257FD8
+	.sdata      start:0x802C3E50 end:0x802C3E58
+	.sdata2     start:0x802C7EA8 end:0x802C7EB0
+
+camera/TCamVerticalLine.cpp:
+	.text       start:0x8008A84C end:0x8008AB30
+	.rodata     start:0x80243770 end:0x80243788
+	.data       start:0x80257FD8 end:0x80258030
+	.sdata      start:0x802C3E58 end:0x802C3E60
+	.sdata2     start:0x802C7EB0 end:0x802C7EB8
+
+camera/TCamConversation.cpp:
+	.text       start:0x8008AB30 end:0x8008AE94
+
+engine/TMobileObject.cpp:
+	.text       start:0x8008AE94 end:0x8008FAB0
+	.rodata     start:0x802437A0 end:0x802437B0
+	.data       start:0x80258088 end:0x80258170
+	.sdata      start:0x802C3E68 end:0x802C3E70
+	.sdata2     start:0x802C7ED0 end:0x802C7F48
+
+egg/EggBody.cpp:
+	.text       start:0x8008FAB0 end:0x80090C78
+	.data       start:0x80258170 end:0x80258190
+	.sdata2     start:0x802C7F48 end:0x802C7F70
+
+enemy/EnemyCommon.cpp:
+	.text       start:0x80090C78 end:0x80090F64
+	.rodata     start:0x802437B0 end:0x80243800
+	.sdata2     start:0x802C7F70 end:0x802C7F78
+
+enemy/EnemySight.cpp:
+	.text       start:0x80090F64 end:0x80091BC4
+	.data       start:0x80258190 end:0x802581D8
+	.sdata2     start:0x802C7F78 end:0x802C7F90
+
+enemy/TEneAntsBomb.cpp:
+	.text       start:0x80091BC4 end:0x800923E0
+
+enemy/TEneAntsQueen.cpp:
+	.text       start:0x800923E0 end:0x80094110
+	.rodata     start:0x80243888 end:0x80243988
+	.data       start:0x802582B0 end:0x802584E8
+	.sdata      start:0x802C3E78 end:0x802C3E80
+	.sdata2     start:0x802C7FC8 end:0x802C8058
+
+enemy/TEneAntsQueenBrain.cpp:
+	.text       start:0x80094110 end:0x80095164
+
+enemy/AntBrain.cpp:
+	.text       start:0x80095164 end:0x800959F0
+	.data       start:0x80258550 end:0x80258598
+	.sdata2     start:0x802C8090 end:0x802C80C8
+
+stage/SetObj16.cpp:
+	.text       start:0x800959F0 end:0x80095A44
+	.ctors      start:0x802401A0 end:0x802401A4
+
+camera/CamChase.cpp:
+	.text       start:0x80095A44 end:0x80098734
+	.sdata2     start:0x802C80C8 end:0x802C81B8
+
+camera/CamPad.cpp:
+	.text       start:0x80098734 end:0x80098B70
+	.sdata2     start:0x802C81B8 end:0x802C81D0
+
+camera/CamCurve.cpp:
+	.text       start:0x80098B70 end:0x80098F24
+	.sdata2     start:0x802C81D0 end:0x802C8208
+
+camera/CamHead.cpp:
+	.text       start:0x80098F24 end:0x8009952C
+	.sdata2     start:0x802C8208 end:0x802C8228
+
+egg/TEggCreatureTypeE.cpp:
+	.text       start:0x8009952C end:0x8009E10C
+
+object/TObjBowlEgg.cpp:
+	.text       start:0x8009E10C end:0x8009F734
+	.rodata     start:0x80243E78 end:0x80243E88
+	.data       start:0x802587B8 end:0x80258860
+	.sdata      start:0x802C3E90 end:0x802C3E98
+	.sdata2     start:0x802C82D8 end:0x802C82F0
+
+object/TObjGameBowling.cpp:
+	.text       start:0x8009F734 end:0x800A14C0
+
+engine/LightZone.cpp:
+	.text       start:0x800A14C0 end:0x800A21A8
+	.rodata     start:0x80243EB8 end:0x80243EF8
+	.sdata2     start:0x802C8388 end:0x802C83A0
+
+object/TObjSetLightCollision.cpp:
+	.text       start:0x800A21A8 end:0x800A30F8
+	.rodata     start:0x80243EF8 end:0x80243FC8
+	.data       start:0x80258930 end:0x802589B8
+	.sdata      start:0x802C3EA0 end:0x802C3EA8
+	.sdata2     start:0x802C83A0 end:0x802C83E8
+
+object/red/TObjRedMagmaShot.cpp:
+	.text       start:0x800A30F8 end:0x800A39E8
+	.ctors      start:0x802401A4 end:0x802401A8
+	.rodata     start:0x80243FC8 end:0x80244128
+	.data       start:0x802589B8 end:0x80258A30
+	.sdata      start:0x802C3EA8 end:0x802C3EB8
+	.sdata2     start:0x802C83E8 end:0x802C8430
+
+object/TObjFallThing.cpp:
+	.text       start:0x800A39E8 end:0x800A4348
+	.data       start:0x80258A30 end:0x80258AA0
+	.sdata2     start:0x802C8430 end:0x802C8470
+
+engine/Rail.cpp:
+	.text       start:0x800A4348 end:0x800A5B64
+
+camera/TCamPointLook.cpp:
+	.text       start:0x800A5B64 end:0x800A5E9C
+	.rodata     start:0x80244138 end:0x80244148
+	.data       start:0x80258AA0 end:0x80258AF8
+	.sdata      start:0x802C3EC0 end:0x802C3EC8
+	.sdata2     start:0x802C8478 end:0x802C8480
+
+ui/TAeObjTitle.cpp:
+	.text       start:0x800A5E9C end:0x800A623C
+	.rodata     start:0x80244148 end:0x802441A8
+	.data       start:0x80258AF8 end:0x80258B20
+	.sdata      start:0x802C3EC8 end:0x802C3ED0
+
+ui/AeSprite.cpp:
+	.text       start:0x800A623C end:0x800A659C
+	.sdata2     start:0x802C8480 end:0x802C84A0
+
+ui/AeDraw.cpp:
+	.text       start:0x800A659C end:0x800A6FAC
+
+ui/TAeObject.cpp:
+	.text       start:0x800A6FAC end:0x800A80D4
+	.rodata     start:0x802441A8 end:0x802441C0
+	.data       start:0x80258B20 end:0x80258B98
+	.sdata      start:0x802C3ED0 end:0x802C3EE0
+	.sdata2     start:0x802C84C8 end:0x802C84F0
+
+camera/CamArea.cpp:
+	.text       start:0x800A80D4 end:0x800A8FA4
+
+engine/SpringBody.cpp:
+	.text       start:0x800A8FA4 end:0x800AA1D4
+	.data       start:0x80258B98 end:0x80258BF0
+	.sdata2     start:0x802C8508 end:0x802C8540
+
+enemy/TEnePenguin.cpp:
+	.text       start:0x800AA1D4 end:0x800AC2E0
+	.rodata     start:0x802441C0 end:0x802442E0
+	.data       start:0x80258BF0 end:0x80258DD8
+	.sdata      start:0x802C3EE0 end:0x802C3EE8
+	.sdata2     start:0x802C8540 end:0x802C85D0
+
+enemy/TEnePenguinBrain.cpp:
+	.text       start:0x800AC2E0 end:0x800ACDC4
+	.data       start:0x80258DD8 end:0x80258E20
+	.sdata2     start:0x802C85D0 end:0x802C85E8
+
+enemy/EnemyTexFx.cpp:
+	.text       start:0x800ACDC4 end:0x800AD9D8
+	.rodata     start:0x802442E0 end:0x80244438
+	.sbss       start:0x802C5168 end:0x802C51C0
+	.sdata2     start:0x802C85E8 end:0x802C8610
+
+player/PlyInput.cpp:
+	.text       start:0x800AD9D8 end:0x800ADBC4
+	.rodata     start:0x80244438 end:0x80244470
+	.sdata2     start:0x802C8610 end:0x802C8618
+
+player/PlyState.cpp:
+	.text       start:0x800ADBC4 end:0x800BC6EC
+	.data       start:0x80258E20 end:0x80259B58
+	.sdata      start:0x802C3FF8 end:0x802C4000
+	.sdata2     start:0x802C8618 end:0x802C86A0
+
+object/blue/TObjBlueWaterfall.cpp:
+	.text       start:0x800BC6EC end:0x800BD1C8
+	.rodata     start:0x80244940 end:0x80244AF0
+	.data       start:0x80259B58 end:0x80259BC8
+	.sdata      start:0x802C4000 end:0x802C4008
+	.sdata2     start:0x802C86A0 end:0x802C86E0
+
+object/blue/TObjBlueCaptain.cpp:
+	.text       start:0x800BD1C8 end:0x800BD9EC
+	.rodata     start:0x80244AF0 end:0x80244D68
+	.data       start:0x80259BC8 end:0x80259C40
+	.sdata      start:0x802C4008 end:0x802C4010
+	.sdata2     start:0x802C86E8 end:0x802C8700
+
+enemy/boss/TEneBoss03_Beam_Pera.cpp:
+	.text       start:0x800BD9EC end:0x800BEC0C
+	.rodata     start:0x80244D68 end:0x80244D80
+	.data       start:0x80259C40 end:0x80259CB0
+	.sdata      start:0x802C4010 end:0x802C4018
+	.sdata2     start:0x802C8700 end:0x802C8778
+
+stage/GameSelect.cpp:
+	.text       start:0x800BEC0C end:0x800BEF78
+	.rodata     start:0x80244D80 end:0x80244DF0
+	.data       start:0x80259CB0 end:0x80259CD0
+	.sdata2     start:0x802C8778 end:0x802C8780
+
+object/TObjGoldenEgg.cpp:
+	.text       start:0x800BEF78 end:0x800C1A88
+	.rodata     start:0x80244DF0 end:0x80244E68
+	.data       start:0x80259CD0 end:0x80259DD8
+	.sdata      start:0x802C4020 end:0x802C4030
+	.sbss       start:0x802C51D8 end:0x802C51F0
+	.sdata2     start:0x802C8790 end:0x802C8800
+
+egg/EggRoll.cpp:
+	.text       start:0x800C1A88 end:0x800C2C6C
+	.data       start:0x80259DD8 end:0x80259DF8
+	.sdata2     start:0x802C8800 end:0x802C8828
+
+io/Arc.cpp:
+	.text       start:0x800C2C6C end:0x800C343C
+	.data       start:0x80259DF8 end:0x80259E10
+
+object/TObjPilingSwitch.cpp:
+	.text       start:0x800C343C end:0x800C4488
+	.ctors      start:0x802401A8 end:0x802401AC
+	.rodata     start:0x80244E68 end:0x80244EB8
+	.data       start:0x80259E10 end:0x80259F00
+	.sdata      start:0x802C4030 end:0x802C4038
+	.sdata2     start:0x802C8828 end:0x802C8870
+
+enemy/boss/TEneBoss03_EffBlur.cpp:
+	.text       start:0x800C4488 end:0x800C47F0
+	.rodata     start:0x80244EB8 end:0x80244ED0
+	.data       start:0x80259F00 end:0x80259F20
+	.sdata      start:0x802C4038 end:0x802C4040
+	.sdata2     start:0x802C8870 end:0x802C8898
+
+egg/EggLevel.cpp:
+	.text       start:0x800C47F0 end:0x800C568C
+	.rodata     start:0x80244ED0 end:0x80244EE0
+	.sbss       start:0x802C51F0 end:0x802C51F8
+	.sdata2     start:0x802C8898 end:0x802C88E8
+
+object/red/TObjRedDinoHead.cpp:
+	.text       start:0x800C568C end:0x800C66F8
+	.ctors      start:0x802401AC end:0x802401B0
+	.rodata     start:0x80244EE0 end:0x80244F60
+	.data       start:0x80259F20 end:0x80259F98
+	.bss        start:0x802803C0 end:0x802804F0
+	.sdata      start:0x802C4040 end:0x802C4048
+	.sdata2     start:0x802C88E8 end:0x802C8920
+
+object/red/TObjRedDHeadInvokeArea.cpp:
+	.text       start:0x800C66F8 end:0x800C70F8
+	.ctors      start:0x802401B0 end:0x802401B4
+	.rodata     start:0x80244F60 end:0x802450B8
+	.data       start:0x80259F98 end:0x8025A010
+	.bss        start:0x802804F0 end:0x80280550
+	.sdata      start:0x802C4048 end:0x802C4058
+	.sbss       start:0x802C51F8 end:0x802C5200
+	.sdata2     start:0x802C8920 end:0x802C8950
+
+object/red/TObjRedEventMagma.cpp:
+	.text       start:0x800C70F8 end:0x800C7DC4
+	.rodata     start:0x802450B8 end:0x80245290
+	.data       start:0x8025A010 end:0x8025A088
+	.sdata      start:0x802C4058 end:0x802C4060
+	.sdata2     start:0x802C8950 end:0x802C8988
+
+enemy/boss/TEnePurpleBoss.cpp:
+	.text       start:0x800C7DC4 end:0x800CB09C
+
+enemy/boss/TEnePurpleBossBrain.cpp:
+	.text       start:0x800CB09C end:0x800CBD8C
+	.data       start:0x8025A2F0 end:0x8025A358
+	.sdata2     start:0x802C8A90 end:0x802C8AA0
+
+object/TObjEggFeed.cpp:
+	.text       start:0x800CBD8C end:0x800CD7F0
+	.ctors      start:0x802401B4 end:0x802401B8
+	.rodata     start:0x802453E0 end:0x802454C0
+	.data       start:0x8025A358 end:0x8025A3F8
+	.bss        start:0x80280560 end:0x80280570
+	.sdata      start:0x802C4068 end:0x802C4078
+	.sbss       start:0x802C5220 end:0x802C5228
+	.sdata2     start:0x802C8AA0 end:0x802C8B60
+
+stage/TGameFreePlay.cpp:
+	.text       start:0x800CD7F0 end:0x800CDA78
+	.data       start:0x8025A3F8 end:0x8025A450
+
+stage/TGameDino.cpp:
+	.text       start:0x800CDA78 end:0x800CDE48
+	.data       start:0x8025A450 end:0x8025A4A8
+
+stage/TGameGoldenEgg.cpp:
+	.text       start:0x800CDE48 end:0x800CE3AC
+	.data       start:0x8025A4A8 end:0x8025A528
+
+object/red/TObjRedFenceCtrl.cpp:
+	.text       start:0x800CE3AC end:0x800CEFC4
+
+object/red/TObjRedFence.cpp:
+	.text       start:0x800CEFC4 end:0x800CF420
+	.rodata     start:0x80245568 end:0x80245578
+	.data       start:0x8025A598 end:0x8025A608
+	.sdata      start:0x802C40A0 end:0x802C40A8
+	.sdata2     start:0x802C8BA0 end:0x802C8BA8
+
+ui/TAeObjConsole1P.cpp:
+	.text       start:0x800CF420 end:0x800D1558
+	.rodata     start:0x802455C0 end:0x802456F0
+	.data       start:0x8025A608 end:0x8025A648
+	.sdata      start:0x802C40A8 end:0x802C40B0
+	.sdata2     start:0x802C8BA8 end:0x802C8BE8
+
+enemy/boss/TEnePurpleBoss_IceBall.cpp:
+	.text       start:0x800D1558 end:0x800D2EE0
+
+ui/AeUtil.cpp:
+	.text       start:0x800D2EE0 end:0x800D33B0
+	.sbss       start:0x802C5240 end:0x802C5258
+	.sdata2     start:0x802C8C60 end:0x802C8C70
+
+ui/MotionObj.cpp:
+	.text       start:0x800D33B0 end:0x800D3468
+	.sdata2     start:0x802C8C70 end:0x802C8C78
+
+engine/TLensFlare.cpp:
+	.text       start:0x800D3468 end:0x800D3B5C
+
+object/TObjEggCannon.cpp:
+	.text       start:0x800D3B5C end:0x800D4DAC
+	.rodata     start:0x80245960 end:0x80245AD0
+	.data       start:0x8025A718 end:0x8025A790
+	.bss        start:0x80280570 end:0x80280990
+	.sdata      start:0x802C40C8 end:0x802C40D0
+	.sdata2     start:0x802C8CB0 end:0x802C8D40
+
+object/TObjBridgeIta.cpp:
+	.text       start:0x800D4DAC end:0x800D51D0
+	.rodata     start:0x80245AD0 end:0x80245CE8
+	.data       start:0x8025A790 end:0x8025A808
+	.sdata      start:0x802C40D0 end:0x802C40D8
+	.sdata2     start:0x802C8D48 end:0x802C8D60
+
+object/TObjHangBridge.cpp:
+	.text       start:0x800D51D0 end:0x800D6A9C
+
+enemy/TEneBat.cpp:
+	.text       start:0x800D6A9C end:0x800D8EA4
+	.rodata     start:0x80245E90 end:0x80245F90
+	.data       start:0x8025A880 end:0x8025AA88
+	.sdata      start:0x802C40E0 end:0x802C40E8
+	.sdata2     start:0x802C8DD8 end:0x802C8EB0
+
+enemy/TEneBatBrain.cpp:
+	.text       start:0x800D8EA4 end:0x800D9B20
+	.data       start:0x8025AA88 end:0x8025AAF0
+	.sdata2     start:0x802C8EB0 end:0x802C8EF0
+
+enemy/BatList.cpp:
+	.text       start:0x800D9B20 end:0x800DA0F0
+
+engine/TPolygonAnim.cpp:
+	.text       start:0x800DA0F0 end:0x800DA460
+	.rodata     start:0x80245F90 end:0x80245FA0
+	.data       start:0x8025AB30 end:0x8025AB50
+	.sdata      start:0x802C40E8 end:0x802C40F0
+	.sdata2     start:0x802C8F18 end:0x802C8F20
+
+engine/FxSystem.cpp:
+	.text       start:0x800DA460 end:0x800DB500
+
+engine/FxSetup.cpp:
+	.text       start:0x800DB500 end:0x800DB7D4
+
+engine/FxAnim.cpp:
+	.text       start:0x800DB7D4 end:0x800DC4EC
+
+engine/FxShape.cpp:
+	.text       start:0x800DC4EC end:0x800DEE60
+
+engine/FxEmitter.cpp:
+	.text       start:0x800DEE60 end:0x800E0938
+
+engine/FxSprite.cpp:
+	.text       start:0x800E0938 end:0x800E2814
+
+engine/FxParticle.cpp:
+	.text       start:0x800E2814 end:0x800E3C9C
+
+engine/FxParticle2.cpp:
+	.text       start:0x800E3C9C end:0x800E73F8
+
+enemy/boss/TEneBoss02_GateShot.cpp:
+	.text       start:0x800E73F8 end:0x800E7708
+	.data       start:0x8025B648 end:0x8025B668
+	.sdata2     start:0x802C8FB8 end:0x802C8FC8
+
+io/ResBank.cpp:
+	.text       start:0x800E7708 end:0x800E8310
+	.rodata     start:0x80245FA0 end:0x80246000
+	.data       start:0x8025B668 end:0x8025B6A8
+	.sbss       start:0x802C5308 end:0x802C5318
+	.sdata2     start:0x802C8FC8 end:0x802C8FE8
+
+enemy/TEneDeathCrow.cpp:
+	.text       start:0x800E8310 end:0x800E8D9C
+	.rodata     start:0x80246000 end:0x80246028
+	.data       start:0x8025B6A8 end:0x8025B6E8
+	.sdata      start:0x802C4100 end:0x802C4108
+	.sdata2     start:0x802C8FE8 end:0x802C9030
+
+enemy/EnemyEffect.cpp:
+	.text       start:0x800E8D9C end:0x800E90AC
+	.sbss       start:0x802C5318 end:0x802C5320
+	.sdata2     start:0x802C9030 end:0x802C9050
+
+ui/TAeObjStageTitle.cpp:
+	.text       start:0x800E90AC end:0x800E9620
+	.rodata     start:0x80246028 end:0x80246100
+	.data       start:0x8025B6E8 end:0x8025B728
+	.sdata      start:0x802C4108 end:0x802C4110
+	.sbss       start:0x802C5320 end:0x802C5338
+	.sdata2     start:0x802C9050 end:0x802C9060
+
+object/blue/TObjBlueRoundShip.cpp:
+	.text       start:0x800E9620 end:0x800E9CE4
+	.rodata     start:0x80246100 end:0x80246148
+	.data       start:0x8025B728 end:0x8025B7A0
+	.sdata      start:0x802C4110 end:0x802C4120
+	.sdata2     start:0x802C9060 end:0x802C9090
+
+ui/TAeObjMsgWindow.cpp:
+	.text       start:0x800E9CE4 end:0x800EB13C
+	.rodata     start:0x80246148 end:0x802461F8
+	.data       start:0x8025B7A0 end:0x8025B7F0
+	.sdata      start:0x802C4120 end:0x802C4128
+	.sdata2     start:0x802C9098 end:0x802C909C
+
+object/blue/TObjBlueFlag.cpp:
+	.text       start:0x800EB13C end:0x800EC660
+
+object/blue/TObjBlueFlagScene.cpp:
+	.text       start:0x800EC660 end:0x800ED784
+
+sound/SoundCtrl.cpp:
+	.text       start:0x800ED784 end:0x800EE354
+	.rodata     start:0x802464D0 end:0x80246528
+
+sound/Sound3DPlay.cpp:
+	.text       start:0x800EE354 end:0x800EE5BC
+	.sdata2     start:0x802C9188 end:0x802C9190
+
+sound/SoundBank.cpp:
+	.text       start:0x800EE5BC end:0x800EEAB8
+	.data       start:0x8025B920 end:0x8025B958
+	.sdata2     start:0x802C9190 end:0x802C91A0
+
+camera/EventCamArc.cpp:
+	.text       start:0x800EEAB8 end:0x800EED54
+	.rodata     start:0x80246528 end:0x80246540
+	.sdata2     start:0x802C91A0 end:0x802C91B0
+
+enemy/TEneFrog.cpp:
+	.text       start:0x800EED54 end:0x800F0E64
+	.rodata     start:0x80246540 end:0x80246648
+	.data       start:0x8025B958 end:0x8025BBA8
+	.sdata      start:0x802C4138 end:0x802C4140
+	.sdata2     start:0x802C91B0 end:0x802C9240
+
+enemy/TEneFrogBrain.cpp:
+	.text       start:0x800F0E64 end:0x800F189C
+	.data       start:0x8025BBA8 end:0x8025BBF0
+	.sdata2     start:0x802C9240 end:0x802C9258
+
+object/ShadowSystem.cpp:
+	.text       start:0x800F189C end:0x800F1EFC
+	.sdata2     start:0x802C9258 end:0x802C9270
+
+object/ObjShadow.cpp:
+	.text       start:0x800F1EFC end:0x800F2344
+	.sdata2     start:0x802C9270 end:0x802C9290
+
+ui/BossConsole.cpp:
+	.text       start:0x800F2344 end:0x800F2634
+	.rodata     start:0x80246648 end:0x802466D0
+	.sdata      start:0x802C4140 end:0x802C4148
+	.sdata2     start:0x802C9290 end:0x802C9298
+
+ui/TAeObjBossConsole.cpp:
+	.text       start:0x800F2634 end:0x800F39C8
+
+object/TObjWindColli.cpp:
+	.text       start:0x800F39C8 end:0x800F43D4
+	.ctors      start:0x802401B8 end:0x802401BC
+	.rodata     start:0x802466F8 end:0x80246738
+	.data       start:0x8025C458 end:0x8025C4F8
+	.sdata      start:0x802C4148 end:0x802C4150
+	.sbss       start:0x802C5408 end:0x802C5410
+	.sdata2     start:0x802C92E0 end:0x802C9340
+
+stage/TStageRed.cpp:
+	.text       start:0x800F43D4 end:0x800F44AC
+	.data       start:0x8025C4F8 end:0x8025C518
+
+object/TObjHiyoko.cpp:
+	.text       start:0x800F44AC end:0x800F5E94
+	.ctors      start:0x802401BC end:0x802401C0
+	.rodata     start:0x80246738 end:0x802469B8
+	.data       start:0x8025C518 end:0x8025C5E0
+	.sdata      start:0x802C4150 end:0x802C4160
+	.sbss       start:0x802C5410 end:0x802C5418
+	.sdata2     start:0x802C9340 end:0x802C93C8
+
+enemy/TEneArmadillo.cpp:
+	.text       start:0x800F5E94 end:0x800F8CBC
+
+object/purple/TObjPurpleVFSnow.cpp:
+	.text       start:0x800F8CBC end:0x800F9E6C
+
+object/TObjSnowman.cpp:
+	.text       start:0x800F9E6C end:0x800FBF8C
+	.rodata     start:0x80246AA0 end:0x80246AE8
+	.data       start:0x8025C918 end:0x8025CA30
+	.sdata      start:0x802C4170 end:0x802C4178
+	.sdata2     start:0x802C94C8 end:0x802C9530
+
+object/purple/TObjPurpleBlizzard.cpp:
+	.text       start:0x800FBF8C end:0x800FC408
+	.data       start:0x8025CA30 end:0x8025CA50
+	.sdata2     start:0x802C9530 end:0x802C9550
+
+stage/TStagePurple.cpp:
+	.text       start:0x800FC408 end:0x800FC4E0
+	.data       start:0x8025CA50 end:0x8025CA70
+
+stage/TStagePurpleBoss.cpp:
+	.text       start:0x800FC4E0 end:0x800FC60C
+	.data       start:0x8025CA70 end:0x8025CA90
+
+object/mission/TMsnObjCage.cpp:
+	.text       start:0x800FC60C end:0x800FD2CC
+	.ctors      start:0x802401C0 end:0x802401C4
+	.rodata     start:0x80246B00 end:0x80246CA0
+	.data       start:0x8025CA90 end:0x8025CB08
+	.sdata      start:0x802C4180 end:0x802C4188
+	.sdata2     start:0x802C9550 end:0x802C95B8
+
+ui/TAeObjMissionIcon.cpp:
+	.text       start:0x800FD2CC end:0x800FF0A4
+	.rodata     start:0x80246CA0 end:0x80246D98
+	.data       start:0x8025CB08 end:0x8025CB70
+	.sdata      start:0x802C4188 end:0x802C4190
+	.sdata2     start:0x802C95B8 end:0x802C95C8
+
+ui/AeObjControl.cpp:
+	.text       start:0x800FF0A4 end:0x80100584
+	.rodata     start:0x80246D98 end:0x80246DD8
+	.data       start:0x8025CB70 end:0x8025CC30
+	.sbss       start:0x802C5468 end:0x802C5490
+	.sdata2     start:0x802C95C8 end:0x802C95D0
+
+egg/EggPlane.cpp:
+	.text       start:0x80100584 end:0x801007A4
+	.sdata2     start:0x802C95D0 end:0x802C95D8
+
+object/EggYolk.cpp:
+	.text       start:0x801007A4 end:0x80100D14
+	.rodata     start:0x80246DD8 end:0x80246DF0
+	.data       start:0x8025CC30 end:0x8025CC88
+	.sdata      start:0x802C4190 end:0x802C4198
+	.sbss       start:0x802C5490 end:0x802C54A0
+	.sdata2     start:0x802C95D8 end:0x802C9618
+
+object/TObjEggYolk.cpp:
+	.text       start:0x80100D14 end:0x801016CC
+	.ctors      start:0x802401C4 end:0x802401C8
+	.rodata     start:0x80246DF0 end:0x80246EB0
+	.data       start:0x8025CC88 end:0x8025CCB8
+	.bss        start:0x80282560 end:0x802825A8
+	.sdata      start:0x802C4198 end:0x802C41A0
+	.sdata2     start:0x802C9618 end:0x802C9680
+
+ui/TAeObjStageSelectE3.cpp:
+	.text       start:0x801016CC end:0x80101A9C
+	.rodata     start:0x80246EB0 end:0x80246F08
+	.data       start:0x8025CCB8 end:0x8025CCE0
+	.sdata      start:0x802C41A0 end:0x802C41A8
+	.sbss       start:0x802C54A0 end:0x802C54B0
+
+object/purple/TObjPurpleIceFenceD.cpp:
+	.text       start:0x80101A9C end:0x801022B4
+	.rodata     start:0x80246F08 end:0x80247060
+	.data       start:0x8025CCE0 end:0x8025CD58
+	.sdata      start:0x802C41A8 end:0x802C41B0
+	.sdata2     start:0x802C9680 end:0x802C96A8
+
+object/purple/TObjPurpleIceWall.cpp:
+	.text       start:0x801022B4 end:0x80102B5C
+	.rodata     start:0x80247060 end:0x802471A8
+	.data       start:0x8025CD58 end:0x8025CDD0
+	.sdata      start:0x802C41B0 end:0x802C41B8
+	.sdata2     start:0x802C96A8 end:0x802C96D0
+
+object/purple/TObjPurpleIceFloor.cpp:
+	.text       start:0x80102B5C end:0x801033F4
+	.rodata     start:0x802471A8 end:0x802472F0
+	.data       start:0x8025CDD0 end:0x8025CE48
+	.sdata      start:0x802C41B8 end:0x802C41C0
+	.sdata2     start:0x802C96D0 end:0x802C96F0
+
+object/purple/TObjPurpleGear.cpp:
+	.text       start:0x801033F4 end:0x80103960
+	.rodata     start:0x802472F0 end:0x80247468
+	.data       start:0x8025CE48 end:0x8025CEC0
+	.sdata      start:0x802C41C0 end:0x802C41D0
+	.sdata2     start:0x802C96F0 end:0x802C9710
+
+object/mission/TMsnObjDarkGate.cpp:
+	.text       start:0x80103960 end:0x8010487C
+	.rodata     start:0x80247468 end:0x802475F0
+	.data       start:0x8025CEC0 end:0x8025CF38
+	.sdata      start:0x802C41D0 end:0x802C41D8
+	.sdata2     start:0x802C9710 end:0x802C9760
+
+object/mission/TMsnObjEmblem.cpp:
+	.text       start:0x8010487C end:0x801060D0
+	.rodata     start:0x802475F0 end:0x80247750
+	.data       start:0x8025CF38 end:0x8025D050
+	.sdata      start:0x802C41D8 end:0x802C41E0
+	.sdata2     start:0x802C9760 end:0x802C97D8
+
+object/mission/TMsnObjGoalPole.cpp:
+	.text       start:0x801060D0 end:0x8010718C
+
+object/mission/TMsnObjRing.cpp:
+	.text       start:0x8010718C end:0x80107F90
+	.rodata     start:0x80247780 end:0x802478E8
+	.data       start:0x8025D158 end:0x8025D1D0
+	.sdata      start:0x802C41E8 end:0x802C41F8
+	.sdata2     start:0x802C9840 end:0x802C98A0
+
+object/mission/TObjMissionBomb.cpp:
+	.text       start:0x80107F90 end:0x80109BE8
+
+object/purple/TObjPurpleIceGearS.cpp:
+	.text       start:0x80109BE8 end:0x8010A4FC
+	.rodata     start:0x80247948 end:0x80247AB0
+	.data       start:0x8025D250 end:0x8025D2C8
+	.sdata      start:0x802C4208 end:0x802C4210
+	.sdata2     start:0x802C9908 end:0x802C9930
+
+object/mission/TObjMissionPrisoner.cpp:
+	.text       start:0x8010A4FC end:0x8010BC5C
+	.ctors      start:0x802401C8 end:0x802401CC
+	.rodata     start:0x80247AB0 end:0x80247B98
+	.data       start:0x8025D2C8 end:0x8025D3D8
+	.bss        start:0x80282680 end:0x80282690
+	.sdata      start:0x802C4210 end:0x802C4218
+	.sdata2     start:0x802C9930 end:0x802C9978
+
+object/purple/TObjPurpleIceGearL.cpp:
+	.text       start:0x8010BC5C end:0x8010C4B0
+	.rodata     start:0x80247B98 end:0x80247CF8
+	.data       start:0x8025D3D8 end:0x8025D450
+	.sdata      start:0x802C4218 end:0x802C4220
+	.sdata2     start:0x802C9978 end:0x802C9998
+
+object/purple/TObjPurplePropeller.cpp:
+	.text       start:0x8010C4B0 end:0x8010CC3C
+	.rodata     start:0x80247CF8 end:0x80247E60
+	.data       start:0x8025D450 end:0x8025D4C8
+	.sdata      start:0x802C4220 end:0x802C4228
+	.sdata2     start:0x802C9998 end:0x802C99B0
+
+object/mission/TMsnObjChicken.cpp:
+	.text       start:0x8010CC3C end:0x8010D8B4
+	.rodata     start:0x80247E60 end:0x80247EB0
+	.data       start:0x8025D568 end:0x8025D5E0
+	.sdata      start:0x802C4228 end:0x802C4230
+	.sbss       start:0x802C5520 end:0x802C5538
+	.sdata2     start:0x802C99B0 end:0x802C9A00
+
+engine/ActorMotion.cpp:
+	.text       start:0x8010D8B4 end:0x8010DEF0
+
+stage/TGameMiniGame.cpp:
+	.text       start:0x8010DEF0 end:0x8010E960
+	.data       start:0x8025D5E0 end:0x8025D678
+
+stage/TGameRescue.cpp:
+	.text       start:0x8010E960 end:0x8010EFE4
+	.data       start:0x8025D678 end:0x8025D6F8
+	.sdata2     start:0x802C9A00 end:0x802C9A08
+
+stage/StageTime.cpp:
+	.text       start:0x8010EFE4 end:0x8010F198
+
+ui/TSpeakCursor.cpp:
+	.text       start:0x8010F198 end:0x8010F6B8
+	.rodata     start:0x80247F18 end:0x80247F98
+	.data       start:0x8025D6F8 end:0x8025D718
+	.sdata      start:0x802C4248 end:0x802C4250
+	.sdata2     start:0x802C9A08 end:0x802C9A28
+
+ui/SpeakIconArc.cpp:
+	.text       start:0x8010F6B8 end:0x8010F770
+	.rodata     start:0x80247F98 end:0x80247FC0
+
+ui/TSimpleText.cpp:
+	.text       start:0x8010F770 end:0x80110D10
+	.ctors      start:0x802401CC end:0x802401D0
+
+stage/TGameStateClear.cpp:
+	.text       start:0x80110D10 end:0x80111BB8
+	.data       start:0x8025D738 end:0x8025D858
+	.sdata2     start:0x802C9A68 end:0x802C9A70
+
+ui/TFade.cpp:
+	.text       start:0x80111BB8 end:0x8011292C
+	.rodata     start:0x80248060 end:0x802480A0
+	.data       start:0x8025D858 end:0x8025D8D8
+	.sdata      start:0x802C4278 end:0x802C4288
+	.sdata2     start:0x802C9A70 end:0x802C9AB8
+
+object/TObjMGLeader.cpp:
+	.text       start:0x8011292C end:0x80113800
+	.rodata     start:0x802480A0 end:0x80248130
+	.data       start:0x8025D8D8 end:0x8025D950
+	.sdata      start:0x802C4288 end:0x802C4290
+	.sbss       start:0x802C5548 end:0x802C5558
+	.sdata2     start:0x802C9AB8 end:0x802C9B00
+
+ui/TAeObjGameOver.cpp:
+	.text       start:0x80113800 end:0x80113AA0
+	.rodata     start:0x80248130 end:0x80248158
+	.data       start:0x8025D950 end:0x8025D978
+	.sdata      start:0x802C4290 end:0x802C4298
+	.sbss       start:0x802C5558 end:0x802C5568
+
+stage/TGameCollect.cpp:
+	.text       start:0x80113AA0 end:0x80113E48
+	.data       start:0x8025D978 end:0x8025D9D0
+
+stage/TGameBoss.cpp:
+	.text       start:0x80113E48 end:0x80114184
+	.data       start:0x8025D9D0 end:0x8025DA28
+
+stage/TGameSnowman.cpp:
+	.text       start:0x80114184 end:0x801144C0
+	.data       start:0x8025DA28 end:0x8025DA80
+
+stage/TGameGoal.cpp:
+	.text       start:0x801144C0 end:0x80114608
+	.rodata     start:0x802481C8 end:0x802481D8
+	.data       start:0x8025DA80 end:0x8025DAB8
+	.sdata      start:0x802C42B0 end:0x802C42B8
+
+enemy/boss/TEneOrangeBoss.cpp:
+	.text       start:0x80114608 end:0x8011A3E0
+	.rodata     start:0x802481D8 end:0x80248448
+	.data       start:0x8025DAB8 end:0x8025DF58
+	.bss        start:0x80282708 end:0x80282718
+	.sdata      start:0x802C42B8 end:0x802C42C0
+	.sbss       start:0x802C5568 end:0x802C5580
+	.sdata2     start:0x802C9B00 end:0x802C9CB0
+
+enemy/boss/TEneOrangeBossBrain.cpp:
+	.text       start:0x8011A3E0 end:0x8011BE94
+	.data       start:0x8025DF58 end:0x8025DFE0
+	.sdata      start:0x802C42C0 end:0x802C42C8
+	.sdata2     start:0x802C9CB0 end:0x802C9CE8
+
+enemy/boss/TEneOrangeBossMirror.cpp:
+	.text       start:0x8011BE94 end:0x8011EC14
+	.rodata     start:0x80248448 end:0x80248498
+	.data       start:0x8025DFE0 end:0x8025E050
+	.sdata      start:0x802C42C8 end:0x802C42D0
+	.sbss       start:0x802C5580 end:0x802C5598
+	.sdata2     start:0x802C9CE8 end:0x802C9D60
+
+stage/TStageOrangeBoss.cpp:
+	.text       start:0x8011EC14 end:0x8011EEE4
+	.data       start:0x8025E050 end:0x8025E070
+	.sbss       start:0x802C5598 end:0x802C55A0
+
+core/Vibration.cpp:
+	.text       start:0x8011EEE4 end:0x8011F780
+
+object/orange/TObjOrangePanelDeOpen.cpp:
+	.text       start:0x8011F780 end:0x80120610
+	.rodata     start:0x80248498 end:0x80248600
+	.data       start:0x8025E070 end:0x8025E0F8
+	.sdata      start:0x802C42D0 end:0x802C42D8
+	.sdata2     start:0x802C9D60 end:0x802C9DD0
+
+object/orange/TObjOrangeBattery.cpp:
+	.text       start:0x80120610 end:0x801216E4
+	.rodata     start:0x80248660 end:0x802487A8
+	.data       start:0x8025E0F8 end:0x8025E170
+	.sdata      start:0x802C42D8 end:0x802C42E0
+	.sdata2     start:0x802C9DD0 end:0x802C9E48
+
+object/TObjDivineVoice.cpp:
+	.text       start:0x801216E4 end:0x80122234
+	.rodata     start:0x802487A8 end:0x80248818
+	.data       start:0x8025E170 end:0x8025E218
+	.sdata      start:0x802C42E0 end:0x802C42E8
+	.sdata2     start:0x802C9E48 end:0x802C9E98
+
+enemy/boss/TEneOrangeBossBall.cpp:
+	.text       start:0x80122234 end:0x80122C98
+	.rodata     start:0x80248818 end:0x802488B8
+	.data       start:0x8025E218 end:0x8025E2F0
+	.sdata      start:0x802C42E8 end:0x802C42F0
+	.sbss       start:0x802C55A8 end:0x802C55B8
+	.sdata2     start:0x802C9E98 end:0x802C9ED0
+
+sound/TSoundEffect3DCtrl.cpp:
+	.text       start:0x80122C98 end:0x80123310
+	.rodata     start:0x802488B8 end:0x802488D0
+	.data       start:0x8025E2F0 end:0x8025E310
+	.sdata      start:0x802C42F0 end:0x802C42F8
+	.sdata2     start:0x802C9ED0 end:0x802C9EF8
+
+stage/TStageOrange.cpp:
+	.text       start:0x80123310 end:0x80123968
+	.ctors      start:0x802401D0 end:0x802401D4
+	.rodata     start:0x802488D0 end:0x802488E0
+	.data       start:0x8025E310 end:0x8025E330
+	.bss        start:0x80282798 end:0x802827C0
+	.sbss       start:0x802C55B8 end:0x802C55D0
+	.sdata2     start:0x802C9EF8 end:0x802C9F00
+
+sound/SeHolder.cpp:
+	.text       start:0x80123968 end:0x80123D54
+	.sdata2     start:0x802C9F00 end:0x802C9F10
+
+object/orange/TObjOrangeMapMirror.cpp:
+	.text       start:0x80123D54 end:0x80124334
+	.ctors      start:0x802401D4 end:0x802401D8
+	.rodata     start:0x802488E0 end:0x80248910
+	.data       start:0x8025E330 end:0x8025E350
+	.bss        start:0x802827C0 end:0x80282808
+	.sdata      start:0x802C42F8 end:0x802C4300
+	.sdata2     start:0x802C9F10 end:0x802C9F28
+
+ui/TAeObjPause.cpp:
+	.text       start:0x80124334 end:0x80125D94
+	.ctors      start:0x802401D8 end:0x802401DC
+	.rodata     start:0x80248910 end:0x802489D8
+	.data       start:0x8025E350 end:0x8025E3C0
+	.bss        start:0x80282808 end:0x80282838
+	.sdata      start:0x802C4300 end:0x802C4310
+	.sbss       start:0x802C55D8 end:0x802C55F0
+	.sdata2     start:0x802C9F30 end:0x802C9F80
+
+object/purple/TObjPurpleIceTrap.cpp:
+	.text       start:0x80125D94 end:0x80126B98
+	.rodata     start:0x802489D8 end:0x80248B20
+	.data       start:0x8025E3C0 end:0x8025E438
+	.sdata      start:0x802C4310 end:0x802C4318
+	.sdata2     start:0x802C9F80 end:0x802C9FA8
+
+object/orange/TObjOrangeBalloon.cpp:
+	.text       start:0x80126B98 end:0x8012766C
+	.rodata     start:0x80248B20 end:0x80248B58
+	.data       start:0x8025E438 end:0x8025E458
+	.sdata      start:0x802C4318 end:0x802C4320
+	.sdata2     start:0x802C9FA8 end:0x802C9FF8
+
+object/orange/TObjOrangeMirrorTrap.cpp:
+	.text       start:0x8012766C end:0x80129F7C
+	.ctors      start:0x802401DC end:0x802401E0
+
+object/orange/TObjOrangeBossFence.cpp:
+	.text       start:0x80129F7C end:0x8012A290
+	.rodata     start:0x80248CC8 end:0x80248D08
+	.data       start:0x8025E5E0 end:0x8025E660
+	.sdata      start:0x802C4330 end:0x802C4338
+	.sbss       start:0x802C5620 end:0x802C5628
+	.sdata2     start:0x802CA0C8 end:0x802CA0D8
+
+object/orange/TObjOrangeClockTower.cpp:
+	.text       start:0x8012A290 end:0x8012BFFC
+	.ctors      start:0x802401E0 end:0x802401E4
+	.rodata     start:0x80248D08 end:0x80248E90
+	.data       start:0x8025E660 end:0x8025E710
+	.bss        start:0x80282860 end:0x802828A0
+	.sdata      start:0x802C4338 end:0x802C4348
+	.sdata2     start:0x802CA0D8 end:0x802CA160
+
+core/BlockPool.cpp:
+	.text       start:0x8012BFFC end:0x8012C148
+	.data       start:0x8025E710 end:0x8025E720
+
+stage/EventScript.cpp:
+	.text       start:0x8012C148 end:0x8012CF74
+	.rodata     start:0x80248E90 end:0x80249030
+	.data       start:0x8025E720 end:0x8025E978
+	.sbss       start:0x802C5628 end:0x802C5638
+	.sdata2     start:0x802CA160 end:0x802CA1E8
+
+camera/EventCam.cpp:
+	.text       start:0x8012CF74 end:0x8012D4A0
+	.data       start:0x8025E978 end:0x8025E9B8
+	.sbss       start:0x802C5638 end:0x802C5648
+
+object/yellow/TObjYellowSlideDoor.cpp:
+	.text       start:0x8012D4A0 end:0x8012E350
+	.ctors      start:0x802401E4 end:0x802401E8
+	.rodata     start:0x80249030 end:0x80249188
+	.data       start:0x8025E9B8 end:0x8025EA30
+	.sdata      start:0x802C4348 end:0x802C4350
+	.sdata2     start:0x802CA1E8 end:0x802CA240
+
+object/yellow/TObjYellowFireTrap.cpp:
+	.text       start:0x8012E350 end:0x8012EC58
+	.rodata     start:0x80249188 end:0x802492D0
+	.data       start:0x8025EA30 end:0x8025EAA8
+	.sdata      start:0x802C4350 end:0x802C4358
+	.sdata2     start:0x802CA240 end:0x802CA268
+
+object/orange/TObjOrangeFireworks.cpp:
+	.text       start:0x8012EC58 end:0x8012F054
+	.ctors      start:0x802401E8 end:0x802401EC
+	.rodata     start:0x802492D0 end:0x80249308
+	.data       start:0x8025EAA8 end:0x8025EAC8
+	.bss        start:0x802828B0 end:0x802828D8
+	.sdata      start:0x802C4358 end:0x802C4360
+	.sbss       start:0x802C5650 end:0x802C5660
+	.sdata2     start:0x802CA268 end:0x802CA298
+
+object/orange/TObjOrangeFireworksBall.cpp:
+	.text       start:0x8012F054 end:0x801303A4
+	.rodata     start:0x80249308 end:0x80249350
+	.data       start:0x8025EAC8 end:0x8025EB48
+	.sdata      start:0x802C4360 end:0x802C4368
+	.sdata2     start:0x802CA298 end:0x802CA2C8
+
+animal/TAniElectric.cpp:
+	.text       start:0x801303A4 end:0x8013076C
+	.rodata     start:0x80249350 end:0x80249360
+	.data       start:0x8025EB48 end:0x8025EB70
+	.sdata      start:0x802C4368 end:0x802C4370
+	.sdata2     start:0x802CA2C8 end:0x802CA2F0
+
+animal/TAniSaruKoumori.cpp:
+	.text       start:0x8013076C end:0x801314F0
+	.ctors      start:0x802401EC end:0x802401F0
+	.rodata     start:0x80249360 end:0x80249388
+	.data       start:0x8025EB70 end:0x8025ED90
+	.sdata      start:0x802C4370 end:0x802C4388
+	.sbss       start:0x802C5670 end:0x802C5678
+	.sdata2     start:0x802CA2F0 end:0x802CA310
+
+animal/TAniKumaKame.cpp:
+	.text       start:0x801314F0 end:0x801325B0
+	.ctors      start:0x802401F0 end:0x802401F4
+
+animal/TAniKijiSai.cpp:
+	.text       start:0x801325B0 end:0x80133420
+	.ctors      start:0x802401F4 end:0x802401F8
+	.rodata     start:0x802493D8 end:0x802493F8
+	.data       start:0x8025EF48 end:0x8025F138
+	.sdata      start:0x802C43A0 end:0x802C43B8
+	.sbss       start:0x802C5680 end:0x802C5688
+	.sdata2     start:0x802CA350 end:0x802CA378
+
+animal/TAniSpiralFire.cpp:
+	.text       start:0x80133420 end:0x80133B1C
+	.rodata     start:0x802493F8 end:0x802494F8
+	.data       start:0x8025F138 end:0x8025F168
+	.sdata      start:0x802C43B8 end:0x802C43C0
+	.sdata2     start:0x802CA378 end:0x802CA3B0
+
+animal/TAniBubble.cpp:
+	.text       start:0x80133B1C end:0x801340C4
+	.rodata     start:0x802494F8 end:0x80249508
+	.data       start:0x8025F168 end:0x8025F198
+	.sdata      start:0x802C43C0 end:0x802C43C8
+	.sdata2     start:0x802CA3B0 end:0x802CA3E8
+
+animal/TAniBubbleWave.cpp:
+	.text       start:0x801340C4 end:0x80134CC4
+
+animal/TAniClionePenguin.cpp:
+	.text       start:0x80134CC4 end:0x80135BF8
+	.ctors      start:0x802401F8 end:0x802401FC
+
+animal/TAniHariAzarashi.cpp:
+	.text       start:0x80135BF8 end:0x80136940
+	.ctors      start:0x802401FC end:0x80240200
+	.rodata     start:0x802496C0 end:0x802496F0
+	.data       start:0x8025F500 end:0x8025F6B8
+	.sdata      start:0x802C43E8 end:0x802C4400
+	.sbss       start:0x802C5690 end:0x802C5698
+	.sdata2     start:0x802CA498 end:0x802CA4B8
+
+animal/TAniIceSlider.cpp:
+	.text       start:0x80136940 end:0x80137068
+	.rodata     start:0x802496F0 end:0x80249730
+	.data       start:0x8025F6B8 end:0x8025F6D8
+	.sdata      start:0x802C4400 end:0x802C4408
+	.sdata2     start:0x802CA4B8 end:0x802CA4D8
+
+object/TObjEggRing.cpp:
+	.text       start:0x80137068 end:0x8013B320
+	.rodata     start:0x80249730 end:0x80249770
+	.data       start:0x8025F6D8 end:0x8025FA40
+	.sdata      start:0x802C4408 end:0x802C4410
+	.sbss       start:0x802C5698 end:0x802C56A0
+	.sdata2     start:0x802CA4D8 end:0x802CA5C0
+
+stage/TGameBattery.cpp:
+	.text       start:0x8013B320 end:0x8013B6F0
+	.data       start:0x8025FA40 end:0x8025FA98
+
+stage/TGameFireworks.cpp:
+	.text       start:0x8013B6F0 end:0x8013BA94
+	.data       start:0x8025FA98 end:0x8025FAF0
+
+stage/TGameGear.cpp:
+	.text       start:0x8013BA94 end:0x8013BE9C
+	.data       start:0x8025FAF0 end:0x8025FB48
+
+animal/TAniIceRock.cpp:
+	.text       start:0x8013BE9C end:0x8013C86C
+
+enemy/boss/TEneOrangeBossFloor.cpp:
+	.text       start:0x8013C86C end:0x8013CD38
+	.rodata     start:0x802497F8 end:0x80249818
+	.data       start:0x8025FB68 end:0x8025FB88
+	.sdata      start:0x802C4430 end:0x802C4438
+	.sbss       start:0x802C56A0 end:0x802C56A8
+	.sdata2     start:0x802CA608 end:0x802CA630
+
+animal/TAniPelicanDog.cpp:
+	.text       start:0x8013CD38 end:0x8013DAAC
+	.ctors      start:0x80240200 end:0x80240204
+	.rodata     start:0x80249818 end:0x80249848
+	.data       start:0x8025FB88 end:0x8025FD78
+	.sdata      start:0x802C4438 end:0x802C4450
+	.sbss       start:0x802C56A8 end:0x802C56B0
+	.sdata2     start:0x802CA630 end:0x802CA670
+
+ui/HatchNotice.cpp:
+	.text       start:0x8013DAAC end:0x8013DB64
+	.sbss       start:0x802C56B0 end:0x802C56B8
+
+engine/Landscape.cpp:
+	.text       start:0x8013DB64 end:0x8013F068
+	.data       start:0x8025FD78 end:0x8025FD98
+	.sbss       start:0x802C56B8 end:0x802C56D0
+	.sdata2     start:0x802CA670 end:0x802CA698
+
+engine/LandModel.cpp:
+	.text       start:0x8013F068 end:0x80140600
+
+mode/TModeLicense.cpp:
+	.text       start:0x80140600 end:0x8014080C
+	.rodata     start:0x80249858 end:0x80249868
+	.data       start:0x8025FD98 end:0x8025FDB8
+
+ui/TAeObjLicense.cpp:
+	.text       start:0x8014080C end:0x80140A60
+	.rodata     start:0x80249868 end:0x80249888
+	.data       start:0x8025FDB8 end:0x8025FDE0
+	.sdata      start:0x802C4458 end:0x802C4460
+	.sbss       start:0x802C5700 end:0x802C5710
+
+object/yellow/TObjYellowSand.cpp:
+	.text       start:0x80140A60 end:0x80142328
+
+sound/TSoundEffectAdx.cpp:
+	.text       start:0x80142328 end:0x801429F8
+	.rodata     start:0x80249968 end:0x80249978
+	.data       start:0x8025FF68 end:0x8025FF88
+	.sdata      start:0x802C4470 end:0x802C4478
+
+mode/TModeComing.cpp:
+	.text       start:0x801429F8 end:0x80142BFC
+	.data       start:0x8025FF88 end:0x8025FFA8
+
+ui/TAeObjComing.cpp:
+	.text       start:0x80142BFC end:0x80142E4C
+	.rodata     start:0x80249978 end:0x80249998
+	.data       start:0x8025FFA8 end:0x8025FFD0
+	.sdata      start:0x802C4478 end:0x802C4480
+	.sbss       start:0x802C5720 end:0x802C5730
+
+egg/ObjEgg.cpp:
+	.text       start:0x80142E4C end:0x80146FF8
+	.ctors      start:0x80240204 end:0x80240208
+	.rodata     start:0x80249998 end:0x80249A38
+	.data       start:0x8025FFD0 end:0x80260318
+	.sdata      start:0x802C4480 end:0x802C4488
+	.sbss       start:0x802C5730 end:0x802C5748
+	.sdata2     start:0x802CA730 end:0x802CA7C0
+
+enemy/EnemyGround.cpp:
+	.text       start:0x80146FF8 end:0x801477A4
+	.data       start:0x80260318 end:0x80260340
+	.sdata2     start:0x802CA7C0 end:0x802CA7D8
+
+engine/NoiseTex.cpp:
+	.text       start:0x801477A4 end:0x80147D88
+	.bss        start:0x80282948 end:0x80286180
+	.sbss       start:0x802C5748 end:0x802C5750
+	.sdata2     start:0x802CA7D8 end:0x802CA810
+
+object/TObjFractalCloud.cpp:
+	.text       start:0x80147D88 end:0x80148E70
+	.rodata     start:0x80249A38 end:0x80249AB8
+	.data       start:0x80260340 end:0x802603B8
+	.sdata      start:0x802C4488 end:0x802C4490
+	.sdata2     start:0x802CA810 end:0x802CA870
+
+enemy/boss/TEneYellowBoss.cpp:
+	.text       start:0x80148E70 end:0x8014C904
+	.rodata     start:0x80249AB8 end:0x80249B8C
+	.data       start:0x802603B8 end:0x80260788
+	.sdata      start:0x802C4490 end:0x802C4498
+	.sdata2     start:0x802CA870 end:0x802CA958
+
+enemy/boss/TEneYellowBossAi.cpp:
+	.text       start:0x8014C904 end:0x8014E4B8
+	.data       start:0x80260788 end:0x80260800
+	.sdata2     start:0x802CA958 end:0x802CA990
+
+enemy/boss/TEneYellowBossPurple.cpp:
+	.text       start:0x8014E4B8 end:0x8014F238
+	.data       start:0x80260800 end:0x802608E8
+	.sdata2     start:0x802CA990 end:0x802CA9D8
+
+enemy/boss/TEneYellowBossCrystal.cpp:
+	.text       start:0x8014F238 end:0x8014FC18
+	.data       start:0x802608E8 end:0x80260960
+	.sdata2     start:0x802CA9D8 end:0x802CAA08
+
+enemy/boss/TEneYellowBossOrange.cpp:
+	.text       start:0x8014FC18 end:0x80150818
+	.data       start:0x80260960 end:0x802609F8
+	.sdata2     start:0x802CAA08 end:0x802CAA60
+
+enemy/boss/TEneYellowBossTama.cpp:
+	.text       start:0x80150818 end:0x80151CBC
+	.data       start:0x802609F8 end:0x80260B40
+	.sdata2     start:0x802CAA60 end:0x802CAAE8
+
+mode/TModeMovie.cpp:
+	.text       start:0x80151CBC end:0x801520F4
+	.rodata     start:0x80249C38 end:0x80249D20
+	.data       start:0x80260B40 end:0x80260B90
+	.sbss       start:0x802C5768 end:0x802C5770
+	.sdata2     start:0x802CAAE8 end:0x802CAB00
+
+enemy/boss/TEneYellowBossBlue.cpp:
+	.text       start:0x801520F4 end:0x80152BE0
+	.data       start:0x80260B90 end:0x80260C40
+	.sdata2     start:0x802CAB00 end:0x802CAB58
+
+ui/TAeObjGo.cpp:
+	.text       start:0x80152BE0 end:0x80152E84
+	.rodata     start:0x80249D38 end:0x80249D50
+	.data       start:0x80260C40 end:0x80260C68
+	.sdata      start:0x802C44C0 end:0x802C44C8
+	.sbss       start:0x802C5770 end:0x802C5780
+
+animal/TAniManager.cpp:
+	.text       start:0x80152E84 end:0x80153484
+	.rodata     start:0x80249D50 end:0x80249D70
+	.data       start:0x80260C68 end:0x80260C88
+	.sdata      start:0x802C44C8 end:0x802C44D0
+	.sbss       start:0x802C5780 end:0x802C5788
+
+io/nt_arc.c:
+	.text       start:0x80153484 end:0x80153A04
+	.rodata     start:0x80249D70 end:0x80249DA0
+
+io/PrdFile.cpp:
+	.text       start:0x80153A04 end:0x80153F70
+	.sbss       start:0x802C5788 end:0x802C5790
+
+ui/MessageTable.cpp:
+	.text       start:0x80153F70 end:0x80154008
+	.sbss       start:0x802C5790 end:0x802C5798
+
+object/yellow/TObjYellowStatue.cpp:
+	.text       start:0x80154008 end:0x80154C8C
+	.ctors      start:0x80240208 end:0x8024020C
+	.rodata     start:0x80249DA0 end:0x80249EF8
+	.data       start:0x80260C88 end:0x80260D00
+	.bss        start:0x80286190 end:0x802861A8
+	.sdata      start:0x802C44D0 end:0x802C44D8
+	.sdata2     start:0x802CAB58 end:0x802CAB90
+
+object/yellow/TObjYellowTimberBrick.cpp:
+	.text       start:0x80154C8C end:0x80156090
+	.ctors      start:0x8024020C end:0x80240210
+	.rodata     start:0x80249EF8 end:0x8024A048
+	.data       start:0x80260D00 end:0x80260DF0
+	.bss        start:0x802861A8 end:0x802861B8
+	.sdata      start:0x802C44D8 end:0x802C44E0
+	.sdata2     start:0x802CAB90 end:0x802CABE8
+
+stage/TStageSelectModelE3.cpp:
+	.text       start:0x80156090 end:0x80156484
+	.rodata     start:0x8024A048 end:0x8024A070
+	.data       start:0x80260DF0 end:0x80260E10
+	.sdata      start:0x802C44E0 end:0x802C44E8
+	.sdata2     start:0x802CABE8 end:0x802CABF8
+
+enemy/boss/TEneLastBoss.cpp:
+	.text       start:0x80156484 end:0x80159938
+	.rodata     start:0x8024A070 end:0x8024A168
+	.data       start:0x80260E10 end:0x80261110
+	.sdata      start:0x802C44E8 end:0x802C44F0
+	.sdata2     start:0x802CABF8 end:0x802CACB8
+
+enemy/boss/TEneLastBossAi.cpp:
+	.text       start:0x80159938 end:0x8015AC30
+	.data       start:0x80261110 end:0x80261178
+	.sdata2     start:0x802CACB8 end:0x802CACF0
+
+enemy/boss/TEneLastBossDarkCtrl.cpp:
+	.text       start:0x8015AC30 end:0x8015D314
+	.rodata     start:0x8024A168 end:0x8024A1B0
+	.data       start:0x80261178 end:0x802611E8
+	.sdata      start:0x802C44F0 end:0x802C44F8
+	.sdata2     start:0x802CACF0 end:0x802CAD60
+
+enemy/boss/TEneLastBossFeather.cpp:
+	.text       start:0x8015D314 end:0x8015EA14
+	.rodata     start:0x8024A1B0 end:0x8024A220
+	.data       start:0x802611E8 end:0x80261370
+	.sdata      start:0x802C44F8 end:0x802C4508
+	.sdata2     start:0x802CAD60 end:0x802CADE0
+
+enemy/boss/TEneLastBossMagic.cpp:
+	.text       start:0x8015EA14 end:0x8015ED54
+	.rodata     start:0x8024A220 end:0x8024A238
+	.data       start:0x80261370 end:0x802613E0
+	.sdata      start:0x802C4508 end:0x802C4510
+	.sdata2     start:0x802CADE0 end:0x802CADF8
+
+object/last/TObjLastEggLight.cpp:
+	.text       start:0x8015ED54 end:0x8015F220
+	.rodata     start:0x8024A238 end:0x8024A290
+	.data       start:0x802613E0 end:0x80261460
+	.sdata      start:0x802C4510 end:0x802C4518
+	.sbss       start:0x802C57E8 end:0x802C57F0
+	.sdata2     start:0x802CADF8 end:0x802CAE10
+
+stage/TGameWipeOut.cpp:
+	.text       start:0x8015F220 end:0x8015F608
+	.data       start:0x80261460 end:0x802614B8
+
+enemy/boss/TEneGreenBoss.cpp:
+	.text       start:0x8015F608 end:0x801632C0
+	.rodata     start:0x8024A2B8 end:0x8024A368
+	.data       start:0x802614B8 end:0x80261848
+	.bss        start:0x802861E8 end:0x802861F8
+	.sdata      start:0x802C4520 end:0x802C4528
+	.sbss       start:0x802C57F0 end:0x802C5808
+	.sdata2     start:0x802CAE10 end:0x802CAED8
+
+enemy/boss/TEneGreenBossBrain.cpp:
+	.text       start:0x801632C0 end:0x80164B88
+	.data       start:0x80261848 end:0x802618C0
+	.sdata2     start:0x802CAED8 end:0x802CAEF0
+
+enemy/boss/TEneYellowBossDemo_Gate.cpp:
+	.text       start:0x80164B88 end:0x80165030
+	.rodata     start:0x8024A368 end:0x8024A380
+	.data       start:0x802618C0 end:0x80261918
+	.sdata      start:0x802C4528 end:0x802C4530
+	.sdata2     start:0x802CAEF0 end:0x802CAF08
+
+engine/MirrorRipple.cpp:
+	.text       start:0x80165030 end:0x80165968
+
+enemy/boss/TEneLastExBoss.cpp:
+	.text       start:0x80165968 end:0x8016B0A0
+
+object/yellow/TObjYellowSandfall.cpp:
+	.text       start:0x8016B0A0 end:0x8016BC88
+	.ctors      start:0x80240210 end:0x80240214
+	.rodata     start:0x8024A4E8 end:0x8024A508
+	.data       start:0x80261C90 end:0x80261D08
+	.bss        start:0x80286208 end:0x80286220
+	.sdata      start:0x802C4538 end:0x802C4540
+	.sdata2     start:0x802CB090 end:0x802CB0C8
+
+mode/TModeTvConfig.cpp:
+	.text       start:0x8016BC88 end:0x8016C734
+	.rodata     start:0x8024A508 end:0x8024A530
+	.data       start:0x80261D08 end:0x80261D28
+	.sbss       start:0x802C5828 end:0x802C5838
+	.sdata2     start:0x802CB0C8 end:0x802CB0E8
+
+enemy/boss/LastBossRes.cpp:
+	.text       start:0x8016C734 end:0x8016C998
+	.rodata     start:0x8024A530 end:0x8024A5AC
+	.bss        start:0x80286220 end:0x80286230
+	.sdata      start:0x802C4540 end:0x802C4548
+	.sbss       start:0x802C5838 end:0x802C5850
+	.sdata2     start:0x802CB0E8 end:0x802CB0F0
+
+object/last/TObjLastBossInd.cpp:
+	.text       start:0x8016C998 end:0x8016CF34
+	.data       start:0x80261D28 end:0x80261DA8
+	.sdata2     start:0x802CB0F0 end:0x802CB110
+
+object/last/TObjLastBossEgg.cpp:
+	.text       start:0x8016CF34 end:0x8016D914
+	.rodata     start:0x8024A5B0 end:0x8024A5E8
+	.data       start:0x80261DA8 end:0x80261E48
+	.bss        start:0x80286230 end:0x80286240
+	.sdata      start:0x802C4548 end:0x802C4550
+	.sbss       start:0x802C5850 end:0x802C5858
+	.sdata2     start:0x802CB110 end:0x802CB150
+
+enemy/boss/TEneYellowBossRed.cpp:
+	.text       start:0x8016D914 end:0x8016E50C
+	.rodata     start:0x8024A5E8 end:0x8024A600
+	.data       start:0x80261E48 end:0x80261EF8
+	.sdata      start:0x802C4550 end:0x802C4558
+	.sdata2     start:0x802CB150 end:0x802CB1D0
+
+object/yellow/TObjYellowPillar.cpp:
+	.text       start:0x8016E50C end:0x8016F314
+	.rodata     start:0x8024A600 end:0x8024A628
+	.data       start:0x80261EF8 end:0x80261F70
+	.sdata      start:0x802C4558 end:0x802C4560
+	.sdata2     start:0x802CB1D0 end:0x802CB210
+
+object/yellow/TObjYellowFogTrapCtrl.cpp:
+	.text       start:0x8016F314 end:0x8016FB8C
+	.rodata     start:0x8024A628 end:0x8024A660
+	.data       start:0x80261F70 end:0x80261FE8
+	.sdata      start:0x802C4560 end:0x802C4568
+	.sdata2     start:0x802CB210 end:0x802CB238
+
+object/green/TObjGreenHoverLeaf.cpp:
+	.text       start:0x8016FB8C end:0x8016FE50
+	.data       start:0x80261FE8 end:0x80262008
+	.sdata2     start:0x802CB238 end:0x802CB258
+
+ui/MainMenu.cpp:
+	.text       start:0x8016FE50 end:0x80174EBC
+	.ctors      start:0x80240214 end:0x80240218
+	.rodata     start:0x8024A678 end:0x8024A69C
+	.data       start:0x802620FC end:0x80262120
+	.bss        start:0x80286240 end:0x80286400
+	.sdata2     start:0x802CB258 end:0x802CB300
+
+sound/MobileSound.cpp:
+	.text       start:0x80174EBC end:0x80175114
+	.sdata2     start:0x802CB300 end:0x802CB318
+
+mode/TModeStageMenu.cpp:
+	.text       start:0x80175114 end:0x801792F8
+	.ctors      start:0x80240218 end:0x8024021C
+
+stage/TStageSelectModel.cpp:
+	.text       start:0x801792F8 end:0x80179EE0
+	.rodata     start:0x8024AA48 end:0x8024AAB0
+	.data       start:0x80262270 end:0x80262290
+	.sdata      start:0x802C4570 end:0x802C4578
+	.sbss       start:0x802C5890 end:0x802C58B0
+	.sdata2     start:0x802CB3D8 end:0x802CB3F0
+
+object/yellow/TObjYellowFogTrapStatue.cpp:
+	.text       start:0x80179EE0 end:0x8017AA90
+	.ctors      start:0x8024021C end:0x80240220
+	.rodata     start:0x8024AAB0 end:0x8024AB10
+	.data       start:0x80262290 end:0x80262308
+	.bss        start:0x802865B0 end:0x802865C0
+	.sdata      start:0x802C4578 end:0x802C4580
+	.sdata2     start:0x802CB3F0 end:0x802CB420
+
+animal/TAniRacePath.cpp:
+	.text       start:0x8017AA90 end:0x8017B18C
+	.ctors      start:0x80240220 end:0x80240224
+	.rodata     start:0x8024AB10 end:0x8024AB20
+	.data       start:0x80262308 end:0x80262328
+	.sdata      start:0x802C4580 end:0x802C4588
+	.sbss       start:0x802C58B8 end:0x802C58D8
+	.sdata2     start:0x802CB420 end:0x802CB430
+
+object/last/TObjLastExBoss_BGCtrl.cpp:
+	.text       start:0x8017B18C end:0x8017BAE0
+	.rodata     start:0x8024AB20 end:0x8024AB68
+	.data       start:0x80262328 end:0x80262388
+	.sdata      start:0x802C4588 end:0x802C4590
+	.sbss       start:0x802C58D8 end:0x802C58E0
+	.sdata2     start:0x802CB430 end:0x802CB480
+
+stage/TStageLastBoss2.cpp:
+	.text       start:0x8017BAE0 end:0x8017BC34
+	.data       start:0x80262388 end:0x802623A8
+
+ui/TAeObjStageSelect.cpp:
+	.text       start:0x8017BC34 end:0x8017D830
+	.rodata     start:0x8024AB68 end:0x8024AD18
+	.data       start:0x802623A8 end:0x802623D0
+	.sdata      start:0x802C4590 end:0x802C4598
+	.sdata2     start:0x802CB480 end:0x802CB490
+
+stage/TStageYellow.cpp:
+	.text       start:0x8017D830 end:0x8017D98C
+	.data       start:0x802623D0 end:0x802623F0
+
+object/yellow/TObjYellowDoubleFog.cpp:
+	.text       start:0x8017D98C end:0x8017E00C
+	.rodata     start:0x8024AD18 end:0x8024AD30
+	.data       start:0x802623F0 end:0x80262410
+	.sdata      start:0x802C4598 end:0x802C45A0
+	.sdata2     start:0x802CB490 end:0x802CB4E0
+
+ui/TAeObjMainMenu.cpp:
+	.text       start:0x8017E00C end:0x8017F184
+	.rodata     start:0x8024AD30 end:0x8024ADF0
+	.data       start:0x80262410 end:0x80262438
+	.sdata      start:0x802C45A0 end:0x802C45A8
+	.sdata2     start:0x802CB4F8 end:0x802CB518
+
+object/green/TObjGreenGrassGroup.cpp:
+	.text       start:0x8017F184 end:0x8017FD60
+	.rodata     start:0x8024ADF0 end:0x8024AE08
+	.data       start:0x80262438 end:0x802624B0
+	.sdata      start:0x802C45A8 end:0x802C45B0
+	.sdata2     start:0x802CB518 end:0x802CB530
+
+object/green/TObjGreenGrassField.cpp:
+	.text       start:0x8017FD60 end:0x80180770
+	.rodata     start:0x8024AE08 end:0x8024AE48
+	.data       start:0x802624B0 end:0x80262528
+	.sdata2     start:0x802CB530 end:0x802CB560
+
+engine/GrassBlade.cpp:
+	.text       start:0x80180770 end:0x80181970
+	.sdata2     start:0x802CB560 end:0x802CB5B0
+
+stage/GameFlow.cpp:
+	.text       start:0x80181970 end:0x801837E8
+	.rodata     start:0x8024AE48 end:0x8024B0D8
+	.data       start:0x80262608 end:0x802626C0
+	.sdata2     start:0x802CB770 end:0x802CB780
+
+engine/TLightEffect.cpp:
+	.text       start:0x801837E8 end:0x80184850
+	.ctors      start:0x80240224 end:0x80240228
+	.rodata     start:0x8024B0D8 end:0x8024B120
+	.data       start:0x802626C0 end:0x80262750
+	.sdata      start:0x802C45B0 end:0x802C45B8
+	.sbss       start:0x802C5908 end:0x802C5920
+	.sdata2     start:0x802CB780 end:0x802CB7D0
+
+enemy/boss/TEneLastBossDemo_Darkness.cpp:
+	.text       start:0x80184850 end:0x80184A34
+	.rodata     start:0x8024B120 end:0x8024B140
+	.data       start:0x80262750 end:0x80262770
+	.sdata      start:0x802C45B8 end:0x802C45C0
+	.sdata2     start:0x802CB7D0 end:0x802CB7E8
+
+object/green/TObjGreenPondScene.cpp:
+	.text       start:0x80184A34 end:0x80185940
+	.ctors      start:0x80240228 end:0x8024022C
+	.rodata     start:0x8024B140 end:0x8024B2C8
+	.data       start:0x80262770 end:0x80262800
+	.sdata      start:0x802C45C0 end:0x802C45C8
+	.sbss       start:0x802C5920 end:0x802C5938
+	.sdata2     start:0x802CB7E8 end:0x802CB830
+
+object/green/TObjGreenWindmill.cpp:
+	.text       start:0x80185940 end:0x80186190
+	.ctors      start:0x8024022C end:0x80240230
+	.rodata     start:0x8024B2C8 end:0x8024B2E8
+	.data       start:0x80262800 end:0x80262878
+	.sdata      start:0x802C45C8 end:0x802C45D0
+	.sbss       start:0x802C5938 end:0x802C5940
+	.sdata2     start:0x802CB830 end:0x802CB858
+
+object/green/TObjGreenWaterfall.cpp:
+	.text       start:0x80186190 end:0x801867F0
+	.ctors      start:0x80240230 end:0x80240234
+	.rodata     start:0x8024B2E8 end:0x8024B300
+	.data       start:0x80262878 end:0x802628F0
+	.sdata      start:0x802C45D0 end:0x802C45D8
+	.sbss       start:0x802C5940 end:0x802C5948
+	.sdata2     start:0x802CB858 end:0x802CB870
+
+item/TItemManage.cpp:
+	.text       start:0x801867F0 end:0x801883B0
+	.ctors      start:0x80240234 end:0x80240238
+
+object/mission/TMsnObjOrangeCannon.cpp:
+	.text       start:0x801883B0 end:0x8018938C
+	.ctors      start:0x80240238 end:0x8024023C
+	.rodata     start:0x8024B7F0 end:0x8024B860
+	.data       start:0x80262B88 end:0x80262C00
+	.sdata      start:0x802C45E0 end:0x802C45E8
+	.sbss       start:0x802C5958 end:0x802C5978
+	.sdata2     start:0x802CB8B0 end:0x802CB918
+	.sbss2      start:0x802CD340 end:0x802CD348
+
+engine/FxHolder.cpp:
+	.text       start:0x8018938C end:0x80189768
+
+player/TPlyItem.cpp:
+	.text       start:0x80189768 end:0x80189908
+	.data       start:0x80262C00 end:0x80262C20
+
+object/yellow/TObjYellowTornadoScene.cpp:
+	.text       start:0x80189908 end:0x80189CD0
+	.rodata     start:0x8024B870 end:0x8024B8A0
+	.data       start:0x80262C20 end:0x80262C40
+	.sdata      start:0x802C45F0 end:0x802C45F8
+	.sdata2     start:0x802CB918 end:0x802CB938
+
+object/TObjHelios.cpp:
+	.text       start:0x80189CD0 end:0x8018A120
+	.rodata     start:0x8024B8A0 end:0x8024B8B0
+	.data       start:0x80262C40 end:0x80262C60
+	.sdata      start:0x802C45F8 end:0x802C4600
+	.sdata2     start:0x802CB938 end:0x802CB968
+
+enemy/boss/TEneLastExBossFeather.cpp:
+	.text       start:0x8018A120 end:0x8018AAF0
+	.rodata     start:0x8024B8B0 end:0x8024B8C8
+	.data       start:0x80262C60 end:0x80262D08
+	.sdata      start:0x802C4600 end:0x802C4608
+	.sbss       start:0x802C5978 end:0x802C5988
+	.sdata2     start:0x802CB968 end:0x802CB9A8
+
+enemy/boss/BombBody.cpp:
+	.text       start:0x8018AAF0 end:0x8018B0C8
+	.sdata2     start:0x802CB9A8 end:0x802CB9C0
+
+object/TObjSensorBomb.cpp:
+	.text       start:0x8018B0C8 end:0x8018B6CC
+	.rodata     start:0x8024B8C8 end:0x8024B8E8
+	.data       start:0x80262D08 end:0x80262D88
+	.sdata      start:0x802C4608 end:0x802C4610
+	.sdata2     start:0x802CB9C0 end:0x802CB9E0
+
+object/TObjExplode.cpp:
+	.text       start:0x8018B6CC end:0x8018B9D8
+	.rodata     start:0x8024B8E8 end:0x8024B8F8
+	.data       start:0x80262D88 end:0x80262DF8
+	.sdata      start:0x802C4610 end:0x802C4618
+	.sdata2     start:0x802CB9E0 end:0x802CB9E8
+
+object/TObjChickenBomb.cpp:
+	.text       start:0x8018B9D8 end:0x8018C9B8
+
+object/last/TObjLastTorch.cpp:
+	.text       start:0x8018C9B8 end:0x8018D148
+	.rodata     start:0x8024B908 end:0x8024B938
+	.data       start:0x80262E98 end:0x80262F10
+	.sdata      start:0x802C4620 end:0x802C4628
+	.sdata2     start:0x802CBA00 end:0x802CBA18
+
+enemy/boss/TEneLastExBossCore.cpp:
+	.text       start:0x8018D148 end:0x8018D7D0
+	.data       start:0x80262F10 end:0x80262F68
+	.sdata2     start:0x802CBA18 end:0x802CBA38
+
+object/last/TObjLastBossShot.cpp:
+	.text       start:0x8018D7D0 end:0x8018ED58
+	.rodata     start:0x8024B950 end:0x8024B968
+	.data       start:0x80262F68 end:0x80262FE8
+	.sdata      start:0x802C4630 end:0x802C4638
+	.sdata2     start:0x802CBA38 end:0x802CBA70
+
+object/last/TObjLastAnimus.cpp:
+	.text       start:0x8018ED58 end:0x801901D0
+	.rodata     start:0x8024B968 end:0x8024BB50
+	.data       start:0x80262FE8 end:0x80263060
+	.sdata      start:0x802C4638 end:0x802C4648
+	.sdata2     start:0x802CBA70 end:0x802CBAE8
+
+object/green/GreenObjBank.cpp:
+	.text       start:0x801901D0 end:0x80190294
+	.rodata     start:0x8024BB50 end:0x8024BB80
+	.bss        start:0x80286638 end:0x80286648
+	.sbss       start:0x802C5988 end:0x802C5990
+
+object/green/TObjGreenBossFence.cpp:
+	.text       start:0x80190294 end:0x80190500
+	.data       start:0x80263060 end:0x802630E0
+	.sdata2     start:0x802CBAE8 end:0x802CBAF8
+
+object/last/TObjLastCrowLemuresCtrl.cpp:
+	.text       start:0x80190500 end:0x80191950
+	.rodata     start:0x8024BB98 end:0x8024BD18
+	.data       start:0x802630E0 end:0x802631E8
+	.sdata      start:0x802C4650 end:0x802C4660
+	.sdata2     start:0x802CBAF8 end:0x802CBB50
+
+stage/TStageYellowBoss.cpp:
+	.text       start:0x80191950 end:0x80191A9C
+	.data       start:0x802631E8 end:0x80263208
+
+object/yellow/TObjYellowGateSet.cpp:
+	.text       start:0x80191A9C end:0x80192C9C
+	.rodata     start:0x8024BD18 end:0x8024BF30
+	.data       start:0x80263208 end:0x802632E8
+	.bss        start:0x80286648 end:0x80286688
+	.sdata      start:0x802C4660 end:0x802C4668
+	.sbss       start:0x802C5990 end:0x802C5998
+	.sdata2     start:0x802CBB50 end:0x802CBBA0
+
+object/green/TObjGreenBossWaterfall.cpp:
+	.text       start:0x80192C9C end:0x80192F80
+	.data       start:0x802632E8 end:0x80263360
+	.sdata2     start:0x802CBBA0 end:0x802CBBA8
+
+object/green/TObjGreenBossLake.cpp:
+	.text       start:0x80192F80 end:0x80193268
+	.rodata     start:0x8024BF48 end:0x8024BF68
+	.data       start:0x80263360 end:0x802633D8
+	.sdata      start:0x802C4670 end:0x802C4678
+
+object/green/TObjGreenBossRay.cpp:
+	.text       start:0x80193268 end:0x80193478
+	.rodata     start:0x8024BF68 end:0x8024BF80
+	.data       start:0x802633D8 end:0x80263450
+	.sdata      start:0x802C4678 end:0x802C4680
+
+object/green/GreenBossWater.cpp:
+	.text       start:0x80193478 end:0x801935CC
+	.data       start:0x80263450 end:0x80263468
+	.sdata2     start:0x802CBBA8 end:0x802CBBB0
+
+mode/TModeBattleSetup.cpp:
+	.text       start:0x801935CC end:0x80196620
+	.ctors      start:0x8024023C end:0x80240240
+
+ui/TAeObjBattleSelect.cpp:
+	.text       start:0x80196620 end:0x80197BE8
+	.rodata     start:0x8024BFE8 end:0x8024C190
+	.data       start:0x802634B0 end:0x802634D8
+	.sdata      start:0x802C4680 end:0x802C4688
+	.sdata2     start:0x802CBC60 end:0x802CBC78
+
+object/mission/TMsnObjCoin.cpp:
+	.text       start:0x80197BE8 end:0x801985D0
+	.rodata     start:0x8024C190 end:0x8024C1A8
+	.data       start:0x802634D8 end:0x80263550
+	.sdata      start:0x802C4688 end:0x802C4690
+	.sdata2     start:0x802CBC78 end:0x802CBCA8
+
+object/green/TObjGreenSpore.cpp:
+	.text       start:0x801985D0 end:0x80198754
+	.data       start:0x80263550 end:0x80263570
+	.sdata2     start:0x802CBCA8 end:0x802CBCB0
+
+ui/TBattleModelHiyoko.cpp:
+	.text       start:0x80198754 end:0x80198F08
+	.rodata     start:0x8024C1B8 end:0x8024C1E8
+	.data       start:0x802635E0 end:0x80263620
+	.sdata      start:0x802C4698 end:0x802C46A0
+	.sbss       start:0x802C59B8 end:0x802C59C8
+	.sdata2     start:0x802CBCB0 end:0x802CBCC0
+
+io/SaveData.cpp:
+	.text       start:0x80198F08 end:0x80199740
+	.sbss       start:0x802C59C8 end:0x802C59D0
+
+animal/RacerMover.cpp:
+	.text       start:0x80199740 end:0x8019A11C
+
+object/last/TObjLastSealedCrest.cpp:
+	.text       start:0x8019A11C end:0x8019A9BC
+	.rodata     start:0x8024C1E8 end:0x8024C218
+	.data       start:0x80263620 end:0x80263698
+	.sdata      start:0x802C46A0 end:0x802C46A8
+	.sdata2     start:0x802CBD10 end:0x802CBD50
+
+stage/TStageLast.cpp:
+	.text       start:0x8019A9BC end:0x8019AAD0
+	.data       start:0x80263698 end:0x802636B8
+	.sdata2     start:0x802CBD50 end:0x802CBD60
+
+stage/TStageGreenBoss.cpp:
+	.text       start:0x8019AAD0 end:0x8019ABFC
+	.data       start:0x802636B8 end:0x802636D8
+
+animal/TAniRabitOwl.cpp:
+	.text       start:0x8019ABFC end:0x8019B7FC
+
+animal/TAniOrixPanther.cpp:
+	.text       start:0x8019B7FC end:0x8019CA74
+	.rodata     start:0x8024C248 end:0x8024C2D8
+	.data       start:0x802638E0 end:0x80263F90
+	.sdata      start:0x802C46B0 end:0x802C46B8
+	.sbss       start:0x802C59D8 end:0x802C59E0
+	.sdata2     start:0x802CBD80 end:0x802CBDC8
+
+animal/TAniBullBoar.cpp:
+	.text       start:0x8019CA74 end:0x8019DBC0
+	.rodata     start:0x8024C2D8 end:0x8024C31C
+	.data       start:0x80263F90 end:0x802643E0
+	.sdata      start:0x802C46B8 end:0x802C46C0
+	.sbss       start:0x802C59E0 end:0x802C59E8
+	.sdata2     start:0x802CBDC8 end:0x802CBE20
+
+ui/TextTexture.cpp:
+	.text       start:0x8019DBC0 end:0x8019E658
+
+stage/TGameStateBattle.cpp:
+	.text       start:0x8019E658 end:0x8019EF84
+	.data       start:0x802643E0 end:0x80264488
+
+stage/BattleStateSlot.cpp:
+	.text       start:0x8019EF84 end:0x8019F07C
+
+stage/TGameBattleSurvival.cpp:
+	.text       start:0x8019F07C end:0x8019F7C0
+	.rodata     start:0x8024C3C0 end:0x8024C3E8
+	.data       start:0x80264488 end:0x802644D8
+	.sdata      start:0x802C46D0 end:0x802C46D8
+
+core/TCustomGameContext.cpp:
+	.text       start:0x8019F7C0 end:0x8019F80C
+	.rodata     start:0x8024C3E8 end:0x8024C400
+	.sdata      start:0x802C46D8 end:0x802C46E0
+
+io/CardManager.cpp:
+	.text       start:0x8019F80C end:0x801A0EFC
+	.rodata     start:0x8024C400 end:0x8024C440
+	.data       start:0x802664D8 end:0x802665B0
+	.sdata      start:0x802C46E0 end:0x802C46E8
+	.sbss       start:0x802C5A00 end:0x802C5A08
+	.sdata2     start:0x802CBE30 end:0x802CBE38
+
+io/CardWorker.cpp:
+	.text       start:0x801A0EFC end:0x801A2678
+	.data       start:0x802665B0 end:0x80266620
+
+io/CardImage.cpp:
+	.text       start:0x801A2678 end:0x801A2B34
+
+object/green/TObjGreenRay.cpp:
+	.text       start:0x801A2B34 end:0x801A2D60
+	.rodata     start:0x8024C440 end:0x8024C450
+	.data       start:0x80266620 end:0x80266698
+	.sdata      start:0x802C46E8 end:0x802C46F0
+	.sdata2     start:0x802CBE38 end:0x802CBE48
+
+animal/TAniFlushFlowerBomb.cpp:
+	.text       start:0x801A2D60 end:0x801A31C0
+	.rodata     start:0x8024C450 end:0x8024C468
+	.data       start:0x80266698 end:0x802666C0
+	.sdata      start:0x802C46F0 end:0x802C46F8
+	.sdata2     start:0x802CBE48 end:0x802CBE60
+
+io/LangFile.cpp:
+	.text       start:0x801A31C0 end:0x801A3288
+	.data       start:0x802666C0 end:0x80266700
+	.sdata2     start:0x802CBE60 end:0x802CBE68
+
+io/FileReader.cpp:
+	.text       start:0x801A3288 end:0x801A3A00
+	.rodata     start:0x8024C468 end:0x8024C478
+	.sbss       start:0x802C5A08 end:0x802C5A10
+
+engine/LightSet.cpp:
+	.text       start:0x801A3A00 end:0x801A3EE0
+	.sbss       start:0x802C5A10 end:0x802C5A20
+	.sdata2     start:0x802CBE68 end:0x802CBE78
+
+animal/TAniDevilMomonga.cpp:
+	.text       start:0x801A3EE0 end:0x801A519C
+	.rodata     start:0x8024C478 end:0x8024C4F8
+	.data       start:0x80266700 end:0x80266BF8
+	.sdata      start:0x802C46F8 end:0x802C4700
+	.sbss       start:0x802C5A20 end:0x802C5A28
+	.sdata2     start:0x802CBE78 end:0x802CBEB0
+
+object/TObjSceneLightCollision.cpp:
+	.text       start:0x801A519C end:0x801A5944
+	.rodata     start:0x8024C4F8 end:0x8024C520
+	.data       start:0x80266BF8 end:0x80266C68
+	.sdata      start:0x802C4700 end:0x802C4708
+	.sbss       start:0x802C5A28 end:0x802C5A30
+	.sdata2     start:0x802CBEB0 end:0x802CBEC0
+
+ui/TBattleResult.cpp:
+	.text       start:0x801A5944 end:0x801A8170
+	.ctors      start:0x80240240 end:0x80240244
+	.rodata     start:0x8024C520 end:0x8024C6B8
+	.data       start:0x80266C68 end:0x80266CB0
+	.bss        start:0x80286808 end:0x80286820
+	.sdata      start:0x802C4708 end:0x802C4710
+	.sbss       start:0x802C5A30 end:0x802C5A48
+	.sdata2     start:0x802CBEC0 end:0x802CBF08
+
+object/last/TObjLastRippleField.cpp:
+	.text       start:0x801A8170 end:0x801A8F34
+
+object/last/TObjLastRipple.cpp:
+	.text       start:0x801A8F34 end:0x801A91BC
+	.data       start:0x80266CB0 end:0x80266D1C
+	.sdata2     start:0x802CBF50 end:0x802CBF68
+
+enemy/boss/TEneYellowBossGreen.cpp:
+	.text       start:0x801A91BC end:0x801AA4C4
+	.rodata     start:0x8024C818 end:0x8024C850
+	.data       start:0x80266D90 end:0x80266E60
+	.sdata      start:0x802C4718 end:0x802C4720
+	.sbss       start:0x802C5A58 end:0x802C5A60
+	.sdata2     start:0x802CBF68 end:0x802CBFD8
+
+enemy/boss/StorySeq.cpp:
+	.text       start:0x801AA4C4 end:0x801AAB34
+	.rodata     start:0x8024C850 end:0x8024C860
+	.sbss       start:0x802C5A60 end:0x802C5A68
+
+object/TObjBrkScaffold.cpp:
+	.text       start:0x801AAB34 end:0x801AB26C
+	.rodata     start:0x8024C860 end:0x8024C870
+	.data       start:0x80266E60 end:0x80266ED8
+	.sdata      start:0x802C4720 end:0x802C4728
+	.sdata2     start:0x802CBFD8 end:0x802CC008
+
+stage/TGameBattleTime.cpp:
+	.text       start:0x801AB26C end:0x801AB9B4
+
+stage/TGameSuddenDeath.cpp:
+	.text       start:0x801AB9B4 end:0x801AC01C
+	.rodata     start:0x8024C890 end:0x8024C8C0
+	.data       start:0x80266F28 end:0x80266F78
+	.sdata      start:0x802C4730 end:0x802C4738
+
+stage/TGameBossAfter.cpp:
+	.text       start:0x801AC01C end:0x801AC34C
+	.data       start:0x80266F78 end:0x80266FD0
+	.sdata2     start:0x802CC008 end:0x802CC010
+
+io/BinFileEx.cpp:
+	.text       start:0x801AC34C end:0x801AC758
+	.data       start:0x80266FD0 end:0x80266FE8
+	.sbss       start:0x802C5A68 end:0x802C5A70
+
+ui/TitleObjArc.cpp:
+	.text       start:0x801AC758 end:0x801AC83C
+	.rodata     start:0x8024C8E8 end:0x8024C910
+	.sbss       start:0x802C5A70 end:0x802C5A78
+
+object/TObjTitleChiken.cpp:
+	.text       start:0x801AC83C end:0x801ACE58
+	.rodata     start:0x8024C910 end:0x8024C988
+	.data       start:0x80266FE8 end:0x80267060
+	.sdata      start:0x802C4740 end:0x802C4748
+	.sdata2     start:0x802CC010 end:0x802CC028
+
+object/TObjTitleBush.cpp:
+	.text       start:0x801ACE58 end:0x801AD1FC
+	.rodata     start:0x8024C988 end:0x8024C9C8
+	.data       start:0x80267060 end:0x802670D8
+	.sdata      start:0x802C4748 end:0x802C4750
+	.sdata2     start:0x802CC028 end:0x802CC038
+
+object/TObjTitleFlower.cpp:
+	.text       start:0x801AD1FC end:0x801AD5A0
+	.rodata     start:0x8024C9C8 end:0x8024CA08
+	.data       start:0x802670D8 end:0x80267150
+	.sdata      start:0x802C4750 end:0x802C4758
+	.sdata2     start:0x802CC038 end:0x802CC048
+
+object/TObjTitleFlowers.cpp:
+	.text       start:0x801AD5A0 end:0x801AD8F8
+	.rodata     start:0x8024CA08 end:0x8024CA30
+	.data       start:0x80267150 end:0x802671C8
+	.sdata      start:0x802C4758 end:0x802C4760
+	.sdata2     start:0x802CC048 end:0x802CC058
+
+object/TObjTitleHelios.cpp:
+	.text       start:0x801AD8F8 end:0x801ADEC0
+	.rodata     start:0x8024CA30 end:0x8024CA40
+	.data       start:0x802671C8 end:0x80267240
+	.sdata      start:0x802C4760 end:0x802C4768
+	.sdata2     start:0x802CC058 end:0x802CC098
+
+object/TObjTitleTree.cpp:
+	.text       start:0x801ADEC0 end:0x801AE264
+	.rodata     start:0x8024CA60 end:0x8024CAA0
+	.data       start:0x80267240 end:0x802672B8
+	.sdata      start:0x802C4768 end:0x802C4770
+	.sdata2     start:0x802CC098 end:0x802CC0A8
+
+stage/TStageTitle.cpp:
+	.text       start:0x801AE264 end:0x801AE33C
+	.data       start:0x802672B8 end:0x802672D8
+
+object/TObjTitlePAEffect.cpp:
+	.text       start:0x801AE33C end:0x801AE634
+	.rodata     start:0x8024CAA0 end:0x8024CAB8
+	.data       start:0x802672D8 end:0x80267350
+	.sdata      start:0x802C4770 end:0x802C4778
+	.sdata2     start:0x802CC0A8 end:0x802CC0C8
+
+ui/TBattleModelPlayer.cpp:
+	.text       start:0x801AE634 end:0x801AEB60
+	.rodata     start:0x8024CAB8 end:0x8024CAE8
+	.data       start:0x802674A0 end:0x802674C0
+	.sdata      start:0x802C4778 end:0x802C4780
+	.sbss       start:0x802C5A78 end:0x802C5A80
+	.sdata2     start:0x802CC0C8 end:0x802CC0D8
+
+stage/TStageLastBoss.cpp:
+	.text       start:0x801AEB60 end:0x801AEC8C
+	.data       start:0x802674C0 end:0x802674E0
+
+core/JoyCarry.cpp:
+	.text       start:0x801AEC8C end:0x801AF068
+	.sbss       start:0x802C5A80 end:0x802C5A88
+
+mode/TModeJoyCarry.cpp:
+	.text       start:0x801AF068 end:0x801AF41C
+	.rodata     start:0x8024CAE8 end:0x8024CBB0
+	.data       start:0x802674E0 end:0x80267528
+	.sdata2     start:0x802CC0D8 end:0x802CC0F0
+
+item/TItemEquipment.cpp:
+	.text       start:0x801AF41C end:0x801AF5F0
+	.rodata     start:0x8024CBB0 end:0x8024CBC0
+	.data       start:0x80267528 end:0x802675B0
+	.sdata      start:0x802C4780 end:0x802C4788
+
+item/TItemEquipComb.cpp:
+	.text       start:0x801AF5F0 end:0x801AF7FC
+	.data       start:0x802675B0 end:0x80267638
+
+item/TItemEquipWing.cpp:
+	.text       start:0x801AF7FC end:0x801AFAAC
+	.data       start:0x80267638 end:0x802676C0
+
+item/TItemOnce.cpp:
+	.text       start:0x801AFAAC end:0x801AFE08
+	.rodata     start:0x8024CBE0 end:0x8024CBF0
+	.data       start:0x802676C0 end:0x80267740
+	.sdata      start:0x802C4798 end:0x802C47A0
+
+stage/TGameLastBoss.cpp:
+	.text       start:0x801AFE08 end:0x801B0108
+	.data       start:0x80267740 end:0x80267798
+
+animal/AniModelManager.cpp:
+	.text       start:0x801B0108 end:0x801B0C1C
+	.rodata     start:0x8024CC18 end:0x8024CE88
+	.data       start:0x80267798 end:0x80267860
+
+object/TObjTitleLake.cpp:
+	.text       start:0x801B0C1C end:0x801B0EE0
+	.rodata     start:0x8024CE98 end:0x8024CEA8
+	.data       start:0x80267860 end:0x802678D8
+
+object/TObjTitleBigFall.cpp:
+	.text       start:0x801B0EE0 end:0x801B11A0
+	.data       start:0x802678D8 end:0x80267950
+	.sdata2     start:0x802CC0F8 end:0x802CC100
+
+animal/TAnimalRacer.cpp:
+	.text       start:0x801B11A0 end:0x801B32CC
+
+stage/TStageScore.cpp:
+	.text       start:0x801B32CC end:0x801B3F58
+	.data       start:0x802679E8 end:0x80267A08
+	.sdata2     start:0x802CC148 end:0x802CC158
+
+stage/TGameRace.cpp:
+	.text       start:0x801B3F58 end:0x801B42F4
+	.rodata     start:0x8024CF00 end:0x8024CF20
+	.data       start:0x80267A08 end:0x80267A60
+	.sdata      start:0x802C47C0 end:0x802C47C8
+
+object/TObjTitleRainbow.cpp:
+	.text       start:0x801B42F4 end:0x801B4710
+	.rodata     start:0x8024CF20 end:0x8024CF48
+	.data       start:0x80267A60 end:0x80267AD8
+	.sdata      start:0x802C47C8 end:0x802C47D0
+	.sdata2     start:0x802CC158 end:0x802CC170
+
+ui/TAeObjGallery.cpp:
+	.text       start:0x801B4710 end:0x801B4E9C
+	.rodata     start:0x8024CF48 end:0x8024D1D0
+	.data       start:0x80267AD8 end:0x80267B00
+	.sdata      start:0x802C47D0 end:0x802C47D8
+
+mode/TModeGallery.cpp:
+	.text       start:0x801B4E9C end:0x801B622C
+	.ctors      start:0x80240244 end:0x80240248
+	.rodata     start:0x8024D1D0 end:0x8024D208
+	.data       start:0x80267B00 end:0x80267B20
+	.bss        start:0x80286830 end:0x802868B8
+	.sbss       start:0x802C5AC0 end:0x802C5AE0
+	.sdata2     start:0x802CC170 end:0x802CC1D0
+
+ui/TGalleryEggModel.cpp:
+	.text       start:0x801B622C end:0x801B6864
+	.rodata     start:0x8024D208 end:0x8024D230
+	.data       start:0x80267B20 end:0x80267B40
+	.sdata      start:0x802C47D8 end:0x802C47E0
+	.sbss       start:0x802C5AE0 end:0x802C5AE8
+	.sdata2     start:0x802CC1D0 end:0x802CC1E0
+
+enemy/TEneGreenDemo.cpp:
+	.text       start:0x801B6864 end:0x801B704C
+	.rodata     start:0x8024D230 end:0x8024D288
+	.data       start:0x80267B40 end:0x80267B80
+	.bss        start:0x802868B8 end:0x802868C8
+	.sdata      start:0x802C47E0 end:0x802C47E8
+	.sbss       start:0x802C5AE8 end:0x802C5AF8
+	.sdata2     start:0x802CC1E0 end:0x802CC208
+
+enemy/boss/TEneOrangeBossMirror_Frag.cpp:
+	.text       start:0x801B704C end:0x801B7AAC
+	.rodata     start:0x8024D288 end:0x8024D2A8
+	.data       start:0x80267B80 end:0x80267BA0
+	.sdata      start:0x802C47E8 end:0x802C47F0
+	.sdata2     start:0x802CC208 end:0x802CC260
+
+ui/TMainMenuModel.cpp:
+	.text       start:0x801B7AAC end:0x801B8148
+	.rodata     start:0x8024D2A8 end:0x8024D2D0
+	.data       start:0x80267BA0 end:0x80267CC0
+	.sdata      start:0x802C47F0 end:0x802C47F8
+	.sbss       start:0x802C5AF8 end:0x802C5B00
+
+mode/TModeResult.cpp:
+	.text       start:0x801B8148 end:0x801B9FD4
+	.ctors      start:0x80240248 end:0x8024024C
+	.rodata     start:0x8024D2D0 end:0x8024D2E0
+	.data       start:0x80267CC0 end:0x80267D70
+	.bss        start:0x802868C8 end:0x80286908
+	.sdata2     start:0x802CC260 end:0x802CC290
+
+io/ResPack.cpp:
+	.text       start:0x801B9FD4 end:0x801BA378
+	.data       start:0x80267D70 end:0x80267D88
+	.sbss       start:0x802C5B00 end:0x802C5B08
+
+egg/TEggTextureManager.cpp:
+	.text       start:0x801BA378 end:0x801BAB2C
+	.rodata     start:0x8024D2E0 end:0x8024D2F8
+	.data       start:0x80267D88 end:0x80267DA8
+	.sdata      start:0x802C47F8 end:0x802C4800
+	.sdata2     start:0x802CC290 end:0x802CC298
+
+object/TObjClosedEgg.cpp:
+	.text       start:0x801BAB2C end:0x801BBB14
+	.rodata     start:0x8024D2F8 end:0x8024D330
+	.data       start:0x80267DA8 end:0x80267E18
+	.sdata      start:0x802C4800 end:0x802C4808
+	.sbss       start:0x802C5B10 end:0x802C5B20
+	.sdata2     start:0x802CC298 end:0x802CC2D0
+
+player/TPlyEffStSleep.cpp:
+	.text       start:0x801BBB14 end:0x801BBCE8
+	.data       start:0x802683D0 end:0x802683F8
+
+player/TPlyEffStInvincible.cpp:
+	.text       start:0x801BBCE8 end:0x801BBF18
+	.data       start:0x80268420 end:0x80268448
+
+player/TPlyEffStStrength.cpp:
+	.text       start:0x801BBF18 end:0x801BC168
+	.data       start:0x80268448 end:0x80268470
+
+player/TPlyEffStBlind.cpp:
+	.text       start:0x801BC168 end:0x801BC4F4
+	.data       start:0x80268470 end:0x80268498
+	.sdata2     start:0x802CC2D0 end:0x802CC2D8
+
+player/TPlyEffStDrain.cpp:
+	.text       start:0x801BC4F4 end:0x801BC880
+	.data       start:0x80268498 end:0x802684C0
+	.sdata2     start:0x802CC2D8 end:0x802CC2E0
+
+animal/TAniTigerHawk.cpp:
+	.text       start:0x801BC880 end:0x801BD568
+	.rodata     start:0x8024D930 end:0x8024D9A8
+	.data       start:0x802684C0 end:0x802686F0
+	.sdata      start:0x802C4830 end:0x802C4838
+	.sbss       start:0x802C5B20 end:0x802C5B28
+	.sdata2     start:0x802CC2E0 end:0x802CC318
+
+ui/NowLoading.cpp:
+	.text       start:0x801BD568 end:0x801BDECC
+
+item/TItemImm.cpp:
+	.text       start:0x801BDECC end:0x801BDFC4
+	.rodata     start:0x8024DAE0 end:0x8024DAF0
+	.data       start:0x802686F0 end:0x80268770
+	.sdata      start:0x802C4838 end:0x802C4840
+
+ui/TBlindCtrl.cpp:
+	.text       start:0x801BDFC4 end:0x801BE1C0
+	.data       start:0x80268770 end:0x80268790
+	.sdata2     start:0x802CC398 end:0x802CC3A0
+
+egg/TEggContentsIntro.cpp:
+	.text       start:0x801BE1C0 end:0x801BE41C
+	.rodata     start:0x8024DB00 end:0x8024DB20
+	.data       start:0x80268790 end:0x802687B0
+	.sdata      start:0x802C4848 end:0x802C4850
+	.sbss       start:0x802C5B40 end:0x802C5B50
+
+engine/Movie.cpp:
+	.text       start:0x801BE41C end:0x801BEC0C
+	.rodata     start:0x8024DB20 end:0x8024DB38
+	.sbss       start:0x802C5B50 end:0x802C5C38
+	.sdata2     start:0x802CC3A0 end:0x802CC3A8
+
+animal/TAniCamelOstrich.cpp:
+	.text       start:0x801BEC0C end:0x801C09FC
+	.ctors      start:0x8024024C end:0x80240250
+	.rodata     start:0x8024DB38 end:0x8024DD00
+	.data       start:0x802687B0 end:0x802688C8
+	.sdata      start:0x802C4850 end:0x802C4858
+	.sdata2     start:0x802CC3A8 end:0x802CC3F0
+
+animal/AniSpawn.cpp:
+	.text       start:0x801C09FC end:0x801C0AEC
+	.rodata     start:0x8024DD00 end:0x8024DD20
+
+animal/AniMotions.cpp:
+	.text       start:0x801C0AEC end:0x801C0C1C
+	.rodata     start:0x8024DD20 end:0x8024DD30
+
+animal/AniModel.cpp:
+	.text       start:0x801C0C1C end:0x801C1110
+	.rodata     start:0x8024DD30 end:0x8024DD40
+	.data       start:0x802688C8 end:0x802688D8
+
+animal/AniBody.cpp:
+	.text       start:0x801C1110 end:0x801C1EC4
+	.data       start:0x802688D8 end:0x802688E8
+	.sdata2     start:0x802CC3F0 end:0x802CC420
+
+player/TPlyEffStSuper.cpp:
+	.text       start:0x801C1EC4 end:0x801C2114
+	.data       start:0x802688E8 end:0x80268910
+
+animal/TAniLionKangaroo.cpp:
+	.text       start:0x801C2114 end:0x801C3A90
+	.ctors      start:0x80240250 end:0x80240254
+	.rodata     start:0x8024DD50 end:0x8024DF18
+	.data       start:0x80268910 end:0x802689F8
+	.sdata      start:0x802C4860 end:0x802C4868
+	.sdata2     start:0x802CC420 end:0x802CC470
+
+animal/TAniHorseshoeCrabShark.cpp:
+	.text       start:0x801C3A90 end:0x801C5674
+	.ctors      start:0x80240254 end:0x80240258
+	.rodata     start:0x8024DF18 end:0x8024E080
+	.data       start:0x802689F8 end:0x80268AE0
+	.sdata      start:0x802C4868 end:0x802C4870
+	.sdata2     start:0x802CC478 end:0x802CC4C8
+
+animal/TAniMount.cpp:
+	.text       start:0x801C5674 end:0x801C5C9C
+	.data       start:0x80268AE0 end:0x80268B98
+
+animal/AniMove.cpp:
+	.text       start:0x801C5C9C end:0x801C5EDC
+	.sdata2     start:0x802CC4C8 end:0x802CC4E0
+
+animal/AniWalk.cpp:
+	.text       start:0x801C5EDC end:0x801C641C
+	.data       start:0x80268B98 end:0x80268BB0
+	.sdata2     start:0x802CC4E0 end:0x802CC4F8
+
+ui/StaffRoll.cpp:
+	.text       start:0x801C641C end:0x801C75FC
+
+mode/TModeStaffRoll.cpp:
+	.text       start:0x801C75FC end:0x801C78F4
+	.rodata     start:0x8024E210 end:0x8024E228
+	.data       start:0x80268C00 end:0x80268C20
+	.sdata2     start:0x802CC548 end:0x802CC560
+
+ui/TResult.cpp:
+	.text       start:0x801C78F4 end:0x801CA0D0
+	.ctors      start:0x80240258 end:0x8024025C
+	.rodata     start:0x8024E228 end:0x8024E2B8
+	.data       start:0x80268C20 end:0x80268CA0
+	.bss        start:0x80286C78 end:0x80286D48
+	.sdata      start:0x802C4870 end:0x802C4878
+	.sbss       start:0x802C5C48 end:0x802C5C60
+	.sdata2     start:0x802CC560 end:0x802CC5F8
+
+ui/TFadeModel.cpp:
+	.text       start:0x801CA0D0 end:0x801CA7B8
+	.rodata     start:0x8024E2B8 end:0x8024E2D8
+	.data       start:0x80268CA0 end:0x8026A690
+	.sdata      start:0x802C4878 end:0x802C4888
+	.sdata2     start:0x802CC5F8 end:0x802CC678
+
+ui/TAeObjCombo.cpp:
+	.text       start:0x801CA7B8 end:0x801CAF7C
+	.rodata     start:0x8024E2D8 end:0x8024E32C
+	.data       start:0x8026A690 end:0x8026A6B8
+	.sdata      start:0x802C4888 end:0x802C4890
+	.sdata2     start:0x802CC678 end:0x802CC690
+
+animal/AniBlast.cpp:
+	.text       start:0x801CAF7C end:0x801CB2E4
+	.data       start:0x8026A6B8 end:0x8026A6D0
+	.sdata2     start:0x802CC690 end:0x802CC6A0
+
+animal/AniSlam.cpp:
+	.text       start:0x801CB2E4 end:0x801CB4A0
+	.data       start:0x8026A6D0 end:0x8026A6E8
+	.sdata2     start:0x802CC6A0 end:0x802CC6B0
+
+animal/AniDash.cpp:
+	.text       start:0x801CB4A0 end:0x801CB714
+	.data       start:0x8026A6E8 end:0x8026A700
+	.sdata2     start:0x802CC6B0 end:0x802CC6B8
+
+animal/AniJump.cpp:
+	.text       start:0x801CB714 end:0x801CBA98
+	.data       start:0x8026A700 end:0x8026A718
+	.sdata2     start:0x802CC6B8 end:0x802CC6D8
+
+animal/AniDive.cpp:
+	.text       start:0x801CBA98 end:0x801CC3EC
+	.data       start:0x8026A718 end:0x8026A730
+	.sdata2     start:0x802CC6D8 end:0x802CC6F8
+
+animal/AniHitList.cpp:
+	.text       start:0x801CC3EC end:0x801CC884
+	.ctors      start:0x8024025C end:0x80240260
+	.data       start:0x8026A730 end:0x8026A750
+	.sdata2     start:0x802CC6F8 end:0x802CC700
+
+animal/AniHitParts.cpp:
+	.text       start:0x801CC884 end:0x801CCC88
+	.data       start:0x8026A750 end:0x8026A770
+	.sdata2     start:0x802CC700 end:0x802CC710
+
+animal/AniReachHit.cpp:
+	.text       start:0x801CCC88 end:0x801CCE94
+	.data       start:0x8026A770 end:0x8026A790
+
+animal/TAniLionFireBall.cpp:
+	.text       start:0x801CCE94 end:0x801CD190
+	.rodata     start:0x8024E340 end:0x8024E358
+	.data       start:0x8026A790 end:0x8026A7B0
+	.sdata      start:0x802C4890 end:0x802C4898
+	.sdata2     start:0x802CC710 end:0x802CC728
+
+animal/AniLife.cpp:
+	.text       start:0x801CD190 end:0x801CD4C0
+	.ctors      start:0x80240260 end:0x80240264
+	.sbss       start:0x802C5C70 end:0x802C5C78
+	.sdata2     start:0x802CC728 end:0x802CC730
+
+animal/TAniSharkShockWave.cpp:
+	.text       start:0x801CD4C0 end:0x801CD704
+	.rodata     start:0x8024E358 end:0x8024E370
+	.data       start:0x8026A7B0 end:0x8026A7D0
+	.sdata      start:0x802C4898 end:0x802C48A0
+	.sdata2     start:0x802CC730 end:0x802CC740
+
+item/ItemGlow.cpp:
+	.text       start:0x801CD704 end:0x801CE0A0
+	.data       start:0x8026A7D0 end:0x8026A7E0
+
+object/TObjWholeAttack.cpp:
+	.text       start:0x801CE0A0 end:0x801CE2B0
+	.data       start:0x8026A7E0 end:0x8026A850
+	.sdata2     start:0x802CC740 end:0x802CC748
+
+stage/TGameBattleHatch.cpp:
+	.text       start:0x801CE2B0 end:0x801CEA5C
+	.rodata     start:0x8024E380 end:0x8024E3A8
+	.data       start:0x8026A850 end:0x8026A8A0
+	.sdata      start:0x802C48A8 end:0x802C48B0
+
+player/SuperBillyRes.cpp:
+	.text       start:0x801CEA5C end:0x801CEBD8
+	.rodata     start:0x8024E3A8 end:0x8024E3D0
+	.sbss       start:0x802C5C78 end:0x802C5C80
+	.sdata2     start:0x802CC748 end:0x802CC750
+
+player/TPlyDemoLastLose.cpp:
+	.text       start:0x801CEBD8 end:0x801CEF50
+	.rodata     start:0x8024E3D0 end:0x8024E3F0
+	.data       start:0x8026A8A0 end:0x8026A8E8
+	.sdata      start:0x802C48B0 end:0x802C48B8
+	.sdata2     start:0x802CC750 end:0x802CC758
+
+engine/TLastLightEffect.cpp:
+	.text       start:0x801CEF50 end:0x801CFBBC
+	.ctors      start:0x80240264 end:0x80240268
+	.rodata     start:0x8024E410 end:0x8024E41C
+	.data       start:0x8026A8E8 end:0x8026A978
+	.sbss       start:0x802C5C88 end:0x802C5C98
+	.sdata2     start:0x802CC758 end:0x802CC770
+
+player/TPlyDemoLastCtrl.cpp:
+	.text       start:0x801CFBBC end:0x801CFF0C
+	.data       start:0x8026A978 end:0x8026A9D8
+	.sdata2     start:0x802CC770 end:0x802CC778
+
+egg/EggAura.cpp:
+	.text       start:0x801CFF0C end:0x801D0108
+	.sdata2     start:0x802CC778 end:0x802CC780
+
+ui/TAeObjGoal.cpp:
+	.text       start:0x801D0108 end:0x801D039C
+	.rodata     start:0x8024E448 end:0x8024E460
+	.data       start:0x8026A9D8 end:0x8026AA00
+	.sdata      start:0x802C48D0 end:0x802C48D8
+
+ui/TAeObjTimeUp.cpp:
+	.text       start:0x801D039C end:0x801D0630
+	.rodata     start:0x8024E460 end:0x8024E480
+	.data       start:0x8026AA00 end:0x8026AA28
+	.sdata      start:0x802C48D8 end:0x802C48E0
+
+animal/TAniBirth.cpp:
+	.text       start:0x801D0630 end:0x801D1040
+	.ctors      start:0x80240268 end:0x8024026C
+
+animal/TAniLionFireBreath.cpp:
+	.text       start:0x801D1040 end:0x801D12C0
+	.ctors      start:0x8024026C end:0x80240270
+	.data       start:0x8026AA68 end:0x8026AA88
+	.sdata2     start:0x802CC7A0 end:0x802CC7B0
+
+item/TItemEquipShoeHiJump.cpp:
+	.text       start:0x801D12C0 end:0x801D1464
+	.data       start:0x8026AA88 end:0x8026AB10
+
+item/TItemEquipShoeSpeed.cpp:
+	.text       start:0x801D1464 end:0x801D1628
+	.data       start:0x8026AB10 end:0x8026AB98
+
+sound/MobileDust.cpp:
+	.text       start:0x801D1628 end:0x801D195C
+	.sdata2     start:0x802CC7B0 end:0x802CC7B8
+
+sound/MobileWake.cpp:
+	.text       start:0x801D195C end:0x801D1CA0
+	.sdata2     start:0x802CC7B8 end:0x802CC7C8
+
+Dolphin/base/PPCArch.c:
+	.text       start:0x801D1CA0 end:0x801D1DB4
+
+Dolphin/db/db.c:
+	.text       start:0x801D1DB4 end:0x801D1EA0
+	.data       start:0x8026AB98 end:0x8026ABB0
+	.sbss       start:0x802C5CB8 end:0x802C5CC0
+
+Dolphin/os/OS.c:
+	.text       start:0x801D1EA0 end:0x801D298C
+	.data       start:0x8026ABB0 end:0x8026ADA8
+	.bss        start:0x80286D80 end:0x80286DD0
+	.sdata      start:0x802C4900 end:0x802C4910
+	.sbss       start:0x802C5CC0 end:0x802C5D00
+
+Dolphin/os/OSAlarm.c:
+	.text       start:0x801D298C end:0x801D303C
+	.sbss       start:0x802C5D00 end:0x802C5D08
+
+Dolphin/os/OSAlloc.c:
+	.text       start:0x801D303C end:0x801D36AC
+	.data       start:0x8026ADA8 end:0x8026B140
+	.sdata      start:0x802C4910 end:0x802C4918
+	.sbss       start:0x802C5D08 end:0x802C5D18
+
+Dolphin/os/OSArena.c:
+	.text       start:0x801D36AC end:0x801D36F8
+	.sdata      start:0x802C4918 end:0x802C4920
+	.sbss       start:0x802C5D18 end:0x802C5D20
+
+Dolphin/os/OSAudioSystem.c:
+	.text       start:0x801D36F8 end:0x801D398C
+	.data       start:0x8026B140 end:0x8026B1C0
+
+Dolphin/os/OSCache.c:
+	.text       start:0x801D398C end:0x801D3EF4
+	.data       start:0x8026B1C0 end:0x8026B3F0
+
+Dolphin/os/OSContext.c:
+	.text       start:0x801D3EF4 end:0x801D4764
+	.data       start:0x8026B3F0 end:0x8026B5C8
+
+Dolphin/os/OSError.c:
+	.text       start:0x801D4764 end:0x801D4E10
+	.data       start:0x8026B5C8 end:0x8026B8E8
+	.bss        start:0x80286DD0 end:0x80286E14
+	.sdata      start:0x802C4920 end:0x802C4928
+
+Dolphin/os/OSFont.c:
+	.text       start:0x801D4E10 end:0x801D583C
+	.data       start:0x8026B8E8 end:0x8026C3F8
+	.sdata      start:0x802C4928 end:0x802C4930
+	.sbss       start:0x802C5D20 end:0x802C5D30
+	.sdata2     start:0x802CC7C8 end:0x802CC7D0
+
+Dolphin/os/OSInterrupt.c:
+	.text       start:0x801D583C end:0x801D60A8
+	.data       start:0x8026C3F8 end:0x8026C428
+	.sbss       start:0x802C5D30 end:0x802C5D48
+
+Dolphin/os/OSLink.c:
+	.text       start:0x801D60A8 end:0x801D6A94
+	.data       start:0x8026C428 end:0x8026C478
+
+Dolphin/os/OSMemory.c:
+	.text       start:0x801D6A94 end:0x801D6D6C
+	.data       start:0x8026C478 end:0x8026C488
+
+Dolphin/os/OSMutex.c:
+	.text       start:0x801D6D6C end:0x801D6DDC
+
+Dolphin/os/OSReboot.c:
+	.text       start:0x801D6DDC end:0x801D7138
+	.bss        start:0x80286E20 end:0x80286E40
+	.sbss       start:0x802C5D48 end:0x802C5D58
+
+Dolphin/os/OSReset.c:
+	.text       start:0x801D7138 end:0x801D755C
+	.sbss       start:0x802C5D58 end:0x802C5D68
+
+Dolphin/os/OSResetSW.c:
+	.text       start:0x801D755C end:0x801D78E8
+	.sbss       start:0x802C5D68 end:0x802C5D88
+
+Dolphin/os/OSRtc.c:
+	.text       start:0x801D78E8 end:0x801D859C
+	.bss        start:0x80286E40 end:0x80286E98
+
+Dolphin/os/OSSync.c:
+	.text       start:0x801D859C end:0x801D8620
+
+Dolphin/os/OSThread.c:
+	.text       start:0x801D8620 end:0x801D98B8
+	.bss        start:0x80286E98 end:0x80287890
+	.sdata      start:0x802C4930 end:0x802C4938
+	.sbss       start:0x802C5D88 end:0x802C5D98
+
+Dolphin/os/OSTime.c:
+	.text       start:0x801D98B8 end:0x801D9CDC
+	.data       start:0x8026C488 end:0x8026C4E8
+
+Dolphin/os/__start.c:
+	.init       start:0x80003100 end:0x80003400
+	.sbss       start:0x802C5D98 end:0x802C5DA0
+
+Dolphin/os/__ppc_eabi_init.cpp:
+	.init       start:0x80003400 end:0x80003458
+	.text       start:0x801D9CDC end:0x801D9D70
+
+Dolphin/mtx/mtx.c:
+	.text       start:0x801D9D70 end:0x801DA704
+	.sdata      start:0x802C4938 end:0x802C4940
+	.sdata2     start:0x802CC7D0 end:0x802CC7E8
+
+Dolphin/mtx/mtxvec.c:
+	.text       start:0x801DA704 end:0x801DA8C0
+
+Dolphin/mtx/mtx44.c:
+	.text       start:0x801DA8C0 end:0x801DAAC4
+	.sdata2     start:0x802CC7E8 end:0x802CC800
+
+Dolphin/mtx/vec.c:
+	.text       start:0x801DAAC4 end:0x801DAB84
+	.sdata2     start:0x802CC800 end:0x802CC808
+
+Dolphin/mtx/quat.c:
+	.text       start:0x801DAB84 end:0x801DAE38
+	.rodata     start:0x8024E4E0 end:0x8024E4F0
+	.sdata2     start:0x802CC808 end:0x802CC828
+
+Dolphin/mtx/psmtx.c:
+	.text       start:0x801DAE38 end:0x801DAF9C
+
+Dolphin/dvd/dvdlow.c:
+	.text       start:0x801DAF9C end:0x801DBDE0
+	.bss        start:0x80287890 end:0x80287960
+	.sdata      start:0x802C4940 end:0x802C4948
+	.sbss       start:0x802C5DA0 end:0x802C5DE8
+
+Dolphin/dvd/dvdfs.c:
+	.text       start:0x801DBDE0 end:0x801DC6B4
+	.data       start:0x8026C4E8 end:0x8026C650
+	.sdata      start:0x802C4948 end:0x802C4950
+	.sbss       start:0x802C5DE8 end:0x802C5E08
+
+Dolphin/dvd/dvd.c:
+	.text       start:0x801DC6B4 end:0x801DEDB0
+	.data       start:0x8026C650 end:0x8026C7D0
+	.bss        start:0x80287960 end:0x802879F8
+	.sdata      start:0x802C4950 end:0x802C4968
+	.sbss       start:0x802C5E08 end:0x802C5E50
+
+Dolphin/dvd/dvdqueue.c:
+	.text       start:0x801DEDB0 end:0x801DEFA8
+	.bss        start:0x802879F8 end:0x80287A18
+
+Dolphin/dvd/dvderror.c:
+	.text       start:0x801DEFA8 end:0x801DF140
+	.data       start:0x8026C7D0 end:0x8026C818
+
+Dolphin/dvd/dvdidutils.c:
+	.text       start:0x801DF140 end:0x801DF238
+
+Dolphin/dvd/dvdFatal.c:
+	.text       start:0x801DF238 end:0x801DF268
+	.sbss       start:0x802C5E50 end:0x802C5E58
+
+Dolphin/dvd/fstload.c:
+	.text       start:0x801DF268 end:0x801DF4A8
+	.data       start:0x8026C818 end:0x8026C888
+	.bss        start:0x80287A18 end:0x80287A88
+	.sdata      start:0x802C4968 end:0x802C4978
+	.sbss       start:0x802C5E58 end:0x802C5E68
+
+Dolphin/vi/vi.c:
+	.text       start:0x801DF4A8 end:0x801E12B8
+	.data       start:0x8026C888 end:0x8026CC58
+	.bss        start:0x80287A88 end:0x80287BD0
+	.sdata      start:0x802C4978 end:0x802C4988
+	.sbss       start:0x802C5E68 end:0x802C5EC8
+
+Dolphin/pad/Padclamp.c:
+	.text       start:0x801E12B8 end:0x801E156C
+	.rodata     start:0x8024E4F0 end:0x8024E500
+	.sdata2     start:0x802CC828 end:0x802CC848
+
+Dolphin/pad/Pad.c:
+	.text       start:0x801E156C end:0x801E30F4
+	.data       start:0x8026CC58 end:0x8026CCB0
+	.bss        start:0x80287BD0 end:0x80287C20
+	.sdata      start:0x802C4988 end:0x802C49A8
+	.sbss       start:0x802C5EC8 end:0x802C5EF0
+
+Dolphin/ai/ai.c:
+	.text       start:0x801E30F4 end:0x801E39C0
+	.data       start:0x8026CCB0 end:0x8026CCF8
+	.sdata      start:0x802C49A8 end:0x802C49B0
+	.sbss       start:0x802C5EF0 end:0x802C5F30
+
+Dolphin/ar/ar.c:
+	.text       start:0x801E39C0 end:0x801E5500
+	.data       start:0x8026CCF8 end:0x8026CD40
+	.sdata      start:0x802C49B0 end:0x802C49B8
+	.sbss       start:0x802C5F30 end:0x802C5F50
+
+Dolphin/ar/arq.c:
+	.text       start:0x801E5500 end:0x801E589C
+	.data       start:0x8026CD40 end:0x8026CD88
+	.sdata      start:0x802C49B8 end:0x802C49C0
+	.sbss       start:0x802C5F50 end:0x802C5F78
+
+Dolphin/ax/AX.c:
+	.text       start:0x801E589C end:0x801E590C
+	.data       start:0x8026CD88 end:0x8026CDD0
+	.sdata      start:0x802C49C0 end:0x802C49C8
+
+Dolphin/ax/AXAlloc.c:
+	.text       start:0x801E590C end:0x801E5D20
+	.bss        start:0x80287C20 end:0x80287D20
+	.sbss       start:0x802C5F78 end:0x802C5F80
+
+Dolphin/ax/AXAux.c:
+	.text       start:0x801E5D20 end:0x801E61B0
+	.bss        start:0x80287D20 end:0x8028AA20
+	.sbss       start:0x802C5F80 end:0x802C5FB8
+
+Dolphin/ax/AXCL.c:
+	.text       start:0x801E61B0 end:0x801E68DC
+	.bss        start:0x8028AA20 end:0x8028B020
+	.sbss       start:0x802C5FB8 end:0x802C5FD0
+
+Dolphin/ax/AXOut.c:
+	.text       start:0x801E68DC end:0x801E7054
+	.bss        start:0x8028B020 end:0x8028FAC0
+	.sbss       start:0x802C5FD0 end:0x802C6008
+
+Dolphin/ax/AXSPB.c:
+	.text       start:0x801E7054 end:0x801E7518
+	.bss        start:0x8028FAC0 end:0x8028FAF8
+	.sbss       start:0x802C6008 end:0x802C6030
+
+Dolphin/ax/AXVPB.c:
+	.text       start:0x801E7518 end:0x801E87F4
+	.data       start:0x8026CDD0 end:0x8026CEC0
+	.bss        start:0x8028FB00 end:0x802A1300
+	.sbss       start:0x802C6030 end:0x802C6040
+	.sdata2     start:0x802CC848 end:0x802CC850
+
+Dolphin/ax/AXProf.c:
+	.text       start:0x801E87F4 end:0x801E883C
+	.sbss       start:0x802C6040 end:0x802C6050
+
+Dolphin/dsp/dsp.c:
+	.text       start:0x801E883C end:0x801E8A8C
+	.data       start:0x802707C0 end:0x80270840
+	.sdata      start:0x802C49D0 end:0x802C49D8
+	.sbss       start:0x802C6050 end:0x802C6058
+
+Dolphin/dsp/dsp_debug.c:
+	.text       start:0x801E8A8C end:0x801E8ADC
+
+Dolphin/dsp/dsp_task.c:
+	.text       start:0x801E8ADC end:0x801E9360
+	.data       start:0x80270840 end:0x80270980
+	.sbss       start:0x802C6058 end:0x802C6070
+
+Dolphin/card/CARDBios.c:
+	.text       start:0x801E9360 end:0x801EA578
+	.data       start:0x80270980 end:0x802709E0
+	.bss        start:0x802A1300 end:0x802A1540
+	.sdata      start:0x802C49D8 end:0x802C49E0
+	.sbss       start:0x802C6070 end:0x802C6078
+
+Dolphin/card/CARDUnlock.c:
+	.text       start:0x801EA578 end:0x801EB7D8
+	.data       start:0x802709E0 end:0x80270B40
+	.sdata      start:0x802C49E0 end:0x802C49E8
+
+Dolphin/card/CARDRdwr.c:
+	.text       start:0x801EB7D8 end:0x801EBA58
+
+Dolphin/card/CARDBlock.c:
+	.text       start:0x801EBA58 end:0x801EBE5C
+
+Dolphin/card/CARDDir.c:
+	.text       start:0x801EBE5C end:0x801EC0C0
+
+Dolphin/card/CARDCheck.c:
+	.text       start:0x801EC0C0 end:0x801ECFFC
+
+Dolphin/card/CARDMount.c:
+	.text       start:0x801ECFFC end:0x801EDA74
+	.data       start:0x80270B40 end:0x80270B80
+
+Dolphin/card/CARDFormat.c:
+	.text       start:0x801EDA74 end:0x801EE258
+
+Dolphin/card/CARDOpen.c:
+	.text       start:0x801EE258 end:0x801EE844
+
+Dolphin/card/CARDCreate.c:
+	.text       start:0x801EE844 end:0x801EEB94
+
+Dolphin/card/CARDRead.c:
+	.text       start:0x801EEB94 end:0x801EEFC0
+
+Dolphin/card/CARDWrite.c:
+	.text       start:0x801EEFC0 end:0x801EF2F4
+
+Dolphin/card/CARDDelete.c:
+	.text       start:0x801EF2F4 end:0x801EF4A8
+
+Dolphin/card/CARDStat.c:
+	.text       start:0x801EF4A8 end:0x801EF928
+
+Dolphin/gx/GXInit.c:
+	.text       start:0x801EF928 end:0x801F0CA0
+	.data       start:0x80270B80 end:0x80270DC0
+	.bss        start:0x802A1540 end:0x802A1B70
+	.sdata      start:0x802C49F0 end:0x802C49F8
+	.sbss       start:0x802C6078 end:0x802C60A0
+	.sdata2     start:0x802CC850 end:0x802CC878
+
+Dolphin/gx/GXFifo.c:
+	.text       start:0x801F0CA0 end:0x801F12D0
+	.sbss       start:0x802C60A0 end:0x802C60C0
+
+Dolphin/gx/GXAttr.c:
+	.text       start:0x801F12D0 end:0x801F27E4
+	.data       start:0x80270DC0 end:0x80271038
+	.sdata      start:0x802C49F8 end:0x802C4A08
+
+Dolphin/gx/GXMisc.c:
+	.text       start:0x801F27E4 end:0x801F2EF0
+	.sbss       start:0x802C60C0 end:0x802C60D8
+
+Dolphin/gx/GXGeometry.c:
+	.text       start:0x801F2EF0 end:0x801F3270
+
+Dolphin/gx/GXFrameBuf.c:
+	.text       start:0x801F3270 end:0x801F3CF4
+	.data       start:0x80271038 end:0x80271168
+	.sdata2     start:0x802CC878 end:0x802CC880
+
+Dolphin/gx/GXLight.c:
+	.text       start:0x801F3CF4 end:0x801F4340
+	.data       start:0x80271168 end:0x80271188
+	.sdata2     start:0x802CC880 end:0x802CC8B0
+
+Dolphin/gx/GXTexture.c:
+	.text       start:0x801F4340 end:0x801F5328
+	.data       start:0x80271188 end:0x802713B0
+	.sdata      start:0x802C4A08 end:0x802C4A48
+	.sdata2     start:0x802CC8B0 end:0x802CC8D8
+
+Dolphin/gx/GXBump.c:
+	.text       start:0x801F5328 end:0x801F5834
+	.sdata2     start:0x802CC8D8 end:0x802CC8E0
+
+Dolphin/gx/GXTev.c:
+	.text       start:0x801F5834 end:0x801F5F1C
+	.data       start:0x802713B0 end:0x80271428
+
+Dolphin/gx/GXPixel.c:
+	.text       start:0x801F5F1C end:0x801F6714
+	.data       start:0x80271428 end:0x80271448
+	.sdata2     start:0x802CC8E0 end:0x802CC940
+
+Dolphin/gx/GXDraw.c:
+	.text       start:0x801F6714 end:0x801F7710
+	.data       start:0x80271448 end:0x80271758
+	.bss        start:0x802A1B70 end:0x802A1DF8
+	.sdata2     start:0x802CC940 end:0x802CC980
+
+Dolphin/gx/GXDisplayList.c:
+	.text       start:0x801F7710 end:0x801F7780
+
+Dolphin/gx/GXTransform.c:
+	.text       start:0x801F7780 end:0x801F7EAC
+	.sdata2     start:0x802CC980 end:0x802CC990
+
+Dolphin/gx/GXPerf.c:
+	.text       start:0x801F7EAC end:0x801F886C
+	.data       start:0x80271758 end:0x80271848
+
+Dolphin/TRK_MINNOW_DOLPHIN/mainloop.c:
+	.text       start:0x801F886C end:0x801F8964
+
+Dolphin/TRK_MINNOW_DOLPHIN/nubevent.c:
+	.text       start:0x801F8964 end:0x801F8B8C
+	.bss        start:0x802A1DF8 end:0x802A1E20
+
+Dolphin/TRK_MINNOW_DOLPHIN/nubinit.c:
+	.text       start:0x801F8B8C end:0x801F8D24
+	.rodata     start:0x8024E500 end:0x8024E530
+	.bss        start:0x802A1E20 end:0x802A1E28
+
+Dolphin/TRK_MINNOW_DOLPHIN/msg.c:
+	.text       start:0x801F8D24 end:0x801F8D68
+	.rodata     start:0x8024E530 end:0x8024E558
+
+Dolphin/TRK_MINNOW_DOLPHIN/msgbuf.c:
+	.text       start:0x801F8D68 end:0x801F95A4
+	.rodata     start:0x8024E558 end:0x8024E578
+	.bss        start:0x802A1E28 end:0x802A37D8
+
+Dolphin/TRK_MINNOW_DOLPHIN/serpoll.c:
+	.text       start:0x801F95A4 end:0x801F985C
+	.rodata     start:0x8024E578 end:0x8024E708
+	.bss        start:0x802A37D8 end:0x802A37F0
+
+Dolphin/TRK_MINNOW_DOLPHIN/usr_put.c:
+	.text       start:0x801F985C end:0x801F98E8
+
+Dolphin/TRK_MINNOW_DOLPHIN/dispatch.c:
+	.text       start:0x801F98E8 end:0x801F9A60
+	.rodata     start:0x8024E708 end:0x8024E748
+	.data       start:0x80271848 end:0x802718B8
+
+Dolphin/TRK_MINNOW_DOLPHIN/msghndlr.c:
+	.text       start:0x801F9A60 end:0x801FAA30
+	.rodata     start:0x8024E748 end:0x8024E930
+	.data       start:0x802718B8 end:0x802718F0
+	.bss        start:0x802A37F0 end:0x802A37F8
+
+Dolphin/TRK_MINNOW_DOLPHIN/support.c:
+	.text       start:0x801FAA30 end:0x801FB164
+	.rodata     start:0x8024E930 end:0x8024E9D8
+
+Dolphin/TRK_MINNOW_DOLPHIN/mutex_TRK.c:
+	.text       start:0x801FB164 end:0x801FB17C
+
+Dolphin/TRK_MINNOW_DOLPHIN/notify.c:
+	.text       start:0x801FB17C end:0x801FB214
+
+Dolphin/TRK_MINNOW_DOLPHIN/flush_cache.c:
+	.text       start:0x801FB214 end:0x801FB24C
+
+Dolphin/TRK_MINNOW_DOLPHIN/mem_TRK.c:
+	.init       start:0x80003458 end:0x800034AC
+	.text       start:0x801FB24C end:0x801FB304
+
+Dolphin/TRK_MINNOW_DOLPHIN/targimpl.c:
+	.text       start:0x801FB304 end:0x801FCD50
+	.rodata     start:0x8024E9D8 end:0x8024EA70
+	.data       start:0x802718F0 end:0x80271920
+	.bss        start:0x802A37F8 end:0x802A3D78
+
+Dolphin/TRK_MINNOW_DOLPHIN/targsupp.c:
+	.text       start:0x801FCD50 end:0x801FCD70
+
+Dolphin/TRK_MINNOW_DOLPHIN/mpc_7xx_603e.c:
+	.text       start:0x801FCD70 end:0x801FD0E0
+
+Dolphin/TRK_MINNOW_DOLPHIN/__exception.s: comment:0
+	.init       start:0x800034AC end:0x800053E0
+
+Dolphin/TRK_MINNOW_DOLPHIN/dolphin_trk.c:
+	.init       start:0x800053E0 end:0x8000540C
+	.text       start:0x801FD0E0 end:0x801FD3FC
+	.data       start:0x80271920 end:0x80271960
+	.bss        start:0x802A3D78 end:0x802A3D80
+
+Dolphin/TRK_MINNOW_DOLPHIN/main_TRK.c:
+	.text       start:0x801FD3FC end:0x801FD454
+	.rodata     start:0x8024EA70 end:0x8024EA80
+	.bss        start:0x802A3D80 end:0x802A3D88
+
+Dolphin/TRK_MINNOW_DOLPHIN/dolphin_trk_glue.c:
+	.text       start:0x801FD454 end:0x801FD9AC
+	.rodata     start:0x8024EA80 end:0x8024EB88
+	.data       start:0x80271960 end:0x80271988
+	.bss        start:0x802A3D88 end:0x802A3D90
+
+Dolphin/TRK_MINNOW_DOLPHIN/targcont.c:
+	.text       start:0x801FD9AC end:0x801FD9E0
+
+Dolphin/TRK_MINNOW_DOLPHIN/target_options.c:
+	.text       start:0x801FD9E0 end:0x801FD9FC
+	.bss        start:0x802A3D90 end:0x802A3D98
+
+Dolphin/TRK_MINNOW_DOLPHIN/mslsupp.c:
+	.text       start:0x801FD9FC end:0x801FDBF8
+
+Dolphin/TRK_MINNOW_DOLPHIN/UDP_Stubs.c:
+	.text       start:0x801FDBF8 end:0x801FDC40
+
+Dolphin/TRK_MINNOW_DOLPHIN/ddh/main.c:
+	.text       start:0x801FDC40 end:0x801FDF84
+	.rodata     start:0x8024EB88 end:0x8024EC68
+	.bss        start:0x802A3D98 end:0x802A45B8
+	.sbss       start:0x802C60E0 end:0x802C60E8
+
+Dolphin/TRK_MINNOW_DOLPHIN/CircleBuffer.c:
+	.text       start:0x801FDF84 end:0x801FE1EC
+
+Dolphin/TRK_MINNOW_DOLPHIN/gdev/main.c:
+	.text       start:0x801FE1EC end:0x801FE538
+	.rodata     start:0x8024EC68 end:0x8024ED48
+	.bss        start:0x802A45B8 end:0x802A4AD8
+	.sbss       start:0x802C60E8 end:0x802C60F0
+
+Dolphin/TRK_MINNOW_DOLPHIN/MWTrace.c:
+	.text       start:0x801FE538 end:0x801FE588
+
+Dolphin/TRK_MINNOW_DOLPHIN/MWCriticalSection_gc.cpp:
+	.text       start:0x801FE588 end:0x801FE5E0
+
+Dolphin/Runtime/__va_arg.c:
+	.text       start:0x801FE5E0 end:0x801FE6A8
+
+Dolphin/Runtime/global_destructor_chain.c:
+	.text       start:0x801FE6A8 end:0x801FE708
+	.dtors      start:0x80240288 end:0x8024028C
+	.sbss       start:0x802C60F0 end:0x802C60F8
+
+Dolphin/Runtime/NMWException.cp:
+	extab       start:0x80005600 end:0x80005648
+	extabindex  start:0x80005660 end:0x8000569C
+	.text       start:0x801FE708 end:0x801FEAB4
+
+Dolphin/Runtime/ptmf.c:
+	.text       start:0x801FEAB4 end:0x801FEB0C
+	.rodata     start:0x8024ED48 end:0x8024ED58
+
+Dolphin/Runtime/runtime.c:
+	.text       start:0x801FEB0C end:0x801FF298
+	.rodata     start:0x8024ED58 end:0x8024ED70
+
+Dolphin/Runtime/__init_cpp_exceptions.cpp:
+	.text       start:0x801FF298 end:0x801FF314
+	.ctors      start:0x80240160 end:0x80240164
+	.dtors      start:0x80240280 end:0x80240288
+	.sdata      start:0x802C4A48 end:0x802C4A50
+
+Dolphin/Runtime/Gecko_ExceptionPPC.cp:
+	.text       start:0x801FF314 end:0x801FF37C
+	.bss        start:0x802A4AD8 end:0x802A4AE8
+
+Dolphin/Runtime/GCN_mem_alloc.c:
+	.text       start:0x801FF37C end:0x801FF434
+	.rodata     start:0x8024ED70 end:0x8024EDE8
+
+Dolphin/MSL_C/PPC_EABI/abort_exit.c:
+	.text       start:0x801FF434 end:0x801FF524
+	.bss        start:0x802A4AE8 end:0x802A4BE8
+	.sbss       start:0x802C60F8 end:0x802C6108
+
+Dolphin/MSL_C/MSL_Common/alloc.c:
+	.text       start:0x801FF524 end:0x801FF9D8
+	.rodata     start:0x8024EDE8 end:0x8024EE00
+	.bss        start:0x802A4BE8 end:0x802A4C20
+	.sbss       start:0x802C6108 end:0x802C6110
+
+Dolphin/MSL_C/MSL_Common/ansi_files.c:
+	.text       start:0x801FF9D8 end:0x801FFAF0
+	.data       start:0x80271988 end:0x80271AC8
+	.bss        start:0x802A4C20 end:0x802A4F20
+
+Dolphin/MSL_C/MSL_Common_Embedded/ansi_fp.c:
+	.text       start:0x801FFAF0 end:0x802030CC
+	.rodata     start:0x8024EE00 end:0x8024EEE0
+	.data       start:0x80271AC8 end:0x80271C30
+	.sdata2     start:0x802CC990 end:0x802CC9C0
+
+Dolphin/MSL_C/MSL_Common/buffer_io.c:
+	.text       start:0x802030CC end:0x802031C4
+
+Dolphin/MSL_C/PPC_EABI/critical_regions.gamecube.c:
+	.text       start:0x802031C4 end:0x802031D0
+
+Dolphin/MSL_C/MSL_Common/ctype.c:
+	.text       start:0x802031D0 end:0x802031F4
+	.data       start:0x80271C30 end:0x80271F30
+
+Dolphin/MSL_C/MSL_Common/direct_io.c:
+	.text       start:0x802031F4 end:0x8020357C
+
+Dolphin/MSL_C/MSL_Common/file_io.c:
+	.text       start:0x8020357C end:0x80203870
+
+Dolphin/MSL_C/MSL_Common/FILE_POS.C:
+	.text       start:0x80203870 end:0x80203BC0
+
+Dolphin/MSL_C/MSL_Common/mbstring.c:
+	.text       start:0x80203BC0 end:0x80203EE4
+	.sdata2     start:0x802CC9C0 end:0x802CC9C8
+
+Dolphin/MSL_C/MSL_Common/mem.c:
+	.text       start:0x80203EE4 end:0x80204054
+
+Dolphin/MSL_C/MSL_Common/mem_funcs.c:
+	.text       start:0x80204054 end:0x80204324
+
+Dolphin/MSL_C/MSL_Common/misc_io.c:
+	.text       start:0x80204324 end:0x80204334
+
+Dolphin/MSL_C/MSL_Common/printf.c:
+	.text       start:0x80204334 end:0x80206434
+	.rodata     start:0x8024EEE8 end:0x8024EF10
+	.data       start:0x80271F68 end:0x80272198
+	.sdata      start:0x802C4A50 end:0x802C4A58
+	.sdata2     start:0x802CC9C8 end:0x802CC9D0
+
+Dolphin/MSL_C/MSL_Common/qsort.c:
+	.text       start:0x80206434 end:0x802065A0
+
+Dolphin/MSL_C/MSL_Common/rand.c:
+	.text       start:0x802065A0 end:0x802065C0
+	.sdata      start:0x802C4A58 end:0x802C4A60
+
+Dolphin/MSL_C/MSL_Common/scanf.c:
+	.text       start:0x802065C0 end:0x80207608
+	.rodata     start:0x8024EF10 end:0x8024EF38
+	.data       start:0x80272198 end:0x80272268
+
+Dolphin/MSL_C/MSL_Common/string.c:
+	.text       start:0x80207608 end:0x80207998
+
+Dolphin/MSL_C/MSL_Common/strtold.c:
+	.text       start:0x80207998 end:0x802089A4
+	.rodata     start:0x8024EF38 end:0x8024EF70
+	.sdata2     start:0x802CC9D0 end:0x802CC9E8
+
+Dolphin/MSL_C/MSL_Common/strtoul.c:
+	.text       start:0x802089A4 end:0x80209294
+	.data       start:0x80272268 end:0x802722F0
+
+Dolphin/MSL_C/PPC_EABI/uart_console_io_gcn.c:
+	.text       start:0x80209294 end:0x80209364
+	.sbss       start:0x802C6118 end:0x802C6120
+
+Dolphin/MSL_C/MSL_Common/wchar_io.c:
+	.text       start:0x80209364 end:0x802093EC
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/e_acos.c:
+	.text       start:0x802093EC end:0x802096FC
+	.sdata2     start:0x802CC9E8 end:0x802CCA78
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/e_asin.c:
+	.text       start:0x802096FC end:0x80209960
+	.sdata2     start:0x802CCA78 end:0x802CCB10
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/e_atan2.c:
+	.text       start:0x80209960 end:0x80209BF0
+	.sdata2     start:0x802CCB10 end:0x802CCB68
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/e_log.c:
+	.text       start:0x80209BF0 end:0x80209E6C
+	.sbss       start:0x802C6120 end:0x802C6128
+	.sdata2     start:0x802CCB68 end:0x802CCBE8
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/e_log10.c:
+	.text       start:0x80209E6C end:0x80209F7C
+	.sbss       start:0x802C6128 end:0x802C6130
+	.sdata2     start:0x802CCBE8 end:0x802CCC18
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/e_pow.c:
+	.text       start:0x80209F7C end:0x8020A830
+	.rodata     start:0x8024EF70 end:0x8024EFA0
+	.sdata2     start:0x802CCC18 end:0x802CCD28
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/e_rem_pio2.c:
+	.text       start:0x8020A830 end:0x8020ABD0
+	.rodata     start:0x8024EFA0 end:0x8024F128
+	.sdata2     start:0x802CCD28 end:0x802CCD80
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/k_cos.c:
+	.text       start:0x8020ABD0 end:0x8020ACC4
+	.sdata2     start:0x802CCD80 end:0x802CCDC8
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/k_rem_pio2.c:
+	.text       start:0x8020ACC4 end:0x8020BB18
+	.rodata     start:0x8024F128 end:0x8024F178
+	.sdata2     start:0x802CCDC8 end:0x802CCE08
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/k_sin.c:
+	.text       start:0x8020BB18 end:0x8020BBB8
+	.sdata2     start:0x802CCE08 end:0x802CCE40
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/k_tan.c:
+	.text       start:0x8020BBB8 end:0x8020BDCC
+	.rodata     start:0x8024F178 end:0x8024F1E0
+	.sdata2     start:0x802CCE40 end:0x802CCE78
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/s_atan.c:
+	.text       start:0x8020BDCC end:0x8020BFE4
+	.rodata     start:0x8024F1E0 end:0x8024F278
+	.sdata2     start:0x802CCE78 end:0x802CCEA0
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/s_ceil.c:
+	.text       start:0x8020BFE4 end:0x8020C128
+	.sdata2     start:0x802CCEA0 end:0x802CCEB0
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/s_copysign.c:
+	.text       start:0x8020C128 end:0x8020C150
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/s_cos.c:
+	.text       start:0x8020C150 end:0x8020C224
+	.sdata2     start:0x802CCEB0 end:0x802CCEB8
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/s_floor.c:
+	.text       start:0x8020C224 end:0x8020C36C
+	.sdata2     start:0x802CCEB8 end:0x802CCEC8
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/s_frexp.c:
+	.text       start:0x8020C36C end:0x8020C3F8
+	.sdata2     start:0x802CCEC8 end:0x802CCED0
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/s_ldexp.c:
+	.text       start:0x8020C3F8 end:0x8020C5BC
+	.sdata2     start:0x802CCED0 end:0x802CCEF8
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/s_modf.c:
+	.text       start:0x8020C5BC end:0x8020C6B8
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/s_sin.c:
+	.text       start:0x8020C6B8 end:0x8020C790
+	.sdata2     start:0x802CCEF8 end:0x802CCF00
+
+Dolphin/MSL_C/MSL_Common_Embedded/Math/Double_precision/s_tan.c:
+	.text       start:0x8020C790 end:0x8020C808
+	.sdata2     start:0x802CCF00 end:0x802CCF08
+
+core/MslMath.cpp:
+	.text       start:0x8020C808 end:0x8020CB30
+	.sdata2     start:0x802CCF08 end:0x802CCF28
+
+Ninja/njFraction.c:
+	.text       start:0x8020CB30 end:0x8020CB54
+	.sbss       start:0x802C6130 end:0x802C6138
+
+Ninja/njSinCos.c:
+	.text       start:0x8020CB54 end:0x8020CBB4
+
+Ninja/njCamera.c:
+	.text       start:0x8020CBB4 end:0x8020CD80
+	.data       start:0x802722F0 end:0x80272308
+	.sdata2     start:0x802CCF28 end:0x802CCF38
+
+Ninja/njPerspective.c:
+	.text       start:0x8020CD80 end:0x8020CF0C
+	.sdata2     start:0x802CCF38 end:0x802CCF68
+
+Ninja/njMotion.c:
+	.text       start:0x8020CF0C end:0x8020DB78
+	.sdata2     start:0x802CCF68 end:0x802CCFA0
+
+Ninja/njMotionLink.c:
+	.text       start:0x8020DB78 end:0x8020DE50
+	.sbss       start:0x802C6138 end:0x802C6140
+	.sdata2     start:0x802CCFA0 end:0x802CCFA8
+
+Ninja/njMotionObj.c:
+	.text       start:0x8020DE50 end:0x8020E7D8
+	.rodata     start:0x8024F278 end:0x8024F288
+	.data       start:0x80272308 end:0x80272338
+	.bss        start:0x802A4F78 end:0x802A5008
+	.sdata2     start:0x802CCFA8 end:0x802CCFB8
+
+Ninja/njPrint.c:
+	.text       start:0x8020E7D8 end:0x8020F4E0
+
+Ninja/njMath.c:
+	.text       start:0x8020F4E0 end:0x8020F888
+	.sdata      start:0x802C4A98 end:0x802C4AA0
+	.sdata2     start:0x802CCFF0 end:0x802CCFF8
+
+Ninja/njMath2.c:
+	.text       start:0x8020F888 end:0x8020FC34
+	.sdata2     start:0x802CCFF8 end:0x802CD000
+
+Ninja/njMath3.c:
+	.text       start:0x8020FC34 end:0x8020FCB4
+	.sdata2     start:0x802CD000 end:0x802CD010
+
+Ninja/njMath4.c:
+	.text       start:0x8020FCB4 end:0x802100B8
+	.sdata      start:0x802C4AA0 end:0x802C4AA8
+	.sdata2     start:0x802CD010 end:0x802CD020
+
+Ninja/njMath5.c:
+	.text       start:0x802100B8 end:0x802105F4
+	.sdata      start:0x802C4AA8 end:0x802C4AB0
+	.sdata2     start:0x802CD020 end:0x802CD030
+
+Ninja/njTexture.c:
+	.text       start:0x802105F4 end:0x80211B04
+	.sbss       start:0x802C61E8 end:0x802C61F4
+
+Ninja/gjDrawList.c:
+	.text       start:0x80211B04 end:0x80211CF4
+	.data       start:0x80274368 end:0x80274378
+	.bss        start:0x802A5038 end:0x802A5268
+	.sdata2     start:0x802CD030 end:0x802CD038
+
+Ninja/gjDraw.c:
+	.text       start:0x80211CF4 end:0x802130E8
+	.data       start:0x80274378 end:0x802744E0
+	.bss        start:0x802A5268 end:0x802A52F0
+	.sdata      start:0x802C4AB0 end:0x802C4AB8
+	.sdata2     start:0x802CD038 end:0x802CD048
+
+Ninja/gjActor.c:
+	.text       start:0x802130E8 end:0x80214980
+	.bss        start:0x802A52F0 end:0x802A5320
+	.sdata2     start:0x802CD048 end:0x802CD050
+
+Ninja/gjSystem.c:
+	.text       start:0x80214980 end:0x80215540
+	.rodata     start:0x8024F288 end:0x8024F2B8
+	.data       start:0x802744E0 end:0x80274500
+	.bss        start:0x802A5320 end:0x802A5950
+	.sdata      start:0x802C4AB8 end:0x802C4AC0
+	.sdata2     start:0x802CD050 end:0x802CD088
+
+Ninja/njTexLoad.c:
+	.text       start:0x80215540 end:0x80215B4C
+	.data       start:0x80274500 end:0x80274510
+	.bss        start:0x802A5B60 end:0x802A5B80
+	.sdata      start:0x802C4AC8 end:0x802C4AD0
+
+Ninja/syLib.c:
+	.text       start:0x80215B4C end:0x80215E70
+	.rodata     start:0x8024F2D8 end:0x8024F2E8
+	.bss        start:0x802A5B80 end:0x802A5E60
+	.sbss       start:0x802C6220 end:0x802C6228
+
+Ninja/njMisc.c:
+	.text       start:0x80215E70 end:0x80216428
+	.sdata2     start:0x802CD088 end:0x802CD0A0
+
+Ninja/syTimer.c:
+	.text       start:0x80216428 end:0x8021647C
+
+Ninja/gjLight.c:
+	.text       start:0x8021647C end:0x80216798
+	.data       start:0x80274510 end:0x80274548
+	.sdata2     start:0x802CD0A0 end:0x802CD0A8
+
+Ninja/njDrawPolygon3DEx.c:
+	.text       start:0x80216798 end:0x802168A4
+
+Ninja/njDistanceP2L.c:
+	.text       start:0x802168A4 end:0x802169C8
+	.sdata2     start:0x802CD0A8 end:0x802CD0B0
+
+Ninja/njDistanceP2P.c:
+	.text       start:0x802169C8 end:0x80216A34
+	.sdata2     start:0x802CD0B0 end:0x802CD0B8
+
+Ninja/gjMath.c:
+	.text       start:0x80216A34 end:0x80216C6C
+	.sdata      start:0x802C4AD0 end:0x802C4AD8
+
+Ninja/gjPrim.c:
+	.text       start:0x80216C6C end:0x80217A34
+	.data       start:0x80274548 end:0x80274598
+	.bss        start:0x802A5E60 end:0x802A5EA0
+	.sdata      start:0x802C4AD8 end:0x802C4AE0
+	.sbss       start:0x802C6230 end:0x802C6248
+	.sdata2     start:0x802CD0B8 end:0x802CD0D0
+
+Ninja/njDrawTexture3D.c:
+	.text       start:0x80217A34 end:0x80217BAC
+
+Ninja/njDrawPolygon2D.c:
+	.text       start:0x80217BAC end:0x80217CD8
+	.sdata2     start:0x802CD0D0 end:0x802CD0D8
+
+Ninja/njDrawTexture2D.c:
+	.text       start:0x80217CD8 end:0x80217E24
+	.sdata2     start:0x802CD0D8 end:0x802CD0E0
+
+Ninja/njDrawLine.c:
+	.text       start:0x80217E24 end:0x80218164
+	.sbss       start:0x802C6248 end:0x802C6250
+	.sdata2     start:0x802CD0E0 end:0x802CD0F0
+
+Ninja/gjShape.c:
+	.text       start:0x80218164 end:0x802184C4
+	.bss        start:0x802A5EA0 end:0x802A5EE8
+	.sbss       start:0x802C6250 end:0x802C6258
+	.sdata2     start:0x802CD0F0 end:0x802CD0F8
+
+Dolphin/amcExi2/AmcExi.c:
+	.text       start:0x802184C4 end:0x80218B04
+	.bss        start:0x802A5EE8 end:0x802A5F00
+	.sdata      start:0x802C4AE0 end:0x802C4AE8
+
+Dolphin/amcExi2/AmcExi2Comm.c:
+	.text       start:0x80218B04 end:0x802191A8
+	.data       start:0x80274598 end:0x802745B8
+	.sdata      start:0x802C4AE8 end:0x802C4AF0
+	.sbss       start:0x802C6258 end:0x802C6268
+
+Dolphin/amcstubs/AmcExi2Stubs.c:
+	.text       start:0x802191A8 end:0x802191B0
+
+Dolphin/odenotstub/odenotstub.c:
+	.text       start:0x802191B0 end:0x802191B8
+
+Dolphin/OdemuExi2/DebuggerDriver.c:
+	.text       start:0x802191B8 end:0x80219C38
+	.sdata      start:0x802C4AF0 end:0x802C4AF8
+	.sbss       start:0x802C6268 end:0x802C6280
+
+CRI/adx_inis.c:
+	.text       start:0x80219C38 end:0x80219EE4
+	.rodata     start:0x8024F2E8 end:0x8024F320
+	.data       start:0x802745B8 end:0x802745C0
+	.bss        start:0x802A5F00 end:0x802A6B18
+
+CRI/adx_sjd.c:
+	.text       start:0x80219EE4 end:0x8021AEE0
+
+CRI/adx_bwav.c:
+	.text       start:0x8021AEE0 end:0x8021BD68
+
+CRI/adx_bahx.c:
+	.text       start:0x8021BD68 end:0x8021BDF0
+	.bss        start:0x802A74D8 end:0x802A74E0
+
+CRI/adx_baif.c:
+	.text       start:0x8021BDF0 end:0x8021C968
+
+CRI/adx_bau.c:
+	.text       start:0x8021C968 end:0x8021D840
+
+CRI/adx_bsc.c:
+	.text       start:0x8021D840 end:0x8021E92C
+
+CRI/adx_bsps.c:
+	.text       start:0x8021E92C end:0x8021EE48
+
+CRI/adx_amp.c:
+	.text       start:0x8021EE48 end:0x8021F058
+
+CRI/adx_crs.c:
+	.text       start:0x8021F058 end:0x8021F0E4
+	.bss        start:0x802A80B8 end:0x802A80C0
+
+CRI/adx_dcd.c:
+	.text       start:0x8021F0E4 end:0x8021F790
+	.rodata     start:0x8024FC38 end:0x8024FC78
+
+CRI/adx_dcd3.c:
+	.text       start:0x8021F790 end:0x8021F79C
+	.bss        start:0x802A80C0 end:0x802A80C8
+
+CRI/adx_errs.c:
+	.text       start:0x8021F79C end:0x8021FDEC
+	.rodata     start:0x8024FC78 end:0x8024FC80
+	.bss        start:0x802A80C8 end:0x802A81F0
+
+CRI/adx_fsvr.c:
+	.text       start:0x8021FDEC end:0x8021FE78
+	.bss        start:0x802A81F0 end:0x802A81F8
+
+CRI/adx_enc.c:
+	.text       start:0x8021FE78 end:0x80222818
+
+CRI/adx_stmc.c:
+	.text       start:0x80222818 end:0x80223B94
+
+CRI/adx_tlk.c:
+	.text       start:0x80223B94 end:0x8022541C
+	.rodata     start:0x8024FCC8 end:0x80250310
+	.bss        start:0x802AB540 end:0x802AB580
+
+CRI/adx_tlk2.c:
+	.text       start:0x8022541C end:0x802255A8
+	.rodata     start:0x80250310 end:0x80250390
+
+CRI/adx_tsvr.c:
+	.text       start:0x802255A8 end:0x80226264
+
+CRI/adx_xpnd.c:
+	.text       start:0x80226264 end:0x802266A8
+	.bss        start:0x802AB590 end:0x802AB958
+
+CRI/adxm.c:
+	.text       start:0x802266A8 end:0x80226D14
+
+CRI/adx_gcsdk.c:
+	.text       start:0x80226D14 end:0x80226E1C
+	.rodata     start:0x80250490 end:0x802504D8
+
+CRI/adx_rna.c:
+	.text       start:0x80226E1C end:0x80227088
+
+CRI/adx_dcd5.c:
+	.text       start:0x80227088 end:0x80227790
+
+CRI/adxf_ini.c:
+	.text       start:0x80227790 end:0x802278D8
+	.rodata     start:0x80250518 end:0x80250550
+	.bss        start:0x802B3608 end:0x802B6008
+
+CRI/adx_fs.c:
+	.text       start:0x802278D8 end:0x80229120
+
+CRI/cri_cvfs.c:
+	.text       start:0x80229120 end:0x8022A074
+
+CRI/gcci.c:
+	.text       start:0x8022A074 end:0x8022B0B0
+
+CRI/lsc_err.c:
+	.text       start:0x8022B0B0 end:0x8022B1A4
+	.bss        start:0x802B7548 end:0x802B7650
+
+CRI/lsc_crs.c:
+	.text       start:0x8022B1A4 end:0x8022B1E4
+
+CRI/lsc.c:
+	.text       start:0x8022B1E4 end:0x8022BBEC
+	.rodata     start:0x802518F8 end:0x80251A00
+	.bss        start:0x802B7650 end:0x802B7660
+
+CRI/lsc_ini.c:
+	.text       start:0x8022BBEC end:0x8022BD08
+	.rodata     start:0x80251A00 end:0x80251A38
+	.bss        start:0x802B7660 end:0x802B99E8
+
+CRI/lsc_svr.c:
+	.text       start:0x8022BD08 end:0x8022BF50
+	.rodata     start:0x80251A38 end:0x80251A50
+
+CRI/sj_crs.c:
+	.text       start:0x8022BF50 end:0x8022BFE8
+	.bss        start:0x802B99E8 end:0x802B99F0
+
+CRI/sj_mem.c:
+	.text       start:0x8022BFE8 end:0x8022C5D8
+	.rodata     start:0x80251A50 end:0x80251A60
+	.data       start:0x80274878 end:0x802748A8
+	.bss        start:0x802B99F0 end:0x802B9E78
+
+CRI/sj_rbf.c:
+	.text       start:0x8022C5D8 end:0x8022CEF8
+	.rodata     start:0x80251A60 end:0x80251AA0
+	.data       start:0x802748A8 end:0x802748D8
+	.bss        start:0x802B9E78 end:0x802BDE80
+
+CRI/sj_uni.c:
+	.text       start:0x8022CEF8 end:0x8022CF94
+	.bss        start:0x802BDE80 end:0x802BEA88
+
+CRI/sj_utl.c:
+	.text       start:0x8022CF94 end:0x8022D20C
+	.data       start:0x802748D8 end:0x80274A98
+
+CRI/svm.c:
+	.text       start:0x8022D20C end:0x8022E008
+	.rodata     start:0x80251AA0 end:0x80251C48
+	.bss        start:0x802BEA88 end:0x802BED50
+
+CRI/mfci.c:
+	.text       start:0x8022E008 end:0x8022EA18
+
+CRI/axrna_err.c:
+	.text       start:0x8022EA18 end:0x8022EAC4
+	.bss        start:0x802BF748 end:0x802BF850
+
+CRI/axrna.c:
+	.text       start:0x8022EAC4 end:0x802302A4
+
+CRI/axrnares.c:
+	.text       start:0x802302A4 end:0x80230410
+	.rodata     start:0x802520D8 end:0x802520FC
+
+CRI/axrnares_ini.c:
+	.text       start:0x80230410 end:0x802306F4
+	.bss        start:0x802C17A8 end:0x802C1940
+
+gcax/gcaxSndMemory.c:
+	.text       start:0x802306F4 end:0x80230D7C
+	.data       start:0x80274B80 end:0x80274C20
+
+gcax/gcaxSndBank.c:
+	.text       start:0x80230D7C end:0x80231A68
+	.data       start:0x80274C20 end:0x80274C90
+	.sdata      start:0x802C4AF8 end:0x802C4B08
+
+gcax/gcaxSndNote.c:
+	.text       start:0x80231A68 end:0x802321B0
+	.data       start:0x80274C90 end:0x802772F8
+	.sdata2     start:0x802CD0F8 end:0x802CD110
+
+gcax/gcaxSndNoteList.c:
+	.text       start:0x802321B0 end:0x802324C4
+	.sdata2     start:0x802CD110 end:0x802CD118
+
+gcax/gcaxSndVoice.c:
+	.text       start:0x802324C4 end:0x802345FC
+	.data       start:0x802772F8 end:0x80277330
+	.sdata2     start:0x802CD118 end:0x802CD1D0
+
+gcax/gcaxSndPort.c:
+	.text       start:0x802345FC end:0x80235698
+	.sdata2     start:0x802CD1D0 end:0x802CD1F8
+
+gcax/gcaxSndSys.c:
+	.text       start:0x80235698 end:0x80235D54
+	.data       start:0x80277330 end:0x80277390
+	.sbss       start:0x802C6280 end:0x802C6288
+	.sdata2     start:0x802CD1F8 end:0x802CD210
+
+gcax/gcaxSndApi.c:
+	.text       start:0x80235D54 end:0x80236960
+	.sdata2     start:0x802CD210 end:0x802CD228
+
+gcax/gcaxSndSeq.c:
+	.text       start:0x80236960 end:0x80236EA4
+	.sdata2     start:0x802CD228 end:0x802CD240
+
+Dolphin/mix/mix.c:
+	.text       start:0x80236EA4 end:0x80238360
+	.data       start:0x80277390 end:0x80278080
+	.bss        start:0x802C1940 end:0x802C3140
+	.sdata      start:0x802C4B08 end:0x802C4B10
+	.sbss       start:0x802C6288 end:0x802C6298
+
+Dolphin/axfx/reverb_hi.c:
+	.text       start:0x80238360 end:0x8023921C
+	.data       start:0x80278080 end:0x802780A0
+	.sdata2     start:0x802CD240 end:0x802CD280
+
+Dolphin/axfx/reverb_std.c:
+	.text       start:0x8023921C end:0x80239C0C
+	.data       start:0x802780A0 end:0x802780B0
+	.sdata2     start:0x802CD280 end:0x802CD2B8
+
+Dolphin/axfx/chorus.c:
+	.text       start:0x80239C0C end:0x8023A638
+	.data       start:0x802780B0 end:0x802788B0
+	.sdata2     start:0x802CD2B8 end:0x802CD2C0
+
+Dolphin/axfx/delay.c:
+	.text       start:0x8023A638 end:0x8023ABB8
+
+Dolphin/axfx/axfx.c:
+	.text       start:0x8023ABB8 end:0x8023AC14
+	.sdata      start:0x802C4B10 end:0x802C4B18
+
+Dolphin/si/SIBios.c:
+	.text       start:0x8023AC14 end:0x8023C5E4
+	.data       start:0x802788B0 end:0x80278D38
+	.bss        start:0x802C3140 end:0x802C3340
+	.sdata      start:0x802C4B18 end:0x802C4B20
+	.sbss       start:0x802C6298 end:0x802C62A8
+
+Dolphin/si/SISamplingRate.c:
+	.text       start:0x8023C5E4 end:0x8023C700
+	.data       start:0x80278D38 end:0x80278E14
+	.sbss       start:0x802C62A8 end:0x802C62B0
+
+Dolphin/exi/EXIBios.c:
+	.text       start:0x8023C700 end:0x8023E2C0
+	.data       start:0x80278FA8 end:0x802792CC
+	.bss        start:0x802C3340 end:0x802C3400
+	.sdata      start:0x802C4B20 end:0x802C4B24
+	.sbss       start:0x802C62B0 end:0x802C62B8
+
+Dolphin/exi/EXIUart.c:
+	.text       start:0x8023E2C0 end:0x8023E8B8
+	.sbss       start:0x802C62B8 end:0x802C62C8
+
+Dolphin/gba/GBA.c:
+	.text       start:0x8023E8B8 end:0x8023EA88
+	.data       start:0x80279390 end:0x802793A0
+	.bss        start:0x802C3400 end:0x802C3900
+	.sbss       start:0x802C62C8 end:0x802C62CC
+
+Dolphin/gba/GBAGetProcessStatus.c:
+	.text       start:0x8023EA88 end:0x8023EBFC
+
+Dolphin/gba/GBAJoyBoot.c:
+	.text       start:0x8023EBFC end:0x8023FAC0
+	.data       start:0x802793A0 end:0x802793D0
+
+Dolphin/gba/GBARead.c:
+	.text       start:0x8023FAC0 end:0x8023FB8C
+
+Dolphin/gba/GBAWrite.c:
+	.text       start:0x8023FB8C end:0x8023FC50
+
+Dolphin/gba/GBAXfer.c:
+	.text       start:0x8023FC50 end:0x8023FEE8
+
+Dolphin/gba/GBAKey.c:
+	.text       start:0x8023FEE8 end:0x80240150
+	.data       start:0x802793D0 end:0x80279776
+
+Dolphin/Runtime/__mem.c:
+	.init       start:0x8000540C end:0x80005544
